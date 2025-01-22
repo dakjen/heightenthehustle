@@ -42,6 +42,7 @@ interface Location {
 interface Demographic {
   id: number;
   name: string;
+  category: string;
 }
 
 interface TeamMessage {

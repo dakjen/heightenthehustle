@@ -26,6 +26,7 @@ interface Location {
 interface Demographic {
   id: number;
   name: string;
+  category: string;
 }
 
 interface IndividualMessage {
@@ -52,7 +53,7 @@ interface MessagesPageProps {
 
 export default async function MessagesPage() {
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  if (!session || !session.user) {
     redirect('/dashboard');
   }
   const isAdmin = session?.user?.role === 'admin';
