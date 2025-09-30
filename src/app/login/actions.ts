@@ -46,9 +46,7 @@ export async function login(formData: FormData) {
 
   // Create session
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-  const session = await encrypt({ user, expires });
-
-  // @ts-expect-error
+  // @ts-expect-error - a bug in Next.js types
   const { set } = cookies();
   set("session", session, { expires, httpOnly: true });
 
@@ -56,7 +54,7 @@ export async function login(formData: FormData) {
 }
 
 export async function logout() {
-  // @ts-expect-error
+  // @ts-expect-error - a bug in Next.js types
   const { set } = cookies();
   set("session", "", { expires: new Date(0) });
   redirect("/login");
