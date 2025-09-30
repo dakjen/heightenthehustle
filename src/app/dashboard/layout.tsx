@@ -22,6 +22,9 @@ export default async function DashboardLayout({
           <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Home</a>
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Settings</a>
           <a href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Profile</a>
+          {session.user && session.user.role === 'admin' && (
+            <a href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Admin Users</a>
+          )}
           {/* Add more navigation links here */}
         </nav>
         <LogoutButton />
