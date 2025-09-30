@@ -26,7 +26,7 @@ async function decrypt(input: string): Promise<JWTPayload> {
   return payload;
 }
 
-export async function login(formData: FormData) {
+export async function login(prevState: { error: string; } | undefined, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
