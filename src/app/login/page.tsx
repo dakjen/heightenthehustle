@@ -1,10 +1,10 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { login } from "./actions";
+import { login, type FormState } from "./actions";
 
 export default function LoginPage() {
-  const [state, formAction] = useFormState(login, undefined);
+  const [state, formAction] = useFormState<FormState, FormData>(login, undefined);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
