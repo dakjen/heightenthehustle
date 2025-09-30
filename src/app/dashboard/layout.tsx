@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
+import LogoutButton from "@/app/components/LogoutButton";
 
 export default async function DashboardLayout({
   children,
@@ -21,6 +22,7 @@ export default async function DashboardLayout({
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
           {/* Add more navigation links here */}
         </nav>
+        <LogoutButton />
       </aside>
 
       {/* Main content */}
