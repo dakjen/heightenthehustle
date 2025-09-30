@@ -8,5 +8,5 @@ export const users = pgTable('users', {
   phone: varchar('phone', { length: 20 }).notNull(),
   email: text('email').notNull().unique(),
   password: varchar('password', { length: 256 }).notNull(),
-  role: userRole('role').notNull().default('internal'),
+  role: userRole('role').notNull().default('admin'),
 });
