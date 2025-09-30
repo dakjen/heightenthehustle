@@ -13,13 +13,13 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-4 space-y-6">
+      <aside className="w-64 bg-[#910000] text-white p-4 space-y-6">
         <h2 className="text-2xl font-bold">Dashboard</h2>
         <nav>
-          <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Home</a>
-          <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
+          <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Home</a>
+          <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Settings</a>
           {/* Add more navigation links here */}
         </nav>
         <LogoutButton />
