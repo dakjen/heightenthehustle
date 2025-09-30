@@ -1,9 +1,11 @@
+import { createAccount } from "./actions";
+
 export default function CreateAccountPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-black text-center mb-8">Create an Account</h1>
-        <form className="space-y-6">
+        <form action={createAccount} className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-[#606060]">
               Name
@@ -15,7 +17,7 @@ export default function CreateAccountPage() {
                 type="text"
                 autoComplete="name"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm text-black"
               />
             </div>
           </div>
@@ -31,7 +33,7 @@ export default function CreateAccountPage() {
                 type="tel"
                 autoComplete="tel"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm text-black"
               />
             </div>
           </div>
@@ -47,7 +49,7 @@ export default function CreateAccountPage() {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm text-black"
               />
             </div>
           </div>
@@ -63,7 +65,7 @@ export default function CreateAccountPage() {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm text-black"
               />
             </div>
           </div>
