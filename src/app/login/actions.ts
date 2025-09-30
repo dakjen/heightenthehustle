@@ -47,22 +47,20 @@ export async function login(formData: FormData) {
   // Create session
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-  // @ts-expect-error - a bug in Next.js types
-  const { set } = cookies();
-  set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
+  const cookieStore = await cookies();
+  cookieStore.set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
 
   redirect("/");
 }
 
 export async function logout() {
-  // @ts-expect-error - a bug in Next.js types
-  const { set } = cookies();
-  set("session", "", { expires: new Date(0) });
+  const cookieStore = await cookies();
+  cookieStore.set("session", "", { expires: new Date(0) });
   redirect("/login");
 }
 
 export async function getSession() {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
 }
