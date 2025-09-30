@@ -26,7 +26,11 @@ async function decrypt(input: string): Promise<JWTPayload> {
   return payload;
 }
 
-export async function login(prevState: { error: string; } | undefined, formData: FormData) {
+export type FormState = {
+  error: string;
+} | undefined;
+
+export async function login(prevState: FormState, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -44,13 +48,18 @@ export async function login(prevState: { error: string; } | undefined, formData:
     return { error: "Invalid email or password" };
   }
 
-  // Create session
-  const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+  try {
+    // Create session
+    const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-  const cookieStore = await cookies();
-  cookieStore.set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
+    const cookieStore = await cookies();
+    cookieStore.set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
 
-  redirect("/");
+    redirect("/");
+  } catch (error) {
+    console.error("Login error:", error); // Log the error for server-side debugging
+    return { error: "An unexpected error occurred during login." };
+  }
 }
 
 export async function logout() {
