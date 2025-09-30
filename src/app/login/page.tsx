@@ -1,7 +1,11 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { login, type FormState } from "./actions";
+import { login } from "./actions";
+
+type FormState = {
+  error: string;
+} | undefined;
 
 export default function LoginPage() {
   const [state, formAction] = useFormState<FormState, FormData>(login, undefined);
