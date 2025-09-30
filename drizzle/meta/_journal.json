@@ -43,6 +43,13 @@
       "when": 1759248086379,
       "tag": "0005_open_ender_wiggin",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1759248456063,
+      "tag": "0006_early_grandmaster",
+      "breakpoints": true
     }
   ]
 }
