@@ -49,14 +49,16 @@ export async function login(formData: FormData) {
   const session = await encrypt({ user, expires });
 
   // Save session in a cookie
-  cookies().set("session", session, { expires, httpOnly: true });
+  const { set } = cookies();
+  set("session", session, { expires, httpOnly: true });
 
   redirect("/");
 }
 
 export async function logout() {
   // Destroy the session
-  cookies().set("session", "", { expires: new Date(0) });
+  const { set } = cookies();
+  set("session", "", { expires: new Date(0) });
   redirect("/login");
 }
 
