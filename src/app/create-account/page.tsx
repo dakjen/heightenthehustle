@@ -5,6 +5,38 @@ export default function CreateAccountPage() {
         <h1 className="text-4xl font-bold text-black text-center mb-8">Create an Account</h1>
         <form className="space-y-6">
           <div>
+            <label htmlFor="name" className="block text-sm font-medium text-[#606060]">
+              Name
+            </label>
+            <div className="mt-1">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-[#606060]">
+              Phone Number
+            </label>
+            <div className="mt-1">
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                required
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
             <label htmlFor="email" className="block text-sm font-medium text-[#606060]">
               Email address
             </label>
