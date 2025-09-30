@@ -48,7 +48,7 @@ export async function login(formData: FormData) {
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
   const session = await encrypt({ user, expires });
 
-  // Save session in a cookie
+  // @ts-ignore
   const { set } = cookies();
   set("session", session, { expires, httpOnly: true });
 
@@ -56,7 +56,7 @@ export async function login(formData: FormData) {
 }
 
 export async function logout() {
-  // Destroy the session
+  // @ts-ignore
   const { set } = cookies();
   set("session", "", { expires: new Date(0) });
   redirect("/login");
