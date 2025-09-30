@@ -1,9 +1,16 @@
+"use client";
+
+import { useFormState } from "react-dom";
+import { login } from "./actions";
+
 export default function LoginPage() {
+  const [state, formAction] = useFormState(login, undefined);
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-black text-center mb-8">Login</h1>
-        <form className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-[#606060]">
               Email address
@@ -35,6 +42,10 @@ export default function LoginPage() {
               />
             </div>
           </div>
+
+          {state?.error && (
+            <p className="text-sm text-red-600">{state.error}</p>
+          )}
 
           <div>
             <button
