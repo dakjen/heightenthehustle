@@ -58,7 +58,7 @@ export async function login(prevState: FormState, formData: FormData) {
     const cookieStore = await cookies();
     cookieStore.set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
 
-    redirect("/");
+    redirect("/dashboard");
   } catch (error) {
     // Re-throw NEXT_REDIRECT errors to allow Next.js to handle the redirect
     if (error && typeof error === 'object' && 'digest' in error && typeof error.digest === 'string' && error.digest.startsWith('NEXT_REDIRECT')) {
