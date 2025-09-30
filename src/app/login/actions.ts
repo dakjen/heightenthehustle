@@ -9,6 +9,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const secretKey = process.env.JWT_SECRET;
+if (!secretKey) {
+  throw new Error("JWT_SECRET environment variable is not set.");
+}
 const key = new TextEncoder().encode(secretKey);
 
 async function encrypt(payload: JWTPayload) {
