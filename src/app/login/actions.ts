@@ -60,7 +60,11 @@ export async function login(prevState: FormState, formData: FormData) {
 
     redirect("/");
   } catch (error) {
-    console.error("Login error:", error); // Log the error for server-side debugging
+    // Re-throw NEXT_REDIRECT errors to allow Next.js to handle the redirect
+    if (error && typeof error === 'object' && 'digest' in error && typeof error.digest === 'string' && error.digest.startsWith('NEXT_REDIRECT')) {
+      throw error;
+    }
+    console.error("Login error:", error); // Log other errors for server-side debugging
     return { error: "An unexpected error occurred during login." };
   }
 }
