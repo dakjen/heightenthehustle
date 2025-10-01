@@ -188,12 +188,56 @@ export default function BusinessesPage() {
             />
           </div>
 
-          {/* Address */}
+          {/* Street Address */}
           <div>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-              Address
+            <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">
+              Street Address
             </label>
             <input
+              id="streetAddress"
+              name="streetAddress"
+              type="text"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            />
+          </div>
+
+          {/* City */}
+          <div>
+            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+              City
+            </label>
+            <input
+              id="city"
+              name="city"
+              type="text"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            />
+          </div>
+
+          {/* State */}
+          <div>
+            <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+              State
+            </label>
+            <input
+              id="state"
+              name="state"
+              type="text"
+              maxLength={2}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            />
+          </div>
+
+          {/* Zip Code */}
+          <div>
+            <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
+              Zip Code
+            </label>
+            <input
+              id="zipCode"
+              name="zipCode"
+              type="text"
+              maxLength={10}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
           </div>

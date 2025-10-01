@@ -28,8 +28,12 @@ export const businesses = pgTable('businesses', {
   businessTaxStatus: businessTaxStatusEnum('business_tax_status').notNull(),
   businessDescription: text('business_description'),
   businessIndustry: text('business_industry').notNull(),
+  naicsCode: varchar('naics_code', { length: 6 }), // New field
   businessMaterialsUrl: text('business_materials_url'),
-  address: text('address'),
+  streetAddress: text('street_address'), // New field
+  city: text('city'), // New field
+  state: varchar('state', { length: 2 }), // New field
+  zipCode: varchar('zip_code', { length: 10 }), // New field
   phone: varchar('phone', { length: 20 }),
   website: text('website'),
   isArchived: boolean('is_archived').notNull().default(false), // New field

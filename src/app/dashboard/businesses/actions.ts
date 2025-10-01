@@ -64,7 +64,11 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   const businessTaxStatus = formData.get("businessTaxStatus") as string;
   const businessDescription = formData.get("businessDescription") as string;
   const businessIndustry = formData.get("businessIndustry") as string;
-  const address = formData.get("address") as string;
+  const naicsCode = formData.get("naicsCode") as string;
+  const streetAddress = formData.get("streetAddress") as string;
+  const city = formData.get("city") as string;
+  const state = formData.get("state") as string;
+  const zipCode = formData.get("zipCode") as string;
   const phone = formData.get("phone") as string;
   const website = formData.get("website") as string;
   const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
@@ -92,7 +96,11 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
       businessDescription,
       businessIndustry,
-      address,
+      naicsCode,
+      streetAddress,
+      city,
+      state,
+      zipCode,
       phone,
       website,
       businessMaterialsUrl,
@@ -123,7 +131,11 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
   const businessTaxStatus = formData.get("businessTaxStatus") as string;
   const businessDescription = formData.get("businessDescription") as string;
   const businessIndustry = formData.get("businessIndustry") as string;
-  const address = formData.get("address") as string;
+  const naicsCode = formData.get("naicsCode") as string;
+  const streetAddress = formData.get("streetAddress") as string;
+  const city = formData.get("city") as string;
+  const state = formData.get("state") as string;
+  const zipCode = formData.get("zipCode") as string;
   const phone = formData.get("phone") as string;
   const website = formData.get("website") as string;
   const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
@@ -149,7 +161,11 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
         businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
         businessDescription,
         businessIndustry,
-        address,
+        naicsCode,
+        streetAddress,
+        city,
+        state,
+        zipCode,
         phone,
         website,
         businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
