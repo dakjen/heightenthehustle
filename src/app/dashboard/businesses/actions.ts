@@ -21,6 +21,10 @@ async function getUserIdFromSession(): Promise<number | undefined> {
   return session?.user?.id;
 }
 
+export async function fetchSession(): Promise<SessionPayload | null> {
+  return await getSession();
+}
+
 export async function getBusinessProfile(businessId: number) {
   try {
     const profile = await db.query.businesses.findFirst({

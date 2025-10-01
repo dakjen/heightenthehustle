@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { createBusinessProfile, getAllUserBusinesses } from "./actions";
+import { createBusinessProfile, getAllUserBusinesses, fetchSession } from "./actions";
 import { SessionPayload } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
 
@@ -40,7 +40,7 @@ export default function BusinessesPage() {
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {
-      const currentSession = await getSession();
+      const currentSession = await fetchSession();
       setSession(currentSession);
 
       if (currentSession && currentSession.user) {
