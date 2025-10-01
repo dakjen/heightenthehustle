@@ -2,11 +2,7 @@
 
 import { useState, useEffect } from "react"; // Import useEffect
 import { useFormState } from "react-dom";
-import { db } from "@/db"; // Keep db import for fetching users
-import { users } from "@/db/schema"; // Keep users import for fetching users
-import { eq } from "drizzle-orm"; // Keep eq import for fetching users
-import { revalidatePath } from "next/cache"; // Keep revalidatePath import for fetching users
-import { createUser } from "./actions"; // Import createUser
+import { createUser, getAllUsers } from "./actions"; // Import createUser and getAllUsers
 
 type FormState = {
   message: string;
@@ -22,6 +18,11 @@ interface User {
   password: string; // Note: In a real app, you wouldn't fetch password to client
   role: 'admin' | 'internal' | 'external';
   hasBusinessProfile: boolean;
+  personalAddress: string | null;
+  personalCity: string | null;
+  personalState: string | null;
+  personalZipCode: string | null;
+  profilePhotoUrl: string | null;
 }
 
 export default function UserManagementPage() {
@@ -32,7 +33,7 @@ export default function UserManagementPage() {
   // Fetch users on component mount and after creation
   useEffect(() => {
     async function fetchUsers() {
-      const fetchedUsers = await db.query.users.findMany(); // This will need to be a server action
+      const fetchedUsers = await getAllUsers(); // Use getAllUsers server action
       setAllUsers(fetchedUsers);
     }
     fetchUsers();

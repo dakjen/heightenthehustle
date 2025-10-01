@@ -11,6 +11,17 @@ type FormState = {
   error: string;
 } | undefined;
 
+// New function to fetch all users
+export async function getAllUsers() {
+  try {
+    const allUsers = await db.query.users.findMany();
+    return allUsers;
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+    return [];
+  }
+}
+
 export async function createUser(prevState: FormState, formData: FormData): Promise<FormState> {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
