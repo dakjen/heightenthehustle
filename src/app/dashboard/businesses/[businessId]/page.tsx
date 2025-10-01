@@ -54,7 +54,7 @@ export default function BusinessDetailsPage({ params }: { params: { businessId: 
       }
     }
     fetchSessionAndBusiness();
-  }, [businessId, updateState, archiveState]); // Re-fetch on update/archive
+  }, [businessId, updateState, archiveState, router]); // Re-fetch on update/archive
 
   if (!session || !session.user || !business) {
     return <div className="flex-1 p-6">Loading business details...</div>;
@@ -70,7 +70,7 @@ export default function BusinessDetailsPage({ params }: { params: { businessId: 
           {/* Owner's Name */}
           <div>
             <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-              Owner's Name
+              Owner&#39;s Name
             </label>
             <input
               id="ownerName"
