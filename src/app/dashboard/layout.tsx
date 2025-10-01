@@ -36,7 +36,7 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col text-gray-900">
         {children}
       </main>
     </div>
