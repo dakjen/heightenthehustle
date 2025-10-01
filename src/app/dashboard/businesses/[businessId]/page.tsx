@@ -29,7 +29,13 @@ interface Business {
   isArchived: boolean;
 }
 
-export default function BusinessDetailsPage({ params }: { params: { businessId: string } }) {
+// Define the props for the page component
+interface BusinessDetailsPageProps {
+  params: { businessId: string };
+  // searchParams?: { [key: string]: string | string[] | undefined }; // If you need search params
+}
+
+export default function BusinessDetailsPage({ params }: BusinessDetailsPageProps) {
   const router = useRouter();
   const businessId = parseInt(params.businessId);
   const [session, setSession] = useState<SessionPayload | null>(null);
