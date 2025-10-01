@@ -16,6 +16,11 @@ interface UserSession {
   phone: string;
   role: 'admin' | 'internal' | 'external'; // Assuming userRole enum from schema
   hasBusinessProfile: boolean;
+  personalAddress: string | null;
+  personalCity: string | null;
+  personalState: string | null;
+  personalZipCode: string | null;
+  profilePhotoUrl: string | null;
 }
 
 // Extend JWTPayload to include our user session data
