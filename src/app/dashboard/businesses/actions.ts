@@ -80,6 +80,8 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
     }
 
     const newBusinessData: NewBusiness = {
+      userId,
+      ownerName,
       percentOwnership: percentOwnership.toString(),
       businessName,
       businessType: businessType as typeof businessTypeEnum.enumValues[number],
