@@ -17,7 +17,7 @@ interface Business {
   userId: number;
   businessName: string;
   ownerName: string;
-  percentOwnership: number;
+  percentOwnership: string;
   businessType: string;
   businessTaxStatus: string;
   businessDescription?: string;
