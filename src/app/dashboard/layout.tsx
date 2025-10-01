@@ -16,15 +16,15 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#910000] text-white p-4 space-y-6">
+      <aside className="w-64 bg-[#606060] text-white p-4 space-y-6">
         <Image src="/hthlogo.svg" alt="Logo" width={120} height={120} className="mb-6" />
         <h2 className="text-2xl font-bold">Dashboard</h2>
         <nav>
-          <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Home</a>
-          <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Settings</a>
-          <a href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Profile</a>
+          <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</a>
+          <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
+          <a href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</a>
           {session.user && session.user.role === 'admin' && (
-            <a href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Admin Users</a>
+            <a href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</a>
           )}
           {/* Add more navigation links here */}
         </nav>
