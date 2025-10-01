@@ -91,11 +91,7 @@ export default function BusinessesPage() {
                 Owner&#39;s Name
               </label>
               <input
-                id="ownerName"
-                name="ownerName"
-                type="text"
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
               />
             </div>
 
@@ -110,7 +106,7 @@ export default function BusinessesPage() {
                 type="number"
                 step="0.01"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
               />
             </div>
 
@@ -124,7 +120,7 @@ export default function BusinessesPage() {
                 name="businessName"
                 type="text"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
               />
             </div>
 
@@ -137,7 +133,7 @@ export default function BusinessesPage() {
               id="businessType"
               name="businessType"
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             >
               <option value="">Select Business Type</option>
               <option value="Sole Proprietorship">Sole Proprietorship</option>
@@ -156,7 +152,7 @@ export default function BusinessesPage() {
               id="businessTaxStatus"
               name="businessTaxStatus"
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             >
               <option value="">Select Tax Status</option>
               <option value="S-Corporation">S-Corporation</option>
@@ -174,7 +170,7 @@ export default function BusinessesPage() {
               id="businessDescription"
               name="businessDescription"
               rows={3}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             ></textarea>
           </div>
 
@@ -188,7 +184,7 @@ export default function BusinessesPage() {
               name="businessIndustry"
               type="text"
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
           </div>
 
@@ -198,10 +194,7 @@ export default function BusinessesPage() {
               Address
             </label>
             <input
-              id="address"
-              name="address"
-              type="text"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
           </div>
 
@@ -214,7 +207,7 @@ export default function BusinessesPage() {
               id="phone"
               name="phone"
               type="text"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
           </div>
 
@@ -227,7 +220,7 @@ export default function BusinessesPage() {
               id="website"
               name="website"
               type="text"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
           </div>
 
@@ -240,7 +233,7 @@ export default function BusinessesPage() {
               id="businessMaterials"
               name="businessMaterials"
               type="file"
-              className="mt-1 block w-full text-sm text-gray-500
+              className="mt-1 block w-full text-sm text-gray-900
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-md file:border-0
                 file:text-sm file:font-semibold
