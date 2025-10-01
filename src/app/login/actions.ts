@@ -110,3 +110,8 @@ export async function getSession(): Promise<SessionPayload | null> {
   if (!session) return null;
   return await decrypt(session);
 }
+
+// New server action to fetch session for client components
+export export async function fetchSession(): Promise<SessionPayload | null> {
+  return await getSession();
+}
