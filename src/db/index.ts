@@ -2,6 +2,11 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import * as schema from './schema';
 
-console.log("DATABASE_URL from process.env:", process.env.DATABASE_URL);
-const sql = neon(process.env.DATABASE_URL!);
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL environment variable is not set in db/index.ts");
+}
+
+const sql = neon(databaseUrl);
 export const db = drizzle(sql, { schema });
