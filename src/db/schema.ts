@@ -16,6 +16,11 @@ export const users = pgTable('users', {
   password: varchar('password', { length: 256 }).notNull(),
   role: userRole('role').notNull().default('internal'),
   hasBusinessProfile: boolean('has_business_profile').notNull().default(false),
+  personalAddress: text('personal_address'), // New field
+  personalCity: text('personal_city'), // New field
+  personalState: varchar('personal_state', { length: 2 }), // New field
+  personalZipCode: varchar('personal_zip_code', { length: 10 }), // New field
+  profilePhotoUrl: text('profile_photo_url'), // New field
 });
 
 export const businesses = pgTable('businesses', {
@@ -29,6 +34,7 @@ export const businesses = pgTable('businesses', {
   businessDescription: text('business_description'),
   businessIndustry: text('business_industry').notNull(),
   naicsCode: varchar('naics_code', { length: 6 }), // New field
+  logoUrl: text('logo_url'), // New field
   businessMaterialsUrl: text('business_materials_url'),
   streetAddress: text('street_address'), // New field
   city: text('city'), // New field
