@@ -6,11 +6,14 @@ import { eq } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
 type FormState = {
   message: string;
   error: string;
 } | undefined;
+
+type NewBusiness = InferInsertModel<typeof businesses>; // Define type for new business
 
 // Helper function to get user ID from session
 async function getUserIdFromSession(): Promise<number | undefined> {
@@ -76,7 +79,7 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       businessMaterialsUrl = "https://example.com/placeholder-material.pdf"; // Placeholder URL
     }
 
-    await db.insert(businesses).values({
+    const newBusinessData: NewBusiness = {
       userId,
       ownerName,
       percentOwnership,
@@ -89,7 +92,9 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       phone,
       website,
       businessMaterialsUrl,
-    });
+    };
+
+    await db.insert(businesses).values(newBusinessData);
 
     revalidatePath("/dashboard/businesses");
     redirect("/dashboard/businesses"); // Redirect to dashboard after creation
