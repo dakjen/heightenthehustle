@@ -73,6 +73,15 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   const website = formData.get("website") as string;
   const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
 
+  console.log("--- createBusinessProfile Debug ---");
+  console.log("ownerName:", ownerName);
+  console.log("percentOwnership:", percentOwnership, "isNaN:", isNaN(percentOwnership));
+  console.log("businessName:", businessName);
+  console.log("businessType:", businessType);
+  console.log("businessTaxStatus:", businessTaxStatus);
+  console.log("businessIndustry:", businessIndustry);
+  console.log("--- End Debug ---");
+
   if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
     return { message: "", error: "Required fields are missing." };
   }
