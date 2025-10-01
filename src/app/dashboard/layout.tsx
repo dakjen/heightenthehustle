@@ -17,7 +17,7 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside className="w-64 bg-[#910000] text-white p-4 space-y-6">
-        <Image src="/mycompanylogo.svg" alt="Logo" width={40} height={40} className="mb-6" />
+        <Image src="/hthlogo.svg" alt="Logo" width={40} height={40} className="mb-6" />
         <h2 className="text-2xl font-bold">Dashboard</h2>
         <nav>
           <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Home</a>
