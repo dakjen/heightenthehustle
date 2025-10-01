@@ -15,14 +15,14 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   const session = await getSession();
 
   if (!session || !session.user || !session.user.id) {
-    return { error: "User not authenticated." };
+    return { message: "", error: "User not authenticated." };
   }
 
   const name = formData.get("name") as string;
   const phone = formData.get("phone") as string;
 
   if (!name || !phone) {
-    return { error: "Name and Phone are required." };
+    return { message: "", error: "Name and Phone are required." };
   }
 
   try {
@@ -31,9 +31,9 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
       .where(eq(users.id, session.user.id));
 
     revalidatePath("/dashboard/profile"); // Revalidate the profile page to show updated data
-    return { message: "Profile updated successfully!" };
+    return { message: "Profile updated successfully!", error: "" };
   } catch (error) {
     console.error("Error updating profile:", error);
-    return { error: "Failed to update profile." };
+    return { message: "", error: "Failed to update profile." };
   }
 }
