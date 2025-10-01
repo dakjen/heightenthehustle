@@ -18,7 +18,6 @@ export default async function AdminLayout({
     <div className="flex min-h-screen bg-gray-50">
       {/* Admin Sidebar */}
       <aside className="w-64 bg-[#910000] text-white p-4 space-y-6">
-        <Image src="/hthlogo.png" alt="Logo" width={40} height={40} className="mb-6" />
         <h2 className="text-2xl font-bold">Admin Dashboard</h2>
         <nav>
           <a href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">User Management</a>
