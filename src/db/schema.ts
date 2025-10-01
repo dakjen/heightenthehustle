@@ -1,6 +1,12 @@
-import { pgTable, serial, text, varchar, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 export const userRole = pgEnum('user_role', ['admin', 'internal', 'external']);
+
+// New enums for business profile
+export const businessTypeEnum = pgEnum('business_type', ['Sole Proprietorship', 'Partnership', 'Limited Liability Company (LLC)', 'Corporation']);
+export const businessTaxStatusEnum = pgEnum('business_tax_status', ['S-Corporation', 'C-Corporation', 'Not Applicable']);
+
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -9,4 +15,32 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   password: varchar('password', { length: 256 }).notNull(),
   role: userRole('role').notNull().default('internal'),
+  hasBusinessProfile: boolean('has_business_profile').notNull().default(false),
 });
+
+export const businesses = pgTable('businesses', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
+  businessName: text('business_name').notNull(),
+  ownerName: text('owner_name').notNull(),
+  percentOwnership: numeric('percent_ownership').notNull(),
+  businessType: businessTypeEnum('business_type').notNull(),
+  businessTaxStatus: businessTaxStatusEnum('business_tax_status').notNull(),
+  businessDescription: text('business_description'),
+  businessIndustry: text('business_industry').notNull(),
+  businessMaterialsUrl: text('business_materials_url'),
+  address: text('address'),
+  phone: varchar('phone', { length: 20 }),
+  website: text('website'),
+});
+
+export const usersRelations = relations(users, ({ one, many }) => ({
+  businesses: many(businesses),
+}));
+
+export const businessesRelations = relations(businesses, ({ one }) => ({
+  user: one(users, {
+    fields: [businesses.userId],
+    references: [users.id],
+  }),
+}));

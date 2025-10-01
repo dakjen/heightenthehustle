@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "has_business_profile" boolean DEFAULT false NOT NULL;
