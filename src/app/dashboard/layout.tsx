@@ -17,8 +17,10 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside className="w-64 bg-[#606060] text-white p-4 space-y-6">
-        <Image src="/hthlogo.svg" alt="Logo" width={180} height={180} className="mb-6" />
-        <h2 className="text-2xl font-bold">Dashboard</h2>
+        <a href="/">
+          <Image src="/hthlogo.svg" alt="Logo" width={180} height={180} className="mb-6" />
+        </a>
+
         <nav>
           <a href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</a>
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
