@@ -32,6 +32,7 @@ export const businesses = pgTable('businesses', {
   address: text('address'),
   phone: varchar('phone', { length: 20 }),
   website: text('website'),
+  isArchived: boolean('is_archived').notNull().default(false), // New field
 });
 
 export const usersRelations = relations(users, ({ one, many }) => ({

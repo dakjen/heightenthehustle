@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users, businesses } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
@@ -15,6 +15,7 @@ interface UserSession {
   email: string;
   phone: string;
   role: 'admin' | 'internal' | 'external'; // Assuming userRole enum from schema
+  hasBusinessProfile: boolean;
 }
 
 // Extend JWTPayload to include our user session data
@@ -73,11 +74,15 @@ export async function login(prevState: FormState, formData: FormData) {
     const cookieStore = await cookies();
     cookieStore.set("session", await encrypt({ user, expires }), { expires, httpOnly: true });
 
-    // Conditional redirect based on hasBusinessProfile
-    if (!user.hasBusinessProfile) {
-      redirect("/dashboard/businesses");
+    // Check if user has any active businesses
+    const userBusinesses = await db.query.businesses.findFirst({
+      where: eq(businesses.userId, user.id),
+    });
+
+    if (!userBusinesses) {
+      redirect("/dashboard/businesses"); // Redirect to create business if none exist
     } else {
-      redirect("/dashboard");
+      redirect("/dashboard"); // Redirect to dashboard if businesses exist
     }
   } catch (error) {
     // Re-throw NEXT_REDIRECT errors to allow Next.js to handle the redirect

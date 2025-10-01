@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { createBusinessProfile, getAllUserBusinesses } from "./actions";
+import { getBusinessProfile, updateBusinessProfile, archiveBusiness } from "../actions"; // Relative import
 import { SessionPayload } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
 
@@ -29,106 +29,91 @@ interface Business {
   isArchived: boolean;
 }
 
-export default function BusinessesPage() {
+export default function BusinessDetailsPage({ params }: { params: { businessId: string } }) {
   const router = useRouter();
+  const businessId = parseInt(params.businessId);
   const [session, setSession] = useState<SessionPayload | null>(null);
-  const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
-  const [showCreateForm, setShowCreateForm] = useState(false); // State to toggle form visibility
+  const [business, setBusiness] = useState<Business | null>(null);
+  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessProfile.bind(null, businessId), undefined);
+  const [archiveState, archiveAction] = useFormState<FormState, number>(archiveBusiness, undefined);
 
-  // Form state for creating a new business
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, undefined);
 
   useEffect(() => {
-    async function fetchSessionAndBusinesses() {
+    async function fetchSessionAndBusiness() {
       const currentSession = await getSession();
       setSession(currentSession);
 
       if (currentSession && currentSession.user) {
-        const businesses = await getAllUserBusinesses(currentSession.user.id);
-        setUserBusinesses(businesses);
+        const fetchedBusiness = await getBusinessProfile(businessId);
+        if (fetchedBusiness && fetchedBusiness.userId === currentSession.user.id) {
+          setBusiness(fetchedBusiness);
+        } else {
+          // Redirect if business not found or not owned by user
+          router.push("/dashboard/businesses");
+        }
       }
     }
-    fetchSessionAndBusinesses();
-  }, [createState]); // Re-fetch businesses when a new one is created
+    fetchSessionAndBusiness();
+  }, [businessId, updateState, archiveState]); // Re-fetch on update/archive
 
-  // Handle successful creation and redirect
-  useEffect(() => {
-    if (createState?.message && !createState.error) {
-      setShowCreateForm(false); // Hide form on success
-      // Optionally, show a success toast or message
-    }
-  }, [createState]);
-
-  if (!session || !session.user) {
-    return <div className="flex-1 p-6">Loading user session...</div>;
+  if (!session || !session.user || !business) {
+    return <div className="flex-1 p-6">Loading business details...</div>;
   }
-
-  const handleBusinessClick = (businessId: number) => {
-    router.push(`/dashboard/businesses/${businessId}`);
-  };
 
   return (
     <div className="flex-1 p-6">
-      <h1 className="text-3xl font-bold text-gray-900">Your Businesses</h1>
-      <p className="mt-4 text-gray-700">Manage all your registered businesses.</p>
+      <h1 className="text-3xl font-bold text-gray-900">Edit Business: {business.businessName}</h1>
+      <p className="mt-4 text-gray-700">Manage details for your business.</p>
 
-      <div className="mt-6">
-        <button
-          onClick={() => setShowCreateForm(!showCreateForm)}
-          className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          {showCreateForm ? "Cancel" : "Create New Business"}
-        </button>
-      </div>
+      <div className="mt-8 max-w-2xl">
+        <form action={updateFormAction} className="space-y-6">
+          {/* Owner's Name */}
+          <div>
+            <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
+              Owner's Name
+            </label>
+            <input
+              id="ownerName"
+              name="ownerName"
+              type="text"
+              defaultValue={business.ownerName}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            />
+          </div>
 
-      {showCreateForm && (
-        <div className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Create New Business Profile</h2>
-          <form action={createFormAction} className="space-y-6">
-            {/* Owner's Name */}
-            <div>
-              <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-                Owner's Name
-              </label>
-              <input
-                id="ownerName"
-                name="ownerName"
-                type="text"
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
-            </div>
+          {/* Percent Ownership */}
+          <div>
+            <label htmlFor="percentOwnership" className="block text-sm font-medium text-gray-700">
+              Percent Ownership
+            </label>
+            <input
+              id="percentOwnership"
+              name="percentOwnership"
+              type="number"
+              step="0.01"
+              defaultValue={business.percentOwnership}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            />
+          </div>
 
-            {/* Percent Ownership */}
-            <div>
-              <label htmlFor="percentOwnership" className="block text-sm font-medium text-gray-700">
-                Percent Ownership
-              </label>
-              <input
-                id="percentOwnership"
-                name="percentOwnership"
-                type="number"
-                step="0.01"
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
-            </div>
+          {/* Business Name */}
+          <div>
+            <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
+              Business Name
+            </label>
+            <input
+              id="businessName"
+              name="businessName"
+              type="text"
+              defaultValue={business.businessName}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            />
+          </div>
 
-            {/* Business Name */}
-            <div>
-              <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
-                Business Name
-              </label>
-              <input
-                id="businessName"
-                name="businessName"
-                type="text"
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
-            </div>
-
-            {/* Business Type */}
+          {/* Business Type */}
           <div>
             <label htmlFor="businessType" className="block text-sm font-medium text-gray-700">
               Business Type
@@ -136,10 +121,10 @@ export default function BusinessesPage() {
             <select
               id="businessType"
               name="businessType"
+              defaultValue={business.businessType}
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             >
-              <option value="">Select Business Type</option>
               <option value="Sole Proprietorship">Sole Proprietorship</option>
               <option value="Partnership">Partnership</option>
               <option value="Limited Liability Company (LLC)">Limited Liability Company (LLC)</option>
@@ -155,10 +140,10 @@ export default function BusinessesPage() {
             <select
               id="businessTaxStatus"
               name="businessTaxStatus"
+              defaultValue={business.businessTaxStatus}
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             >
-              <option value="">Select Tax Status</option>
               <option value="S-Corporation">S-Corporation</option>
               <option value="C-Corporation">C-Corporation</option>
               <option value="Not Applicable">Not Applicable</option>
@@ -174,6 +159,7 @@ export default function BusinessesPage() {
               id="businessDescription"
               name="businessDescription"
               rows={3}
+              defaultValue={business.businessDescription || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             ></textarea>
           </div>
@@ -187,6 +173,7 @@ export default function BusinessesPage() {
               id="businessIndustry"
               name="businessIndustry"
               type="text"
+              defaultValue={business.businessIndustry}
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             />
@@ -201,6 +188,7 @@ export default function BusinessesPage() {
               id="address"
               name="address"
               type="text"
+              defaultValue={business.address || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
@@ -214,6 +202,7 @@ export default function BusinessesPage() {
               id="phone"
               name="phone"
               type="text"
+              defaultValue={business.phone || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
@@ -227,6 +216,7 @@ export default function BusinessesPage() {
               id="website"
               name="website"
               type="text"
+              defaultValue={business.website || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
@@ -247,48 +237,42 @@ export default function BusinessesPage() {
                 file:bg-[#910000] file:text-white
                 hover:file:bg-[#7a0000]"
             />
+            {business.businessMaterialsUrl && (
+              <p className="mt-2 text-sm text-gray-500">
+                Current materials: <a href={business.businessMaterialsUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">View</a>
+              </p>
+            )}
           </div>
 
-          {createState?.message && (
-            <p className="text-sm text-green-600">{createState.message}</p>
+          {updateState?.message && (
+            <p className="text-sm text-green-600">{updateState.message}</p>
           )}
-          {createState?.error && (
-            <p className="text-sm text-red-600">{createState.error}</p>
+          {updateState?.error && (
+            <p className="text-sm text-red-600">{updateState.error}</p>
           )}
 
-          <div>
+          <div className="flex justify-between items-center">
             <button
               type="submit"
               className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Create Business Profile
+              Update Business Profile
             </button>
+
+            {!business.isArchived && (
+              <button
+                type="button"
+                onClick={() => archiveAction(business.id)}
+                className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Archive Business
+              </button>
+            )}
+            {business.isArchived && (
+              <p className="text-sm text-gray-500">This business is archived.</p>
+            )}
           </div>
         </form>
-      </div>
-      )} {/* End of showCreateForm conditional rendering */}
-
-      {/* Display existing businesses */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {userBusinesses.length === 0 && !showCreateForm ? (
-          <p className="text-gray-700">You don't have any businesses yet. Click "Create New Business" to get started!</p>
-        ) : (
-          userBusinesses.map((business) => (
-            <div
-              key={business.id}
-              onClick={() => handleBusinessClick(business.id)}
-              className={`cursor-pointer p-6 rounded-lg shadow-md transition-all duration-200
-                ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
-            >
-              <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
-              <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
-              <p className="text-sm text-gray-600">Type: {business.businessType}</p>
-              {business.isArchived && (
-                <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
-              )}
-            </div>
-          ))
-        )}
       </div>
     </div>
   );

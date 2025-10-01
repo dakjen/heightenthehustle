@@ -18,15 +18,28 @@ async function getUserIdFromSession(): Promise<number | undefined> {
   return session?.user?.id;
 }
 
-export async function getBusinessProfile(userId: number) {
+export async function getBusinessProfile(businessId: number) {
   try {
     const profile = await db.query.businesses.findFirst({
-      where: eq(businesses.userId, userId),
+      where: eq(businesses.id, businessId),
     });
     return profile;
   } catch (error) {
     console.error("Error fetching business profile:", error);
     return null;
+  }
+}
+
+export async function getAllUserBusinesses(userId: number) {
+  try {
+    const allBusinesses = await db.query.businesses.findMany({
+      where: eq(businesses.userId, userId),
+      orderBy: (businesses, { asc, desc }) => [asc(businesses.isArchived), asc(businesses.businessName)], // Order by archived status then name
+    });
+    return allBusinesses;
+  } catch (error) {
+    console.error("Error fetching all user businesses:", error);
+    return [];
   }
 }
 
@@ -54,13 +67,6 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   }
 
   try {
-    // Check if a profile already exists for this user
-    const existingProfile = await getBusinessProfile(userId);
-
-    if (existingProfile) {
-      return { message: "", error: "Business profile already exists. Please update instead." };
-    }
-
     // Placeholder for file upload logic
     let businessMaterialsUrl: string | undefined;
     if (businessMaterials && businessMaterials.size > 0) {
@@ -85,13 +91,8 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       businessMaterialsUrl,
     });
 
-    // Update user's hasBusinessProfile status
-    await db.update(users)
-      .set({ hasBusinessProfile: true })
-      .where(eq(users.id, userId));
-
     revalidatePath("/dashboard/businesses");
-    redirect("/dashboard"); // Redirect to dashboard after creation
+    redirect("/dashboard/businesses"); // Redirect to dashboard after creation
     return { message: "Business profile created successfully!", error: "" };
   } catch (error) {
     console.error("Error creating business profile:", error);
@@ -99,7 +100,7 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   }
 }
 
-export async function updateBusinessProfile(prevState: FormState, formData: FormData): Promise<FormState> {
+export async function updateBusinessProfile(businessId: number, prevState: FormState, formData: FormData): Promise<FormState> {
   const userId = await getUserIdFromSession();
 
   if (!userId) {
@@ -144,12 +145,34 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
         website,
         businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
       })
-      .where(eq(businesses.userId, userId));
+      .where(eq(businesses.id, businessId));
 
     revalidatePath("/dashboard/businesses");
+    revalidatePath(`/dashboard/businesses/${businessId}`); // Revalidate specific business page
     return { message: "Business profile updated successfully!", error: "" };
   } catch (error) {
     console.error("Error updating business profile:", error);
     return { message: "", error: "Failed to update business profile." };
+  }
+}
+
+export async function archiveBusiness(businessId: number): Promise<FormState> {
+  const userId = await getUserIdFromSession();
+
+  if (!userId) {
+    return { message: "", error: "User not authenticated." };
+  }
+
+  try {
+    await db.update(businesses)
+      .set({ isArchived: true })
+      .where(eq(businesses.id, businessId));
+
+    revalidatePath("/dashboard/businesses");
+    revalidatePath(`/dashboard/businesses/${businessId}`);
+    return { message: "Business archived successfully!", error: "" };
+  } catch (error) {
+    console.error("Error archiving business:", error);
+    return { message: "", error: "Failed to archive business." };
   }
 }
