@@ -8,13 +8,28 @@ import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+// Define the structure of the user object within the session
+interface UserSession {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  role: 'admin' | 'internal' | 'external'; // Assuming userRole enum from schema
+}
+
+// Extend JWTPayload to include our user session data
+export interface SessionPayload extends JWTPayload {
+  user?: UserSession;
+  expires?: Date;
+}
+
 const secretKey = process.env.JWT_SECRET;
 if (!secretKey) {
   throw new Error("JWT_SECRET environment variable is not set.");
 }
 const key = new TextEncoder().encode(secretKey);
 
-async function encrypt(payload: JWTPayload) {
+async function encrypt(payload: SessionPayload) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -22,11 +37,11 @@ async function encrypt(payload: JWTPayload) {
     .sign(key);
 }
 
-async function decrypt(input: string): Promise<JWTPayload> {
+async function decrypt(input: string): Promise<SessionPayload> {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
   });
-  return payload;
+  return payload as SessionPayload;
 }
 
 export type FormState = {
@@ -75,7 +90,7 @@ export async function logout() {
   redirect("/login");
 }
 
-export async function getSession() {
+export async function getSession(): Promise<SessionPayload | null> {
   const session = (await cookies()).get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
