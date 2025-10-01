@@ -80,9 +80,7 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
     }
 
     const newBusinessData: NewBusiness = {
-      userId,
-      ownerName,
-      percentOwnership,
+      percentOwnership: percentOwnership.toString(),
       businessName,
       businessType: businessType as typeof businessTypeEnum.enumValues[number],
       businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
@@ -139,7 +137,7 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
     await db.update(businesses)
       .set({
         ownerName,
-        percentOwnership,
+        percentOwnership: percentOwnership.toString(),
         businessName,
         businessType: businessType as typeof businessTypeEnum.enumValues[number],
         businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
