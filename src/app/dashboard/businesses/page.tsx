@@ -20,12 +20,12 @@ interface Business {
   percentOwnership: string;
   businessType: string;
   businessTaxStatus: string;
-  businessDescription?: string;
+  businessDescription: string | null;
   businessIndustry: string;
-  businessMaterialsUrl?: string;
-  address?: string;
-  phone?: string;
-  website?: string;
+  businessMaterialsUrl: string | null;
+  address: string | null;
+  phone: string | null;
+  website: string | null;
   isArchived: boolean;
 }
 
