@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { businesses, users } from "@/db/schema";
+import { businesses, users, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -81,8 +81,8 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       ownerName,
       percentOwnership,
       businessName,
-      businessType: businessType as any, // Cast to any for enum type
-      businessTaxStatus: businessTaxStatus as any, // Cast to any for enum type
+      businessType: businessType as typeof businessTypeEnum.enumValues[number],
+      businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
       businessDescription,
       businessIndustry,
       address,
@@ -136,8 +136,8 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
         ownerName,
         percentOwnership,
         businessName,
-        businessType: businessType as any,
-        businessTaxStatus: businessTaxStatus as any,
+        businessType: businessType as typeof businessTypeEnum.enumValues[number],
+        businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
         businessDescription,
         businessIndustry,
         address,

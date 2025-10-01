@@ -88,7 +88,7 @@ export default function BusinessesPage() {
             {/* Owner's Name */}
             <div>
               <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-                Owner's Name
+                Owner&#39;s Name
               </label>
               <input
                 id="ownerName"
@@ -271,7 +271,7 @@ export default function BusinessesPage() {
       {/* Display existing businesses */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {userBusinesses.length === 0 && !showCreateForm ? (
-          <p className="text-gray-700">You don't have any businesses yet. Click "Create New Business" to get started!</p>
+          <p className="text-gray-700">You don&#39;t have any businesses yet. Click &quot;Create New Business&quot; to get started!</p>
         ) : (
           userBusinesses.map((business) => (
             <div
