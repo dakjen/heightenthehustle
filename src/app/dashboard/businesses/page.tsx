@@ -23,7 +23,10 @@ interface Business {
   businessDescription: string | null;
   businessIndustry: string;
   businessMaterialsUrl: string | null;
-  address: string | null;
+  streetAddress: string | null;
+  city: string | null;
+  state: string | null;
+  zipCode: string | null;
   phone: string | null;
   website: string | null;
   isArchived: boolean;
