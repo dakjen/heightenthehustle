@@ -1,3 +1,4 @@
+/*
 "use client";
 
 import { useState, useEffect } from "react";
@@ -283,3 +284,4 @@ export default function BusinessDetailsPage({ params }: BusinessDetailsComponent
     </div>
   );
 }
+*/
