@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { createBusinessProfile, getAllUserBusinesses, fetchSession } from "./actions";
+import { createBusinessProfile, getAllUserBusinesses } from "./actions";
 import { SessionPayload, fetchSession } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
 
