@@ -13,10 +13,21 @@ type FormState = {
   error: string;
 } | undefined;
 
+// Define a type for a single user (matching your schema)
+interface User {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  password: string; // Note: In a real app, you wouldn't fetch password to client
+  role: 'admin' | 'internal' | 'external';
+  hasBusinessProfile: boolean;
+}
+
 export default function UserManagementPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [createState, createFormAction] = useFormState<FormState, FormData>(createUser, undefined);
-  const [allUsers, setAllUsers] = useState([]); // State to hold users
+  const [allUsers, setAllUsers] = useState<User[]>([]); // Explicitly type as User[]
 
   // Fetch users on component mount and after creation
   useEffect(() => {
