@@ -44,6 +44,17 @@ export default function ProfilePage() {
 
   return (
     <div className="flex-1 p-6">
+      {/* Profile Photo Display */}
+      <div className="mb-6 flex justify-center">
+        {user.profilePhotoUrl ? (
+          <img src={user.profilePhotoUrl} alt="Profile" className="h-24 w-24 rounded-full object-cover border-2 border-gray-300" />
+        ) : (
+          <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
+            {user.name ? user.name[0].toUpperCase() : '?'}
+          </div>
+        )}
+      </div>
+
       <h1 className="text-3xl font-bold text-gray-900">Your Personal Profile</h1> {/* Renamed heading */}
       <p className="mt-4 text-gray-700">Manage your personal information.</p>
 
