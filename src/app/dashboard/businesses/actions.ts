@@ -1,11 +1,10 @@
 "use server";
 
 import { db } from "@/db";
-import { businesses, users, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { getSession, SessionPayload } from "@/app/login/actions";
+import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
 type FormState = {

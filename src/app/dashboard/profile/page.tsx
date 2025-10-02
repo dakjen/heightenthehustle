@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { updateProfile } from "./actions";
-import { getSession, SessionPayload } from "@/app/login/actions"; // Import SessionPayload
+import { getSession } from "@/app/login/actions";
+import Image from "next/image";
 
 // Define a type for the user object in state, matching the updated schema
 interface UserProfile {
@@ -47,7 +48,7 @@ export default function ProfilePage() {
       {/* Profile Photo Display */}
       <div className="mb-6 flex justify-center">
         {user.profilePhotoUrl ? (
-          <img src={user.profilePhotoUrl} alt="Profile" className="h-24 w-24 rounded-full object-cover border-2 border-gray-300" />
+          <Image src={user.profilePhotoUrl} alt="Profile" width={96} height={96} className="rounded-full object-cover border-2 border-gray-300" />
         ) : (
           <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
             {user.name ? user.name[0].toUpperCase() : '?'}
@@ -64,7 +65,7 @@ export default function ProfilePage() {
           {user.profilePhotoUrl && (
             <div>
               <label className="block text-sm font-medium text-gray-700">Current Profile Photo</label>
-              <img src={user.profilePhotoUrl} alt="Profile" className="mt-1 h-20 w-20 rounded-full object-cover" />
+              <Image src={user.profilePhotoUrl} alt="Profile" width={80} height={80} className="mt-1 rounded-full object-cover" />
             </div>
           )}
           <div>

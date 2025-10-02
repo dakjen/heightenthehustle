@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
 import LogoutButton from "@/app/components/LogoutButton";

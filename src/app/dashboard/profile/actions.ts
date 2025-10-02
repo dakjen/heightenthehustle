@@ -42,8 +42,15 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload profile photo.');
+        const errorText = await response.text();
+        console.error("Upload failed, response text:", errorText);
+        try {
+          const errorData = JSON.parse(errorText);
+          throw new Error(errorData.error || 'Failed to upload profile photo.');
+        } catch (e) {
+          // If parsing fails, throw a generic error with the raw text
+          throw new Error(`Failed to upload profile photo. Server responded with: ${errorText}`);
+        }
       }
 
       const blob = await response.json();

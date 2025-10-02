@@ -2,6 +2,7 @@ import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request): Promise<NextResponse> {
+  console.log('--- UPLOAD PROFILE PHOTO API ROUTE ---');
   const { searchParams } = new URL(request.url);
   const filename = searchParams.get('filename');
 
