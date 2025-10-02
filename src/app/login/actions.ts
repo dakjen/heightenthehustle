@@ -112,6 +112,6 @@ export async function getSession(): Promise<SessionPayload | null> {
 }
 
 // New server action to fetch session for client components
-export export async function fetchSession(): Promise<SessionPayload | null> {
+export async function fetchSession(): Promise<SessionPayload | null> {
   return await getSession();
 }
