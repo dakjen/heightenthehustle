@@ -16,6 +16,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json(blob);
   } catch (error) {
     console.error('Error uploading file to Vercel Blob:', error);
+    console.error('Vercel Blob Error Details:', JSON.stringify(error, Object.getOwnPropertyNames(error))); // New debug log
     return NextResponse.json({ error: 'Failed to upload file.' }, { status: 500 });
   }
 }
