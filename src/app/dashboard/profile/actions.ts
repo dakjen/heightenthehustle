@@ -31,13 +31,21 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   }
 
   try {
-    // Placeholder for profile photo upload logic
     let profilePhotoUrl: string | undefined;
     if (profilePhoto && profilePhoto.size > 0) {
-      // In a real application, you would upload this file to a storage service (e.g., S3, Vercel Blob)
-      // and get a URL. For now, we'll just log it.
-      console.log("Attempting to upload profile photo:", profilePhoto.name);
-      profilePhotoUrl = "https://example.com/placeholder-profile.jpg"; // Placeholder URL
+      // Call the API route to upload the file
+      const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/upload/profile-photo?filename=${profilePhoto.name}`, {
+        method: 'POST',
+        body: profilePhoto,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to upload profile photo.');
+      }
+
+      const blob = await response.json();
+      profilePhotoUrl = blob.url;
     }
 
     await db.update(users)
