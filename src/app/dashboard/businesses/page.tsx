@@ -58,9 +58,10 @@ export default function BusinessesPage() {
   useEffect(() => {
     if (createState?.message && !createState.error) {
       setShowCreateForm(false); // Hide form on success
+      router.push("/dashboard/businesses"); // Redirect to the list page
       // Optionally, show a success toast or message
     }
-  }, [createState]);
+  }, [createState, router]); // Added router to dependencies
 
   if (!session || !session.user) {
     return <div className="flex-1 p-6">Loading user session...</div>;

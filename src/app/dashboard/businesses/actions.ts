@@ -109,7 +109,6 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
     await db.insert(businesses).values(newBusinessData);
 
     revalidatePath("/dashboard/businesses");
-    redirect("/dashboard/businesses"); // Redirect to dashboard after creation
     return { message: "Business profile created successfully!", error: "" };
   } catch (error) {
     console.error("Error creating business profile:", error);
