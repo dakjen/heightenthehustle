@@ -33,8 +33,10 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   try {
     let profilePhotoUrl: string | undefined;
     if (profilePhoto && profilePhoto.size > 0) {
+      const uploadUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/upload/profile-photo?filename=${profilePhoto.name}`;
+      console.log("Profile photo upload URL:", uploadUrl); // Debug log
       // Call the API route to upload the file
-      const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/upload/profile-photo?filename=${profilePhoto.name}`, {
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         body: profilePhoto,
       });
