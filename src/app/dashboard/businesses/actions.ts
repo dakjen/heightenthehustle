@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { getSession } from "@/app/login/actions";
+import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 

@@ -47,7 +47,7 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
         try {
           const errorData = JSON.parse(errorText);
           throw new Error(errorData.error || 'Failed to upload profile photo.');
-        } catch (e) {
+        } catch {
           // If parsing fails, throw a generic error with the raw text
           throw new Error(`Failed to upload profile photo. Server responded with: ${errorText}`);
         }
