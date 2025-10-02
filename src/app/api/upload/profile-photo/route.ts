@@ -5,18 +5,19 @@ export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const filename = searchParams.get('filename');
 
-  if (!filename) {
-    return NextResponse.json({ error: 'Filename is required.' }, { status: 400 });
+  if (!filename || !request.body) {
+    return NextResponse.json({ error: 'No filename or file body provided.' }, { status: 400 });
   }
 
   try {
-    const blob = await put(filename, request.body as ReadableStream, {
+    const blob = await put(filename, request.body, {
       access: 'public',
     });
+
     return NextResponse.json(blob);
   } catch (error) {
-    console.error('Error uploading file to Vercel Blob:', error);
-    console.error('Vercel Blob Error Details:', JSON.stringify(error, Object.getOwnPropertyNames(error))); // New debug log
-    return NextResponse.json({ error: 'Failed to upload file.' }, { status: 500 });
+    console.error('Error uploading to Vercel Blob:', error);
+    const message = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return NextResponse.json({ error: 'Failed to upload file to Vercel Blob.', details: message }, { status: 500 });
   }
 }
