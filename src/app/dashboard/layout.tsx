@@ -4,6 +4,7 @@ import LogoutButton from "@/app/components/LogoutButton";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
+import AdminViewToggle from "./components/AdminViewToggle"; // New import
 
 export default async function DashboardLayout({
   children,
@@ -16,6 +17,8 @@ export default async function DashboardLayout({
   }
 
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
+  const isAdmin = session.user.role === 'admin';
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -36,11 +39,15 @@ export default async function DashboardLayout({
           <Link href="/dashboard/heighten-ai" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Heighten.Ai</Link> {/* New Link */}
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
-          {session.user && session.user.role === 'admin' && (
+          {isAdmin && (
             <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
           )}
           {/* Add more navigation links here */}
         </nav>
+
+        {/* Admin View Toggle */}
+        <AdminViewToggle isAdmin={isAdmin} />
+
         <LogoutButton />
       </aside>
 

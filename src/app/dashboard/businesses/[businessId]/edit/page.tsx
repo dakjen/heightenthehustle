@@ -1,11 +1,9 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { getBusinessProfile, updateBusinessProfile } from "../../actions";
+import { getBusinessProfile, updateBusinessProfile, archiveBusiness } from "../../actions";
 import { Business } from "@/db/schema";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 
 type FormState = {
   message: string;
@@ -17,6 +15,7 @@ interface EditBusinessProfilePageProps {
 }
 
 export default function EditBusinessProfilePage({ params }: EditBusinessProfilePageProps) {
+  const router = useRouter();
   const businessId = parseInt(params.businessId);
 
   if (isNaN(businessId)) {
@@ -57,6 +56,17 @@ export default function EditBusinessProfilePage({ params }: EditBusinessProfileP
       reFetchBusiness();
     }
   }, [editState, businessId]);
+
+  const handleArchive = async () => {
+    if (window.confirm("Are you sure you want to archive this business? This action cannot be undone.")) {
+      const result = await archiveBusiness(businessId);
+      if (result?.message && !result.error) {
+        router.push("/dashboard/businesses"); // Redirect to business list after archiving
+      } else if (result?.error) {
+        alert(`Failed to archive business: ${result.error}`);
+      }
+    }
+  };
 
   if (loading) {
     return <div className="flex-1 p-6 text-center text-gray-500">Loading business profile...</div>;
@@ -321,6 +331,17 @@ export default function EditBusinessProfilePage({ params }: EditBusinessProfileP
             </button>
           </div>
         </form>
+
+        {/* Archive Button */}
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={handleArchive}
+            className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            Archive Business
+          </button>
+        </div>
       </div>
     </div>
   );
