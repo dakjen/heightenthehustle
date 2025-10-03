@@ -31,6 +31,7 @@ interface Business {
   phone: string | null;
   website: string | null;
   isArchived: boolean;
+  logoUrl: string | null; // Added logoUrl
 }
 
 export default function BusinessesPage() {
