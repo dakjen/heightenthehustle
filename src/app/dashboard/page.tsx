@@ -49,7 +49,7 @@ export default function DashboardPage() {
         <div className="bg-white shadow-lg rounded-lg p-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Important Information</h2>
           <p className="text-lg text-gray-700">
-            We will periodically send you resources, notes, and alerts to help your business grow and thrive. If you'd like to stop receiving these communications, you can opt out below.
+            We will periodically send you resources, notes, and alerts to help your business grow and thrive. If you&apos;d like to stop receiving these communications, you can opt out below.
           </p>
           <button className="mt-6 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-colors">
             Opt Out
