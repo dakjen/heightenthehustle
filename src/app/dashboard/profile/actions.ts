@@ -5,6 +5,7 @@ import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
+import { put } from "@vercel/blob";
 
 type FormState = {
   message: string;
@@ -33,27 +34,7 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   try {
     let profilePhotoUrl: string | undefined;
     if (profilePhoto && profilePhoto.size > 0) {
-      const uploadUrl = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/upload/profile-photo?filename=${encodeURIComponent(profilePhoto.name)}`;
-      console.log("Profile photo upload URL:", uploadUrl); // Debug log
-      // Call the API route to upload the file
-      const response = await fetch(uploadUrl, {
-        method: 'POST',
-        body: profilePhoto,
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Upload failed, response text:", errorText);
-        try {
-          const errorData = JSON.parse(errorText);
-          throw new Error(errorData.error || 'Failed to upload profile photo.');
-        } catch {
-          // If parsing fails, throw a generic error with the raw text
-          throw new Error(`Failed to upload profile photo. Server responded with: ${errorText}`);
-        }
-      }
-
-      const blob = await response.json();
+      const blob = await put(profilePhoto.name, profilePhoto, { access: 'public' });
       profilePhotoUrl = blob.url;
     }
 
