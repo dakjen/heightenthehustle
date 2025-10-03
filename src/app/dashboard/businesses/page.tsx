@@ -314,15 +314,15 @@ export default function BusinessesPage() {
       )} {/* End of showCreateForm conditional rendering */}
 
       {/* Display existing businesses */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-8 flex flex-col space-y-4">
         {userBusinesses.length === 0 && !showCreateForm ? (
           <p className="text-gray-700">You don&#39;t have any businesses yet. Click &quot;Create New Business&quot; to get started!</p>
         ) : (
           userBusinesses.map((business) => (
-            <div
+            <button
               key={business.id}
               onClick={() => handleBusinessClick(business.id)}
-              className={`cursor-pointer p-6 rounded-lg shadow-md transition-all duration-200
+              className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200
                 ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
             >
               <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
@@ -331,7 +331,7 @@ export default function BusinessesPage() {
               {business.isArchived && (
                 <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
               )}
-            </div>
+            </button>
           ))
         )}
       </div>

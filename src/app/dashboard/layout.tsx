@@ -3,6 +3,7 @@ import { getSession } from "@/app/login/actions";
 import LogoutButton from "@/app/components/LogoutButton";
 import Image from "next/image";
 import Link from "next/link";
+import { getAllUserBusinesses } from "../businesses/actions";
 
 export default async function DashboardLayout({
   children,
@@ -14,6 +15,7 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
+  const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -25,6 +27,12 @@ export default async function DashboardLayout({
         <nav>
           <Link href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</Link>
           <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
+          {/* Render sublinks for businesses */}
+          {businesses.map((business) => (
+            <Link key={business.id} href={`/dashboard/businesses/${business.id}`} className="block py-2 px-6 text-sm rounded transition duration-200 hover:bg-[#4a4a4a]">
+              {business.businessName}
+            </Link>
+          ))}
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
           {session.user && session.user.role === 'admin' && (
