@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { getBusinessProfile, updateBusinessProfile } from "../actions";
 import { Business } from "@/db/schema"; // New import
-import Image from "next/image"; // New import
+import Image from "next/image";
+import Link from "next/link"; // New import
 
 type FormState = {
   message: string;
