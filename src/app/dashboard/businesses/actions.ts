@@ -5,6 +5,7 @@ import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema
 import { eq } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
+import { put } from "@vercel/blob";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
 type FormState = {
@@ -137,6 +138,7 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
   const phone = formData.get("phone") as string;
   const website = formData.get("website") as string;
   const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
+  const logo = formData.get("logo") as File; // New: Get logo file
 
   if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
     return { message: "", error: "Required fields are missing." };
@@ -148,6 +150,13 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
     if (businessMaterials && businessMaterials.size > 0) {
       console.log("Attempting to upload file:", businessMaterials.name);
       businessMaterialsUrl = "https://example.com/placeholder-material.pdf"; // Placeholder URL
+    }
+
+    // New: Handle logo upload
+    let logoUrl: string | undefined;
+    if (logo && logo.size > 0) {
+      const blob = await put(logo.name, logo, { access: 'public', allowOverwrite: true });
+      logoUrl = blob.url;
     }
 
     await db.update(businesses)
@@ -167,6 +176,7 @@ export async function updateBusinessProfile(businessId: number, prevState: FormS
         phone,
         website,
         businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
+        logoUrl: logoUrl || undefined, // New: Update logoUrl
       })
       .where(eq(businesses.id, businessId));
 

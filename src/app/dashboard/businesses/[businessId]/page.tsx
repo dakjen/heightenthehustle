@@ -287,12 +287,41 @@ export default function BusinessDetailPage({ params }: BusinessDetailPageProps) 
             />
           </div>
 
+          {/* Business Logo Upload */}
+          <div>
+            <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
+              Business Logo (Current: {business.logoUrl || 'None'})
+            </label>
+            <input
+              id="logo"
+              name="logo"
+              type="file"
+              className="mt-1 block w-full text-sm text-gray-900
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:text-sm file:font-semibold
+                file:bg-[#910000] file:text-white
+                hover:file:bg-[#7a0000]"
+            />
+          </div>
+
           {editState?.message && (
             <p className="text-sm text-green-600">{editState.message}</p>
           )}
           {editState?.error && (
             <p className="text-sm text-red-600">{editState.error}</p>
           )}
+
+          {/* Pending Requests Section */}
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-900">Pending Requests</h2>
+            <p className="mt-2 text-gray-700">This section will display requests to work with this business.</p>
+            {/* Placeholder for pending requests list */}
+            <ul className="mt-4 space-y-2">
+              <li className="p-4 bg-gray-100 rounded-md">Request from User A - Pending</li>
+              <li className="p-4 bg-gray-100 rounded-md">Request from User B - Pending</li>
+            </ul>
+          </div>
 
           <div>
             <button
