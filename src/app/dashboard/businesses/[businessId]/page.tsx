@@ -9,6 +9,28 @@ interface BusinessDetailPageProps {
   params: { businessId: string };
 }
 
+// Define a type for a single business (matching your schema)
+interface Business {
+  id: number;
+  userId: number;
+  businessName: string;
+  ownerName: string;
+  percentOwnership: string;
+  businessType: string;
+  businessTaxStatus: string;
+  businessDescription: string | null;
+  businessIndustry: string;
+  businessMaterialsUrl: string | null;
+  streetAddress: string | null;
+  city: string | null;
+  state: string | null;
+  zipCode: string | null;
+  phone: string | null;
+  website: string | null;
+  isArchived: boolean;
+  logoUrl: string | null; // Added logoUrl
+}
+
 type FormState = {
   message: string;
   error: string;
@@ -17,7 +39,7 @@ type FormState = {
 export default function BusinessDetailPage({ params }: BusinessDetailPageProps) {
   const businessId = parseInt(params.businessId);
 
-  const [business, setBusiness] = useState<any>(null); // Use useState for business data
+  const [business, setBusiness] = useState<Business | null>(null); // Use useState for business data
   const [loading, setLoading] = useState(true); // Add loading state
   const [editState, formAction] = useFormState<FormState, FormData>(
     updateBusinessProfile.bind(null, businessId), // Bind businessId to the action
