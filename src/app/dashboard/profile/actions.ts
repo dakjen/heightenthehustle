@@ -69,7 +69,7 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
       cookieStore.set("session", await encrypt(newSessionPayload), { expires, httpOnly: true });
     }
 
-    revalidatePath("/dashboard/profile"); // Revalidate the profile page to show updated data
+    revalidatePath("/dashboard"); // Revalidate the entire dashboard path to show updated data
     return { message: "Profile updated successfully!", error: "" };
   } catch (error) {
     console.error("Error updating profile:", error);
