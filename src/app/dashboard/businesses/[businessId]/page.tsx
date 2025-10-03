@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getBusinessProfile } from "../actions";
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
-export default async function BusinessDetailPage({ params }: { params: { businessId: string } }) {
+export default async function BusinessDetailPage({ params }: { params: any }) {
   const businessId = parseInt(params.businessId);
 
   if (isNaN(businessId)) {
