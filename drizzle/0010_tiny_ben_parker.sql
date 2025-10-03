@@ -1,1 +1,1 @@
-ALTER TABLE "businesses" ADD COLUMN "is_archived" boolean DEFAULT false NOT NULL;
+-- ALTER TABLE "businesses" ADD COLUMN "is_archived" boolean DEFAULT false NOT NULL;
