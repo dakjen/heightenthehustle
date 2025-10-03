@@ -34,7 +34,7 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   try {
     let profilePhotoUrl: string | undefined;
     if (profilePhoto && profilePhoto.size > 0) {
-      const blob = await put(profilePhoto.name, profilePhoto, { access: 'public' });
+      const blob = await put(profilePhoto.name, profilePhoto, { access: 'public', allowOverwrite: true });
       profilePhotoUrl = blob.url;
     }
 
