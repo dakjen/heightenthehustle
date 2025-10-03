@@ -1,10 +1,8 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useFormState } from "react-dom";
 import { createBusinessProfile, getAllUserBusinesses } from "./actions";
 import { SessionPayload, fetchSession } from "@/app/login/actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image"; // New import
 
 type FormState = {
@@ -36,25 +34,57 @@ interface Business {
 
 export default function BusinessesPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [session, setSession] = useState<SessionPayload | null>(null);
   const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false); // State to toggle form visibility
+  const [loadingBusinesses, setLoadingBusinesses] = useState(true);
+
+  const searchQuery = searchParams.get("search") || "";
+  const businessTypeFilter = searchParams.get("businessType") || "";
+  const businessTaxStatusFilter = searchParams.get("businessTaxStatus") || "";
+  const isArchivedFilter = searchParams.get("isArchived") === "true";
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const deleteQueryString = useCallback(
+    (name: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete(name);
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   // Form state for creating a new business
   const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, undefined);
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {
+      setLoadingBusinesses(true);
       const currentSession = await fetchSession();
       setSession(currentSession);
 
       if (currentSession && currentSession.user) {
-        const businesses = await getAllUserBusinesses(currentSession.user.id);
+        const filters = {
+          businessType: businessTypeFilter || undefined,
+          businessTaxStatus: businessTaxStatusFilter || undefined,
+          isArchived: isArchivedFilter || undefined,
+        };
+        const businesses = await getAllUserBusinesses(currentSession.user.id, searchQuery, filters);
         setUserBusinesses(businesses);
       }
+      setLoadingBusinesses(false);
     }
     fetchSessionAndBusinesses();
-  }, [createState]); // Re-fetch businesses when a new one is created
+  }, [createState, searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter]);
 
   // Handle successful creation and redirect
   useEffect(() => {
@@ -73,10 +103,101 @@ export default function BusinessesPage() {
     router.push(`/dashboard/businesses/${businessId}`);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value) {
+      router.push(`/dashboard/businesses?${createQueryString("search", value)}`);
+    } else {
+      router.push(`/dashboard/businesses?${deleteQueryString("search")}`);
+    }
+  };
+
+  const handleFilterChange = (name: string, value: string) => {
+    if (value) {
+      router.push(`/dashboard/businesses?${createQueryString(name, value)}`);
+    } else {
+      router.push(`/dashboard/businesses?${deleteQueryString(name)}`);
+    }
+  };
+
+  const handleArchivedToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    if (checked) {
+      router.push(`/dashboard/businesses?${createQueryString("isArchived", "true")}`);
+    } else {
+      router.push(`/dashboard/businesses?${deleteQueryString("isArchived")}`);
+    }
+  };
+
   return (
     <div className="flex-1 p-6">
       <h1 className="text-3xl font-bold text-gray-900">Your Businesses</h1>
       <p className="mt-4 text-gray-700">Manage all your registered businesses.</p>
+
+      {/* Search and Filter Section */}
+      <div className="mt-6 p-4 bg-white shadow-md rounded-lg">
+        <div className="flex flex-col md:flex-row gap-4 mb-4">
+          {/* Search Bar */}
+          <div className="flex-1">
+            <label htmlFor="search" className="sr-only">Search Businesses</label>
+            <input
+              id="search"
+              type="text"
+              placeholder="Search by business name..."
+              defaultValue={searchQuery}
+              onChange={handleSearchChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            />
+          </div>
+
+          {/* Business Type Filter */}
+          <div>
+            <label htmlFor="businessTypeFilter" className="sr-only">Filter by Business Type</label>
+            <select
+              id="businessTypeFilter"
+              defaultValue={businessTypeFilter}
+              onChange={(e) => handleFilterChange("businessType", e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            >
+              <option value="">All Types</option>
+              <option value="Sole Proprietorship">Sole Proprietorship</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Limited Liability Company (LLC)">Limited Liability Company (LLC)</option>
+              <option value="Corporation">Corporation</option>
+            </select>
+          </div>
+
+          {/* Business Tax Status Filter */}
+          <div>
+            <label htmlFor="businessTaxStatusFilter" className="sr-only">Filter by Tax Status</label>
+            <select
+              id="businessTaxStatusFilter"
+              defaultValue={businessTaxStatusFilter}
+              onChange={(e) => handleFilterChange("businessTaxStatus", e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            >
+              <option value="">All Tax Statuses</option>
+              <option value="S-Corporation">S-Corporation</option>
+              <option value="C-Corporation">C-Corporation</option>
+              <option value="Not Applicable">Not Applicable</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Archived Toggle */}
+        <div className="flex items-center">
+          <input
+            id="isArchivedFilter"
+            type="checkbox"
+            checked={isArchivedFilter}
+            onChange={handleArchivedToggle}
+            className="h-4 w-4 text-[#910000] focus:ring-[#910000] border-gray-300 rounded"
+          />
+          <label htmlFor="isArchivedFilter" className="ml-2 block text-sm text-gray-900">
+            Show Archived Businesses
+          </label>
+        </div>
+      </div>
 
       <div className="mt-6">
         <button

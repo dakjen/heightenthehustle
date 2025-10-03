@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import { put } from "@vercel/blob";
@@ -37,11 +37,29 @@ export async function getBusinessProfile(businessId: number) {
   }
 }
 
-export async function getAllUserBusinesses(userId: number) {
+export async function getAllUserBusinesses(userId: number, searchQuery?: string, filters?: { businessType?: string; businessTaxStatus?: string; isArchived?: boolean; }) {
   try {
+    const conditions = [eq(businesses.userId, userId)];
+
+    if (searchQuery) {
+      conditions.push(like(businesses.businessName, `%${searchQuery}%`));
+    }
+
+    if (filters?.businessType) {
+      conditions.push(eq(businesses.businessType, filters.businessType as typeof businessTypeEnum.enumValues[number]));
+    }
+
+    if (filters?.businessTaxStatus) {
+      conditions.push(eq(businesses.businessTaxStatus, filters.businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number]));
+    }
+
+    if (filters?.isArchived !== undefined) {
+      conditions.push(eq(businesses.isArchived, filters.isArchived));
+    }
+
     const allBusinesses = await db.query.businesses.findMany({
-      where: eq(businesses.userId, userId),
-      orderBy: (businesses, { asc, desc }) => [asc(businesses.isArchived), asc(businesses.businessName)], // Order by archived status then name
+      where: and(...conditions),
+      orderBy: (businesses, { asc, desc }) => [asc(businesses.isArchived), asc(businesses.businessName)],
     });
     return allBusinesses;
   } catch (error) {
