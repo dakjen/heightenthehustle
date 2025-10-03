@@ -3,28 +3,7 @@
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { getBusinessProfile, updateBusinessProfile } from "../actions";
-
-// Define a type for a single business (matching your schema)
-interface Business {
-  id: number;
-  userId: number;
-  businessName: string;
-  ownerName: string;
-  percentOwnership: string;
-  businessType: string;
-  businessTaxStatus: string;
-  businessDescription: string | null;
-  businessIndustry: string;
-  businessMaterialsUrl: string | null;
-  streetAddress: string | null;
-  city: string | null;
-  state: string | null;
-  zipCode: string | null;
-  phone: string | null;
-  website: string | null;
-  isArchived: boolean;
-  logoUrl: string | null;
-}
+import { Business } from "@/db/schema"; // New import
 
 type FormState = {
   message: string;

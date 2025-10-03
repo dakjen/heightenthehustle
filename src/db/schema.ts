@@ -1,5 +1,5 @@
 import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { relations, InferSelectModel } from 'drizzle-orm';
 
 export const userRole = pgEnum('user_role', ['admin', 'internal', 'external']);
 
@@ -44,6 +44,8 @@ export const businesses = pgTable('businesses', {
   website: text('website'),
   isArchived: boolean('is_archived').notNull().default(false), // New field
 });
+
+export type Business = InferSelectModel<typeof businesses>;
 
 export const usersRelations = relations(users, ({ one, many }) => ({
   businesses: many(businesses),
