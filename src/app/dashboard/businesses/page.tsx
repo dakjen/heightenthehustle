@@ -5,6 +5,7 @@ import { useFormState } from "react-dom";
 import { createBusinessProfile, getAllUserBusinesses } from "./actions";
 import { SessionPayload, fetchSession } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
+import Image from "next/image"; // New import
 
 type FormState = {
   message: string;
@@ -322,15 +323,24 @@ export default function BusinessesPage() {
             <button
               key={business.id}
               onClick={() => handleBusinessClick(business.id)}
-              className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200
+              className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-4
                 ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
             >
-              <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
-              <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
-              <p className="text-sm text-gray-600">Type: {business.businessType}</p>
-              {business.isArchived && (
-                <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
+              {business.logoUrl ? (
+                <Image src={business.logoUrl} alt={`${business.businessName} Logo`} width={40} height={40} className="rounded-full object-cover" />
+              ) : (
+                <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-bold">
+                  {business.businessName ? business.businessName[0].toUpperCase() : '?'}
+                </div>
               )}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
+                <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
+                <p className="text-sm text-gray-600">Type: {business.businessType}</p>
+                {business.isArchived && (
+                  <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
+                )}
+              </div>
             </button>
           ))
         )}
