@@ -35,7 +35,7 @@ if (!secretKey) {
 }
 const key = new TextEncoder().encode(secretKey);
 
-async function encrypt(payload: SessionPayload) {
+export async function encrypt(payload: SessionPayload) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
