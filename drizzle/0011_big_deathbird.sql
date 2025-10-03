@@ -1,0 +1,1 @@
+ALTER TABLE "businesses" ADD COLUMN "naics_code" varchar(6);

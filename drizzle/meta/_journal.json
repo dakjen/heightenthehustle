@@ -50,6 +50,41 @@
       "when": 1759248456063,
       "tag": "0006_early_grandmaster",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1759287629570,
+      "tag": "0007_strong_iron_monger",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1759287645862,
+      "tag": "0008_quick_dragon_lord",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1759287749572,
+      "tag": "0009_old_monster_badoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1759288020625,
+      "tag": "0010_tiny_ben_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1759336575288,
+      "tag": "0011_big_deathbird",
+      "breakpoints": true
     }
   ]
 }
