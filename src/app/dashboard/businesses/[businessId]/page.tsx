@@ -1,13 +1,7 @@
-"use client"; // Add this
-
 import { notFound } from "next/navigation";
-import { useState, useEffect } from "react"; // Add this
-import { useFormState } from "react-dom"; // Add this
-import { getBusinessProfile, updateBusinessProfile } from "../actions"; // Modify this
-
-interface BusinessDetailPageProps {
-  params: { businessId: string };
-}
+import { getBusinessProfile, updateBusinessProfile } from "../actions";
+import { useState, useEffect } from "react";
+import { useFormState } from "react-dom";
 
 // Define a type for a single business (matching your schema)
 interface Business {
@@ -28,7 +22,7 @@ interface Business {
   phone: string | null;
   website: string | null;
   isArchived: boolean;
-  logoUrl: string | null; // Added logoUrl
+  logoUrl: string | null;
 }
 
 type FormState = {
@@ -36,51 +30,30 @@ type FormState = {
   error: string;
 } | undefined;
 
-export default function BusinessDetailPage({ params }: BusinessDetailPageProps) {
-  const businessId = parseInt(params.businessId);
+interface BusinessDetailClientPageProps {
+  initialBusiness: Business;
+}
 
-  const [business, setBusiness] = useState<Business | null>(null); // Use useState for business data
-  const [loading, setLoading] = useState(true); // Add loading state
+function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
+  const [business, setBusiness] = useState<Business>(initialBusiness);
   const [editState, formAction] = useFormState<FormState, FormData>(
-    updateBusinessProfile.bind(null, businessId), // Bind businessId to the action
+    updateBusinessProfile.bind(null, business.id),
     undefined
   );
-
-  useEffect(() => {
-    async function fetchBusiness() {
-      if (isNaN(businessId)) {
-        notFound();
-        return;
-      }
-      const fetchedBusiness = await getBusinessProfile(businessId);
-      if (!fetchedBusiness) {
-        notFound();
-        return;
-      }
-      setBusiness(fetchedBusiness);
-      setLoading(false);
-    }
-    fetchBusiness();
-  }, [businessId]); // Re-fetch when businessId changes
 
   // Handle successful update
   useEffect(() => {
     if (editState?.message && !editState.error) {
-      // Optionally, re-fetch business data to show updated values
-      // This is important if the action modifies data not directly in the form
+      // Re-fetch business data to show updated values
       async function reFetchBusiness() {
-        const reFetchedBusiness = await getBusinessProfile(businessId);
+        const reFetchedBusiness = await getBusinessProfile(business.id);
         if (reFetchedBusiness) {
           setBusiness(reFetchedBusiness);
         }
       }
       reFetchBusiness();
     }
-  }, [editState, businessId]);
-
-  if (loading || !business) {
-    return <div className="flex-1 p-6">Loading business details...</div>;
-  }
+  }, [editState, business.id]);
 
   return (
     <div className="flex-1 p-6">
