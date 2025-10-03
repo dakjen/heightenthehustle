@@ -11,18 +11,7 @@ export default function DashboardPage() {
           Elevate your hustle into a thriving business venture. Our portal provides the tools, resources, and guidance you need to take your business to the next level.
         </p>
 
-        <div className="flex justify-center gap-4 mb-12">
-          <Link href="/login">
-            <a className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
-              Login
-            </a>
-          </Link>
-          <Link href="/create-account">
-            <a className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
-              Create an account
-            </a>
-          </Link>
-        </div>
+
 
         {/* How We Help Section */}
         <div className="bg-white shadow-lg rounded-lg p-8 mb-12">
@@ -33,7 +22,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Our Resources Section */}
-        <div className="bg-white shadow-lg rounded-lg p-8 mb-12">
+        <div className="bg-white shadow-lg rounded-lg p-8 mb-12 text-left">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Resources</h2>
           <ul className="text-lg text-gray-700 space-y-4">
             <li>
@@ -57,14 +46,13 @@ export default function DashboardPage() {
         </div>
 
         {/* Stay Connected Section */}
-        <div className="bg-white shadow-lg rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Stay Connected</h2>
+        <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Important Information</h2>
           <p className="text-lg text-gray-700">
-            Sign up for updates, insights, and exclusive resources to keep your business moving forward.
+            We will periodically send you resources, notes, and alerts to help your business grow and thrive. If you'd like to stop receiving these communications, you can opt out below.
           </p>
-          {/* Placeholder for a signup form or link */}
-          <button className="mt-6 px-6 py-3 bg-[#606060] text-white font-semibold rounded-lg shadow-md hover:bg-[#4a4a4a] transition-colors">
-            Sign Up for Updates
+          <button className="mt-6 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-colors">
+            Opt Out
           </button>
         </div>
       </div>
