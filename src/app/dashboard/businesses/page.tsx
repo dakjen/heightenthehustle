@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { useFormState } from "react-dom";
 import { createBusinessProfile, getAllUserBusinesses } from "./actions";
