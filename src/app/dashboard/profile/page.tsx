@@ -33,15 +33,15 @@ export default function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null); // Use UserProfile type
 
   useEffect(() => {
-    async function fetchSession() {
+    async function fetchAndSetUser() {
       const session = await getSession();
       if (session && session.user) {
         // Cast session.user to UserProfile to match state type
         setUser(session.user as UserProfile);
       }
     }
-    fetchSession();
-  }, []);
+    fetchAndSetUser();
+  }, [state.message]); // Re-run when state.message changes
 
   if (!user) {
     return <div className="flex-1 p-6">Loading profile...</div>;
