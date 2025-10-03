@@ -41,7 +41,7 @@ export default function ProfilePage() {
       }
     }
     fetchAndSetUser();
-  }, [state.message]); // Re-run when state.message changes
+  }, [state?.message]); // Safely access state.message
 
   if (!user) {
     return <div className="flex-1 p-6">Loading profile...</div>;
