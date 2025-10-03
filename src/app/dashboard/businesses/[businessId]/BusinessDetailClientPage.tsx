@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { getBusinessProfile, updateBusinessProfile } from "../actions";
 import { Business } from "@/db/schema"; // New import
+import Image from "next/image"; // New import
 
 type FormState = {
   message: string;
@@ -38,6 +39,16 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
   return (
     <div className="flex-1 p-6">
       <h1 className="text-3xl font-bold text-gray-900">{business.businessName}</h1>
+      {/* Business Logo Display */}
+      <div className="mb-6 flex justify-center">
+        {business.logoUrl ? (
+          <Image src={business.logoUrl} alt="Business Logo" width={96} height={96} className="rounded-full object-cover border-2 border-gray-300" />
+        ) : (
+          <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
+            {business.businessName ? business.businessName[0].toUpperCase() : '?'}
+          </div>
+        )}
+      </div>
       <p className="mt-4 text-gray-700">Owner: {business.ownerName}</p>
       <p className="mt-2 text-gray-700">Type: {business.businessType}</p>
       <p className="mt-2 text-gray-700">Tax Status: {business.businessTaxStatus}</p>
