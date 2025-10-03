@@ -33,6 +33,7 @@ export default async function DashboardLayout({
               {business.businessName}
             </Link>
           ))}
+          <Link href="/dashboard/heighten-ai" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Heighten.Ai</Link> {/* New Link */}
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
           {session.user && session.user.role === 'admin' && (
