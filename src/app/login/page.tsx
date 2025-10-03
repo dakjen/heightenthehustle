@@ -14,6 +14,9 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-black text-center mb-8">Login</h1>
+        <p className="text-center text-gray-600 mb-6">
+          Stay connected by signing up and sharing your business information. This allows us to refer you to relevant opportunities, send you grant funding applications, and provide free resources to help your business grow and thrive.
+        </p>
         <form action={formAction} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-[#606060]">
