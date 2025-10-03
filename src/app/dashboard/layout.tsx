@@ -3,7 +3,7 @@ import { getSession } from "@/app/login/actions";
 import LogoutButton from "@/app/components/LogoutButton";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllUserBusinesses } from "../businesses/actions";
+import { getAllUserBusinesses } from "./businesses/actions";
 
 export default async function DashboardLayout({
   children,
