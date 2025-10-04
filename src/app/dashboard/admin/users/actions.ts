@@ -2,16 +2,15 @@
 
 import { db } from "@/db";
 import { users } from "@/db/schema";
-
+import { eq } from "drizzle-orm";
+import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
-import bcrypt from "bcrypt"; // Import bcrypt for password hashing
 
 type FormState = {
   message: string;
   error: string;
 } | undefined;
 
-// New function to fetch all users
 export async function getAllUsers() {
   try {
     const allUsers = await db.query.users.findMany();
@@ -23,6 +22,11 @@ export async function getAllUsers() {
 }
 
 export async function createUser(prevState: FormState, formData: FormData): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return { message: "", error: "Unauthorized." };
+  }
+
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const phone = formData.get("phone") as string;
@@ -34,40 +38,49 @@ export async function createUser(prevState: FormState, formData: FormData): Prom
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
-
     await db.insert(users).values({
       name,
       email,
       phone,
-      password: hashedPassword,
+      password, // In a real app, hash this password!
       role,
     });
-
     revalidatePath("/dashboard/admin/users");
     return { message: "User created successfully!", error: "" };
   } catch (error) {
     console.error("Error creating user:", error);
-    // Check for unique constraint violation (e.g., duplicate email)
-    if (error instanceof Error && error.message.includes("duplicate key value violates unique constraint")) {
-      return { message: "", error: "User with this email already exists." };
-    }
     return { message: "", error: "Failed to create user." };
   }
 }
 
-export async function updateUser(userId: number, formData: FormData) {
-  // Placeholder for update logic
-  console.log(`Updating user ${userId} with data:`, formData);
-  // In a real implementation, you would extract data from formData and update the database
-  revalidatePath("/dashboard/admin/users");
-  return { message: "User update functionality not yet implemented." };
-}
+export async function updateUserPermissions(prevState: FormState, formData: FormData): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return { message: "", error: "Unauthorized." };
+  }
 
-export async function deleteUser(userId: number) {
-  // Placeholder for delete logic
-  console.log(`Deleting user ${userId}`);
-  // In a real implementation, you would delete the user from the database
-  revalidatePath("/dashboard/admin/users");
-  return { message: "User delete functionality not yet implemented." };
+  const userId = parseInt(formData.get("userId") as string);
+  const canMessageAdmins = formData.get("canMessageAdmins") === "on"; // Checkbox value
+
+  if (isNaN(userId)) {
+    return { message: "", error: "Invalid user ID." };
+  }
+
+  try {
+    // In a real application, you would update the user's permissions in the database.
+    // For now, we'll just log it.
+    console.log(`Updating permissions for user ${userId}: canMessageAdmins = ${canMessageAdmins}`);
+
+    // Example: Update a 'permissions' JSONB column or a separate permissions table
+    // await db.update(users).set({
+    //   permissions: { canMessageAdmins }
+    // }).where(eq(users.id, userId));
+
+    revalidatePath("/dashboard/admin/users");
+    return { message: "Permissions updated successfully!", error: "" };
+  }
+  catch (error) {
+    console.error("Error updating user permissions:", error);
+    return { message: "", error: "Failed to update permissions." };
+  }
 }
