@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { getBusinessProfile, updateBusinessProfile } from "../actions";
+import { getBusinessProfile, updateBusinessProfile, archiveBusiness } from "../actions";
 import { Business } from "@/db/schema"; // New import
 import Image from "next/image";
 import Link from "next/link"; // New import
@@ -294,22 +294,32 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
             <p className="text-sm text-red-600">{editState.error}</p>
           )}
   
-          <div className="mt-6 flex justify-end space-x-4">
+        <div className="mt-6 flex justify-end space-x-4">
+          <button
+            type="submit"
+            className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:focus:ring-offset-2"
+          >
+            Save Changes
+          </button>
+          <Link href={`/dashboard/businesses/${business.id}`}>
             <button
-              type="submit"
-              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              type="button"
+              className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Save Changes
+              Cancel
             </button>
-            <Link href={`/dashboard/businesses/${business.id}`}>
+          </Link>
+          {!business.isArchived && (
+            <form action={archiveBusiness.bind(null, business.id)}>
               <button
-                type="button"
-                className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                type="submit"
+                className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
-                Cancel
+                Archive Business
               </button>
-            </Link>
-          </div>
+            </form>
+          )}
+        </div>
         </form>
   
         {/* Placeholder for Multi-level Business Progress Tracker */}
