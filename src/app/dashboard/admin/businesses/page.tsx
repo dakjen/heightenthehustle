@@ -2,9 +2,7 @@ import BusinessSearchAndFilter from "./BusinessSearchAndFilter";
 import YourBusinessesPageContent from "../../businesses/YourBusinessesPageContent"; // Adjust path as needed
 
 interface AdminBusinessesPageProps {
-  searchParams: {
-    viewMode?: string;
-  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export default async function AdminBusinessesPage({ searchParams }: AdminBusinessesPageProps) {
