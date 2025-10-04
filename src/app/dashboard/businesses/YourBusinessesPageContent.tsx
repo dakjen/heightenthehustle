@@ -42,11 +42,6 @@ export default function YourBusinessesPageContent() {
 
   const [createState, setCreateState] = useState<FormState>(undefined);
 
-  const createFormAction = async (formData: FormData) => {
-    const result = await createBusinessProfile(undefined, formData);
-    setCreateState(result);
-  };
-
   useEffect(() => {
     async function fetchSessionAndBusinesses() {
       setLoadingBusinesses(true);
@@ -94,7 +89,7 @@ export default function YourBusinessesPageContent() {
       {showCreateForm && (
         <div className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Create New Business Profile</h2>
-          <form action={createFormAction} className="space-y-6">
+          <form className="space-y-6">
             {/* Owner's Name */}
             <div>
               <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
