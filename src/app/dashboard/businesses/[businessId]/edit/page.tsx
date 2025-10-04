@@ -1,6 +1,6 @@
-import { validateRequest } from '@/lib/auth';
-import { redirect } from 'next/navigation';
-import EditBusinessProfileDataFetcher from './EditBusinessProfileDataFetcher';
+import { notFound } from "next/navigation";
+import { getBusinessProfile } from "../../../businesses/actions";
+import BusinessDetailClientPage from "../BusinessDetailClientPage";
 
 interface BusinessEditPageProps {
   params: Promise<{
@@ -10,11 +10,17 @@ interface BusinessEditPageProps {
 
 export default async function Page({ params: paramsPromise }: BusinessEditPageProps) {
   const params = await paramsPromise; // Await the params promise
-  const { user } = await validateRequest();
+  const businessId = parseInt(params.businessId);
 
-  if (!user) {
-    redirect('/login');
+  if (isNaN(businessId)) {
+    notFound();
   }
 
-  return <EditBusinessProfileDataFetcher businessId={params.businessId} />;
+  const business = await getBusinessProfile(businessId);
+
+  if (!business) {
+    notFound();
+  }
+
+  return <BusinessDetailClientPage initialBusiness={business} />;
 }
