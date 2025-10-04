@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
 import AdminViewToggle from "./components/AdminViewToggle"; // New import
+import { headers } from "next/headers"; // New import for searchParams
 
 export default async function DashboardLayout({
   children,
@@ -19,6 +20,11 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
 
+  const headerList = headers();
+  const pathname = headerList.get("x-invoke-path") || "";
+  const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
+  const isInternalUserView = searchParams.get("viewMode") === "internal";
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -29,7 +35,12 @@ export default async function DashboardLayout({
 
         <nav>
           <Link href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</Link>
-          <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
+          {isAdmin && !isInternalUserView && ( // Show Admin Businesses link only for admin view
+            <Link href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
+          )}
+          {(!isAdmin || isInternalUserView) && ( // Show Businesses link for regular users or internal admin view
+            <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
+          )}
           {/* Render sublinks for businesses */}
           {businesses.map((business) => (
             <Link key={business.id} href={`/dashboard/businesses/${business.id}`} className="block py-2 px-6 text-sm rounded transition duration-200 hover:bg-[#4a4a4a]">
@@ -39,7 +50,7 @@ export default async function DashboardLayout({
           <Link href="/dashboard/heighten-ai" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Heighten.Ai</Link> {/* New Link */}
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</a>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
-          {isAdmin && (
+          {isAdmin && !isInternalUserView && ( // Show Admin Users link only for admin view
             <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
           )}
           {/* Add more navigation links here */}
