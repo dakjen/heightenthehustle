@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
 
-  const headerList = headers();
+  const headerList = await headers();
   const pathname = headerList.get("x-invoke-path") || "";
   const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
   const isInternalUserView = searchParams.get("viewMode") === "internal";
