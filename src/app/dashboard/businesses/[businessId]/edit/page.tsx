@@ -1,5 +1,11 @@
 import EditBusinessProfileDataFetcher from "./EditBusinessProfileDataFetcher";
 
-export default function EditBusinessProfilePageWrapper({ params }: { params: { businessId: string } }) {
+interface BusinessEditPageProps {
+  params: {
+    businessId: string;
+  };
+}
+
+export default async function Page({ params }: BusinessEditPageProps) {
   return <EditBusinessProfileDataFetcher params={params} />;
 }
