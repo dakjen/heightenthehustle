@@ -64,7 +64,7 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col text-gray-900">
+      <main className="flex-1 flex flex-col text-gray-900 p-6">
         {children}
       </main>
     </div>
