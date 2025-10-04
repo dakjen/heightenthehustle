@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { businesses } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
 
 interface BusinessFilters {
@@ -18,11 +18,11 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
   }
 
   if (filters.businessType) {
-    conditions.push(eq(businesses.businessType, filters.businessType));
+    conditions.push(eq(businesses.businessType, filters.businessType as typeof businessTypeEnum.enumValues[number]));
   }
 
   if (filters.businessTaxStatus) {
-    conditions.push(eq(businesses.businessTaxStatus, filters.businessTaxStatus));
+    conditions.push(eq(businesses.businessTaxStatus, filters.businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number]));
   }
 
   if (filters.isArchived !== undefined) {
