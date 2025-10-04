@@ -1,29 +1,62 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface AdminViewToggleProps {
   isAdmin: boolean;
 }
 
 export default function AdminViewToggle({ isAdmin }: AdminViewToggleProps) {
-  const [isInternalUserView, setIsInternalUserView] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentViewMode = searchParams.get("viewMode"); // 'internal' or null (for admin)
+
+  // Initialize isInternalUserView based on URL search param
+  const [isInternalUserView, setIsInternalUserView] = useState(currentViewMode === "internal");
+
+  useEffect(() => {
+    setIsInternalUserView(currentViewMode === "internal");
+  }, [currentViewMode]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const deleteQueryString = useCallback(
+    (name: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete(name);
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   if (!isAdmin) {
     return null; // Only show toggle for admins
   }
 
   const handleToggle = () => {
-    setIsInternalUserView(prev => !prev);
-    // In a real application, this would involve:
-    // 1. Setting a cookie or local storage item to persist the view mode.
-    // 2. Potentially redirecting or triggering a global state update to change the view.
-    console.log("Admin toggled internal user view to:", !isInternalUserView);
+    const newInternalUserView = !isInternalUserView;
+    setIsInternalUserView(newInternalUserView);
+
+    if (newInternalUserView) {
+      // Switch to internal user view
+      router.push(`/dashboard/admin/businesses?${createQueryString("viewMode", "internal")}`);
+    } else {
+      // Switch to admin view (remove viewMode param)
+      router.push(`/dashboard/admin/businesses?${deleteQueryString("viewMode")}`);
+    }
   };
 
   return (
     <div className="mt-6 p-2 bg-[#4a4a4a] rounded-md flex items-center justify-between">
-      <span className="text-sm font-medium">Internal User View</span>
+      <span className="text-sm font-medium text-white">Internal User View</span>
       <label htmlFor="admin-toggle" className="relative inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
