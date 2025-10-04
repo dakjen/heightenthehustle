@@ -7,5 +7,5 @@ interface BusinessEditPageProps {
 }
 
 export default async function Page({ params }: BusinessEditPageProps) {
-  return <EditBusinessProfileDataFetcher params={params} />;
+  return <div>Editing Business: {params.businessId}</div>;
 }
