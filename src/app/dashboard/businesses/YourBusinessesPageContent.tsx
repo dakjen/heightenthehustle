@@ -312,7 +312,7 @@ export default function YourBusinessesPageContent() {
           </div>
         </form>
         </div>
-      </div>
+      )}
 
       {/* Display existing businesses */}
       <div className="mt-8 flex flex-col space-y-4">
