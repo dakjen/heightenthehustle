@@ -14,9 +14,10 @@ type FormState = {
 
 interface BusinessDetailClientPageProps {
   initialBusiness: Business;
+  isInternalUserView?: boolean; // New prop
 }
 
-export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
+export default function BusinessDetailClientPage({ initialBusiness, isInternalUserView }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
   const [editState, formAction] = useFormState<FormState, FormData>(
     updateBusinessProfile.bind(null, business.id),
@@ -309,7 +310,7 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
               Cancel
             </button>
           </Link>
-          {!business.isArchived && (
+          {!business.isArchived && !isInternalUserView && (
             <form action={archiveBusiness.bind(null, business.id)}>
               <button
                 type="submit"

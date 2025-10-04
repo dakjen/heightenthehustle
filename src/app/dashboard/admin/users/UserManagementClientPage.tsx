@@ -27,9 +27,10 @@ interface User {
 
 interface UserManagementClientPageProps {
   initialUsers: User[];
+  isInternalUserView: boolean; // New prop
 }
 
-export default function UserManagementClientPage({ initialUsers }: UserManagementClientPageProps) {
+export default function UserManagementClientPage({ initialUsers, isInternalUserView }: UserManagementClientPageProps) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [createState, createFormAction] = useFormState<FormState, FormData>(createUser, undefined);
   const [allUsers, setAllUsers] = useState<User[]>(initialUsers); // Initialize with server-fetched users
@@ -213,7 +214,9 @@ export default function UserManagementClientPage({ initialUsers }: UserManagemen
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
-                  <a href="#" className="ml-4 text-red-600 hover:text-red-900">Delete</a>
+                  {!isInternalUserView && (
+                    <a href="#" className="ml-4 text-red-600 hover:text-red-900">Delete</a>
+                  )}
                 </td>
               </tr>
             ))}

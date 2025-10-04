@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getBusinessProfile } from "../../../businesses/actions";
 import BusinessDetailClientPage from "../BusinessDetailClientPage";
+import { headers } from "next/headers"; // New import for searchParams
 
 interface BusinessEditPageProps {
   params: Promise<{
@@ -22,5 +23,9 @@ export default async function Page({ params: paramsPromise }: BusinessEditPagePr
     notFound();
   }
 
-  return <BusinessDetailClientPage initialBusiness={business} />;
+  const headerList = headers();
+  const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
+  const isInternalUserView = searchParams.get("viewMode") === "internal";
+
+  return <BusinessDetailClientPage initialBusiness={business} isInternalUserView={isInternalUserView} />;
 }
