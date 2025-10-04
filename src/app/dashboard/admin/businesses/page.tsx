@@ -1,11 +1,7 @@
 import BusinessSearchAndFilter from "./BusinessSearchAndFilter";
 import YourBusinessesPageContent from "../../businesses/YourBusinessesPageContent"; // Adjust path as needed
 
-interface AdminBusinessesPageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function AdminBusinessesPage({ searchParams }: AdminBusinessesPageProps) {
+export default async function AdminBusinessesPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   const isInternalUserView = searchParams.viewMode === "internal";
 
   return (
