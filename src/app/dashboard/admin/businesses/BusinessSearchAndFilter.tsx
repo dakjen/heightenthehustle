@@ -189,7 +189,7 @@ export default function BusinessSearchAndFilter() {
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
                   <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
-                  <p className="text-sm text-gray-600}>Type: {business.businessType}</p>
+                  <p className="text-sm text-gray-600">Type: {business.businessType}</p>
                   {business.isArchived && (
                     <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
                   )}
