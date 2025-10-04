@@ -4,9 +4,7 @@ import { createUser, getAllUsers } from "./actions";
 import UserManagementClientPage from "./UserManagementClientPage"; // New import for client component
 import PermissionsManagementClientPage from "./PermissionsManagementClientPage"; // New import for permissions component
 import { headers } from "next/headers"; // New import for searchParams
-import Link from "next/link"; // New import for Link component
-import { useRouter, useSearchParams } from "next/navigation"; // New import for TabLink
-import { useCallback } from "react"; // New import for TabLink
+import TabLink from "./TabLink"; // New import for TabLink
 
 // Define a type for a single user (matching your schema)
 interface User {
@@ -64,36 +62,5 @@ export default async function UserManagementPage({ searchParams }: UserManagemen
         )}
       </div>
     </div>
-  );
-}
-
-// Helper component for Tab Links
-function TabLink({ href, activeTab, children }: { href: string; activeTab: string; children: React.ReactNode }) {
-  const router = useRouter(); // Use useRouter for client-side navigation
-  const searchParams = useSearchParams();
-
-  const createTabQueryString = useCallback(
-    (tabName: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("tab", tabName);
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const isActive = activeTab === href;
-
-  return (
-    <Link
-      href={`/dashboard/admin/users?${createTabQueryString(href)}`}
-      className={`${
-        isActive
-          ? "border-indigo-500 text-indigo-600"
-          : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-      } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-      aria-current={isActive ? "page" : undefined}
-    >
-      {children}
-    </Link>
   );
 }
