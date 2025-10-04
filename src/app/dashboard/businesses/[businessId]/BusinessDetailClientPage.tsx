@@ -69,7 +69,7 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
           {/* Owner's Name */}
           <div>
             <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-              Owner's Name
+              Owner&apos;s Name
             </label>
             <input
               id="ownerName"
