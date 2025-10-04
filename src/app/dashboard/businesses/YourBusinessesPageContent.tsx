@@ -39,6 +39,10 @@ export default function YourBusinessesPageContent() {
   const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
   const [activeTab, setActiveTab] = useState('your-businesses');
 
+  const handleBusinessClick = (businessId: number) => {
+    router.push(`/dashboard/businesses/${businessId}`);
+  };
+
   return (
     <>
       <div className="border-b border-gray-200">
