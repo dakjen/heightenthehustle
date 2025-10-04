@@ -58,7 +58,7 @@ export default function YourBusinessesPageContent() {
   }, [createState]);
 
   useEffect(() => {
-    if (createState?.message && !createState.error) {
+    if (createState && createState.message && !createState.error) {
       setShowCreateForm(false);
       router.push("/dashboard/businesses");
     }
