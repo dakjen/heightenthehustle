@@ -38,7 +38,7 @@ export default async function DashboardLayout({
           {isAdmin && !isInternalUserView && ( // Show Admin Businesses link only for admin view
             <Link href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
           )}
-          {(!isAdmin || isInternalUserView) && ( // Show Businesses link for regular users or internal admin view
+          {isInternalUserView && ( // Show Businesses link only for internal admin view
             <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
           )}
           {/* Render sublinks for businesses */}
