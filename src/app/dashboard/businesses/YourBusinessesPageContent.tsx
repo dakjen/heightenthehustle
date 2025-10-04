@@ -40,7 +40,12 @@ export default function YourBusinessesPageContent() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [loadingBusinesses, setLoadingBusinesses] = useState(true);
 
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, undefined);
+  const [createState, setCreateState] = useState<FormState>(undefined);
+
+  const createFormAction = async (formData: FormData) => {
+    const result = await createBusinessProfile(undefined, formData);
+    setCreateState(result);
+  };
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {

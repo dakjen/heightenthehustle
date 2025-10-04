@@ -1,9 +1,13 @@
 import BusinessSearchAndFilter from "./BusinessSearchAndFilter";
-import dynamic from 'next/dynamic';
+import YourBusinessesPageContent from "../../businesses/YourBusinessesPageContent"; // Adjust path as needed
 
-const YourBusinessesPageContent = dynamic(() => import('../../businesses/YourBusinessesPageContent'), { ssr: false });
+interface AdminBusinessesPageProps {
+  searchParams: {
+    viewMode?: string;
+  };
+}
 
-export default async function AdminBusinessesPage({ searchParams }: { searchParams: { viewMode?: string } }) {
+export default async function AdminBusinessesPage({ searchParams }: AdminBusinessesPageProps) {
   const isInternalUserView = searchParams.viewMode === "internal";
 
   return (
