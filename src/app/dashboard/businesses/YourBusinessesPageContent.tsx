@@ -311,6 +311,7 @@ export default function YourBusinessesPageContent() {
             </button>
           </div>
         </form>
+        </div>
       </div>
 
       {/* Display existing businesses */}
