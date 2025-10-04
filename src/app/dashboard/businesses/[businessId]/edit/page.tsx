@@ -2,7 +2,11 @@ import { notFound } from "next/navigation";
 import { getBusinessProfile } from "../../../businesses/actions"; // Adjust path as needed
 import EditBusinessProfileClientPage from "./EditBusinessProfileClientPage";
 
-export default async function EditBusinessProfileServerPage({ params }: { params: { businessId: string } }) {
+interface PageProps {
+  params: { businessId: string };
+}
+
+export default async function EditBusinessProfileServerPage({ params }: PageProps) {
   const businessId = parseInt(params.businessId);
 
   if (isNaN(businessId)) {
