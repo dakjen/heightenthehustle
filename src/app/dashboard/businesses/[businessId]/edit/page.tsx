@@ -6,8 +6,8 @@ interface PageProps {
   params: { businessId: string };
 }
 
-export default async function EditBusinessProfileServerPage({ params }: PageProps) {
-  const businessId = parseInt(params.businessId);
+export default async function EditBusinessProfileServerPage(props: PageProps) {
+  const businessId = parseInt(props.params.businessId);
 
   if (isNaN(businessId)) {
     notFound();
