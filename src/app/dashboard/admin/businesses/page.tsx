@@ -1,14 +1,9 @@
 import BusinessSearchAndFilter from "./BusinessSearchAndFilter";
 import YourBusinessesPageContent from "../../businesses/YourBusinessesPageContent"; // Adjust path as needed
 
-interface AdminBusinessesPageProps {
-  searchParams: {
-    viewMode?: string;
-  };
-}
-
-export default async function AdminBusinessesPage({ searchParams }: AdminBusinessesPageProps) {
-  const isInternalUserView = searchParams.viewMode === "internal";
+export default async function AdminBusinessesPage({ searchParams }: { searchParams: Promise<{ viewMode?: string }> }) {
+  const resolvedSearchParams = await searchParams;
+  const isInternalUserView = resolvedSearchParams.viewMode === "internal";
 
   return (
     <div className="flex-1 p-6">

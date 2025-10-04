@@ -22,15 +22,16 @@ interface User {
   profilePhotoUrl: string | null;
 }
 
-export default async function UserManagementPage({ searchParams }: { searchParams: { viewMode?: string, tab?: string } }) {
+export default async function UserManagementPage({ searchParams }: { searchParams: Promise<{ viewMode?: string, tab?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   const session = await getSession();
   if (!session || !session.user || session.user.role !== 'admin') {
     redirect("/dashboard");
   }
 
   const allUsers = await getAllUsers(); // Fetch users on the server
-  const isInternalUserView = searchParams.viewMode === "internal";
-  const activeTab = searchParams.tab || "users"; // Default to 'users' tab
+  const isInternalUserView = resolvedSearchParams.viewMode === "internal";
+  const activeTab = resolvedSearchParams.tab || "users"; // Default to 'users' tab
 
   return (
     <div className="flex-1 p-6">
