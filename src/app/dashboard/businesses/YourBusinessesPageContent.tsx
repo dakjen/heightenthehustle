@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
+import { useFormState } from "react-dom";
 import { createBusinessProfile, getAllUserBusinesses } from "./actions";
 import { SessionPayload, fetchSession } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
@@ -38,6 +39,8 @@ export default function YourBusinessesPageContent() {
   const [session, setSession] = useState<SessionPayload | null>(null);
   const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
   const [activeTab, setActiveTab] = useState('your-businesses');
+
+  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, undefined);
 
   const handleBusinessClick = (businessId: number) => {
     router.push(`/dashboard/businesses/${businessId}`);
