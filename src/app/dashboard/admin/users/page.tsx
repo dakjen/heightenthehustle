@@ -22,14 +22,7 @@ interface User {
   profilePhotoUrl: string | null;
 }
 
-interface UserManagementPageProps {
-  searchParams: {
-    viewMode?: string;
-    tab?: string; // New search param for tabs
-  };
-}
-
-export default async function UserManagementPage({ searchParams }: UserManagementPageProps) {
+export default async function UserManagementPage({ searchParams }: { searchParams: { viewMode?: string, tab?: string } }) {
   const session = await getSession();
   if (!session || !session.user || session.user.role !== 'admin') {
     redirect("/dashboard");
