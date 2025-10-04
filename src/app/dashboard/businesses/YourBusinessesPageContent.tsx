@@ -323,7 +323,7 @@ export default function YourBusinessesPageContent() {
             <button
               key={business.id}
               onClick={() => handleBusinessClick(business.id)}
-              className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-4\n                ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
+              className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-4 ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
             >
               {business.logoUrl ? (
                 <Image src={business.logoUrl} alt={`${business.businessName} Logo`} width={40} height={40} className="rounded-full object-cover" />
