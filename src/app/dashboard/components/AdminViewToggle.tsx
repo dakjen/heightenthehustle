@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { setViewModeCookie } from "../actions";
+import { setViewModeCookie } from "../../actions";
 import { useRouter } from "next/navigation";
 
 interface AdminViewToggleProps {
