@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage } from "./actions";
+import { sendMessage, sendMassMessage, getAllInternalUsers, getMassMessages } from "./actions";
 import { useFormState } from "react-dom";
+import { getSession } from "@/app/login/actions"; // Import getSession
 
 interface Message {
   id: number;
@@ -31,31 +32,30 @@ type FormState = {
   error: string;
 } | undefined;
 
-interface MessagesPageProps {
-  isAdmin: boolean;
-  initialInternalUsers: User[];
-  initialMassMessages: MassMessage[];
-}
-
-export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages }: MessagesPageProps) {
+export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
-  const [massMessages, setMassMessages] = useState<MassMessage[]>(initialMassMessages); // New state for mass messages
+  const [massMessages, setMassMessages] = useState<MassMessage[]>([]); // New state for mass messages
   const [messageContent, setMessageContent] = useState("");
   const [recipient, setRecipient] = useState("admin"); // Default recipient
   const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
-  const [internalUsers, setInternalUsers] = useState<User[]>(initialInternalUsers); // New state for internal users
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [internalUsers, setInternalUsers] = useState<User[]>([]); // New state for internal users
 
   const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
   const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
 
   useEffect(() => {
-    // Update mass messages when a new one is sent
-    if (massSendState?.message && !massSendState.error) {
-      // Re-fetch mass messages or update state directly if possible
-      // For now, we'll just clear the form
-      setMassMessageLocations([]);
-      setMessageContent("");
+    async function fetchData() {
+      const session = await getSession();
+      if (session?.user?.role === 'admin') {
+        setIsAdmin(true);
+        const users = await getAllInternalUsers();
+        setInternalUsers(users);
+        const fetchedMassMessages = await getMassMessages();
+        setMassMessages(fetchedMassMessages);
+      }
     }
+    fetchData();
   }, [massSendState]);
 
   const handleSendMessage = (formData: FormData) => {
