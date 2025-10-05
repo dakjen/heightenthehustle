@@ -11,6 +11,7 @@ interface BusinessDetailClientPageProps {
 }
 
 export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
+  console.log('BusinessDetailClientPage rendered');
   const [business, setBusiness] = useState<Business>(initialBusiness);
 
   // In a real application, you might re-fetch business data if it can change
