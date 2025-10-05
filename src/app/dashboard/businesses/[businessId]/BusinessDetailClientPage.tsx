@@ -71,9 +71,9 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
           {/* Business Logo Display */}
           <div className="mb-6 flex justify-center">
             {business.logoUrl ? (
-              <Image src={business.logoUrl} alt="Business Logo" width={96} height={96} className="rounded-full object-cover border-2 border-gray-300" />
+              <Image src={business.logoUrl} alt="Business Logo" width={96} height={96} className="rounded-md object-cover border-2 border-gray-300" />
             ) : (
-              <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
+              <div className="h-24 w-24 rounded-md bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
                 {business.businessName ? business.businessName[0].toUpperCase() : '?'}
               </div>
             )}
