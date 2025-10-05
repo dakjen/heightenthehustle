@@ -26,6 +26,7 @@ type FormState = {
 
 export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
+  const [massMessages, setMassMessages] = useState<MassMessage[]>([]); // New state for mass messages
   const [messageContent, setMessageContent] = useState("");
   const [recipient, setRecipient] = useState("admin"); // Default recipient
   const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
