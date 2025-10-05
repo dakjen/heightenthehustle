@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { getAllBusinesses, toggleBusinessArchiveStatus } from "./actions"; // Assuming this action will be updated to take filters
+import { getAllBusinesses, toggleBusinessArchiveStatus, deleteBusiness } from "./actions"; // Assuming this action will be updated to take filters
 
 // Define a type for a single business (matching your schema)
 interface BusinessWithUserEmail {
@@ -82,6 +82,17 @@ export default function BusinessSearchAndFilter() {
       alert(result.error);
     } else {
       fetchBusinesses(); // Re-fetch businesses to update the list
+    }
+  };
+
+  const handleDeleteBusiness = async (businessId: number, businessName: string) => {
+    if (confirm(`Are you sure you want to delete the business "${businessName}"? This action cannot be undone.`)) {
+      const result = await deleteBusiness(businessId);
+      if (result.error) {
+        alert(result.error);
+      } else {
+        fetchBusinesses(); // Re-fetch businesses to update the list
+      }
     }
   };
 
@@ -216,6 +227,12 @@ export default function BusinessSearchAndFilter() {
                     ${business.isArchived ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}`}
                 >
                   {business.isArchived ? 'Unarchive' : 'Archive'}
+                </button>
+                <button
+                  onClick={() => handleDeleteBusiness(business.id, business.businessName)}
+                  className="py-2 px-4 rounded-md text-sm font-medium text-white bg-gray-600 hover:bg-gray-700"
+                >
+                  Delete
                 </button>
               </div>
             ))

@@ -55,3 +55,15 @@ export async function toggleBusinessArchiveStatus(businessId: number, newStatus:
     return { message: "", error: "Failed to update business archive status." };
   }
 }
+
+export async function deleteBusiness(businessId: number) {
+  try {
+    await db.delete(businesses)
+      .where(eq(businesses.id, businessId));
+    revalidatePath('/dashboard/admin/businesses'); // Revalidate the admin businesses page
+    return { message: "Business deleted successfully!", error: "" };
+  } catch (error) {
+    console.error("Error deleting business:", error);
+    return { message: "", error: "Failed to delete business." };
+  }
+}
