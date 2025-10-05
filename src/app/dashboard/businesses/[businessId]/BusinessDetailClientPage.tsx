@@ -13,6 +13,9 @@ interface BusinessDetailClientPageProps {
 export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
   const [selectedLocation, setSelectedLocation] = useState(''); // New state for location
+  const [selectedRace, setSelectedRace] = useState(''); // New state for race
+  const [selectedGender, setSelectedGender] = useState(''); // New state for gender
+  const [otherDetails, setOtherDetails] = useState(''); // New state for other details
 
   // In a real application, you might re-fetch business data if it can change
   // useEffect(() => {
