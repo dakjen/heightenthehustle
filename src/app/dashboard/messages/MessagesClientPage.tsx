@@ -1,15 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage } from "./actions";
+import { sendMessage, sendMassMessage, getIndividualMessages } from "./actions";
 import { useFormState } from "react-dom";
 
 interface Message {
   id: number;
-  sender: string;
-  recipient: string; // Could be 'admin', 'internal', or a specific user ID
+  senderId: number;
+  recipientId: number;
   content: string;
-  timestamp: string;
+  timestamp: Date;
+  read: boolean;
+  replyToMessageId: number | null;
 }
 
 interface MassMessage {
@@ -48,13 +50,15 @@ interface MessagesPageProps {
   initialMassMessages: MassMessage[];
   initialLocations: Location[];
   initialDemographics: Demographic[];
+  currentUserId: number | null;
 }
 
-export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages, initialLocations, initialDemographics }: MessagesPageProps) {
+export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages, initialLocations, initialDemographics, currentUserId }: MessagesPageProps) {
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
   const [massMessages, setMassMessages] = useState<MassMessage[]>(initialMassMessages); // New state for mass messages
   const [messageContent, setMessageContent] = useState("");
   const [recipient, setRecipient] = useState("admin"); // Default recipient
+  const [selectedRecipientId, setSelectedRecipientId] = useState<number | null>(null); // New state for selected recipient
   const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
   const [internalUsers, setInternalUsers] = useState<User[]>(initialInternalUsers); // New state for internal users
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
@@ -75,9 +79,22 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
     }
   }, [massSendState]);
 
+  // Fetch individual messages when selectedRecipientId changes
+  useEffect(() => {
+    async function fetchMessages() {
+      if (selectedRecipientId && currentUserId) {
+        const fetchedMessages = await getIndividualMessages(currentUserId, selectedRecipientId);
+        setMessages(fetchedMessages);
+      }
+    }
+    fetchMessages();
+  }, [selectedRecipientId, currentUserId]);
+
   const handleSendMessage = (formData: FormData) => {
-    // This will be handled by the server action
-    sendFormAction(formData);
+    const formDataWithRecipient = new FormData();
+    formDataWithRecipient.append("messageContent", messageContent);
+    formDataWithRecipient.append("recipient", selectedRecipientId ? selectedRecipientId.toString() : recipient);
+    sendFormAction(formDataWithRecipient);
     setMessageContent(""); // Clear input after sending
   };
 
@@ -138,10 +155,14 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
               <p className="text-gray-500">No messages yet. Start a conversation!</p>
             ) : (
               messages.map((msg) => (
-                <div key={msg.id} className="mb-4 p-3 bg-gray-100 rounded-lg">
-                  <p className="text-sm font-semibold">{msg.sender} to {msg.recipient}:</p>
+                <div key={msg.id} className="mb-4 p-3 bg-gray-100 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelectedRecipientId(msg.senderId === currentUserId ? msg.recipientId : msg.senderId);
+                    setRecipient(msg.senderId === currentUserId ? msg.recipientId.toString() : msg.senderId.toString());
+                  }}>
+                  <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : "User"} to {msg.senderId === currentUserId ? "User" : "You"}:</p>
                   <p className="text-gray-800">{msg.content}</p>
-                  <p className="text-xs text-gray-500 text-right">{msg.timestamp}</p>
+                  <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
                 </div>
               ))
             )}
@@ -159,13 +180,16 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
               <select
                 id="recipient"
                 name="recipient"
-                value={recipient}
-                onChange={(e) => setRecipient(e.target.value)}
+                value={selectedRecipientId ? selectedRecipientId.toString() : recipient}
+                onChange={(e) => {
+                  setRecipient(e.target.value);
+                  setSelectedRecipientId(parseInt(e.target.value));
+                }}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
               >
                 <option value="admin">Admin</option>
                 <option value="internal">Internal Users</option>
-                {internalUsers.map(user => (
+                {initialInternalUsers.map(user => (
                   <option key={user.id} value={user.id.toString()}>{user.name} ({user.email})</option>
                 ))}
               </select>
