@@ -17,6 +17,16 @@ export default function DashboardPage() {
           <p className="text-lg text-gray-700">
             Please add your business details and complete your profile to gain access to our HTH benefits!
           </p>
+          <div className="mt-6">
+            <Link href="/dashboard/businesses">
+              <button
+                type="button"
+                className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Get Started
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* How We Help Section */}

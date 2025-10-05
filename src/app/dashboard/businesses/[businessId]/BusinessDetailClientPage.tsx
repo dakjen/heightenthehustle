@@ -178,7 +178,8 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
               ></textarea>
             </div>
           </div>
-        </div>}
+        </div>
+      )}
 
       {activeTab === 'business-materials' && (
         <div className="mt-8">
