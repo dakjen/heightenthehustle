@@ -11,7 +11,13 @@ export default function DashboardPage() {
           Elevate your hustle into a thriving business venture. Our portal provides the tools, resources, and guidance you need to take your business to the next level.
         </p>
 
-
+        {/* Welcome Box */}
+        <div className="bg-white shadow-lg rounded-lg p-8 mb-12 border-l-4 border-[#910000]">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Welcome</h2>
+          <p className="text-lg text-gray-700">
+            Please add your business details and complete your profile to gain access to our HTH benefits!
+          </p>
+        </div>
 
         {/* How We Help Section */}
         <div className="bg-white shadow-lg rounded-lg p-8 mb-12">
