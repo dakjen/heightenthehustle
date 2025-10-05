@@ -13,6 +13,7 @@ interface BusinessDetailClientPageProps {
 export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
   console.log('BusinessDetailClientPage rendered');
   const [business, setBusiness] = useState<Business>(initialBusiness);
+  const [selectedLocation, setSelectedLocation] = useState(''); // New state for location
 
   // In a real application, you might re-fetch business data if it can change
   // useEffect(() => {
@@ -25,7 +26,7 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
   //   reFetchBusiness();
   // }, [business.id]);
 
-  const [activeTab, setActiveTab] = useState('business-info');
+  const [activeTab, setActiveTab] = useState('business-profile');
 
   return (
     <div className="flex-1 p-6">
@@ -92,6 +93,28 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-gray-900">Business Details Content</h2>
           <p className="mt-2 text-gray-700">This section will contain additional business details.</p>
+          <div className="mt-4">
+            <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+              Location
+            </label>
+            <select
+              id="location"
+              name="location"
+              value={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            >
+              <option value="">Select Location</option>
+              <option value="North East">North East</option>
+              <option value="DMV">DMV</option>
+              <option value="South">South</option>
+              <option value="Southwest">Southwest</option>
+              <option value="West">West</option>
+              <option value="Northwest">Northwest</option>
+              <option value="MidWest">MidWest</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
       )}
 
@@ -122,5 +145,3 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
         </div>
       )}
     </div>
-  );
-}
