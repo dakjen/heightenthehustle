@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage } from "./actions"; // Will create this action
+import { sendMessage, sendMassMessage, getAllInternalUsers } from "./actions"; // Will create this action
 import { useFormState } from "react-dom";
 import { getSession } from "@/app/login/actions"; // Import getSession
 
@@ -11,6 +11,12 @@ interface Message {
   recipient: string; // Could be 'admin', 'internal', or a specific user ID
   content: string;
   timestamp: string;
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 
 type FormState = {
@@ -24,18 +30,21 @@ export default function MessagesPage() {
   const [recipient, setRecipient] = useState("admin"); // Default recipient
   const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
   const [isAdmin, setIsAdmin] = useState(false);
+  const [internalUsers, setInternalUsers] = useState<User[]>([]); // New state for internal users
 
   const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
   const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
 
   useEffect(() => {
-    async function checkAdminStatus() {
+    async function fetchData() {
       const session = await getSession();
       if (session?.user?.role === 'admin') {
         setIsAdmin(true);
+        const users = await getAllInternalUsers();
+        setInternalUsers(users);
       }
     }
-    checkAdminStatus();
+    fetchData();
   }, []);
 
   const handleSendMessage = (formData: FormData) => {
@@ -90,7 +99,9 @@ export default function MessagesPage() {
             >
               <option value="admin">Admin</option>
               <option value="internal">Internal Users</option>
-              {/* In a real app, this would be dynamic based on permissions/available users */}
+              {internalUsers.map(user => (
+                <option key={user.id} value={user.id.toString()}>{user.name} ({user.email})</option>
+              ))}
             </select>
           </div>
 
