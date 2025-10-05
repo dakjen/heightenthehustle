@@ -11,7 +11,6 @@ interface BusinessDetailClientPageProps {
 }
 
 export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
-  console.log('BusinessDetailClientPage rendered');
   const [business, setBusiness] = useState<Business>(initialBusiness);
   const [selectedLocation, setSelectedLocation] = useState(''); // New state for location
 
@@ -208,3 +207,5 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
         </div>
       )}
     </div>
+  );
+}
