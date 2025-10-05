@@ -3,7 +3,7 @@
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
-import { eq, inArray, and } from "drizzle-orm";
+import { eq, inArray, and, or } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
 async function getLocationIdsByNames(locationNames: string[]): Promise<number[]> {
@@ -179,6 +179,24 @@ export async function getAvailableDemographics() {
     return allDemographics;
   } catch (error) {
     console.error("Error fetching available demographics:", error);
+    return [];
+  }
+}
+
+export async function getIndividualMessages(userId1: number, userId2: number) {
+  try {
+    const messages = await db.select()
+      .from(individualMessages)
+      .where(
+        or(
+          and(eq(individualMessages.senderId, userId1), eq(individualMessages.recipientId, userId2)),
+          and(eq(individualMessages.senderId, userId2), eq(individualMessages.recipientId, userId1))
+        )
+      )
+      .orderBy(individualMessages.timestamp);
+    return messages;
+  } catch (error) {
+    console.error("Error fetching individual messages:", error);
     return [];
   }
 }
