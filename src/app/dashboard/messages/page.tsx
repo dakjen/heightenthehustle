@@ -13,6 +13,14 @@ interface Message {
   timestamp: string;
 }
 
+interface MassMessage {
+  id: number;
+  adminId: number;
+  content: string;
+  targetLocations: string;
+  timestamp: string;
+}
+
 interface User {
   id: number;
   name: string;
