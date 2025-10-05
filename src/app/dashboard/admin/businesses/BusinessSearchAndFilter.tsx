@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { getAllBusinesses } from "./actions"; // Assuming this action will be updated to take filters
+import { getAllBusinesses, toggleBusinessArchiveStatus } from "./actions"; // Assuming this action will be updated to take filters
 
 // Define a type for a single business (matching your schema)
 interface Business {
@@ -56,20 +56,31 @@ export default function BusinessSearchAndFilter() {
     [searchParams]
   );
 
-  useEffect(() => {
-    async function fetchBusinesses() {
-      setLoadingBusinesses(true);
-      const filters = {
-        businessType: businessTypeFilter || undefined,
-        businessTaxStatus: businessTaxStatusFilter || undefined,
-        isArchived: isArchivedFilter || undefined,
-      };
-      const businesses = await getAllBusinesses(searchQuery, filters); // Assuming getAllBusinesses takes these params
-      setAllBusinesses(businesses);
-      setLoadingBusinesses(false);
-    }
-    fetchBusinesses();
+  const fetchBusinesses = useCallback(async () => {
+    setLoadingBusinesses(true);
+    const filters = {
+      businessType: businessTypeFilter || undefined,
+      businessTaxStatus: businessTaxStatusFilter || undefined,
+      isArchived: isArchivedFilter || undefined,
+    };
+    const businesses = await getAllBusinesses(searchQuery, filters);
+    setAllBusinesses(businesses);
+    setLoadingBusinesses(false);
   }, [searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter]);
+
+  useEffect(() => {
+    fetchBusinesses();
+  }, [fetchBusinesses]);
+
+  const handleToggleArchive = async (businessId: number, currentStatus: boolean) => {
+    const newStatus = !currentStatus;
+    const result = await toggleBusinessArchiveStatus(businessId, newStatus);
+    if (result.error) {
+      alert(result.error);
+    } else {
+      fetchBusinesses(); // Re-fetch businesses to update the list
+    }
+  };
 
   const handleBusinessClick = (businessId: number) => {
     router.push(`/dashboard/businesses/${businessId}`);
@@ -173,28 +184,36 @@ export default function BusinessSearchAndFilter() {
             <p className="text-gray-700">No businesses found matching your criteria.</p>
           ) : (
             allBusinesses.map((business) => (
-              <button
-                key={business.id}
-                onClick={() => handleBusinessClick(business.id)}
-                className={`w-full text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-4
-                  ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
-              >
-                {business.logoUrl ? (
-                  <Image src={business.logoUrl} alt={`${business.businessName} Logo`} width={40} height={40} className="rounded-full object-cover" />
-                ) : (
-                  <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-bold">
-                    {business.businessName ? business.businessName[0].toUpperCase() : '?'}
-                  </div>
-                )}
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
-                  <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
-                  <p className="text-sm text-gray-600">Type: {business.businessType}</p>
-                  {business.isArchived && (
-                    <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
+              <div key={business.id} className="flex items-center space-x-4">
+                <button
+                  onClick={() => handleBusinessClick(business.id)}
+                  className={`flex-1 text-left py-4 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-4
+                    ${business.isArchived ? 'bg-gray-200 text-gray-500 opacity-60' : 'bg-white hover:shadow-lg'}`}
+                >
+                  {business.logoUrl ? (
+                    <Image src={business.logoUrl} alt={`${business.businessName} Logo`} width={40} height={40} className="rounded-full object-cover" />
+                  ) : (
+                    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-bold">
+                      {business.businessName ? business.businessName[0].toUpperCase() : '?'}
+                    </div>
                   )}
-                </div>
-              </button>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
+                    <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
+                    <p className="text-sm text-gray-600">Type: {business.businessType}</p>
+                    {business.isArchived && (
+                      <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
+                    )}
+                  </div>
+                </button>
+                <button
+                  onClick={() => handleToggleArchive(business.id, business.isArchived)}
+                  className={`py-2 px-4 rounded-md text-sm font-medium text-white
+                    ${business.isArchived ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}`}
+                >
+                  {business.isArchived ? 'Unarchive' : 'Archive'}
+                </button>
+              </div>
             ))
           )}
         </div>

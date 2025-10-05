@@ -3,6 +3,7 @@
 import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 interface BusinessFilters {
   businessType?: string;
@@ -31,4 +32,17 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
 
   const allBusinesses = await db.select().from(businesses).where(and(...conditions));
   return allBusinesses;
+}
+
+export async function toggleBusinessArchiveStatus(businessId: number, newStatus: boolean) {
+  try {
+    await db.update(businesses)
+      .set({ isArchived: newStatus })
+      .where(eq(businesses.id, businessId));
+    revalidatePath('/dashboard/admin/businesses'); // Revalidate the admin businesses page
+    return { message: "Business archive status updated successfully!", error: "" };
+  } catch (error) {
+    console.error("Error toggling business archive status:", error);
+    return { message: "", error: "Failed to update business archive status." };
+  }
 }
