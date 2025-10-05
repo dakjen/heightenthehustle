@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { sendMessage } from "./actions"; // Will create this action
+import { useState, useEffect } from "react";
+import { sendMessage, sendMassMessage } from "./actions"; // Will create this action
 import { useFormState } from "react-dom";
+import { getSession } from "@/app/login/actions"; // Import getSession
 
 interface Message {
   id: number;
@@ -21,22 +22,33 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
   const [messageContent, setMessageContent] = useState("");
   const [recipient, setRecipient] = useState("admin"); // Default recipient
+  const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
+  const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
 
-  // In a real application, you would fetch messages here
-  // useEffect(() => {
-  //   async function fetchMessages() {
-  //     const fetchedMessages = await getMessages();
-  //     setMessages(fetchedMessages);
-  //   }
-  //   fetchMessages();
-  // }, []);
+  useEffect(() => {
+    async function checkAdminStatus() {
+      const session = await getSession();
+      if (session?.user?.role === 'admin') {
+        setIsAdmin(true);
+      }
+    }
+    checkAdminStatus();
+  }, []);
 
   const handleSendMessage = (formData: FormData) => {
     // This will be handled by the server action
     sendFormAction(formData);
     setMessageContent(""); // Clear input after sending
+  };
+
+  const handleMassSendMessage = (formData: FormData) => {
+    // This will be handled by the server action
+    massSendFormAction(formData);
+    setMessageContent(""); // Clear input after sending
+    setMassMessageLocations([]); // Clear locations after sending
   };
 
   return (
@@ -60,58 +72,113 @@ export default function MessagesPage() {
       </div>
 
       {/* Message Input Form */}
-      <form action={handleSendMessage} className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">New Message</h2>
+      {!isAdmin && (
+        <form action={handleSendMessage} className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">New Message</h2>
 
-        {/* Recipient Selection */}
-        <div>
-          <label htmlFor="recipient" className="block text-sm font-medium text-gray-700">
-            Recipient
-          </label>
-          <select
-            id="recipient"
-            name="recipient"
-            value={recipient}
-            onChange={(e) => setRecipient(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-          >
-            <option value="admin">Admin</option>
-            <option value="internal">Internal Users</option>
-            {/* In a real app, this would be dynamic based on permissions/available users */}
-          </select>
-        </div>
+          {/* Recipient Selection */}
+          <div>
+            <label htmlFor="recipient" className="block text-sm font-medium text-gray-700">
+              Recipient
+            </label>
+            <select
+              id="recipient"
+              name="recipient"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            >
+              <option value="admin">Admin</option>
+              <option value="internal">Internal Users</option>
+              {/* In a real app, this would be dynamic based on permissions/available users */}
+            </select>
+          </div>
 
-        {/* Message Content */}
-        <div className="mt-4">
-          <label htmlFor="messageContent" className="sr-only">Message</label>
-          <textarea
-            id="messageContent"
-            name="messageContent"
-            rows={4}
-            value={messageContent}
-            onChange={(e) => setMessageContent(e.target.value)}
-            placeholder="Type your message here..."
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-          ></textarea>
-        </div>
+          {/* Message Content */}
+          <div className="mt-4">
+            <label htmlFor="messageContent" className="sr-only">Message</label>
+            <textarea
+              id="messageContent"
+              name="messageContent"
+              rows={4}
+              value={messageContent}
+              onChange={(e) => setMessageContent(e.target.value)}
+              placeholder="Type your message here..."
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            ></textarea>
+          </div>
 
-        {sendState?.message && (
-          <p className="text-sm text-green-600 mt-2">{sendState.message}</p>
-        )}
-        {sendState?.error && (
-          <p className="text-sm text-red-600 mt-2">{sendState.error}</p>
-        )}
+          {sendState?.message && (
+            <p className="text-sm text-green-600 mt-2">{sendState.message}</p>
+          )}
+          {sendState?.error && (
+            <p className="text-sm text-red-600 mt-2">{sendState.error}</p>
+          )}
 
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Send Message
-          </button>
-        </div>
-      </form>
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      )}
+
+      {isAdmin && (
+        <form action={handleMassSendMessage} className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Send Mass Message</h2>
+
+          {/* Location Selection */}
+          <div>
+            <label htmlFor="massMessageLocations" className="block text-sm font-medium text-gray-700">
+              Target Locations (comma-separated)
+            </label>
+            <input
+              id="massMessageLocations"
+              name="massMessageLocations"
+              type="text"
+              value={massMessageLocations.join(', ')}
+              onChange={(e) => setMassMessageLocations(e.target.value.split(', ').map(loc => loc.trim()))}
+              placeholder="e.g., New York, Washington, D.C."
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            />
+          </div>
+
+          {/* Message Content */}
+          <div className="mt-4">
+            <label htmlFor="massMessageContent" className="sr-only">Message</label>
+            <textarea
+              id="massMessageContent"
+              name="massMessageContent"
+              rows={4}
+              value={messageContent}
+              onChange={(e) => setMessageContent(e.target.value)}
+              placeholder="Type your message here..."
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            ></textarea>
+          </div>
+
+          {massSendState?.message && (
+            <p className="text-sm text-green-600 mt-2">{massSendState.message}</p>
+          )}
+          {massSendState?.error && (
+            <p className="text-sm text-red-600 mt-2">{massSendState.error}</p>
+          )}
+
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Send Mass Message
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
