@@ -33,6 +33,8 @@ export const demographics = pgTable('demographics', {
   name: text('name').notNull().unique(),
 });
 
+export type Demographic = InferSelectModel<typeof demographics>;
+
 export const businesses = pgTable('businesses', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
@@ -58,6 +60,7 @@ export const businesses = pgTable('businesses', {
 });
 
 export type Business = InferSelectModel<typeof businesses>;
+export type BusinessWithDemographic = InferSelectModel<typeof businesses, { with: { demographic: true } }>;
 
 export const usersRelations = relations(users, ({ one, many }) => ({
   businesses: many(businesses),

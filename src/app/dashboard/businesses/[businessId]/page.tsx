@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getBusinessProfile } from "../actions";
+import { getBusinessProfile, BusinessProfileWithDemographic } from "../actions"; // Import BusinessProfileWithDemographic
 import { getAvailableDemographics } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
@@ -12,7 +12,7 @@ export default async function BusinessDetailPage({ params }: { params: { busines
     notFound();
   }
 
-  const business = await getBusinessProfile(businessId);
+  const business: BusinessProfileWithDemographic | null = await getBusinessProfile(businessId); // Use the new type
   const availableDemographics = await getAvailableDemographics(); // Fetch available demographics
 
   if (!business) {

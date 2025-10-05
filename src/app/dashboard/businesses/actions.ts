@@ -1,8 +1,6 @@
-"use server";
-
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics } from "@/db/schema";
-import { eq, like, and } from "drizzle-orm";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations } from "@/db/schema";
+import { eq, like, and, InferSelectModel } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import { put } from "@vercel/blob";
@@ -15,6 +13,9 @@ type FormState = {
 
 type NewBusiness = InferInsertModel<typeof businesses>; // Define type for new business
 
+// Define a type for Business with its demographic relation
+export type BusinessProfileWithDemographic = InferSelectModel<typeof businesses, { with: { demographic: true } }>;
+
 // Helper function to get user ID from session
 async function getUserIdFromSession(): Promise<number | undefined> {
   const session: SessionPayload | null = await getSession();
@@ -25,7 +26,7 @@ export async function fetchSession(): Promise<SessionPayload | null> {
   return await getSession();
 }
 
-export async function getBusinessProfile(businessId: number) {
+export async function getBusinessProfile(businessId: number): Promise<BusinessProfileWithDemographic | null> {
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),

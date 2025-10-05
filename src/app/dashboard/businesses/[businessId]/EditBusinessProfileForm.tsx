@@ -319,6 +319,26 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
         </select>
       </div>
 
+      {/* Demographic Selection */}
+      <div>
+        <label htmlFor="demographicId" className="block text-sm font-medium text-gray-700">
+          Demographic
+        </label>
+        <select
+          id="demographicId"
+          name="demographicId"
+          defaultValue={initialBusiness.demographicId || ''}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+        >
+          <option value="">Select Demographic</option>
+          {availableDemographics.map(demographic => (
+            <option key={demographic.id} value={demographic.id}>
+              {demographic.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {editState?.message && (
         <p className="text-sm text-green-600 mt-2">{editState.message}</p>
       )}
