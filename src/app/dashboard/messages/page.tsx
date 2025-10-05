@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getAllInternalUsers } from "./actions"; // Will create this action
+import { sendMessage, sendMassMessage, getAllInternalUsers, getMassMessages } from "./actions";
 import { useFormState } from "react-dom";
 import { getSession } from "@/app/login/actions"; // Import getSession
 
