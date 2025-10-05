@@ -1,24 +1,9 @@
-import { getSession } from "@/app/login/actions";
-import { getAllInternalUsers, getMassMessages } from "./actions";
-import MessagesPage from "./page";
+import { ReactNode } from 'react';
 
-export default async function MessagesLayout() {
-  const session = await getSession();
-  const isAdmin = session?.user?.role === 'admin';
-
-  let initialInternalUsers = [];
-  let initialMassMessages = [];
-
-  if (isAdmin) {
-    initialInternalUsers = await getAllInternalUsers();
-    initialMassMessages = await getMassMessages();
-  }
-
+export default async function MessagesLayout({ children }: { children: ReactNode }) {
   return (
-    <MessagesPage
-      isAdmin={isAdmin}
-      initialInternalUsers={initialInternalUsers}
-      initialMassMessages={initialMassMessages}
-    />
+    <>
+      {children}
+    </>
   );
 }
