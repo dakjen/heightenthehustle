@@ -134,77 +134,79 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   }
 }
 
-export async function updateBusinessProfile(businessId: number, prevState: FormState, formData: FormData): Promise<FormState> {
-  const userId = await getUserIdFromSession();
+export function updateBusinessProfile(businessId: number) {
+  return async (prevState: FormState, formData: FormData): Promise<FormState> => {
+    const userId = await getUserIdFromSession();
 
-  if (!userId) {
-    return { message: "", error: "User not authenticated." };
-  }
-
-  const ownerName = formData.get("ownerName") as string;
-  const percentOwnership = parseFloat(formData.get("percentOwnership") as string);
-  const businessName = formData.get("businessName") as string;
-  const businessType = formData.get("businessType") as string;
-  const businessTaxStatus = formData.get("businessTaxStatus") as string;
-  const businessDescription = formData.get("businessDescription") as string;
-  const businessIndustry = formData.get("businessIndustry") as string;
-  const naicsCode = formData.get("naicsCode") as string;
-  const streetAddress = formData.get("streetAddress") as string;
-  const city = formData.get("city") as string;
-  const state = formData.get("state") as string;
-  const zipCode = formData.get("zipCode") as string;
-  const phone = formData.get("phone") as string;
-  const website = formData.get("website") as string;
-  const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
-  const logo = formData.get("logo") as File; // New: Get logo file
-
-  if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
-    return { message: "", error: "Required fields are missing." };
-  }
-
-  try {
-    // Placeholder for file upload logic
-    let businessMaterialsUrl: string | undefined;
-    if (businessMaterials && businessMaterials.size > 0) {
-      console.log("Attempting to upload file:", businessMaterials.name);
-      businessMaterialsUrl = "https://example.com/placeholder-material.pdf"; // Placeholder URL
+    if (!userId) {
+      return { message: "", error: "User not authenticated." };
     }
 
-    // New: Handle logo upload
-    let logoUrl: string | undefined;
-    if (logo && logo.size > 0) {
-      const blob = await put(logo.name, logo, { access: 'public', allowOverwrite: true });
-      logoUrl = blob.url;
+    const ownerName = formData.get("ownerName") as string;
+    const percentOwnership = parseFloat(formData.get("percentOwnership") as string);
+    const businessName = formData.get("businessName") as string;
+    const businessType = formData.get("businessType") as string;
+    const businessTaxStatus = formData.get("businessTaxStatus") as string;
+    const businessDescription = formData.get("businessDescription") as string;
+    const businessIndustry = formData.get("businessIndustry") as string;
+    const naicsCode = formData.get("naicsCode") as string;
+    const streetAddress = formData.get("streetAddress") as string;
+    const city = formData.get("city") as string;
+    const state = formData.get("state") as string;
+    const zipCode = formData.get("zipCode") as string;
+    const phone = formData.get("phone") as string;
+    const website = formData.get("website") as string;
+    const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
+    const logo = formData.get("logo") as File; // New: Get logo file
+
+    if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
+      return { message: "", error: "Required fields are missing." };
     }
 
-    await db.update(businesses)
-      .set({
-        ownerName,
-        percentOwnership: percentOwnership.toString(),
-        businessName,
-        businessType: businessType as typeof businessTypeEnum.enumValues[number],
-        businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
-        businessDescription,
-        businessIndustry,
-        naicsCode,
-        streetAddress,
-        city,
-        state,
-        zipCode,
-        phone,
-        website,
-        businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
-        logoUrl: logoUrl || undefined, // New: Update logoUrl
-      })
-      .where(eq(businesses.id, businessId));
+    try {
+      // Placeholder for file upload logic
+      let businessMaterialsUrl: string | undefined;
+      if (businessMaterials && businessMaterials.size > 0) {
+        console.log("Attempting to upload file:", businessMaterials.name);
+        businessMaterialsUrl = "https://example.com/placeholder-material.pdf"; // Placeholder URL
+      }
 
-    revalidatePath("/dashboard/businesses");
-    revalidatePath(`/dashboard/businesses/${businessId}`); // Revalidate specific business page
-    return { message: "Business profile updated successfully!", error: "" };
-  } catch (error) {
-    console.error("Error updating business profile:", error);
-    return { message: "", error: "Failed to update business profile." };
-  }
+      // New: Handle logo upload
+      let logoUrl: string | undefined;
+      if (logo && logo.size > 0) {
+        const blob = await put(logo.name, logo, { access: 'public', allowOverwrite: true });
+        logoUrl = blob.url;
+      }
+
+      await db.update(businesses)
+        .set({
+          ownerName,
+          percentOwnership: percentOwnership.toString(),
+          businessName,
+          businessType: businessType as typeof businessTypeEnum.enumValues[number],
+          businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
+          businessDescription,
+          businessIndustry,
+          naicsCode,
+          streetAddress,
+          city,
+          state,
+          zipCode,
+          phone,
+          website,
+          businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
+          logoUrl: logoUrl || undefined, // New: Update logoUrl
+        })
+        .where(eq(businesses.id, businessId));
+
+      revalidatePath("/dashboard/businesses");
+      revalidatePath(`/dashboard/businesses/${businessId}`); // Revalidate specific business page
+      return { message: "Business profile updated successfully!", error: "" };
+    } catch (error) {
+      console.error("Error updating business profile:", error);
+      return { message: "", error: "Failed to update business profile." };
+    }
+  };
 }
 
 export async function archiveBusiness(businessId: number): Promise<FormState> {
