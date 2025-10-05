@@ -35,9 +35,6 @@ export default async function DashboardLayout({
 
         <nav>
           <Link href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</Link>
-          {isAdmin && !isInternalUserView && ( // Show Admin Businesses link only for admin view
-            <Link href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
-          )}
           {session.user.role === 'external' && ( // Show Businesses link only for external users
             <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
           )}
