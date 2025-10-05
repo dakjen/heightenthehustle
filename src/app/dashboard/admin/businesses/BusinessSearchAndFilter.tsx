@@ -228,12 +228,6 @@ export default function BusinessSearchAndFilter() {
                 >
                   {business.isArchived ? 'Unarchive' : 'Archive'}
                 </button>
-                <button
-                  onClick={() => handleDeleteBusiness(business.id, business.businessName)}
-                  className="py-2 px-4 rounded-md text-sm font-medium text-white bg-gray-600 hover:bg-gray-700"
-                >
-                  Delete
-                </button>
               </div>
             ))
           )}
