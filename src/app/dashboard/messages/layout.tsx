@@ -1,5 +1,5 @@
 import { getSession } from "@/app/login/actions";
-import { getAllInternalUsers, getMassMessages } from "./server-data";
+import { getAllInternalUsers, getMassMessages } from "./actions";
 import MessagesPage from "./page";
 
 export default async function MessagesLayout() {
