@@ -134,12 +134,17 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   }
 }
 
-export async function updateBusinessProfile(businessId: number) {
-  return async (prevState: FormState, formData: FormData): Promise<FormState> => {
+export async function updateBusinessProfile(prevState: FormState, formData: FormData): Promise<FormState> {
     const userId = await getUserIdFromSession();
 
     if (!userId) {
       return { message: "", error: "User not authenticated." };
+    }
+
+    const businessId = parseInt(formData.get("businessId") as string);
+
+    if (isNaN(businessId)) {
+      return { message: "", error: "Business ID is invalid." };
     }
 
     const ownerName = formData.get("ownerName") as string;

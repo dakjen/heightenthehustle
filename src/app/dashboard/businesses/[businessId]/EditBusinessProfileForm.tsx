@@ -17,10 +17,11 @@ interface EditBusinessProfileFormProps {
 export default function EditBusinessProfileForm({ initialBusiness }: EditBusinessProfileFormProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
 
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile.bind(null, business.id), undefined);
+  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, undefined);
 
   return (
     <form action={editFormAction} className="space-y-6">
+      <input type="hidden" name="businessId" value={business.id} />
       {/* Business Name */}
       <div>
         <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
