@@ -26,8 +26,10 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
     conditions.push(eq(businesses.businessTaxStatus, filters.businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number]));
   }
 
-  if (filters.isArchived !== undefined) {
-    conditions.push(eq(businesses.isArchived, filters.isArchived));
+  if (filters.isArchived === false) {
+    conditions.push(eq(businesses.isArchived, false));
+  } else if (filters.isArchived === true) {
+    conditions.push(eq(businesses.isArchived, true));
   }
 
   const allBusinesses = await db.select({
