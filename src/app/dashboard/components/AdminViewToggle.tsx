@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { setViewModeCookie } from "../../actions";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface AdminViewToggleProps {
   isAdmin: boolean;
@@ -10,24 +9,26 @@ interface AdminViewToggleProps {
 
 export default function AdminViewToggle({ isAdmin }: AdminViewToggleProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isInternalUserView, setIsInternalUserView] = useState(false);
 
   useEffect(() => {
-    // Read the cookie value on client-side to initialize state
-    const viewMode = document.cookie.split('; ').find(row => row.startsWith('viewMode='))?.split('=')[1];
-    setIsInternalUserView(viewMode === "internal");
-  }, []);
+    setIsInternalUserView(searchParams.get("viewMode") === "internal");
+  }, [searchParams]);
 
   if (!isAdmin) {
     return null; // Only show toggle for admins
   }
 
-  const handleToggle = async () => {
+  const handleToggle = () => {
     const newInternalUserView = !isInternalUserView;
-    setIsInternalUserView(newInternalUserView);
-
-    await setViewModeCookie(newInternalUserView ? 'internal' : 'admin');
-    router.refresh(); // Refresh the page to apply the new view mode
+    const params = new URLSearchParams(searchParams.toString());
+    if (newInternalUserView) {
+      params.set("viewMode", "internal");
+    } else {
+      params.delete("viewMode"); // Default to admin view
+    }
+    router.push(`?${params.toString()}`);
   };
 
   return (
