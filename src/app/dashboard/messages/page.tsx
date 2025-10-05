@@ -27,6 +27,15 @@ interface Demographic {
   name: string;
 }
 
+interface MessagesPageProps {
+  isAdmin: boolean;
+  initialInternalUsers: User[];
+  initialMassMessages: MassMessage[];
+  initialLocations: Location[];
+  initialDemographics: Demographic[];
+  currentUserId: number | null;
+}
+
 export default async function MessagesPage() {
   const session = await getSession();
   const isAdmin = session?.user?.role === 'admin';
@@ -50,6 +59,7 @@ export default async function MessagesPage() {
       initialMassMessages={initialMassMessages}
       initialLocations={initialLocations}
       initialDemographics={initialDemographics}
+      currentUserId={session?.user?.id || null}
     />
   );
 }
