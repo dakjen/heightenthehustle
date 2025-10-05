@@ -1,9 +1,8 @@
-"use server";
-
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users, massMessages } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 type FormState = {
   message: string;
@@ -57,12 +56,20 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
 
   const locationsArray = massMessageLocations.split(', ').map(loc => loc.trim());
 
-  console.log(`Admin ${session.user.id} (${session.user.email}) sending mass message to locations: ${locationsArray.join(', ')} with content: ${massMessageContent}`);
+  try {
+    await db.insert(massMessages).values({
+      adminId: session.user.id,
+      content: massMessageContent,
+      targetLocations: massMessageLocations,
+      timestamp: new Date().toISOString(),
+    });
 
-  // In a real application, you would query your database for users in these locations
-  // and then send them the message. For now, this is a placeholder.
-
-  return { message: `Mass message sent to users in ${locationsArray.join(', ')}!`, error: "" };
+    revalidatePath("/dashboard/messages");
+    return { message: `Mass message sent to users in ${locationsArray.join(', ')}!`, error: "" };
+  } catch (error) {
+    console.error("Error sending mass message:", error);
+    return { message: "", error: "Failed to send mass message." };
+  }
 }
 
 export async function getAllInternalUsers() {
@@ -72,4 +79,13 @@ export async function getAllInternalUsers() {
   }
   const internalUsers = await db.select().from(users).where(eq(users.role, 'internal'));
   return internalUsers;
+}
+
+export async function getMassMessages() {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return [];
+  }
+  const messages = await db.select().from(massMessages).orderBy(massMessages.timestamp);
+  return messages;
 }

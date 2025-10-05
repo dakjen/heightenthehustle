@@ -57,3 +57,20 @@ export const businessesRelations = relations(businesses, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const massMessages = pgTable('mass_messages', {
+  id: serial('id').primaryKey(),
+  adminId: integer('admin_id').notNull().references(() => users.id),
+  content: text('content').notNull(),
+  targetLocations: text('target_locations').notNull(),
+  timestamp: text('timestamp').notNull(),
+});
+
+export type MassMessage = InferSelectModel<typeof massMessages>;
+
+export const massMessagesRelations = relations(massMessages, ({ one }) => ({
+  admin: one(users, {
+    fields: [massMessages.adminId],
+    references: [users.id],
+  }),
+}));

@@ -42,10 +42,12 @@ export default function MessagesPage() {
         setIsAdmin(true);
         const users = await getAllInternalUsers();
         setInternalUsers(users);
+        const fetchedMassMessages = await getMassMessages();
+        setMassMessages(fetchedMassMessages);
       }
     }
     fetchData();
-  }, []);
+  }, [massSendState]);
 
   const handleSendMessage = (formData: FormData) => {
     // This will be handled by the server action
