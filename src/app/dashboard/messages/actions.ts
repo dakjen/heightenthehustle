@@ -2,8 +2,8 @@
 
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users, massMessages, locations, demographics } from "@/db/schema";
-import { eq, inArray } from "drizzle-orm";
+import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
+import { eq, inArray, and } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
 async function getLocationIdsByNames(locationNames: string[]): Promise<number[]> {
@@ -32,7 +32,7 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
     return { message: "", error: "Message content and recipient are required." };
   }
 
-  let targetRecipient: string = recipient;
+  let targetRecipientId: number | undefined;
 
   // Check if recipient is a user ID
   if (!isNaN(parseInt(recipient))) {
@@ -40,15 +40,32 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
     if (recipientUser.length === 0) {
       return { message: "", error: "Recipient user not found." };
     }
-    targetRecipient = recipientUser[0].email; // Or some other identifier
+    targetRecipientId = recipientUser[0].id;
+  } else {
+    // If recipient is not a user ID, assume it's an admin or internal user by email/role
+    // For now, we'll just assume it's an admin if not a user ID
+    const adminUser = await db.select().from(users).where(eq(users.role, 'admin')).limit(1);
+    if (adminUser.length > 0) {
+      targetRecipientId = adminUser[0].id;
+    }
   }
 
-  console.log(`User ${session.user.id} (${session.user.email}) sent a message to ${targetRecipient}: ${messageContent}`);
+  if (!targetRecipientId) {
+    return { message: "", error: "Recipient not found." };
+  }
 
-  // In a real application, you would save this message to a database
-  // and handle permissions for recipients.
-
-  return { message: "Message sent successfully!", error: "" };
+  try {
+    await db.insert(individualMessages).values({
+      senderId: session.user.id,
+      recipientId: targetRecipientId,
+      content: messageContent,
+      timestamp: new Date(),
+    });
+    return { message: "Message sent successfully!", error: "" };
+  } catch (error) {
+    console.error("Error sending individual message:", error);
+    return { message: "", error: "Failed to send message." };
+  }
 }
 
 export async function getMassMessages() {
@@ -78,26 +95,68 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
   }
 
   const massMessageContent = formData.get("massMessageContent") as string;
-  const massMessageLocations = formData.get("massMessageLocations") as string;
+  const targetLocationIdsString = formData.get("targetLocationIds") as string;
+  const targetDemographicIdsString = formData.get("targetDemographicIds") as string;
 
-  if (!massMessageContent || !massMessageLocations) {
-    return { message: "", error: "Message content and target locations are required." };
+  if (!massMessageContent) {
+    return { message: "", error: "Message content is required." };
   }
 
-  const locationsArray = massMessageLocations.split(', ').map(loc => loc.trim());
-  const targetLocationIds = await getLocationIdsByNames(locationsArray);
+  let targetLocationIds: number[] = [];
+  if (targetLocationIdsString) {
+    targetLocationIds = JSON.parse(targetLocationIdsString);
+  }
+
+  let targetDemographicIds: number[] = [];
+  if (targetDemographicIdsString) {
+    targetDemographicIds = JSON.parse(targetDemographicIdsString);
+  }
 
   try {
+    // Save the mass message record
     await db.insert(massMessages).values({
       adminId: session.user.id,
       content: massMessageContent,
       targetLocationIds: targetLocationIds,
-      targetDemographicIds: [], // Placeholder for now
+      targetDemographicIds: targetDemographicIds,
       timestamp: new Date(),
     });
 
+    // Find target users based on locations and demographics
+    const conditions = [];
+
+    if (targetLocationIds.length > 0) {
+      conditions.push(inArray(businesses.locationId, targetLocationIds));
+    }
+    if (targetDemographicIds.length > 0) {
+      conditions.push(inArray(businesses.demographicId, targetDemographicIds));
+    }
+
+    let targetedUsers: { id: number }[] = [];
+
+    if (conditions.length > 0) {
+      targetedUsers = await db.select({ id: users.id })
+        .from(users)
+        .innerJoin(businesses, eq(users.id, businesses.userId))
+        .where(and(...conditions));
+    } else {
+      // If no specific locations or demographics are selected, target all internal users
+      targetedUsers = await db.select({ id: users.id }).from(users).where(eq(users.role, 'internal'));
+    }
+
+    // Send individual messages to targeted users
+    if (targetedUsers.length > 0) {
+      const messagesToInsert = targetedUsers.map(user => ({
+        senderId: session.user!.id,
+        recipientId: user.id,
+        content: massMessageContent,
+        timestamp: new Date(),
+      }));
+      await db.insert(individualMessages).values(messagesToInsert);
+    }
+
     await revalidateMessagesPath();
-    return { message: `Mass message sent to users in ${locationsArray.join(', ')}!`, error: "" };
+    return { message: `Mass message sent to ${targetedUsers.length} users!`, error: "" };
   } catch (error) {
     console.error("Error sending mass message:", error);
     return { message: "", error: "Failed to send mass message." };
