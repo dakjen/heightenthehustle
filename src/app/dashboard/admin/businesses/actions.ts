@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, users } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -30,7 +30,14 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
     conditions.push(eq(businesses.isArchived, filters.isArchived));
   }
 
-  const allBusinesses = await db.select().from(businesses).where(and(...conditions));
+  const allBusinesses = await db.select({
+    business: businesses,
+    userEmail: users.email,
+  })
+  .from(businesses)
+  .innerJoin(users, eq(businesses.userId, users.id))
+  .where(and(...conditions));
+
   return allBusinesses;
 }
 

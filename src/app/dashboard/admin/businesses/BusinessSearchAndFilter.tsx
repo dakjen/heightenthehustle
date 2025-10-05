@@ -6,31 +6,34 @@ import Image from "next/image";
 import { getAllBusinesses, toggleBusinessArchiveStatus } from "./actions"; // Assuming this action will be updated to take filters
 
 // Define a type for a single business (matching your schema)
-interface Business {
-  id: number;
-  userId: number;
-  businessName: string;
-  ownerName: string;
-  percentOwnership: string;
-  businessType: string;
-  businessTaxStatus: string;
-  businessDescription: string | null;
-  businessIndustry: string;
-  businessMaterialsUrl: string | null;
-  streetAddress: string | null;
-  city: string | null;
-  state: string | null;
-  zipCode: string | null;
-  phone: string | null;
-  website: string | null;
-  isArchived: boolean;
-  logoUrl: string | null;
+interface BusinessWithUserEmail {
+  business: {
+    id: number;
+    userId: number;
+    businessName: string;
+    ownerName: string;
+    percentOwnership: string;
+    businessType: string;
+    businessTaxStatus: string;
+    businessDescription: string | null;
+    businessIndustry: string;
+    businessMaterialsUrl: string | null;
+    streetAddress: string | null;
+    city: string | null;
+    state: string | null;
+    zipCode: string | null;
+    phone: string | null;
+    website: string | null;
+    isArchived: boolean;
+    logoUrl: string | null;
+  };
+  userEmail: string;
 }
 
 export default function BusinessSearchAndFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [allBusinesses, setAllBusinesses] = useState<Business[]>([]);
+  const [allBusinesses, setAllBusinesses] = useState<BusinessWithUserEmail[]>([]);
   const [loadingBusinesses, setLoadingBusinesses] = useState(true);
 
   const searchQuery = searchParams.get("search") || "";
@@ -63,8 +66,8 @@ export default function BusinessSearchAndFilter() {
       businessTaxStatus: businessTaxStatusFilter || undefined,
       isArchived: isArchivedFilter || undefined,
     };
-    const businesses = await getAllBusinesses(searchQuery, filters);
-    setAllBusinesses(businesses);
+    const businessesData = await getAllBusinesses(searchQuery, filters);
+    setAllBusinesses(businessesData);
     setLoadingBusinesses(false);
   }, [searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter]);
 
@@ -183,7 +186,7 @@ export default function BusinessSearchAndFilter() {
           {allBusinesses.length === 0 ? (
             <p className="text-gray-700">No businesses found matching your criteria.</p>
           ) : (
-            allBusinesses.map((business) => (
+            allBusinesses.map(({ business, userEmail }) => (
               <div key={business.id} className="flex items-center space-x-4">
                 <button
                   onClick={() => handleBusinessClick(business.id)}
@@ -199,7 +202,8 @@ export default function BusinessSearchAndFilter() {
                   )}
                   <div>
                     <h3 className="text-xl font-bold text-gray-900">{business.businessName}</h3>
-                    <p className="mt-2 text-sm text-gray-600">Owner: {business.ownerName}</p>
+                    <p className="mt-2 text-sm text-gray-600">User: {userEmail}</p>
+                    <p className="text-sm text-gray-600">Owner: {business.ownerName}</p>
                     <p className="text-sm text-gray-600">Type: {business.businessType}</p>
                     {business.isArchived && (
                       <p className="mt-2 text-sm font-semibold text-red-600">Archived</p>
