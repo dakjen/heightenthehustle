@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users, userRole } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -82,5 +82,32 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
   catch (error) {
     console.error("Error updating user permissions:", error);
     return { message: "", error: "Failed to update permissions." };
+  }
+}
+
+export async function updateUser(prevState: FormState, formData: FormData): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return { message: "", error: "Unauthorized." };
+  }
+
+  const userId = parseInt(formData.get("userId") as string);
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
+  const role = formData.get("role") as typeof userRole.enumValues[number];
+
+  if (isNaN(userId) || !email || !phone || !role) {
+    return { message: "", error: "All fields are required." };
+  }
+
+  try {
+    await db.update(users)
+      .set({ email, phone, role })
+      .where(eq(users.id, userId));
+    revalidatePath("/dashboard/admin/users");
+    return { message: "User updated successfully!", error: "" };
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return { message: "", error: "Failed to update user." };
   }
 }
