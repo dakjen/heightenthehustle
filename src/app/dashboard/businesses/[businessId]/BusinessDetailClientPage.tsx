@@ -32,10 +32,16 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           <button
-            onClick={() => setActiveTab('business-info')}
-            className={`${activeTab === 'business-info' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            onClick={() => setActiveTab('business-profile')}
+            className={`${activeTab === 'business-profile' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
-            Business Info
+            Business Profile
+          </button>
+          <button
+            onClick={() => setActiveTab('business-details')}
+            className={`${activeTab === 'business-details' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+          >
+            Business Details
           </button>
           <button
             onClick={() => setActiveTab('business-materials')}
@@ -58,7 +64,7 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
         </nav>
       </div>
 
-      {activeTab === 'business-info' && (
+      {activeTab === 'business-profile' && (
         <div className="mt-8">
           <h1 className="text-3xl font-bold text-gray-900">{business.businessName}</h1>
           {/* Business Logo Display */}
@@ -79,6 +85,13 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
           {business.streetAddress && <p className="mt-2 text-gray-700">Address: {business.streetAddress}, {business.city}, {business.state} {business.zipCode}</p>}
           {business.phone && <p className="mt-2 text-gray-700">Phone: {business.phone}</p>}
           {business.website && <p className="mt-2 text-gray-700">Website: <a href={business.website} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">{business.website}</a></p>}
+        </div>
+      )}
+
+      {activeTab === 'business-details' && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-gray-900">Business Details Content</h2>
+          <p className="mt-2 text-gray-700">This section will contain additional business details.</p>
         </div>
       )}
 
