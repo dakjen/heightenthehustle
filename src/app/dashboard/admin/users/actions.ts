@@ -5,6 +5,7 @@ import { users, userRole } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
+import bcrypt from 'bcrypt';
 
 type FormState = {
   message: string;
@@ -38,11 +39,13 @@ export async function createUser(prevState: FormState, formData: FormData): Prom
   }
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+
     await db.insert(users).values({
       name,
       email,
       phone,
-      password, // In a real app, hash this password!
+      password: hashedPassword, // Store the hashed password
       role,
     });
     revalidatePath("/dashboard/admin/users");
