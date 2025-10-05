@@ -2,9 +2,17 @@
 
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users, massMessages } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { users, massMessages, locations } from "@/db/schema";
+import { eq, inArray } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
+
+async function getLocationIdsByNames(locationNames: string[]): Promise<number[]> {
+  if (locationNames.length === 0) {
+    return [];
+  }
+  const existingLocations = await db.select().from(locations).where(inArray(locations.name, locationNames));
+  return existingLocations.map(loc => loc.id);
+}
 
 type FormState = {
   message: string;
@@ -77,13 +85,15 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
   }
 
   const locationsArray = massMessageLocations.split(', ').map(loc => loc.trim());
+  const targetLocationIds = await getLocationIdsByNames(locationsArray);
 
   try {
     await db.insert(massMessages).values({
       adminId: session.user.id,
       content: massMessageContent,
-      targetLocations: massMessageLocations,
-      timestamp: new Date().toISOString(),
+      targetLocationIds: targetLocationIds,
+      targetDemographicIds: [], // Placeholder for now
+      timestamp: new Date(),
     });
 
     await revalidateMessagesPath();

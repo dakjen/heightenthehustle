@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric, timestamp, AnyPgColumn } from 'drizzle-orm/pg-core';
 import { relations, InferSelectModel } from 'drizzle-orm';
 
 export const userRole = pgEnum('user_role', ['admin', 'internal', 'external']);
@@ -23,6 +23,16 @@ export const users = pgTable('users', {
   profilePhotoUrl: text('profile_photo_url'), // New field
 });
 
+export const locations = pgTable('locations', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull().unique(),
+});
+
+export const demographics = pgTable('demographics', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull().unique(),
+});
+
 export const businesses = pgTable('businesses', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
@@ -43,12 +53,16 @@ export const businesses = pgTable('businesses', {
   phone: varchar('phone', { length: 20 }),
   website: text('website'),
   isArchived: boolean('is_archived').notNull().default(false), // New field
+  locationId: integer('location_id').references(() => locations.id), // New field
+  demographicId: integer('demographic_id').references(() => demographics.id), // New field
 });
 
 export type Business = InferSelectModel<typeof businesses>;
 
 export const usersRelations = relations(users, ({ one, many }) => ({
   businesses: many(businesses),
+  sentMessages: many(individualMessages, { relationName: 'sent_messages' }),
+  receivedMessages: many(individualMessages, { relationName: 'received_messages' }),
 }));
 
 export const businessesRelations = relations(businesses, ({ one }) => ({
@@ -56,14 +70,23 @@ export const businessesRelations = relations(businesses, ({ one }) => ({
     fields: [businesses.userId],
     references: [users.id],
   }),
+  location: one(locations, {
+    fields: [businesses.locationId],
+    references: [locations.id],
+  }),
+  demographic: one(demographics, {
+    fields: [businesses.demographicId],
+    references: [demographics.id],
+  }),
 }));
 
 export const massMessages = pgTable('mass_messages', {
   id: serial('id').primaryKey(),
   adminId: integer('admin_id').notNull().references(() => users.id),
   content: text('content').notNull(),
-  targetLocations: text('target_locations').notNull(),
-  timestamp: text('timestamp').notNull(),
+  targetLocationIds: integer('target_location_ids').array(), // Modified field
+  targetDemographicIds: integer('target_demographic_ids').array(), // New field
+  timestamp: timestamp('timestamp', { withTimezone: true }).notNull().defaultNow(), // Modified to use timestamp type
 });
 
 export type MassMessage = InferSelectModel<typeof massMessages>;
@@ -72,5 +95,34 @@ export const massMessagesRelations = relations(massMessages, ({ one }) => ({
   admin: one(users, {
     fields: [massMessages.adminId],
     references: [users.id],
+  }),
+}));
+
+export const individualMessages = pgTable('individual_messages', {
+  id: serial('id').primaryKey(),
+  senderId: integer('sender_id').notNull().references(() => users.id),
+  recipientId: integer('recipient_id').notNull().references(() => users.id),
+  content: text('content').notNull(),
+  timestamp: timestamp('timestamp', { withTimezone: true }).notNull().defaultNow(),
+  read: boolean('read').notNull().default(false),
+  replyToMessageId: integer('reply_to_message_id').references((): AnyPgColumn => individualMessages.id),
+});
+
+export type IndividualMessage = InferSelectModel<typeof individualMessages>;
+
+export const individualMessagesRelations = relations(individualMessages, ({ one }) => ({
+  sender: one(users, {
+    fields: [individualMessages.senderId],
+    references: [users.id],
+    relationName: 'sent_messages',
+  }),
+  recipient: one(users, {
+    fields: [individualMessages.recipientId],
+    references: [users.id],
+    relationName: 'received_messages',
+  }),
+  replyToMessage: one(individualMessages, {
+    fields: [individualMessages.replyToMessageId],
+    references: [individualMessages.id],
   }),
 }));

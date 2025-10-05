@@ -16,8 +16,9 @@ interface MassMessage {
   id: number;
   adminId: number;
   content: string;
-  targetLocations: string;
-  timestamp: string;
+  targetLocationIds: number[] | null;
+  targetDemographicIds: number[] | null;
+  timestamp: Date;
 }
 
 interface User {
