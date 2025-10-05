@@ -1,3 +1,5 @@
+"use server";
+
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages } from "@/db/schema";
