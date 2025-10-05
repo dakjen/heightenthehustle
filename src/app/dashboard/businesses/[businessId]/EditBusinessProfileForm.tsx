@@ -17,7 +17,7 @@ interface EditBusinessProfileFormProps {
 export default function EditBusinessProfileForm({ initialBusiness }: EditBusinessProfileFormProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
 
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, undefined);
+  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile.bind(null, business.id), undefined);
 
   return (
     <form action={editFormAction} className="space-y-6">
