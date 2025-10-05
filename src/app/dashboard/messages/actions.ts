@@ -2,7 +2,7 @@ import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
+import { revalidateMessagesPath } from "./revalidate";
 
 type FormState = {
   message: string;
@@ -64,7 +64,7 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
       timestamp: new Date().toISOString(),
     });
 
-    revalidatePath("/dashboard/messages");
+    await revalidateMessagesPath();
     return { message: `Mass message sent to users in ${locationsArray.join(', ')}!`, error: "" };
   } catch (error) {
     console.error("Error sending mass message:", error);
