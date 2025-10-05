@@ -211,8 +211,8 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
       console.error("Error updating business profile:", error);
       return { message: "", error: "Failed to update business profile." };
     }
-  };
-}
+  }
+
 
 export async function archiveBusiness(businessId: number): Promise<FormState> {
   const userId = await getUserIdFromSession();
