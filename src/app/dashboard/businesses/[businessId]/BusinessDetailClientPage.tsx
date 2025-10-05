@@ -115,8 +115,70 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
               <option value="Other">Other</option>
             </select>
           </div>
-        </div>
-      )}
+
+          {/* The Owner Section */}
+          <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">The Owner</h3>
+
+            {/* Race Dropdown */}
+            <div className="mt-4">
+              <label htmlFor="ownerRace" className="block text-sm font-medium text-gray-700">
+                Race
+              </label>
+              <select
+                id="ownerRace"
+                name="ownerRace"
+                value={selectedRace}
+                onChange={(e) => setSelectedRace(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              >
+                <option value="">Select Race</option>
+                <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                <option value="Asian">Asian</option>
+                <option value="Black or African American">Black or African American</option>
+                <option value="Native Hawaiian or Pacific Islander">Native Hawaiian or Pacific Islander</option>
+                <option value="White">White</option>
+                <option value="More Than One Race">More Than One Race</option>
+                <option value="Prefer Not To Say">Prefer Not To Say</option>
+              </select>
+            </div>
+
+            {/* Gender Dropdown */}
+            <div className="mt-4">
+              <label htmlFor="ownerGender" className="block text-sm font-medium text-gray-700">
+                Gender
+              </label>
+              <select
+                id="ownerGender"
+                name="ownerGender"
+                value={selectedGender}
+                onChange={(e) => setSelectedGender(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Prefer Not To Say">Prefer Not To Say</option>
+              </select>
+            </div>
+
+            {/* Other Details Textbox */}
+            <div className="mt-4">
+              <label htmlFor="ownerOtherDetails" className="block text-sm font-medium text-gray-700">
+                Other Details
+              </label>
+              <textarea
+                id="ownerOtherDetails"
+                name="ownerOtherDetails"
+                rows={3}
+                value={otherDetails}
+                onChange={(e) => setOtherDetails(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              ></textarea>
+            </div>
+          </div>
+        </div>}
 
       {activeTab === 'business-materials' && (
         <div className="mt-8">
