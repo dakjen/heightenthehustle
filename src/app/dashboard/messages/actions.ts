@@ -2,7 +2,7 @@
 
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users, massMessages, locations } from "@/db/schema";
+import { users, massMessages, locations, demographics } from "@/db/schema";
 import { eq, inArray } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
@@ -104,4 +104,22 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
   }
 }
 
+export async function getAvailableLocations() {
+  try {
+    const allLocations = await db.select().from(locations);
+    return allLocations;
+  } catch (error) {
+    console.error("Error fetching available locations:", error);
+    return [];
+  }
+}
 
+export async function getAvailableDemographics() {
+  try {
+    const allDemographics = await db.select().from(demographics);
+    return allDemographics;
+  } catch (error) {
+    console.error("Error fetching available demographics:", error);
+    return [];
+  }
+}

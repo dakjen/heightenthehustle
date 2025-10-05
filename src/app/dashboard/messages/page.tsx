@@ -1,5 +1,5 @@
 import { getSession } from "@/app/login/actions";
-import { getAllInternalUsers, getMassMessages } from "./actions";
+import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
 
 interface MassMessage {
@@ -17,16 +17,30 @@ interface User {
   email: string;
 }
 
+interface Location {
+  id: number;
+  name: string;
+}
+
+interface Demographic {
+  id: number;
+  name: string;
+}
+
 export default async function MessagesPage() {
   const session = await getSession();
   const isAdmin = session?.user?.role === 'admin';
 
   let initialInternalUsers: User[] = [];
   let initialMassMessages: MassMessage[] = [];
+  let initialLocations: Location[] = [];
+  let initialDemographics: Demographic[] = [];
 
   if (isAdmin) {
     initialInternalUsers = await getAllInternalUsers();
     initialMassMessages = await getMassMessages();
+    initialLocations = await getAvailableLocations();
+    initialDemographics = await getAvailableDemographics();
   }
 
   return (
@@ -34,6 +48,8 @@ export default async function MessagesPage() {
       isAdmin={isAdmin}
       initialInternalUsers={initialInternalUsers}
       initialMassMessages={initialMassMessages}
+      initialLocations={initialLocations}
+      initialDemographics={initialDemographics}
     />
   );
 }

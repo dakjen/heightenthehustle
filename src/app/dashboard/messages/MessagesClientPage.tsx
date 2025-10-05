@@ -27,6 +27,16 @@ interface User {
   email: string;
 }
 
+interface Location {
+  id: number;
+  name: string;
+}
+
+interface Demographic {
+  id: number;
+  name: string;
+}
+
 type FormState = {
   message: string;
   error: string;
@@ -36,15 +46,19 @@ interface MessagesPageProps {
   isAdmin: boolean;
   initialInternalUsers: User[];
   initialMassMessages: MassMessage[];
+  initialLocations: Location[];
+  initialDemographics: Demographic[];
 }
 
-export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages }: MessagesPageProps) {
+export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages, initialLocations, initialDemographics }: MessagesPageProps) {
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
   const [massMessages, setMassMessages] = useState<MassMessage[]>(initialMassMessages); // New state for mass messages
   const [messageContent, setMessageContent] = useState("");
   const [recipient, setRecipient] = useState("admin"); // Default recipient
   const [massMessageLocations, setMassMessageLocations] = useState<string[]>([]); // New state for locations
   const [internalUsers, setInternalUsers] = useState<User[]>(initialInternalUsers); // New state for internal users
+  const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
+  const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
 
   const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
   const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
@@ -56,6 +70,8 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
       // For now, we'll just clear the form
       setMassMessageLocations([]);
       setMessageContent("");
+      setSelectedLocations([]);
+      setSelectedDemographics([]);
     }
   }, [massSendState]);
 
@@ -66,10 +82,26 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
   };
 
   const handleMassSendMessage = (formData: FormData) => {
-    // This will be handled by the server action
-    massSendFormAction(formData);
+    const formDataWithSelections = new FormData();
+    formDataWithSelections.append("massMessageContent", messageContent);
+    formDataWithSelections.append("targetLocationIds", JSON.stringify(selectedLocations));
+    formDataWithSelections.append("targetDemographicIds", JSON.stringify(selectedDemographics));
+    massSendFormAction(formDataWithSelections);
     setMessageContent(""); // Clear input after sending
-    setMassMessageLocations([]); // Clear locations after sending
+    setSelectedLocations([]); // Clear selections after sending
+    setSelectedDemographics([]);
+  };
+
+  const handleLocationChange = (locationId: number) => {
+    setSelectedLocations(prev =>
+      prev.includes(locationId) ? prev.filter(id => id !== locationId) : [...prev, locationId]
+    );
+  };
+
+  const handleDemographicChange = (demographicId: number) => {
+    setSelectedDemographics(prev =>
+      prev.includes(demographicId) ? prev.filter(id => id !== demographicId) : [...prev, demographicId]
+    );
   };
 
   const [activeTab, setActiveTab] = useState('individual-messages');
@@ -178,19 +210,47 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Send Mass Message</h2>
 
           {/* Location Selection */}
-          <div>
-            <label htmlFor="massMessageLocations" className="block text-sm font-medium text-gray-700">
-              Target Locations (comma-separated)
-            </label>
-            <input
-              id="massMessageLocations"
-              name="massMessageLocations"
-              type="text"
-              value={massMessageLocations.join(', ')}
-              onChange={(e) => setMassMessageLocations(e.target.value.split(', ').map(loc => loc.trim()))}
-              placeholder="e.g., New York, Washington, D.C."
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-            />
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700">Target Locations</label>
+            <div className="mt-1 grid grid-cols-2 gap-2">
+              {initialLocations.map(location => (
+                <div key={location.id} className="flex items-center">
+                  <input
+                    id={`location-${location.id}`}
+                    name="locations"
+                    type="checkbox"
+                    checked={selectedLocations.includes(location.id)}
+                    onChange={() => handleLocationChange(location.id)}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <label htmlFor={`location-${location.id}`} className="ml-2 text-sm text-gray-900">
+                    {location.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Demographic Selection */}
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700">Target Demographics</label>
+            <div className="mt-1 grid grid-cols-2 gap-2">
+              {initialDemographics.map(demographic => (
+                <div key={demographic.id} className="flex items-center">
+                  <input
+                    id={`demographic-${demographic.id}`}
+                    name="demographics"
+                    type="checkbox"
+                    checked={selectedDemographics.includes(demographic.id)}
+                    onChange={() => handleDemographicChange(demographic.id)}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <label htmlFor={`demographic-${demographic.id}`} className="ml-2 text-sm text-gray-900">
+                    {demographic.name}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Message Content */}
