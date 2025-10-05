@@ -7,11 +7,17 @@ import Image from "next/image";
 import Link from "next/link";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
 
-interface BusinessDetailClientPageProps {
-  initialBusiness: Business;
+interface Demographic {
+  id: number;
+  name: string;
 }
 
-export default function BusinessDetailClientPage({ initialBusiness }: BusinessDetailClientPageProps) {
+interface BusinessDetailClientPageProps {
+  initialBusiness: Business & { demographic?: Demographic | null };
+  availableDemographics: Demographic[];
+}
+
+export default function BusinessDetailClientPage({ initialBusiness, availableDemographics }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
   const [selectedLocation, setSelectedLocation] = useState(''); // New state for location
   const [selectedRace, setSelectedRace] = useState(''); // New state for race
@@ -200,7 +206,7 @@ export default function BusinessDetailClientPage({ initialBusiness }: BusinessDe
 
       {activeTab === 'edit' && (
         <div className="mt-8">
-          <EditBusinessProfileForm initialBusiness={business} />
+          <EditBusinessProfileForm initialBusiness={business} availableDemographics={availableDemographics} />
         </div>
       )}
     </div>

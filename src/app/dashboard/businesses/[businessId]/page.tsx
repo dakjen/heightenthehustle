@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBusinessProfile } from "../actions";
+import { getAvailableDemographics } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,10 +13,11 @@ export default async function BusinessDetailPage({ params }: { params: { busines
   }
 
   const business = await getBusinessProfile(businessId);
+  const availableDemographics = await getAvailableDemographics(); // Fetch available demographics
 
   if (!business) {
     notFound();
   }
 
-  return <BusinessDetailClientPage initialBusiness={business} />;
+  return <BusinessDetailClientPage initialBusiness={business} availableDemographics={availableDemographics} />;
 }

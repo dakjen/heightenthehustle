@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 import { Business } from "@/db/schema";
-import { updateBusinessProfile } from "../actions"; // Will create this action
+import { updateBusinessProfile, updateBusinessDemographics } from "../actions"; // Will create this action
 import { useFormState } from "react-dom";
+import Image from "next/image";
+
+interface Demographic {
+  id: number;
+  name: string;
+}
 
 type FormState = {
   message: string;
@@ -11,13 +17,33 @@ type FormState = {
 } | undefined;
 
 interface EditBusinessProfileFormProps {
-  initialBusiness: Business;
+  initialBusiness: Business & { demographic?: Demographic | null };
+  availableDemographics: Demographic[];
 }
 
-export default function EditBusinessProfileForm({ initialBusiness }: EditBusinessProfileFormProps) {
+export default function EditBusinessProfileForm({ initialBusiness, availableDemographics }: EditBusinessProfileFormProps) {
   const [business, setBusiness] = useState<Business>(initialBusiness);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
 
   const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, undefined);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (business.logoUrl && !confirm("Are you sure you want to override your current logo?")) {
+        e.target.value = ''; // Clear the input if user cancels
+        setLogoFile(null);
+        setLogoPreview(business.logoUrl);
+        return;
+      }
+      setLogoFile(file);
+      setLogoPreview(URL.createObjectURL(file));
+    } else {
+      setLogoFile(null);
+      setLogoPreview(business.logoUrl);
+    }
+  };
 
   return (
     <form action={editFormAction} className="space-y-6">
@@ -241,18 +267,56 @@ export default function EditBusinessProfileForm({ initialBusiness }: EditBusines
         />
       </div>
 
-      {/* Logo URL */}
+      {/* Logo Upload */}
       <div>
-        <label htmlFor="logoUrl" className="block text-sm font-medium text-gray-700">
-          Logo URL
+        <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
+          Business Logo
         </label>
         <input
-          id="logoUrl"
-          name="logoUrl"
-          type="text"
-          defaultValue={business.logoUrl || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          id="logo"
+          name="logo"
+          type="file"
+          accept="image/*"
+          onChange={handleLogoChange}
+          className="mt-1 block w-full text-sm text-gray-900
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-md file:border-0
+            file:text-sm file:font-semibold
+            file:bg-[#910000] file:text-white
+            hover:file:bg-[#7a0000]"
         />
+        {logoPreview && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-500">New Logo Preview:</p>
+            <Image src={logoPreview} alt="Logo Preview" width={96} height={96} className="rounded-md object-cover" />
+          </div>
+        )}
+        {business.logoUrl && !logoPreview && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-500">Current Logo:</p>
+            <Image src={business.logoUrl} alt="Current Logo" width={96} height={96} className="rounded-md object-cover" />
+          </div>
+        )}
+      </div>
+
+      {/* Demographic Selection */}
+      <div>
+        <label htmlFor="demographicId" className="block text-sm font-medium text-gray-700">
+          Demographic
+        </label>
+        <select
+          id="demographicId"
+          name="demographicId"
+          defaultValue={initialBusiness.demographicId || ''}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+        >
+          <option value="">Select Demographic</option>
+          {availableDemographics.map(demographic => (
+            <option key={demographic.id} value={demographic.id}>
+              {demographic.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       {editState?.message && (

@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -29,6 +29,9 @@ export async function getBusinessProfile(businessId: number) {
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
+      with: {
+        demographic: true, // Include demographic details
+      },
     });
     return profile;
   } catch (error) {
@@ -232,5 +235,32 @@ export async function archiveBusiness(businessId: number): Promise<FormState> {
   } catch (error) {
     console.error("Error archiving business:", error);
     return { message: "", error: "Failed to archive business." };
+  }
+}
+
+export async function updateBusinessDemographics(prevState: FormState, formData: FormData): Promise<FormState> {
+  const userId = await getUserIdFromSession();
+
+  if (!userId) {
+    return { message: "", error: "User not authenticated." };
+  }
+
+  const businessId = parseInt(formData.get("businessId") as string);
+  const demographicId = parseInt(formData.get("demographicId") as string);
+
+  if (isNaN(businessId) || isNaN(demographicId)) {
+    return { message: "", error: "Invalid business ID or demographic ID." };
+  }
+
+  try {
+    await db.update(businesses)
+      .set({ demographicId: demographicId })
+      .where(eq(businesses.id, businessId));
+
+    revalidatePath(`/dashboard/businesses/${businessId}`);
+    return { message: "Business demographics updated successfully!", error: "" };
+  } catch (error) {
+    console.error("Error updating business demographics:", error);
+    return { message: "", error: "Failed to update business demographics." };
   }
 }
