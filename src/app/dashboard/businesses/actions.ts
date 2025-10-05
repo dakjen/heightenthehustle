@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic } from "@/db/schema";
 import { eq, like, and, InferSelectModel } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -16,7 +16,7 @@ type FormState = {
 type NewBusiness = InferInsertModel<typeof businesses>; // Define type for new business
 
 // Define a type for Business with its demographic relation using InferResult
-export type BusinessProfileWithDemographic = Exclude<Awaited<ReturnType<typeof getBusinessProfile>>, null>;
+
 
 // Helper function to get user ID from session
 async function getUserIdFromSession(): Promise<number | undefined> {
@@ -28,7 +28,7 @@ export async function fetchSession(): Promise<SessionPayload | null> {
   return await getSession();
 }
 
-export async function getBusinessProfile(businessId: number): Promise<BusinessProfileWithDemographic | null> {
+export async function getBusinessProfile(businessId: number): Promise<BusinessWithDemographic | null> {
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
