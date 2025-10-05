@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const viewModeCookie = cookieStore.get('viewMode');
   const isInternalUserView = viewModeCookie?.value === "internal";
 
