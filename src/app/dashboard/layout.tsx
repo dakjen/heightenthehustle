@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
 import AdminViewToggle from "./components/AdminViewToggle"; // New import
-import { headers } from "next/headers"; // New import for searchParams
+import { headers, cookies } from "next/headers"; // New import for searchParams and cookies
 
 export default async function DashboardLayout({
   children,
@@ -20,10 +20,13 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
 
+  const cookieStore = cookies();
+  const viewModeCookie = cookieStore.get('viewMode');
+  const isInternalUserView = viewModeCookie?.value === "internal";
+
   const headerList = await headers();
   const pathname = headerList.get("x-invoke-path") || "";
   const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
-  const isInternalUserView = searchParams.get("viewMode") === "internal";
 
   return (
     <div className="flex min-h-screen bg-gray-50">

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { setViewModeCookie } from "../actions";
+import { useRouter } from "next/navigation";
 
 interface AdminViewToggleProps {
   isAdmin: boolean;
@@ -9,49 +10,24 @@ interface AdminViewToggleProps {
 
 export default function AdminViewToggle({ isAdmin }: AdminViewToggleProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentViewMode = searchParams.get("viewMode"); // 'internal' or null (for admin)
-
-  // Initialize isInternalUserView based on URL search param
-  const [isInternalUserView, setIsInternalUserView] = useState(currentViewMode === "internal");
+  const [isInternalUserView, setIsInternalUserView] = useState(false);
 
   useEffect(() => {
-    setIsInternalUserView(currentViewMode === "internal");
-  }, [currentViewMode]);
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const deleteQueryString = useCallback(
-    (name: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete(name);
-      return params.toString();
-    },
-    [searchParams]
-  );
+    // Read the cookie value on client-side to initialize state
+    const viewMode = document.cookie.split('; ').find(row => row.startsWith('viewMode='))?.split('=')[1];
+    setIsInternalUserView(viewMode === "internal");
+  }, []);
 
   if (!isAdmin) {
     return null; // Only show toggle for admins
   }
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     const newInternalUserView = !isInternalUserView;
     setIsInternalUserView(newInternalUserView);
 
-    if (newInternalUserView) {
-      // Switch to internal user view
-      router.push(`/dashboard/admin/businesses?${createQueryString("viewMode", "internal")}`);
-    } else {
-      // Switch to admin view (remove viewMode param)
-      router.push(`/dashboard/admin/businesses?${deleteQueryString("viewMode")}`);
-    }
+    await setViewModeCookie(newInternalUserView ? 'internal' : 'admin');
+    router.refresh(); // Refresh the page to apply the new view mode
   };
 
   return (
