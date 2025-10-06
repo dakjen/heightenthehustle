@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Business } from "@/db/schema";
+import { Business, BusinessWithDemographic } from "@/db/schema";
 import { updateBusinessProfile, updateBusinessDemographics } from "../actions"; // Will create this action
 import { useFormState } from "react-dom";
 import Image from "next/image";
