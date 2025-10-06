@@ -6,7 +6,9 @@ import { businesses, businessesRelations, Business, Demographic, BusinessWithDem
 import { InferSelectModel } from "drizzle-orm";
 import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
-import BusinessMaterialsForm from "./BusinessMaterialsForm";
+import OwnerDetailsForm from "./OwnerDetailsForm";
+
+
 
 // Remove this line as BusinessProfileWithDemographic is now imported
 // type BusinessWithDemographic = Business & { demographic?: Demographic | null };
@@ -24,22 +26,6 @@ interface BusinessDetailClientPageProps {
 
 export default function BusinessDetailClientPage({ initialBusiness, availableDemographics }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<BusinessWithDemographic>(initialBusiness); // Use the imported type
-  const [selectedLocation, setSelectedLocation] = useState(''); // New state for location
-  const [selectedRace, setSelectedRace] = useState(''); // New state for race
-  const [selectedGender, setSelectedGender] = useState(''); // New state for gender
-  const [otherDetails, setOtherDetails] = useState(''); // New state for other details
-
-  // In a real application, you might re-fetch business data if it can change
-  // useEffect(() => {
-  //   async function reFetchBusiness() {
-  //     const reFetchedBusiness = await getBusinessProfile(business.id);
-  //     if (reFetchedBusiness) {
-  //       setBusiness(reFetchedBusiness);
-  //     }
-  //   }
-  //   reFetchBusiness();
-  // }, [business.id]);
-
   const [activeTab, setActiveTab] = useState('business-profile');
 
   return (
@@ -53,22 +39,10 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
             Business Profile
           </button>
           <button
-            onClick={() => setActiveTab('business-details')}
-            className={`${activeTab === 'business-details' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            onClick={() => setActiveTab('owner-details')}
+            className={`${activeTab === 'owner-details' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
-            Business Details
-          </button>
-          <button
-            onClick={() => setActiveTab('business-materials')}
-            className={`${activeTab === 'business-materials' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-          >
-            Business Materials
-          </button>
-          <button
-            onClick={() => setActiveTab('branding')}
-            className={`${activeTab === 'branding' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-          >
-            Branding
+            Owner Details
           </button>
           <button
             onClick={() => setActiveTab('edit')}
@@ -79,10 +53,11 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
         </nav>
       </div>
 
+  return (
+    <div className="flex-1 p-6">
       {activeTab === 'business-profile' && (
         <div className="mt-8">
           <h1 className="text-3xl font-bold text-gray-900">{business.businessName}</h1>
-          {/* Business Logo Display */}
           <div className="mb-6 flex justify-center">
             {business.logoUrl ? (
               <Image src={business.logoUrl} alt="Business Logo" width={96} height={96} className="rounded-md object-cover border-2 border-gray-300" />
@@ -103,30 +78,9 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
         </div>
       )}
 
-      {activeTab === 'business-details' && (
+      {activeTab === 'owner-details' && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900">Business Details Content</h2>
-          <p className="mt-2 text-gray-700">This section will contain additional business details.</p>
-          {/* Display Demographic Information */}
-          {business.demographic && (
-            <div className="mt-4">
-              <p className="block text-sm font-medium text-gray-700">Demographic:</p>
-              <p className="mt-1 text-gray-900">{business.demographic.name}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {activeTab === 'business-materials' && (
-        <div className="mt-8">
-          <BusinessMaterialsForm initialBusiness={business} />
-        </div>
-      )}
-
-      {activeTab === 'branding' && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900">Branding</h2>
-          <p className="mt-2 text-gray-700">This section will contain the branding information.</p>
+          <OwnerDetailsForm initialBusiness={business} availableDemographics={availableDemographics} />
         </div>
       )}
 
@@ -137,4 +91,5 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
       )}
     </div>
   );
+}
 }
