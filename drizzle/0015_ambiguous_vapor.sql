@@ -1,0 +1,1 @@
+ALTER TABLE "businesses" ADD COLUMN "business_profile_photo_url" text;
