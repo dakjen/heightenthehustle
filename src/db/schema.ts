@@ -60,7 +60,7 @@ export const businesses = pgTable('businesses', {
 });
 
 export type Business = InferSelectModel<typeof businesses>;
-export type BusinessWithDemographic = InferSelectModel<typeof businesses, { with: { demographic: true } }>;
+export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: InferSelectModel<typeof demographics> | null };
 
 export const usersRelations = relations(users, ({ one, many }) => ({
   businesses: many(businesses),
