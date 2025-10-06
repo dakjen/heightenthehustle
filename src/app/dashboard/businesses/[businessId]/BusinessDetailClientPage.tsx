@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getBusinessProfile } from "../actions";
-import { businesses, businessesRelations, Business, Demographic } from "@/db/schema";
+import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
+import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
 
-type BusinessWithDemographic = Business & { demographic?: Demographic | null };
+// Remove this line as BusinessProfileWithDemographic is now imported
+// type BusinessWithDemographic = Business & { demographic?: Demographic | null };
 
 // Remove this local interface as it's now imported from schema.ts
 // interface Demographic {
@@ -16,7 +17,7 @@ type BusinessWithDemographic = Business & { demographic?: Demographic | null };
 // }
 
 interface BusinessDetailClientPageProps {
-  initialBusiness: BusinessWithDemographic;
+  initialBusiness: BusinessWithDemographic; // Use the imported type
   availableDemographics: Demographic[];
 }
 
