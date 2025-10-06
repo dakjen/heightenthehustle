@@ -139,3 +139,23 @@ export const individualMessagesRelations = relations(individualMessages, ({ one 
     references: [individualMessages.id],
   }),
 }));
+
+export const pitchCompetitions = pgTable('pitch_competitions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
+  businessId: integer('business_id').notNull().references(() => businesses.id),
+  pitchVideoUrl: text('pitch_video_url'),
+  pitchDeckUrl: text('pitch_deck_url'),
+  submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const pitchCompetitionsRelations = relations(pitchCompetitions, ({ one }) => ({
+  user: one(users, {
+    fields: [pitchCompetitions.userId],
+    references: [users.id],
+  }),
+  business: one(businesses, {
+    fields: [pitchCompetitions.businessId],
+    references: [businesses.id],
+  }),
+}));

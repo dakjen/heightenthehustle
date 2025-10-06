@@ -22,6 +22,7 @@ export default async function AdminLayout({
         <nav>
           <a href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">User Management</a>
           <a href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Business Management</a>
+          <a href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#7a0000]">Pitch Competition</a>
           {/* Add more admin navigation links here */}
         </nav>
         <LogoutButton />

@@ -92,6 +92,20 @@
       "when": 1759641062252,
       "tag": "0012_abnormal_riptide",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1759769266515,
+      "tag": "0013_wandering_shocker",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1759772888780,
+      "tag": "0014_absurd_captain_marvel",
+      "breakpoints": true
     }
   ]
 }
