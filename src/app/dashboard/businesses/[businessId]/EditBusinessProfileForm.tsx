@@ -322,26 +322,15 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
       {/* Business Description */}
       <div>
         <label htmlFor="businessDescription" className="block text-sm font-medium leading-6 text-gray-900">
-
-
-      {/* Demographic Selection */}
-      <div>
-        <label htmlFor="demographicId" className="block text-sm font-medium text-gray-700">
-          Demographic
+          Business Description
         </label>
-        <select
-          id="demographicId"
-          name="demographicId"
-          defaultValue={initialBusiness.demographicId || ''}
+        <textarea
+          id="businessDescription"
+          name="businessDescription"
+          rows={3}
+          defaultValue={business.businessDescription || ''}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-        >
-          <option value="">Select Demographic</option>
-          {availableDemographics.map(demographic => (
-            <option key={demographic.id} value={demographic.id}>
-              {demographic.name}
-            </option>
-          ))}
-        </select>
+        ></textarea>
       </div>
 
       {/* Demographic Selection */}
