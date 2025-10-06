@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "drizzle-kit migrate && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "npm install @vercel/blob",
-    "vercel-build": "echo DATABASE_URL=\"$DATABASE_URL\" > .env && drizzle-kit migrate && next build"
+
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
