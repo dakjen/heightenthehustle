@@ -13,7 +13,7 @@ import PitchCompetitionDetails, { PitchCompetition } from "./PitchCompetition";
 interface BusinessDetailClientPageProps {
   initialBusiness: BusinessWithDemographic;
   availableDemographics: Demographic[];
-  pitchCompetition: PitchCompetition | null;
+  pitchCompetition: PitchCompetition | null | undefined;
 }
 
 export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, pitchCompetition }: BusinessDetailClientPageProps) {
