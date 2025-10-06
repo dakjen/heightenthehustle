@@ -36,6 +36,7 @@ export async function getBusinessProfile(businessId: number): Promise<BusinessWi
         demographic: true, // Include demographic details
       },
     });
+    if (!profile) { return null; }
     return profile;
   } catch (error) {
     console.error("Error fetching business profile:", error);
