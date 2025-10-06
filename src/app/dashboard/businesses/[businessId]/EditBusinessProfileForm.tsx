@@ -248,7 +248,9 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
         />
       </div>
 
-      {/* Business Materials Upload */}
+      {/* Business Materials Upload (old field, will be replaced by new material uploads) */}
+      {/* This section is commented out as it's replaced by the new material upload fields */}
+      {/*
       <div>
         <label htmlFor="businessMaterials" className="block text-sm font-medium text-gray-700">
           Business Materials URL
@@ -266,54 +268,60 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
             hover:file:bg-[#7a0000]"
         />
       </div>
+      */}
 
-            <div className="mt-2">
-              <input
-                id="logo"
-                name="logo"
-                type="file"
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-              />
-            </div>
+      {/* Business Logo Upload */}
+      <div>
+        <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
+          Business Logo
+        </label>
+        <div className="mt-2">
+          <input
+            id="logo"
+            name="logo"
+            type="file"
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+          />
+        </div>
+      </div>
+
+      {/* New: Material Uploads */}
+      {[1, 2, 3, 4, 5].map((i) => (
+        <div key={i} className="sm:col-span-full">
+          <label htmlFor={`material${i}Title`} className="block text-sm font-medium leading-6 text-gray-900">
+            Material {i} Title
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name={`material${i}Title`}
+              id={`material${i}Title`}
+              defaultValue={initialBusiness[`material${i}Title` as keyof BusinessWithDemographic] as string || ''}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
           </div>
+          <label htmlFor={`material${i}`} className="block text-sm font-medium leading-6 text-gray-900 mt-4">
+            Material {i} Document
+          </label>
+          <div className="mt-2">
+            <input
+              id={`material${i}`}
+              name={`material${i}`}
+              type="file"
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            />
+            {initialBusiness[`material${i}Url` as keyof BusinessWithDemographic] && (
+              <p className="mt-2 text-sm text-gray-500">
+                Current: <a href={initialBusiness[`material${i}Url` as keyof BusinessWithDemographic] as string} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">View Document</a>
+              </p>
+            )}
+          </div>
+        </div>
+      ))}
 
-          {/* New: Material Uploads */}
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="sm:col-span-full">
-              <label htmlFor={`material${i}Title`} className="block text-sm font-medium leading-6 text-gray-900">
-                Material {i} Title
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name={`material${i}Title`}
-                  id={`material${i}Title`}
-                  defaultValue={initialBusiness[`material${i}Title` as keyof BusinessWithDemographic] as string || ''}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              <label htmlFor={`material${i}`} className="block text-sm font-medium leading-6 text-gray-900 mt-4">
-                Material {i} Document
-              </label>
-              <div className="mt-2">
-                <input
-                  id={`material${i}`}
-                  name={`material${i}`}
-                  type="file"
-                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                />
-                {initialBusiness[`material${i}Url` as keyof BusinessWithDemographic] && (
-                  <p className="mt-2 text-sm text-gray-500">
-                    Current: <a href={initialBusiness[`material${i}Url` as keyof BusinessWithDemographic] as string} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">View Document</a>
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {/* Business Description */}
-          <div>
-            <label htmlFor="businessDescription" className="block text-sm font-medium leading-6 text-gray-900">
+      {/* Business Description */}
+      <div>
+        <label htmlFor="businessDescription" className="block text-sm font-medium leading-6 text-gray-900">
 
 
       {/* Demographic Selection */}
