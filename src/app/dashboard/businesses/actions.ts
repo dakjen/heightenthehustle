@@ -170,6 +170,7 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
     const website = formData.get("website") as string;
     const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
     const logo = formData.get("logo") as File; // New: Get logo file
+    const businessProfilePhoto = formData.get("businessProfilePhoto") as File; // New: Get business profile photo file
 
     // New: Handle 5 material uploads and titles
     const materialUpdates: { urlField: string; titleField: string; url?: string; title?: string; }[] = [];
@@ -210,6 +211,13 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
         logoUrl = blob.url;
       }
 
+      // New: Handle business profile photo upload
+      let businessProfilePhotoUrl: string | undefined;
+      if (businessProfilePhoto && businessProfilePhoto.size > 0) {
+        const blob = await put(businessProfilePhoto.name, businessProfilePhoto, { access: 'public', allowOverwrite: true });
+        businessProfilePhotoUrl = blob.url;
+      }
+
       const updateData: Partial<InferInsertModel<typeof businesses>> & { [key: string]: string | number | boolean | undefined | null } = {
         ownerName,
         percentOwnership: percentOwnership.toString(),
@@ -227,6 +235,7 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
         website,
         businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
         logoUrl: logoUrl || undefined, // New: Update logoUrl
+        businessProfilePhotoUrl: businessProfilePhotoUrl || undefined, // New: Update business profile photo url
       };
 
       // Apply material updates

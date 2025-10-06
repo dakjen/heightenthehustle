@@ -47,6 +47,7 @@ export const businesses = pgTable('businesses', {
   businessIndustry: text('business_industry').notNull(),
   naicsCode: varchar('naics_code', { length: 6 }), // New field
   logoUrl: text('logo_url'), // New field
+  businessProfilePhotoUrl: text('business_profile_photo_url'), // New field
   businessMaterialsUrl: text('business_materials_url'),
   streetAddress: text('street_address'), // New field
   city: text('city'), // New field

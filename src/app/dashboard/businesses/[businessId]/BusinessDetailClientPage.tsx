@@ -67,6 +67,11 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
               </div>
             )}
           </div>
+          {business.businessProfilePhotoUrl && (
+            <div className="mb-6 flex justify-center">
+              <Image src={business.businessProfilePhotoUrl} alt="Business Profile Photo" width={96} height={96} className="rounded-full object-cover border-2 border-gray-300" />
+            </div>
+          )}
           <p className="mt-4 text-gray-700">Owner: {business.ownerName}</p>
           <p className="mt-2 text-gray-700">Type: {business.businessType}</p>
           <p className="mt-2 text-gray-700">Tax Status: {business.businessTaxStatus}</p>
