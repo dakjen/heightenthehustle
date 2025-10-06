@@ -10,17 +10,18 @@ type FormState = {
   error: string;
 } | undefined;
 
-interface OwnerDetailsFormProps {
+interface BusinessDetailsFormProps {
   initialBusiness: BusinessWithDemographic;
   availableDemographics: Demographic[];
 }
 
-export default function OwnerDetailsForm({ initialBusiness, availableDemographics }: OwnerDetailsFormProps) {
+export default function BusinessDetailsForm({ initialBusiness, availableDemographics }: BusinessDetailsFormProps) {
   const [demographicId, setDemographicId] = useState(initialBusiness.demographicId || "");
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, undefined);
 
   return (
     <form action={updateFormAction}>
+      <h2 className="text-2xl font-bold">Business Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
       <div>
         <label htmlFor="demographicId" className="block text-sm font-medium text-gray-700">
