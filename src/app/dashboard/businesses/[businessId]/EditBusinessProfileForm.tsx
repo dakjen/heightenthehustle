@@ -311,7 +311,8 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
             </div>
           ))}
 
-          <div className="sm:col-span-full">
+          {/* Business Description */}
+          <div>
             <label htmlFor="businessDescription" className="block text-sm font-medium leading-6 text-gray-900">
 
 
