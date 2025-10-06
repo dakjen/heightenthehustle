@@ -21,10 +21,11 @@ interface EditBusinessProfileFormProps {
   availableDemographics: Demographic[];
 }
 
-type BusinessWithMaterials = BusinessWithDemographic & {
-  [key: `material${1 | 2 | 3 | 4 | 5}Url`]: string | null | undefined;
-  [key: `material${1 | 2 | 3 | 4 | 5}Title`]: string | null | undefined;
+type MaterialProperties = {
+  [K in `material${1 | 2 | 3 | 4 | 5}Url` | `material${1 | 2 | 3 | 4 | 5}Title`]: string | null | undefined;
 };
+
+type BusinessWithMaterials = BusinessWithDemographic & MaterialProperties;
 
 export default function EditBusinessProfileForm({ initialBusiness, availableDemographics }: EditBusinessProfileFormProps) {
   const [business, setBusiness] = useState<BusinessWithMaterials>(initialBusiness);
