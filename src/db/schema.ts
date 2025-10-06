@@ -57,6 +57,16 @@ export const businesses = pgTable('businesses', {
   isArchived: boolean('is_archived').notNull().default(false), // New field
   locationId: integer('location_id').references(() => locations.id), // New field
   demographicId: integer('demographic_id').references(() => demographics.id), // New field
+  material1Url: text('material1_url'),
+  material1Title: text('material1_title'),
+  material2Url: text('material2_url'),
+  material2Title: text('material2_title'),
+  material3Url: text('material3_url'),
+  material3Title: text('material3_title'),
+  material4Url: text('material4_url'),
+  material4Title: text('material4_title'),
+  material5Url: text('material5_url'),
+  material5Title: text('material5_title'),
 });
 
 export type Business = InferSelectModel<typeof businesses>;
