@@ -1,15 +1,26 @@
 'use client';
 
 import { useState } from "react";
+import { users, businesses } from "@/db/schema";
+import { InferSelectModel } from "drizzle-orm";
 
-export default function AddProjectModal({ users, businesses, onAdd }) {
+type User = InferSelectModel<typeof users>;
+type Business = InferSelectModel<typeof businesses>;
+
+interface AddProjectModalProps {
+  users: User[];
+  businesses: Business[];
+  onAdd: (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl:string }) => void;
+}
+
+export default function AddProjectModal({ users, businesses, onAdd }: AddProjectModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const [businessId, setBusinessId] = useState("");
   const [pitchVideoUrl, setPitchVideoUrl] = useState("");
   const [pitchDeckUrl, setPitchDeckUrl] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onAdd({ userId, businessId, pitchVideoUrl, pitchDeckUrl });
     setIsOpen(false);

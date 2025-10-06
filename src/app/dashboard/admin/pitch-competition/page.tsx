@@ -50,14 +50,18 @@ export default async function PitchCompetitionPage() {
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{entry.business.businessName}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.user.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <a href={entry.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
-                    View Video
-                  </a>
+                  {entry.pitchVideoUrl && (
+                    <a href={entry.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
+                      View Video
+                    </a>
+                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <a href={entry.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
-                    View Deck
-                  </a>
+                  {entry.pitchDeckUrl && (
+                    <a href={entry.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
+                      View Deck
+                    </a>
+                  )}
                 </td>
               </tr>
             ))}
