@@ -302,7 +302,7 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
               type="text"
               name={`material${i}Title`}
               id={`material${i}Title`}
-                                defaultValue={business[`material${i}Title`] || ''}              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                defaultValue={business[`material${i}Title` as `material${1 | 2 | 3 | 4 | 5}Title`] || ''}              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
           <label htmlFor={`material${i}`} className="block text-sm font-medium leading-6 text-gray-900 mt-4">
@@ -315,9 +315,9 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
               type="file"
               className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
             />
-                { business[`material${i}Url`] && (
+                { business[`material${i}Url` as `material${1 | 2 | 3 | 4 | 5}Url`] && (
                   <p className="mt-2 text-sm text-gray-500">
-                    Current: <a href={business[`material${i}Url`] as string} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">View Document</a>
+                    Current: <a href={business[`material${i}Url` as `material${1 | 2 | 3 | 4 | 5}Url`] as string} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">View Document</a>
                   </p>
                 )}          </div>
         </div>
