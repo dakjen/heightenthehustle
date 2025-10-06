@@ -210,7 +210,7 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
         logoUrl = blob.url;
       }
 
-      const updateData: Record<string, any> = {
+      const updateData: Partial<InferInsertModel<typeof businesses>> = {
         ownerName,
         percentOwnership: percentOwnership.toString(),
         businessName,
