@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic, pitchCompetitions } from "@/db/schema";
 import { eq, like, and, InferSelectModel } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
