@@ -7,7 +7,7 @@
     "build": "drizzle-kit migrate && next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "npm install @vercel/blob",
+    "postinstall": "npm install @vercel/blob"
 
   },
   "dependencies": {
