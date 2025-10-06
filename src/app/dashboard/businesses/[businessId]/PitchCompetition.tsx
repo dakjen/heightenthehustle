@@ -6,7 +6,7 @@ import { pitchCompetitions } from "@/db/schema";
 export type PitchCompetition = InferSelectModel<typeof pitchCompetitions>;
 
 interface PitchCompetitionProps {
-  pitchCompetition: PitchCompetition | null;
+  pitchCompetition: PitchCompetition | null | undefined;
 }
 
 export default function PitchCompetitionDetails({ pitchCompetition }: PitchCompetitionProps) {
