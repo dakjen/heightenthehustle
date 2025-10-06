@@ -119,7 +119,25 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
       {activeTab === 'business-materials' && (
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-gray-900">Business Materials</h2>
-          <p className="mt-2 text-gray-700">This section will contain the business materials.</p>
+          <div className="mt-4 space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => {
+              const materialUrl = business[`material${i}Url` as keyof BusinessWithDemographic] as string | undefined;
+              const materialTitle = business[`material${i}Title` as keyof BusinessWithDemographic] as string | undefined;
+              return (
+                materialUrl && materialTitle && (
+                  <div key={i}>
+                    <p className="block text-sm font-medium text-gray-700">Material {i}:</p>
+                    <a href={materialUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+                      {materialTitle}
+                    </a>
+                  </div>
+                )
+              );
+            })}
+            {(!business.material1Url && !business.material2Url && !business.material3Url && !business.material4Url && !business.material5Url) && (
+              <p className="mt-2 text-gray-700">No business materials uploaded yet.</p>
+            )}
+          </div>
         </div>
       )}
 
