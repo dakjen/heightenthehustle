@@ -171,6 +171,26 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
     const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
     const logo = formData.get("logo") as File; // New: Get logo file
 
+    // New: Handle 5 material uploads and titles
+    const materialUpdates: { urlField: string; titleField: string; url?: string; title?: string; }[] = [];
+    for (let i = 1; i <= 5; i++) {
+      const materialFile = formData.get(`material${i}`) as File;
+      const materialTitle = formData.get(`material${i}Title`) as string;
+      const update: { urlField: string; titleField: string; url?: string; title?: string; } = {
+        urlField: `material${i}Url`,
+        titleField: `material${i}Title`,
+      };
+
+      if (materialFile && materialFile.size > 0) {
+        const blob = await put(materialFile.name, materialFile, { access: 'public', allowOverwrite: true });
+        update.url = blob.url;
+      }
+      if (materialTitle) {
+        update.title = materialTitle;
+      }
+      materialUpdates.push(update);
+    }
+
     if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
       return { message: "", error: "Required fields are missing." };
     }
@@ -190,25 +210,37 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
         logoUrl = blob.url;
       }
 
+      const updateData: Record<string, any> = {
+        ownerName,
+        percentOwnership: percentOwnership.toString(),
+        businessName,
+        businessType: businessType as typeof businessTypeEnum.enumValues[number],
+        businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
+        businessDescription,
+        businessIndustry,
+        naicsCode,
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        phone,
+        website,
+        businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
+        logoUrl: logoUrl || undefined, // New: Update logoUrl
+      };
+
+      // Apply material updates
+      materialUpdates.forEach(update => {
+        if (update.url !== undefined) {
+          updateData[update.urlField] = update.url;
+        }
+        if (update.title !== undefined) {
+          updateData[update.titleField] = update.title;
+        }
+      });
+
       await db.update(businesses)
-        .set({
-          ownerName,
-          percentOwnership: percentOwnership.toString(),
-          businessName,
-          businessType: businessType as typeof businessTypeEnum.enumValues[number],
-          businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
-          businessDescription,
-          businessIndustry,
-          naicsCode,
-          streetAddress,
-          city,
-          state,
-          zipCode,
-          phone,
-          website,
-          businessMaterialsUrl: businessMaterialsUrl || undefined, // Only update if new file uploaded
-          logoUrl: logoUrl || undefined, // New: Update logoUrl
-        })
+        .set(updateData)
         .where(eq(businesses.id, businessId));
 
       revalidatePath("/dashboard/businesses");
