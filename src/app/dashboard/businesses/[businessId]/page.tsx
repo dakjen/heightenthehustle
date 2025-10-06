@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { getBusinessProfile, BusinessProfileWithDemographic } from "../actions"; // Import BusinessProfileWithDemographic
+import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
+import { BusinessWithDemographic } from "@/db/schema"; // Import BusinessWithDemographic from schema
 import { getAvailableDemographics } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
@@ -12,7 +13,7 @@ export default async function BusinessDetailPage({ params }: { params: { busines
     notFound();
   }
 
-  const business: BusinessProfileWithDemographic | null = await getBusinessProfile(businessId); // Use the new type
+  const business: BusinessWithDemographic | null = await getBusinessProfile(businessId); // Use the new type
   const availableDemographics = await getAvailableDemographics(); // Fetch available demographics
 
   if (!business) {
