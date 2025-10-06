@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "drizzle-kit migrate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "npm install @vercel/blob"
+    "postinstall": "npm install @vercel/blob",
+    "vercel-build": "drizzle-kit migrate && next build"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
