@@ -309,3 +309,15 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     return { message: "", error: "Failed to update business demographics." };
   }
 }
+
+export async function getPitchCompetitionByBusinessId(businessId: number) {
+  try {
+    const pitchCompetition = await db.query.pitchCompetitions.findFirst({
+      where: eq(pitchCompetitions.businessId, businessId),
+    });
+    return pitchCompetition;
+  } catch (error) {
+    console.error("Error fetching pitch competition:", error);
+    return null;
+  }
+}

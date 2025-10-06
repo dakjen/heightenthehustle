@@ -8,13 +8,15 @@ import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
 import BusinessDetailsForm from "./BusinessDetailsForm";
 import BusinessMaterials from "./BusinessMaterials";
+import PitchCompetitionDetails, { PitchCompetition } from "./PitchCompetition";
 
 interface BusinessDetailClientPageProps {
-  initialBusiness: BusinessWithDemographic; // Use the imported type
+  initialBusiness: BusinessWithDemographic;
   availableDemographics: Demographic[];
+  pitchCompetition: PitchCompetition | null;
 }
 
-export default function BusinessDetailClientPage({ initialBusiness, availableDemographics }: BusinessDetailClientPageProps) {
+export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, pitchCompetition }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<BusinessWithDemographic>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
@@ -45,6 +47,12 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
             className={`${activeTab === 'business-materials' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
             Business Materials
+          </button>
+          <button
+            onClick={() => setActiveTab('pitch-competition')}
+            className={`${activeTab === 'pitch-competition' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+          >
+            Pitch Competition
           </button>
         </nav>
       </div>
@@ -92,6 +100,12 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
       {activeTab === 'business-materials' && (
         <div className="mt-8">
           <BusinessMaterials business={business} />
+        </div>
+      )}
+
+      {activeTab === 'pitch-competition' && (
+        <div className="mt-8">
+          <PitchCompetitionDetails pitchCompetition={pitchCompetition} />
         </div>
       )}
     </div>

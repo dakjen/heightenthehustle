@@ -1,6 +1,9 @@
 'use client';
 
-import { PitchCompetition } from "@/db/schema";
+import { InferSelectModel } from 'drizzle-orm';
+import { pitchCompetitions } from "@/db/schema";
+
+export type PitchCompetition = InferSelectModel<typeof pitchCompetitions>;
 
 interface PitchCompetitionProps {
   pitchCompetition: PitchCompetition | null;
