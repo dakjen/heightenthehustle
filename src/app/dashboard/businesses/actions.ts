@@ -325,6 +325,66 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 }
 
+export async function updateBusinessMaterials(prevState: FormState, formData: FormData): Promise<FormState> {
+  const userId = await getUserIdFromSession();
+
+  if (!userId) {
+    return { message: "", error: "User not authenticated." };
+  }
+
+  const businessId = parseInt(formData.get("businessId") as string);
+
+  if (isNaN(businessId)) {
+    return { message: "", error: "Business ID is invalid." };
+  }
+
+  try {
+    const materialUpdates: { urlField: string; titleField: string; url?: string; title?: string; }[] = [];
+    for (let i = 1; i <= 5; i++) {
+      const materialFile = formData.get(`material${i}`) as File;
+      const materialTitle = formData.get(`material${i}Title`) as string;
+      const update: { urlField: string; titleField: string; url?: string; title?: string; } = {
+        urlField: `material${i}Url`,
+        titleField: `material${i}Title`,
+      };
+
+      if (materialFile && materialFile.size > 0) {
+        const blob = await put(materialFile.name, materialFile, { access: 'public', allowOverwrite: true });
+        update.url = blob.url;
+      }
+      if (materialTitle) {
+        update.title = materialTitle;
+      }
+      materialUpdates.push(update);
+    }
+
+    const updateData: Partial<InferInsertModel<typeof businesses>> & { [key: string]: string | number | boolean | undefined | null } = {};
+
+    // Apply material updates
+    materialUpdates.forEach(update => {
+      if (update.url !== undefined) {
+        updateData[update.urlField] = update.url;
+      }
+      if (update.title !== undefined) {
+        updateData[update.titleField] = update.title;
+      }
+    });
+
+    if (Object.keys(updateData).length > 0) {
+      await db.update(businesses)
+        .set(updateData)
+        .where(eq(businesses.id, businessId));
+    }
+
+    revalidatePath(`/dashboard/businesses/${businessId}`);
+    return { message: "Business materials updated successfully!", error: "" };
+  } catch (error) {
+    console.error("Error updating business materials:", error);
+    return { message: "", error: "Failed to update business materials." };
+  }
+}
+
+
 export async function getPitchCompetitionByBusinessId(businessId: number) {
   try {
     const pitchCompetition = await db.query.pitchCompetitions.findFirst({
