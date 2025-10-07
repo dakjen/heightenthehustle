@@ -22,7 +22,7 @@ interface EditBusinessProfileFormProps {
 }
 
 export default function EditBusinessProfileForm({ initialBusiness, availableDemographics }: EditBusinessProfileFormProps) {
-  const [business, setBusiness] = useState<BusinessWithDemographic>(initialBusiness);
+  const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
 
