@@ -33,7 +33,7 @@ export async function getBusinessProfile(businessId: number): Promise<BusinessWi
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
       with: {
-        demographic: true, // Include demographic details
+        demographics: true, // Include demographic details
         location: true, // Include location details
       },
     });
