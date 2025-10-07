@@ -49,7 +49,7 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
           Add Project
         </button>
         {isModalOpen && (
-          <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
+          <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
         )}
       </div>
 

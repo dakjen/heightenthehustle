@@ -11,11 +11,10 @@ interface AddProjectModalProps {
   users: User[];
   businesses: Business[];
   onAdd: (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl:string }) => void;
-  isVisible: boolean;
   onClose: () => void;
 }
 
-export default function AddProjectModal({ users, businesses, onAdd, isVisible, onClose }: AddProjectModalProps) {
+export default function AddProjectModal({ users, businesses, onAdd, onClose }: AddProjectModalProps) {
   const [userId, setUserId] = useState("");
   const [businessId, setBusinessId] = useState("");
   const [pitchVideoUrl, setPitchVideoUrl] = useState("");
@@ -27,11 +26,8 @@ export default function AddProjectModal({ users, businesses, onAdd, isVisible, o
     onClose(); // Close modal after submission
   };
 
-  if (!isVisible) return null;
-
   return (
     <>
-      {isVisible && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity" aria-hidden="true">
