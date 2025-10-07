@@ -4,8 +4,8 @@ import LogoutButton from "@/app/components/LogoutButton";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
-import AdminViewToggle from "./components/AdminViewToggle"; // New import
-import { headers, cookies } from "next/headers"; // New import for searchParams and cookies
+// import AdminViewToggle from "./components/AdminViewToggle"; // New import
+// import { headers, cookies } from "next/headers"; // New import for searchParams and cookies
 
 export default async function DashboardLayout({
   children,
@@ -20,13 +20,13 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
 
-  const cookieStore = await cookies();
-  const viewModeCookie = cookieStore.get('viewMode');
-  const isInternalUserView = viewModeCookie?.value === "internal";
+  // const cookieStore = await cookies();
+  // const viewModeCookie = cookieStore.get('viewMode');
+  // const isInternalUserView = viewModeCookie?.value === "internal";
 
-  const headerList = await headers();
-  const pathname = headerList.get("x-invoke-path") || "";
-  const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
+  // const headerList = await headers();
+  // const pathname = headerList.get("x-invoke-path") || "";
+  // const searchParams = new URLSearchParams(headerList.get("x-invoke-query") || "");
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -54,17 +54,17 @@ export default async function DashboardLayout({
           )}
           <Link href="/dashboard/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</Link>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
-          {isAdmin && !isInternalUserView && ( // Show Admin Users link only for admin view
+          {isAdmin && ( // Show Admin Users link only for admin view
             <>
               <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
               <Link href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
-              <Link href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
+              <Link href="/dashboard/(admin)/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
             </>
           )}
         </nav>
 
         {/* Admin View Toggle */}
-        <AdminViewToggle isAdmin={isAdmin} />
+        {/* <AdminViewToggle isAdmin={isAdmin} /> */}
 
         <LogoutButton />
       </aside>
