@@ -23,14 +23,6 @@ export const users = pgTable('users', {
   profilePhotoUrl: text('profile_photo_url'), // New field
 });
 
-export const locationCategoryEnum = pgEnum('location_category', ['City', 'Region']);
-
-export const locations = pgTable('locations', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull().unique(),
-  category: locationCategoryEnum('category').notNull().default('City'),
-});
-
 export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion']);
 
 export const demographics = pgTable('demographics', {
@@ -40,6 +32,16 @@ export const demographics = pgTable('demographics', {
 });
 
 export type Demographic = InferSelectModel<typeof demographics>;
+
+export const locationCategoryEnum = pgEnum('location_category', ['City', 'Region']);
+
+export const locations = pgTable('locations', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull().unique(),
+  category: locationCategoryEnum('category').notNull().default('City'),
+});
+
+export type Location = InferSelectModel<typeof locations>;
 
 export const businesses = pgTable('businesses', {
   id: serial('id').primaryKey(),
@@ -63,7 +65,7 @@ export const businesses = pgTable('businesses', {
   website: text('website'),
   isArchived: boolean('is_archived').notNull().default(false), // New field
   locationId: integer('location_id').references(() => locations.id), // New field
-  demographicId: integer('demographic_id').references(() => demographics.id), // New field
+  demographicIds: integer('demographic_ids').array(), // Modified field
   material1Url: text('material1_url'),
   material1Title: text('material1_title'),
   material2Url: text('material2_url'),
@@ -77,7 +79,9 @@ export const businesses = pgTable('businesses', {
 });
 
 export type Business = InferSelectModel<typeof businesses>;
-export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: InferSelectModel<typeof demographics> | null };
+export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: Demographic | null };
+export type BusinessWithLocation = InferSelectModel<typeof businesses> & { location: Location | null };
+export type BusinessWithDemographicAndLocation = InferSelectModel<typeof businesses> & { demographic: Demographic | null, location: Location | null };
 
 export const usersRelations = relations(users, ({ one, many }) => ({
   businesses: many(businesses),

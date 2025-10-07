@@ -127,6 +127,13 @@
       "when": 1759865363150,
       "tag": "0017_old_pretty_boy",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1759866420531,
+      "tag": "0018_greedy_archangel",
+      "breakpoints": true
     }
   ]
 }

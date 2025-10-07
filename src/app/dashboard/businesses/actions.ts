@@ -291,17 +291,22 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   const businessId = parseInt(formData.get("businessId") as string);
-  const demographicId = parseInt(formData.get("demographicId") as string);
+  const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
   const locationId = parseInt(formData.get("locationId") as string);
 
   if (isNaN(businessId)) {
     return { message: "", error: "Invalid business ID." };
   }
 
-  const dataToUpdate: { demographicId?: number; locationId?: number } = {};
+  let selectedDemographicIds: number[] = [];
+  if (selectedDemographicIdsString) {
+    selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
+  }
 
-  if (!isNaN(demographicId)) {
-    dataToUpdate.demographicId = demographicId;
+  const dataToUpdate: { demographicIds?: number[]; locationId?: number } = {};
+
+  if (selectedDemographicIds.length > 0) {
+    dataToUpdate.demographicIds = selectedDemographicIds;
   }
 
   if (!isNaN(locationId)) {
