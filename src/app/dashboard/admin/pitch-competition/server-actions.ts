@@ -19,7 +19,7 @@ export async function addProject(project: { projectName: string; projectLocation
   let locationId: number;
 
   // Find or create location
-  let existingLocation = await db.query.locations.findFirst({
+  const existingLocation = await db.query.locations.findFirst({
     where: eq(locations.name, project.projectLocation),
   });
 
@@ -31,7 +31,7 @@ export async function addProject(project: { projectName: string; projectLocation
   }
 
   // Find or create business
-  let existingBusiness = await db.query.businesses.findFirst({
+  const existingBusiness = await db.query.businesses.findFirst({
     where: and(eq(businesses.businessName, project.projectName), eq(businesses.locationId, locationId)),
   });
 
