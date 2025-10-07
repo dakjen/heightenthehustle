@@ -40,7 +40,7 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
-        {/* <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} /> */}
+        <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} />
       </div>
 
       <div className="mt-6 border-b border-gray-200">
