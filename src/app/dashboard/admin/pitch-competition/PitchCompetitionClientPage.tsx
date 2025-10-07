@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getPitchCompetitionEntries } from "./actions";
-import AddProjectModal from "./AddProjectModal";
+// import AddProjectModal from "./AddProjectModal";
 import { addProject } from "./server-actions";
 import { InferSelectModel } from "drizzle-orm";
 import { pitchCompetitions } from "@/db/schema";
@@ -37,9 +37,9 @@ export default function PitchCompetitionClientPage({ initialProjects }: PitchCom
         >
           Add Project
         </button>
-        {isModalOpen && (
+        {/* {isModalOpen && (
           <AddProjectModal onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
-        )}
+        )} */}
       </div>
 
       <div className="mt-6 border-b border-gray-200">
