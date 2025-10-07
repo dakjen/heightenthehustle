@@ -85,7 +85,7 @@ export async function login(prevState: FormState, formData: FormData) {
     });
 
     if (!userBusinesses) {
-      redirect("/dashboard/businesses"); // Redirect to create business if none exist
+      redirect("/dashboard"); // Redirect to dashboard (home page) if no businesses exist
     } else {
       redirect("/dashboard"); // Redirect to dashboard if businesses exist
     }
