@@ -5,6 +5,9 @@ import { BusinessWithDemographic, Demographic, locations } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
 import { getAvailableLocations } from "../../messages/actions";
+import { type InferSelectModel } from 'drizzle-orm';
+
+type Location = InferSelectModel<typeof locations>;
 
 type FormState = {
   message: string;
@@ -19,7 +22,7 @@ interface BusinessDetailsFormProps {
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics }: BusinessDetailsFormProps) {
   const [demographicId, setDemographicId] = useState(initialBusiness.demographicId || "");
   const [locationId, setLocationId] = useState(initialBusiness.locationId || "");
-  const [availableLocations, setAvailableLocations] = useState<any[]>([]);
+  const [availableLocations, setAvailableLocations] = useState<Location[]>([]);
 
   useEffect(() => {
     async function fetchLocations() {
