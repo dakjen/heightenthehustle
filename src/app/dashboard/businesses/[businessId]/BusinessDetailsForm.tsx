@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { BusinessWithDemographic, Demographic, locations } from "@/db/schema";
+import { BusinessWithDemographic, Demographic, locations, BusinessWithLocation } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
 import { getAvailableLocations } from "../../messages/actions";
@@ -15,7 +15,7 @@ type FormState = {
 } | undefined;
 
 interface BusinessDetailsFormProps {
-  initialBusiness: BusinessWithDemographic;
+  initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
 }
 

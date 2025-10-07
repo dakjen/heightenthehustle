@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBusinessProfile, getPitchCompetitionByBusinessId } from "../actions"; // Import getBusinessProfile and getPitchCompetitionByBusinessId
-import { BusinessWithDemographic, BusinessWithDemographicAndLocation } from "@/db/schema"; // Import BusinessWithDemographic from schema
+import { BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation } from "@/db/schema"; // Import BusinessWithDemographic from schema
 import { getAvailableDemographics } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
@@ -13,7 +13,7 @@ export default async function BusinessDetailPage({ params }: { params: { busines
     notFound();
   }
 
-  const business: BusinessWithDemographicAndLocation | null = await getBusinessProfile(businessId); // Use the new type
+  const business: BusinessWithLocation | null = await getBusinessProfile(businessId); // Use the new type
   const availableDemographics = await getAvailableDemographics(); // Fetch available demographics
   const pitchCompetition = await getPitchCompetitionByBusinessId(businessId); // Fetch pitch competition
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
-import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithDemographicAndLocation } from "@/db/schema";
+import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
@@ -11,13 +11,13 @@ import BusinessMaterials from "./BusinessMaterials";
 import PitchCompetitionDetails, { PitchCompetition } from "./PitchCompetition";
 
 interface BusinessDetailClientPageProps {
-  initialBusiness: BusinessWithDemographicAndLocation;
+  initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
   pitchCompetition: PitchCompetition | null | undefined;
 }
 
 export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, pitchCompetition }: BusinessDetailClientPageProps) {
-  const [business, setBusiness] = useState<BusinessWithDemographicAndLocation>(initialBusiness);
+  const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
   return (

@@ -98,10 +98,6 @@ export const businessesRelations = relations(businesses, ({ one }) => ({
     fields: [businesses.locationId],
     references: [locations.id],
   }),
-  demographic: one(demographics, {
-    fields: [businesses.demographicId],
-    references: [demographics.id],
-  }),
 }));
 
 export const massMessages = pgTable('mass_messages', {

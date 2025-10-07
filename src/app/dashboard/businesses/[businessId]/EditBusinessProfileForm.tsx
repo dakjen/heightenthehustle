@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { Business, BusinessWithDemographic } from "@/db/schema";
+import { Business, BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
 import { updateBusinessProfile } from "../actions";
 import { useFormState } from "react-dom";
 import Image from "next/image";
@@ -17,7 +17,7 @@ type FormState = {
 } | undefined;
 
 interface EditBusinessProfileFormProps {
-  initialBusiness: BusinessWithDemographic;
+  initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
 }
 
