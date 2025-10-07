@@ -3,7 +3,7 @@
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
-import { eq, inArray, and, or } from "drizzle-orm";
+import { eq, inArray, and, or, asc } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
 async function getLocationIdsByNames(locationNames: string[]): Promise<number[]> {
