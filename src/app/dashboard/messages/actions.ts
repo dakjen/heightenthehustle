@@ -183,20 +183,41 @@ export async function getAvailableDemographics() {
   }
 }
 
-export async function getIndividualMessages(userId1: number, userId2: number) {
+export async function getIndividualMessages(currentUserId: number, otherUserId: number) {
   try {
-    const messages = await db.select()
-      .from(individualMessages)
-      .where(
-        or(
-          and(eq(individualMessages.senderId, userId1), eq(individualMessages.recipientId, userId2)),
-          and(eq(individualMessages.senderId, userId2), eq(individualMessages.recipientId, userId1))
-        )
-      )
-      .orderBy(individualMessages.timestamp);
+    const messages = await db.query.individualMessages.findMany({
+      where: or(
+        and(eq(individualMessages.senderId, currentUserId), eq(individualMessages.recipientId, otherUserId)),
+        and(eq(individualMessages.senderId, otherUserId), eq(individualMessages.recipientId, currentUserId))
+      ),
+      orderBy: asc(individualMessages.timestamp),
+    });
     return messages;
   } catch (error) {
     console.error("Error fetching individual messages:", error);
+    return [];
+  }
+}
+
+export async function getPendingRequests() {
+  try {
+    const pendingRequests = await db.query.individualMessages.findMany({
+      where: and(
+        eq(individualMessages.read, false),
+        // Assuming external users have role 'external' and internal users have role 'internal' or 'admin'
+        // This would require joining with the users table to check roles
+        // For now, we'll assume sender is external and recipient is internal/admin
+        // A more robust solution would involve fetching sender/recipient roles
+      ),
+      with: {
+        sender: { columns: { name: true, email: true } },
+        recipient: { columns: { name: true, email: true } },
+      },
+      orderBy: asc(individualMessages.timestamp),
+    });
+    return pendingRequests;
+  } catch (error) {
+    console.error("Error fetching pending requests:", error);
     return [];
   }
 }

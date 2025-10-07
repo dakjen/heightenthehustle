@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getIndividualMessages } from "./actions";
+import { sendMessage, sendMassMessage, getIndividualMessages, getPendingRequests } from "./actions";
 import { useFormState } from "react-dom";
 
 interface Message {
@@ -39,6 +39,11 @@ interface Demographic {
   name: string;
 }
 
+interface PendingRequest extends Message {
+  sender: { name: string; email: string };
+  recipient: { name: string; email: string };
+}
+
 type FormState = {
   message: string;
   error: string;
@@ -63,6 +68,7 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
   const [internalUsers, setInternalUsers] = useState<User[]>(initialInternalUsers); // New state for internal users
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
+  const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]); // New state for pending requests
 
   const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
   const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
@@ -89,6 +95,17 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
     }
     fetchMessages();
   }, [selectedRecipientId, currentUserId]);
+
+  // Fetch pending requests when the tab is active and the user is not an admin
+  useEffect(() => {
+    async function fetchPendingRequests() {
+      if (activeTab === 'pending-requests' && !isAdmin) {
+        const fetchedPendingRequests = await getPendingRequests();
+        setPendingRequests(fetchedPendingRequests);
+      }
+    }
+    fetchPendingRequests();
+  }, [activeTab, isAdmin]);
 
   const handleSendMessage = (formData: FormData) => {
     const formDataWithRecipient = new FormData();
@@ -136,6 +153,14 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
           >
             Individual Messages
           </button>
+          {!isAdmin && (
+            <button
+              onClick={() => setActiveTab('pending-requests')}
+              className={`${activeTab === 'pending-requests' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Pending Requests
+            </button>
+          )}
           {isAdmin && (
             <button
               onClick={() => setActiveTab('correspondence')}
@@ -188,10 +213,14 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
               >
                 <option value="admin">Admin</option>
-                <option value="internal">Internal Users</option>
-                {initialInternalUsers.map(user => (
-                  <option key={user.id} value={user.id.toString()}>{user.name} ({user.email})</option>
-                ))}
+                {isAdmin && (
+                  <>
+                    <option value="internal">Internal Users</option>
+                    {initialInternalUsers.map(user => (
+                      <option key={user.id} value={user.id.toString()}>{user.name} ({user.email})</option>
+                    ))}
+                  </>
+                )}
               </select>
             </div>
 
@@ -226,6 +255,25 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
               </button>
             </div>
           </form>
+        </div>
+      )}
+
+      {activeTab === 'pending-requests' && !isAdmin && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>
+          <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
+            {pendingRequests.length === 0 ? (
+              <p className="text-gray-500">No pending requests.</p>
+            ) : (
+              pendingRequests.map((req) => (
+                <div key={req.id} className="mb-4 p-3 bg-gray-100 rounded-lg">
+                  <p className="text-sm font-semibold">From: {req.sender.name} ({req.sender.email})</p>
+                  <p className="text-gray-800">{req.content}</p>
+                  <p className="text-xs text-gray-500 text-right">{req.timestamp.toLocaleString()}</p>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       )}
 
