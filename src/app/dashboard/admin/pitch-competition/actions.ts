@@ -2,6 +2,7 @@
 
 import { db } from "@/db";
 import { pitchCompetitions, users, businesses } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export async function getPitchCompetitionEntries() {
   try {
