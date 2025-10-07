@@ -23,14 +23,20 @@ export const users = pgTable('users', {
   profilePhotoUrl: text('profile_photo_url'), // New field
 });
 
+export const locationCategoryEnum = pgEnum('location_category', ['City', 'Region']);
+
 export const locations = pgTable('locations', {
   id: serial('id').primaryKey(),
   name: text('name').notNull().unique(),
+  category: locationCategoryEnum('category').notNull().default('City'),
 });
+
+export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion']);
 
 export const demographics = pgTable('demographics', {
   id: serial('id').primaryKey(),
   name: text('name').notNull().unique(),
+  category: demographicCategoryEnum('category').notNull(),
 });
 
 export type Demographic = InferSelectModel<typeof demographics>;

@@ -70,8 +70,8 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
             )}
           </div>
           {business.businessProfilePhotoUrl && (
-            <div className="mb-6">
-              <Image src={business.businessProfilePhotoUrl} alt="Business Profile Photo" width={512} height={512} className="rounded-md object-cover border-2 border-gray-300 mx-auto" />
+            <div className="mb-6 flex justify-center">
+              <Image src={business.businessProfilePhotoUrl} alt="Business Profile Photo" width={512} height={512} className="rounded-md object-cover border-2 border-gray-300" />
             </div>
           )}
           <p className="mt-4 text-gray-700">Owner: {business.ownerName}</p>
