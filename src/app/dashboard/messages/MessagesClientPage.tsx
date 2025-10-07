@@ -59,6 +59,7 @@ interface MessagesPageProps {
 }
 
 export default function MessagesPage({ isAdmin, initialInternalUsers, initialMassMessages, initialLocations, initialDemographics, currentUserId }: MessagesPageProps) {
+  const [activeTab, setActiveTab] = useState('individual-messages');
   const [messages, setMessages] = useState<Message[]>([]); // Placeholder for messages
   const [massMessages, setMassMessages] = useState<MassMessage[]>(initialMassMessages); // New state for mass messages
   const [messageContent, setMessageContent] = useState("");
@@ -69,76 +70,6 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]); // New state for pending requests
-
-  const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
-  const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
-
-  useEffect(() => {
-    // Update mass messages when a new one is sent
-    if (massSendState?.message && !massSendState.error) {
-      // Re-fetch mass messages or update state directly if possible
-      // For now, we'll just clear the form
-      setMassMessageLocations([]);
-      setMessageContent("");
-      setSelectedLocations([]);
-      setSelectedDemographics([]);
-    }
-  }, [massSendState]);
-
-  // Fetch individual messages when selectedRecipientId changes
-  useEffect(() => {
-    async function fetchMessages() {
-      if (selectedRecipientId && currentUserId) {
-        const fetchedMessages = await getIndividualMessages(currentUserId, selectedRecipientId);
-        setMessages(fetchedMessages);
-      }
-    }
-    fetchMessages();
-  }, [selectedRecipientId, currentUserId]);
-
-  // Fetch pending requests when the tab is active and the user is not an admin
-  useEffect(() => {
-    async function fetchPendingRequests() {
-      if (activeTab === 'pending-requests' && !isAdmin) {
-        const fetchedPendingRequests = await getPendingRequests();
-        setPendingRequests(fetchedPendingRequests);
-      }
-    }
-    fetchPendingRequests();
-  }, [activeTab, isAdmin]);
-
-  const handleSendMessage = (formData: FormData) => {
-    const formDataWithRecipient = new FormData();
-    formDataWithRecipient.append("messageContent", messageContent);
-    formDataWithRecipient.append("recipient", selectedRecipientId ? selectedRecipientId.toString() : recipient);
-    sendFormAction(formDataWithRecipient);
-    setMessageContent(""); // Clear input after sending
-  };
-
-  const handleMassSendMessage = (formData: FormData) => {
-    const formDataWithSelections = new FormData();
-    formDataWithSelections.append("massMessageContent", messageContent);
-    formDataWithSelections.append("targetLocationIds", JSON.stringify(selectedLocations));
-    formDataWithSelections.append("targetDemographicIds", JSON.stringify(selectedDemographics));
-    massSendFormAction(formDataWithSelections);
-    setMessageContent(""); // Clear input after sending
-    setSelectedLocations([]); // Clear selections after sending
-    setSelectedDemographics([]);
-  };
-
-  const handleLocationChange = (locationId: number) => {
-    setSelectedLocations(prev =>
-      prev.includes(locationId) ? prev.filter(id => id !== locationId) : [...prev, locationId]
-    );
-  };
-
-  const handleDemographicChange = (demographicId: number) => {
-    setSelectedDemographics(prev =>
-      prev.includes(demographicId) ? prev.filter(id => id !== demographicId) : [...prev, demographicId]
-    );
-  };
-
-  const [activeTab, setActiveTab] = useState('individual-messages');
 
   return (
     <div className="flex-1 p-6">
