@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { InferSelectModel } from "drizzle-orm";
 import { pitchCompetitions, users, businesses } from "@/db/schema";
+import ProjectEntries from "./ProjectEntries";
+import ProjectFinalists from "./ProjectFinalists";
+import ProjectWinners from "./ProjectWinners";
+import ProjectEventDetails from "./ProjectEventDetails";
 
 type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
   user: InferSelectModel<typeof users>;
@@ -50,31 +54,19 @@ export default function ProjectDetailClientPage({ project }: ProjectDetailClient
       </div>
 
       {activeTab === 'entries' && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">Project Entries</h2>
-          <p>Content for project entries.</p>
-        </div>
+        <ProjectEntries project={project} />
       )}
 
       {activeTab === 'finalists' && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">Finalists</h2>
-          <p>Content for finalists.</p>
-        </div>
+        <ProjectFinalists />
       )}
 
       {activeTab === 'winners' && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">Winners</h2>
-          <p>Content for winners.</p>
-        </div>
+        <ProjectWinners />
       )}
 
       {activeTab === 'event-details' && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">Event Details</h2>
-          <p>Content for event details.</p>
-        </div>
+        <ProjectEventDetails />
       )}
     </div>
   );
