@@ -28,12 +28,13 @@ export async function fetchSession(): Promise<SessionPayload | null> {
   return await getSession();
 }
 
-export async function getBusinessProfile(businessId: number): Promise<BusinessWithDemographic | null> {
+export async function getBusinessProfile(businessId: number): Promise<BusinessWithDemographicAndLocation | null> {
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
       with: {
         demographic: true, // Include demographic details
+        location: true, // Include location details
       },
     });
     if (!profile) { return null; }
