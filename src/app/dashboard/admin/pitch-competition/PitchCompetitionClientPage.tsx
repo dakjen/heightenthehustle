@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
 import AddProjectModal from "./AddProjectModal";
-import { db } from "@/db";
-import { pitchCompetitions } from "@/db/schema";
-import { revalidatePath } from "next/cache";
+import { addProject } from "./server-actions";
 
 interface PitchCompetitionClientPageProps {
   initialEntries: any[]; // Replace 'any' with actual type
@@ -17,17 +15,6 @@ export default function PitchCompetitionClientPage({ initialEntries, initialUser
   const [entries, setEntries] = useState(initialEntries);
   const [users, setUsers] = useState(initialUsers);
   const [businesses, setBusinesses] = useState(initialBusinesses);
-
-  async function addProject(project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl: string; }) {
-    'use server';
-    await db.insert(pitchCompetitions).values({
-      userId: parseInt(project.userId),
-      businessId: parseInt(project.businessId),
-      pitchVideoUrl: project.pitchVideoUrl,
-      pitchDeckUrl: project.pitchDeckUrl,
-    });
-    revalidatePath("/dashboard/admin/pitch-competition");
-  }
 
   const [activeTab, setActiveTab] = useState('all-entries');
 
