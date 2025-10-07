@@ -292,21 +292,36 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   const businessId = parseInt(formData.get("businessId") as string);
   const demographicId = parseInt(formData.get("demographicId") as string);
+  const locationId = parseInt(formData.get("locationId") as string);
 
-  if (isNaN(businessId) || isNaN(demographicId)) {
-    return { message: "", error: "Invalid business ID or demographic ID." };
+  if (isNaN(businessId)) {
+    return { message: "", error: "Invalid business ID." };
+  }
+
+  const dataToUpdate: { demographicId?: number; locationId?: number } = {};
+
+  if (!isNaN(demographicId)) {
+    dataToUpdate.demographicId = demographicId;
+  }
+
+  if (!isNaN(locationId)) {
+    dataToUpdate.locationId = locationId;
+  }
+
+  if (Object.keys(dataToUpdate).length === 0) {
+    return { message: "", error: "No demographic or location data to update." };
   }
 
   try {
     await db.update(businesses)
-      .set({ demographicId: demographicId })
+      .set(dataToUpdate)
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: "Business demographics updated successfully!", error: "" };
+    return { message: "Business details updated successfully!", error: "" };
   } catch (error) {
-    console.error("Error updating business demographics:", error);
-    return { message: "", error: "Failed to update business demographics." };
+    console.error("Error updating business details:", error);
+    return { message: "", error: "Failed to update business details." };
   }
 }
 

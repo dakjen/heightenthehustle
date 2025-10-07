@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from "react";
-import { BusinessWithDemographic, Demographic } from "@/db/schema";
+import { useState, useEffect } from "react";
+import { BusinessWithDemographic, Demographic, locations } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
+import { getAvailableLocations } from "../../messages/actions";
 
 type FormState = {
   message: string;
@@ -17,11 +18,22 @@ interface BusinessDetailsFormProps {
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics }: BusinessDetailsFormProps) {
   const [demographicId, setDemographicId] = useState(initialBusiness.demographicId || "");
+  const [locationId, setLocationId] = useState(initialBusiness.locationId || "");
+  const [availableLocations, setAvailableLocations] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchLocations() {
+      const locations = await getAvailableLocations();
+      setAvailableLocations(locations);
+    }
+    fetchLocations();
+  }, []);
+
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, undefined);
 
   return (
     <form action={updateFormAction}>
-      <h2 className="text-2xl font-bold">Business Details</h2>
+      <h2 className="text-2xl font-bold">Owner Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
       <div>
         <label htmlFor="demographicId" className="block text-sm font-medium text-gray-700">
@@ -38,6 +50,26 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           {availableDemographics.map(demographic => (
             <option key={demographic.id} value={demographic.id}>
               {demographic.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mt-4">
+        <label htmlFor="locationId" className="block text-sm font-medium text-gray-700">
+          Location
+        </label>
+        <select
+          id="locationId"
+          name="locationId"
+          value={locationId}
+          onChange={(e) => setLocationId(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+        >
+          <option value="">Select Location</option>
+          {availableLocations.map(location => (
+            <option key={location.id} value={location.id}>
+              {location.name}
             </option>
           ))}
         </select>
