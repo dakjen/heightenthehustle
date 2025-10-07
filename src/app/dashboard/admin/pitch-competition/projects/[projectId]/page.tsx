@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getPitchCompetitionEntryById } from "../../actions";
 import ProjectDetailClientPage from "./ProjectDetailClientPage";
 
-export default async function ProjectDetailPage({ params }: { params: { projectId: string } }) {
+export default async function ProjectDetailPage({ params }) {
   const projectId = parseInt(params.projectId);
 
   if (isNaN(projectId)) {
