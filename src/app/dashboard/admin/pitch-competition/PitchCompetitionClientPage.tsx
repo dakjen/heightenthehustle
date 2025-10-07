@@ -27,11 +27,13 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
   const [projects, setProjects] = useState(initialProjects);
   const [users, setUsers] = useState(initialUsers);
   const [businesses, setBusinesses] = useState(initialBusinesses);
+  const [isModalOpen, setIsModalOpen] = useState(false); // New state for modal visibility
 
   const handleAddProject = async (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
     await addProject(project);
     const updatedProjects = await getPitchCompetitionEntries();
     setProjects(updatedProjects);
+    setIsModalOpen(false); // Close modal after adding project
   };
 
   const [activeTab, setActiveTab] = useState('projects');
@@ -40,7 +42,13 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
-        <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} />
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+        >
+          Add Project
+        </button>
+        <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
 
       <div className="mt-6 border-b border-gray-200">
