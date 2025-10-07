@@ -6,7 +6,7 @@ export default async function PitchCompetitionPage() {
 
   return (
     <PitchCompetitionClientPage
-      initialProjects={entries}
+      initialProjects={JSON.stringify(entries)}
     />
   );
 }

@@ -11,11 +11,11 @@ import Link from "next/link";
 type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions>;
 
 interface PitchCompetitionClientPageProps {
-  initialProjects: PitchCompetitionEntry[];
+  initialProjects: string;
 }
 
 export default function PitchCompetitionClientPage({ initialProjects }: PitchCompetitionClientPageProps) {
-  const [projects, setProjects] = useState(initialProjects);
+  const [projects, setProjects] = useState<PitchCompetitionEntry[]>(JSON.parse(initialProjects));
 
   const handleAddProject = async (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
     await addProject(project);
