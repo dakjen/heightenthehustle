@@ -1,5 +1,5 @@
-import BusinessSearchAndFilter from "./BusinessSearchAndFilter";
-import YourBusinessesPageContent from "../../businesses/YourBusinessesPageContent"; // Adjust path as needed
+import BusinessSearchAndFilter from "../BusinessSearchAndFilter";
+import YourBusinessesPageContent from "../../../businesses/YourBusinessesPageContent";
 
 export default async function AdminBusinessesPage({ searchParams }: { searchParams: Promise<{ viewMode?: string }> }) {
   const resolvedSearchParams = await searchParams;
