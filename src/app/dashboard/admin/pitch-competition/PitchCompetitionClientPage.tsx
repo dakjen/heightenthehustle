@@ -26,13 +26,19 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
   const [users, setUsers] = useState(initialUsers);
   const [businesses, setBusinesses] = useState(initialBusinesses);
 
+  const handleAddProject = async (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
+    await addProject(project);
+    const updatedProjects = await getPitchCompetitionEntries();
+    setProjects(updatedProjects);
+  };
+
   const [activeTab, setActiveTab] = useState('projects');
 
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
-        <AddProjectModal users={users} businesses={businesses} onAdd={addProject} />
+        <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} />
       </div>
 
       <div className="mt-6 border-b border-gray-200">
