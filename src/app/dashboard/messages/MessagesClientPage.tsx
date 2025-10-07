@@ -71,6 +71,40 @@ export default function MessagesPage({ isAdmin, initialInternalUsers, initialMas
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]); // New state for pending requests
 
+  const [sendState, sendFormAction] = useFormState<FormState, FormData>(sendMessage, undefined);
+  const [massSendState, massSendFormAction] = useFormState<FormState, FormData>(sendMassMessage, undefined); // New form state for mass messages
+
+  const handleSendMessage = (formData: FormData) => {
+    const formDataWithRecipient = new FormData();
+    formDataWithRecipient.append("messageContent", messageContent);
+    formDataWithRecipient.append("recipient", selectedRecipientId ? selectedRecipientId.toString() : recipient);
+    sendFormAction(formDataWithRecipient);
+    setMessageContent(""); // Clear input after sending
+  };
+
+  const handleMassSendMessage = (formData: FormData) => {
+    const formDataWithSelections = new FormData();
+    formDataWithSelections.append("massMessageContent", messageContent);
+    formDataWithSelections.append("targetLocationIds", JSON.stringify(selectedLocations));
+    formDataWithSelections.append("targetDemographicIds", JSON.stringify(selectedDemographics));
+    massSendFormAction(formDataWithSelections);
+    setMessageContent(""); // Clear input after sending
+    setSelectedLocations([]); // Clear selections after sending
+    setSelectedDemographics([]);
+  };
+
+  const handleLocationChange = (locationId: number) => {
+    setSelectedLocations(prev =>
+      prev.includes(locationId) ? prev.filter(id => id !== locationId) : [...prev, locationId]
+    );
+  };
+
+  const handleDemographicChange = (demographicId: number) => {
+    setSelectedDemographics(prev =>
+      prev.includes(demographicId) ? prev.filter(id => id !== demographicId) : [...prev, demographicId]
+    );
+  };
+
   return (
     <div className="flex-1 p-6">
       <h1 className="text-3xl font-bold text-gray-900">Messages</h1>
