@@ -2,44 +2,18 @@
 
 import { useState } from "react";
 import { getPitchCompetitionEntries } from "./actions";
-// import AddProjectModal from "./AddProjectModal";
+import AddProjectModal from "./AddProjectModal";
 import { addProject } from "./server-actions";
-import { InferSelectModel } from "drizzle-orm";
-import { pitchCompetitions } from "@/db/schema";
-import Link from "next/link";
-
-type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions>;
-
-interface PitchCompetitionClientPageProps {
-  initialProjects: string;
-}
-
-export default function PitchCompetitionClientPage({ initialProjects }: PitchCompetitionClientPageProps) {
-  const [projects, setProjects] = useState<PitchCompetitionEntry[]>(JSON.parse(initialProjects));
-
-  const handleAddProject = async (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
-    await addProject(project);
-    const updatedProjects = await getPitchCompetitionEntries();
-    setProjects(updatedProjects);
-    setIsModalOpen(false); // Close modal after adding project
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-  const [activeTab, setActiveTab] = useState('projects');
-
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
+// ...
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
         >
           Add Project
         </button>
-        {/* {isModalOpen && (
+        {isModalOpen && (
           <AddProjectModal onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
-        )} */}
+        )}
       </div>
 
       <div className="mt-6 border-b border-gray-200">
