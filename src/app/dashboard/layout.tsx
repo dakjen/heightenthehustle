@@ -57,8 +57,8 @@ export default async function DashboardLayout({
           {isAdmin && (
             <>
               <h2 className="text-xs font-semibold text-gray-400 uppercase mt-6 mb-2">Admin Tools</h2>
-              <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
-              <Link href="/dashboard/admin/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
+              <Link href="/dashboard/(admin)/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
+              <Link href="/dashboard/(admin)/businesses/manage" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
               <Link href="/dashboard/(admin)/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
             </>
           )}
