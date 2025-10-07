@@ -126,7 +126,6 @@ export default function AddProjectModal({ users, businesses, onAdd, onClose }: A
             </div>
           </div>
         </div>
-      )}
     </>
   );
 }
