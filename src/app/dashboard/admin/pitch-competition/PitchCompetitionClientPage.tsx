@@ -5,15 +5,16 @@ import { getPitchCompetitionEntries } from "./actions";
 import AddProjectModal from "./AddProjectModal";
 import { addProject } from "./server-actions";
 // ...
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+        <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
+        <div
+          onClick={() => console.log("Add Project button clicked!")}
+          className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 cursor-pointer"
         >
-          Add Project
-        </button>
-        {isModalOpen && (
+          Add Project (Debug)
+        </div>
+        {/* {isModalOpen && (
           <AddProjectModal onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
-        )}
+        )} */}
       </div>
 
       <div className="mt-6 border-b border-gray-200">
