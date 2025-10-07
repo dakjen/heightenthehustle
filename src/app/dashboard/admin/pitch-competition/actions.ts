@@ -1,21 +1,12 @@
 'use server';
 
 import { db } from "@/db";
-import { pitchCompetitions, users, businesses, locations } from "@/db/schema";
+import { pitchCompetitions, locations } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function getPitchCompetitionEntries() {
   try {
-    const entries = await db.query.pitchCompetitions.findMany({
-      with: {
-        user: true,
-        business: {
-          with: {
-            location: true,
-          },
-        },
-      },
-    });
+    const entries = await db.query.pitchCompetitions.findMany({});
     return entries;
   } catch (error) {
     console.error("Error fetching pitch competition entries:", error);
@@ -47,10 +38,6 @@ export async function getPitchCompetitionEntryById(id: number) {
   try {
     const entry = await db.query.pitchCompetitions.findFirst({
       where: eq(pitchCompetitions.id, id),
-      with: {
-        user: true,
-        business: true,
-      },
     });
     return entry;
   } catch (error) {

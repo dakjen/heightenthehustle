@@ -8,21 +8,20 @@ type User = InferSelectModel<typeof users>;
 type Business = InferSelectModel<typeof businesses>;
 
 interface AddProjectModalProps {
-  users: User[];
-  businesses: Business[];
-  onAdd: (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl:string }) => void;
+  onAdd: (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl:string }) => void;
   onClose: () => void;
 }
 
-export default function AddProjectModal({ users, businesses, onAdd, onClose }: AddProjectModalProps) {
-  const [userId, setUserId] = useState("");
-  const [businessId, setBusinessId] = useState("");
+export default function AddProjectModal({ onAdd, onClose }: AddProjectModalProps) {
+  const [projectName, setProjectName] = useState("");
+  const [projectLocation, setProjectLocation] = useState("");
+  const [submissionDate, setSubmissionDate] = useState("");
   const [pitchVideoUrl, setPitchVideoUrl] = useState("");
   const [pitchDeckUrl, setPitchDeckUrl] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onAdd({ userId, businessId, pitchVideoUrl, pitchDeckUrl });
+    onAdd({ projectName, projectLocation, submissionDate, pitchVideoUrl, pitchDeckUrl });
     onClose(); // Close modal after submission
   };
 
@@ -42,42 +41,43 @@ export default function AddProjectModal({ users, businesses, onAdd, onClose }: A
                   <h3 className="text-lg leading-6 font-medium text-gray-900">Add New Project</h3>
                   <div className="mt-2">
                     <div className="mb-4">
-                      <label htmlFor="user" className="block text-sm font-medium text-gray-700">
-                        User
+                      <label htmlFor="projectName" className="block text-sm font-medium text-gray-700">
+                        Name
                       </label>
-                      <select
-                        id="user"
-                        name="user"
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
-                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                      >
-                        <option value="">Select a user</option>
-                        {users.map((user) => (
-                          <option key={user.id} value={user.id}>
-                            {user.name}
-                          </option>
-                        ))}
-                      </select>
+                      <input
+                        type="text"
+                        name="projectName"
+                        id="projectName"
+                        value={projectName}
+                        onChange={(e) => setProjectName(e.target.value)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
                     </div>
                     <div className="mb-4">
-                      <label htmlFor="business" className="block text-sm font-medium text-gray-700">
-                        Business
+                      <label htmlFor="projectLocation" className="block text-sm font-medium text-gray-700">
+                        Location
                       </label>
-                      <select
-                        id="business"
-                        name="business"
-                        value={businessId}
-                        onChange={(e) => setBusinessId(e.target.value)}
-                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                      >
-                        <option value="">Select a business</option>
-                        {businesses.map((business) => (
-                          <option key={business.id} value={business.id}>
-                            {business.businessName}
-                          </option>
-                        ))}
-                      </select>
+                      <input
+                        type="text"
+                        name="projectLocation"
+                        id="projectLocation"
+                        value={projectLocation}
+                        onChange={(e) => setProjectLocation(e.target.value)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="submissionDate" className="block text-sm font-medium text-gray-700">
+                        Date
+                      </label>
+                      <input
+                        type="date"
+                        name="submissionDate"
+                        id="submissionDate"
+                        value={submissionDate}
+                        onChange={(e) => setSubmissionDate(e.target.value)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
                     </div>
                     <div className="mb-4">
                       <label htmlFor="pitchVideoUrl" className="block text-sm font-medium text-gray-700">

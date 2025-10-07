@@ -145,6 +145,8 @@ export const pitchCompetitions = pgTable('pitch_competitions', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
   businessId: integer('business_id').notNull().references(() => businesses.id),
+  projectName: text('project_name').notNull(),
+  projectLocation: text('project_location').notNull(),
   pitchVideoUrl: text('pitch_video_url'),
   pitchDeckUrl: text('pitch_deck_url'),
   submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow(),

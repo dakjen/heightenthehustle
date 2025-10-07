@@ -1,41 +1,30 @@
 'use client';
 
 import { useState } from "react";
-import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
+import { getPitchCompetitionEntries } from "./actions";
 import AddProjectModal from "./AddProjectModal";
 import { addProject } from "./server-actions";
 import { InferSelectModel } from "drizzle-orm";
-import { pitchCompetitions, users, businesses, locations } from "@/db/schema";
+import { pitchCompetitions } from "@/db/schema";
 import Link from "next/link";
 
-type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
-  user: InferSelectModel<typeof users>;
-  business: InferSelectModel<typeof businesses> & {
-    location: InferSelectModel<typeof locations> | null;
-  };
-};
-type User = InferSelectModel<typeof users>;
-type Business = InferSelectModel<typeof businesses>;
+type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions>;
 
 interface PitchCompetitionClientPageProps {
   initialProjects: PitchCompetitionEntry[];
-  initialUsers: User[];
-  initialBusinesses: Business[];
 }
 
-export default function PitchCompetitionClientPage({ initialProjects, initialUsers, initialBusinesses }: PitchCompetitionClientPageProps) {
+export default function PitchCompetitionClientPage({ initialProjects }: PitchCompetitionClientPageProps) {
   const [projects, setProjects] = useState(initialProjects);
-  const [users, setUsers] = useState(initialUsers);
-  const [businesses, setBusinesses] = useState(initialBusinesses);
-  const [isModalOpen, setIsModalOpen] = useState(false); // New state for modal visibility
 
-  const handleAddProject = async (project: { userId: string; businessId: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
+  const handleAddProject = async (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
     await addProject(project);
     const updatedProjects = await getPitchCompetitionEntries();
     setProjects(updatedProjects);
     setIsModalOpen(false); // Close modal after adding project
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
   const [activeTab, setActiveTab] = useState('projects');
 
   return (
@@ -49,7 +38,7 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
           Add Project
         </button>
         {isModalOpen && (
-          <AddProjectModal users={users} businesses={businesses} onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
+          <AddProjectModal onAdd={handleAddProject} onClose={() => setIsModalOpen(false)} />
         )}
       </div>
 
@@ -88,10 +77,10 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
                 <tr key={project.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <Link href={`/dashboard/admin/pitch-competition/projects/${project.id}`} className="text-indigo-600 hover:underline">
-                      {project.business.businessName}
+                      {project.projectName}
                     </Link>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.business.location?.name || 'N/A'}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.projectLocation || 'N/A'}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(project.submittedAt).toLocaleDateString()}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0</td> {/* Placeholder for funding */}
                 </tr>

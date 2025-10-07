@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import { InferSelectModel } from "drizzle-orm";
-import { pitchCompetitions, users, businesses } from "@/db/schema";
+import { pitchCompetitions } from "@/db/schema";
 import ProjectEntries from "./ProjectEntries";
 import ProjectFinalists from "./ProjectFinalists";
 import ProjectWinners from "./ProjectWinners";
 import ProjectEventDetails from "./ProjectEventDetails";
 
-type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
-  user: InferSelectModel<typeof users>;
-  business: InferSelectModel<typeof businesses>;
-};
+type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions>;
 
 interface ProjectDetailClientPageProps {
   project: PitchCompetitionEntry;
@@ -22,7 +19,7 @@ export default function ProjectDetailClientPage({ project }: ProjectDetailClient
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Project: {project.business.businessName}</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-4">Project: {project.projectName}</h1>
 
       <div className="mt-6 border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">

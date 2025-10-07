@@ -1,12 +1,9 @@
 'use client';
 
 import { InferSelectModel } from "drizzle-orm";
-import { pitchCompetitions, users, businesses } from "@/db/schema";
+import { pitchCompetitions } from "@/db/schema";
 
-type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
-  user: InferSelectModel<typeof users>;
-  business: InferSelectModel<typeof businesses>;
-};
+type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions>;
 
 interface ProjectEntriesProps {
   project: PitchCompetitionEntry;
@@ -17,8 +14,8 @@ export default function ProjectEntries({ project }: ProjectEntriesProps) {
     <div className="mt-8">
       <h2 className="text-2xl font-bold">Project Entries</h2>
       <div className="mt-4">
-        <p><strong>Business Name:</strong> {project.business.businessName}</p>
-        <p><strong>Owner Name:</strong> {project.user.name}</p>
+        <p><strong>Project Name:</strong> {project.projectName}</p>
+        <p><strong>Project Location:</strong> {project.projectLocation}</p>
         {project.pitchVideoUrl && (
           <p><strong>Pitch Video:</strong> <a href={project.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">View Video</a></p>
         )}
