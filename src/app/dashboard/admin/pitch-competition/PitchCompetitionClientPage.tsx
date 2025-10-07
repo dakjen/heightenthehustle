@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
-// import AddProjectModal from "./AddProjectModal";
-// import { addProject } from "./server-actions";
+import AddProjectModal from "./AddProjectModal";
+import { addProject } from "./server-actions";
 import { InferSelectModel } from "drizzle-orm";
 import { pitchCompetitions, users, businesses } from "@/db/schema";
+import Link from "next/link";
 
 type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
   user: InferSelectModel<typeof users>;
@@ -15,32 +16,32 @@ type User = InferSelectModel<typeof users>;
 type Business = InferSelectModel<typeof businesses>;
 
 interface PitchCompetitionClientPageProps {
-  initialEntries: PitchCompetitionEntry[];
+  initialProjects: PitchCompetitionEntry[];
   initialUsers: User[];
   initialBusinesses: Business[];
 }
 
-export default function PitchCompetitionClientPage({ initialEntries, initialUsers, initialBusinesses }: PitchCompetitionClientPageProps) {
-  const [entries, setEntries] = useState(initialEntries);
+export default function PitchCompetitionClientPage({ initialProjects, initialUsers, initialBusinesses }: PitchCompetitionClientPageProps) {
+  const [projects, setProjects] = useState(initialProjects);
   const [users, setUsers] = useState(initialUsers);
   const [businesses, setBusinesses] = useState(initialBusinesses);
 
-  const [activeTab, setActiveTab] = useState('all-entries');
+  const [activeTab, setActiveTab] = useState('projects');
 
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
-        {/* <AddProjectModal users={users} businesses={businesses} onAdd={addProject} /> */}
+        <AddProjectModal users={users} businesses={businesses} onAdd={addProject} />
       </div>
 
       <div className="mt-6 border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           <button
-            onClick={() => setActiveTab('all-entries')}
-            className={`${activeTab === 'all-entries' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            onClick={() => setActiveTab('projects')}
+            className={`${activeTab === 'projects' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
-            All Entries
+            Projects
           </button>
           <button
             onClick={() => setActiveTab('pending-entries')}
@@ -57,7 +58,7 @@ export default function PitchCompetitionClientPage({ initialEntries, initialUser
         </nav>
       </div>
 
-      {activeTab === 'all-entries' && (
+      {activeTab === 'projects' && (
         <div className="mt-8">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -77,20 +78,24 @@ export default function PitchCompetitionClientPage({ initialEntries, initialUser
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {entries.map((entry) => (
-                <tr key={entry.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{entry.business.businessName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.user.name}</td>
+              {projects.map((project) => (
+                <tr key={project.id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <Link href={`/dashboard/admin/pitch-competition/projects/${project.id}`} className="text-indigo-600 hover:underline">
+                      {project.business.businessName}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.user.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {entry.pitchVideoUrl && (
-                      <a href={entry.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
+                    {project.pitchVideoUrl && (
+                      <a href={project.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
                         View Video
                       </a>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {entry.pitchDeckUrl && (
-                      <a href={entry.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
+                    {project.pitchDeckUrl && (
+                      <a href={project.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
                         View Deck
                       </a>
                     )}

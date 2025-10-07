@@ -8,7 +8,7 @@ export default async function PitchCompetitionPage() {
 
   return (
     <PitchCompetitionClientPage
-      initialEntries={entries}
+      initialProjects={entries}
       initialUsers={users}
       initialBusinesses={businesses}
     />

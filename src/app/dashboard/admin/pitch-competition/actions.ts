@@ -37,3 +37,19 @@ export async function getBusinesses() {
     return [];
   }
 }
+
+export async function getPitchCompetitionEntryById(id: number) {
+  try {
+    const entry = await db.query.pitchCompetitions.findFirst({
+      where: eq(pitchCompetitions.id, id),
+      with: {
+        user: true,
+        business: true,
+      },
+    });
+    return entry;
+  } catch (error) {
+    console.error("Error fetching pitch competition entry by ID:", error);
+    return null;
+  }
+}
