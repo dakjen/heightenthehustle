@@ -1,4 +1,4 @@
-export default function PitchCompetitionLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
