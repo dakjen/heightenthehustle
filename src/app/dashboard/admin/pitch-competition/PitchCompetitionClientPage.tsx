@@ -4,11 +4,20 @@ import { useState } from "react";
 import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
 // import AddProjectModal from "./AddProjectModal";
 // import { addProject } from "./server-actions";
+import { InferSelectModel } from "drizzle-orm";
+import { pitchCompetitions, users, businesses } from "@/db/schema";
+
+type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
+  user: InferSelectModel<typeof users>;
+  business: InferSelectModel<typeof businesses>;
+};
+type User = InferSelectModel<typeof users>;
+type Business = InferSelectModel<typeof businesses>;
 
 interface PitchCompetitionClientPageProps {
-  initialEntries: any[]; // Replace 'any' with actual type
-  initialUsers: any[]; // Replace 'any' with actual type
-  initialBusinesses: any[]; // Replace 'any' with actual type
+  initialEntries: PitchCompetitionEntry[];
+  initialUsers: User[];
+  initialBusinesses: Business[];
 }
 
 export default function PitchCompetitionClientPage({ initialEntries, initialUsers, initialBusinesses }: PitchCompetitionClientPageProps) {
