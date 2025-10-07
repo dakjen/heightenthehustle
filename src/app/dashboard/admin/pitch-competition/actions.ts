@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { pitchCompetitions, users, businesses } from "@/db/schema";
+import { pitchCompetitions, users, businesses, locations } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function getPitchCompetitionEntries() {
@@ -9,7 +9,11 @@ export async function getPitchCompetitionEntries() {
     const entries = await db.query.pitchCompetitions.findMany({
       with: {
         user: true,
-        business: true,
+        business: {
+          with: {
+            location: true,
+          },
+        },
       },
     });
     return entries;

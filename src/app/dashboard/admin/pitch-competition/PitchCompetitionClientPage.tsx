@@ -5,12 +5,14 @@ import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
 import AddProjectModal from "./AddProjectModal";
 import { addProject } from "./server-actions";
 import { InferSelectModel } from "drizzle-orm";
-import { pitchCompetitions, users, businesses } from "@/db/schema";
+import { pitchCompetitions, users, businesses, locations } from "@/db/schema";
 import Link from "next/link";
 
 type PitchCompetitionEntry = InferSelectModel<typeof pitchCompetitions> & {
   user: InferSelectModel<typeof users>;
-  business: InferSelectModel<typeof businesses>;
+  business: InferSelectModel<typeof businesses> & {
+    location: InferSelectModel<typeof locations> | null;
+  };
 };
 type User = InferSelectModel<typeof users>;
 type Business = InferSelectModel<typeof businesses>;
@@ -58,16 +60,16 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Business Name
+                  Name
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Owner Name
+                  Location
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Pitch Video
+                  Date
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Pitch Deck
+                  Funding
                 </th>
               </tr>
             </thead>
@@ -79,21 +81,9 @@ export default function PitchCompetitionClientPage({ initialProjects, initialUse
                       {project.business.businessName}
                     </Link>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.user.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {project.pitchVideoUrl && (
-                      <a href={project.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
-                        View Video
-                      </a>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {project.pitchDeckUrl && (
-                      <a href={project.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900">
-                        View Deck
-                      </a>
-                    )}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.business.location?.name || 'N/A'}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(project.submittedAt).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0</td> {/* Placeholder for funding */}
                 </tr>
               ))}
             </tbody>
