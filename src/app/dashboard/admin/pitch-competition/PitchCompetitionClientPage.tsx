@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { getPitchCompetitionEntries, getUsers, getBusinesses } from "./actions";
-import AddProjectModal from "./AddProjectModal";
-import { addProject } from "./server-actions";
+// import AddProjectModal from "./AddProjectModal";
+// import { addProject } from "./server-actions";
 
 interface PitchCompetitionClientPageProps {
   initialEntries: any[]; // Replace 'any' with actual type
@@ -22,7 +22,7 @@ export default function PitchCompetitionClientPage({ initialEntries, initialUser
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
-        <AddProjectModal users={users} businesses={businesses} onAdd={addProject} />
+        {/* <AddProjectModal users={users} businesses={businesses} onAdd={addProject} /> */}
       </div>
 
       <div className="mt-6 border-b border-gray-200">
