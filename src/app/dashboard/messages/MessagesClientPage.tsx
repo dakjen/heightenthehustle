@@ -138,6 +138,27 @@ export default function MessagesPage({
 
       {activeTab === 'pending-requests' && !isAdmin && (
         <div className="mt-8">
+          <div className="mb-8 p-6 bg-white shadow-md rounded-lg">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Create Collaboration Request</h2>
+            <form action={async (formData) => {
+              console.log("Collaboration request created:", formData.get("business-search"));
+            }}>
+              <div className="flex items-center">
+                <input
+                  type="search"
+                  name="business-search"
+                  placeholder="Search for a business..."
+                  className="flex-grow rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                />
+                <button
+                  type="submit"
+                  className="ml-4 inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  Send Request
+                </button>
+              </div>
+            </form>
+          </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>
           <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
             <p className="text-gray-500">This feature is coming soon.</p>
