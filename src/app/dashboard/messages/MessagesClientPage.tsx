@@ -171,7 +171,7 @@ export default function MessagesPage({
               <p className="text-gray-500">No messages yet.</p>
             ) : (
               individualMessages.map((msg) => (
-                <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-blue-100 self-end' : 'bg-gray-100 self-start'}`}>
+                <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'}`}>
                   <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : "User"} to {msg.senderId === currentUserId ? "User" : "You"}:</p>
                   <p className="text-gray-800">{msg.content}</p>
                   <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
