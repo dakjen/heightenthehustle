@@ -183,14 +183,18 @@ export async function getAvailableDemographics() {
   }
 }
 
-export async function getIndividualMessages(currentUserId: number, otherUserId: number) {
+export async function getIndividualMessages(currentUserId: number) {
   try {
     const messages = await db.query.individualMessages.findMany({
       where: or(
-        and(eq(individualMessages.senderId, currentUserId), eq(individualMessages.recipientId, otherUserId)),
-        and(eq(individualMessages.senderId, otherUserId), eq(individualMessages.recipientId, currentUserId))
+        eq(individualMessages.senderId, currentUserId),
+        eq(individualMessages.recipientId, currentUserId)
       ),
       orderBy: asc(individualMessages.timestamp),
+      with: {
+        sender: { columns: { id: true, name: true, email: true } },
+        recipient: { columns: { id: true, name: true, email: true } },
+      },
     });
     return messages;
   } catch (error) {

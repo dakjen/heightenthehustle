@@ -1,5 +1,5 @@
 import { getSession } from "@/app/login/actions";
-import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics } from "./actions";
+import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
 
 interface MassMessage {
@@ -27,29 +27,48 @@ interface Demographic {
   name: string;
 }
 
+interface IndividualMessage {
+  id: number;
+  senderId: number;
+  recipientId: number;
+  content: string;
+  timestamp: Date;
+  read: boolean;
+  replyToMessageId: number | null;
+  sender: User;
+  recipient: User;
+}
+
 interface MessagesPageProps {
   isAdmin: boolean;
   initialInternalUsers: User[];
   initialMassMessages: MassMessage[];
   initialLocations: Location[];
   initialDemographics: Demographic[];
+  initialIndividualMessages: IndividualMessage[];
   currentUserId: number | null;
 }
 
 export default async function MessagesPage() {
   const session = await getSession();
   const isAdmin = session?.user?.role === 'admin';
+  const currentUserId = session?.user?.id || null;
 
   let initialInternalUsers: User[] = [];
   let initialMassMessages: MassMessage[] = [];
   let initialLocations: Location[] = [];
   let initialDemographics: Demographic[] = [];
+  let initialIndividualMessages: IndividualMessage[] = [];
 
   if (isAdmin) {
     initialInternalUsers = await getAllInternalUsers();
     initialMassMessages = await getMassMessages();
     initialLocations = await getAvailableLocations();
     initialDemographics = await getAvailableDemographics();
+  }
+
+  if (currentUserId) {
+    initialIndividualMessages = await getIndividualMessages(currentUserId);
   }
 
   return (
@@ -59,7 +78,8 @@ export default async function MessagesPage() {
       initialMassMessages={initialMassMessages}
       initialLocations={initialLocations}
       initialDemographics={initialDemographics}
-      currentUserId={session?.user?.id || null}
+      initialIndividualMessages={initialIndividualMessages}
+      currentUserId={currentUserId}
     />
   );
 }
