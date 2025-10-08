@@ -214,8 +214,8 @@ export async function getPendingRequests() {
         // A more robust solution would involve fetching sender/recipient roles
       ),
       with: {
-        sender: { columns: { name: true, email: true } },
-        recipient: { columns: { name: true, email: true } },
+        sender: { columns: { id: true, name: true, email: true } },
+        recipient: { columns: { id: true, name: true, email: true } },
       },
       orderBy: asc(individualMessages.timestamp),
     });
