@@ -82,6 +82,7 @@ export default function MessagesPage({
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
 
 
+
   useEffect(() => {
     if (activeTab === 'pending-requests' && !isAdmin) {
       getPendingRequests().then(setPendingRequests);
@@ -144,8 +145,41 @@ export default function MessagesPage({
         </div>
       </div>
 
-          {/* Message Input Form */}
-          <form action={sendAction} className="mt-8 max-w-2xl p-6 bg-white shadow-md rounded-lg">
+      {activeTab === 'pending-requests' && !isAdmin && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>
+          <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
+            {pendingRequests.length === 0 ? (
+              <p className="text-gray-500">No pending requests.</p>
+            ) : (
+              pendingRequests.map((req) => (
+                <div key={req.id} className="mb-4 p-3 bg-gray-100 rounded-lg">
+                  <p className="text-sm font-semibold">From: {req.sender.name} ({req.sender.email})</p>
+                  <p className="text-gray-800">{req.content}</p>
+                  <p className="text-xs text-gray-500 text-right">{req.timestamp.toLocaleString()}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'correspondence' && !isAdmin && (
+        <div className="mt-8 flex flex-col h-[calc(100vh-200px)]">
+          <div className="flex-grow overflow-y-auto p-6 bg-white shadow-md rounded-lg">
+            {individualMessages.length === 0 ? (
+              <p className="text-gray-500">No messages yet.</p>
+            ) : (
+              individualMessages.map((msg) => (
+                <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-blue-100 self-end' : 'bg-gray-100 self-start'}`}>
+                  <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : "User"} to {msg.senderId === currentUserId ? "User" : "You"}:</p>
+                  <p className="text-gray-800">{msg.content}</p>
+                  <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
+                </div>
+              ))
+            )}
+          </div>
+          <form action={sendAction} className="mt-4 p-6 bg-white shadow-md rounded-lg">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">New Message</h2>
 
             {/* Recipient Selection */}
@@ -181,7 +215,7 @@ export default function MessagesPage({
               <textarea
                 id="messageContent"
                 name="messageContent"
-                rows={4}
+                rows={2}
                 value={messageContent}
                 onChange={(e) => setMessageContent(e.target.value)}
                 placeholder="Type your message here..."
@@ -205,43 +239,7 @@ export default function MessagesPage({
                 Send Message
               </button>
             </div>
-</form>
-
-      {activeTab === 'pending-requests' && !isAdmin && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>
-          <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
-            {pendingRequests.length === 0 ? (
-              <p className="text-gray-500">No pending requests.</p>
-            ) : (
-              pendingRequests.map((req) => (
-                <div key={req.id} className="mb-4 p-3 bg-gray-100 rounded-lg">
-                  <p className="text-sm font-semibold">From: {req.sender.name} ({req.sender.email})</p>
-                  <p className="text-gray-800">{req.content}</p>
-                  <p className="text-xs text-gray-500 text-right">{req.timestamp.toLocaleString()}</p>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      )}
-
-      {activeTab === 'correspondence' && !isAdmin && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Correspondence</h2>
-          <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
-            {individualMessages.length === 0 ? (
-              <p className="text-gray-500">No messages yet.</p>
-            ) : (
-              individualMessages.map((msg) => (
-                <div key={msg.id} className={`mb-4 p-3 rounded-lg ${msg.senderId === currentUserId ? 'bg-blue-100' : 'bg-gray-100'}`}>
-                  <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : "User"} to {msg.senderId === currentUserId ? "User" : "You"}:</p>
-                  <p className="text-gray-800">{msg.content}</p>
-                  <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
-                </div>
-              ))
-            )}
-          </div>
+          </form>
         </div>
       )}
 
