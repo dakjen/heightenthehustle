@@ -1,13 +1,11 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { BusinessWithDemographic, Demographic, locations, BusinessWithLocation } from "@/db/schema";
+import { BusinessWithDemographic, Demographic, locations, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
-import { getAvailableLocations } from "../../messages/actions";
-import { type InferSelectModel } from 'drizzle-orm';
 
-type Location = InferSelectModel<typeof locations>;
+
 
 type FormState = {
   message: string;
@@ -17,20 +15,12 @@ type FormState = {
 interface BusinessDetailsFormProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
+  availableLocations: Location[];
 }
 
-export default function BusinessDetailsForm({ initialBusiness, availableDemographics }: BusinessDetailsFormProps) {
+export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
   const [selectedDemographicIds, setSelectedDemographicIds] = useState<number[]>(initialBusiness.demographicIds || []);
   const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
-  const [availableLocations, setAvailableLocations] = useState<Location[]>([]);
-
-  useEffect(() => {
-    async function fetchLocations() {
-      const locations = await getAvailableLocations();
-      setAvailableLocations(locations);
-    }
-    fetchLocations();
-  }, []);
 
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, undefined);
 

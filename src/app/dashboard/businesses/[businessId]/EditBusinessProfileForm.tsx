@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { Business, BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
+import { Business, BusinessWithDemographic, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessProfile } from "../actions";
 import { useFormState } from "react-dom";
 import Image from "next/image";
@@ -19,9 +19,10 @@ type FormState = {
 interface EditBusinessProfileFormProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
+  availableLocations: Location[];
 }
 
-export default function EditBusinessProfileForm({ initialBusiness, availableDemographics }: EditBusinessProfileFormProps) {
+export default function EditBusinessProfileForm({ initialBusiness, availableDemographics, availableLocations }: EditBusinessProfileFormProps) {
   const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
@@ -218,6 +219,26 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
           defaultValue={business.zipCode || ''}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         />
+      </div>
+
+      {/* Location */}
+      <div>
+        <label htmlFor="locationId" className="block text-sm font-medium text-gray-700">
+          Location
+        </label>
+        <select
+          id="locationId"
+          name="locationId"
+          defaultValue={business.locationId || ''}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+        >
+          <option value="">Select Location</option>
+          {availableLocations.map(location => (
+            <option key={location.id} value={location.id}>
+              {location.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Phone */}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
-import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation } from "@/db/schema";
+import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation, type Location as LocationType } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
@@ -13,10 +13,11 @@ import PitchCompetitionDetails, { PitchCompetition } from "./PitchCompetition";
 interface BusinessDetailClientPageProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
+  availableLocations: LocationType[];
   pitchCompetition: PitchCompetition | null | undefined;
 }
 
-export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, pitchCompetition }: BusinessDetailClientPageProps) {
+export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, availableLocations, pitchCompetition }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
@@ -128,7 +129,7 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
 
       {activeTab === 'business-details' && (
         <div className="mt-8">
-          <BusinessDetailsForm initialBusiness={business} availableDemographics={availableDemographics} />
+          <BusinessDetailsForm initialBusiness={business} availableDemographics={availableDemographics} availableLocations={availableLocations} />
         </div>
       )}
 
@@ -140,7 +141,7 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
 
       {activeTab === 'edit' && (
         <div className="mt-8">
-          <EditBusinessProfileForm initialBusiness={business} availableDemographics={availableDemographics} />
+          <EditBusinessProfileForm initialBusiness={business} availableDemographics={availableDemographics} availableLocations={availableLocations} />
         </div>
       )}
 
