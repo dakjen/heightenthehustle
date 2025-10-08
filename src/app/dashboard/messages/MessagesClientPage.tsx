@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getIndividualMessages, getPendingRequests } from "./actions";
+import { sendMessage, sendMassMessage, getIndividualMessages } from "./actions";
 import { useFormState } from "react-dom";
 
 interface Message {
@@ -76,18 +76,9 @@ export default function MessagesPage({
   const [recipient, setRecipient] = useState("admin");
   const [messageContent, setMessageContent] = useState("");
   const [activeTab, setActiveTab] = useState(isAdmin ? "mass-messages" : "correspondence");
-  const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
   const [individualMessages, setIndividualMessages] = useState<Message[]>(initialIndividualMessages);
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
-
-
-
-  useEffect(() => {
-    if (activeTab === 'pending-requests' && !isAdmin) {
-      getPendingRequests().then(setPendingRequests);
-    }
-  }, [activeTab, isAdmin]);
 
   const handleLocationChange = (locationId: number) => {
     setSelectedLocations(prev =>
@@ -149,17 +140,7 @@ export default function MessagesPage({
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>
           <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
-            {pendingRequests.length === 0 ? (
-              <p className="text-gray-500">No pending requests.</p>
-            ) : (
-              pendingRequests.map((req) => (
-                <div key={req.id} className="mb-4 p-3 bg-gray-100 rounded-lg">
-                  <p className="text-sm font-semibold">From: {req.sender.name} ({req.sender.email})</p>
-                  <p className="text-gray-800">{req.content}</p>
-                  <p className="text-xs text-gray-500 text-right">{req.timestamp.toLocaleString()}</p>
-                </div>
-              ))
-            )}
+            <p className="text-gray-500">This feature is coming soon.</p>
           </div>
         </div>
       )}

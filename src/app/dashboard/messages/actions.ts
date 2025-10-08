@@ -203,25 +203,3 @@ export async function getIndividualMessages(currentUserId: number) {
   }
 }
 
-export async function getPendingRequests() {
-  try {
-    const pendingRequests = await db.query.individualMessages.findMany({
-      where: and(
-        eq(individualMessages.read, false),
-        // Assuming external users have role 'external' and internal users have role 'internal' or 'admin'
-        // This would require joining with the users table to check roles
-        // For now, we'll assume sender is external and recipient is internal/admin
-        // A more robust solution would involve fetching sender/recipient roles
-      ),
-      with: {
-        sender: { columns: { id: true, name: true, email: true } },
-        recipient: { columns: { id: true, name: true, email: true } },
-      },
-      orderBy: asc(individualMessages.timestamp),
-    });
-    return pendingRequests;
-  } catch (error) {
-    console.error("Error fetching pending requests:", error);
-    return [];
-  }
-}
