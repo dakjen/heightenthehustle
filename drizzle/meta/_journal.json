@@ -141,6 +141,13 @@
       "when": 1760019216609,
       "tag": "0019_brave_pete_wisdom",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1760020358248,
+      "tag": "0020_chubby_tony_stark",
+      "breakpoints": true
     }
   ]
 }
