@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { sendMessage, sendMassMessage, getIndividualMessages } from "./actions";
+import { searchBusinesses } from "../businesses/actions";
+import { Business } from "@/db/schema";
 import { useFormState } from "react-dom";
 
 interface Message {
@@ -79,6 +81,14 @@ export default function MessagesPage({
   const [individualMessages, setIndividualMessages] = useState<Message[]>(initialIndividualMessages);
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Business[]>([]);
+
+  useEffect(() => {
+    if (searchQuery.length > 2) {
+      searchBusinesses(searchQuery).then(setSearchResults);
+    }
+  }, [searchQuery]);
 
   const handleLocationChange = (locationId: number) => {
     setSelectedLocations(prev =>
@@ -141,13 +151,16 @@ export default function MessagesPage({
           <div className="mb-8 p-6 bg-white shadow-md rounded-lg">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Create Collaboration Request</h2>
             <form action={async (formData) => {
-              console.log("Collaboration request created:", formData.get("business-search"));
+              const selectedBusinessId = formData.get("business-id");
+              console.log("Collaboration request created for business:", selectedBusinessId);
             }}>
               <div className="flex items-center">
                 <input
                   type="search"
                   name="business-search"
                   placeholder="Search for a business..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   className="flex-grow rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
                 />
                 <button
@@ -157,6 +170,18 @@ export default function MessagesPage({
                   Send Request
                 </button>
               </div>
+              {searchResults.length > 0 && (
+                <ul className="mt-4 border border-gray-200 rounded-md">
+                  {searchResults.map((business) => (
+                    <li key={business.id} className="p-2 border-b border-gray-200">
+                      <label className="flex items-center">
+                        <input type="radio" name="business-id" value={business.id} className="mr-2" />
+                        {business.businessName}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </form>
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Requests</h2>

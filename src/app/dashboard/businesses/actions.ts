@@ -401,3 +401,15 @@ export async function getPitchCompetitionByBusinessId(businessId: number) {
     return null;
   }
 }
+
+export async function searchBusinesses(query: string): Promise<Business[]> {
+  try {
+    const allBusinesses = await db.query.businesses.findMany({
+      where: like(businesses.businessName, `%${query}%`),
+    });
+    return allBusinesses;
+  } catch (error) {
+    console.error("Error searching businesses:", error);
+    return [];
+  }
+}
