@@ -185,7 +185,7 @@ export default function DownloadDataButton() {
       <button
         onClick={handleClick}
         disabled={isLoading}
-        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 disabled:bg-gray-300"
       >
         {isLoading ? "Downloading..." : "Download All Data (CSV)"}
       </button>
