@@ -9,6 +9,7 @@ interface BusinessFilters {
   businessType?: string;
   businessTaxStatus?: string;
   isArchived?: boolean;
+  includeOptedOut?: boolean;
 }
 
 export async function getAllBusinesses(searchQuery: string, filters: BusinessFilters) {
@@ -30,6 +31,10 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
     conditions.push(eq(businesses.isArchived, false));
   } else if (filters.isArchived === true) {
     conditions.push(eq(businesses.isArchived, true));
+  }
+
+  if (!filters.includeOptedOut) {
+    conditions.push(eq(users.isOptedOut, false));
   }
 
   const allBusinesses = await db.select({

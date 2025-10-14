@@ -83,6 +83,7 @@ export default function MessagesPage({
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Business[]>([]);
+  const [excludeOptedOut, setExcludeOptedOut] = useState(true);
 
   useEffect(() => {
     if (searchQuery.length > 2) {
@@ -333,6 +334,23 @@ export default function MessagesPage({
                   </label>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Opt-out Toggle */}
+          <div className="mt-4">
+            <div className="flex items-center">
+              <input
+                id="excludeOptedOut"
+                name="excludeOptedOut"
+                type="checkbox"
+                checked={excludeOptedOut}
+                onChange={(e) => setExcludeOptedOut(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label htmlFor="excludeOptedOut" className="ml-2 text-sm text-gray-900">
+                Exclude users who have opted out
+              </label>
             </div>
           </div>
 

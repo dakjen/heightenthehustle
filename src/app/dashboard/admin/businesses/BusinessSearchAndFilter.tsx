@@ -40,6 +40,7 @@ export default function BusinessSearchAndFilter() {
   const businessTypeFilter = searchParams.get("businessType") || "";
   const businessTaxStatusFilter = searchParams.get("businessTaxStatus") || "";
   const isArchivedFilter = searchParams.get("isArchived") === "true";
+  const includeOptedOutFilter = searchParams.get("includeOptedOut") === "true";
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -65,11 +66,12 @@ export default function BusinessSearchAndFilter() {
       businessType: businessTypeFilter || undefined,
       businessTaxStatus: businessTaxStatusFilter || undefined,
       isArchived: isArchivedFilter || undefined,
+      includeOptedOut: includeOptedOutFilter,
     };
     const businessesData = await getAllBusinesses(searchQuery, filters);
     setAllBusinesses(businessesData);
     setLoadingBusinesses(false);
-  }, [searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter]);
+  }, [searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter, includeOptedOutFilter]);
 
   useEffect(() => {
     fetchBusinesses();
@@ -120,9 +122,18 @@ export default function BusinessSearchAndFilter() {
   const handleArchivedToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     if (checked) {
-      router.push(`/dashboard/admin/businesses?${createQueryString("isArchived", "true")}`);
+      router.push(`/dashboard/admin/businesses/manage?${createQueryString("isArchived", "true")}`);
     } else {
-      router.push(`/dashboard/admin/businesses?${deleteQueryString("isArchived")}`);
+      router.push(`/dashboard/admin/businesses/manage?${deleteQueryString("isArchived")}`);
+    }
+  };
+
+  const handleOptedOutToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    if (checked) {
+      router.push(`/dashboard/admin/businesses/manage?${createQueryString("includeOptedOut", "true")}`);
+    } else {
+      router.push(`/dashboard/admin/businesses/manage?${deleteQueryString("includeOptedOut")}`);
     }
   };
 
@@ -176,18 +187,32 @@ export default function BusinessSearchAndFilter() {
         </div>
       </div>
 
-      {/* Archived Toggle */}
-      <div className="flex items-center">
-        <input
-          id="isArchivedFilter"
-          type="checkbox"
-          checked={isArchivedFilter}
-          onChange={handleArchivedToggle}
-          className="h-4 w-4 text-[#910000] focus:ring-[#910000] border-gray-300 rounded"
-        />
-        <label htmlFor="isArchivedFilter" className="ml-2 block text-sm text-gray-900">
-          Show Active Businesses
-        </label>
+      {/* Filter Toggles */}
+      <div className="flex items-center space-x-4">
+        <div className="flex items-center">
+          <input
+            id="isArchivedFilter"
+            type="checkbox"
+            checked={isArchivedFilter}
+            onChange={handleArchivedToggle}
+            className="h-4 w-4 text-[#910000] focus:ring-[#910000] border-gray-300 rounded"
+          />
+          <label htmlFor="isArchivedFilter" className="ml-2 block text-sm text-gray-900">
+            Show Archived Businesses
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="includeOptedOutFilter"
+            type="checkbox"
+            checked={includeOptedOutFilter}
+            onChange={handleOptedOutToggle}
+            className="h-4 w-4 text-[#910000] focus:ring-[#910000] border-gray-300 rounded"
+          />
+          <label htmlFor="includeOptedOutFilter" className="ml-2 block text-sm text-gray-900">
+            Include Opted-Out Users
+          </label>
+        </div>
       </div>
 
       {loadingBusinesses ? (

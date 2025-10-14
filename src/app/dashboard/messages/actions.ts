@@ -95,21 +95,12 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
   }
 
   const massMessageContent = formData.get("massMessageContent") as string;
-  const targetLocationIdsString = formData.get("targetLocationIds") as string;
-  const targetDemographicIdsString = formData.get("targetDemographicIds") as string;
+  const targetLocationIds = formData.getAll("locations").map(id => parseInt(id as string));
+  const targetDemographicIds = formData.getAll("demographics").map(id => parseInt(id as string));
+  const excludeOptedOut = formData.get("excludeOptedOut") === "on";
 
   if (!massMessageContent) {
     return { message: "", error: "Message content is required." };
-  }
-
-  let targetLocationIds: number[] = [];
-  if (targetLocationIdsString) {
-    targetLocationIds = JSON.parse(targetLocationIdsString);
-  }
-
-  let targetDemographicIds: number[] = [];
-  if (targetDemographicIdsString) {
-    targetDemographicIds = JSON.parse(targetDemographicIdsString);
   }
 
   try {
@@ -124,6 +115,7 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
 
     // Find target users based on locations and demographics
     const conditions = [];
+    const userConditions = [];
 
     if (targetLocationIds.length > 0) {
       conditions.push(inArray(businesses.locationId, targetLocationIds));
@@ -132,16 +124,21 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
       conditions.push(arrayOverlaps(businesses.demographicIds, targetDemographicIds));
     }
 
+    if (excludeOptedOut) {
+      userConditions.push(eq(users.isOptedOut, false));
+    }
+
     let targetedUsers: { id: number }[] = [];
 
     if (conditions.length > 0) {
-      targetedUsers = await db.select({ id: users.id })
+      targetedUsers = await db.selectDistinct({ id: users.id }) // Use distinct to avoid duplicate users
         .from(users)
         .innerJoin(businesses, eq(users.id, businesses.userId))
-        .where(and(...conditions));
+        .where(and(...conditions, ...userConditions));
     } else {
-      // If no specific locations or demographics are selected, target all internal users
-      targetedUsers = await db.select({ id: users.id }).from(users).where(eq(users.role, 'internal'));
+      // If no specific locations or demographics are selected, target all users that match the userConditions
+      userConditions.push(eq(users.role, 'internal')); // Original logic was to target internal users
+      targetedUsers = await db.select({ id: users.id }).from(users).where(and(...userConditions));
     }
 
     // Send individual messages to targeted users

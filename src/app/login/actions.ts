@@ -21,6 +21,7 @@ interface UserSession {
   personalState: string | null;
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
+  isOptedOut: boolean;
 }
 
 // Extend JWTPayload to include our user session data

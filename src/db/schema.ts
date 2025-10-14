@@ -21,6 +21,7 @@ export const users = pgTable('users', {
   personalState: varchar('personal_state', { length: 2 }), // New field
   personalZipCode: varchar('personal_zip_code', { length: 10 }), // New field
   profilePhotoUrl: text('profile_photo_url'), // New field
+  isOptedOut: boolean('is_opted_out').notNull().default(false),
 });
 
 export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion']);
