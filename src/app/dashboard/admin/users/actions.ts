@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
+import { getAllBusinesses } from "../businesses/actions"; // Added import
 
 type FormState = {
   message: string;
@@ -113,4 +114,24 @@ export async function updateUser(prevState: FormState, formData: FormData): Prom
     console.error("Error updating user:", error);
     return { message: "", error: "Failed to update user." };
   }
+}
+
+export async function downloadAllData() {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    throw new Error("Unauthorized");
+  }
+
+  const usersData = await getAllUsers();
+  const businessesData = await getAllBusinesses("", {});
+
+  // Remove sensitive information from users
+  const sanitizedUsers = usersData.map(({ password, ...user }) => user);
+
+  const allData = {
+    users: sanitizedUsers,
+    businesses: businessesData,
+  };
+
+  return allData;
 }

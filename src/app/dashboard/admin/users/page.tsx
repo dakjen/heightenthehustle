@@ -5,6 +5,7 @@ import UserManagementClientPage from "./UserManagementClientPage"; // New import
 import PermissionsManagementClientPage from "./PermissionsManagementClientPage"; // New import for permissions component
 import { headers } from "next/headers"; // New import for searchParams
 import TabLink from "./TabLink"; // New import for TabLink
+import DownloadDataButton from "./DownloadDataButton";
 
 // Define a type for a single user (matching your schema)
 interface User {
@@ -35,8 +36,13 @@ export default async function UserManagementPage({ searchParams }: { searchParam
 
   return (
     <div className="flex-1 p-6">
-      <h1 className="text-3xl font-bold text-gray-900">Admin User Management</h1>
-      <p className="mt-4 text-gray-700">Manage users and their permissions.</p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Admin User Management</h1>
+          <p className="mt-4 text-gray-700">Manage users and their permissions.</p>
+        </div>
+        <DownloadDataButton />
+      </div>
 
       {/* Tabs */}
       <div className="mt-6 border-b border-gray-200">
