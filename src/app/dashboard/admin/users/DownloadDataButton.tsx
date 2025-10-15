@@ -64,7 +64,7 @@ interface AllData {
 }
 
 // Function to escape CSV fields
-const escapeCSV = (field: any): string => {
+const escapeCSV = (field: string | number | boolean | null | undefined): string => {
   if (field === null || field === undefined) {
     return '""';
   }
