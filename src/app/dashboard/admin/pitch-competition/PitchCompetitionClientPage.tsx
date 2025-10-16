@@ -19,10 +19,15 @@ export default function PitchCompetitionClientPage({ initialProjects }: PitchCom
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddProject = async (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
-    await addProject(project);
-    const updatedEntries = await getPitchCompetitionEntries();
-    setProjects(updatedEntries);
-    setIsModalOpen(false);
+    try {
+      await addProject(project);
+      const updatedEntries = await getPitchCompetitionEntries();
+      setProjects(updatedEntries);
+      setIsModalOpen(false);
+    } catch (error) { 
+      console.error("Failed to add project:", error);
+      alert(`Failed to add project: ${error instanceof Error ? error.message : String(error)}`);
+    }
   };
 
   const [activeTab, setActiveTab] = useState('projects');
