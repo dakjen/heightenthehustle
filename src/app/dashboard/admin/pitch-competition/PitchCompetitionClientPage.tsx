@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { getPitchCompetitionEntries } from "./actions";
-// import AddProjectModal from "./AddProjectModal"; // Removed
-// import { addProject } from "./server-actions"; // Removed
+import AddProjectModal from "./AddProjectModal";
+import { addProject } from "./server-actions";
 import { InferSelectModel } from "drizzle-orm";
 import { pitchCompetitions } from "@/db/schema";
 import Link from "next/link";
@@ -16,10 +16,15 @@ interface PitchCompetitionClientPageProps {
 
 export default function PitchCompetitionClientPage({ initialProjects }: PitchCompetitionClientPageProps) {
   const [projects, setProjects] = useState<PitchCompetitionEntry[]>(JSON.parse(initialProjects));
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // handleAddProject function removed
+  const handleAddProject = async (project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) => {
+    await addProject(project);
+    const updatedEntries = await getPitchCompetitionEntries();
+    setProjects(updatedEntries);
+    setIsModalOpen(false);
+  };
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
   const [activeTab, setActiveTab] = useState('projects');
 
   return (
@@ -27,12 +32,17 @@ export default function PitchCompetitionClientPage({ initialProjects }: PitchCom
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Pitch Competition Management</h1>
         <button
-          onClick={() => console.log("Add Project button clicked!")}
+          onClick={() => setIsModalOpen(true)}
           className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
         >
-          Add Project (Debug)
+          Add Project
         </button>
-        {/* AddProjectModal removed */}
+        {isModalOpen && (
+          <AddProjectModal
+            onAdd={handleAddProject}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
       </div>
 
       <div className="mt-6 border-b border-gray-200">
