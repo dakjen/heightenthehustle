@@ -5,7 +5,8 @@ import UserManagementClientPage from "./UserManagementClientPage"; // New import
 import PermissionsManagementClientPage from "./PermissionsManagementClientPage"; // New import for permissions component
 import { headers } from "next/headers"; // New import for searchParams
 import TabLink from "./TabLink"; // New import for TabLink
-import DownloadDataButton from "./DownloadDataButton";
+import UserDownloadButton from "./UserDownloadButton";
+import BusinessDownloadButton from "./BusinessDownloadButton";
 
 // Define a type for a single user (matching your schema)
 interface User {
@@ -41,7 +42,10 @@ export default async function UserManagementPage({ searchParams }: { searchParam
           <h1 className="text-3xl font-bold text-gray-900">Admin User Management</h1>
           <p className="mt-4 text-gray-700">Manage users and their permissions.</p>
         </div>
-        <DownloadDataButton />
+        <div className="flex space-x-2">
+          <UserDownloadButton />
+          <BusinessDownloadButton />
+        </div>
       </div>
 
       {/* Tabs */}
