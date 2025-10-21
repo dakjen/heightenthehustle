@@ -1,6 +1,6 @@
 import React from "react";
 
-export default async function EditClassPage(props: any) {
+export default async function EditClassPage(props: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
   const resolvedParams = await Promise.resolve(props.params);
   const { classId } = resolvedParams;
 
