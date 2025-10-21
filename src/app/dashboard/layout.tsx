@@ -52,6 +52,7 @@ export default async function DashboardLayout({
           {session.user.role === 'internal' && ( // Show Resources link only for internal users
             <Link href="/dashboard/resources" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Resources</Link>
           )}
+          <Link href="/dashboard/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">HTH Class</Link>
           <Link href="/dashboard/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</Link>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
           {isAdmin && (
@@ -60,6 +61,7 @@ export default async function DashboardLayout({
               <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
               <Link href="/dashboard/admin/businesses/manage" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
               <Link href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
+              <Link href="/dashboard/admin/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin HTH Class</Link>
             </>
           )}
         </nav>

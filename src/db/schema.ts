@@ -169,3 +169,37 @@ export const pitchCompetitionsRelations = relations(pitchCompetitions, ({ one })
     references: [businesses.id],
   }),
 }));
+
+export const classes = pgTable('classes', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  teacherId: integer('teacher_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const lessons = pgTable('lessons', {
+  id: serial('id').primaryKey(),
+  classId: integer('class_id').notNull().references(() => classes.id),
+  title: text('title').notNull(),
+  content: text('content'), // Markdown or rich text content for the lesson
+  order: integer('order').notNull(), // Order of the lesson within a class
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const classesRelations = relations(classes, ({ one, many }) => ({
+  teacher: one(users, {
+    fields: [classes.teacherId],
+    references: [users.id],
+  }),
+  lessons: many(lessons),
+}));
+
+export const lessonsRelations = relations(lessons, ({ one }) => ({
+  class: one(classes, {
+    fields: [lessons.classId],
+    references: [classes.id],
+  }),
+}));
