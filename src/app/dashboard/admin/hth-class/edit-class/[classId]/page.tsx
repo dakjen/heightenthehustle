@@ -1,10 +1,7 @@
 import React from 'react';
 
-export default async function EditClassPage({
-  params,
-}: {
-  params: { classId: string };
-}) {
+export default async function EditClassPage(props: { params: { classId: string } }) {
+  const { params } = props;
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Edit Class {params.classId}</h1>
