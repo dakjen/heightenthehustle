@@ -1,11 +1,46 @@
 import React from 'react';
+import Link from 'next/link';
+import { getAllClasses } from './actions'; // Adjust path as needed
 
-export default function AdminHTHClassPage() {
+export default async function AdminHTHClassPage() {
+  const classes = await getAllClasses();
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">HTH Class - Admin View (Teacher)</h1>
-      <p>This is where admins can add and modify lessons and classes.</p>
-      {/* TODO: Implement class and lesson management */}
+
+      <div className="mb-6">
+        <Link href="/dashboard/admin/hth-class/add-class" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Add New Class
+        </Link>
+      </div>
+
+      <h2 className="text-2xl font-bold mb-4">Existing Classes</h2>
+      {classes.length === 0 ? (
+        <p>No classes found. Add a new class to get started.</p>
+      ) : (
+        <ul className="space-y-4">
+          {classes.map((classItem) => (
+            <li key={classItem.id} className="bg-white shadow overflow-hidden rounded-md px-6 py-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900">{classItem.title}</h3>
+                  <p className="text-sm text-gray-500">{classItem.description}</p>
+                </div>
+                <div className="flex space-x-2">
+                  <Link href={`/dashboard/admin/hth-class/edit-class/${classItem.id}`} className="text-indigo-600 hover:text-indigo-900">
+                    Edit Class
+                  </Link>
+                  <Link href={`/dashboard/admin/hth-class/add-lesson?classId=${classItem.id}`} className="text-green-600 hover:text-green-900">
+                    Add Lesson
+                  </Link>
+                  {/* TODO: Add Delete Class functionality */}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
