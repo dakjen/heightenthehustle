@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { classes, lessons } from '@/db/schema';
+import { classes, lessons, classTypeEnum } from '@/db/schema'; // Added classTypeEnum
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
@@ -8,16 +8,18 @@ import { revalidatePath } from 'next/cache';
 export async function createClass(formData: FormData) {
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
-  const teacherId = parseInt(formData.get('teacherId') as string); // Assuming teacherId is passed as a string and needs parsing
+  const teacherId = parseInt(formData.get('teacherId') as string);
+  const type = formData.get('type') as 'pre-course' | 'hth-course'; // New type field
 
-  if (!title || !teacherId) {
-    throw new Error('Title and Teacher ID are required to create a class.');
+  if (!title || !teacherId || !type) {
+    throw new Error('Title, Teacher ID, and Type are required to create a class.');
   }
 
   await db.insert(classes).values({
     title,
     description,
     teacherId,
+    type, // Added type
   });
 
   revalidatePath('/dashboard/admin/hth-class');
@@ -26,15 +28,17 @@ export async function createClass(formData: FormData) {
 export async function updateClass(classId: number, formData: FormData) {
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
+  const type = formData.get('type') as 'pre-course' | 'hth-course'; // New type field
 
-  if (!title) {
-    throw new Error('Title is required to update a class.');
+  if (!title || !type) {
+    throw new Error('Title and Type are required to update a class.');
   }
 
   await db.update(classes)
     .set({
       title,
       description,
+      type, // Added type
       updatedAt: new Date(),
     })
     .where(eq(classes.id, classId));

@@ -170,11 +170,14 @@ export const pitchCompetitionsRelations = relations(pitchCompetitions, ({ one })
   }),
 }));
 
+export const classTypeEnum = pgEnum('class_type', ['pre-course', 'hth-course']);
+
 export const classes = pgTable('classes', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
   description: text('description'),
   teacherId: integer('teacher_id').notNull().references(() => users.id),
+  type: classTypeEnum('type').notNull().default('hth-course'), // New type column
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
