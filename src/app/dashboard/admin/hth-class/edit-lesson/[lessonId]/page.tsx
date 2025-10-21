@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
-export default async function EditLessonPage(props: { params: { lessonId: string } }) {
-  const { params } = props;
+export default async function EditLessonPage(props: any) {
+  const resolvedParams = await Promise.resolve(props.params);
+  const { lessonId } = resolvedParams;
+
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Edit Lesson {params.lessonId}</h1>
-      <p>Form to edit lesson with ID: {params.lessonId}.</p>
+      <h1 className="text-3xl font-bold mb-6">Edit Lesson {lessonId}</h1>
+      <p>Form to edit lesson with ID: {lessonId}.</p>
       {/* TODO: Implement form for editing lessons */}
     </div>
   );
