@@ -4,6 +4,7 @@ import { getAllClasses } from './actions'; // Adjust path as needed
 
 export default async function AdminHTHClassPage() {
   const allClasses = await getAllClasses();
+  console.log('All Classes:', allClasses); // Added console.log
   const preCourseClasses = allClasses.filter(cls => cls.type === 'pre-course');
   const hthCourseClasses = allClasses.filter(cls => cls.type === 'hth-course');
 
