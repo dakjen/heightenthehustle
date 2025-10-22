@@ -9,7 +9,8 @@ export async function createClass(formData: FormData) {
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
   const teacherId = parseInt(formData.get('teacherId') as string);
-  const type = formData.get('type') as 'pre-course' | 'hth-course'; // New type field
+  const type = formData.get('type') as 'pre-course' | 'hth-course';
+  const syllabusUrl = formData.get('syllabusUrl') as string | null; // New syllabusUrl field
 
   if (!title || !teacherId || !type) {
     throw new Error('Title, Teacher ID, and Type are required to create a class.');
@@ -19,7 +20,8 @@ export async function createClass(formData: FormData) {
     title,
     description,
     teacherId,
-    type, // Added type
+    type,
+    syllabusUrl, // Added syllabusUrl
   });
 
   revalidatePath('/dashboard/admin/hth-class');
@@ -28,7 +30,8 @@ export async function createClass(formData: FormData) {
 export async function updateClass(classId: number, formData: FormData) {
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
-  const type = formData.get('type') as 'pre-course' | 'hth-course'; // New type field
+  const type = formData.get('type') as 'pre-course' | 'hth-course';
+  const syllabusUrl = formData.get('syllabusUrl') as string | null; // New syllabusUrl field
 
   if (!title || !type) {
     throw new Error('Title and Type are required to update a class.');
@@ -38,7 +41,8 @@ export async function updateClass(classId: number, formData: FormData) {
     .set({
       title,
       description,
-      type, // Added type
+      type,
+      syllabusUrl, // Added syllabusUrl
       updatedAt: new Date(),
     })
     .where(eq(classes.id, classId));

@@ -177,7 +177,8 @@ export const classes = pgTable('classes', {
   title: text('title').notNull(),
   description: text('description'),
   teacherId: integer('teacher_id').notNull().references(() => users.id),
-  type: classTypeEnum('type').notNull().default('hth-course'), // New type column
+  type: classTypeEnum('type').notNull().default('hth-course'),
+  syllabusUrl: text('syllabus_url'), // New syllabusUrl column
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });

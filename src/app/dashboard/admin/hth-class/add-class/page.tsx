@@ -1,15 +1,17 @@
 import React from 'react';
-import { createClass, getInternalAndAdminUsers } from '../actions'; // Added getInternalAndAdminUsers
+import { createClass, getInternalAndAdminUsers } from '../actions';
 import { redirect } from 'next/navigation';
+import SyllabusUploadInput from './SyllabusUploadInput'; // Import the new component
 
-export default async function AddClassPage() { // Made async to fetch users
-  const teachers = await getInternalAndAdminUsers(); // Fetch teachers
+export default async function AddClassPage() {
+  const teachers = await getInternalAndAdminUsers();
 
   async function handleSubmit(formData: FormData) {
     'use server';
     try {
+      // The syllabusUrl will be automatically included in formData from the hidden input
       await createClass(formData);
-      redirect('/dashboard/admin/hth-class'); // Redirect to the admin class list after creation
+      redirect('/dashboard/admin/hth-class');
     } catch (error) {
       console.error('Error creating class:', error);
       // TODO: Display an error message to the user
@@ -40,7 +42,7 @@ export default async function AddClassPage() { // Made async to fetch users
           ></textarea>
         </div>
         <div>
-          <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher</label> {/* Changed label */}
+          <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher</label>
           <select
             id="teacherId"
             name="teacherId"
@@ -66,6 +68,10 @@ export default async function AddClassPage() { // Made async to fetch users
             <option value="pre-course">Pre-Course</option>
             <option value="hth-course">HTH Course</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="syllabus" className="block text-sm font-medium text-gray-700">Syllabus (PDF)</label>
+          <SyllabusUploadInput onUploadSuccess={() => {}} /> {/* onUploadSuccess can be empty for now */}
         </div>
         <button
           type="submit"

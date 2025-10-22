@@ -1,6 +1,7 @@
 import React from 'react';
-import { getClassById, updateClass, getInternalAndAdminUsers } from '../../actions'; // Adjust path as needed
+import { getClassById, updateClass, getInternalAndAdminUsers } from '../../actions';
 import { redirect } from 'next/navigation';
+import SyllabusUploadInput from '../SyllabusUploadInput'; // Import the new component
 
 export default async function EditClassPage(props: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
   const resolvedParams = await Promise.resolve(props.params);
@@ -16,8 +17,9 @@ export default async function EditClassPage(props: any /* eslint-disable-line @t
   async function handleSubmit(formData: FormData) {
     'use server';
     try {
+      // The syllabusUrl will be automatically included in formData from the hidden input
       await updateClass(parseInt(classId), formData);
-      redirect('/dashboard/admin/hth-class'); // Redirect to the admin class list after update
+      redirect('/dashboard/admin/hth-class');
     } catch (error) {
       console.error('Error updating class:', error);
       // TODO: Display an error message to the user
@@ -77,6 +79,10 @@ export default async function EditClassPage(props: any /* eslint-disable-line @t
             <option value="pre-course">Pre-Course</option>
             <option value="hth-course">HTH Course</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="syllabus" className="block text-sm font-medium text-gray-700">Syllabus (PDF)</label>
+          <SyllabusUploadInput onUploadSuccess={() => {}} initialUrl={classItem.syllabusUrl} />
         </div>
         <button
           type="submit"
