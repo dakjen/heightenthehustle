@@ -1,6 +1,6 @@
 import { db } from '@/db';
-import { classes, lessons, classTypeEnum, users } from '@/db/schema'; // Added users
-import { eq, or } from 'drizzle-orm'; // Added or
+import { classes, lessons, classTypeEnum, users, enrollments, enrollmentStatusEnum } from '@/db/schema'; // Added enrollments, enrollmentStatusEnum
+import { eq, or, and } from 'drizzle-orm'; // Added and
 import { revalidatePath } from 'next/cache';
 
 // --- Class Actions ---
@@ -144,4 +144,90 @@ export async function getInternalAndAdminUsers() {
     },
   });
   return internalAndAdminUsers;
+}
+
+// --- Enrollment Actions ---
+
+export async function requestEnrollment(userId: number, classId: number) {
+  // Check if already enrolled or pending
+  const existingEnrollment = await db.query.enrollments.findFirst({
+    where: and(eq(enrollments.userId, userId), eq(enrollments.classId, classId)),
+  });
+
+  if (existingEnrollment) {
+    if (existingEnrollment.status === 'enrolled') {
+      throw new Error('User is already enrolled in this class.');
+    }
+    if (existingEnrollment.status === 'pending') {
+      throw new Error('Enrollment request for this class is already pending.');
+    }
+  }
+
+  await db.insert(enrollments).values({
+    userId,
+    classId,
+    status: 'pending', // Default to pending for requests
+  });
+
+  revalidatePath(`/dashboard/admin/hth-class/enrollment-requests`); // Revalidate admin requests page
+  revalidatePath(`/dashboard/hth-class`); // Revalidate user class list
+}
+
+export async function acceptEnrollment(enrollmentId: number) {
+  await db.update(enrollments)
+    .set({ status: 'enrolled' })
+    .where(eq(enrollments.id, enrollmentId));
+
+  revalidatePath(`/dashboard/admin/hth-class/enrollment-requests`);
+  revalidatePath(`/dashboard/hth-class`);
+  // Revalidate class detail page if needed
+}
+
+export async function rejectEnrollment(enrollmentId: number) {
+  await db.update(enrollments)
+    .set({ status: 'rejected' })
+    .where(eq(enrollments.id, enrollmentId));
+
+  revalidatePath(`/dashboard/admin/hth-class/enrollment-requests`);
+  revalidatePath(`/dashboard/hth-class`);
+  // Revalidate class detail page if needed
+}
+
+export async function getPendingEnrollments() {
+  const pendingRequests = await db.query.enrollments.findMany({
+    where: eq(enrollments.status, 'pending'),
+    with: {
+      user: {
+        columns: { id: true, name: true, email: true },
+      },
+      class: {
+        columns: { id: true, title: true },
+      },
+    },
+  });
+  return pendingRequests;
+}
+
+export async function getEnrolledUsersForClass(classId: number) {
+  const enrolledUsers = await db.query.enrollments.findMany({
+    where: and(eq(enrollments.classId, classId), eq(enrollments.status, 'enrolled')),
+    with: {
+      user: {
+        columns: { id: true, name: true, email: true },
+      },
+    },
+  });
+  return enrolledUsers;
+}
+
+export async function getClassesForUser(userId: number) {
+  const userEnrollments = await db.query.enrollments.findMany({
+    where: eq(enrollments.userId, userId),
+    with: {
+      class: {
+        columns: { id: true, title: true, description: true, type: true, syllabusUrl: true },
+      },
+    },
+  });
+  return userEnrollments;
 }

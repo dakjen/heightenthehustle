@@ -36,6 +36,13 @@
       "when": 1761149467749,
       "tag": "0004_famous_exodus",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1761155447841,
+      "tag": "0005_white_pyro",
+      "breakpoints": true
     }
   ]
 }
