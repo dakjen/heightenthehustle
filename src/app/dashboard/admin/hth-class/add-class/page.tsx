@@ -1,8 +1,10 @@
 import React from 'react';
-import { createClass } from '../actions'; // Adjust path as needed
+import { createClass, getInternalAndAdminUsers } from '../actions'; // Added getInternalAndAdminUsers
 import { redirect } from 'next/navigation';
 
-export default function AddClassPage() {
+export default async function AddClassPage() { // Made async to fetch users
+  const teachers = await getInternalAndAdminUsers(); // Fetch teachers
+
   async function handleSubmit(formData: FormData) {
     'use server';
     try {
@@ -38,16 +40,19 @@ export default function AddClassPage() {
           ></textarea>
         </div>
         <div>
-          <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher ID</label>
-          <input
-            type="number"
+          <label htmlFor="teacherId" className="block text-sm font-medium text-gray-700">Teacher</label> {/* Changed label */}
+          <select
             id="teacherId"
             name="teacherId"
             required
-            // TODO: Replace with a dynamic selection of actual teachers
-            defaultValue={1} // Placeholder for now
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
+          >
+            {teachers.map((teacher) => (
+              <option key={teacher.id} value={teacher.id}>
+                {teacher.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor="type" className="block text-sm font-medium text-gray-700">Class Type</label>

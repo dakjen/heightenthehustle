@@ -1,6 +1,6 @@
 import { db } from '@/db';
-import { classes, lessons, classTypeEnum } from '@/db/schema'; // Added classTypeEnum
-import { eq } from 'drizzle-orm';
+import { classes, lessons, classTypeEnum, users } from '@/db/schema'; // Added users
+import { eq, or } from 'drizzle-orm'; // Added or
 import { revalidatePath } from 'next/cache';
 
 // --- Class Actions ---
@@ -129,4 +129,15 @@ export async function getLessonsByClassId(classId: number) {
     orderBy: lessons.order,
   });
   return classLessons;
+}
+
+export async function getInternalAndAdminUsers() {
+  const internalAndAdminUsers = await db.query.users.findMany({
+    where: or(eq(users.role, 'admin'), eq(users.role, 'internal')),
+    columns: {
+      id: true,
+      name: true,
+    },
+  });
+  return internalAndAdminUsers;
 }
