@@ -1,7 +1,7 @@
 import React from 'react';
 import { createClass, getInternalAndAdminUsers } from '../actions';
 import { redirect } from 'next/navigation';
-import SyllabusUploadInput from './SyllabusUploadInput'; // Import the new component
+import SyllabusUploadInput from '../SyllabusUploadInput'; // Import the new component
 
 export default async function AddClassPage() {
   const teachers = await getInternalAndAdminUsers();
