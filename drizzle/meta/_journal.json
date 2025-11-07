@@ -43,6 +43,13 @@
       "when": 1761155447841,
       "tag": "0005_white_pyro",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1762552773170,
+      "tag": "0006_third_raider",
+      "breakpoints": true
     }
   ]
 }
