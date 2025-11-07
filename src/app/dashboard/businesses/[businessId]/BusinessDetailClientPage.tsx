@@ -14,10 +14,9 @@ interface BusinessDetailClientPageProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
   availableLocations: LocationType[];
-  pitchCompetition: PitchCompetition | null | undefined;
 }
 
-export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, availableLocations, pitchCompetition }: BusinessDetailClientPageProps) {
+export default function BusinessDetailClientPage({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailClientPageProps) {
   const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
@@ -48,12 +47,6 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
             className={`${activeTab === 'edit' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
             Edit
-          </button>
-          <button
-            onClick={() => setActiveTab('pitch-competition')}
-            className={`${activeTab === 'pitch-competition' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-          >
-            Pitch Competition
           </button>
         </nav>
       </div>
@@ -142,12 +135,6 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
       {activeTab === 'edit' && (
         <div className="mt-8">
           <EditBusinessProfileForm initialBusiness={business} availableDemographics={availableDemographics} availableLocations={availableLocations} />
-        </div>
-      )}
-
-      {activeTab === 'pitch-competition' && (
-        <div className="mt-8">
-          <PitchCompetitionDetails pitchCompetition={pitchCompetition} />
         </div>
       )}
     </div>

@@ -2,13 +2,7 @@ import { notFound } from "next/navigation";
 import { getSubmissionById } from "../../server-actions";
 import SubmissionDetailClientPage from "./SubmissionDetailClientPage"; // Renamed from ProjectDetailClientPage
 
-interface SubmissionDetailPageProps {
-  params: {
-    submissionId: string;
-  };
-}
-
-export default async function SubmissionDetailPage({ params }: SubmissionDetailPageProps) {
+export default async function SubmissionDetailPage({ params }: { params: { submissionId:string } }) {
   const submissionId = parseInt(params.submissionId);
 
   if (isNaN(submissionId)) {
