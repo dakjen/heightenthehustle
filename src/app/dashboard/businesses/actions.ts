@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic, BusinessWithLocation, pitchCompetitions } from "@/db/schema";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
 import { eq, like, and, InferSelectModel } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -389,18 +389,6 @@ export async function updateBusinessMaterials(prevState: FormState, formData: Fo
   }
 }
 
-
-export async function getPitchCompetitionByBusinessId(businessId: number) {
-  try {
-    const pitchCompetition = await db.query.pitchCompetitions.findFirst({
-      where: eq(pitchCompetitions.businessId, businessId),
-    });
-    return pitchCompetition;
-  } catch (error) {
-    console.error("Error fetching pitch competition:", error);
-    return null;
-  }
-}
 
 export async function searchBusinesses(query: string): Promise<Business[]> {
   try {

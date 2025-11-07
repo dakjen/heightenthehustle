@@ -4,12 +4,12 @@ import SubmissionDetailClientPage from "./SubmissionDetailClientPage"; // Rename
 
 interface SubmissionDetailPageProps {
   params: {
-    projectId: string;
+    submissionId: string;
   };
 }
 
 export default async function SubmissionDetailPage({ params }: SubmissionDetailPageProps) {
-  const submissionId = parseInt(params.projectId);
+  const submissionId = parseInt(params.submissionId);
 
   if (isNaN(submissionId)) {
     notFound();
