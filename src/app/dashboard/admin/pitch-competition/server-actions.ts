@@ -1,65 +1,51 @@
 'use server';
 
 import { db } from "@/db";
-import { pitchCompetitions, businesses, locations, users } from "@/db/schema";
+import { pitchCompetitionEvents, pitchSubmissions } from "@/db/schema";
 import { revalidatePath } from "next/cache";
-import { eq, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 
-export async function addProject(project: { projectName: string; projectLocation: string; submissionDate: string; pitchVideoUrl: string; pitchDeckUrl: string; }) {
+export async function createPitchCompetitionEvent(event: {
+  name: string;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
+}) {
   const session = await getSession();
-  if (!session || !session.user) {
-    throw new Error("User not authenticated.");
+  if (!session || session.user.role !== 'admin') {
+    throw new Error("Unauthorized: Only admins can create competition events.");
   }
 
-  // For now, we'll use the current user's ID as the userId for the pitch competition
-  // and create a dummy business if needed, or link to an existing one.
-  // This part needs refinement based on actual business creation/selection flow.
-  let businessId: number;
-  let locationId: number;
-
-  // Find or create location
-  const existingLocation = await db.query.locations.findFirst({
-    where: eq(locations.name, project.projectLocation),
+  await db.insert(pitchCompetitionEvents).values({
+    ...event,
+    createdById: session.user.id,
   });
 
-  if (existingLocation) {
-    locationId = existingLocation.id;
-  } else {
-    const newLocation = await db.insert(locations).values({ name: project.projectLocation }).returning({ id: locations.id });
-    locationId = newLocation[0].id;
-  }
-
-  // Find or create business
-  const existingBusiness = await db.query.businesses.findFirst({
-    where: and(eq(businesses.businessName, project.projectName), eq(businesses.locationId, locationId)),
-  });
-
-  if (existingBusiness) {
-    businessId = existingBusiness.id;
-  } else {
-    // Create a dummy business for the project if it doesn't exist
-    const newBusiness = await db.insert(businesses).values({
-      userId: session.user.id,
-      businessName: project.projectName,
-      ownerName: session.user.name, // Assuming current user is owner
-      percentOwnership: "100",
-      businessType: "Sole Proprietorship", // Default type
-      businessTaxStatus: "Not Applicable", // Default status
-      businessIndustry: "General", // Default industry
-      locationId: locationId,
-    }).returning({ id: businesses.id });
-    businessId = newBusiness[0].id;
-  }
-
-  await db.insert(pitchCompetitions).values({
-    userId: session.user.id,
-    businessId: businessId,
-    projectName: project.projectName,
-    projectLocation: project.projectLocation,
-    pitchVideoUrl: project.pitchVideoUrl,
-    pitchDeckUrl: project.pitchDeckUrl,
-    submittedAt: new Date(project.submissionDate),
-  });
   revalidatePath("/dashboard/admin/pitch-competition");
+}
+
+export async function getPitchCompetitionEvents() {
+  return await db.query.pitchCompetitionEvents.findMany({
+    orderBy: (events, { desc }) => [desc(events.createdAt)],
+  });
+}
+
+export async function getPitchSubmissionsForEvent(eventId: number) {
+  return await db.query.pitchSubmissions.findMany({
+    where: eq(pitchSubmissions.competitionEventId, eventId),
+    with: {
+      user: true, // Include user details with each submission
+    },
+    orderBy: (submissions, { desc }) => [desc(submissions.submittedAt)],
+  });
+}
+
+export async function getSubmissionById(submissionId: number) {
+  return await db.query.pitchSubmissions.findFirst({
+    where: eq(pitchSubmissions.id, submissionId),
+    with: {
+      user: true, // Include user details
+    },
+  });
 }

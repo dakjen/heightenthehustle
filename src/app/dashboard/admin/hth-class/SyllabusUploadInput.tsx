@@ -47,9 +47,13 @@ export default function SyllabusUploadInput({ onUploadSuccess, initialUrl }: Syl
       const newBlob = await response.json();
       setUploadedUrl(newBlob.url);
       onUploadSuccess(newBlob.url);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error uploading syllabus:', err);
-      setError(err.message || 'Failed to upload file.');
+      if (err instanceof Error) {
+        setError(err.message || 'Failed to upload file.');
+      } else {
+        setError('An unknown error occurred.');
+      }
     } finally {
       setUploading(false);
     }

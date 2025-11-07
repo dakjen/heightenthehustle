@@ -93,10 +93,20 @@ export const individualMessages = pgTable('individual_messages', {
   replyToMessageId: integer('reply_to_message_id').references((): AnyPgColumn => individualMessages.id),
 });
 
-export const pitchCompetitions = pgTable('pitch_competitions', {
+export const pitchCompetitionEvents = pgTable('pitch_competition_events', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  description: text('description'),
+  startDate: timestamp('start_date', { withTimezone: true }),
+  endDate: timestamp('end_date', { withTimezone: true }),
+  createdById: integer('created_by_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const pitchSubmissions = pgTable('pitch_submissions', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
-  businessId: integer('business_id').notNull().references(() => businesses.id),
+  competitionEventId: integer('competition_event_id').notNull().references(() => pitchCompetitionEvents.id),
   projectName: text('project_name').notNull(),
   projectLocation: text('project_location').notNull(),
   pitchVideoUrl: text('pitch_video_url'),
@@ -142,6 +152,8 @@ export type BusinessWithLocation = InferSelectModel<typeof businesses> & { locat
 export type BusinessWithDemographicAndLocation = InferSelectModel<typeof businesses> & { demographic: Demographic | null, location: Location | null };
 export type MassMessage = InferSelectModel<typeof massMessages>;
 export type IndividualMessage = InferSelectModel<typeof individualMessages>;
+export type PitchCompetitionEvent = InferSelectModel<typeof pitchCompetitionEvents>;
+export type PitchSubmission = InferSelectModel<typeof pitchSubmissions>;
 
 
 // --- Relations ---
@@ -150,6 +162,8 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   sentMessages: many(individualMessages, { relationName: 'sent_messages' }),
   receivedMessages: many(individualMessages, { relationName: 'received_messages' }),
   enrollments: many(enrollments),
+  createdPitchCompetitionEvents: many(pitchCompetitionEvents),
+  pitchSubmissions: many(pitchSubmissions),
 }));
 
 export const businessesRelations = relations(businesses, ({ one }) => ({
@@ -187,14 +201,22 @@ export const individualMessagesRelations = relations(individualMessages, ({ one 
   }),
 }));
 
-export const pitchCompetitionsRelations = relations(pitchCompetitions, ({ one }) => ({
-  user: one(users, {
-    fields: [pitchCompetitions.userId],
+export const pitchCompetitionEventsRelations = relations(pitchCompetitionEvents, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [pitchCompetitionEvents.createdById],
     references: [users.id],
   }),
-  business: one(businesses, {
-    fields: [pitchCompetitions.businessId],
-    references: [businesses.id],
+  submissions: many(pitchSubmissions),
+}));
+
+export const pitchSubmissionsRelations = relations(pitchSubmissions, ({ one }) => ({
+  user: one(users, {
+    fields: [pitchSubmissions.userId],
+    references: [users.id],
+  }),
+  competitionEvent: one(pitchCompetitionEvents, {
+    fields: [pitchSubmissions.competitionEventId],
+    references: [pitchCompetitionEvents.id],
   }),
 }));
 

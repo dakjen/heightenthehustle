@@ -1,12 +1,12 @@
-import { getPitchCompetitionEntries } from "./actions";
+import { getPitchCompetitionEvents } from "./server-actions";
 import PitchCompetitionClientPage from "./PitchCompetitionClientPage";
 
 export default async function PitchCompetitionPage() {
-  const entries = await getPitchCompetitionEntries();
+  const events = await getPitchCompetitionEvents();
 
   return (
     <PitchCompetitionClientPage
-      initialProjects={JSON.stringify(entries)}
+      initialEvents={JSON.stringify(events)}
     />
   );
 }
