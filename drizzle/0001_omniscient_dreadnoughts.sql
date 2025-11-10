@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "is_opted_out" boolean DEFAULT false NOT NULL;
