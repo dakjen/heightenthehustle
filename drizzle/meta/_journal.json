@@ -57,6 +57,13 @@
       "when": 1762822061471,
       "tag": "0007_romantic_bastion",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1762828647716,
+      "tag": "0008_colossal_harpoon",
+      "breakpoints": true
     }
   ]
 }
