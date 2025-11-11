@@ -312,7 +312,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   if (!isNaN(locationId)) {
-    dataToUpdate.locationId = locationId as typeof businesses.locationId.type;
+    dataToUpdate.locationId = locationId as number | null;
   }
 
   if (Object.keys(dataToUpdate).length === 0) {
