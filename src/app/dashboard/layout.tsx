@@ -48,7 +48,7 @@ export default async function DashboardLayout({
             </Link>
           ))}
           {/* <Link href="/dashboard/heighten-ai" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Heighten.Ai</Link> */}
-          <Link href="/dashboard/messages" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Messages</Link>
+          <Link href="#" className="block py-2.5 px-4 rounded transition duration-200 text-gray-400">Messages <span className="text-xs text-gray-500 ml-2">(Coming Soon)</span></Link>
           {session.user.role === 'internal' && ( // Show Resources link only for internal users
             <Link href="/dashboard/resources" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Resources</Link>
           )}
