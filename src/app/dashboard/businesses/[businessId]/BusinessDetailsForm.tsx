@@ -185,7 +185,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
       <div className="mt-4">
         <label htmlFor="locationId" className="block text-sm font-medium text-gray-700">
-          Location (City)
+          Location (State)
         </label>
         <select
           id="locationId"
@@ -195,13 +195,27 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
           disabled={!isEditing}
         >
-          <option value="">Select City</option>
-          {cityLocations.map(location => (
+          <option value="">Select State</option>
+          {availableLocations.filter(l => l.category === 'State').map(location => (
             <option key={location.id} value={location.id}>
               {location.name}
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="mt-4">
+        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+          City
+        </label>
+        <input
+          id="city"
+          name="city"
+          type="text"
+          defaultValue={initialBusiness.city || ''}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
+        />
       </div>
 
       <div className="mt-4">
