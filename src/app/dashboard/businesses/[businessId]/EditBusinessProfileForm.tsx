@@ -12,8 +12,8 @@ interface Demographic {
 }
 
 type FormState = {
-  message: string;
-  error: string;
+  message?: string;
+  error?: string;
 } | undefined;
 
 interface EditBusinessProfileFormProps {
