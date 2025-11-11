@@ -9,8 +9,8 @@ import { put } from "@vercel/blob";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
 type FormState = {
-  message: string;
-  error: string;
+  message?: string;
+  error?: string;
 } | undefined;
 
 type NewBusiness = InferInsertModel<typeof businesses>; // Define type for new business
