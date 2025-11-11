@@ -13,7 +13,7 @@ export async function createPitchCompetitionEvent(event: {
   endDate?: Date;
 }) {
   const session = await getSession();
-  if (!session || session.user.role !== 'admin') {
+  if (!session || !session.user || session.user.role !== 'admin') {
     throw new Error("Unauthorized: Only admins can create competition events.");
   }
 
