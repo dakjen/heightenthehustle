@@ -14,6 +14,9 @@ interface BusinessDetailsFormProps {
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
+  // State for edit mode
+  const [isEditing, setIsEditing] = useState(false);
+
   // Initialize state for single selections
   const [selectedGenderId, setSelectedGenderId] = useState<number | "">("");
   const [selectedRaceId, setSelectedRaceId] = useState<number | "">("");
@@ -43,7 +46,12 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     setIsTransgender(initialBusiness.demographicIds?.includes(transgenderDemographic?.id as number) || false);
     setIsCisgender(initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false);
 
-  }, [initialBusiness, availableDemographics]);
+    // Exit edit mode after a successful save
+    if (updateState?.message && !updateState.error) {
+      setIsEditing(false);
+    }
+
+  }, [initialBusiness, availableDemographics, updateState]);
 
   // Combine selected demographic IDs for submission
   const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
@@ -94,6 +102,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           value={selectedGenderId}
           onChange={(e) => setSelectedGenderId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
         >
           <option value="">Select Gender</option>
           {genderDemographics.map(demographic => (
@@ -113,6 +122,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
             checked={isTransgender}
             onChange={handleTransgenderChange}
             className="form-checkbox h-5 w-5 text-[#910000]"
+            disabled={!isEditing}
           />
           <span className="ml-2 text-gray-700">Transgender</span>
         </label>
@@ -125,6 +135,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
             checked={isCisgender}
             onChange={handleCisgenderChange}
             className="form-checkbox h-5 w-5 text-[#910000]"
+            disabled={!isEditing}
           />
           <span className="ml-2 text-gray-700">Cisgender</span>
         </label>
@@ -139,6 +150,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           value={selectedRaceId}
           onChange={(e) => setSelectedRaceId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
         >
           <option value="">Select Race</option>
           {raceDemographics.map(demographic => (
@@ -158,6 +170,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           value={selectedReligionId}
           onChange={(e) => setSelectedReligionId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
         >
           <option value="">Select Religion</option>
           {religionDemographics.map(demographic => (
@@ -180,6 +193,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           value={selectedLocationId}
           onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
         >
           <option value="">Select City</option>
           {cityLocations.map(location => (
@@ -200,6 +214,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           value={selectedLocationId}
           onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          disabled={!isEditing}
         >
           <option value="">Select Region</option>
           {regionLocations.map(location => (
@@ -217,13 +232,24 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         <p className="text-sm text-red-600 mt-2">{updateState.error}</p>
       )}
 
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          Save Changes
-        </button>
+      <div className="mt-6 flex justify-end space-x-3">
+        {!isEditing && (
+          <button
+            type="button"
+            onClick={() => setIsEditing(true)}
+            className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Edit Details
+          </button>
+        )}
+        {isEditing && (
+          <button
+            type="submit"
+            className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Save Changes
+          </button>
+        )}
       </div>
     </form>
   );
