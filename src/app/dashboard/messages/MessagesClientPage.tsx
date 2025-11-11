@@ -5,6 +5,7 @@ import { sendMessage, sendMassMessage, getIndividualMessages } from "./actions";
 import { searchBusinesses } from "../businesses/actions";
 import { Business } from "@/db/schema";
 import { useFormState } from "react-dom";
+import { FormState } from "@/types/form-state";
 
 interface Message {
   id: number;
@@ -48,11 +49,6 @@ interface PendingRequest extends Message {
   recipient: { id: number; name: string; email: string };
 }
 
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
-
 interface MessagesPageProps {
   isAdmin: boolean;
   initialInternalUsers: User[];
@@ -72,8 +68,8 @@ export default function MessagesPage({
   initialIndividualMessages,
   currentUserId,
 }: MessagesPageProps) {
-  const [massSendState, massSendAction] = useFormState(sendMassMessage, undefined);
-  const [sendState, sendAction] = useFormState(sendMessage, undefined);
+  const [massSendState, massSendAction] = useFormState<FormState, FormData>(sendMassMessage, { message: "" });
+  const [sendState, sendAction] = useFormState<FormState, FormData>(sendMessage, { message: "" });
   const [selectedRecipientId, setSelectedRecipientId] = useState<number | null>(null);
   const [recipient, setRecipient] = useState("admin");
   const [messageContent, setMessageContent] = useState("");

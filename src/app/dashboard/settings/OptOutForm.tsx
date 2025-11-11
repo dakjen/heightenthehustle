@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import { FormState } from "@/types/form-state";
 import { optOutUser } from "./actions";
-
-const initialState: { message: string; error: string } | undefined = undefined;
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -21,7 +20,7 @@ function SubmitButton() {
 
 export default function OptOutForm({ userName, isOptedOut: initialIsOptedOut }: { userName: string, isOptedOut: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [state, formAction] = useFormState(optOutUser, initialState);
+  const [state, formAction] = useFormState(optOutUser, { message: "" });
   const [isOptedOut, setIsOptedOut] = useState(initialIsOptedOut);
 
   useEffect(() => {

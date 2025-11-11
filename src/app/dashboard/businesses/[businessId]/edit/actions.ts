@@ -10,7 +10,7 @@ import { FormState } from "@/types/form-state";
 export async function updateBusinessProfile(
   prevState: FormState,
   formData: FormData
-) {
+): Promise<FormState> {
   const businessId = formData.get('businessId') as string;
   const businessName = formData.get('businessName') as string;
   const ownerName = formData.get('ownerName') as string;
@@ -28,7 +28,7 @@ export async function updateBusinessProfile(
   const website = formData.get('website') as string;
 
   if (!businessId) {
-    return { error: 'Business ID is required.' };
+    return { message: "", error: 'Business ID is required.' };
   }
 
   try {
@@ -57,6 +57,6 @@ export async function updateBusinessProfile(
     return { message: 'Business profile updated successfully!' };
   } catch (error) {
     console.error('Error updating business profile:', error);
-    return { error: 'Failed to update business profile.' };
+    return { message: "", error: 'Failed to update business profile.' };
   }
 }

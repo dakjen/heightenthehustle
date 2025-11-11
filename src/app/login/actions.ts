@@ -1,5 +1,6 @@
 "use server";
 
+import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users, businesses } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -51,11 +52,7 @@ async function decrypt(input: string): Promise<SessionPayload> {
   return payload as SessionPayload;
 }
 
-export type FormState = {
-  error: string;
-} | undefined;
-
-export async function login(prevState: FormState, formData: FormData) {
+export async function login(prevState: FormState, formData: FormData): Promise<FormState> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -64,13 +61,13 @@ export async function login(prevState: FormState, formData: FormData) {
   });
 
   if (!user) {
-    return { error: "Invalid email or password" };
+    return { message: "", error: "Invalid email or password" };
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    return { error: "Invalid email or password" };
+    return { message: "", error: "Invalid email or password" };
   }
 
   try {
@@ -96,7 +93,7 @@ export async function login(prevState: FormState, formData: FormData) {
       throw error;
     }
     console.error("Login error:", error); // Log other errors for server-side debugging
-    return { error: "An unexpected error occurred during login." };
+    return { message: "", error: "An unexpected error occurred during login." };
   }
 }
 

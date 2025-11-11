@@ -4,6 +4,8 @@ import { useState } from "react";
 import { updateUserPermissions } from "./actions"; // Will create this action
 import { useFormState } from "react-dom";
 
+import { FormState } from "@/types/form-state";
+
 interface User {
   id: number;
   name: string;
@@ -23,14 +25,9 @@ interface PermissionsManagementClientPageProps {
   initialUsers: User[];
 }
 
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
-
 export default function PermissionsManagementClientPage({ initialUsers }: PermissionsManagementClientPageProps) {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [permissionsState, permissionsFormAction] = useFormState<FormState, FormData>(updateUserPermissions, undefined);
+  const [permissionsState, permissionsFormAction] = useFormState<FormState, FormData>(updateUserPermissions, { message: "" });
 
   const handleUserSelect = (userId: number) => {
     const user = initialUsers.find(u => u.id === userId);

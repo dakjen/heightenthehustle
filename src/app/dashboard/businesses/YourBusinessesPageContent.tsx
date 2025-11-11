@@ -37,7 +37,7 @@ export default function YourBusinessesPageContent() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [loadingBusinesses, setLoadingBusinesses] = useState(true);
 
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, undefined);
+  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, { message: "" });
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {

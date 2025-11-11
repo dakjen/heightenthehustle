@@ -1,5 +1,6 @@
 "use server";
 
+import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -7,11 +8,6 @@ import { getSession, encrypt, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import { put } from "@vercel/blob";
 import { cookies } from "next/headers";
-
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
 
 export async function updateProfile(prevState: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();

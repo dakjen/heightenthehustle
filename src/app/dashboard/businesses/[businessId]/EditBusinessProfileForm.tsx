@@ -24,7 +24,7 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
 
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, undefined);
+  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, { message: "" });
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

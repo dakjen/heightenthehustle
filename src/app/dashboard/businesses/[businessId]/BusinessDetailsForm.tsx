@@ -26,7 +26,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   );
   const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
 
-  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, undefined);
+  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
   const genderDemographics = availableDemographics.filter(d => d.category === 'Gender');
   const raceDemographics = availableDemographics.filter(d => d.category === 'Race');

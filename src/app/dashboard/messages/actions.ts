@@ -1,5 +1,6 @@
 "use server";
 
+import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
@@ -13,11 +14,6 @@ async function getLocationIdsByNames(locationNames: string[]): Promise<number[]>
   const existingLocations = await db.select().from(locations).where(inArray(locations.name, locationNames));
   return existingLocations.map(loc => loc.id);
 }
-
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
 
 export async function sendMessage(prevState: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();

@@ -11,7 +11,7 @@ interface BusinessDocumentsProps {
 }
 
 export default function BusinessDocuments({ business }: BusinessDocumentsProps) {
-  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessMaterials, undefined);
+  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessMaterials, { message: "" });
 
   return (
     <div className="mt-8">

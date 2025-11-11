@@ -2,12 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
+import { FormState } from "@/types/form-state";
 import { createUser, getAllUsers, updateUser } from "./actions"; // Import createUser, getAllUsers, and updateUser
-
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
 
 // Define a type for a single user (matching your schema)
 interface User {
@@ -32,11 +28,11 @@ interface UserManagementClientPageProps {
 
 export default function UserManagementClientPage({ initialUsers, isInternalUserView }: UserManagementClientPageProps) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createUser, undefined);
+  const [createState, createFormAction] = useFormState<FormState, FormData>(createUser, { message: "" });
   const [allUsers, setAllUsers] = useState<User[]>(initialUsers); // Initialize with server-fetched users
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateUser, undefined);
+  const [editState, editFormAction] = useFormState<FormState, FormData>(updateUser, { message: "" });
 
   // Re-fetch users after a new one is created or if initialUsers change (though initialUsers should be stable)
   useEffect(() => {

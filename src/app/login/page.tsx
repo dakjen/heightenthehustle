@@ -2,13 +2,10 @@
 
 import { useFormState } from "react-dom";
 import { login } from "./actions";
-
-type FormState = {
-  error: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 export default function LoginPage() {
-  const [state, formAction] = useFormState<FormState, FormData>(login, undefined);
+  const [state, formAction] = useFormState<FormState, FormData>(login, { message: "" });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">

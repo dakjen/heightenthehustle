@@ -1,5 +1,6 @@
 "use server";
 
+import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users, userRole } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -7,11 +8,6 @@ import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
 import { getAllBusinesses } from "../businesses/actions"; // Added import
-
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
 
 export async function getAllUsers() {
   try {

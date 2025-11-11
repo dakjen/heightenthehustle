@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
+import { FormState } from "@/types/form-state";
 import { updateProfile } from "./actions";
 import { getSession } from "@/app/login/actions";
 import Image from "next/image";
@@ -19,17 +20,12 @@ interface UserProfile {
   profilePhotoUrl: string | null;
 }
 
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
-
 const isPlaceholder = (url: string | null | undefined): boolean => {
   return url?.includes('example.com') ?? false;
 };
 
 export default function ProfilePage() {
-  const [state, formAction] = useFormState<FormState, FormData>(updateProfile, undefined);
+  const [state, formAction] = useFormState<FormState, FormData>(updateProfile, { message: "" });
   const [user, setUser] = useState<UserProfile | null>(null); // Use UserProfile type
 
   useEffect(() => {
