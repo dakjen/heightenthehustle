@@ -1,15 +1,13 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { BusinessWithDemographic, Demographic, locations, BusinessWithLocation, Location } from "@/db/schema";
+import { Demographic, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
 
-
-
 type FormState = {
-  message: string;
-  error: string;
+  message?: string;
+  error?: string;
 } | undefined;
 
 interface BusinessDetailsFormProps {
@@ -19,7 +17,16 @@ interface BusinessDetailsFormProps {
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
-  const [selectedDemographicIds, setSelectedDemographicIds] = useState<number[]>(initialBusiness.demographicIds || []);
+  // Initialize state for single selections
+  const [selectedGenderId, setSelectedGenderId] = useState<number | "">(
+    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || ""
+  );
+  const [selectedRaceId, setSelectedRaceId] = useState<number | "">(
+    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || ""
+  );
+  const [selectedReligionId, setSelectedReligionId] = useState<number | "">(
+    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || ""
+  );
   const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
 
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, undefined);
@@ -30,17 +37,15 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const cityLocations = availableLocations.filter(l => l.category === 'City');
   const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
-  const handleDemographicChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const options = Array.from(e.target.options);
-    const selected = options.filter(option => option.selected).map(option => parseInt(option.value));
-    setSelectedDemographicIds(selected);
-  };
+  // Combine selected demographic IDs for submission
+  const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
+    .filter((id): id is number => typeof id === 'number');
 
   return (
     <form action={updateFormAction}>
       <h2 className="text-2xl font-bold">Owner Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
-      <input type="hidden" name="selectedDemographicIds" value={JSON.stringify(selectedDemographicIds)} />
+      <input type="hidden" name="selectedDemographicIds" value={JSON.stringify(combinedDemographicIds)} />
 
       <div className="mt-4">
         <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
@@ -48,10 +53,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </label>
         <select
           id="gender"
-          name="genderDemographicIds"
-          multiple
-          value={selectedDemographicIds.filter(id => genderDemographics.some(d => d.id === id)).map(String)}
-          onChange={handleDemographicChange}
+          name="genderDemographicId"
+          value={selectedGenderId}
+          onChange={(e) => setSelectedGenderId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         >
           <option value="">Select Gender</option>
@@ -69,10 +73,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </label>
         <select
           id="race"
-          name="raceDemographicIds"
-          multiple
-          value={selectedDemographicIds.filter(id => raceDemographics.some(d => d.id === id)).map(String)}
-          onChange={handleDemographicChange}
+          name="raceDemographicId"
+          value={selectedRaceId}
+          onChange={(e) => setSelectedRaceId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         >
           <option value="">Select Race</option>
@@ -90,10 +93,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </label>
         <select
           id="religion"
-          name="religionDemographicIds"
-          multiple
-          value={selectedDemographicIds.filter(id => religionDemographics.some(d => d.id === id)).map(String)}
-          onChange={handleDemographicChange}
+          name="religionDemographicId"
+          value={selectedReligionId}
+          onChange={(e) => setSelectedReligionId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         >
           <option value="">Select Religion</option>
@@ -115,7 +117,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           id="locationId"
           name="locationId"
           value={selectedLocationId}
-          onChange={(e) => setSelectedLocationId(parseInt(e.target.value))}
+          onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         >
           <option value="">Select City</option>
@@ -135,7 +137,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           id="regionId"
           name="regionId"
           value={selectedLocationId}
-          onChange={(e) => setSelectedLocationId(parseInt(e.target.value))}
+          onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         >
           <option value="">Select Region</option>
