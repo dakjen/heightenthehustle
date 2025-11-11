@@ -14,6 +14,7 @@ interface BusinessDetailsFormProps {
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
+  console.log('BusinessDetailsForm: initialBusiness on render', initialBusiness);
   // State for edit mode
   const [isEditing, setIsEditing] = useState(false);
 
@@ -34,17 +35,25 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
   useEffect(() => {
+    console.log('BusinessDetailsForm: useEffect triggered. initialBusiness:', initialBusiness);
     // Re-initialize state when initialBusiness changes (after a successful save)
-    setSelectedGenderId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || "");
-    setSelectedRaceId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || "");
-    setSelectedReligionId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "");
+    const currentGenderId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || "";
+    setSelectedGenderId(currentGenderId);
+    const currentRaceId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || "";
+    setSelectedRaceId(currentRaceId);
+    const currentReligionId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "";
+    setSelectedReligionId(currentReligionId);
     setSelectedLocationId(initialBusiness.locationId || "");
 
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
 
-    setIsTransgender(initialBusiness.demographicIds?.includes(transgenderDemographic?.id as number) || false);
-    setIsCisgender(initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false);
+    const currentIsTransgender = initialBusiness.demographicIds?.includes(transgenderDemographic?.id as number) || false;
+    setIsTransgender(currentIsTransgender);
+    const currentIsCisgender = initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false;
+    setIsCisgender(currentIsCisgender);
+
+    console.log('BusinessDetailsForm: State after useEffect - Gender:', currentGenderId, 'Race:', currentRaceId, 'Religion:', currentReligionId, 'Location:', initialBusiness.locationId, 'Transgender:', currentIsTransgender, 'Cisgender:', currentIsCisgender);
 
     // Exit edit mode after a successful save
     if (updateState?.message && !updateState.error) {

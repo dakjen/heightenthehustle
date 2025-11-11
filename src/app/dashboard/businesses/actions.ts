@@ -291,6 +291,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const businessId = parseInt(formData.get("businessId") as string);
   const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
   const locationId = parseInt(formData.get("locationId") as string);
+  const city = formData.get("city") as string;
 
   if (isNaN(businessId)) {
     return { message: "", error: "Invalid business ID." };
@@ -301,7 +302,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
   }
 
-  const dataToUpdate: { demographicIds?: number[] | null; locationId?: number | null } = {};
+  const dataToUpdate: { demographicIds?: number[] | null; locationId?: number | null; city?: string | null } = {};
 
   if (selectedDemographicIds.length > 0) {
     dataToUpdate.demographicIds = selectedDemographicIds;
@@ -311,6 +312,12 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   if (!isNaN(locationId)) {
     dataToUpdate.locationId = locationId as number | null;
+  }
+
+  if (city !== null && city !== undefined) { // Check for null and undefined to allow empty string
+    dataToUpdate.city = city;
+  } else {
+    dataToUpdate.city = null;
   }
 
   if (Object.keys(dataToUpdate).length === 0) {
