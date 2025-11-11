@@ -303,10 +303,12 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
   }
 
-  const dataToUpdate: { demographicIds?: number[]; locationId?: number } = {};
+  const dataToUpdate: { demographicIds?: number[] | null; locationId?: number | null } = {};
 
   if (selectedDemographicIds.length > 0) {
     dataToUpdate.demographicIds = selectedDemographicIds;
+  } else {
+    dataToUpdate.demographicIds = null; // Explicitly set to null if empty
   }
 
   if (!isNaN(locationId)) {
