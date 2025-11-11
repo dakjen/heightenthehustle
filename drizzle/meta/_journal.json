@@ -64,6 +64,13 @@
       "when": 1762828647716,
       "tag": "0008_colossal_harpoon",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1762900372416,
+      "tag": "0009_white_felicia_hardy",
+      "breakpoints": true
     }
   ]
 }
