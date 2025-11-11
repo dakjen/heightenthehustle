@@ -35,7 +35,7 @@ export async function updateBusinessProfile(
       .set({
         businessName,
         ownerName,
-        percentOwnership: percentOwnership.toString(),
+        percentOwnership: percentOwnership.toString() as string,
         businessType,
         businessTaxStatus,
         businessDescription,
