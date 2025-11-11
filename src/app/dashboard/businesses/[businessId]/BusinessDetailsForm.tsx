@@ -25,6 +25,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || ""
   );
   const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
+  const [isTransgender, setIsTransgender] = useState<boolean>(
+    initialBusiness.demographicIds?.some(id => availableDemographics.find(d => d.id === id)?.name === 'Transgender') || false
+  );
 
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
@@ -37,6 +40,14 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   // Combine selected demographic IDs for submission
   const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
     .filter((id): id is number => typeof id === 'number');
+
+  // Add Transgender ID if checked
+  if (isTransgender) {
+    const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
+    if (transgenderDemographic) {
+      combinedDemographicIds.push(transgenderDemographic.id);
+    }
+  }
 
   return (
     <form action={updateFormAction}>
@@ -61,6 +72,20 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
             </option>
           ))}
         </select>
+      </div>
+
+      {/* Transgender Checkbox */}
+      <div className="mt-4">
+        <label className="inline-flex items-center">
+          <input
+            type="checkbox"
+            name="isTransgender"
+            checked={isTransgender}
+            onChange={(e) => setIsTransgender(e.target.checked)}
+            className="form-checkbox h-5 w-5 text-[#910000]"
+          />
+          <span className="ml-2 text-gray-700">Transgender</span>
+        </label>
       </div>
 
       <div className="mt-4">
