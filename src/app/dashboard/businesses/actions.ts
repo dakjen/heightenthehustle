@@ -8,10 +8,7 @@ import { revalidatePath } from "next/cache";
 import { put } from "@vercel/blob";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
-type FormState = {
-  message?: string;
-  error?: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 type NewBusiness = InferInsertModel<typeof businesses>; // Define type for new business
 

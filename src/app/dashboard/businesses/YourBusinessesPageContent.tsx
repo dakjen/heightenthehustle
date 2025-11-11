@@ -7,10 +7,7 @@ import { SessionPayload, fetchSession } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-type FormState = {
-  message: string;
-  error: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 interface Business {
   id: number;

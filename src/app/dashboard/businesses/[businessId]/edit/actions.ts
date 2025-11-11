@@ -5,8 +5,10 @@ import { businesses } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
+import { FormState } from "@/types/form-state";
+
 export async function updateBusinessProfile(
-  prevState: { message?: string; error?: string } | undefined,
+  prevState: FormState,
   formData: FormData
 ) {
   const businessId = formData.get('businessId') as string;

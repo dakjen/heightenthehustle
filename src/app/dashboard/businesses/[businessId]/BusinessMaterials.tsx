@@ -4,10 +4,7 @@ import { BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
 import { useFormState } from "react-dom";
 import { updateBusinessMaterials } from "../actions";
 
-type FormState = {
-  message?: string;
-  error?: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 interface BusinessDocumentsProps {
   business: BusinessWithLocation;

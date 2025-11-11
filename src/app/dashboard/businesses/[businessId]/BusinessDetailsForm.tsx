@@ -5,10 +5,7 @@ import { Demographic, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useFormState } from "react-dom";
 
-type FormState = {
-  message?: string;
-  error?: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 interface BusinessDetailsFormProps {
   initialBusiness: BusinessWithLocation;

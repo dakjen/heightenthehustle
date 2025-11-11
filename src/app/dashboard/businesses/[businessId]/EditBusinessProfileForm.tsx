@@ -11,10 +11,7 @@ interface Demographic {
   name: string;
 }
 
-type FormState = {
-  message?: string;
-  error?: string;
-} | undefined;
+import { FormState } from "@/types/form-state";
 
 interface EditBusinessProfileFormProps {
   initialBusiness: BusinessWithLocation;
