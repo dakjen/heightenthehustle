@@ -11,15 +11,11 @@ export default function Home() {
           Your one-stop destination for amazing things.
         </p>
         <div className="flex justify-center gap-4">
-          <Link href="/login">
-            <a className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
-              Login
-            </a>
+          <Link href="/login" className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
+            Login
           </Link>
-          <Link href="/create-account">
-            <a className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
-              Create an account
-            </a>
+          <Link href="/create-account" className="px-6 py-3 bg-[#910000] text-white font-semibold rounded-lg shadow-md hover:bg-[#7a0000] transition-colors">
+            Create an account
           </Link>
         </div>
       </div>
