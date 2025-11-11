@@ -143,6 +143,13 @@ export const enrollments = pgTable('enrollments', {
   enrollmentDate: timestamp('enrollment_date', { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const businessToCompetition = pgTable('business_to_competition', {
+  id: serial('id').primaryKey(),
+  businessId: integer('business_id').notNull().references(() => businesses.id),
+  competitionEventId: integer('competition_event_id').notNull().references(() => pitchCompetitionEvents.id),
+  status: text('status').default('assigned'), // e.g., 'assigned', 'participating', 'winner'
+});
+
 // --- Types for InferSelectModel ---
 export type Demographic = InferSelectModel<typeof demographics>;
 export type Location = InferSelectModel<typeof locations>;
@@ -154,6 +161,7 @@ export type MassMessage = InferSelectModel<typeof massMessages>;
 export type IndividualMessage = InferSelectModel<typeof individualMessages>;
 export type PitchCompetitionEvent = InferSelectModel<typeof pitchCompetitionEvents>;
 export type PitchSubmission = InferSelectModel<typeof pitchSubmissions>;
+export type BusinessToCompetition = InferSelectModel<typeof businessToCompetition>;
 
 
 // --- Relations ---
@@ -166,7 +174,7 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   pitchSubmissions: many(pitchSubmissions),
 }));
 
-export const businessesRelations = relations(businesses, ({ one }) => ({
+export const businessesRelations = relations(businesses, ({ one, many }) => ({
   user: one(users, {
     fields: [businesses.userId],
     references: [users.id],
@@ -175,6 +183,7 @@ export const businessesRelations = relations(businesses, ({ one }) => ({
     fields: [businesses.locationId],
     references: [locations.id],
   }),
+  businessToCompetitions: many(businessToCompetition),
 }));
 
 export const massMessagesRelations = relations(massMessages, ({ one }) => ({
@@ -207,6 +216,7 @@ export const pitchCompetitionEventsRelations = relations(pitchCompetitionEvents,
     references: [users.id],
   }),
   submissions: many(pitchSubmissions),
+  businessToCompetitions: many(businessToCompetition),
 }));
 
 export const pitchSubmissionsRelations = relations(pitchSubmissions, ({ one }) => ({
@@ -244,5 +254,16 @@ export const enrollmentsRelations = relations(enrollments, ({ one }) => ({
   class: one(classes, {
     fields: [enrollments.classId],
     references: [classes.id],
+  }),
+}));
+
+export const businessToCompetitionRelations = relations(businessToCompetition, ({ one }) => ({
+  business: one(businesses, {
+    fields: [businessToCompetition.businessId],
+    references: [businesses.id],
+  }),
+  competitionEvent: one(pitchCompetitionEvents, {
+    fields: [businessToCompetition.competitionEventId],
+    references: [pitchCompetitionEvents.id],
   }),
 }));

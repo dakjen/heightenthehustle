@@ -50,6 +50,13 @@
       "when": 1762552773170,
       "tag": "0006_third_raider",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1762822061471,
+      "tag": "0007_romantic_bastion",
+      "breakpoints": true
     }
   ]
 }
