@@ -34,7 +34,11 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
         {activeTab === "info" && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Business Information</h2>
-            <EditBusinessProfileForm initialBusiness={initialBusiness} />
+            <EditBusinessProfileForm
+              initialBusiness={initialBusiness}
+              availableDemographics={availableDemographics}
+              availableLocations={availableLocations}
+            />
           </div>
         )}
         {activeTab === "owner-details" && (
