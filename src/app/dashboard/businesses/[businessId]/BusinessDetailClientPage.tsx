@@ -8,7 +8,7 @@ import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
 import BusinessDetailsForm from "./BusinessDetailsForm";
 import BusinessMaterials from "./BusinessMaterials";
-import PitchCompetitionDetails, { PitchCompetition } from "./PitchCompetition";
+
 
 interface BusinessDetailClientPageProps {
   initialBusiness: BusinessWithLocation;
