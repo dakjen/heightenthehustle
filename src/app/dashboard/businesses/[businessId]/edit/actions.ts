@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 export async function updateBusinessProfile(
-  prevState: { message: string; error: string } | undefined,
+  prevState: { message?: string; error?: string } | undefined,
   formData: FormData
 ) {
   const businessId = formData.get('businessId') as string;
