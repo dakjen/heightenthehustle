@@ -15,19 +15,12 @@ interface BusinessDetailsFormProps {
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
   // Initialize state for single selections
-  const [selectedGenderId, setSelectedGenderId] = useState<number | "">(
-    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || ""
-  );
-  const [selectedRaceId, setSelectedRaceId] = useState<number | "">(
-    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || ""
-  );
-  const [selectedReligionId, setSelectedReligionId] = useState<number | "">(
-    initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || ""
-  );
+  const [selectedGenderId, setSelectedGenderId] = useState<number | "">("");
+  const [selectedRaceId, setSelectedRaceId] = useState<number | "">("");
+  const [selectedReligionId, setSelectedReligionId] = useState<number | "">("");
   const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
-  const [isTransgender, setIsTransgender] = useState<boolean>(
-    initialBusiness.demographicIds?.some(id => availableDemographics.find(d => d.id === id)?.name === 'Transgender') || false
-  );
+  const [isTransgender, setIsTransgender] = useState<boolean>(false);
+  const [isCisgender, setIsCisgender] = useState<boolean>(false);
 
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
@@ -37,17 +30,54 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const cityLocations = availableLocations.filter(l => l.category === 'City');
   const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
+  useEffect(() => {
+    // Re-initialize state when initialBusiness changes (after a successful save)
+    setSelectedGenderId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || "");
+    setSelectedRaceId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || "");
+    setSelectedReligionId(initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "");
+    setSelectedLocationId(initialBusiness.locationId || "");
+
+    const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
+    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
+
+    setIsTransgender(initialBusiness.demographicIds?.includes(transgenderDemographic?.id as number) || false);
+    setIsCisgender(initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false);
+
+  }, [initialBusiness, availableDemographics]);
+
   // Combine selected demographic IDs for submission
   const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
     .filter((id): id is number => typeof id === 'number');
 
-  // Add Transgender ID if checked
+  // Add Transgender ID if checked and not Cisgender
   if (isTransgender) {
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     if (transgenderDemographic) {
       combinedDemographicIds.push(transgenderDemographic.id);
     }
   }
+
+  // Add Cisgender ID if checked and not Transgender
+  if (isCisgender) {
+    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
+    if (cisgenderDemographic) {
+      combinedDemographicIds.push(cisgenderDemographic.id);
+    }
+  }
+
+  const handleTransgenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsTransgender(e.target.checked);
+    if (e.target.checked) {
+      setIsCisgender(false); // Uncheck Cisgender if Transgender is checked
+    }
+  };
+
+  const handleCisgenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCisgender(e.target.checked);
+    if (e.target.checked) {
+      setIsTransgender(false); // Uncheck Transgender if Cisgender is checked
+    }
+  };
 
   return (
     <form action={updateFormAction}>
@@ -74,17 +104,29 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </select>
       </div>
 
-      {/* Transgender Checkbox */}
-      <div className="mt-4">
+      <div className="mt-4 flex items-center space-x-4">
+        {/* Transgender Checkbox */}
         <label className="inline-flex items-center">
           <input
             type="checkbox"
             name="isTransgender"
             checked={isTransgender}
-            onChange={(e) => setIsTransgender(e.target.checked)}
+            onChange={handleTransgenderChange}
             className="form-checkbox h-5 w-5 text-[#910000]"
           />
           <span className="ml-2 text-gray-700">Transgender</span>
+        </label>
+
+        {/* Cisgender Checkbox */}
+        <label className="inline-flex items-center">
+          <input
+            type="checkbox"
+            name="isCisgender"
+            checked={isCisgender}
+            onChange={handleCisgenderChange}
+            className="form-checkbox h-5 w-5 text-[#910000]"
+          />
+          <span className="ml-2 text-gray-700">Cisgender</span>
         </label>
       </div>
 
