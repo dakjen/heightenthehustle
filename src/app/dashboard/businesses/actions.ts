@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
 import { eq, like, and, InferSelectModel } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { put } from "@vercel/blob";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
@@ -26,6 +26,7 @@ export async function fetchSession(): Promise<SessionPayload | null> {
 }
 
 export async function getBusinessProfile(businessId: number): Promise<BusinessWithLocation | null> {
+  unstable_noStore();
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
