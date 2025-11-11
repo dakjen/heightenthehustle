@@ -7,7 +7,7 @@ import EditBusinessProfileForm from "../EditBusinessProfileForm";
 import BusinessDetailsForm from "../BusinessDetailsForm";
 
 interface EditBusinessProfileClientPageProps {
-  initialBusiness: Business;
+  initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
   availableLocations: Location[];
 }
