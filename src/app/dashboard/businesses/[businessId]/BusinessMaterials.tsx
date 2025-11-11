@@ -5,8 +5,8 @@ import { useFormState } from "react-dom";
 import { updateBusinessMaterials } from "../actions";
 
 type FormState = {
-  message: string;
-  error: string;
+  message?: string;
+  error?: string;
 } | undefined;
 
 interface BusinessDocumentsProps {
