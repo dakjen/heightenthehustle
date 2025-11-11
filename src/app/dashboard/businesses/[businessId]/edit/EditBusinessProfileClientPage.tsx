@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Business } from "@/db/schema"; // Assuming Business type is available
+import { Business, Demographic, Location } from "@/db/schema";
 import Link from "next/link";
+import EditBusinessProfileForm from "../EditBusinessProfileForm";
+import BusinessDetailsForm from "../BusinessDetailsForm";
 
 interface EditBusinessProfileClientPageProps {
   initialBusiness: Business;
+  availableDemographics: Demographic[];
+  availableLocations: Location[];
 }
 
-export default function EditBusinessProfileClientPage({ initialBusiness }: EditBusinessProfileClientPageProps) {
-  const [activeTab, setActiveTab] = useState("info"); // 'info', 'materials', 'branding', 'edit'
+export default function EditBusinessProfileClientPage({ initialBusiness, availableDemographics, availableLocations }: EditBusinessProfileClientPageProps) {
+  const [activeTab, setActiveTab] = useState("info"); // 'info', 'owner-details', 'materials', 'branding'
 
   return (
     <div className="flex-1 p-6">
@@ -19,9 +23,9 @@ export default function EditBusinessProfileClientPage({ initialBusiness }: EditB
       <div className="mt-6 border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           <TabButton tabName="info" activeTab={activeTab} setActiveTab={setActiveTab}>Business Info</TabButton>
+          <TabButton tabName="owner-details" activeTab={activeTab} setActiveTab={setActiveTab}>Owner Details</TabButton>
           <TabButton tabName="materials" activeTab={activeTab} setActiveTab={setActiveTab}>Business Materials</TabButton>
           <TabButton tabName="branding" activeTab={activeTab} setActiveTab={setActiveTab}>Branding</TabButton>
-          <TabButton tabName="edit" activeTab={activeTab} setActiveTab={setActiveTab}>Edit</TabButton>
         </nav>
       </div>
 
@@ -30,8 +34,17 @@ export default function EditBusinessProfileClientPage({ initialBusiness }: EditB
         {activeTab === "info" && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Business Information</h2>
-            {/* Placeholder for editable business info form */}
-            <p>Editable business information form will go here.</p>
+            <EditBusinessProfileForm initialBusiness={initialBusiness} />
+          </div>
+        )}
+        {activeTab === "owner-details" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Owner Details</h2>
+            <BusinessDetailsForm
+              initialBusiness={initialBusiness}
+              availableDemographics={availableDemographics}
+              availableLocations={availableLocations}
+            />
           </div>
         )}
         {activeTab === "materials" && (
@@ -46,13 +59,6 @@ export default function EditBusinessProfileClientPage({ initialBusiness }: EditB
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Branding</h2>
             {/* Placeholder for branding elements */}
             <p>Branding elements (logo, colors, etc.) will go here.</p>
-          </div>
-        )}
-        {activeTab === "edit" && (
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">General Edit Settings</h2>
-            {/* Placeholder for general edit settings or summary */}
-            <p>General edit settings or summary will go here.</p>
           </div>
         )}
       </div>
@@ -94,3 +100,4 @@ function TabButton({ tabName, activeTab, setActiveTab, children }: TabButtonProp
     </button>
   );
 }
+

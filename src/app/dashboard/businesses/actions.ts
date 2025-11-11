@@ -141,7 +141,7 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   }
 }
 
-export async function updateBusinessProfile(prevState: FormState, formData: FormData): Promise<FormState> {
+export async function updateBusinessProfileWithMaterials(prevState: FormState, formData: FormData): Promise<FormState> {
     const userId = await getUserIdFromSession();
 
     if (!userId) {
