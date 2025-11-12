@@ -1,0 +1,4 @@
+ALTER TABLE "businesses" ADD COLUMN "state_location_id" integer;--> statement-breakpoint
+ALTER TABLE "businesses" ADD COLUMN "region_location_id" integer;--> statement-breakpoint
+ALTER TABLE "businesses" ADD CONSTRAINT "businesses_state_location_id_locations_id_fk" FOREIGN KEY ("state_location_id") REFERENCES "public"."locations"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "businesses" ADD CONSTRAINT "businesses_region_location_id_locations_id_fk" FOREIGN KEY ("region_location_id") REFERENCES "public"."locations"("id") ON DELETE no action ON UPDATE no action;

@@ -60,7 +60,9 @@ export const businesses = pgTable('businesses', {
   phone: varchar('phone', { length: 20 }),
   website: text('website'),
   isArchived: boolean('is_archived').notNull().default(false),
-  locationId: integer('location_id').references(() => locations.id),
+  locationId: integer('location_id').references(() => locations.id), // Keep for backward compatibility or if still used for a primary location
+  stateLocationId: integer('state_location_id').references(() => locations.id),
+  regionLocationId: integer('region_location_id').references(() => locations.id),
   demographicIds: integer('demographic_ids').array(),
   material1Url: text('material1_url'),
   material1Title: text('material1_title'),

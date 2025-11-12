@@ -96,8 +96,13 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     }
   };
 
+  const updateFormActionWithLog = (formData: FormData) => {
+    console.log('BusinessDetailsForm: Submitting combinedDemographicIds:', combinedDemographicIds);
+    updateFormAction(formData);
+  };
+
   return (
-    <form action={updateFormAction}>
+    <form action={updateFormActionWithLog}>
       <h2 className="text-2xl font-bold">Owner Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
       <input type="hidden" name="selectedDemographicIds" value={JSON.stringify(combinedDemographicIds)} />

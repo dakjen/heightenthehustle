@@ -290,6 +290,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   const businessId = parseInt(formData.get("businessId") as string);
   const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
+  console.log('updateBusinessDemographics: Received selectedDemographicIdsString:', selectedDemographicIdsString);
   const locationId = parseInt(formData.get("locationId") as string);
   const city = formData.get("city") as string;
 
@@ -300,6 +301,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   let selectedDemographicIds: number[] = [];
   if (selectedDemographicIdsString) {
     selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
+    console.log('updateBusinessDemographics: Parsed selectedDemographicIds:', selectedDemographicIds);
   }
 
   const dataToUpdate: { demographicIds?: number[] | null; locationId?: number | null; city?: string | null } = {};
