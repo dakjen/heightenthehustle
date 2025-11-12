@@ -31,7 +31,9 @@ export async function getBusinessProfile(businessId: number): Promise<BusinessWi
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
       with: {
-        location: true, // Include location details
+        location: true, // Keep for backward compatibility or if still used for a primary location
+        stateLocation: true,
+        regionLocation: true,
       },
     });
     if (!profile) { return null; }
@@ -291,7 +293,8 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const businessId = parseInt(formData.get("businessId") as string);
   const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
   console.log('updateBusinessDemographics: Received selectedDemographicIdsString:', selectedDemographicIdsString);
-  const locationId = parseInt(formData.get("locationId") as string);
+  const stateLocationId = parseInt(formData.get("stateLocationId") as string);
+  const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
 
   if (isNaN(businessId)) {
@@ -304,7 +307,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     console.log('updateBusinessDemographics: Parsed selectedDemographicIds:', selectedDemographicIds);
   }
 
-  const dataToUpdate: { demographicIds?: number[] | null; locationId?: number | null; city?: string | null } = {};
+  const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {};
 
   if (selectedDemographicIds.length > 0) {
     dataToUpdate.demographicIds = selectedDemographicIds;
@@ -312,8 +315,16 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     dataToUpdate.demographicIds = null; // Explicitly set to null if empty
   }
 
-  if (!isNaN(locationId)) {
-    dataToUpdate.locationId = locationId as number | null;
+  if (!isNaN(stateLocationId)) {
+    dataToUpdate.stateLocationId = stateLocationId;
+  } else {
+    dataToUpdate.stateLocationId = null;
+  }
+
+  if (!isNaN(regionLocationId)) {
+    dataToUpdate.regionLocationId = regionLocationId;
+  } else {
+    dataToUpdate.regionLocationId = null;
   }
 
   if (city !== null && city !== undefined) { // Check for null and undefined to allow empty string

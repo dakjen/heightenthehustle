@@ -157,7 +157,7 @@ export type Demographic = InferSelectModel<typeof demographics>;
 export type Location = InferSelectModel<typeof locations>;
 export type Business = InferSelectModel<typeof businesses>;
 export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: Demographic | null };
-export type BusinessWithLocation = InferSelectModel<typeof businesses> & { location: Location | null };
+export type BusinessWithLocation = InferSelectModel<typeof businesses> & { location: Location | null, stateLocation: Location | null, regionLocation: Location | null };
 export type BusinessWithDemographicAndLocation = InferSelectModel<typeof businesses> & { demographic: Demographic | null, location: Location | null };
 export type MassMessage = InferSelectModel<typeof massMessages>;
 export type IndividualMessage = InferSelectModel<typeof individualMessages>;
@@ -183,6 +183,14 @@ export const businessesRelations = relations(businesses, ({ one, many }) => ({
   }),
   location: one(locations, {
     fields: [businesses.locationId],
+    references: [locations.id],
+  }),
+  stateLocation: one(locations, {
+    fields: [businesses.stateLocationId],
+    references: [locations.id],
+  }),
+  regionLocation: one(locations, {
+    fields: [businesses.regionLocationId],
     references: [locations.id],
   }),
   businessToCompetitions: many(businessToCompetition),

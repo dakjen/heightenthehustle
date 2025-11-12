@@ -22,7 +22,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const [selectedGenderId, setSelectedGenderId] = useState<number | "">("");
   const [selectedRaceId, setSelectedRaceId] = useState<number | "">("");
   const [selectedReligionId, setSelectedReligionId] = useState<number | "">("");
-  const [selectedLocationId, setSelectedLocationId] = useState<number | "">(initialBusiness.locationId || "");
+  const [selectedStateLocationId, setSelectedStateLocationId] = useState<number | "">("");
+  const [selectedRegionLocationId, setSelectedRegionLocationId] = useState<number | "">("");
   const [isTransgender, setIsTransgender] = useState<boolean>(false);
   const [isCisgender, setIsCisgender] = useState<boolean>(false);
 
@@ -43,7 +44,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     setSelectedRaceId(currentRaceId);
     const currentReligionId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "";
     setSelectedReligionId(currentReligionId);
-    setSelectedLocationId(initialBusiness.locationId || "");
+    setSelectedStateLocationId(initialBusiness.stateLocationId || "");
+    setSelectedRegionLocationId(initialBusiness.regionLocationId || "");
 
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
@@ -53,7 +55,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     const currentIsCisgender = initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false;
     setIsCisgender(currentIsCisgender);
 
-    console.log('BusinessDetailsForm: State after useEffect - Gender:', currentGenderId, 'Race:', currentRaceId, 'Religion:', currentReligionId, 'Location:', initialBusiness.locationId, 'Transgender:', currentIsTransgender, 'Cisgender:', currentIsCisgender);
+    console.log('BusinessDetailsForm: State after useEffect - Gender:', currentGenderId, 'Race:', currentRaceId, 'Religion:', currentReligionId, 'State Location:', initialBusiness.stateLocationId, 'Region Location:', initialBusiness.regionLocationId, 'Transgender:', currentIsTransgender, 'Cisgender:', currentIsCisgender);
 
     // Exit edit mode after a successful save
     if (updateState?.message && !updateState.error) {
@@ -198,14 +200,14 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
       <h2 className="text-2xl font-bold mt-8">Business Details</h2>
 
       <div className="mt-4">
-        <label htmlFor="locationId" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="stateLocationId" className="block text-sm font-medium text-gray-700">
           Location (State)
         </label>
         <select
-          id="locationId"
-          name="locationId"
-          value={selectedLocationId}
-          onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
+          id="stateLocationId"
+          name="stateLocationId"
+          value={selectedStateLocationId}
+          onChange={(e) => setSelectedStateLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
           disabled={!isEditing}
         >
@@ -233,19 +235,19 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
       </div>
 
       <div className="mt-4">
-        <label htmlFor="regionId" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="regionLocationId" className="block text-sm font-medium text-gray-700">
           Location (Region)
         </label>
         <select
-          id="regionId"
-          name="regionId"
-          value={selectedLocationId}
-          onChange={(e) => setSelectedLocationId(parseInt(e.target.value) || "")}
+          id="regionLocationId"
+          name="regionLocationId"
+          value={selectedRegionLocationId}
+          onChange={(e) => setSelectedRegionLocationId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
           disabled={!isEditing}
         >
           <option value="">Select Region</option>
-          {regionLocations.map(location => (
+          {availableLocations.filter(l => l.category === 'Region').map(location => (
             <option key={location.id} value={location.id}>
               {location.name}
             </option>
