@@ -300,7 +300,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
 
-  let demographicIds: number[] = [];
+  const demographicIds: number[] = [];
 
   // Add Gender, Race, Religion if selected
   if (!isNaN(selectedGenderId)) demographicIds.push(selectedGenderId);
