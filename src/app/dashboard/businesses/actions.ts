@@ -296,20 +296,9 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
 
-  console.log('updateBusinessDemographics: Received businessId:', businessId);
-  console.log('updateBusinessDemographics: Received selectedDemographicIdsString:', selectedDemographicIdsString);
-  console.log('updateBusinessDemographics: Received stateLocationId:', stateLocationId);
-  console.log('updateBusinessDemographics: Received regionLocationId:', regionLocationId);
-  console.log('updateBusinessDemographics: Received city:', city);
-
-  if (isNaN(businessId)) {
-    return { message: "", error: "Invalid business ID." };
-  }
-
   let selectedDemographicIds: number[] = [];
   if (selectedDemographicIdsString) {
     selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
-    console.log('updateBusinessDemographics: Parsed selectedDemographicIds:', selectedDemographicIds);
   }
 
   const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {};
@@ -328,7 +317,8 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   if (!isNaN(regionLocationId)) {
     dataToUpdate.regionLocationId = regionLocationId;
-  } else {
+  }
+  else {
     dataToUpdate.regionLocationId = null;
   }
 
@@ -339,7 +329,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   if (Object.keys(dataToUpdate).length === 0) {
-    return { message: "", error: "No demographic or location data to update." };
+    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(selectedDemographicIds)}` };
   }
 
   try {
@@ -348,7 +338,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: "Business details updated successfully!", error: "" };
+    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(selectedDemographicIds)}`, error: "" };
   } catch (error) {
     console.error("Error updating business details:", error);
     return { message: "", error: "Failed to update business details." };
