@@ -110,7 +110,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     <form action={updateFormActionWithLog}>
       <h2 className="text-2xl font-bold">Owner Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
-      <input type="hidden" name="selectedDemographicIds" value={JSON.stringify(combinedDemographicIds)} />
+      <input type="hidden" name="isTransgender" value={isTransgender.toString()} />
+      <input type="hidden" name="isCisgender" value={isCisgender.toString()} />
 
       <div className="mt-4">
         <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
@@ -166,6 +167,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </label>
         <select
           id="race"
+          name="race"
           value={selectedRaceId}
           onChange={(e) => setSelectedRaceId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
@@ -186,6 +188,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
         </label>
         <select
           id="religion"
+          name="religion"
           value={selectedReligionId}
           onChange={(e) => setSelectedReligionId(parseInt(e.target.value) || "")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"

@@ -291,20 +291,37 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   const businessId = parseInt(formData.get("businessId") as string);
-  const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
+  const selectedGenderId = parseInt(formData.get("gender") as string);
+  const selectedRaceId = parseInt(formData.get("race") as string);
+  const selectedReligionId = parseInt(formData.get("religion") as string);
+  const isTransgender = formData.get("isTransgender") === "true";
+  const isCisgender = formData.get("isCisgender") === "true";
   const stateLocationId = parseInt(formData.get("stateLocationId") as string);
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
 
-  let selectedDemographicIds: number[] = [];
-  if (selectedDemographicIdsString) {
-    selectedDemographicIds = JSON.parse(selectedDemographicIdsString);
+  let demographicIds: number[] = [];
+
+  // Add Gender, Race, Religion if selected
+  if (!isNaN(selectedGenderId)) demographicIds.push(selectedGenderId);
+  if (!isNaN(selectedRaceId)) demographicIds.push(selectedRaceId);
+  if (!isNaN(selectedReligionId)) demographicIds.push(selectedReligionId);
+
+  // Fetch Transgender and Cisgender demographic IDs from the database
+  const transgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Transgender') });
+  const cisgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Cisgender') });
+
+  if (isTransgender && transgenderDemographic) {
+    demographicIds.push(transgenderDemographic.id);
+  }
+  if (isCisgender && cisgenderDemographic) {
+    demographicIds.push(cisgenderDemographic.id);
   }
 
   const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {};
 
-  if (selectedDemographicIds.length > 0) {
-    dataToUpdate.demographicIds = selectedDemographicIds;
+  if (demographicIds.length > 0) {
+    dataToUpdate.demographicIds = demographicIds;
   } else {
     dataToUpdate.demographicIds = null; // Explicitly set to null if empty
   }
@@ -329,7 +346,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   if (Object.keys(dataToUpdate).length === 0) {
-    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(selectedDemographicIds)}` };
+    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(demographicIds)}` };
   }
 
   try {
@@ -338,7 +355,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(selectedDemographicIds)}`, error: "" };
+    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(demographicIds)}`, error: "" };
   } catch (error) {
     console.error("Error updating business details:", error);
     return { message: "", error: "Failed to update business details." };
