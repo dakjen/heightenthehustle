@@ -292,10 +292,15 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   const businessId = parseInt(formData.get("businessId") as string);
   const selectedDemographicIdsString = formData.get("selectedDemographicIds") as string;
-  console.log('updateBusinessDemographics: Received selectedDemographicIdsString:', selectedDemographicIdsString);
   const stateLocationId = parseInt(formData.get("stateLocationId") as string);
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
+
+  console.log('updateBusinessDemographics: Received businessId:', businessId);
+  console.log('updateBusinessDemographics: Received selectedDemographicIdsString:', selectedDemographicIdsString);
+  console.log('updateBusinessDemographics: Received stateLocationId:', stateLocationId);
+  console.log('updateBusinessDemographics: Received regionLocationId:', regionLocationId);
+  console.log('updateBusinessDemographics: Received city:', city);
 
   if (isNaN(businessId)) {
     return { message: "", error: "Invalid business ID." };
