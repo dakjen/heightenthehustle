@@ -44,8 +44,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     setSelectedRaceId(currentRaceId);
     const currentReligionId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "";
     setSelectedReligionId(currentReligionId);
-    setSelectedStateLocationId(initialBusiness.stateLocationId || "");
-    setSelectedRegionLocationId(initialBusiness.regionLocationId || "");
+    setSelectedStateLocationId(initialBusiness.stateLocation?.id || "");
+    setSelectedRegionLocationId(initialBusiness.regionLocation?.id || "");
 
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
