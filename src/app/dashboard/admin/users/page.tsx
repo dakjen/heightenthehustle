@@ -3,6 +3,7 @@ import { getSession } from "@/app/login/actions";
 import { createUser, getAllUsers } from "./actions";
 import UserManagementClientPage from "./UserManagementClientPage"; // New import for client component
 import PermissionsManagementClientPage from "./PermissionsManagementClientPage"; // New import for permissions component
+import UserRequestsClientPage from "./UserRequestsClientPage"; // Import for user requests component
 import { headers } from "next/headers"; // New import for searchParams
 import TabLink from "./TabLink"; // New import for TabLink
 import UserDownloadButton from "./UserDownloadButton";
@@ -16,6 +17,7 @@ interface User {
   email: string;
   password: string; // Note: In a real app, you\'t fetch password to client
   role: 'admin' | 'internal' | 'external';
+  status: 'pending' | 'approved' | 'rejected'; // Include status
   hasBusinessProfile: boolean;
   personalAddress: string | null;
   personalCity: string | null;
@@ -53,6 +55,7 @@ export default async function UserManagementPage({ searchParams }: { searchParam
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           <TabLink href="users" activeTab={activeTab}>Users</TabLink>
           <TabLink href="permissions" activeTab={activeTab}>Permissions</TabLink>
+          <TabLink href="requests" activeTab={activeTab}>Requests</TabLink>
         </nav>
       </div>
 
@@ -63,6 +66,9 @@ export default async function UserManagementPage({ searchParams }: { searchParam
         )}
         {activeTab === "permissions" && (
           <PermissionsManagementClientPage initialUsers={allUsers} /> // Pass allUsers to permissions page
+        )}
+        {activeTab === "requests" && (
+          <UserRequestsClientPage />
         )}
       </div>
     </div>

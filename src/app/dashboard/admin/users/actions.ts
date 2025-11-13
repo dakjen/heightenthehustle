@@ -2,20 +2,76 @@
 
 import { FormState } from "@/types/form-state";
 import { db } from "@/db";
-import { users, userRole } from "@/db/schema";
+import { users, userRole, userStatus } from "@/db/schema"; // Import userStatus
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
 import { getAllBusinesses } from "../businesses/actions"; // Added import
 
-export async function getAllUsers() {
+// Define a type for a single user with status
+type UserWithStatus = typeof users.$inferSelect;
+
+export async function getAllUsers(): Promise<UserWithStatus[]> {
   try {
     const allUsers = await db.query.users.findMany();
     return allUsers;
   } catch (error) {
     console.error("Error fetching all users:", error);
     return [];
+  }
+}
+
+export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return []; // Unauthorized
+  }
+
+  try {
+    const pendingUsers = await db.query.users.findMany({
+      where: eq(users.status, 'pending'),
+    });
+    return pendingUsers;
+  } catch (error) {
+    console.error("Error fetching pending users:", error);
+    return [];
+  }
+}
+
+export async function approveUser(userId: number): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return { message: "", error: "Unauthorized." };
+  }
+
+  try {
+    await db.update(users)
+      .set({ status: 'approved' })
+      .where(eq(users.id, userId));
+    revalidatePath("/dashboard/admin/users");
+    return { message: "User approved successfully!", error: "" };
+  } catch (error) {
+    console.error("Error approving user:", error);
+    return { message: "", error: "Failed to approve user." };
+  }
+}
+
+export async function rejectUser(userId: number): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || session.user.role !== 'admin') {
+    return { message: "", error: "Unauthorized." };
+  }
+
+  try {
+    await db.update(users)
+      .set({ status: 'rejected' })
+      .where(eq(users.id, userId));
+    revalidatePath("/dashboard/admin/users");
+    return { message: "User rejected successfully!", error: "" };
+  } catch (error) {
+    console.error("Error rejecting user:", error);
+    return { message: "", error: "Failed to reject user." };
   }
 }
 
@@ -44,6 +100,7 @@ export async function createUser(prevState: FormState, formData: FormData): Prom
       phone,
       password: hashedPassword, // Store the hashed password
       role,
+      status: 'approved', // Admins create approved users
     });
     revalidatePath("/dashboard/admin/users");
     return { message: "User created successfully!", error: "" };
