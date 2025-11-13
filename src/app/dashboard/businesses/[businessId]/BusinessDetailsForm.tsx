@@ -37,22 +37,35 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
   useEffect(() => {
     console.log('BusinessDetailsForm: useEffect triggered. initialBusiness:', initialBusiness);
-    // Re-initialize state when initialBusiness changes (after a successful save)
-    const currentGenderId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Gender') || "";
-    setSelectedGenderId(currentGenderId);
-    const currentRaceId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || "";
-    setSelectedRaceId(currentRaceId);
-    const currentReligionId = initialBusiness.demographicIds?.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "";
-    setSelectedReligionId(currentReligionId);
-    setSelectedStateLocationId(initialBusiness.stateLocation?.id || "");
-    setSelectedRegionLocationId(initialBusiness.regionLocation?.id || "");
+
+    const currentDemographicIds = initialBusiness.demographicIds || [];
 
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
 
-    const currentIsTransgender = initialBusiness.demographicIds?.includes(transgenderDemographic?.id as number) || false;
+    const transgenderId = transgenderDemographic?.id;
+    const cisgenderId = cisgenderDemographic?.id;
+
+    // Filter out Transgender and Cisgender IDs from the general gender selection
+    const genderDemographicsForDropdown = availableDemographics.filter(d =>
+      d.category === 'Gender' && d.id !== transgenderId && d.id !== cisgenderId
+    );
+
+    const currentGenderId = currentDemographicIds.find(id =>
+      genderDemographicsForDropdown.some(d => d.id === id)
+    ) || "";
+    setSelectedGenderId(currentGenderId);
+
+    const currentRaceId = currentDemographicIds.find(id => availableDemographics.find(d => d.id === id)?.category === 'Race') || "";
+    setSelectedRaceId(currentRaceId);
+    const currentReligionId = currentDemographicIds.find(id => availableDemographics.find(d => d.id === id)?.category === 'Religion') || "";
+    setSelectedReligionId(currentReligionId);
+    setSelectedStateLocationId(initialBusiness.stateLocation?.id || "");
+    setSelectedRegionLocationId(initialBusiness.regionLocation?.id || "");
+
+    const currentIsTransgender = (transgenderId && currentDemographicIds.includes(transgenderId)) || false;
     setIsTransgender(currentIsTransgender);
-    const currentIsCisgender = initialBusiness.demographicIds?.includes(cisgenderDemographic?.id as number) || false;
+    const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
     setIsCisgender(currentIsCisgender);
 
     console.log('BusinessDetailsForm: State after useEffect - Gender:', currentGenderId, 'Race:', currentRaceId, 'Religion:', currentReligionId, 'State Location:', initialBusiness.stateLocationId, 'Region Location:', initialBusiness.regionLocationId, 'Transgender:', currentIsTransgender, 'Cisgender:', currentIsCisgender);
