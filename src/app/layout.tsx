@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/hthlogo.png" />
+        <meta property="og:image" content="/hthlink.png" />
       </head>
       <body
         className={`${dmSans.variable} ${bebasNeue.variable} antialiased`}
