@@ -337,28 +337,56 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
 
-  const demographicIds: number[] = [];
+  // Fetch current business profile to get existing demographic IDs
+  const currentBusiness = await db.query.businesses.findFirst({
+    where: eq(businesses.id, businessId),
+    columns: { demographicIds: true }
+  });
 
-  // Add Gender, Race, Religion if selected
-  if (!isNaN(selectedGenderId)) demographicIds.push(selectedGenderId);
-  if (!isNaN(selectedRaceId)) demographicIds.push(selectedRaceId);
-  if (!isNaN(selectedReligionId)) demographicIds.push(selectedReligionId);
+  const existingDemographicIds = currentBusiness?.demographicIds || [];
 
   // Fetch Transgender and Cisgender demographic IDs from the database
   const transgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Transgender') });
   const cisgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Cisgender') });
 
-  if (isTransgender && transgenderDemographic) {
-    demographicIds.push(transgenderDemographic.id);
+  const transgenderId = transgenderDemographic?.id;
+  const cisgenderId = cisgenderDemographic?.id;
+
+  // Get all demographic IDs related to Gender, Race, Religion, Transgender, Cisgender
+  // to filter them out from existingDemographicIds
+  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion'];
+  const demographicNamesToUpdate = ['Transgender', 'Cisgender'];
+
+  const allDemographicsToUpdate = await db.query.demographics.findMany({
+    where: (demographics, { inArray }) => inArray(demographics.category, demographicCategoriesToUpdate)
+  });
+
+  const idsToFilterOut = new Set(allDemographicsToUpdate.map(d => d.id));
+  if (transgenderId) idsToFilterOut.add(transgenderId);
+  if (cisgenderId) idsToFilterOut.add(cisgenderId);
+
+  // Filter out existing IDs that are managed by this form
+  const preservedDemographicIds = existingDemographicIds.filter(id => !idsToFilterOut.has(id));
+
+  const newDemographicIds: number[] = [...preservedDemographicIds];
+
+  // Add newly selected Gender, Race, Religion if selected
+  if (!isNaN(selectedGenderId)) newDemographicIds.push(selectedGenderId);
+  if (!isNaN(selectedRaceId)) newDemographicIds.push(selectedRaceId);
+  if (!isNaN(selectedReligionId)) newDemographicIds.push(selectedReligionId);
+
+  // Add Transgender/Cisgender IDs if checked
+  if (isTransgender && transgenderId) {
+    newDemographicIds.push(transgenderId);
   }
-  if (isCisgender && cisgenderDemographic) {
-    demographicIds.push(cisgenderDemographic.id);
+  if (isCisgender && cisgenderId) {
+    newDemographicIds.push(cisgenderId);
   }
 
   const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {};
 
-  if (demographicIds.length > 0) {
-    dataToUpdate.demographicIds = demographicIds;
+  if (newDemographicIds.length > 0) {
+    dataToUpdate.demographicIds = newDemographicIds;
   } else {
     dataToUpdate.demographicIds = null; // Explicitly set to null if empty
   }
@@ -383,7 +411,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   if (Object.keys(dataToUpdate).length === 0) {
-    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(demographicIds)}` };
+    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(newDemographicIds)}` };
   }
 
   try {
@@ -392,7 +420,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(demographicIds)}`, error: "" };
+    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(newDemographicIds)}`, error: "" };
   } catch (error) {
     console.error("Error updating business details:", error);
     return { message: "", error: "Failed to update business details." };
