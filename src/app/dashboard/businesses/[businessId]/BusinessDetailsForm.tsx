@@ -42,8 +42,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
     const currentDemographicIds = initialBusiness.demographicIds || [];
 
-    const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
-    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
+    const transgenderDemographic = availableDemographics.find(d => d.category === 'Transgender');
+    const cisgenderDemographic = availableDemographics.find(d => d.category === 'Cisgender');
 
     const transgenderId = transgenderDemographic?.id;
     const cisgenderId = cisgenderDemographic?.id;

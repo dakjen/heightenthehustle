@@ -354,7 +354,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   // Get all demographic IDs related to Gender, Race, Religion, Transgender, Cisgender
   // to filter them out from existingDemographicIds
-  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion'] as const;
+  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion', 'Transgender', 'Cisgender'] as const;
   const demographicNamesToUpdate = ['Transgender', 'Cisgender'];
 
   const allDemographicsToUpdate = await db.query.demographics.findMany({
