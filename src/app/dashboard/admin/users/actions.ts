@@ -31,6 +31,23 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
   try {
     const pendingUsers = await db.query.users.findMany({
       where: eq(users.status, 'pending'),
+      columns: {
+        id: true,
+        name: true,
+        phone: true,
+        email: true,
+        password: true,
+        role: true,
+        status: true,
+        hasBusinessProfile: true,
+        personalAddress: true,
+        personalCity: true,
+        personalState: true,
+        personalZipCode: true,
+        profilePhotoUrl: true,
+        isOptedOut: true,
+        businessName: true, // Explicitly select businessName
+      }
     });
     return pendingUsers;
   } catch (error) {

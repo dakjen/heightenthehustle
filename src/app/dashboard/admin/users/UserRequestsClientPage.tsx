@@ -18,6 +18,7 @@ export default function UserRequestsClientPage() {
     setError(null);
     try {
       const users = await getAllPendingUserRequests();
+      console.log("Fetched pending users:", users); // Add this line
       setPendingUsers(users);
     } catch (err) {
       console.error("Failed to fetch pending users:", err);
