@@ -3,24 +3,37 @@
 import { db } from "@/db";
 import { users, userStatus } from "@/db/schema"; // Import userStatus
 import bcrypt from "bcrypt";
+import { FormState } from "@/types/form-state"; // Import FormState
 
-export async function createAccount(formData: FormData) {
+export async function createAccount(prevState: FormState, formData: FormData): Promise<FormState> {
   const name = formData.get("name") as string;
   const phone = formData.get("phone") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // Basic validation
+  if (!name || !phone || !email || !password) {
+    return { message: "", error: "All fields are required." };
+  }
 
-  await db.insert(users).values({
-    name,
-    phone,
-    email,
-    password: hashedPassword,
-    status: 'pending', // Set status to pending
-  });
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  // In a real app, you'd want to redirect the user to the login page
-  // or directly log them in.
-  console.log("Account created successfully!");
+    await db.insert(users).values({
+      name,
+      phone,
+      email,
+      password: hashedPassword,
+      status: 'pending', // Set status to pending
+    });
+
+    return { message: "Account request submitted successfully! Please wait for admin approval.", error: "" };
+  } catch (error) {
+    console.error("Error creating account:", error);
+    // Check for unique email constraint violation
+    if (error instanceof Error && error.message.includes('duplicate key value violates unique constraint "users_email_unique"')) {
+      return { message: "", error: "An account with this email already exists." };
+    }
+    return { message: "", error: "Failed to submit account request." };
+  }
 }
