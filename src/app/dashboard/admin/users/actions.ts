@@ -48,6 +48,7 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         isOptedOut: true,
         businessName: true, // Explicitly select businessName
         canApproveRequests: true, // Explicitly select canApproveRequests
+        canMessageAdmins: true, // Explicitly select canMessageAdmins
       }
     });
     return pendingUsers;
