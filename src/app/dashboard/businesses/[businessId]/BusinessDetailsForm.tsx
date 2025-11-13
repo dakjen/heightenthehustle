@@ -14,7 +14,8 @@ interface BusinessDetailsFormProps {
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
-  console.log('BusinessDetailsForm: initialBusiness on render', initialBusiness);
+  console.log('BusinessDetailsForm: availableDemographics (client)', JSON.stringify(availableDemographics, null, 2));
+  console.log('BusinessDetailsForm: initialBusiness (client)', JSON.stringify(initialBusiness, null, 2));
   // State for edit mode
   const [isEditing, setIsEditing] = useState(false);
 
@@ -36,7 +37,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
   useEffect(() => {
-    console.log('BusinessDetailsForm: useEffect triggered. initialBusiness:', initialBusiness);
+    console.log('BusinessDetailsForm: useEffect triggered. initialBusiness (client):', JSON.stringify(initialBusiness, null, 2));
+    console.log('BusinessDetailsForm: availableDemographics (client) inside useEffect:', JSON.stringify(availableDemographics, null, 2));
 
     const currentDemographicIds = initialBusiness.demographicIds || [];
 
