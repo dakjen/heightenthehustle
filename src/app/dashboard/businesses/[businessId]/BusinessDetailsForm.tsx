@@ -14,8 +14,6 @@ interface BusinessDetailsFormProps {
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
-  console.log('BusinessDetailsForm: availableDemographics (client)', JSON.stringify(availableDemographics, null, 2));
-  console.log('BusinessDetailsForm: initialBusiness (client)', JSON.stringify(initialBusiness, null, 2));
   // State for edit mode
   const [isEditing, setIsEditing] = useState(false);
 
@@ -37,9 +35,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
   useEffect(() => {
-    console.log('BusinessDetailsForm: useEffect triggered. initialBusiness (client):', JSON.stringify(initialBusiness, null, 2));
-    console.log('BusinessDetailsForm: availableDemographics (client) inside useEffect:', JSON.stringify(availableDemographics, null, 2));
-
     const currentDemographicIds = initialBusiness.demographicIds || [];
 
     const transgenderDemographic = availableDemographics.find(d => d.category === 'Transgender');
@@ -69,11 +64,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     setIsTransgender(currentIsTransgender);
     const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
     setIsCisgender(currentIsCisgender);
-
-    console.log('BusinessDetailsForm: State after useEffect - Gender:', currentGenderId, 'Race:', currentRaceId, 'Religion:', currentReligionId, 'State Location:', initialBusiness.stateLocationId, 'Region Location:', initialBusiness.regionLocationId, 'Transgender:', currentIsTransgender, 'Cisgender:', currentIsCisgender);
-    console.log('BusinessDetailsForm: initialBusiness.demographicIds:', initialBusiness.demographicIds);
-    console.log('BusinessDetailsForm: initialBusiness.stateLocationId:', initialBusiness.stateLocationId);
-    console.log('BusinessDetailsForm: initialBusiness.regionLocationId:', initialBusiness.regionLocationId);
 
     // Exit edit mode after a successful save
     if (updateState?.message && !updateState.error) {
@@ -117,7 +107,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   };
 
   const updateFormActionWithLog = (formData: FormData) => {
-    console.log('BusinessDetailsForm: Submitting combinedDemographicIds:', combinedDemographicIds);
     updateFormAction(formData);
   };
 
