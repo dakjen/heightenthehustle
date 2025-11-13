@@ -10,10 +10,11 @@ export async function createAccount(prevState: FormState, formData: FormData): P
   const phone = formData.get("phone") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  const businessName = formData.get("businessName") as string | undefined; // Capture businessName
 
   // Basic validation
   if (!name || !phone || !email || !password) {
-    return { message: "", error: "All fields are required." };
+    return { message: "", error: "All fields are required.", businessName }; // Include businessName in error state
   }
 
   try {
@@ -27,13 +28,13 @@ export async function createAccount(prevState: FormState, formData: FormData): P
       status: 'pending', // Set status to pending
     });
 
-    return { message: "Thank you for your request. We will get back to you shortly.", error: "" };
+    return { message: "Thank you for your request. We will get back to you shortly.", error: "", businessName }; // Include businessName in success state
   } catch (error) {
     console.error("Error creating account:", error);
     // Check for unique email constraint violation
     if (error instanceof Error && error.message.includes('duplicate key value violates unique constraint "users_email_unique"')) {
-      return { message: "", error: "An account with this email already exists." };
+      return { message: "", error: "An account with this email already exists.", businessName }; // Include businessName in error state
     }
-    return { message: "", error: "Failed to submit account request." };
+    return { message: "", error: "Failed to submit account request.", businessName }; // Include businessName in error state
   }
 }

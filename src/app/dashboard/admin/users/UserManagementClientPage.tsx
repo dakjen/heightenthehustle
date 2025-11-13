@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { FormState } from "@/types/form-state";
-import { createUser, getAllUsers, updateUser } from "./actions"; // Import createUser, getAllUsers, and updateUser
+import { createUser, getAllUsers, updateUser, deleteUser } from "./actions"; // Import deleteUser
 
 // Define a type for a single user (matching your schema)
 interface User {

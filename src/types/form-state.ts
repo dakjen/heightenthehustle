@@ -4,4 +4,5 @@
 export type FormState = {
   message: string;
   error?: string;
+  businessName?: string; // Optional business name for display purposes
 };
