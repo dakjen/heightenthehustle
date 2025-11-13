@@ -19,10 +19,12 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
 
   const handleBusinessUpdate = async () => {
     console.log('EditBusinessProfileClientPage: handleBusinessUpdate called for business ID:', business.id);
+    console.log('EditBusinessProfileClientPage: business state BEFORE setBusiness:', JSON.stringify(business, null, 2));
     const updatedBusiness = await getBusinessProfile(business.id);
     if (updatedBusiness) {
       console.log('EditBusinessProfileClientPage: setBusiness with updatedBusiness:', JSON.stringify(updatedBusiness, null, 2));
       setBusiness(updatedBusiness);
+      console.log('EditBusinessProfileClientPage: business state AFTER setBusiness (should be updated on next render):', JSON.stringify(updatedBusiness, null, 2));
     }
   };
 
