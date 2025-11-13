@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users, userStatus } from "@/db/schema"; // Import userStatus
 import bcrypt from "bcrypt";
 
 export async function createAccount(formData: FormData) {
@@ -17,6 +17,7 @@ export async function createAccount(formData: FormData) {
     phone,
     email,
     password: hashedPassword,
+    status: 'pending', // Set status to pending
   });
 
   // In a real app, you'd want to redirect the user to the login page
