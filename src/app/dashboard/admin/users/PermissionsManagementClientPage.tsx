@@ -20,6 +20,7 @@ interface User {
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
   canApproveRequests: boolean; // New permission field
+  canMessageAdmins: boolean; // New permission field
 }
 
 interface PermissionsManagementClientPageProps {
@@ -67,7 +68,7 @@ export default function PermissionsManagementClientPage({ initialUsers }: Permis
                   type="checkbox"
                   name="canMessageAdmins"
                   className="form-checkbox h-5 w-5 text-[#910000]"
-                  // You would pre-fill this based on existing permissions
+                  defaultChecked={selectedUser.canMessageAdmins} // Pre-fill based on existing permissions
                 />
                 <span className="ml-2 text-gray-700">Can Message Admins</span>
               </label>

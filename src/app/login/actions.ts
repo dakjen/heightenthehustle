@@ -25,6 +25,7 @@ interface UserSession {
   profilePhotoUrl: string | null;
   isOptedOut: boolean;
   canApproveRequests: boolean; // New permission field
+  canMessageAdmins: boolean; // New permission field
 }
 
 // Extend JWTPayload to include our user session data

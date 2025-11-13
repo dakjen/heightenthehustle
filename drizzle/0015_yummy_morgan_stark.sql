@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "can_message_admins" boolean DEFAULT false NOT NULL;
