@@ -11,9 +11,10 @@ interface BusinessDetailsFormProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
   availableLocations: Location[];
+  onBusinessUpdate: () => Promise<void>;
 }
 
-export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations }: BusinessDetailsFormProps) {
+export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations, onBusinessUpdate }: BusinessDetailsFormProps) {
   // State for edit mode
   const [isEditing, setIsEditing] = useState(false);
 
@@ -65,12 +66,15 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
     setIsCisgender(currentIsCisgender);
 
-    // Exit edit mode after a successful save
+  }, [initialBusiness, availableDemographics]); // Removed updateState from dependencies
+
+  // Trigger onBusinessUpdate after a successful save
+  useEffect(() => {
     if (updateState?.message && !updateState.error) {
       setIsEditing(false);
+      onBusinessUpdate(); // Call the parent's update function
     }
-
-  }, [initialBusiness, availableDemographics, updateState]);
+  }, [updateState, onBusinessUpdate]);
 
   // Combine selected demographic IDs for submission
   const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
