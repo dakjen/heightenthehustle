@@ -19,6 +19,7 @@ interface User {
   personalState: string | null;
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
+  canApproveRequests: boolean; // New permission field
 }
 
 interface PermissionsManagementClientPageProps {
@@ -69,6 +70,19 @@ export default function PermissionsManagementClientPage({ initialUsers }: Permis
                   // You would pre-fill this based on existing permissions
                 />
                 <span className="ml-2 text-gray-700">Can Message Admins</span>
+              </label>
+            </div>
+
+            {/* Can Approve Requests Permission */}
+            <div>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="canApproveRequests"
+                  className="form-checkbox h-5 w-5 text-[#910000]"
+                  defaultChecked={selectedUser.canApproveRequests}
+                />
+                <span className="ml-2 text-gray-700">Can Approve/Reject User Requests</span>
               </label>
             </div>
             {/* Add more permission checkboxes here */}

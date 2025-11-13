@@ -28,6 +28,7 @@ export const users = pgTable('users', {
   profilePhotoUrl: text('profile_photo_url'),
   businessName: text('business_name'), // Optional business name for account requests
   isOptedOut: boolean('is_opted_out').notNull().default(false),
+  canApproveRequests: boolean('can_approve_requests').notNull().default(false), // New permission for approving requests
 });
 
 export const demographics = pgTable('demographics', {

@@ -58,8 +58,13 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
 
 export async function approveUser(userId: number): Promise<FormState> {
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  if (!session || !session.user) {
     return { message: "", error: "Unauthorized." };
+  }
+
+  // Admins can always approve. Internal users need specific permission.
+  if (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests)) {
+    return { message: "", error: "Unauthorized to approve users." };
   }
 
   try {
@@ -76,8 +81,13 @@ export async function approveUser(userId: number): Promise<FormState> {
 
 export async function rejectUser(userId: number): Promise<FormState> {
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  if (!session || !session.user) {
     return { message: "", error: "Unauthorized." };
+  }
+
+  // Admins can always reject. Internal users need specific permission.
+  if (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests)) {
+    return { message: "", error: "Unauthorized to reject users." };
   }
 
   try {
@@ -154,20 +164,17 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
 
   const userId = parseInt(formData.get("userId") as string);
   const canMessageAdmins = formData.get("canMessageAdmins") === "on"; // Checkbox value
+  const canApproveRequests = formData.get("canApproveRequests") === "on"; // New checkbox value
 
   if (isNaN(userId)) {
     return { message: "", error: "Invalid user ID." };
   }
 
   try {
-    // In a real application, you would update the user's permissions in the database.
-    // For now, we'll just log it.
-    console.log(`Updating permissions for user ${userId}: canMessageAdmins = ${canMessageAdmins}`);
-
-    // Example: Update a 'permissions' JSONB column or a separate permissions table
-    // await db.update(users).set({
-    //   permissions: { canMessageAdmins }
-    // }).where(eq(users.id, userId));
+    await db.update(users).set({
+      canMessageAdmins: canMessageAdmins, // Assuming this column exists or will be added
+      canApproveRequests: canApproveRequests,
+    }).where(eq(users.id, userId));
 
     revalidatePath("/dashboard/admin/users");
     return { message: "Permissions updated successfully!", error: "" };

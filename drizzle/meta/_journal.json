@@ -99,6 +99,13 @@
       "when": 1700000000000,
       "tag": "0014_stiff_elektra",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1700000000001,
+      "tag": "0014_silent_night_thrasher",
+      "breakpoints": true
     }
   ]
 }

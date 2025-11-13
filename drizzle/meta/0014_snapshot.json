@@ -1,6 +1,6 @@
 {
-  "id": "b0b26050-db6a-4f6b-bbd2-4a4c23d61c6e",
-  "prevId": "f3f99b06-a301-4c13-a6eb-2aff60189206",
+  "id": "0b50bded-309f-4ffd-b2a6-9e4508aa053e",
+  "prevId": "b0b26050-db6a-4f6b-bbd2-4a4c23d61c6e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -1061,6 +1061,13 @@
         },
         "is_opted_out": {
           "name": "is_opted_out",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "can_approve_requests": {
+          "name": "can_approve_requests",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
