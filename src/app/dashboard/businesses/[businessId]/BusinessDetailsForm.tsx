@@ -11,7 +11,7 @@ interface BusinessDetailsFormProps {
   initialBusiness: BusinessWithLocation;
   availableDemographics: Demographic[];
   availableLocations: Location[];
-  onBusinessUpdate: () => Promise<void>;
+  onBusinessUpdate?: () => Promise<void>; // Made optional
 }
 
 export default function BusinessDetailsForm({ initialBusiness, availableDemographics, availableLocations, onBusinessUpdate }: BusinessDetailsFormProps) {
@@ -72,7 +72,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   useEffect(() => {
     if (updateState?.message && !updateState.error) {
       setIsEditing(false);
-      onBusinessUpdate(); // Call the parent's update function
+      if (onBusinessUpdate) { // Conditional check
+        onBusinessUpdate(); // Call the parent's update function
+      }
     }
   }, [updateState, onBusinessUpdate]);
 
