@@ -26,6 +26,7 @@ export const users = pgTable('users', {
   personalState: varchar('personal_state', { length: 2 }),
   personalZipCode: varchar('personal_zip_code', { length: 10 }),
   profilePhotoUrl: text('profile_photo_url'),
+  businessName: text('business_name'), // Optional business name for account requests
   isOptedOut: boolean('is_opted_out').notNull().default(false),
 });
 

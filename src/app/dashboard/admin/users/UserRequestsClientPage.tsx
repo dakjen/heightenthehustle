@@ -6,7 +6,7 @@ import { InferSelectModel } from 'drizzle-orm';
 import { users } from '@/db/schema';
 import { FormState } from '@/types/form-state';
 
-type User = InferSelectModel<typeof users>;
+type User = InferSelectModel<typeof users> & { businessName?: string | null };
 
 export default function UserRequestsClientPage() {
   const [pendingUsers, setPendingUsers] = useState<User[]>([]);
@@ -81,7 +81,10 @@ export default function UserRequestsClientPage() {
               <li key={user.id} className="px-4 py-4 sm:px-6 flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-900">{user.name} ({user.email})</p>
-                  <p className="text-sm text-gray-500">Phone: {user.phone}</p>
+                  <p className="text-sm text-gray-500">
+                    Phone: {user.phone}
+                    {user.businessName && <span className="ml-2"> | Business: {user.businessName}</span>}
+                  </p>
                 </div>
                 <div className="flex space-x-3">
                   <button

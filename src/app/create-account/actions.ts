@@ -26,6 +26,7 @@ export async function createAccount(prevState: FormState, formData: FormData): P
       email,
       password: hashedPassword,
       status: 'pending', // Set status to pending
+      businessName: businessName || null, // Save businessName to the database
     });
 
     return { message: "Thank you for your request. We will get back to you shortly.", error: "", businessName }; // Include businessName in success state
