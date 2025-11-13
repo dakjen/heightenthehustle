@@ -5,6 +5,7 @@ import { Business, Demographic, Location, BusinessWithLocation } from "@/db/sche
 import Link from "next/link";
 import EditBusinessProfileForm from "../EditBusinessProfileForm";
 import BusinessDetailsForm from "../BusinessDetailsForm";
+import { getBusinessProfile } from "../../../businesses/actions"; // Import getBusinessProfile
 
 interface EditBusinessProfileClientPageProps {
   initialBusiness: BusinessWithLocation;
@@ -14,10 +15,18 @@ interface EditBusinessProfileClientPageProps {
 
 export default function EditBusinessProfileClientPage({ initialBusiness, availableDemographics, availableLocations }: EditBusinessProfileClientPageProps) {
   const [activeTab, setActiveTab] = useState("info"); // 'info', 'owner-details', 'materials', 'branding'
+  const [business, setBusiness] = useState(initialBusiness); // Introduce state for business
+
+  const handleBusinessUpdate = async () => {
+    const updatedBusiness = await getBusinessProfile(business.id);
+    if (updatedBusiness) {
+      setBusiness(updatedBusiness);
+    }
+  };
 
   return (
     <div className="flex-1 p-6">
-      <h1 className="text-3xl font-bold text-gray-900">Edit Business: {initialBusiness.businessName}</h1>
+      <h1 className="text-3xl font-bold text-gray-900">Edit Business: {business.businessName}</h1>
 
       {/* Tabs */}
       <div className="mt-6 border-b border-gray-200">
@@ -35,7 +44,7 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Business Information</h2>
             <EditBusinessProfileForm
-              initialBusiness={initialBusiness}
+              initialBusiness={business} // Pass local state
               availableDemographics={availableDemographics}
               availableLocations={availableLocations}
             />
@@ -45,9 +54,10 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Owner Details</h2>
             <BusinessDetailsForm
-              initialBusiness={initialBusiness}
+              initialBusiness={business} // Pass local state
               availableDemographics={availableDemographics}
               availableLocations={availableLocations}
+              onBusinessUpdate={handleBusinessUpdate} // Pass the update function
             />
           </div>
         )}
@@ -68,7 +78,7 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
       </div>
 
       <div className="mt-8">
-        <Link href={`/dashboard/businesses/${initialBusiness.id}`}>
+        <Link href={`/dashboard/businesses/${business.id}`}>
           <button
             type="button"
             className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
