@@ -121,6 +121,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
   const updateFormActionWithLog = (formData: FormData) => {
     updateFormAction(formData);
+    console.log('BusinessDetailsForm: updateState after formAction:', updateState);
   };
 
   return (
