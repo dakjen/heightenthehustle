@@ -3,6 +3,7 @@ import { relations, InferSelectModel } from 'drizzle-orm';
 
 // --- Enums ---
 export const userRole = pgEnum('user_role', ['admin', 'internal', 'external']);
+export const userStatus = pgEnum('user_status', ['pending', 'approved', 'rejected']);
 export const businessTypeEnum = pgEnum('business_type', ['Sole Proprietorship', 'Partnership', 'Limited Liability Company (LLC)', 'Corporation']);
 export const businessTaxStatusEnum = pgEnum('business_tax_status', ['S-Corporation', 'C-Corporation', 'Not Applicable']);
 export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion', 'Male', 'Female', 'Non-Binary', 'Intersex', 'Other', 'White', 'Black or African American', 'Asian', 'American Indian or Alaska Native', 'Native Hawaiian or Other Pacific Islander', 'Middle Eastern or North African', 'Two or More Races', 'Christianity', 'Islam', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Baháʼí Faith', 'Shinto', 'Taoism', 'Confucianism', 'Jainism', 'Indigenous / Traditional Beliefs', 'Pagan / Wicca', 'Atheist', 'Agnostic', 'Spiritual but Not Religious', 'Cisgender', 'Transgender']);
@@ -18,6 +19,7 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   password: varchar('password', { length: 256 }).notNull(),
   role: userRole('role').notNull().default('external'),
+  status: userStatus('status').notNull().default('pending'),
   hasBusinessProfile: boolean('has_business_profile').notNull().default(false),
   personalAddress: text('personal_address'),
   personalCity: text('personal_city'),
