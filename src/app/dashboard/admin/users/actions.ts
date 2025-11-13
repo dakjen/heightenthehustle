@@ -47,6 +47,7 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         profilePhotoUrl: true,
         isOptedOut: true,
         businessName: true, // Explicitly select businessName
+        canApproveRequests: true, // Explicitly select canApproveRequests
       }
     });
     return pendingUsers;
