@@ -235,7 +235,24 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                     Edit
                   </button>
                   {!isInternalUserView && (
-                    <a href="#" className="ml-4 text-red-600 hover:text-red-900">Delete</a>
+                    <button
+                      onClick={async () => {
+                        if (window.confirm(`Are you sure you want to delete user ${user.name} (${user.email})?`)) {
+                          const result = await deleteUser(user.id);
+                          if (result.error) {
+                            alert(`Failed to delete user: ${result.error}`);
+                          } else {
+                            alert(result.message);
+                            // Re-fetch users after deletion
+                            const fetchedUsers = await getAllUsers();
+                            setAllUsers(fetchedUsers);
+                          }
+                        }
+                      }}
+                      className="ml-4 text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
                   )}
                 </td>
               </tr>
