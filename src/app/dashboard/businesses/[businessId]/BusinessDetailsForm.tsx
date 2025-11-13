@@ -71,6 +71,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
     setIsCisgender(currentIsCisgender);
 
+    console.log('BusinessDetailsForm: State after useEffect - selectedGenderId:', selectedGenderId, 'isTransgender:', isTransgender, 'isCisgender:', isCisgender);
+
   }, [initialBusiness, availableDemographics]); // Removed updateState from dependencies
 
   // Trigger onBusinessUpdate after a successful save

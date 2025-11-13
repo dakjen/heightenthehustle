@@ -18,8 +18,10 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
   const [business, setBusiness] = useState(initialBusiness); // Introduce state for business
 
   const handleBusinessUpdate = async () => {
+    console.log('EditBusinessProfileClientPage: handleBusinessUpdate called for business ID:', business.id);
     const updatedBusiness = await getBusinessProfile(business.id);
     if (updatedBusiness) {
+      console.log('EditBusinessProfileClientPage: setBusiness with updatedBusiness:', JSON.stringify(updatedBusiness, null, 2));
       setBusiness(updatedBusiness);
     }
   };
