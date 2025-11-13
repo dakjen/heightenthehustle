@@ -81,11 +81,13 @@ export async function rejectUser(userId: number): Promise<FormState> {
   }
 
   try {
-    await db.update(users)
-      .set({ status: 'rejected' })
-      .where(eq(users.id, userId));
+    // Instead of setting status to 'rejected', delete the user
+    const deleteResult = await deleteUser(userId);
+    if (deleteResult.error) {
+      return { message: "", error: `Failed to reject and delete user: ${deleteResult.error}` };
+    }
     revalidatePath("/dashboard/admin/users");
-    return { message: "User rejected successfully!", error: "" };
+    return { message: "User rejected and deleted successfully!", error: "" };
   } catch (error) {
     console.error("Error rejecting user:", error);
     return { message: "", error: "Failed to reject user." };
