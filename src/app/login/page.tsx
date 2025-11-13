@@ -3,12 +3,21 @@
 import { useFormState } from "react-dom";
 import { login } from "./actions";
 import { FormState } from "@/types/form-state";
+import Link from "next/link"; // Import Link
 
 export default function LoginPage() {
   const [state, formAction] = useFormState<FormState, FormData>(login, { message: "" });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
+      <div className="absolute top-4 left-4"> {/* Position the back link */}
+        <Link href="/" className="text-gray-600 hover:text-gray-900 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+          Back
+        </Link>
+      </div>
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-black text-center mb-8">Login</h1>
         <p className="text-center text-gray-600 mb-6">
