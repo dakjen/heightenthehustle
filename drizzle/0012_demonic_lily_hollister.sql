@@ -1,0 +1,1 @@
+ALTER TYPE "public"."demographic_category" ADD VALUE 'Transgender';
