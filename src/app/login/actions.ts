@@ -2,7 +2,7 @@
 
 import { FormState } from "@/types/form-state";
 import { db } from "@/db";
-import { users, businesses } from "@/db/schema";
+import { users, businesses, userStatus } from "@/db/schema"; // Import userStatus
 import { eq } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
@@ -16,6 +16,7 @@ interface UserSession {
   email: string;
   phone: string;
   role: 'admin' | 'internal' | 'external'; // Assuming userRole enum from schema
+  status: 'pending' | 'approved' | 'rejected'; // Add user status
   hasBusinessProfile: boolean;
   personalAddress: string | null;
   personalCity: string | null;
@@ -68,6 +69,11 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
 
   if (!isPasswordValid) {
     return { message: "", error: "Invalid email or password" };
+  }
+
+  // Check user status
+  if (user.status !== 'approved') {
+    return { message: "", error: "Your account is pending approval or has been rejected." };
   }
 
   try {
