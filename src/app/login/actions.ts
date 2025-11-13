@@ -73,7 +73,7 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
 
   // Check user status
   if (user.status !== 'approved') {
-    return { message: "", error: "Your account is pending approval or has been rejected." };
+    return { message: "", error: "We'll verify your request and send you an approval" };
   }
 
   try {

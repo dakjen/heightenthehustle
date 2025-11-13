@@ -27,7 +27,7 @@ export async function createAccount(prevState: FormState, formData: FormData): P
       status: 'pending', // Set status to pending
     });
 
-    return { message: "Account request submitted successfully! Please wait for admin approval.", error: "" };
+    return { message: "Thank you for your request. We will get back to you shortly.", error: "" };
   } catch (error) {
     console.error("Error creating account:", error);
     // Check for unique email constraint violation
