@@ -22,6 +22,9 @@ export default async function EditBusinessProfileDataFetcher({ businessId, avail
     notFound();
   }
 
+  console.log('EditBusinessProfileDataFetcher: availableDemographics', availableDemographics);
+  console.log('EditBusinessProfileDataFetcher: fetched business', business);
+
   return (
     <EditBusinessProfileClientPage
       initialBusiness={business}

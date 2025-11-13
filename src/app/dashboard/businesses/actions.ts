@@ -31,10 +31,47 @@ export async function getBusinessProfile(businessId: number): Promise<BusinessWi
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
       with: {
-        location: true, // Keep for backward compatibility or if still used for a primary location
+        location: true,
         stateLocation: true,
         regionLocation: true,
       },
+      // Explicitly select demographicIds to ensure it's always included
+      columns: {
+        demographicIds: true,
+        id: true,
+        userId: true,
+        businessName: true,
+        ownerName: true,
+        percentOwnership: true,
+        businessType: true,
+        businessTaxStatus: true,
+        businessDescription: true,
+        businessIndustry: true,
+        naicsCode: true,
+        logoUrl: true,
+        businessProfilePhotoUrl: true,
+        businessMaterialsUrl: true,
+        streetAddress: true,
+        city: true,
+        state: true,
+        zipCode: true,
+        phone: true,
+        website: true,
+        isArchived: true,
+        locationId: true,
+        stateLocationId: true,
+        regionLocationId: true,
+        material1Url: true,
+        material1Title: true,
+        material2Url: true,
+        material2Title: true,
+        material3Url: true,
+        material3Title: true,
+        material4Url: true,
+        material4Title: true,
+        material5Url: true,
+        material5Title: true,
+      }
     });
     if (!profile) { return null; }
     return profile;
