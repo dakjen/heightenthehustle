@@ -67,9 +67,9 @@ export default function DashboardPage() {
           <p className="text-lg text-gray-700">
             We will periodically send you resources, notes, and alerts to help your business grow and thrive. If you&apos;d like to stop receiving these communications, you can opt out below.
           </p>
-          <button className="mt-6 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-colors">
+          <Link href="/dashboard/settings" className="mt-6 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-colors inline-block">
             Opt Out
-          </button>
+          </Link>
         </div>
       </div>
     </div>
