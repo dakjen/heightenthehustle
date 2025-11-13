@@ -354,7 +354,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   // Get all demographic IDs related to Gender, Race, Religion, Transgender, Cisgender
   // to filter them out from existingDemographicIds
-  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion'];
+  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion'] as const;
   const demographicNamesToUpdate = ['Transgender', 'Cisgender'];
 
   const allDemographicsToUpdate = await db.query.demographics.findMany({
@@ -420,7 +420,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: `Business details updated successfully! State: ${stateLocationId}, Region: ${regionLocationId}, Demographics: ${JSON.stringify(newDemographicIds)}`, error: "" };
+    return { message: `Business details updated successfully! Please refresh to see changes.`, error: "" };
   } catch (error) {
     console.error("Error updating business details:", error);
     return { message: "", error: "Failed to update business details." };
