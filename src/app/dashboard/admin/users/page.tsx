@@ -24,12 +24,15 @@ interface User {
   personalState: string | null;
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
+  canApproveRequests: boolean; // Include new permission
+  canMessageAdmins: boolean; // Include new permission
 }
 
 export default async function UserManagementPage({ searchParams }: { searchParams: Promise<{ viewMode?: string, tab?: string }> }) {
   const resolvedSearchParams = await searchParams;
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  // Allow admin or internal users with canApproveRequests to access
+  if (!session || !session.user || (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests))) {
     redirect("/dashboard");
   }
 
