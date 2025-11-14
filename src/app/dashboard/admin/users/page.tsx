@@ -37,8 +37,12 @@ export default async function UserManagementPage({ searchParams }: { searchParam
   }
 
   const allUsers = await getAllUsers(); // Fetch users on the server
-  const isInternalUserView = resolvedSearchParams.viewMode === "internal";
-  const activeTab = resolvedSearchParams.tab || "users"; // Default to 'users' tab
+  let activeTab = resolvedSearchParams.tab || "users"; // Default to 'users' tab
+
+  // If internal user with canApproveRequests, force activeTab to 'requests'
+  if (session.user.role === 'internal' && session.user.canApproveRequests) {
+    activeTab = "requests";
+  }
 
   return (
     <div className="flex-1 p-6">
@@ -56,21 +60,27 @@ export default async function UserManagementPage({ searchParams }: { searchParam
       {/* Tabs */}
       <div className="mt-6 border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-          <TabLink href="users" activeTab={activeTab}>Users</TabLink>
-          <TabLink href="permissions" activeTab={activeTab}>Permissions</TabLink>
-          <TabLink href="requests" activeTab={activeTab}>Requests</TabLink>
+          {session.user.role === 'admin' && (
+            <>
+              <TabLink href="users" activeTab={activeTab}>Users</TabLink>
+              <TabLink href="permissions" activeTab={activeTab}>Permissions</TabLink>
+            </>
+          )}
+          {(session.user.role === 'admin' || (session.user.role === 'internal' && session.user.canApproveRequests)) && (
+            <TabLink href="requests" activeTab={activeTab}>Requests</TabLink>
+          )}
         </nav>
       </div>
 
       {/* Tab Content */}
       <div className="mt-8">
-        {activeTab === "users" && (
+        {session.user.role === 'admin' && activeTab === "users" && (
           <UserManagementClientPage initialUsers={allUsers} isInternalUserView={isInternalUserView} />
         )}
-        {activeTab === "permissions" && (
+        {session.user.role === 'admin' && activeTab === "permissions" && (
           <PermissionsManagementClientPage initialUsers={allUsers} /> // Pass allUsers to permissions page
         )}
-        {activeTab === "requests" && (
+        {(session.user.role === 'admin' || (session.user.role === 'internal' && session.user.canApproveRequests)) && activeTab === "requests" && (
           <UserRequestsClientPage />
         )}
       </div>
