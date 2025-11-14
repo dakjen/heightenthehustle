@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/hthlogo.png" />
+        <link rel="icon" href="/hth.ico" />
         <meta property="og:image" content="/hthlink.png" />
       </head>
       <body
