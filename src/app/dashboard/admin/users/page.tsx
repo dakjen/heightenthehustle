@@ -37,6 +37,7 @@ export default async function UserManagementPage({ searchParams }: { searchParam
   }
 
   const allUsers = await getAllUsers(); // Fetch users on the server
+  const isInternalUserView = resolvedSearchParams.viewMode === "internal"; // Re-introduce this definition
   let activeTab = resolvedSearchParams.tab || "users"; // Default to 'users' tab
 
   // If internal user with canApproveRequests, force activeTab to 'requests'
