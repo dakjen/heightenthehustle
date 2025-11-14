@@ -30,6 +30,8 @@ export const users = pgTable('users', {
   isOptedOut: boolean('is_opted_out').notNull().default(false),
   canApproveRequests: boolean('can_approve_requests').notNull().default(false), // New permission for approving requests
   canMessageAdmins: boolean('can_message_admins').notNull().default(false), // New permission for messaging admins
+  canManageClasses: boolean('can_manage_classes').notNull().default(false), // New permission for managing classes
+  canManageBusinesses: boolean('can_manage_businesses').notNull().default(false), // New permission for managing businesses
 });
 
 export const demographics = pgTable('demographics', {
