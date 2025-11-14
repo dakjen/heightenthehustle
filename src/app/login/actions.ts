@@ -61,6 +61,24 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
 
   const user = await db.query.users.findFirst({
     where: eq(users.email, email),
+    columns: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      password: true,
+      role: true,
+      status: true,
+      hasBusinessProfile: true,
+      personalAddress: true,
+      personalCity: true,
+      personalState: true,
+      personalZipCode: true,
+      profilePhotoUrl: true,
+      isOptedOut: true,
+      canApproveRequests: true,
+      canMessageAdmins: true,
+    }
   });
 
   if (!user) {
