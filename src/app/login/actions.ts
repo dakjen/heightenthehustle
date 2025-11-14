@@ -26,6 +26,8 @@ interface UserSession {
   isOptedOut: boolean;
   canApproveRequests: boolean; // New permission field
   canMessageAdmins: boolean; // New permission field
+  canManageClasses: boolean; // New permission field
+  canManageBusinesses: boolean; // New permission field
 }
 
 // Extend JWTPayload to include our user session data
@@ -78,6 +80,8 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
       isOptedOut: true,
       canApproveRequests: true,
       canMessageAdmins: true,
+      canManageClasses: true, // Explicitly select new permission
+      canManageBusinesses: true, // Explicitly select new permission
     }
   });
 
