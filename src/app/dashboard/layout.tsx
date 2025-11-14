@@ -20,7 +20,8 @@ export default async function DashboardLayout({
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
   const isAdmin = session.user.role === 'admin';
   const canAccessAdminUsers = isAdmin || (session.user.role === 'internal' && session.user.canApproveRequests);
-  // Add other permission checks here for other admin tools as needed
+  const canAccessAdminClasses = isAdmin || (session.user.role === 'internal' && session.user.canManageClasses);
+  const canAccessAdminBusinesses = isAdmin || (session.user.role === 'internal' && session.user.canManageBusinesses);
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -49,18 +50,20 @@ export default async function DashboardLayout({
           <Link href="#" className="block py-2.5 px-4 rounded transition duration-200 text-gray-400">HTH Class <span className="text-xs text-gray-500 ml-2">(Coming Soon)</span></Link>
           <Link href="/dashboard/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</Link>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
-          {(isAdmin || canAccessAdminUsers) && ( // Show Admin Tools heading if any admin tool is accessible
+          {(isAdmin || canAccessAdminUsers || canAccessAdminClasses || canAccessAdminBusinesses) && ( // Show Admin Tools heading if any admin tool is accessible
             <>
               <h2 className="text-lg font-semibold text-gray-400 uppercase mt-6 mb-2">Admin Tools</h2>
               {canAccessAdminUsers && (
                 <Link href="/dashboard/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Users</Link>
               )}
+              {canAccessAdminBusinesses && (
+                <Link href="/dashboard/admin/businesses/manage" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
+              )}
               {isAdmin && ( // Other admin links remain admin-only for now
-                <>
-                  <Link href="/dashboard/admin/businesses/manage" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
-                  <Link href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
-                  <Link href="/dashboard/admin/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin HTH Class</Link>
-                </>
+                <Link href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>
+              )}
+              {canAccessAdminClasses && (
+                <Link href="/dashboard/admin/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin HTH Class</Link>
               )}
             </>
           )}
