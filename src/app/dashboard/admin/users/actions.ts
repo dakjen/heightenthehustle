@@ -174,9 +174,24 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
 
   try {
     await db.update(users).set({
-      canMessageAdmins: canMessageAdmins, // Assuming this column exists or will be added
+      canMessageAdmins: canMessageAdmins,
       canApproveRequests: canApproveRequests,
     }).where(eq(users.id, userId));
+
+    // If the updated user is the currently logged-in user, update their session
+    if (session.user.id === userId) {
+      const updatedUser = await db.query.users.findFirst({
+        where: eq(users.id, userId),
+      });
+
+      if (updatedUser) {
+        const { encrypt } = await import("@/app/login/actions"); // Dynamically import encrypt
+        const { cookies } = await import("next/headers"); // Dynamically import cookies
+        const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+        const cookieStore = cookies();
+        cookieStore.set("session", await encrypt({ user: updatedUser, expires }), { expires, httpOnly: true });
+      }
+    }
 
     revalidatePath("/dashboard/admin/users");
     return { message: "Permissions updated successfully!", error: "" };
