@@ -29,6 +29,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/hth.ico" />
         <meta property="og:image" content="/hthlink.png" />
+        <meta property="og:title" content="HTH Business Portal" />
       </head>
       <body
         className={`${dmSans.variable} ${bebasNeue.variable} antialiased`}
