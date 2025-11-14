@@ -167,6 +167,8 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
   const userId = parseInt(formData.get("userId") as string);
   const canMessageAdmins = formData.get("canMessageAdmins") === "on"; // Checkbox value
   const canApproveRequests = formData.get("canApproveRequests") === "on"; // New checkbox value
+  const canManageClasses = formData.get("canManageClasses") === "on"; // New checkbox value
+  const canManageBusinesses = formData.get("canManageBusinesses") === "on"; // New checkbox value
 
   if (isNaN(userId)) {
     return { message: "", error: "Invalid user ID." };
@@ -176,6 +178,8 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
     await db.update(users).set({
       canMessageAdmins: canMessageAdmins,
       canApproveRequests: canApproveRequests,
+      canManageClasses: canManageClasses,
+      canManageBusinesses: canManageBusinesses,
     }).where(eq(users.id, userId));
 
     // If the updated user is the currently logged-in user, update their session

@@ -21,6 +21,8 @@ interface User {
   profilePhotoUrl: string | null;
   canApproveRequests: boolean; // New permission field
   canMessageAdmins: boolean; // New permission field
+  canManageClasses: boolean; // New permission field
+  canManageBusinesses: boolean; // New permission field
 }
 
 interface PermissionsManagementClientPageProps {
@@ -84,6 +86,32 @@ export default function PermissionsManagementClientPage({ initialUsers }: Permis
                   defaultChecked={selectedUser.canApproveRequests}
                 />
                 <span className="ml-2 text-gray-700">Can Approve/Reject User Requests</span>
+              </label>
+            </div>
+
+            {/* Can Manage Classes Permission */}
+            <div>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="canManageClasses"
+                  className="form-checkbox h-5 w-5 text-[#910000]"
+                  defaultChecked={selectedUser.canManageClasses}
+                />
+                <span className="ml-2 text-gray-700">Can Manage HTH Classes</span>
+              </label>
+            </div>
+
+            {/* Can Manage Businesses Permission */}
+            <div>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="canManageBusinesses"
+                  className="form-checkbox h-5 w-5 text-[#910000]"
+                  defaultChecked={selectedUser.canManageBusinesses}
+                />
+                <span className="ml-2 text-gray-700">Can Manage Businesses</span>
               </label>
             </div>
             {/* Add more permission checkboxes here */}
