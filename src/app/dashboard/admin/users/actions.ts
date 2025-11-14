@@ -188,7 +188,7 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
         const { encrypt } = await import("@/app/login/actions"); // Dynamically import encrypt
         const { cookies } = await import("next/headers"); // Dynamically import cookies
         const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-        const cookieStore = cookies();
+        const cookieStore = await cookies(); // Await the cookies() call
         cookieStore.set("session", await encrypt({ user: updatedUser, expires }), { expires, httpOnly: true });
       }
     }
