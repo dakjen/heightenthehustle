@@ -3,7 +3,7 @@
 import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users, massMessages, locations, demographics, businesses, individualMessages, teamMessages } from "@/db/schema";
+import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
 import { eq, inArray, and, or, asc, arrayOverlaps } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
@@ -196,7 +196,7 @@ export async function getIndividualMessages(currentUserId: number) {
   }
 }
 
-export async function getConversations(currentUserId: number) {
+export async function getConversations(currentUserId: number, teamChat: boolean = false) {
   try {
     const messages = await db.query.individualMessages.findMany({
       where: or(
@@ -204,18 +204,24 @@ export async function getConversations(currentUserId: number) {
         eq(individualMessages.recipientId, currentUserId)
       ),
       with: {
-        sender: { columns: { id: true, name: true, email: true } },
-        recipient: { columns: { id: true, name: true, email: true } },
+        sender: { columns: { id: true, name: true, email: true, role: true } },
+        recipient: { columns: { id: true, name: true, email: true, role: true } },
       },
     });
 
     const conversations = messages.reduce((acc, msg) => {
       const otherUser = msg.senderId === currentUserId ? msg.recipient : msg.sender;
       if (!acc.find(c => c.id === otherUser.id)) {
-        acc.push(otherUser);
+        if (teamChat) {
+          if (otherUser.role === 'admin' || otherUser.role === 'internal') {
+            acc.push(otherUser);
+          }
+        } else {
+          acc.push(otherUser);
+        }
       }
       return acc;
-    }, [] as { id: number; name: string; email: string }[]);
+    }, [] as { id: number; name: string; email: string, role: 'admin' | 'internal' | 'external' }[]);
 
     return conversations;
   } catch (error) {
@@ -224,44 +230,30 @@ export async function getConversations(currentUserId: number) {
   }
 }
 
-export async function sendTeamMessage(prevState: FormState, formData: FormData): Promise<FormState> {
-  const session = await getSession();
-  if (!session || !session.user || (session.user.role !== 'admin' && session.user.role !== 'internal')) {
-    return { message: "", error: "Unauthorized." };
+
+
+export async function getApplicableBusinessesCount(locationIds: number[], demographicIds: number[]): Promise<number> {
+  const conditions = [];
+  if (locationIds.length > 0) {
+    conditions.push(inArray(businesses.locationId, locationIds));
+  }
+  if (demographicIds.length > 0) {
+    conditions.push(arrayOverlaps(businesses.demographicIds, demographicIds));
   }
 
-  const messageContent = formData.get("messageContent") as string;
-
-  if (!messageContent) {
-    return { message: "", error: "Message content is required." };
+  if (conditions.length === 0) {
+    return 0;
   }
 
   try {
-    await db.insert(teamMessages).values({
-      senderId: session.user.id,
-      content: messageContent,
-      timestamp: new Date(),
-    });
-    revalidateMessagesPath();
-    return { message: "Message sent successfully!", error: "" };
+    const result = await db.selectDistinct({ id: users.id })
+      .from(users)
+      .innerJoin(businesses, eq(users.id, businesses.userId))
+      .where(and(...conditions));
+    return result.length;
   } catch (error) {
-    console.error("Error sending team message:", error);
-    return { message: "", error: "Failed to send message." };
-  }
-}
-
-export async function getTeamMessages() {
-  try {
-    const messages = await db.query.teamMessages.findMany({
-      orderBy: asc(teamMessages.timestamp),
-      with: {
-        sender: { columns: { id: true, name: true, email: true } },
-      },
-    });
-    return messages;
-  } catch (error) {
-    console.error("Error fetching team messages:", error);
-    return [];
+    console.error("Error fetching applicable businesses count:", error);
+    return 0;
   }
 }
 

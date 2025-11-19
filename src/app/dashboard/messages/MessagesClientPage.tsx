@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getTeamMessages, sendTeamMessage } from "./actions";
+import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinessesCount } from "./actions";
 import { searchBusinesses } from "../businesses/actions";
 import { Business } from "@/db/schema";
 import { useFormState } from "react-dom";
@@ -122,51 +122,53 @@ export default function MessagesPage({
 
   const [excludeOptedOut, setExcludeOptedOut] = useState(true);
 
-  const [conversations, setConversations] = useState<User[]>([]);
+    const [conversations, setConversations] = useState<User[]>([]);
 
-  const [selectedConversationUserId, setSelectedConversationUserId] = useState<number | null>(null);
+    const [selectedConversationUserId, setSelectedConversationUserId] = useState<number | null>(null);
 
-  const [teamMessages, setTeamMessages] = useState<TeamMessage[]>([]);
+    const [teamConversations, setTeamConversations] = useState<User[]>([]);
 
-
-
-    const [teamSendState, teamSendAction] = useFormState<FormState, FormData>(sendTeamMessage, { message: "" });
-
-
+    const [applicableBusinessesCount, setApplicableBusinessesCount] = useState(0);
 
   
 
-
-
     useEffect(() => {
 
+      if (currentUserId) {
 
+        if (activeTab === 'team-chat') {
 
-      if (activeTab === 'team-chat') {
+          getConversations(currentUserId, true).then(setTeamConversations);
 
+        } else {
 
+          getConversations(currentUserId).then(setConversations);
 
-        getTeamMessages().then(setTeamMessages);
-
-
+        }
 
       }
 
+    }, [activeTab, currentUserId]);
 
+  
 
-    }, [activeTab]);
+    useEffect(() => {
 
-  useEffect(() => {
-    if (currentUserId) {
-      getConversations(currentUserId).then(setConversations);
-    }
-  }, [currentUserId]);
+      getApplicableBusinessesCount(selectedLocations, selectedDemographics).then(setApplicableBusinessesCount);
 
-  useEffect(() => {
-    if (searchQuery.length > 2) {
-      searchBusinesses(searchQuery).then(setSearchResults);
-    }
-  }, [searchQuery]);
+    }, [selectedLocations, selectedDemographics]);
+
+  
+
+    useEffect(() => {
+
+      if (searchQuery.length > 2) {
+
+        searchBusinesses(searchQuery).then(setSearchResults);
+
+      }
+
+    }, [searchQuery]);
 
   const handleLocationChange = (locationId: number) => {
     setSelectedLocations(prev =>
@@ -288,47 +290,75 @@ export default function MessagesPage({
       )}
 
       {activeTab === 'team-chat' && (
-        <div className="mt-8 flex flex-col h-[calc(100vh-200px)]">
-          <div className="flex-grow overflow-y-auto p-6 bg-white shadow-md rounded-lg">
-            {teamMessages.map((msg) => (
-              <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'}`}>
-                <p className="text-sm font-semibold">{msg.sender.name}:</p>
-                <p className="text-gray-800">{msg.content}</p>
-                <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
-              </div>
-            ))}
+        <div className="mt-8 flex h-[calc(100vh-200px)]">
+          {/* Conversation List */}
+          <div className="w-1/3 border-r border-gray-200">
+            <h2 className="text-xl font-bold p-4">Team Conversations</h2>
+            <div className="overflow-y-auto">
+              {teamConversations.map(convoUser => (
+                <button
+                  key={convoUser.id}
+                  onClick={() => setSelectedConversationUserId(convoUser.id)}
+                  className={`w-full text-left p-4 hover:bg-gray-100 ${selectedConversationUserId === convoUser.id ? 'bg-gray-200' : ''}`}
+                >
+                  {convoUser.name}
+                </button>
+              ))}
+            </div>
           </div>
-          <form action={teamSendAction} className="mt-4 p-6 bg-white shadow-md rounded-lg">
-            <div className="mt-4">
-              <label htmlFor="messageContent" className="sr-only">Message</label>
-              <textarea
-                id="messageContent"
-                name="messageContent"
-                rows={2}
-                value={messageContent}
-                onChange={(e) => setMessageContent(e.target.value)}
-                placeholder="Type your message here..."
-                required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-              ></textarea>
-            </div>
 
-            {sendState?.message && (
-              <p className="text-sm text-green-600 mt-2">{sendState.message}</p>
-            )}
-            {sendState?.error && (
-              <p className="text-sm text-red-600 mt-2">{sendState.error}</p>
-            )}
-
-            <div className="mt-6">
-              <button
-                type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Send Message
-              </button>
+          {/* Message View */}
+          <div className="w-2/3 flex flex-col">
+            <div className="flex-grow overflow-y-auto p-6 bg-white shadow-md rounded-lg">
+              {selectedConversationUserId ? (
+                individualMessages
+                  .filter(msg => (msg.senderId === currentUserId && msg.recipientId === selectedConversationUserId) || (msg.senderId === selectedConversationUserId && msg.recipientId === currentUserId))
+                  .map((msg) => (
+                    <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'}`}>
+                      <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : msg.sender.name}:</p>
+                      <p className="text-gray-800">{msg.content}</p>
+                      <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
+                    </div>
+                  ))
+              ) : (
+                <p className="text-gray-500">Select a conversation to start messaging.</p>
+              )}
             </div>
-          </form>
+            {selectedConversationUserId && (
+              <form action={sendAction} className="mt-4 p-6 bg-white shadow-md rounded-lg">
+                <input type="hidden" name="recipient" value={selectedConversationUserId} />
+                <div className="mt-4">
+                  <label htmlFor="messageContent" className="sr-only">Message</label>
+                  <textarea
+                    id="messageContent"
+                    name="messageContent"
+                    rows={2}
+                    value={messageContent}
+                    onChange={(e) => setMessageContent(e.target.value)}
+                    placeholder="Type your message here..."
+                    required
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                  ></textarea>
+                </div>
+
+                {sendState?.message && (
+                  <p className="text-sm text-green-600 mt-2">{sendState.message}</p>
+                )}
+                {sendState?.error && (
+                  <p className="text-sm text-red-600 mt-2">{sendState.error}</p>
+                )}
+
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       )}
 
@@ -336,11 +366,29 @@ export default function MessagesPage({
         <div className="mt-8">
           <div className="p-6 bg-white shadow-md rounded-lg mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Send Mass Message</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Applicable Businesses: {applicableBusinessesCount}
+            </p>
             <form action={massSendAction}>
+              {/* Message Content */}
+              <div className="mt-4">
+                <label htmlFor="massMessageContent" className="sr-only">Message</label>
+                <textarea
+                  id="massMessageContent"
+                  name="massMessageContent"
+                  rows={4}
+                  value={messageContent}
+                  onChange={(e) => setMessageContent(e.target.value)}
+                  placeholder="Type your message here..."
+                  required
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                ></textarea>
+              </div>
+
               {/* Location Selection */}
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700">Target Locations</label>
-                <div className="mt-1 grid grid-cols-2 gap-2">
+                <div className="mt-1 h-40 overflow-y-auto border border-gray-300 rounded-md p-2">
                   {initialLocations.map(location => (
                     <div key={location.id} className="flex items-center">
                       <input
@@ -363,7 +411,7 @@ export default function MessagesPage({
               {/* Demographic Selection */}
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700">Target Demographics</label>
-                <div className="mt-1 grid grid-cols-2 gap-2">
+                <div className="mt-1 h-40 overflow-y-auto border border-gray-300 rounded-md p-2">
                   {initialDemographics.map(demographic => (
                     <div key={demographic.id} className="flex items-center">
                       <input
@@ -398,21 +446,6 @@ export default function MessagesPage({
                     Exclude users who have opted out
                   </label>
                 </div>
-              </div>
-
-              {/* Message Content */}
-              <div className="mt-4">
-                <label htmlFor="massMessageContent" className="sr-only">Message</label>
-                <textarea
-                  id="massMessageContent"
-                  name="massMessageContent"
-                  rows={4}
-                  value={messageContent}
-                  onChange={(e) => setMessageContent(e.target.value)}
-                  placeholder="Type your message here..."
-                  required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-                ></textarea>
               </div>
 
               {massSendState?.message && (
