@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 
 export default async function HTHClassPage() {
   const session = await getSession();
-  if (!session || session.user.role !== 'admin') {
+  if (!session || !session.user || session.user.role !== 'admin') {
     redirect('/dashboard');
   }
 

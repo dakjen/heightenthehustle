@@ -49,6 +49,8 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         businessName: true, // Explicitly select businessName
         canApproveRequests: true, // Explicitly select canApproveRequests
         canMessageAdmins: true, // Explicitly select canMessageAdmins
+        canManageClasses: true, // Explicitly select canManageClasses
+        canManageBusinesses: true, // Explicitly select canManageBusinesses
       }
     });
     return pendingUsers;

@@ -52,7 +52,7 @@ interface MessagesPageProps {
 
 export default async function MessagesPage() {
   const session = await getSession();
-  if (!session || session.user.role !== 'admin') {
+  if (!session || !session.user || session.user.role !== 'admin') {
     redirect('/dashboard');
   }
   const isAdmin = session?.user?.role === 'admin';
