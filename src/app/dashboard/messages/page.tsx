@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
 import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
@@ -51,6 +52,9 @@ interface MessagesPageProps {
 
 export default async function MessagesPage() {
   const session = await getSession();
+  if (!session || session.user.role !== 'admin') {
+    redirect('/dashboard');
+  }
   const isAdmin = session?.user?.role === 'admin';
   const currentUserId = session?.user?.id || null;
 

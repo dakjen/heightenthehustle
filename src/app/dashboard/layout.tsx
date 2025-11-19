@@ -42,12 +42,15 @@ export default async function DashboardLayout({
               {business.businessName}
             </Link>
           ))}
-          {/* <Link href="/dashboard/heighten-ai" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Heighten.Ai</Link> */}
-          <Link href="#" className="block py-2.5 px-4 rounded transition duration-200 text-gray-400">Messages <span className="text-xs text-gray-500 ml-2">(Coming Soon)</span></Link>
+          {isAdmin && (
+            <>
+              <Link href="/dashboard/messages" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Messages</Link>
+              <Link href="/dashboard/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">HTH Class</Link>
+            </>
+          )}
           {session.user.role === 'internal' && ( // Show Resources link only for internal users
             <Link href="/dashboard/resources" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Resources</Link>
           )}
-          <Link href="#" className="block py-2.5 px-4 rounded transition duration-200 text-gray-400">HTH Class <span className="text-xs text-gray-500 ml-2">(Coming Soon)</span></Link>
           <Link href="/dashboard/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Settings</Link>
           <Link href="/dashboard/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Profile</Link>
           {(isAdmin || canAccessAdminUsers || canAccessAdminClasses || canAccessAdminBusinesses) && ( // Show Admin Tools heading if any admin tool is accessible
