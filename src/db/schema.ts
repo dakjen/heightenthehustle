@@ -102,6 +102,13 @@ export const individualMessages = pgTable('individual_messages', {
   replyToMessageId: integer('reply_to_message_id').references((): AnyPgColumn => individualMessages.id),
 });
 
+export const teamMessages = pgTable('team_messages', {
+  id: serial('id').primaryKey(),
+  senderId: integer('sender_id').notNull().references(() => users.id),
+  content: text('content').notNull(),
+  timestamp: timestamp('timestamp', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const pitchCompetitionEvents = pgTable('pitch_competition_events', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
@@ -224,6 +231,13 @@ export const individualMessagesRelations = relations(individualMessages, ({ one 
   replyToMessage: one(individualMessages, {
     fields: [individualMessages.replyToMessageId],
     references: [individualMessages.id],
+  }),
+}));
+
+export const teamMessagesRelations = relations(teamMessages, ({ one }) => ({
+  sender: one(users, {
+    fields: [teamMessages.senderId],
+    references: [users.id],
   }),
 }));
 

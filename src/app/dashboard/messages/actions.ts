@@ -3,7 +3,7 @@
 import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
-import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
+import { users, massMessages, locations, demographics, businesses, individualMessages, teamMessages } from "@/db/schema";
 import { eq, inArray, and, or, asc, arrayOverlaps } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
@@ -192,6 +192,75 @@ export async function getIndividualMessages(currentUserId: number) {
     return messages;
   } catch (error) {
     console.error("Error fetching individual messages:", error);
+    return [];
+  }
+}
+
+export async function getConversations(currentUserId: number) {
+  try {
+    const messages = await db.query.individualMessages.findMany({
+      where: or(
+        eq(individualMessages.senderId, currentUserId),
+        eq(individualMessages.recipientId, currentUserId)
+      ),
+      with: {
+        sender: { columns: { id: true, name: true, email: true } },
+        recipient: { columns: { id: true, name: true, email: true } },
+      },
+    });
+
+    const conversations = messages.reduce((acc, msg) => {
+      const otherUser = msg.senderId === currentUserId ? msg.recipient : msg.sender;
+      if (!acc.find(c => c.id === otherUser.id)) {
+        acc.push(otherUser);
+      }
+      return acc;
+    }, [] as { id: number; name: string; email: string }[]);
+
+    return conversations;
+  } catch (error) {
+    console.error("Error fetching conversations:", error);
+    return [];
+  }
+}
+
+export async function sendTeamMessage(prevState: FormState, formData: FormData): Promise<FormState> {
+  const session = await getSession();
+  if (!session || !session.user || (session.user.role !== 'admin' && session.user.role !== 'internal')) {
+    return { message: "", error: "Unauthorized." };
+  }
+
+  const messageContent = formData.get("messageContent") as string;
+
+  if (!messageContent) {
+    return { message: "", error: "Message content is required." };
+  }
+
+  try {
+    await db.insert(teamMessages).values({
+      senderId: session.user.id,
+      content: messageContent,
+      timestamp: new Date(),
+    });
+    revalidateMessagesPath();
+    return { message: "Message sent successfully!", error: "" };
+  } catch (error) {
+    console.error("Error sending team message:", error);
+    return { message: "", error: "Failed to send message." };
+  }
+}
+
+export async function getTeamMessages() {
+  try {
+    const messages = await db.query.teamMessages.findMany({
+      orderBy: asc(teamMessages.timestamp),
+      with: {
+        sender: { columns: { id: true, name: true, email: true } },
+      },
+    });
+    return messages;
+  } catch (error) {
+    console.error("Error fetching team messages:", error);
     return [];
   }
 }
