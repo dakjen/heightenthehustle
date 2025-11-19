@@ -206,7 +206,106 @@ export default function MessagesPage({
 
       {activeTab === 'mass-messages' && isAdmin && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Mass Messages</h2>
+          <div className="p-6 bg-white shadow-md rounded-lg mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Send Mass Message</h2>
+            <form action={massSendAction}>
+              {/* Location Selection */}
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700">Target Locations</label>
+                <div className="mt-1 grid grid-cols-2 gap-2">
+                  {initialLocations.map(location => (
+                    <div key={location.id} className="flex items-center">
+                      <input
+                        id={`location-${location.id}`}
+                        name="locations"
+                        type="checkbox"
+                        value={location.id}
+                        checked={selectedLocations.includes(location.id)}
+                        onChange={() => handleLocationChange(location.id)}
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      />
+                      <label htmlFor={`location-${location.id}`} className="ml-2 text-sm text-gray-900">
+                        {location.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Demographic Selection */}
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700">Target Demographics</label>
+                <div className="mt-1 grid grid-cols-2 gap-2">
+                  {initialDemographics.map(demographic => (
+                    <div key={demographic.id} className="flex items-center">
+                      <input
+                        id={`demographic-${demographic.id}`}
+                        name="demographics"
+                        type="checkbox"
+                        value={demographic.id}
+                        checked={selectedDemographics.includes(demographic.id)}
+                        onChange={() => handleDemographicChange(demographic.id)}
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      />
+                      <label htmlFor={`demographic-${demographic.id}`} className="ml-2 text-sm text-gray-900">
+                        {demographic.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Opt-out Toggle */}
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <input
+                    id="excludeOptedOut"
+                    name="excludeOptedOut"
+                    type="checkbox"
+                    checked={excludeOptedOut}
+                    onChange={(e) => setExcludeOptedOut(e.target.checked)}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <label htmlFor="excludeOptedOut" className="ml-2 text-sm text-gray-900">
+                    Exclude users who have opted out
+                  </label>
+                </div>
+              </div>
+
+              {/* Message Content */}
+              <div className="mt-4">
+                <label htmlFor="massMessageContent" className="sr-only">Message</label>
+                <textarea
+                  id="massMessageContent"
+                  name="massMessageContent"
+                  rows={4}
+                  value={messageContent}
+                  onChange={(e) => setMessageContent(e.target.value)}
+                  placeholder="Type your message here..."
+                  required
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                ></textarea>
+              </div>
+
+              {massSendState?.message && (
+                <p className="text-sm text-green-600 mt-2">{massSendState.message}</p>
+              )}
+              {massSendState?.error && (
+                <p className="text-sm text-red-600 mt-2">{massSendState.error}</p>
+              )}
+
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  Send Mass Message
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Sent Mass Messages</h2>
           <div className="p-6 bg-white shadow-md rounded-lg h-96 overflow-y-auto">
             {initialMassMessages.length === 0 ? (
               <p className="text-gray-500">No mass messages sent yet.</p>
