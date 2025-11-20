@@ -411,23 +411,74 @@ export default function MessagesPage({
               {/* Demographic Selection */}
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700">Target Demographics</label>
-                <div className="mt-1 h-40 overflow-y-auto border border-gray-300 rounded-md p-2">
-                  {initialDemographics.map(demographic => (
-                    <div key={demographic.id} className="flex items-center">
-                      <input
-                        id={`demographic-${demographic.id}`}
-                        name="demographics"
-                        type="checkbox"
-                        value={demographic.id}
-                        checked={selectedDemographics.includes(demographic.id)}
-                        onChange={() => handleDemographicChange(demographic.id)}
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      />
-                      <label htmlFor={`demographic-${demographic.id}`} className="ml-2 text-sm text-gray-900">
-                        {demographic.name}
-                      </label>
-                    </div>
-                  ))}
+                <div className="mt-1 p-2 border border-gray-300 rounded-md">
+                  <h4 className="font-semibold mb-2">Gender</h4>
+                  <div className="h-40 overflow-y-auto">
+                    {initialDemographics.filter(d => d.category === 'Gender').map(demographic => (
+                      <div key={demographic.id} className="flex items-center">
+                        <input
+                          id={`demographic-gender-${demographic.id}`}
+                          name="demographics"
+                          type="checkbox"
+                          value={demographic.id}
+                          checked={selectedDemographics.includes(demographic.id)}
+                          onChange={() => handleDemographicChange(demographic.id)}
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <label htmlFor={`demographic-gender-${demographic.id}`} className="ml-2 text-sm text-gray-900">
+                          {demographic.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="mt-1 p-2 border border-gray-300 rounded-md">
+                  <h4 className="font-semibold mb-2">Race</h4>
+                  <div className="h-40 overflow-y-auto">
+                    {initialDemographics.filter(d => d.category === 'Race').map(demographic => (
+                      <div key={demographic.id} className="flex items-center">
+                        <input
+                          id={`demographic-race-${demographic.id}`}
+                          name="demographics"
+                          type="checkbox"
+                          value={demographic.id}
+                          checked={selectedDemographics.includes(demographic.id)}
+                          onChange={() => handleDemographicChange(demographic.id)}
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <label htmlFor={`demographic-race-${demographic.id}`} className="ml-2 text-sm text-gray-900">
+                          {demographic.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="mt-1 p-2 border border-gray-300 rounded-md">
+                  <h4 className="font-semibold mb-2">Religion</h4>
+                  <div className="h-40 overflow-y-auto">
+                    {initialDemographics.filter(d => d.category === 'Religion').map(demographic => (
+                      <div key={demographic.id} className="flex items-center">
+                        <input
+                          id={`demographic-religion-${demographic.id}`}
+                          name="demographics"
+                          type="checkbox"
+                          value={demographic.id}
+                          checked={selectedDemographics.includes(demographic.id)}
+                          onChange={() => handleDemographicChange(demographic.id)}
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <label htmlFor={`demographic-religion-${demographic.id}`} className="ml-2 text-sm text-gray-900">
+                          {demographic.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
