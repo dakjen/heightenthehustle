@@ -18,6 +18,8 @@ interface UserProfile {
   personalState: string | null;
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
+  isCisgender: boolean;
+  isTransgender: boolean;
 }
 
 const isPlaceholder = (url: string | null | undefined): boolean => {
@@ -186,6 +188,34 @@ export default function ProfilePage() {
               defaultValue={user.personalZipCode || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
+          </div>
+
+          {/* Cisgender Checkbox */}
+          <div className="flex items-center">
+            <input
+              id="isCisgender"
+              name="isCisgender"
+              type="checkbox"
+              defaultChecked={user.isCisgender}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label htmlFor="isCisgender" className="ml-2 block text-sm text-gray-900">
+              Are you cisgender?
+            </label>
+          </div>
+
+          {/* Transgender Checkbox */}
+          <div className="flex items-center">
+            <input
+              id="isTransgender"
+              name="isTransgender"
+              type="checkbox"
+              defaultChecked={user.isTransgender}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label htmlFor="isTransgender" className="ml-2 block text-sm text-gray-900">
+              Are you transgender?
+            </label>
           </div>
 
           {state?.message && (

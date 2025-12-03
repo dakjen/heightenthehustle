@@ -24,7 +24,7 @@ export async function getAllUsers(): Promise<UserWithStatus[]> {
 
 export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  if (!session || !session.user || (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests))) {
     return []; // Unauthorized
   }
 

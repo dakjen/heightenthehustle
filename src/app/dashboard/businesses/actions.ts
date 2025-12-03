@@ -352,28 +352,7 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const transgenderId = transgenderDemographic?.id;
   const cisgenderId = cisgenderDemographic?.id;
 
-  // Get all demographic IDs related to Gender, Race, Religion, Transgender, Cisgender
-  // to filter them out from existingDemographicIds
-  const demographicCategoriesToUpdate = ['Gender', 'Race', 'Religion', 'Transgender', 'Cisgender'] as const;
-  const demographicNamesToUpdate = ['Transgender', 'Cisgender'];
-
-  const allDemographicsToUpdate = await db.query.demographics.findMany({
-    where: (demographics, { inArray }) => inArray(demographics.category, demographicCategoriesToUpdate)
-  });
-
-  const idsToFilterOut = new Set(allDemographicsToUpdate.map(d => d.id));
-  if (transgenderId) idsToFilterOut.add(transgenderId);
-  if (cisgenderId) idsToFilterOut.add(cisgenderId);
-
-  // Filter out existing IDs that are managed by this form
-  const preservedDemographicIds = existingDemographicIds.filter(id => !idsToFilterOut.has(id));
-
-  const newDemographicIds: number[] = [...preservedDemographicIds];
-
-  // Add newly selected Gender, Race, Religion if selected
-  if (!isNaN(selectedGenderId)) newDemographicIds.push(selectedGenderId);
-  if (!isNaN(selectedRaceId)) newDemographicIds.push(selectedRaceId);
-  if (!isNaN(selectedReligionId)) newDemographicIds.push(selectedReligionId);
+  const newDemographicIds: (number | undefined)[] = [selectedGenderId, selectedRaceId, selectedReligionId];
 
   // Add Transgender/Cisgender IDs if checked
   if (isTransgender && transgenderId) {
@@ -383,13 +362,9 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     newDemographicIds.push(cisgenderId);
   }
 
-  const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {};
-
-  if (newDemographicIds.length > 0) {
-    dataToUpdate.demographicIds = newDemographicIds;
-  } else {
-    dataToUpdate.demographicIds = null; // Explicitly set to null if empty
-  }
+  const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {
+    demographicIds: newDemographicIds.filter((id): id is number => id !== undefined && !isNaN(id)),
+  };
 
   if (!isNaN(stateLocationId)) {
     dataToUpdate.stateLocationId = stateLocationId;

@@ -75,6 +75,8 @@ export default async function MessagesPage() {
     initialIndividualMessages = await getIndividualMessages(currentUserId);
   }
 
+  console.log("Initial Demographics:", initialDemographics);
+
   return (
     <MessagesClientPage
       isAdmin={isAdmin}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinessesCount } from "./actions";
 import { searchBusinesses } from "../businesses/actions";
-import { Business } from "@/db/schema";
+import { Business, Demographic, Location } from "@/db/schema";
 import { useFormState } from "react-dom";
 import { FormState } from "@/types/form-state";
 
@@ -32,16 +32,6 @@ interface User {
   id: number;
   name: string;
   email: string;
-}
-
-interface Location {
-  id: number;
-  name: string;
-}
-
-interface Demographic {
-  id: number;
-  name: string;
 }
 
 interface TeamMessage {
