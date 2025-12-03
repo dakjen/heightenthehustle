@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 interface TabLinkProps {
@@ -11,7 +11,6 @@ interface TabLinkProps {
 }
 
 export default function TabLink({ href, activeTab, children }: TabLinkProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const createTabQueryString = useCallback(

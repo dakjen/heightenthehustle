@@ -166,6 +166,7 @@ export const businessToCompetition = pgTable('business_to_competition', {
 // --- Types for InferSelectModel ---
 export type Demographic = InferSelectModel<typeof demographics>;
 export type Location = InferSelectModel<typeof locations>;
+export type User = InferSelectModel<typeof users>;
 export type Business = InferSelectModel<typeof businesses>;
 export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: Demographic | null };
 export type BusinessWithLocation = InferSelectModel<typeof businesses> & { location: Location | null, stateLocation: Location | null, regionLocation: Location | null };

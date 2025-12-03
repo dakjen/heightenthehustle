@@ -2,7 +2,7 @@
 
 import { FormState } from "@/types/form-state";
 import { db } from "@/db";
-import { users, userRole, userStatus } from "@/db/schema"; // Import userStatus
+import { users, userRole } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -51,6 +51,8 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         canMessageAdmins: true, // Explicitly select canMessageAdmins
         canManageClasses: true, // Explicitly select canManageClasses
         canManageBusinesses: true, // Explicitly select canManageBusinesses
+        isCisgender: true, // Explicitly select isCisgender
+        isTransgender: true, // Explicitly select isTransgender
       }
     });
     return pendingUsers;
@@ -245,7 +247,7 @@ export async function downloadAllData() {
   const businessesData = await getAllBusinesses("", {});
 
   // Remove sensitive information from users
-  const sanitizedUsers = usersData.map(({ password, ...user }) => user);
+  const sanitizedUsers = usersData.map(({ password: _, ...user }) => user);
 
   const allData = {
     users: sanitizedUsers,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Business, Demographic, Location, BusinessWithLocation } from "@/db/schema";
+import { Demographic, Location, BusinessWithLocation } from "@/db/schema";
 import Link from "next/link";
 import EditBusinessProfileForm from "../EditBusinessProfileForm";
 import BusinessDetailsForm from "../BusinessDetailsForm";

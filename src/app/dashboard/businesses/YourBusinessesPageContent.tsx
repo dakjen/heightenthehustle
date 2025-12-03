@@ -35,13 +35,11 @@ export default function YourBusinessesPageContent() {
   const [session, setSession] = useState<SessionPayload | null>(null);
   const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [loadingBusinesses, setLoadingBusinesses] = useState(true);
 
   const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, { message: "" });
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {
-      setLoadingBusinesses(true);
       const currentSession = await fetchSession();
       setSession(currentSession);
 
@@ -49,15 +47,14 @@ export default function YourBusinessesPageContent() {
         const businesses = await getAllUserBusinesses(currentSession.user.id);
         setUserBusinesses(businesses);
       }
-      setLoadingBusinesses(false);
     }
-    fetchSessionAndBusinesses();
-  }, [createState]);
-
-  useEffect(() => {
     if (createState && createState.message && !createState.error) {
-      setShowCreateForm(false);
-      router.push("/dashboard/businesses");
+      fetchSessionAndBusinesses().then(() => {
+        setShowCreateForm(false);
+        router.push("/dashboard/businesses");
+      });
+    } else {
+      fetchSessionAndBusinesses();
     }
   }, [createState, router]);
 

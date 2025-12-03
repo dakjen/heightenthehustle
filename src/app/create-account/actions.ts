@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { users, userStatus } from "@/db/schema"; // Import userStatus
+import { users } from "@/db/schema"; // Import userStatus
 import bcrypt from "bcrypt";
 import { FormState } from "@/types/form-state"; // Import FormState
 

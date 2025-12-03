@@ -2,31 +2,7 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
 import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
-
-interface MassMessage {
-  id: number;
-  adminId: number;
-  content: string;
-  targetLocationIds: number[] | null;
-  targetDemographicIds: number[] | null;
-  timestamp: Date;
-}
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface Location {
-  id: number;
-  name: string;
-}
-
-interface Demographic {
-  id: number;
-  name: string;
-}
+import { Location, Demographic, User, MassMessage } from "@/db/schema";
 
 interface IndividualMessage {
   id: number;
@@ -36,8 +12,8 @@ interface IndividualMessage {
   timestamp: Date;
   read: boolean;
   replyToMessageId: number | null;
-  sender: User;
-  recipient: User;
+  sender: { id: number; name: string; email: string; };
+  recipient: { id: number; name: string; email: string; };
 }
 
 interface MessagesPageProps {

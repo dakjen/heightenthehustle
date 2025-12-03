@@ -75,7 +75,7 @@ export default function BusinessSearchAndFilter() {
 
   useEffect(() => {
     fetchBusinesses();
-  }, [fetchBusinesses]);
+  }, [searchQuery, businessTypeFilter, businessTaxStatusFilter, isArchivedFilter, includeOptedOutFilter]);
 
   const handleToggleArchive = async (businessId: number, currentStatus: boolean) => {
     const newStatus = !currentStatus;
@@ -252,6 +252,12 @@ export default function BusinessSearchAndFilter() {
                     ${business.isArchived ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}`}
                 >
                   {business.isArchived ? 'Unarchive' : 'Archive'}
+                </button>
+                <button
+                  onClick={() => handleDeleteBusiness(business.id, business.businessName)}
+                  className="py-2 px-4 rounded-md text-sm font-medium text-white bg-gray-800 hover:bg-gray-900"
+                >
+                  Delete
                 </button>
               </div>
             ))

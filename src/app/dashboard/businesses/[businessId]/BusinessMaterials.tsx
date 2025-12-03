@@ -1,6 +1,6 @@
 'use client';
 
-import { BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
+import { BusinessWithLocation } from "@/db/schema";
 import { useFormState } from "react-dom";
 import { updateBusinessMaterials } from "../actions";
 

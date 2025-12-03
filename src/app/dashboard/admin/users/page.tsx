@@ -1,32 +1,12 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
-import { createUser, getAllUsers } from "./actions";
+import { getAllUsers } from "./actions";
 import UserManagementClientPage from "./UserManagementClientPage"; // New import for client component
 import PermissionsManagementClientPage from "./PermissionsManagementClientPage"; // New import for permissions component
 import UserRequestsClientPage from "./UserRequestsClientPage"; // Import for user requests component
-import { headers } from "next/headers"; // New import for searchParams
 import TabLink from "./TabLink"; // New import for TabLink
 import UserDownloadButton from "./UserDownloadButton";
 import BusinessDownloadButton from "./BusinessDownloadButton";
-
-// Define a type for a single user (matching your schema)
-interface User {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  password: string; // Note: In a real app, you\'t fetch password to client
-  role: 'admin' | 'internal' | 'external';
-  status: 'pending' | 'approved' | 'rejected'; // Include status
-  hasBusinessProfile: boolean;
-  personalAddress: string | null;
-  personalCity: string | null;
-  personalState: string | null;
-  personalZipCode: string | null;
-  profilePhotoUrl: string | null;
-  canApproveRequests: boolean; // Include new permission
-  canMessageAdmins: boolean; // Include new permission
-}
 
 export default async function UserManagementPage({ searchParams }: { searchParams: Promise<{ viewMode?: string, tab?: string }> }) {
   const resolvedSearchParams = await searchParams;

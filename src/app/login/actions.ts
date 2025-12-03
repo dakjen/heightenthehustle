@@ -24,6 +24,8 @@ interface UserSession {
   personalZipCode: string | null;
   profilePhotoUrl: string | null;
   isOptedOut: boolean;
+  isCisgender: boolean;
+  isTransgender: boolean;
   canApproveRequests: boolean; // New permission field
   canMessageAdmins: boolean; // New permission field
   canManageClasses: boolean; // New permission field
@@ -82,6 +84,8 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
       canMessageAdmins: true,
       canManageClasses: true, // Explicitly select new permission
       canManageBusinesses: true, // Explicitly select new permission
+      isCisgender: true, // Explicitly select isCisgender
+      isTransgender: true, // Explicitly select isTransgender
     }
   });
 
