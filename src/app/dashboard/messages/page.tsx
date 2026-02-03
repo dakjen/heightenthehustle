@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
 import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
+import { Location, Demographic, User, MassMessage } from "@/db/schema";
 
 interface MassMessage {
   id: number;
@@ -37,8 +38,8 @@ interface IndividualMessage {
   timestamp: Date;
   read: boolean;
   replyToMessageId: number | null;
-  sender: User;
-  recipient: User;
+  sender: { id: number; name: string; email: string; };
+  recipient: { id: number; name: string; email: string; };
 }
 
 interface MessagesPageProps {
@@ -75,6 +76,8 @@ export default async function MessagesPage() {
   if (currentUserId) {
     initialIndividualMessages = await getIndividualMessages(currentUserId);
   }
+
+  console.log("Initial Demographics:", initialDemographics);
 
   return (
     <MessagesClientPage

@@ -42,34 +42,21 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
     }
     // Only re-fetch if createState indicates a change or if initialUsers are empty and we expect more
     if (createState?.message && !createState.error) {
-      setShowCreateForm(false); // Hide form on success
-      fetchUsers(); // Re-fetch to show the new user
+      fetchUsers().then(() => {
+        setShowCreateForm(false); // Hide form on success
+      });
     } else if (editState?.message && !editState.error) {
-      setShowEditModal(false); // Hide modal on success
-      setEditingUser(null);
-      fetchUsers(); // Re-fetch to show updated user
+      fetchUsers().then(() => {
+        setShowEditModal(false); // Hide modal on success
+        setEditingUser(null);
+      });
     } else if (initialUsers.length === 0 && allUsers.length === 0) {
         // Initial fetch if no users were passed and none are set
         fetchUsers();
     }
   }, [createState, editState, initialUsers, allUsers.length]);
 
-  // Handle successful creation
-  useEffect(() => {
-    if (createState?.message && !createState.error) {
-      setShowCreateForm(false); // Hide form on success
-      // Optionally, show a success toast or message
-    }
-  }, [createState]);
 
-  // Handle successful edit
-  useEffect(() => {
-    if (editState?.message && !editState.error) {
-      setShowEditModal(false); // Hide modal on success
-      setEditingUser(null);
-      // Optionally, show a success toast or message
-    }
-  }, [editState]);
 
 
   return (

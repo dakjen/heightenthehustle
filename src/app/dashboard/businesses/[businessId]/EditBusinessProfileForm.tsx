@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { Business, BusinessWithDemographic, BusinessWithLocation, Location, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
+import { BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessProfile } from "./edit/actions";
 import { useFormState } from "react-dom";
 import Image from "next/image";

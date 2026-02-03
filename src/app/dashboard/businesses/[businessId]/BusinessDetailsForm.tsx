@@ -31,11 +31,9 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
   const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
-  const genderDemographics = availableDemographics.filter(d => d.category === 'Gender');
+  const genderDemographics = availableDemographics.filter(d => d.category === 'Gender' && d.name !== 'Transgender' && d.name !== 'Cisgender');
   const raceDemographics = availableDemographics.filter(d => d.category === 'Race');
   const religionDemographics = availableDemographics.filter(d => d.category === 'Religion');
-  const cityLocations = availableLocations.filter(l => l.category === 'City');
-  const regionLocations = availableLocations.filter(l => l.category === 'Region');
 
   useEffect(() => {
     console.log('BusinessDetailsForm: useEffect triggered. initialBusiness (client):', JSON.stringify(initialBusiness, null, 2));
@@ -43,8 +41,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
     const currentDemographicIds = initialBusiness.demographicIds || [];
 
-    const transgenderDemographic = availableDemographics.find(d => d.category === 'Transgender');
-    const cisgenderDemographic = availableDemographics.find(d => d.category === 'Cisgender');
+    const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender' && d.category === 'Gender');
+    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender' && d.category === 'Gender');
 
     const transgenderId = transgenderDemographic?.id;
     const cisgenderId = cisgenderDemographic?.id;
@@ -71,7 +69,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
     setIsCisgender(currentIsCisgender);
 
-  }, [initialBusiness, availableDemographics]); // Removed updateState from dependencies
+  }, [initialBusiness, availableDemographics, availableLocations]); // Added availableLocations to dependencies
 
   // Trigger onBusinessUpdate after a successful save
   useEffect(() => {

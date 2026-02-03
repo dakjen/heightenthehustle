@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { classes, lessons, classTypeEnum, users, enrollments, enrollmentStatusEnum } from '@/db/schema'; // Added enrollments, enrollmentStatusEnum
+import { classes, lessons, users, enrollments } from '@/db/schema'; // Added enrollments, enrollmentStatusEnum
 import { eq, or, and } from 'drizzle-orm'; // Added and
 import { revalidatePath } from 'next/cache';
 

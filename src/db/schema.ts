@@ -6,7 +6,7 @@ export const userRole = pgEnum('user_role', ['admin', 'internal', 'external']);
 export const userStatus = pgEnum('user_status', ['pending', 'approved', 'rejected']);
 export const businessTypeEnum = pgEnum('business_type', ['Sole Proprietorship', 'Partnership', 'Limited Liability Company (LLC)', 'Corporation']);
 export const businessTaxStatusEnum = pgEnum('business_tax_status', ['S-Corporation', 'C-Corporation', 'Not Applicable']);
-export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion', 'Male', 'Female', 'Non-Binary', 'Intersex', 'Other', 'White', 'Black or African American', 'Asian', 'American Indian or Alaska Native', 'Native Hawaiian or Other Pacific Islander', 'Middle Eastern or North African', 'Two or More Races', 'Christianity', 'Islam', 'Judaism', 'Hinduism', 'Buddhism', 'Sikhism', 'Baháʼí Faith', 'Shinto', 'Taoism', 'Confucianism', 'Jainism', 'Indigenous / Traditional Beliefs', 'Pagan / Wicca', 'Atheist', 'Agnostic', 'Spiritual but Not Religious', 'Cisgender', 'Transgender']);
+export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', 'Gender', 'Religion']);
 export const locationCategoryEnum = pgEnum('location_category', ['City', 'Region', 'State']);
 export const classTypeEnum = pgEnum('class_type', ['pre-course', 'hth-course']);
 export const enrollmentStatusEnum = pgEnum('enrollment_status', ['enrolled', 'completed', 'dropped', 'pending', 'rejected']);
@@ -27,6 +27,8 @@ export const users = pgTable('users', {
   personalZipCode: varchar('personal_zip_code', { length: 10 }),
   profilePhotoUrl: text('profile_photo_url'),
   businessName: text('business_name'), // Optional business name for account requests
+  isCisgender: boolean('is_cisgender').notNull().default(false),
+  isTransgender: boolean('is_transgender').notNull().default(false),
   isOptedOut: boolean('is_opted_out').notNull().default(false),
   canApproveRequests: boolean('can_approve_requests').notNull().default(false), // New permission for approving requests
   canMessageAdmins: boolean('can_message_admins').notNull().default(false), // New permission for messaging admins
@@ -164,6 +166,7 @@ export const businessToCompetition = pgTable('business_to_competition', {
 // --- Types for InferSelectModel ---
 export type Demographic = InferSelectModel<typeof demographics>;
 export type Location = InferSelectModel<typeof locations>;
+export type User = InferSelectModel<typeof users>;
 export type Business = InferSelectModel<typeof businesses>;
 export type BusinessWithDemographic = InferSelectModel<typeof businesses> & { demographic: Demographic | null };
 export type BusinessWithLocation = InferSelectModel<typeof businesses> & { location: Location | null, stateLocation: Location | null, regionLocation: Location | null };

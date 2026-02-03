@@ -169,6 +169,7 @@ export async function getAvailableLocations() {
 export async function getAvailableDemographics() {
   try {
     const allDemographics = await db.select().from(demographics);
+    console.log("Fetched Demographics:", allDemographics);
     return allDemographics;
   } catch (error) {
     console.error("Error fetching available demographics:", error);
