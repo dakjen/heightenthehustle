@@ -4,6 +4,32 @@ import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailab
 import MessagesClientPage from "./MessagesClientPage";
 import { Location, Demographic, User, MassMessage } from "@/db/schema";
 
+interface MassMessage {
+  id: number;
+  adminId: number;
+  content: string;
+  targetLocationIds: number[] | null;
+  targetDemographicIds: number[] | null;
+  timestamp: Date;
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface Location {
+  id: number;
+  name: string;
+}
+
+interface Demographic {
+  id: number;
+  name: string;
+  category: string;
+}
+
 interface IndividualMessage {
   id: number;
   senderId: number;
@@ -28,7 +54,7 @@ interface MessagesPageProps {
 
 export default async function MessagesPage() {
   const session = await getSession();
-  if (!session || !session.user || session.user.role !== 'admin') {
+  if (!session || !session.user) {
     redirect('/dashboard');
   }
   const isAdmin = session?.user?.role === 'admin';

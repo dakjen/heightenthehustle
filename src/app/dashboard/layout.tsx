@@ -42,11 +42,9 @@ export default async function DashboardLayout({
               {business.businessName}
             </Link>
           ))}
+          <Link href="/dashboard/messages" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Messages</Link>
           {isAdmin && (
-            <>
-              <Link href="/dashboard/messages" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Messages</Link>
-              <Link href="/dashboard/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">HTH Class</Link>
-            </>
+            <Link href="/dashboard/hth-class" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">HTH Class</Link>
           )}
           {session.user.role === 'internal' && ( // Show Resources link only for internal users
             <Link href="/dashboard/resources" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Resources</Link>
