@@ -34,17 +34,6 @@ interface User {
   email: string;
 }
 
-interface Location {
-  id: number;
-  name: string;
-}
-
-interface Demographic {
-  id: number;
-  name: string;
-  category: string;
-}
-
 interface TeamMessage {
 
   id: number;
