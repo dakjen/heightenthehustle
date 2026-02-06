@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
 import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation, type Location as LocationType } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
@@ -20,12 +20,12 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
   const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
-  const handleBusinessUpdate = async () => {
+  const handleBusinessUpdate = useCallback(async () => {
     const updated = await getBusinessProfile(business.id);
     if (updated) {
       setBusiness(updated);
     }
-  };
+  }, [business.id]);
 
   return (
     <div className="flex-1 p-6">

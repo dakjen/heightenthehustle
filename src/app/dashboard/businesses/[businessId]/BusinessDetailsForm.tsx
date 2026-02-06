@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Demographic, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
 import { useActionState } from "react";
@@ -27,8 +27,10 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const [selectedStateLocationId, setSelectedStateLocationId] = useState<number | "">("");
   const [selectedRegionLocationId, setSelectedRegionLocationId] = useState<number | "">("");
   const [isTransgender, setIsTransgender] = useState<boolean>(false);
+  const [city, setCity] = useState(initialBusiness.city || '');
 
   const [updateState, updateFormAction] = useActionState<FormState, FormData>(updateBusinessDemographics, { message: "" });
+  const lastHandledUpdateState = useRef(updateState);
 
   const genderDemographics = availableDemographics.filter(d => d.category === 'Gender' && d.name !== 'Transgender');
   const raceDemographics = availableDemographics.filter(d => d.category === 'Race');
@@ -60,6 +62,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     setSelectedReligionId(currentReligionId);
     setSelectedStateLocationId(initialBusiness.stateLocation?.id || "");
     setSelectedRegionLocationId(initialBusiness.regionLocation?.id || "");
+    setCity(initialBusiness.city || '');
 
     const currentIsTransgender = (transgenderId && currentDemographicIds.includes(transgenderId)) || false;
     setIsTransgender(currentIsTransgender);
@@ -68,10 +71,12 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
   // Trigger onBusinessUpdate after a successful save
   useEffect(() => {
+    if (updateState === lastHandledUpdateState.current) return;
+    lastHandledUpdateState.current = updateState;
     if (updateState?.message && !updateState.error) {
       setIsEditing(false);
-      if (onBusinessUpdate) { // Conditional check
-        onBusinessUpdate(); // Call the parent's update function
+      if (onBusinessUpdate) {
+        onBusinessUpdate();
       }
     }
   }, [updateState, onBusinessUpdate]);
@@ -212,7 +217,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
           id="city"
           name="city"
           type="text"
-          defaultValue={initialBusiness.city || ''}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
           disabled={!isEditing}
         />
