@@ -4,6 +4,8 @@ import { BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicA
 import { getAvailableDemographics, getAvailableLocations } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
+export const dynamic = "force-dynamic";
+
 export default async function BusinessDetailPage({ params }: { params: Promise<{ businessId: string }> }) {
   const { businessId: businessIdParam } = await params;
   console.log('--- BusinessDetailPage loaded for businessId:', businessIdParam, '---');
