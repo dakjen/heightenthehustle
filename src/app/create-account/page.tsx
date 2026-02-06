@@ -1,7 +1,8 @@
 'use client';
 
 import { createAccount } from "./actions";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link"; // Import Link
@@ -26,7 +27,7 @@ function SubmitButton() {
 }
 
 export default function CreateAccountPage() {
-  const [state, formAction] = useFormState(createAccount, initialState);
+  const [state, formAction] = useActionState(createAccount, initialState);
   const router = useRouter();
 
   useEffect(() => {

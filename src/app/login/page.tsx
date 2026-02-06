@@ -1,12 +1,12 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { login } from "./actions";
 import { FormState } from "@/types/form-state";
 import Link from "next/link"; // Import Link
 
 export default function LoginPage() {
-  const [state, formAction] = useFormState<FormState, FormData>(login, { message: "" });
+  const [state, formAction] = useActionState<FormState, FormData>(login, { message: "" });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">

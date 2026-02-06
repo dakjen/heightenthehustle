@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinessesCount } from "./actions";
 import { searchBusinesses } from "../businesses/actions";
 import { Business, Demographic, Location } from "@/db/schema";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { FormState } from "@/types/form-state";
 
 interface Message {
@@ -88,9 +88,9 @@ export default function MessagesPage({
 
 }: MessagesPageProps) {
 
-  const [massSendState, massSendAction] = useFormState<FormState, FormData>(sendMassMessage, { message: "" });
+  const [massSendState, massSendAction] = useActionState<FormState, FormData>(sendMassMessage, { message: "" });
 
-  const [sendState, sendAction] = useFormState<FormState, FormData>(sendMessage, { message: "" });
+  const [sendState, sendAction] = useActionState<FormState, FormData>(sendMessage, { message: "" });
 
   const [selectedRecipientId, setSelectedRecipientId] = useState<number | null>(null);
 

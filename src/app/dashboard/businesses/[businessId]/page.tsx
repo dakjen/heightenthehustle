@@ -4,10 +4,10 @@ import { BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicA
 import { getAvailableDemographics, getAvailableLocations } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function BusinessDetailPage({ params }: { params: { businessId: string } & Promise<any> }) {
-  console.log('--- BusinessDetailPage loaded for businessId:', params.businessId, '---');
-  const businessId = parseInt(params.businessId);
+export default async function BusinessDetailPage({ params }: { params: Promise<{ businessId: string }> }) {
+  const { businessId: businessIdParam } = await params;
+  console.log('--- BusinessDetailPage loaded for businessId:', businessIdParam, '---');
+  const businessId = parseInt(businessIdParam);
 
   if (isNaN(businessId)) {
     notFound();

@@ -1,7 +1,7 @@
 'use client';
 
 import { BusinessWithLocation } from "@/db/schema";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { updateBusinessMaterials } from "../actions";
 
 import { FormState } from "@/types/form-state";
@@ -11,7 +11,7 @@ interface BusinessDocumentsProps {
 }
 
 export default function BusinessDocuments({ business }: BusinessDocumentsProps) {
-  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessMaterials, { message: "" });
+  const [updateState, updateFormAction] = useActionState<FormState, FormData>(updateBusinessMaterials, { message: "" });
 
   return (
     <div className="mt-8">

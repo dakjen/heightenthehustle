@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessProfile } from "./edit/actions";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import Image from "next/image";
 
 interface Demographic {
@@ -24,7 +24,7 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
 
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateBusinessProfile, { message: "" });
+  const [editState, editFormAction] = useActionState<FormState, FormData>(updateBusinessProfile, { message: "" });
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

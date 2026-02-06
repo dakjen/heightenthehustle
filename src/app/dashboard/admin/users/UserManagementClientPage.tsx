@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { FormState } from "@/types/form-state";
 import { createUser, getAllUsers, updateUser, deleteUser } from "./actions"; // Import deleteUser
 
@@ -28,11 +28,11 @@ interface UserManagementClientPageProps {
 
 export default function UserManagementClientPage({ initialUsers, isInternalUserView }: UserManagementClientPageProps) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createUser, { message: "" });
+  const [createState, createFormAction] = useActionState<FormState, FormData>(createUser, { message: "" });
   const [allUsers, setAllUsers] = useState<User[]>(initialUsers); // Initialize with server-fetched users
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
-  const [editState, editFormAction] = useFormState<FormState, FormData>(updateUser, { message: "" });
+  const [editState, editFormAction] = useActionState<FormState, FormData>(updateUser, { message: "" });
 
   // Re-fetch users after a new one is created or if initialUsers change (though initialUsers should be stable)
   useEffect(() => {

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { FormState } from "@/types/form-state";
 import { optOutUser } from "./actions";
 
@@ -20,7 +21,7 @@ function SubmitButton() {
 
 export default function OptOutForm({ userName, isOptedOut: initialIsOptedOut }: { userName: string, isOptedOut: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [state, formAction] = useFormState(optOutUser, { message: "" });
+  const [state, formAction] = useActionState(optOutUser, { message: "" });
   const [isOptedOut, setIsOptedOut] = useState(initialIsOptedOut);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { createBusinessProfile, getAllUserBusinesses } from "./actions";
 import { SessionPayload, fetchSession } from "@/app/login/actions";
 import { useRouter } from "next/navigation";
@@ -36,7 +36,7 @@ export default function YourBusinessesPageContent() {
   const [userBusinesses, setUserBusinesses] = useState<Business[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  const [createState, createFormAction] = useFormState<FormState, FormData>(createBusinessProfile, { message: "" });
+  const [createState, createFormAction] = useActionState<FormState, FormData>(createBusinessProfile, { message: "" });
 
   useEffect(() => {
     async function fetchSessionAndBusinesses() {

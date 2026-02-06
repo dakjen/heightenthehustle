@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Demographic, BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessDemographics } from "../actions";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 import { FormState } from "@/types/form-state";
 
@@ -29,7 +29,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const [isTransgender, setIsTransgender] = useState<boolean>(false);
   const [isCisgender, setIsCisgender] = useState<boolean>(false);
 
-  const [updateState, updateFormAction] = useFormState<FormState, FormData>(updateBusinessDemographics, { message: "" });
+  const [updateState, updateFormAction] = useActionState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
   const genderDemographics = availableDemographics.filter(d => d.category === 'Gender' && d.name !== 'Transgender' && d.name !== 'Cisgender');
   const raceDemographics = availableDemographics.filter(d => d.category === 'Race');

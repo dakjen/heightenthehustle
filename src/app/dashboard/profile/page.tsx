@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { FormState } from "@/types/form-state";
 import { updateProfile } from "./actions";
 import { getSession } from "@/app/login/actions";
@@ -27,7 +27,7 @@ const isPlaceholder = (url: string | null | undefined): boolean => {
 };
 
 export default function ProfilePage() {
-  const [state, formAction] = useFormState<FormState, FormData>(updateProfile, { message: "" });
+  const [state, formAction] = useActionState<FormState, FormData>(updateProfile, { message: "" });
   const [user, setUser] = useState<UserProfile | null>(null); // Use UserProfile type
 
   useEffect(() => {

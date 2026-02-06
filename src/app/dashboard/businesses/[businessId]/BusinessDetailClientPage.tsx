@@ -20,6 +20,13 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
   const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
   const [activeTab, setActiveTab] = useState('business-profile');
 
+  const handleBusinessUpdate = async () => {
+    const updated = await getBusinessProfile(business.id);
+    if (updated) {
+      setBusiness(updated);
+    }
+  };
+
   return (
     <div className="flex-1 p-6">
       <div className="border-b border-gray-200">
@@ -122,7 +129,7 @@ export default function BusinessDetailClientPage({ initialBusiness, availableDem
 
       {activeTab === 'business-details' && (
         <div className="mt-8">
-          <BusinessDetailsForm initialBusiness={business} availableDemographics={availableDemographics} availableLocations={availableLocations} />
+          <BusinessDetailsForm initialBusiness={business} availableDemographics={availableDemographics} availableLocations={availableLocations} onBusinessUpdate={handleBusinessUpdate} />
         </div>
       )}
 
