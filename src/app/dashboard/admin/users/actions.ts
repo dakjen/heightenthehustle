@@ -50,7 +50,8 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         canApproveRequests: true, // Explicitly select canApproveRequests
         canMessageAdmins: true, // Explicitly select canMessageAdmins
         canManageClasses: true, // Explicitly select canManageClasses
-        canManageBusinesses: true, // Explicitly select canManageBusinesses
+        canManageBusinesses: true,
+        isCisgender: true,
         isTransgender: true,
       }
     });
