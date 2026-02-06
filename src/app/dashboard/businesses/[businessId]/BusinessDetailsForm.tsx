@@ -27,11 +27,10 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const [selectedStateLocationId, setSelectedStateLocationId] = useState<number | "">("");
   const [selectedRegionLocationId, setSelectedRegionLocationId] = useState<number | "">("");
   const [isTransgender, setIsTransgender] = useState<boolean>(false);
-  const [isCisgender, setIsCisgender] = useState<boolean>(false);
 
   const [updateState, updateFormAction] = useActionState<FormState, FormData>(updateBusinessDemographics, { message: "" });
 
-  const genderDemographics = availableDemographics.filter(d => d.category === 'Gender' && d.name !== 'Transgender' && d.name !== 'Cisgender');
+  const genderDemographics = availableDemographics.filter(d => d.category === 'Gender' && d.name !== 'Transgender');
   const raceDemographics = availableDemographics.filter(d => d.category === 'Race');
   const religionDemographics = availableDemographics.filter(d => d.category === 'Religion');
 
@@ -42,14 +41,12 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     const currentDemographicIds = initialBusiness.demographicIds || [];
 
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender' && d.category === 'Gender');
-    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender' && d.category === 'Gender');
 
     const transgenderId = transgenderDemographic?.id;
-    const cisgenderId = cisgenderDemographic?.id;
 
-    // Filter out Transgender and Cisgender IDs from the general gender selection
+    // Filter out Transgender ID from the general gender selection
     const genderDemographicsForDropdown = availableDemographics.filter(d =>
-      d.category === 'Gender' && d.id !== transgenderId && d.id !== cisgenderId
+      d.category === 'Gender' && d.id !== transgenderId
     );
 
     const currentGenderId = currentDemographicIds.find(id =>
@@ -66,8 +63,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
 
     const currentIsTransgender = (transgenderId && currentDemographicIds.includes(transgenderId)) || false;
     setIsTransgender(currentIsTransgender);
-    const currentIsCisgender = (cisgenderId && currentDemographicIds.includes(cisgenderId)) || false;
-    setIsCisgender(currentIsCisgender);
 
   }, [initialBusiness, availableDemographics, availableLocations]); // Added availableLocations to dependencies
 
@@ -85,7 +80,7 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
   const combinedDemographicIds = [selectedGenderId, selectedRaceId, selectedReligionId]
     .filter((id): id is number => typeof id === 'number');
 
-  // Add Transgender ID if checked and not Cisgender
+  // Add Transgender ID if checked
   if (isTransgender) {
     const transgenderDemographic = availableDemographics.find(d => d.name === 'Transgender');
     if (transgenderDemographic) {
@@ -93,26 +88,8 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
     }
   }
 
-  // Add Cisgender ID if checked and not Transgender
-  if (isCisgender) {
-    const cisgenderDemographic = availableDemographics.find(d => d.name === 'Cisgender');
-    if (cisgenderDemographic) {
-      combinedDemographicIds.push(cisgenderDemographic.id);
-    }
-  }
-
   const handleTransgenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTransgender(e.target.checked);
-    if (e.target.checked) {
-      setIsCisgender(false); // Uncheck Cisgender if Transgender is checked
-    }
-  };
-
-  const handleCisgenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCisgender(e.target.checked);
-    if (e.target.checked) {
-      setIsTransgender(false); // Uncheck Transgender if Cisgender is checked
-    }
   };
 
   const updateFormActionWithLog = (formData: FormData) => {
@@ -125,7 +102,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
       <h2 className="text-2xl font-bold">Owner Details</h2>
       <input type="hidden" name="businessId" value={initialBusiness.id} />
       <input type="hidden" name="isTransgender" value={isTransgender.toString()} />
-      <input type="hidden" name="isCisgender" value={isCisgender.toString()} />
 
       <div className="mt-4">
         <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
@@ -160,19 +136,6 @@ export default function BusinessDetailsForm({ initialBusiness, availableDemograp
             disabled={!isEditing}
           />
           <span className="ml-2 text-gray-700">Transgender</span>
-        </label>
-
-        {/* Cisgender Checkbox */}
-        <label className="inline-flex items-center">
-          <input
-            type="checkbox"
-            name="isCisgender"
-            checked={isCisgender}
-            onChange={handleCisgenderChange}
-            className="form-checkbox h-5 w-5 text-[#910000]"
-            disabled={!isEditing}
-          />
-          <span className="ml-2 text-gray-700">Cisgender</span>
         </label>
       </div>
 

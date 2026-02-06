@@ -332,7 +332,6 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const selectedRaceId = parseInt(formData.get("race") as string);
   const selectedReligionId = parseInt(formData.get("religion") as string);
   const isTransgender = formData.get("isTransgender") === "true";
-  const isCisgender = formData.get("isCisgender") === "true";
   const stateLocationId = parseInt(formData.get("stateLocationId") as string);
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
@@ -345,21 +344,16 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
 
   const existingDemographicIds = currentBusiness?.demographicIds || [];
 
-  // Fetch Transgender and Cisgender demographic IDs from the database
+  // Fetch Transgender demographic ID from the database
   const transgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Transgender') });
-  const cisgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Cisgender') });
 
   const transgenderId = transgenderDemographic?.id;
-  const cisgenderId = cisgenderDemographic?.id;
 
   const newDemographicIds: (number | undefined)[] = [selectedGenderId, selectedRaceId, selectedReligionId];
 
-  // Add Transgender/Cisgender IDs if checked
+  // Add Transgender ID if checked
   if (isTransgender && transgenderId) {
     newDemographicIds.push(transgenderId);
-  }
-  if (isCisgender && cisgenderId) {
-    newDemographicIds.push(cisgenderId);
   }
 
   const dataToUpdate: { demographicIds?: number[] | null; stateLocationId?: number | null; regionLocationId?: number | null; city?: string | null } = {

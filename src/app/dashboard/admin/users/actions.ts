@@ -51,8 +51,7 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         canMessageAdmins: true, // Explicitly select canMessageAdmins
         canManageClasses: true, // Explicitly select canManageClasses
         canManageBusinesses: true, // Explicitly select canManageBusinesses
-        isCisgender: true, // Explicitly select isCisgender
-        isTransgender: true, // Explicitly select isTransgender
+        isTransgender: true,
       }
     });
     return pendingUsers;
