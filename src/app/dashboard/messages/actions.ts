@@ -233,7 +233,7 @@ export async function getConversations(currentUserId: number, teamChat: boolean 
 
 
 
-export async function getApplicableBusinessesCount(locationIds: number[], demographicIds: number[]): Promise<number> {
+export async function getApplicableBusinesses(locationIds: number[], demographicIds: number[]): Promise<{ id: number; businessName: string; ownerName: string }[]> {
   const conditions = [];
   if (locationIds.length > 0) {
     conditions.push(inArray(businesses.locationId, locationIds));
@@ -243,18 +243,22 @@ export async function getApplicableBusinessesCount(locationIds: number[], demogr
   }
 
   if (conditions.length === 0) {
-    return 0;
+    return [];
   }
 
   try {
-    const result = await db.selectDistinct({ id: users.id })
-      .from(users)
-      .innerJoin(businesses, eq(users.id, businesses.userId))
+    const result = await db.select({
+      id: businesses.id,
+      businessName: businesses.businessName,
+      ownerName: businesses.ownerName,
+    })
+      .from(businesses)
+      .innerJoin(users, eq(users.id, businesses.userId))
       .where(and(...conditions));
-    return result.length;
+    return result;
   } catch (error) {
-    console.error("Error fetching applicable businesses count:", error);
-    return 0;
+    console.error("Error fetching applicable businesses:", error);
+    return [];
   }
 }
 

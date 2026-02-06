@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinessesCount } from "./actions";
+import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinesses } from "./actions";
 import { searchBusinesses } from "../businesses/actions";
 import { Business, Demographic, Location } from "@/db/schema";
 import { useActionState } from "react";
@@ -118,7 +118,7 @@ export default function MessagesPage({
 
     const [teamConversations, setTeamConversations] = useState<User[]>([]);
 
-    const [applicableBusinessesCount, setApplicableBusinessesCount] = useState(0);
+    const [applicableBusinesses, setApplicableBusinesses] = useState<{ id: number; businessName: string; ownerName: string }[]>([]);
 
   
 
@@ -144,7 +144,7 @@ export default function MessagesPage({
 
     useEffect(() => {
 
-      getApplicableBusinessesCount(selectedLocations, selectedDemographics).then(setApplicableBusinessesCount);
+      getApplicableBusinesses(selectedLocations, selectedDemographics).then(setApplicableBusinesses);
 
     }, [selectedLocations, selectedDemographics]);
 
@@ -356,9 +356,23 @@ export default function MessagesPage({
         <div className="mt-8">
           <div className="p-6 bg-white shadow-md rounded-lg mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Send Mass Message</h2>
-            <p className="text-sm text-gray-600 mb-4">
-              Applicable Businesses: {applicableBusinessesCount}
-            </p>
+            <div className="mb-4">
+              <p className="text-sm font-medium text-gray-700">
+                Applicable Businesses: {applicableBusinesses.length}
+              </p>
+              {applicableBusinesses.length > 0 && (
+                <div className="mt-2 max-h-40 overflow-y-auto border border-gray-200 rounded-md">
+                  <ul className="divide-y divide-gray-200">
+                    {applicableBusinesses.map(biz => (
+                      <li key={biz.id} className="px-3 py-2 text-sm text-gray-800">
+                        <span className="font-medium">{biz.businessName}</span>
+                        <span className="text-gray-500"> — {biz.ownerName}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
             <form action={massSendAction}>
               {/* Message Content */}
               <div className="mt-4">
