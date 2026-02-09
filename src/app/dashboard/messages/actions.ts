@@ -233,6 +233,16 @@ export async function getConversations(currentUserId: number, teamChat: boolean 
 
 
 
+export async function getUserById(userId: number) {
+  try {
+    const result = await db.select({ id: users.id, name: users.name, email: users.email }).from(users).where(eq(users.id, userId)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    return null;
+  }
+}
+
 export async function getApplicableBusinesses(locationIds: number[], demographicIds: number[]): Promise<{ id: number; businessName: string; ownerName: string }[]> {
   const conditions = [];
   if (locationIds.length > 0) {

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
-import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages } from "./actions";
+import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages, getUserById } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
 import { Location, Demographic, User, MassMessage } from "@/db/schema";
 
@@ -51,6 +51,9 @@ export default async function MessagesPage() {
     initialIndividualMessages = await getIndividualMessages(currentUserId);
   }
 
+  // Always fetch user with id=1 so users can always message the admin
+  const adminUser = currentUserId !== 1 ? await getUserById(1) : null;
+
   console.log("Initial Demographics:", initialDemographics);
 
   return (
@@ -62,6 +65,7 @@ export default async function MessagesPage() {
       initialDemographics={initialDemographics}
       initialIndividualMessages={initialIndividualMessages}
       currentUserId={currentUserId}
+      defaultConversationUser={adminUser}
     />
   );
 }

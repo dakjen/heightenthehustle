@@ -66,6 +66,8 @@ interface MessagesPageProps {
 
   currentUserId: number | null;
 
+  defaultConversationUser: User | null;
+
 }
 
 
@@ -85,6 +87,8 @@ export default function MessagesPage({
   initialIndividualMessages,
 
   currentUserId,
+
+  defaultConversationUser,
 
 }: MessagesPageProps) {
 
@@ -132,13 +136,20 @@ export default function MessagesPage({
 
         } else {
 
-          getConversations(currentUserId).then(setConversations);
+          getConversations(currentUserId).then((convos) => {
+            // Always ensure user id=1 is in the conversations list
+            if (defaultConversationUser && !convos.find(c => c.id === defaultConversationUser.id)) {
+              setConversations([defaultConversationUser, ...convos]);
+            } else {
+              setConversations(convos);
+            }
+          });
 
         }
 
       }
 
-    }, [activeTab, currentUserId]);
+    }, [activeTab, currentUserId, defaultConversationUser]);
 
   
 
