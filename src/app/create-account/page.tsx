@@ -138,6 +138,17 @@ export default function CreateAccountPage() {
           {state.message && <p className="mt-4 text-center text-green-600">{state.message}</p>}
           {state.error && <p className="mt-4 text-center text-red-600">{state.error}</p>}
         </form>
+        <p className="mt-4 text-center text-xs text-gray-500">
+          By creating an account, you agree to our{" "}
+          <a
+            href="https://app.termly.io/policy-viewer/policy.html?policyUUID=62daf5ff-d858-4aae-9bd5-717cb57cd833"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#910000] hover:underline"
+          >
+            Terms and Conditions
+          </a>.
+        </p>
       </div>
     </div>
   );

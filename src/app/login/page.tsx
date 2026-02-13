@@ -69,6 +69,17 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
+        <p className="mt-4 text-center text-xs text-gray-500">
+          By logging in, you agree to our{" "}
+          <a
+            href="https://app.termly.io/policy-viewer/policy.html?policyUUID=62daf5ff-d858-4aae-9bd5-717cb57cd833"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#910000] hover:underline"
+          >
+            Terms and Conditions
+          </a>.
+        </p>
       </div>
     </div>
   );
