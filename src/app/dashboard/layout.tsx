@@ -33,6 +33,9 @@ export default async function DashboardLayout({
 
         <nav>
           <Link href="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Home</Link>
+          {session.user.role === 'external' && (
+            <Link href="/dashboard/intake-form" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Client Intake Form</Link>
+          )}
           {session.user.role === 'external' && ( // Show Businesses link only for external users
             <Link href="/dashboard/businesses" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Businesses</Link>
           )}
@@ -59,6 +62,9 @@ export default async function DashboardLayout({
               )}
               {canAccessAdminBusinesses && (
                 <Link href="/dashboard/admin/businesses/manage" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Businesses</Link>
+              )}
+              {isAdmin && (
+                <Link href="/dashboard/admin/intake-forms" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Intake Forms</Link>
               )}
               {isAdmin && ( // Other admin links remain admin-only for now
                 <Link href="/dashboard/admin/pitch-competition" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-[#4a4a4a]">Admin Pitch Competition</Link>

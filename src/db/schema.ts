@@ -10,6 +10,8 @@ export const demographicCategoryEnum = pgEnum('demographic_category', ['Race', '
 export const locationCategoryEnum = pgEnum('location_category', ['City', 'Region', 'State']);
 export const classTypeEnum = pgEnum('class_type', ['pre-course', 'hth-course']);
 export const enrollmentStatusEnum = pgEnum('enrollment_status', ['enrolled', 'completed', 'dropped', 'pending', 'rejected']);
+export const businessStageEnum = pgEnum('business_stage', ['Idea', 'Startup', 'Growing', 'Established']);
+export const intakeStatusEnum = pgEnum('intake_status', ['submitted', 'reviewed', 'archived']);
 
 // --- Tables ---
 export const users = pgTable('users', {
@@ -163,6 +165,22 @@ export const businessToCompetition = pgTable('business_to_competition', {
   status: text('status').default('assigned'), // e.g., 'assigned', 'participating', 'winner'
 });
 
+export const clientIntakeForms = pgTable('client_intake_forms', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
+  businessStage: businessStageEnum('business_stage').notNull(),
+  businessDescription: text('business_description').notNull(),
+  servicesNeeded: text('services_needed').array(),
+  currentRevenue: varchar('current_revenue', { length: 50 }),
+  numberOfEmployees: varchar('number_of_employees', { length: 50 }),
+  primaryGoals: text('primary_goals').notNull(),
+  biggestChallenges: text('biggest_challenges').notNull(),
+  howDidYouHear: text('how_did_you_hear'),
+  additionalNotes: text('additional_notes'),
+  status: intakeStatusEnum('status').notNull().default('submitted'),
+  submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 // --- Types for InferSelectModel ---
 export type Demographic = InferSelectModel<typeof demographics>;
 export type Location = InferSelectModel<typeof locations>;
@@ -176,6 +194,7 @@ export type IndividualMessage = InferSelectModel<typeof individualMessages>;
 export type PitchCompetitionEvent = InferSelectModel<typeof pitchCompetitionEvents>;
 export type PitchSubmission = InferSelectModel<typeof pitchSubmissions>;
 export type BusinessToCompetition = InferSelectModel<typeof businessToCompetition>;
+export type ClientIntakeForm = InferSelectModel<typeof clientIntakeForms>;
 
 
 // --- Relations ---
@@ -186,6 +205,7 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   enrollments: many(enrollments),
   createdPitchCompetitionEvents: many(pitchCompetitionEvents),
   pitchSubmissions: many(pitchSubmissions),
+  intakeForms: many(clientIntakeForms),
 }));
 
 export const businessesRelations = relations(businesses, ({ one, many }) => ({
@@ -289,5 +309,12 @@ export const businessToCompetitionRelations = relations(businessToCompetition, (
   competitionEvent: one(pitchCompetitionEvents, {
     fields: [businessToCompetition.competitionEventId],
     references: [pitchCompetitionEvents.id],
+  }),
+}));
+
+export const clientIntakeFormsRelations = relations(clientIntakeForms, ({ one }) => ({
+  user: one(users, {
+    fields: [clientIntakeForms.userId],
+    references: [users.id],
   }),
 }));

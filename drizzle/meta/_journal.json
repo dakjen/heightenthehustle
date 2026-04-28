@@ -8,6 +8,13 @@
       "when": 1763597261328,
       "tag": "0000_wide_richard_fisk",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777400420494,
+      "tag": "0001_shallow_nextwave",
+      "breakpoints": true
     }
   ]
 }
