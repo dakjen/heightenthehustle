@@ -5,9 +5,20 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Brand panel */}
-      <section className="relative lg:w-1/2 bg-[#2b2b2b] hth-stripes text-white flex flex-col justify-between p-8 lg:p-14 overflow-hidden">
+      <section className="relative lg:w-1/2 bg-[#2b2b2b] text-white flex flex-col justify-between p-8 lg:p-14 overflow-hidden">
+        {/* Background photo with a dark gradient so the copy stays readable */}
+        <Image
+          src="/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover object-center opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b] via-[#2b2b2b]/70 to-[#2b2b2b]/30" />
+        <div className="absolute inset-0 hth-stripes" />
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[#910000] opacity-40 blur-3xl" />
-        <div className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-[#910000] opacity-20 blur-3xl" />
+        <div className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-[#910000] opacity-30 blur-3xl" />
 
         <div className="relative hth-fade-up">
           <Image src="/hthlogo.svg" alt="Heighten The Hustle" width={220} height={220} priority />

@@ -3,7 +3,7 @@ import { getClassById, updateClass, getInternalAndAdminUsers } from '../../actio
 import { redirect } from 'next/navigation';
 import SyllabusUploadInput from '../../SyllabusUploadInput'; // Import the new component
 
-export default async function EditClassPage(props: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
+export default async function EditClassPage(props: any) {
   const resolvedParams = await Promise.resolve(props.params);
   const { classId } = resolvedParams;
 

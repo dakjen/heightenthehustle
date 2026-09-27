@@ -33,10 +33,15 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
 export default function SidebarNav({ items, adminItems }: SidebarNavProps) {
   const pathname = usePathname();
 
-  // Exact match for the dashboard home, prefix match for everything else so
-  // nested pages (e.g. /dashboard/businesses/3/edit) keep their parent lit.
-  const isActive = (href: string) =>
+  // Prefix match so nested pages (e.g. /dashboard/businesses/3/edit) keep their
+  // parent lit, but only the LONGEST matching link is active, so a child link
+  // like /admin/hth-class/cohorts doesn't also light up /admin/hth-class.
+  const matches = (href: string) =>
     href === "/dashboard" ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+  const activeHref = [...items, ...adminItems]
+    .filter((i) => matches(i.href))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+  const isActive = (href: string) => href === activeHref;
 
   return (
     <nav className="space-y-1">

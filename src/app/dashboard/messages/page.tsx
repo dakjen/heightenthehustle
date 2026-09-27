@@ -16,16 +16,6 @@ interface IndividualMessage {
   recipient: { id: number; name: string; email: string; };
 }
 
-interface MessagesPageProps {
-  isAdmin: boolean;
-  initialInternalUsers: User[];
-  initialMassMessages: MassMessage[];
-  initialLocations: Location[];
-  initialDemographics: Demographic[];
-  initialIndividualMessages: IndividualMessage[];
-  currentUserId: number | null;
-}
-
 export default async function MessagesPage() {
   const session = await getSession();
   if (!session || !session.user) {

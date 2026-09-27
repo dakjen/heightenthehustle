@@ -1,54 +1,65 @@
 "use client";
 
-import { useActionState } from "react";
+import { Suspense, useActionState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { login } from "./actions";
 import { FormState } from "@/types/form-state";
-import Link from "next/link";
 import AuthShell from "@/app/components/AuthShell";
+import { Field, FormError, SubmitButton, inputClass, primaryButtonClass } from "@/app/components/form";
 
-const inputClass =
-  "appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#910000]/30 focus:border-[#910000] sm:text-sm text-black transition";
-
-export default function LoginPage() {
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
   const [state, formAction] = useActionState<FormState, FormData>(login, { message: "" });
 
   return (
+    <form action={formAction} className="space-y-5">
+      <input type="hidden" name="next" value={next ?? ""} />
+
+      <Field name="email" label="Email address" required>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          required
+          placeholder="you@example.com"
+          className={inputClass}
+        />
+      </Field>
+
+      <Field name="password" label="Password" required>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          placeholder="••••••••"
+          className={inputClass}
+        />
+      </Field>
+
+      <FormError message={state?.error} />
+
+      <SubmitButton pendingText="Signing in…" className={`${primaryButtonClass} w-full`}>
+        Login
+      </SubmitButton>
+    </form>
+  );
+}
+
+export default function LoginPage() {
+  return (
     <AuthShell
       title="Login"
-      subtitle="Stay connected by signing up and sharing your business information. This allows us to refer you to relevant opportunities, send you grant funding applications, and provide free resources to help your business grow and thrive."
+      subtitle="Sign in to reach your business profile, messages, classes and funding opportunities."
     >
-      <form action={formAction} className="space-y-5">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-[#606060]">
-            Email address
-          </label>
-          <div className="mt-1">
-            <input id="email" name="email" type="email" autoComplete="email" required className={inputClass} />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-[#606060]">
-            Password
-          </label>
-          <div className="mt-1">
-            <input id="password" name="password" type="password" autoComplete="current-password" required className={inputClass} />
-          </div>
-        </div>
-
-        {state?.error && (
-          <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">{state.error}</p>
-        )}
-
-        <div>
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2.5 px-4 rounded-lg shadow-md text-sm font-semibold text-white bg-[#910000] hover:bg-[#7a0000] hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#910000]"
-          >
-            Login
-          </button>
-        </div>
-      </form>
+      <Suspense fallback={<div className="h-56" aria-hidden="true" />}>
+        <LoginForm />
+      </Suspense>
 
       <p className="mt-6 text-center text-sm text-[#606060]">
         New here?{" "}

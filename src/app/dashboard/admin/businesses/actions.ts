@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum, users } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { requirePermission } from "@/lib/auth";
 
 interface BusinessFilters {
   businessType?: string;
@@ -13,6 +14,7 @@ interface BusinessFilters {
 }
 
 export async function getAllBusinesses(searchQuery: string, filters: BusinessFilters) {
+  await requirePermission('canManageBusinesses');
   const conditions = [];
 
   if (searchQuery) {
@@ -49,6 +51,7 @@ export async function getAllBusinesses(searchQuery: string, filters: BusinessFil
 }
 
 export async function toggleBusinessArchiveStatus(businessId: number, newStatus: boolean) {
+  await requirePermission('canManageBusinesses');
   try {
     await db.update(businesses)
       .set({ isArchived: newStatus })
@@ -62,6 +65,7 @@ export async function toggleBusinessArchiveStatus(businessId: number, newStatus:
 }
 
 export async function deleteBusiness(businessId: number) {
+  await requirePermission('canManageBusinesses');
   try {
     await db.delete(businesses)
       .where(eq(businesses.id, businessId));

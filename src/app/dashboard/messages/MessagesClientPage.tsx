@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendMessage, sendMassMessage, getIndividualMessages, getConversations, getApplicableBusinesses } from "./actions";
-import { searchBusinesses } from "../businesses/actions";
-import { Business, Demographic, Location } from "@/db/schema";
+import { sendMessage, sendMassMessage, getConversations, getApplicableBusinesses } from "./actions";
+import { Demographic, Location } from "@/db/schema";
 import { useActionState } from "react";
 import { FormState } from "@/types/form-state";
 
@@ -33,22 +32,6 @@ interface User {
   name: string;
   email: string;
 }
-
-interface TeamMessage {
-
-  id: number;
-
-  senderId: number;
-
-  content: string;
-
-  timestamp: Date;
-
-  sender: { id: number; name: string; email: string; };
-
-}
-
-
 
 interface MessagesPageProps {
 
@@ -96,23 +79,15 @@ export default function MessagesPage({
 
   const [sendState, sendAction] = useActionState<FormState, FormData>(sendMessage, { message: "" });
 
-  const [selectedRecipientId, setSelectedRecipientId] = useState<number | null>(null);
-
-  const [recipient, setRecipient] = useState("admin");
-
   const [messageContent, setMessageContent] = useState("");
 
   const [activeTab, setActiveTab] = useState("individual-messages");
 
-  const [individualMessages, setIndividualMessages] = useState<Message[]>(initialIndividualMessages);
+  const individualMessages: Message[] = initialIndividualMessages;
 
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
 
   const [selectedDemographics, setSelectedDemographics] = useState<number[]>([]);
-
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const [searchResults, setSearchResults] = useState<Business[]>([]);
 
   const [excludeOptedOut, setExcludeOptedOut] = useState(true);
 
@@ -160,16 +135,6 @@ export default function MessagesPage({
     }, [selectedLocations, selectedDemographics]);
 
   
-
-    useEffect(() => {
-
-      if (searchQuery.length > 2) {
-
-        searchBusinesses(searchQuery).then(setSearchResults);
-
-      }
-
-    }, [searchQuery]);
 
   const handleLocationChange = (locationId: number) => {
     setSelectedLocations(prev =>

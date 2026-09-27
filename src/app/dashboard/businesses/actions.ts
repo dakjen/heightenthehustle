@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from "@/db";
-import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, Business, Demographic, businessesRelations, BusinessWithDemographic, BusinessWithLocation } from "@/db/schema";
-import { eq, like, and, InferSelectModel } from "drizzle-orm";
+import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, users, Business, BusinessWithLocation } from "@/db/schema";
+import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { put } from "@vercel/blob";
@@ -103,7 +103,7 @@ export async function getAllUserBusinesses(userId: number, searchQuery?: string,
 
     const allBusinesses = await db.query.businesses.findMany({
       where: and(...conditions),
-      orderBy: (businesses, { asc, desc }) => [asc(businesses.isArchived), asc(businesses.businessName)],
+      orderBy: (businesses, { asc }) => [asc(businesses.isArchived), asc(businesses.businessName)],
     });
     return allBusinesses;
   } catch (error) {
@@ -112,41 +112,110 @@ export async function getAllUserBusinesses(userId: number, searchQuery?: string,
   }
 }
 
+const US_STATES = new Set([
+  'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','PR',
+]);
+
+const MATERIAL_MAX_BYTES = 10 * 1024 * 1024; // matches next.config serverActions bodySizeLimit
+const LOGO_MAX_BYTES = 5 * 1024 * 1024;
+const MATERIAL_TYPES = new Set([
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'image/png',
+  'image/jpeg',
+]);
+
+function text(formData: FormData, name: string): string {
+  const v = formData.get(name);
+  return typeof v === 'string' ? v.trim() : '';
+}
+
+/** Adds https:// when the user typed a bare domain like "mybusiness.com". */
+function normalizeWebsite(raw: string): string | null {
+  if (!raw) return null;
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    return new URL(withScheme).toString();
+  } catch {
+    return raw;
+  }
+}
+
 export async function createBusinessProfile(prevState: FormState, formData: FormData): Promise<FormState> {
   const userId = await getUserIdFromSession();
-
   if (!userId) {
-    return { message: "", error: "User not authenticated." };
+    return { message: "", error: "Your session has expired. Please log in again." };
   }
 
-  const ownerName = formData.get("ownerName") as string;
-  const percentOwnership = parseFloat(formData.get("percentOwnership") as string);
-  const businessName = formData.get("businessName") as string;
-  const businessType = formData.get("businessType") as string;
-  const businessTaxStatus = formData.get("businessTaxStatus") as string;
-  const businessDescription = formData.get("businessDescription") as string;
-  const businessIndustry = formData.get("businessIndustry") as string;
-  const naicsCode = formData.get("naicsCode") as string;
-  const streetAddress = formData.get("streetAddress") as string;
-  const city = formData.get("city") as string;
-  const state = formData.get("state") as string;
-  const zipCode = formData.get("zipCode") as string;
-  const phone = formData.get("phone") as string;
-  const website = formData.get("website") as string;
-  const businessMaterials = formData.get("businessMaterials") as File; // Placeholder for file
+  const ownerName = text(formData, "ownerName");
+  const percentRaw = text(formData, "percentOwnership");
+  const percentOwnership = percentRaw === '' ? NaN : Number(percentRaw);
+  const businessName = text(formData, "businessName");
+  const businessType = text(formData, "businessType");
+  const businessTaxStatus = text(formData, "businessTaxStatus");
+  const businessDescription = text(formData, "businessDescription");
+  const businessIndustry = text(formData, "businessIndustry");
+  const naicsCode = text(formData, "naicsCode");
+  const streetAddress = text(formData, "streetAddress");
+  const city = text(formData, "city");
+  const state = text(formData, "state").toUpperCase();
+  const zipCode = text(formData, "zipCode");
+  const phone = text(formData, "phone");
+  const website = text(formData, "website");
+  const businessMaterials = formData.get("businessMaterials");
+  const materialsFile = businessMaterials instanceof File && businessMaterials.size > 0 ? businessMaterials : null;
+  const logo = formData.get("logo");
+  const logoFile = logo instanceof File && logo.size > 0 ? logo : null;
 
-  if (!ownerName || isNaN(percentOwnership) || !businessName || !businessType || !businessTaxStatus || !businessIndustry) {
-    return { message: "", error: "Required fields are missing." };
+  // Validate every field up front so the user sees all problems at once.
+  const fieldErrors: Record<string, string> = {};
+  if (!businessName) fieldErrors.businessName = "Enter your business name.";
+  if (!ownerName) fieldErrors.ownerName = "Enter the owner's full name.";
+  if (Number.isNaN(percentOwnership) || percentOwnership <= 0 || percentOwnership > 100) {
+    fieldErrors.percentOwnership = "Enter a percentage between 1 and 100.";
+  }
+  if (!businessTypeEnum.enumValues.includes(businessType as typeof businessTypeEnum.enumValues[number])) {
+    fieldErrors.businessType = "Choose a business type.";
+  }
+  if (!businessTaxStatusEnum.enumValues.includes(businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number])) {
+    fieldErrors.businessTaxStatus = "Choose a tax status (pick \"Not Applicable\" if unsure).";
+  }
+  if (!businessIndustry) fieldErrors.businessIndustry = "Tell us what industry you're in.";
+  if (naicsCode && !/^\d{2,6}$/.test(naicsCode)) fieldErrors.naicsCode = "NAICS codes are 2 to 6 digits.";
+  if (state && !US_STATES.has(state)) fieldErrors.state = "Choose a state.";
+  if (zipCode && !/^\d{5}(-\d{4})?$/.test(zipCode)) fieldErrors.zipCode = "Enter a 5-digit ZIP code (or ZIP+4).";
+  if (phone && phone.replace(/\D/g, '').length < 10) fieldErrors.phone = "Enter a 10-digit phone number.";
+  if (logoFile) {
+    if (logoFile.size > LOGO_MAX_BYTES) fieldErrors.logo = "Logo must be 5 MB or smaller.";
+    else if (!logoFile.type.startsWith('image/')) fieldErrors.logo = "Upload an image file (PNG, JPG, SVG or WebP).";
+  }
+  if (materialsFile) {
+    if (materialsFile.size > MATERIAL_MAX_BYTES) fieldErrors.businessMaterials = "File must be 10 MB or smaller.";
+    else if (materialsFile.type && !MATERIAL_TYPES.has(materialsFile.type)) {
+      fieldErrors.businessMaterials = "Upload a PDF, Word, PowerPoint, PNG or JPG file.";
+    }
+  }
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
   }
 
   try {
-    // Placeholder for file upload logic
-    let businessMaterialsUrl: string | undefined;
-    if (businessMaterials && businessMaterials.size > 0) {
-      // In a real application, you would upload this file to a storage service (e.g., S3, Vercel Blob)
-      // and get a URL. For now, we'll just log it.
-      console.log("Attempting to upload file:", businessMaterials.name);
-      businessMaterialsUrl = "https://example.com/placeholder-material.pdf"; // Placeholder URL
+    let logoUrl: string | null = null;
+    if (logoFile) {
+      const safeName = logoFile.name.replace(/[^\w.-]+/g, '_');
+      const blob = await put(`business-logos/${userId}/${Date.now()}-${safeName}`, logoFile, { access: 'public' });
+      logoUrl = blob.url;
+    }
+
+    let businessMaterialsUrl: string | null = null;
+    if (materialsFile) {
+      const safeName = materialsFile.name.replace(/[^\w.-]+/g, '_');
+      const blob = await put(`business-materials/${userId}/${Date.now()}-${safeName}`, materialsFile, { access: 'public' });
+      businessMaterialsUrl = blob.url;
     }
 
     const newBusinessData: NewBusiness = {
@@ -156,25 +225,32 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       businessName,
       businessType: businessType as typeof businessTypeEnum.enumValues[number],
       businessTaxStatus: businessTaxStatus as typeof businessTaxStatusEnum.enumValues[number],
-      businessDescription,
+      businessDescription: businessDescription || null,
       businessIndustry,
-      naicsCode,
-      streetAddress,
-      city,
-      state,
-      zipCode,
-      phone,
-      website,
+      naicsCode: naicsCode || null,
+      streetAddress: streetAddress || null,
+      city: city || null,
+      state: state || null,
+      zipCode: zipCode || null,
+      phone: phone || null,
+      website: normalizeWebsite(website),
+      logoUrl,
       businessMaterialsUrl,
+      // Also surface the upload in the Materials tab so it isn't orphaned.
+      material1Url: businessMaterialsUrl,
+      material1Title: businessMaterialsUrl ? (materialsFile?.name ?? 'Business materials') : null,
     };
 
-    await db.insert(businesses).values(newBusinessData);
+    const [created] = await db.insert(businesses).values(newBusinessData).returning({ id: businesses.id });
 
+    await db.update(users).set({ hasBusinessProfile: true }).where(eq(users.id, userId));
+
+    revalidatePath("/dashboard", "layout"); // sidebar lists businesses
     revalidatePath("/dashboard/businesses");
-    return { message: "Business profile created successfully!", error: "" };
+    return { message: `${businessName} has been added.`, error: "", businessId: created.id, businessName };
   } catch (error) {
     console.error("Error creating business profile:", error);
-    return { message: "", error: "Failed to create business profile." };
+    return { message: "", error: "Something went wrong saving your business. Please try again." };
   }
 }
 
@@ -328,6 +404,16 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   }
 
   const businessId = parseInt(formData.get("businessId") as string);
+  if (isNaN(businessId)) {
+    return { message: "", error: "Business ID is invalid." };
+  }
+  const owned = await db.query.businesses.findFirst({
+    where: and(eq(businesses.id, businessId), eq(businesses.userId, userId)),
+    columns: { id: true },
+  });
+  if (!owned) {
+    return { message: "", error: "You can only edit your own business." };
+  }
   const selectedGenderId = parseInt(formData.get("gender") as string);
   const selectedRaceId = parseInt(formData.get("race") as string);
   const selectedReligionId = parseInt(formData.get("religion") as string);
@@ -335,14 +421,6 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
   const stateLocationId = parseInt(formData.get("stateLocationId") as string);
   const regionLocationId = parseInt(formData.get("regionLocationId") as string);
   const city = formData.get("city") as string;
-
-  // Fetch current business profile to get existing demographic IDs
-  const currentBusiness = await db.query.businesses.findFirst({
-    where: eq(businesses.id, businessId),
-    columns: { demographicIds: true }
-  });
-
-  const existingDemographicIds = currentBusiness?.demographicIds || [];
 
   // Fetch Transgender demographic ID from the database
   const transgenderDemographic = await db.query.demographics.findFirst({ where: eq(demographics.name, 'Transgender') });
@@ -379,17 +457,13 @@ export async function updateBusinessDemographics(prevState: FormState, formData:
     dataToUpdate.city = null;
   }
 
-  if (Object.keys(dataToUpdate).length === 0) {
-    return { message: "", error: `No demographic or location data to update. Received: stateLocationId=${stateLocationId}, regionLocationId=${regionLocationId}, demographicIds=${JSON.stringify(newDemographicIds)}` };
-  }
-
   try {
     await db.update(businesses)
       .set(dataToUpdate)
       .where(eq(businesses.id, businessId));
 
     revalidatePath(`/dashboard/businesses/${businessId}`);
-    return { message: `Business details updated successfully! Please refresh to see changes.`, error: "" };
+    return { message: "Details saved.", error: "" };
   } catch (error) {
     console.error("Error updating business details:", error);
     return { message: "", error: "Failed to update business details." };

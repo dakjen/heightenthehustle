@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { FormState } from "@/types/form-state";
 import { optOutUser } from "./actions";
 
 function SubmitButton() {

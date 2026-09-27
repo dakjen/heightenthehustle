@@ -1,8 +1,13 @@
 import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
+import { getSession } from '@/app/login/actions';
 
 export async function POST(request: Request): Promise<NextResponse> {
-  console.log('--- UPLOAD PROFILE PHOTO API ROUTE ---');
+  const session = await getSession();
+  if (!session?.user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const { searchParams } = new URL(request.url);
   const filename = searchParams.get('filename');
 
@@ -11,14 +16,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   try {
-    const blob = await put(filename, request.body, {
-      access: 'public',
-    });
-
+    const blob = await put(filename, request.body, { access: 'public' });
     return NextResponse.json(blob);
   } catch (error) {
     console.error('Error uploading to Vercel Blob:', error);
-    const message = error instanceof Error ? error.message : 'An unknown error occurred.';
-    return NextResponse.json({ error: 'Failed to upload file to Vercel Blob.', details: message }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to upload file.' }, { status: 500 });
   }
 }

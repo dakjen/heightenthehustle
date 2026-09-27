@@ -35,7 +35,8 @@ export default async function DashboardLayout({
       ? businesses.map((b) => ({ href: `/dashboard/businesses/${b.id}`, label: b.businessName, sub: true }))
       : []),
     { href: "/dashboard/messages", label: "Messages" },
-    ...(isAdmin ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
+    ...(isExternal ? [{ href: "/dashboard/support", label: "Get Support" }] : []),
+    ...(isExternal ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
     ...(session.user.role === 'internal' ? [{ href: "/dashboard/resources", label: "Resources" }] : []),
     { href: "/dashboard/settings", label: "Settings" },
     { href: "/dashboard/profile", label: "Profile" },
@@ -43,18 +44,20 @@ export default async function DashboardLayout({
 
   const adminItems: NavItem[] = [
     ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Admin Users" }] : []),
+    { href: "/dashboard/admin/support", label: "Support Requests" },
     ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Admin Businesses" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),
+    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
     ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Admin HTH Class" }] : []),
   ];
 
   const roleLabel = isAdmin ? "Admin" : session.user.role === 'internal' ? "Team" : "Member";
 
   return (
-    <div className="flex min-h-screen bg-[#f6f6f6]">
+    <div className="flex min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#f6f6f6]">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 bg-[#2b2b2b] text-white flex flex-col">
+      <aside className="sticky top-0 h-screen w-64 shrink-0 bg-[#2b2b2b] text-white flex flex-col">
         <div className="hth-accent-bar rounded-none" />
         <div className="p-5 pb-4 border-b border-white/10">
           <Link href="/" className="block">
@@ -84,7 +87,7 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col text-gray-900 p-6 lg:p-10">
+      <main className="flex-1 min-w-0 flex flex-col text-gray-900 p-6 lg:p-10">
         {children}
       </main>
     </div>

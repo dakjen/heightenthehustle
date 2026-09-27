@@ -1,8 +1,12 @@
-// types/form-state.ts
-// This file defines a shared FormState type for use across client components and server actions.
+// Shared FormState type for client components and server actions.
 
 export type FormState = {
   message: string;
   error?: string;
-  businessName?: string; // Optional business name for display purposes
+  /** Per-field validation messages, keyed by input name. */
+  fieldErrors?: Record<string, string>;
+  /** Optional business name for display purposes. */
+  businessName?: string;
+  /** Set by createBusinessProfile so the client can navigate to the new business. */
+  businessId?: number;
 };

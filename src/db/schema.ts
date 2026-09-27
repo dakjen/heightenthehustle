@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric, timestamp, AnyPgColumn } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, varchar, pgEnum, boolean, integer, numeric, timestamp, uniqueIndex, AnyPgColumn } from 'drizzle-orm/pg-core';
 import { relations, InferSelectModel } from 'drizzle-orm';
 
 // --- Enums ---
@@ -12,6 +12,10 @@ export const classTypeEnum = pgEnum('class_type', ['pre-course', 'hth-course']);
 export const enrollmentStatusEnum = pgEnum('enrollment_status', ['enrolled', 'completed', 'dropped', 'pending', 'rejected']);
 export const businessStageEnum = pgEnum('business_stage', ['Idea', 'Startup', 'Growing', 'Established']);
 export const intakeStatusEnum = pgEnum('intake_status', ['submitted', 'reviewed', 'archived']);
+export const cohortStatusEnum = pgEnum('cohort_status', ['upcoming', 'open', 'in_progress', 'completed']);
+export const supportCategoryEnum = pgEnum('support_category', ['Line of Credit / Loans', 'Grants & Funding', 'Legal', 'Accounting & Taxes', 'Licensing & Permits', 'Marketing & Branding', 'Contracts & Procurement', 'Other']);
+export const supportUrgencyEnum = pgEnum('support_urgency', ['low', 'normal', 'high']);
+export const supportStatusEnum = pgEnum('support_status', ['open', 'in_progress', 'resolved', 'closed']);
 
 // --- Tables ---
 export const users = pgTable('users', {
@@ -29,6 +33,8 @@ export const users = pgTable('users', {
   personalZipCode: varchar('personal_zip_code', { length: 10 }),
   profilePhotoUrl: text('profile_photo_url'),
   businessName: text('business_name'), // Optional business name for account requests
+  pitchEventIds: integer('pitch_event_ids').array(), // Pitch competitions they took part in (asked at account request)
+  pitchEventOther: text('pitch_event_other'), // Free text when their competition isn't in the list
   isCisgender: boolean('is_cisgender').notNull().default(false),
   isTransgender: boolean('is_transgender').notNull().default(false),
   isOptedOut: boolean('is_opted_out').notNull().default(false),
@@ -165,6 +171,49 @@ export const businessToCompetition = pgTable('business_to_competition', {
   status: text('status').default('assigned'), // e.g., 'assigned', 'participating', 'winner'
 });
 
+// --- HTH curriculum cohorts + waitlist ---
+export const cohorts = pgTable('cohorts', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(), // e.g. "January 2027 Cohort"
+  description: text('description'),
+  startDate: timestamp('start_date', { withTimezone: true }),
+  endDate: timestamp('end_date', { withTimezone: true }),
+  status: cohortStatusEnum('status').notNull().default('upcoming'),
+  isWaitlistOpen: boolean('is_waitlist_open').notNull().default(true),
+  createdById: integer('created_by_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const cohortWaitlist = pgTable('cohort_waitlist', {
+  id: serial('id').primaryKey(),
+  cohortId: integer('cohort_id').notNull().references(() => cohorts.id, { onDelete: 'cascade' }),
+  userId: integer('user_id').references(() => users.id), // set when a signed-in member joins
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+  phone: varchar('phone', { length: 20 }),
+  businessName: text('business_name'),
+  notes: text('notes'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex('cohort_waitlist_cohort_email_idx').on(t.cohortId, t.email)]);
+
+// --- Specialized support requests (tickets) ---
+export const supportRequests = pgTable('support_requests', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
+  businessId: integer('business_id').references(() => businesses.id),
+  category: supportCategoryEnum('category').notNull(),
+  subject: text('subject').notNull(),
+  details: text('details').notNull(),
+  amountNeeded: text('amount_needed'), // free text, e.g. "$50,000"
+  neededBy: timestamp('needed_by', { withTimezone: true }),
+  urgency: supportUrgencyEnum('urgency').notNull().default('normal'),
+  status: supportStatusEnum('status').notNull().default('open'),
+  adminNotes: text('admin_notes'),
+  assignedToId: integer('assigned_to_id').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const clientIntakeForms = pgTable('client_intake_forms', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
@@ -197,10 +246,13 @@ export type PitchCompetitionEvent = InferSelectModel<typeof pitchCompetitionEven
 export type PitchSubmission = InferSelectModel<typeof pitchSubmissions>;
 export type BusinessToCompetition = InferSelectModel<typeof businessToCompetition>;
 export type ClientIntakeForm = InferSelectModel<typeof clientIntakeForms>;
+export type Cohort = InferSelectModel<typeof cohorts>;
+export type SupportRequest = InferSelectModel<typeof supportRequests>;
+export type CohortWaitlistEntry = InferSelectModel<typeof cohortWaitlist>;
 
 
 // --- Relations ---
-export const usersRelations = relations(users, ({ one, many }) => ({
+export const usersRelations = relations(users, ({ many }) => ({
   businesses: many(businesses),
   sentMessages: many(individualMessages, { relationName: 'sent_messages' }),
   receivedMessages: many(individualMessages, { relationName: 'received_messages' }),
@@ -319,4 +371,20 @@ export const clientIntakeFormsRelations = relations(clientIntakeForms, ({ one })
     fields: [clientIntakeForms.userId],
     references: [users.id],
   }),
+}));
+
+export const cohortsRelations = relations(cohorts, ({ one, many }) => ({
+  createdBy: one(users, { fields: [cohorts.createdById], references: [users.id] }),
+  waitlist: many(cohortWaitlist),
+}));
+
+export const cohortWaitlistRelations = relations(cohortWaitlist, ({ one }) => ({
+  cohort: one(cohorts, { fields: [cohortWaitlist.cohortId], references: [cohorts.id] }),
+  user: one(users, { fields: [cohortWaitlist.userId], references: [users.id] }),
+}));
+
+export const supportRequestsRelations = relations(supportRequests, ({ one }) => ({
+  user: one(users, { fields: [supportRequests.userId], references: [users.id], relationName: 'support_requester' }),
+  business: one(businesses, { fields: [supportRequests.businessId], references: [businesses.id] }),
+  assignedTo: one(users, { fields: [supportRequests.assignedToId], references: [users.id], relationName: 'support_assignee' }),
 }));

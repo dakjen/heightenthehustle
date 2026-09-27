@@ -27,7 +27,6 @@ export default function BusinessDocuments({ business }: BusinessDocumentsProps) 
               id={`material${i}Title`}
               name={`material${i}Title`}
               type="text"
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               defaultValue={(business as any)[`material${i}Title`] || ''}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
             />
@@ -40,9 +39,7 @@ export default function BusinessDocuments({ business }: BusinessDocumentsProps) 
               type="file"
               className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
             />
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {(business as any)[`material${i}Url`] && (
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               <a href={(business as any)[`material${i}Url`]} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
                 View Current Document {i}
               </a>

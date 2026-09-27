@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
-import { businesses, businessesRelations, Business, Demographic, BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation, type Location as LocationType } from "@/db/schema";
-import { InferSelectModel } from "drizzle-orm";
+import { Demographic, BusinessWithLocation, type Location as LocationType } from "@/db/schema";
 import Image from "next/image";
 import EditBusinessProfileForm from "./EditBusinessProfileForm";
 import BusinessDetailsForm from "./BusinessDetailsForm";
