@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBusinessProfile } from "../actions"; // Import getBusinessProfile
-import { BusinessWithDemographic, BusinessWithLocation, BusinessWithDemographicAndLocation } from "@/db/schema"; // Import BusinessWithDemographic from schema
+import { BusinessWithLocation } from "@/db/schema";
 import { getAvailableDemographics, getAvailableLocations } from "../../messages/actions"; // Import getAvailableDemographics
 import BusinessDetailClientPage from "./BusinessDetailClientPage"; // New import
 

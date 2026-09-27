@@ -1,6 +1,5 @@
 import EditBusinessProfileDataFetcher from "./EditBusinessProfileDataFetcher";
 import { db } from "@/db";
-import { demographics, locations } from "@/db/schema";
 
 interface BusinessEditPageProps {
   params: Promise<{

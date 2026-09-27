@@ -8,6 +8,7 @@ import { getSession } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
 import { getAllBusinesses } from "../businesses/actions"; // Added import
+import { sendEmail, accountApprovedEmail, appUrl } from "@/lib/email";
 
 // Define a type for a single user with status
 type UserWithStatus = typeof users.$inferSelect;
@@ -47,6 +48,8 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
         profilePhotoUrl: true,
         isOptedOut: true,
         businessName: true, // Explicitly select businessName
+        pitchEventIds: true,
+        pitchEventOther: true,
         canApproveRequests: true, // Explicitly select canApproveRequests
         canMessageAdmins: true, // Explicitly select canMessageAdmins
         canManageClasses: true, // Explicitly select canManageClasses
@@ -77,6 +80,23 @@ export async function approveUser(userId: number): Promise<FormState> {
     await db.update(users)
       .set({ status: 'approved' })
       .where(eq(users.id, userId));
+
+    // Welcome email pointing at the intake form. Email failure never fails the approval.
+    const approved = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+      columns: { name: true, email: true },
+    });
+    if (approved) {
+      const link = `${appUrl()}/login?next=${encodeURIComponent("/dashboard/intake-form")}`;
+      const result = await sendEmail({
+        to: { email: approved.email, name: approved.name },
+        ...accountApprovedEmail(approved.name, link),
+      });
+      if (!result.sent) {
+        console.warn(`Approval email not sent to ${approved.email} (${result.reason ?? "unknown"}).`);
+      }
+    }
+
     revalidatePath("/dashboard/admin/users");
     return { message: "User approved successfully!", error: "" };
   } catch (error) {
@@ -247,7 +267,11 @@ export async function downloadAllData() {
   const businessesData = await getAllBusinesses("", {});
 
   // Remove sensitive information from users
-  const sanitizedUsers = usersData.map(({ password: _, ...user }) => user);
+  const sanitizedUsers = usersData.map((user) => {
+    const sanitized = { ...user };
+    delete (sanitized as { password?: unknown }).password;
+    return sanitized;
+  });
 
   const allData = {
     users: sanitizedUsers,

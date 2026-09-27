@@ -19,9 +19,8 @@ interface EditBusinessProfileFormProps {
   availableLocations: Location[];
 }
 
-export default function EditBusinessProfileForm({ initialBusiness, availableDemographics, availableLocations }: EditBusinessProfileFormProps) {
-  const [business, setBusiness] = useState<BusinessWithLocation>(initialBusiness);
-  const [logoFile, setLogoFile] = useState<File | null>(null);
+export default function EditBusinessProfileForm({ initialBusiness, availableLocations }: EditBusinessProfileFormProps) {
+  const business: BusinessWithLocation = initialBusiness;
   const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
 
   const [editState, editFormAction] = useActionState<FormState, FormData>(updateBusinessProfile, { message: "" });
@@ -31,14 +30,11 @@ export default function EditBusinessProfileForm({ initialBusiness, availableDemo
     if (file) {
       if (business.logoUrl && !confirm("Are you sure you want to override your current logo?")) {
         e.target.value = ''; // Clear the input if user cancels
-        setLogoFile(null);
         setLogoPreview(business.logoUrl);
         return;
       }
-      setLogoFile(file);
       setLogoPreview(URL.createObjectURL(file));
     } else {
-      setLogoFile(null);
       setLogoPreview(business.logoUrl);
     }
   };

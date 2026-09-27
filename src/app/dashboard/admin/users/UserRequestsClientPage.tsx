@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllPendingUserRequests, approveUser, rejectUser } from './actions';
+import { getPitchEventOptions, type PitchEventOption } from '@/app/dashboard/intake-form/actions';
 import { InferSelectModel } from 'drizzle-orm';
 import { users } from '@/db/schema';
 import { FormState } from '@/types/form-state';
@@ -10,6 +11,7 @@ type User = InferSelectModel<typeof users> & { businessName?: string | null };
 
 export default function UserRequestsClientPage() {
   const [pendingUsers, setPendingUsers] = useState<User[]>([]);
+  const [pitchEvents, setPitchEvents] = useState<PitchEventOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +20,6 @@ export default function UserRequestsClientPage() {
     setError(null);
     try {
       const users = await getAllPendingUserRequests();
-      console.log("Fetched pending users:", users); // Add this line
       setPendingUsers(users);
     } catch (err) {
       console.error("Failed to fetch pending users:", err);
@@ -30,7 +31,14 @@ export default function UserRequestsClientPage() {
 
   useEffect(() => {
     fetchPendingUsers();
+    getPitchEventOptions().then(setPitchEvents);
   }, []);
+
+  const pitchLabel = (u: User) => {
+    const names = (u.pitchEventIds ?? []).map((id) => pitchEvents.find((e) => e.id === id)?.name ?? `Event #${id}`);
+    if (u.pitchEventOther) names.push(u.pitchEventOther);
+    return names.length ? names.join(', ') : 'Not answered';
+  };
 
   const handleApprove = async (userId: number) => {
     try {
@@ -86,6 +94,7 @@ export default function UserRequestsClientPage() {
                     Phone: {user.phone}
                     {user.businessName && <span className="ml-2"> | Business: {user.businessName}</span>}
                   </p>
+                  <p className="text-sm text-gray-500">Pitch competition: {pitchLabel(user)}</p>
                 </div>
                 <div className="flex space-x-3">
                   <button

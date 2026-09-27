@@ -7,14 +7,6 @@ import { users, massMessages, locations, demographics, businesses, individualMes
 import { eq, inArray, and, or, asc, arrayOverlaps } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
 
-async function getLocationIdsByNames(locationNames: string[]): Promise<number[]> {
-  if (locationNames.length === 0) {
-    return [];
-  }
-  const existingLocations = await db.select().from(locations).where(inArray(locations.name, locationNames));
-  return existingLocations.map(loc => loc.id);
-}
-
 export async function sendMessage(prevState: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();
   if (!session || !session.user) {

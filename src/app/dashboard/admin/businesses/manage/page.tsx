@@ -1,21 +1,12 @@
 import BusinessSearchAndFilter from "../BusinessSearchAndFilter";
-import YourBusinessesPageContent from "../../../businesses/YourBusinessesPageContent";
 
-export default async function AdminBusinessesPage({ searchParams }: { searchParams: Promise<{ viewMode?: string }> }) {
-  const resolvedSearchParams = await searchParams;
-  const isInternalUserView = resolvedSearchParams.viewMode === "internal";
-
+export default function AdminBusinessesPage() {
   return (
     <div className="flex-1 p-6">
-      {isInternalUserView ? (
-        <YourBusinessesPageContent />
-      ) : (
-        <>
-          <h1 className="text-3xl font-bold text-gray-900">All Businesses</h1>
-          <p className="mt-4 text-gray-700">View and manage all businesses in the system.</p>
-          <BusinessSearchAndFilter />
-        </>
-      )}
+      <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Admin</p>
+      <h1 className="text-5xl text-gray-900 leading-none">All businesses</h1>
+      <p className="mt-3 text-gray-700">Search, filter, archive and manage every member business.</p>
+      <BusinessSearchAndFilter />
     </div>
   );
 }

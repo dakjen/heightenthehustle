@@ -6,6 +6,10 @@ import { FormState } from "@/types/form-state";
 import { updateProfile } from "./actions";
 import { getSession } from "@/app/login/actions";
 import Image from "next/image";
+import {
+  Field, FormSection, SubmitButton, FormError, FormSuccess, RequiredNote,
+  inputClass, fileInputClass,
+} from "@/app/components/form";
 
 // Define a type for the user object in state, matching the updated schema
 interface UserProfile {
@@ -29,6 +33,7 @@ const isPlaceholder = (url: string | null | undefined): boolean => {
 export default function ProfilePage() {
   const [state, formAction] = useActionState<FormState, FormData>(updateProfile, { message: "" });
   const [user, setUser] = useState<UserProfile | null>(null); // Use UserProfile type
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchAndSetUser() {
@@ -41,186 +46,169 @@ export default function ProfilePage() {
     fetchAndSetUser();
   }, [state?.message]); // Safely access state.message
 
-  if (!user) {
-    return <div className="flex-1 p-6">Loading profile...</div>;
+  function onPhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    setPhotoPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return file && file.type.startsWith("image/") ? URL.createObjectURL(file) : null;
+    });
   }
 
+  if (!user) {
+    return (
+      <div className="w-full max-w-4xl mx-auto">
+        <p className="text-sm text-gray-500">Loading profile…</p>
+      </div>
+    );
+  }
+
+  const hasPhoto = Boolean(user.profilePhotoUrl && !isPlaceholder(user.profilePhotoUrl));
+  const initial = user.name ? user.name[0].toUpperCase() : "?";
+
   return (
-    <div className="flex-1 p-6">
-      {/* Profile Photo Display */}
-      <div className="mb-6 flex justify-center">
-        {user.profilePhotoUrl && !isPlaceholder(user.profilePhotoUrl) ? (
-          <Image src={user.profilePhotoUrl} alt="Profile" width={96} height={96} className="rounded-full object-cover border-2 border-gray-300" />
+    <div className="w-full max-w-4xl mx-auto">
+      <header className="mb-8 flex items-center gap-5 hth-fade-up">
+        {hasPhoto && user.profilePhotoUrl ? (
+          <Image
+            src={user.profilePhotoUrl}
+            alt="Profile"
+            width={80}
+            height={80}
+            className="h-20 w-20 shrink-0 rounded-full border-2 border-white object-cover shadow-md"
+          />
         ) : (
-          <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl font-bold border-2 border-gray-300">
-            {user.name ? user.name[0].toUpperCase() : '?'}
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#2b2b2b] font-display text-4xl leading-none text-white shadow-md">
+            {initial}
           </div>
         )}
-      </div>
+        <div className="min-w-0">
+          <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Your Profile</p>
+          <h1 className="truncate text-5xl text-gray-900 leading-none">{user.name || "Your profile"}</h1>
+          <p className="mt-2 truncate text-sm text-gray-600">{user.email}</p>
+        </div>
+      </header>
 
-      <h1 className="text-3xl font-bold text-gray-900">Your Personal Profile</h1> {/* Renamed heading */}
-      <p className="mt-4 text-gray-700">Manage your personal information.</p>
-
-      <div className="mt-8 max_w_md">
-        <form action={formAction} className="space-y-6">
-          {/* Profile Photo */}
-          {user.profilePhotoUrl && !isPlaceholder(user.profilePhotoUrl) && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Current Profile Photo</label>
-              <Image src={user.profilePhotoUrl} alt="Profile" width={80} height={80} className="mt-1 rounded-full object-cover" />
+      <form action={formAction} className="space-y-6 hth-fade-up hth-fade-up-delay-1">
+        <FormSection step="01" title="Photo" description="A face helps our team and other members recognize you.">
+          <Field name="profilePhoto" label="Profile photo" className="sm:col-span-2" hint="PNG or JPG. Square images look best.">
+            <div className="flex items-center gap-4">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-dashed border-gray-300 bg-gray-50">
+                {photoPreview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={photoPreview} alt="New photo preview" className="h-full w-full object-cover" />
+                ) : hasPhoto && user.profilePhotoUrl ? (
+                  <Image src={user.profilePhotoUrl} alt="Current profile photo" width={64} height={64} className="h-full w-full object-cover" />
+                ) : (
+                  <span className="text-xs text-gray-400">Preview</span>
+                )}
+              </div>
+              <input
+                id="profilePhoto"
+                name="profilePhoto"
+                type="file"
+                accept="image/*"
+                onChange={onPhotoChange}
+                className={fileInputClass}
+              />
             </div>
-          )}
-          <div>
-            <label htmlFor="profilePhoto" className="block text-sm font-medium text-gray-700">
-              Upload Profile Photo
-            </label>
-            <input
-              id="profilePhoto"
-              name="profilePhoto"
-              type="file"
-              className="mt-1 block w-full text-sm text-gray-900
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-[#910000] file:text-white
-                hover:file:bg-[#7a0000]"
-            />
-          </div>
+          </Field>
+        </FormSection>
 
-          {/* Email Address (Read-only) */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email Address
-            </label>
+        <FormSection step="02" title="Contact details" description="How we reach you.">
+          <Field name="email" label="Email address" hideOptional className="sm:col-span-2" hint="Your email is your sign-in and can't be changed here.">
             <input
               id="email"
               name="email"
               type="email"
               value={user.email}
               readOnly
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 text-gray-500 cursor-not-allowed"
+              autoComplete="email"
+              className={`${inputClass} cursor-not-allowed bg-gray-50 text-gray-500`}
             />
-          </div>
-
-          {/* Name */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
+          </Field>
+          <Field name="name" label="Full name" required>
             <input
               id="name"
               name="name"
               type="text"
               defaultValue={user.name}
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              autoComplete="name"
+              className={inputClass}
             />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-              Phone
-            </label>
+          </Field>
+          <Field name="phone" label="Phone" required>
             <input
               id="phone"
               name="phone"
-              type="text"
+              type="tel"
+              inputMode="tel"
               defaultValue={user.phone}
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              autoComplete="tel"
+              placeholder="(555) 555-5555"
+              className={inputClass}
             />
-          </div>
+          </Field>
+        </FormSection>
 
-          {/* Personal Address */}
-          <div>
-            <label htmlFor="personalAddress" className="block text-sm font-medium text-gray-700">
-              Personal Address
-            </label>
+        <FormSection step="03" title="Home address" description="Used to match you with local programs and grants.">
+          <Field name="personalAddress" label="Street address" className="sm:col-span-2">
             <input
               id="personalAddress"
               name="personalAddress"
               type="text"
               defaultValue={user.personalAddress || ''}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              autoComplete="street-address"
+              className={inputClass}
             />
-          </div>
-
-          {/* Personal City */}
-          <div>
-            <label htmlFor="personalCity" className="block text-sm font-medium text-gray-700">
-              Personal City
-            </label>
+          </Field>
+          <Field name="personalCity" label="City">
             <input
               id="personalCity"
               name="personalCity"
               type="text"
               defaultValue={user.personalCity || ''}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+              autoComplete="address-level2"
+              className={inputClass}
             />
+          </Field>
+          <div className="grid grid-cols-2 gap-4">
+            <Field name="personalState" label="State" hint="Two letters, e.g. NY">
+              <input
+                id="personalState"
+                name="personalState"
+                type="text"
+                maxLength={2}
+                defaultValue={user.personalState || ''}
+                autoComplete="address-level1"
+                placeholder="NY"
+                className={`${inputClass} uppercase`}
+              />
+            </Field>
+            <Field name="personalZipCode" label="ZIP">
+              <input
+                id="personalZipCode"
+                name="personalZipCode"
+                type="text"
+                inputMode="numeric"
+                maxLength={10}
+                defaultValue={user.personalZipCode || ''}
+                autoComplete="postal-code"
+                className={inputClass}
+              />
+            </Field>
           </div>
+        </FormSection>
 
-          {/* Personal State */}
-          <div>
-            <label htmlFor="personalState" className="block text-sm font-medium text-gray-700">
-              Personal State
-            </label>
-            <input
-              id="personalState"
-              name="personalState"
-              type="text"
-              maxLength={2}
-              defaultValue={user.personalState || ''}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-            />
-          </div>
+        <FormError message={state?.error} />
+        {!state?.error && <FormSuccess message={state?.message} />}
 
-          {/* Personal Zip Code */}
-          <div>
-            <label htmlFor="personalZipCode" className="block text-sm font-medium text-gray-700">
-              Personal Zip Code
-            </label>
-            <input
-              id="personalZipCode"
-              name="personalZipCode"
-              type="text"
-              maxLength={10}
-              defaultValue={user.personalZipCode || ''}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
-            />
-          </div>
-
-          {/* Transgender Checkbox */}
-          <div className="flex items-center">
-            <input
-              id="isTransgender"
-              name="isTransgender"
-              type="checkbox"
-              defaultChecked={user.isTransgender}
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            />
-            <label htmlFor="isTransgender" className="ml-2 block text-sm text-gray-900">
-              Are you transgender?
-            </label>
-          </div>
-
-          {state?.message && (
-            <p className="text-sm text-green-600">{state.message}</p>
-          )}
-          {state?.error && (
-            <p className="text-sm text-red-600">{state.error}</p>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Update Profile
-            </button>
-          </div>
-        </form>
-      </div>
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <RequiredNote />
+          <SubmitButton>Update profile</SubmitButton>
+        </div>
+      </form>
     </div>
   );
 }

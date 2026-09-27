@@ -2,10 +2,12 @@ import { db } from '@/db';
 import { classes, lessons, users, enrollments } from '@/db/schema'; // Added enrollments, enrollmentStatusEnum
 import { eq, or, and } from 'drizzle-orm'; // Added and
 import { revalidatePath } from 'next/cache';
+import { requirePermission } from '@/lib/auth';
 
 // --- Class Actions ---
 
 export async function createClass(formData: FormData) {
+  await requirePermission('canManageClasses');
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
   const teacherId = parseInt(formData.get('teacherId') as string);
@@ -28,6 +30,7 @@ export async function createClass(formData: FormData) {
 }
 
 export async function updateClass(classId: number, formData: FormData) {
+  await requirePermission('canManageClasses');
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
   const type = formData.get('type') as 'pre-course' | 'hth-course';
@@ -52,6 +55,7 @@ export async function updateClass(classId: number, formData: FormData) {
 }
 
 export async function deleteClass(classId: number) {
+  await requirePermission('canManageClasses');
   await db.delete(classes).where(eq(classes.id, classId));
   revalidatePath('/dashboard/admin/hth-class');
 }
@@ -71,6 +75,7 @@ export async function getAllClasses() {
 // --- Lesson Actions ---
 
 export async function createLesson(formData: FormData) {
+  await requirePermission('canManageClasses');
   const classId = parseInt(formData.get('classId') as string);
   const title = formData.get('title') as string;
   const content = formData.get('content') as string;
@@ -92,6 +97,7 @@ export async function createLesson(formData: FormData) {
 }
 
 export async function updateLesson(lessonId: number, formData: FormData) {
+  await requirePermission('canManageClasses');
   const title = formData.get('title') as string;
   const content = formData.get('content') as string;
   const order = parseInt(formData.get('order') as string);
@@ -116,6 +122,7 @@ export async function updateLesson(lessonId: number, formData: FormData) {
 }
 
 export async function deleteLesson(lessonId: number) {
+  await requirePermission('canManageClasses');
   await db.delete(lessons).where(eq(lessons.id, lessonId));
   revalidatePath('/dashboard/admin/hth-class');
 }
@@ -174,6 +181,7 @@ export async function requestEnrollment(userId: number, classId: number) {
 }
 
 export async function acceptEnrollment(enrollmentId: number) {
+  await requirePermission('canManageClasses');
   await db.update(enrollments)
     .set({ status: 'enrolled' })
     .where(eq(enrollments.id, enrollmentId));
@@ -184,6 +192,7 @@ export async function acceptEnrollment(enrollmentId: number) {
 }
 
 export async function rejectEnrollment(enrollmentId: number) {
+  await requirePermission('canManageClasses');
   await db.update(enrollments)
     .set({ status: 'rejected' })
     .where(eq(enrollments.id, enrollmentId));

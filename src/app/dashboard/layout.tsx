@@ -35,7 +35,8 @@ export default async function DashboardLayout({
       ? businesses.map((b) => ({ href: `/dashboard/businesses/${b.id}`, label: b.businessName, sub: true }))
       : []),
     { href: "/dashboard/messages", label: "Messages" },
-    ...(isAdmin ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
+    ...(isExternal ? [{ href: "/dashboard/support", label: "Get Support" }] : []),
+    ...(isExternal ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
     ...(session.user.role === 'internal' ? [{ href: "/dashboard/resources", label: "Resources" }] : []),
     { href: "/dashboard/settings", label: "Settings" },
     { href: "/dashboard/profile", label: "Profile" },
@@ -43,9 +44,11 @@ export default async function DashboardLayout({
 
   const adminItems: NavItem[] = [
     ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Admin Users" }] : []),
+    { href: "/dashboard/admin/support", label: "Support Requests" },
     ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Admin Businesses" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),
+    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
     ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Admin HTH Class" }] : []),
   ];
 

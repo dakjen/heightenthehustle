@@ -11,6 +11,21 @@ const eslintConfig = [
   pluginReactConfig,
   ...nextPlugin,
   {
+    // TypeScript already reports undefined identifiers; ESLint's no-undef
+    // false-positives on the ambient `React` namespace type in .ts/.tsx files.
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "no-undef": "off",
+      // Use the TypeScript-aware rule: the base one flags parameter names in
+      // function-type annotations like `(url: string) => void`.
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", ignoreRestSiblings: true },
+      ],
+    },
+  },
+  {
     rules: {
       // "@typescript-eslint/no-unused-vars": "off",
       "react-hooks/exhaustive-deps": "off",

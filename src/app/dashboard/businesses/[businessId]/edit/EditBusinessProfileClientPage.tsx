@@ -98,7 +98,7 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
 interface TabButtonProps {
   tabName: string;
   activeTab: string;
-  setActiveTab: (tab: string) => void;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
   children: React.ReactNode;
 }
 

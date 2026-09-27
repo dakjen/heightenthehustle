@@ -1,12 +1,10 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/app/login/actions";
+import { requireUser } from "@/lib/auth";
 import IntakeFormClientPage from "./IntakeFormClientPage";
 
 export default async function IntakeFormPage() {
-  const session = await getSession();
-  if (!session || !session.user) {
-    redirect("/login");
-  }
+  const user = await requireUser();
+  if (user.role !== "external") redirect("/dashboard"); // members only
 
   return <IntakeFormClientPage />;
 }
