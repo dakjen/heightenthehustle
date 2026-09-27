@@ -3,7 +3,7 @@
 import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users, clientIntakeForms } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { cookies } from "next/headers";
@@ -75,12 +75,16 @@ async function createSession(user: UserSession) {
 }
 
 export async function login(prevState: FormState, formData: FormData): Promise<FormState> {
-  const email = formData.get("email") as string;
+  const email = ((formData.get("email") as string | null) ?? "").trim();
   const password = formData.get("password") as string;
   const next = formData.get("next");
+  if (!email || !password) {
+    return { message: "", error: "Enter your email and password." };
+  }
 
+  // Case-insensitive match so Jane@Example.com and jane@example.com both work.
   const user = await db.query.users.findFirst({
-    where: eq(users.email, email),
+    where: sql`lower(${users.email}) = ${email.toLowerCase()}`,
     columns: {
       id: true,
       name: true,
@@ -128,11 +132,16 @@ export async function login(prevState: FormState, formData: FormData): Promise<F
     target = next;
   } else if (user.role === "external") {
     // Members land on the intake form until they've submitted one. Admins and team go straight home.
-    const intake = await db.query.clientIntakeForms.findFirst({
-      where: eq(clientIntakeForms.userId, user.id),
-      columns: { id: true },
-    });
-    if (!intake) target = "/dashboard/intake-form";
+    try {
+      const intake = await db.query.clientIntakeForms.findFirst({
+        where: eq(clientIntakeForms.userId, user.id),
+        columns: { id: true },
+      });
+      if (!intake) target = "/dashboard/intake-form";
+    } catch (error) {
+      // If the intake table is missing or the query fails, still let them in.
+      console.error("Intake lookup during login failed:", error);
+    }
   }
 
   try {
