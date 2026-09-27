@@ -207,7 +207,7 @@ export default function MessagesPage({
                 individualMessages
                   .filter(msg => (msg.senderId === currentUserId && msg.recipientId === selectedConversationUserId) || (msg.senderId === selectedConversationUserId && msg.recipientId === currentUserId))
                   .map((msg) => (
-                    <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'}`}>
+                    <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-[#2b2b2b]/10 self-end'}`}>
                       <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : msg.sender.name}:</p>
                       <p className="text-gray-800">{msg.content}</p>
                       <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
@@ -230,7 +230,7 @@ export default function MessagesPage({
                     onChange={(e) => setMessageContent(e.target.value)}
                     placeholder="Type your message here..."
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
                   ></textarea>
                 </div>
 
@@ -244,7 +244,7 @@ export default function MessagesPage({
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
                   >
                     Send Message
                   </button>
@@ -280,7 +280,7 @@ export default function MessagesPage({
                 individualMessages
                   .filter(msg => (msg.senderId === currentUserId && msg.recipientId === selectedConversationUserId) || (msg.senderId === selectedConversationUserId && msg.recipientId === currentUserId))
                   .map((msg) => (
-                    <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'}`}>
+                    <div key={msg.id} className={`mb-4 p-3 rounded-lg max-w-xs ${msg.senderId === currentUserId ? 'bg-gray-100 self-start' : 'bg-[#2b2b2b]/10 self-end'}`}>
                       <p className="text-sm font-semibold">{msg.senderId === currentUserId ? "You" : msg.sender.name}:</p>
                       <p className="text-gray-800">{msg.content}</p>
                       <p className="text-xs text-gray-500 text-right">{msg.timestamp.toLocaleString()}</p>
@@ -303,7 +303,7 @@ export default function MessagesPage({
                     onChange={(e) => setMessageContent(e.target.value)}
                     placeholder="Type your message here..."
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
                   ></textarea>
                 </div>
 
@@ -317,7 +317,7 @@ export default function MessagesPage({
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
                   >
                     Send Message
                   </button>
@@ -361,7 +361,7 @@ export default function MessagesPage({
                   onChange={(e) => setMessageContent(e.target.value)}
                   placeholder="Type your message here..."
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
                 ></textarea>
               </div>
 
@@ -378,7 +378,7 @@ export default function MessagesPage({
                         value={location.id}
                         checked={selectedLocations.includes(location.id)}
                         onChange={() => handleLocationChange(location.id)}
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
                       />
                       <label htmlFor={`location-${location.id}`} className="ml-2 text-sm text-gray-900">
                         {location.name}
@@ -403,7 +403,7 @@ export default function MessagesPage({
                           value={demographic.id}
                           checked={selectedDemographics.includes(demographic.id)}
                           onChange={() => handleDemographicChange(demographic.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
                         />
                         <label htmlFor={`demographic-gender-${demographic.id}`} className="ml-2 text-sm text-gray-900">
                           {demographic.name}
@@ -427,7 +427,7 @@ export default function MessagesPage({
                           value={demographic.id}
                           checked={selectedDemographics.includes(demographic.id)}
                           onChange={() => handleDemographicChange(demographic.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
                         />
                         <label htmlFor={`demographic-race-${demographic.id}`} className="ml-2 text-sm text-gray-900">
                           {demographic.name}
@@ -451,7 +451,7 @@ export default function MessagesPage({
                           value={demographic.id}
                           checked={selectedDemographics.includes(demographic.id)}
                           onChange={() => handleDemographicChange(demographic.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
                         />
                         <label htmlFor={`demographic-religion-${demographic.id}`} className="ml-2 text-sm text-gray-900">
                           {demographic.name}
@@ -471,7 +471,7 @@ export default function MessagesPage({
                     type="checkbox"
                     checked={excludeOptedOut}
                     onChange={(e) => setExcludeOptedOut(e.target.checked)}
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4 w-4 rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
                   />
                   <label htmlFor="excludeOptedOut" className="ml-2 text-sm text-gray-900">
                     Exclude users who have opted out
@@ -489,7 +489,7 @@ export default function MessagesPage({
               <div className="mt-6">
                 <button
                   type="submit"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
                 >
                   Send Mass Message
                 </button>

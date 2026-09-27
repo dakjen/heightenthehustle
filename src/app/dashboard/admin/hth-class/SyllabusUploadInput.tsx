@@ -66,7 +66,7 @@ export default function SyllabusUploadInput({ onUploadSuccess, initialUrl }: Syl
         type="button"
         onClick={handleUpload}
         disabled={!file || uploading}
-        className="ml-2 inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        className="ml-2 inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#2b2b2b] hover:bg-[#1f1f1f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2b2b2b]"
       >
         {uploading ? 'Uploading...' : 'Upload Syllabus'}
       </button>

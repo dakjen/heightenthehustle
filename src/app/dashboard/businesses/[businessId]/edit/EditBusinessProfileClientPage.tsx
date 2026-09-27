@@ -85,7 +85,7 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
         <Link href={`/dashboard/businesses/${business.id}`}>
           <button
             type="button"
-            className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
           >
             Back to Business Details
           </button>
@@ -110,7 +110,7 @@ function TabButton({ tabName, activeTab, setActiveTab, children }: TabButtonProp
       onClick={() => setActiveTab(tabName)}
       className={`${
         isActive
-          ? "border-indigo-500 text-indigo-600"
+          ? "border-[#910000] text-[#910000]"
           : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
       } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
     >

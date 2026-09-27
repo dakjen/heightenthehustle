@@ -45,7 +45,7 @@ export default function PermissionsManagementClientPage({ initialUsers }: Permis
         <h2 className="text-xl font-bold text-gray-900 mb-4">Select User</h2>
         <select
           onChange={(e) => handleUserSelect(parseInt(e.target.value))}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
           defaultValue=""
         >
           <option value="" disabled>Select a user</option>
@@ -125,7 +125,7 @@ export default function PermissionsManagementClientPage({ initialUsers }: Permis
 
             <button
               type="submit"
-              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
             >
               Save Permissions
             </button>

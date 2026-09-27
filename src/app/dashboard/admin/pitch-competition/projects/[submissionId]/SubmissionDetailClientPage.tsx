@@ -13,7 +13,7 @@ interface SubmissionDetailClientPageProps {
 export default function SubmissionDetailClientPage({ submission }: SubmissionDetailClientPageProps) {
   return (
     <div>
-      <Link href="/dashboard/admin/pitch-competition" className="text-indigo-600 hover:underline mb-4 inline-block">
+      <Link href="/dashboard/admin/pitch-competition" className="text-[#910000] hover:underline mb-4 inline-block">
         ← Back to Competitions
       </Link>
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -49,7 +49,7 @@ export default function SubmissionDetailClientPage({ submission }: SubmissionDet
               <dt className="text-sm font-medium text-gray-500">Pitch Deck</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {submission.pitchDeckUrl ? (
-                  <a href={submission.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+                  <a href={submission.pitchDeckUrl} target="_blank" rel="noopener noreferrer" className="text-[#910000] hover:underline">
                     View Deck
                   </a>
                 ) : (
@@ -61,7 +61,7 @@ export default function SubmissionDetailClientPage({ submission }: SubmissionDet
               <dt className="text-sm font-medium text-gray-500">Pitch Video</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {submission.pitchVideoUrl ? (
-                  <a href={submission.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+                  <a href={submission.pitchVideoUrl} target="_blank" rel="noopener noreferrer" className="text-[#910000] hover:underline">
                     Watch Video
                   </a>
                 ) : (
