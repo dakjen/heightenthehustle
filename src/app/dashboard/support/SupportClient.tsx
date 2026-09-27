@@ -7,7 +7,7 @@ import { secondaryButtonClass, ghostButtonClass } from "@/app/components/form";
 
 const STATUS: Record<SupportRequest["status"], { label: string; cls: string }> = {
   open: { label: "Received", cls: "bg-yellow-100 text-yellow-800" },
-  in_progress: { label: "In progress", cls: "bg-blue-100 text-blue-800" },
+  in_progress: { label: "In progress", cls: "bg-[#2b2b2b]/10 text-[#2b2b2b]" },
   resolved: { label: "Resolved", cls: "bg-green-100 text-green-800" },
   closed: { label: "Closed", cls: "bg-gray-100 text-gray-700" },
 };

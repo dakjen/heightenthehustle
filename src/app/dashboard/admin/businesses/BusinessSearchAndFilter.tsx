@@ -149,7 +149,7 @@ export default function BusinessSearchAndFilter() {
             placeholder="Search by business name..."
             defaultValue={searchQuery}
             onChange={handleSearchChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
           />
         </div>
 
@@ -160,7 +160,7 @@ export default function BusinessSearchAndFilter() {
             id="businessTypeFilter"
             defaultValue={businessTypeFilter}
             onChange={(e) => handleFilterChange("businessType", e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
           >
             <option value="">All Types</option>
             <option value="Sole Proprietorship">Sole Proprietorship</option>
@@ -177,7 +177,7 @@ export default function BusinessSearchAndFilter() {
             id="businessTaxStatusFilter"
             defaultValue={businessTaxStatusFilter}
             onChange={(e) => handleFilterChange("businessTaxStatus", e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
           >
             <option value="">All Tax Statuses</option>
             <option value="S-Corporation">S-Corporation</option>

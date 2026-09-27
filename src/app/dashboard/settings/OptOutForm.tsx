@@ -69,7 +69,7 @@ export default function OptOutForm({ userName, isOptedOut: initialIsOptedOut }: 
                   id="name"
                   name="name"
                   required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#910000] focus:border-[#910000] sm:text-sm"
                 />
               </div>
 

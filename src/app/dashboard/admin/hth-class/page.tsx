@@ -15,10 +15,10 @@ export default async function AdminHTHClassPage() {
         <Link href="/dashboard/admin/hth-class/cohorts" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#910000] hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#910000]">
           Cohorts &amp; Waitlist
         </Link>
-        <Link href="/dashboard/admin/hth-class/add-class" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <Link href="/dashboard/admin/hth-class/add-class" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#910000] hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#910000]">
           Add New Class
         </Link>
-        <Link href="/dashboard/admin/hth-class/enrollment-requests" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <Link href="/dashboard/admin/hth-class/enrollment-requests" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#2b2b2b] hover:bg-[#1f1f1f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2b2b2b]">
           View Enrollment Requests
         </Link>
       </div>
@@ -36,7 +36,7 @@ export default async function AdminHTHClassPage() {
                   <p className="text-sm text-gray-500">{classItem.description}</p>
                 </div>
                 <div className="flex space-x-2">
-                  <Link href={`/dashboard/admin/hth-class/edit-class/${classItem.id}`} className="text-indigo-600 hover:text-indigo-900">
+                  <Link href={`/dashboard/admin/hth-class/edit-class/${classItem.id}`} className="text-[#910000] hover:text-[#7a0000]">
                     Edit Class
                   </Link>
                   <Link href={`/dashboard/admin/hth-class/add-lesson?classId=${classItem.id}`} className="text-green-600 hover:text-green-900">
@@ -63,7 +63,7 @@ export default async function AdminHTHClassPage() {
                   <p className="text-sm text-gray-500">{classItem.description}</p>
                 </div>
                 <div className="flex space-x-2">
-                  <Link href={`/dashboard/admin/hth-class/edit-class/${classItem.id}`} className="text-indigo-600 hover:text-indigo-900">
+                  <Link href={`/dashboard/admin/hth-class/edit-class/${classItem.id}`} className="text-[#910000] hover:text-[#7a0000]">
                     Edit Class
                   </Link>
                   <Link href={`/dashboard/admin/hth-class/add-lesson?classId=${classItem.id}`} className="text-green-600 hover:text-green-900">

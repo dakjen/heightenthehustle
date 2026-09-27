@@ -49,7 +49,7 @@ export default function PitchCompetitionClientPage({ initialEvents }: PitchCompe
   if (selectedEvent) {
     return (
       <div>
-        <button onClick={() => setSelectedEvent(null)} className="text-indigo-600 hover:underline mb-4">← Back to Events</button>
+        <button onClick={() => setSelectedEvent(null)} className="text-[#910000] hover:underline mb-4">← Back to Events</button>
         <h1 className="text-2xl font-bold mb-4">Submissions for {selectedEvent.name}</h1>
         {isLoadingSubmissions ? <p>Loading submissions...</p> : (
           <div className="mt-8">
@@ -65,7 +65,7 @@ export default function PitchCompetitionClientPage({ initialEvents }: PitchCompe
                 {submissions.map((submission) => (
                   <tr key={submission.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      <Link href={`/dashboard/admin/pitch-competition/projects/${submission.id}`} className="text-indigo-600 hover:underline">
+                      <Link href={`/dashboard/admin/pitch-competition/projects/${submission.id}`} className="text-[#910000] hover:underline">
                         {submission.projectName}
                       </Link>
                     </td>
@@ -88,7 +88,7 @@ export default function PitchCompetitionClientPage({ initialEvents }: PitchCompe
         <h1 className="text-2xl font-bold">Pitch Competition Events</h1>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+          className="bg-[#910000] text-white px-4 py-2 rounded-md hover:bg-[#7a0000]"
         >
           Create Event
         </button>
@@ -107,7 +107,7 @@ export default function PitchCompetitionClientPage({ initialEvents }: PitchCompe
                 <a href="#" onClick={(e) => { e.preventDefault(); handleSelectEvent(event); }} className="block hover:bg-gray-50">
                   <div className="px-4 py-4 sm:px-6">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-indigo-600 truncate">{event.name}</p>
+                      <p className="text-sm font-medium text-[#910000] truncate">{event.name}</p>
                       <div className="ml-2 flex-shrink-0 flex">
                         <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {event.startDate ? new Date(event.startDate).toLocaleDateString() : 'TBA'} - {event.endDate ? new Date(event.endDate).toLocaleDateString() : 'TBA'}

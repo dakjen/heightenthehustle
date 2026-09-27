@@ -67,7 +67,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
       <div className="mt-6">
         <button
           onClick={() => setShowCreateForm(!showCreateForm)}
-          className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
         >
           {showCreateForm ? "Cancel" : "Create New User"}
         </button>
@@ -87,7 +87,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                 name="name"
                 type="text"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
               />
             </div>
 
@@ -101,7 +101,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
               />
             </div>
 
@@ -115,7 +115,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                 name="phone"
                 type="text"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
               />
             </div>
 
@@ -129,7 +129,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                 name="password"
                 type="password"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                 id="role"
                 name="role"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
               >
                 <option value="internal">Internal</option>
                 <option value="external">External</option>
@@ -160,7 +160,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
             <div>
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
               >
                 Create User
               </button>
@@ -217,7 +217,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                       setEditingUser(user);
                       setShowEditModal(true);
                     }}
-                    className="text-indigo-600 hover:text-indigo-900"
+                    className="text-[#910000] hover:text-[#7a0000]"
                   >
                     Edit
                   </button>
@@ -267,7 +267,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                     type="email"
                     defaultValue={editingUser.email}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
                   />
                 </div>
 
@@ -282,7 +282,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                     type="text"
                     defaultValue={editingUser.phone}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
                   />
                 </div>
 
@@ -296,7 +296,7 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                     name="role"
                     defaultValue={editingUser.role}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000]"
                   >
                     <option value="internal">Internal</option>
                     <option value="external">External</option>
@@ -318,13 +318,13 @@ export default function UserManagementClientPage({ initialUsers, isInternalUserV
                       setShowEditModal(false);
                       setEditingUser(null);
                     }}
-                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
                   >
                     Save Changes
                   </button>
