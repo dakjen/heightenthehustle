@@ -79,10 +79,10 @@ export type PitchEventOption = { id: number; name: string };
 /** Pitch competition events offered as choices on the intake form. */
 export async function getPitchEventOptions(): Promise<PitchEventOption[]> {
   try {
-    // Chronological by event date; events without a date go last, then by name.
+    // Newest event first; events without a date go last, then by name.
     return await db.query.pitchCompetitionEvents.findMany({
       columns: { id: true, name: true },
-      orderBy: [sql`${pitchCompetitionEvents.startDate} ASC NULLS LAST`, asc(pitchCompetitionEvents.name)],
+      orderBy: [sql`${pitchCompetitionEvents.startDate} DESC NULLS LAST`, asc(pitchCompetitionEvents.name)],
     });
   } catch (error) {
     console.error("Error fetching pitch event options:", error);
