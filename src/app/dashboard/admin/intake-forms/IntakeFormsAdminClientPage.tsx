@@ -135,6 +135,21 @@ export default function IntakeFormsAdminClientPage({ initialForms }: Props) {
                     </div>
 
                     <div>
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase">Pitch Competitions Pitched At</h3>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {form.pitchEventNames.length > 0 ? (
+                          form.pitchEventNames.map((name) => (
+                            <span key={name} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                              {name}
+                            </span>
+                          ))
+                        ) : (
+                          <p className="text-gray-400 text-sm">None selected</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
                       <h3 className="text-sm font-semibold text-gray-500 uppercase">How They Heard About HTH</h3>
                       <p className="mt-1 text-gray-900">{form.howDidYouHear || "Not specified"}</p>
                     </div>

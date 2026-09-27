@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { clientIntakeForms, users, businessStageEnum, ClientIntakeForm, User } from "@/db/schema";
+import { clientIntakeForms, pitchCompetitionEvents, users, businessStageEnum, ClientIntakeForm, User } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { revalidatePath } from "next/cache";
@@ -38,6 +38,15 @@ export async function submitIntakeForm(prevState: FormState, formData: FormData)
     }
   }
 
+  // Collect selected pitch competition events (checkboxes named pitchEvent_<id>)
+  const pitchEventIds: number[] = [];
+  for (const [key, value] of formData.entries()) {
+    if (key.startsWith("pitchEvent_") && value === "on") {
+      const id = Number(key.slice("pitchEvent_".length));
+      if (Number.isInteger(id)) pitchEventIds.push(id);
+    }
+  }
+
   if (!businessStage || !businessDescription || !primaryGoals || !biggestChallenges) {
     return { message: "", error: "Please fill out all required fields." };
   }
@@ -53,6 +62,7 @@ export async function submitIntakeForm(prevState: FormState, formData: FormData)
       primaryGoals,
       biggestChallenges,
       howDidYouHear: howDidYouHear || null,
+      pitchEventIds: pitchEventIds.length > 0 ? pitchEventIds : null,
       additionalNotes: additionalNotes || null,
     });
 
@@ -61,6 +71,21 @@ export async function submitIntakeForm(prevState: FormState, formData: FormData)
   } catch (error) {
     console.error("Error submitting intake form:", error);
     return { message: "", error: "Failed to submit intake form. Please try again." };
+  }
+}
+
+export type PitchEventOption = { id: number; name: string };
+
+/** Pitch competition events offered as choices on the intake form. */
+export async function getPitchEventOptions(): Promise<PitchEventOption[]> {
+  try {
+    return await db.query.pitchCompetitionEvents.findMany({
+      columns: { id: true, name: true },
+      orderBy: [desc(pitchCompetitionEvents.createdAt)],
+    });
+  } catch (error) {
+    console.error("Error fetching pitch event options:", error);
+    return [];
   }
 }
 
@@ -77,7 +102,10 @@ export async function getUserIntakeForms(userId: number): Promise<ClientIntakeFo
   }
 }
 
-export type IntakeFormWithUser = ClientIntakeForm & { user: Pick<User, 'id' | 'name' | 'email' | 'phone'> };
+export type IntakeFormWithUser = ClientIntakeForm & {
+  user: Pick<User, 'id' | 'name' | 'email' | 'phone'>;
+  pitchEventNames: string[];
+};
 
 export async function getAllIntakeForms(): Promise<IntakeFormWithUser[]> {
   try {
@@ -94,7 +122,12 @@ export async function getAllIntakeForms(): Promise<IntakeFormWithUser[]> {
         },
       },
     });
-    return forms;
+    const events = await getPitchEventOptions();
+    const nameById = new Map(events.map((e) => [e.id, e.name]));
+    return forms.map((form) => ({
+      ...form,
+      pitchEventNames: (form.pitchEventIds ?? []).map((id) => nameById.get(id) ?? `Event #${id}`),
+    }));
   } catch (error) {
     console.error("Error fetching all intake forms:", error);
     return [];

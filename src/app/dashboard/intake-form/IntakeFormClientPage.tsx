@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useActionState } from "react";
-import { submitIntakeForm, getUserIntakeForms } from "./actions";
+import { submitIntakeForm, getUserIntakeForms, getPitchEventOptions, PitchEventOption } from "./actions";
 import { fetchSession } from "@/app/dashboard/businesses/actions";
 import { FormState } from "@/types/form-state";
 import { ClientIntakeForm } from "@/db/schema";
@@ -20,6 +20,7 @@ const serviceOptions = [
 
 export default function IntakeFormClientPage() {
   const [existingForms, setExistingForms] = useState<ClientIntakeForm[]>([]);
+  const [pitchEvents, setPitchEvents] = useState<PitchEventOption[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +29,7 @@ export default function IntakeFormClientPage() {
   useEffect(() => {
     async function loadData() {
       const session = await fetchSession();
+      setPitchEvents(await getPitchEventOptions());
       if (session?.user) {
         const forms = await getUserIntakeForms(session.user.id);
         setExistingForms(forms);
@@ -96,6 +98,18 @@ export default function IntakeFormClientPage() {
                       {form.servicesNeeded.map((service) => (
                         <span key={service} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
                           {service}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {form.pitchEventIds && form.pitchEventIds.length > 0 && (
+                  <div className="mt-3">
+                    <p className="text-sm font-medium text-gray-600">Pitched At:</p>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {form.pitchEventIds.map((id) => (
+                        <span key={id} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                          {pitchEvents.find((e) => e.id === id)?.name ?? `Event #${id}`}
                         </span>
                       ))}
                     </div>
@@ -172,6 +186,29 @@ export default function IntakeFormClientPage() {
                   </label>
                 ))}
               </div>
+            </div>
+
+            {/* Pitch Competitions */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Which pitch competition(s) have you pitched at? (Select all that apply)
+              </label>
+              {pitchEvents.length === 0 ? (
+                <p className="text-sm text-gray-500">No pitch competitions are listed yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {pitchEvents.map((event) => (
+                    <label key={event.id} className="flex items-center space-x-2 text-sm text-gray-700">
+                      <input
+                        type="checkbox"
+                        name={`pitchEvent_${event.id}`}
+                        className="rounded border-gray-300 text-[#910000] focus:ring-[#910000]"
+                      />
+                      <span>{event.name}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Current Revenue */}

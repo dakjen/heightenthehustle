@@ -176,6 +176,8 @@ export const clientIntakeForms = pgTable('client_intake_forms', {
   primaryGoals: text('primary_goals').notNull(),
   biggestChallenges: text('biggest_challenges').notNull(),
   howDidYouHear: text('how_did_you_hear'),
+  // Pitch competition events the client says they pitched at (multi-select, optional)
+  pitchEventIds: integer('pitch_event_ids').array(),
   additionalNotes: text('additional_notes'),
   status: intakeStatusEnum('status').notNull().default('submitted'),
   submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow(),
