@@ -27,7 +27,8 @@ export async function createPitchCompetitionEvent(event: {
 
 export async function getPitchCompetitionEvents() {
   return await db.query.pitchCompetitionEvents.findMany({
-    orderBy: (events, { desc }) => [desc(events.createdAt)],
+    // Newest event first by event date; undated ones last.
+    orderBy: (events, { desc, sql }) => [sql`${events.startDate} DESC NULLS LAST`, desc(events.createdAt)],
   });
 }
 
