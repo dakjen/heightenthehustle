@@ -55,9 +55,9 @@ export default async function DashboardLayout({
   const roleLabel = isAdmin ? "Admin" : session.user.role === 'internal' ? "Team" : "Member";
 
   return (
-    <div className="flex min-h-screen bg-[#f6f6f6]">
+    <div className="flex min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#f6f6f6]">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 bg-[#2b2b2b] text-white flex flex-col">
+      <aside className="sticky top-0 h-screen w-64 shrink-0 bg-[#2b2b2b] text-white flex flex-col">
         <div className="hth-accent-bar rounded-none" />
         <div className="p-5 pb-4 border-b border-white/10">
           <Link href="/" className="block">
@@ -87,7 +87,7 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col text-gray-900 p-6 lg:p-10">
+      <main className="flex-1 min-w-0 flex flex-col text-gray-900 p-6 lg:p-10">
         {children}
       </main>
     </div>
