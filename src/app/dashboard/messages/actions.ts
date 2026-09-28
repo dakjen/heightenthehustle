@@ -2,6 +2,7 @@
 
 import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
+import { isStaff } from "@/lib/auth";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
 import { eq, inArray, and, or, asc, arrayOverlaps, count } from "drizzle-orm";
@@ -79,6 +80,8 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
 }
 
 export async function getMassMessages() {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return []; // staff only
   try {
     const allMassMessages = await db.select().from(massMessages);
     return allMassMessages;
@@ -89,6 +92,7 @@ export async function getMassMessages() {
 }
 
 export async function getAllInternalUsers() {
+  if (!(await getSession())?.user) return []; // signed-in only
   try {
     const allUsers = await db.select().from(users);
     return allUsers;
@@ -192,6 +196,7 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
 }
 
 export async function getAvailableLocations() {
+  if (!(await getSession())?.user) return []; // signed-in only
   try {
     const allLocations = await db.select().from(locations);
     return allLocations;
@@ -202,6 +207,7 @@ export async function getAvailableLocations() {
 }
 
 export async function getAvailableDemographics() {
+  if (!(await getSession())?.user) return []; // signed-in only
   try {
     const allDemographics = await db.select().from(demographics);
     console.log("Fetched Demographics:", allDemographics);
@@ -213,6 +219,10 @@ export async function getAvailableDemographics() {
 }
 
 export async function getIndividualMessages(currentUserId: number) {
+  // Always scope to the signed-in user; the parameter is kept for call-site compatibility.
+  const session = await getSession();
+  if (!session?.user) return [];
+  currentUserId = session.user.id;
   try {
     const messages = await db.query.individualMessages.findMany({
       where: or(
@@ -233,6 +243,10 @@ export async function getIndividualMessages(currentUserId: number) {
 }
 
 export async function getConversations(currentUserId: number, teamChat: boolean = false) {
+  // Always scope to the signed-in user; the parameter is kept for call-site compatibility.
+  const session = await getSession();
+  if (!session?.user) return [];
+  currentUserId = session.user.id;
   try {
     const messages = await db.query.individualMessages.findMany({
       where: or(
@@ -307,6 +321,8 @@ export async function markConversationRead(otherUserId: number): Promise<void> {
 }
 
 export async function getUserById(userId: number) {
+  const session = await getSession();
+  if (!session?.user) return null;
   try {
     const result = await db.select({ id: users.id, name: users.name, email: users.email }).from(users).where(eq(users.id, userId)).limit(1);
     return result.length > 0 ? result[0] : null;
@@ -317,6 +333,8 @@ export async function getUserById(userId: number) {
 }
 
 export async function getApplicableBusinesses(locationIds: number[], demographicIds: number[]): Promise<{ id: number; businessName: string; ownerName: string }[]> {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return []; // staff only
   const conditions = [];
   if (locationIds.length > 0) {
     conditions.push(inArray(businesses.locationId, locationIds));

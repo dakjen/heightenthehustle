@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum, demographics, users, Business, BusinessWithLocation } from "@/db/schema";
 import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
+import { businessAccess, isStaff } from "@/lib/auth";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { put } from "@vercel/blob";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
@@ -27,6 +28,7 @@ export async function fetchSession(): Promise<SessionPayload | null> {
 
 export async function getBusinessProfile(businessId: number): Promise<BusinessWithLocation | null> {
   unstable_noStore();
+  if (!(await businessAccess(businessId))) return null; // owner or staff only
   try {
     const profile = await db.query.businesses.findFirst({
       where: eq(businesses.id, businessId),
@@ -82,6 +84,10 @@ export async function getBusinessProfile(businessId: number): Promise<BusinessWi
 }
 
 export async function getAllUserBusinesses(userId: number, searchQuery?: string, filters?: { businessType?: string; businessTaxStatus?: string; isArchived?: boolean; }) {
+  // Members can only list their own businesses; staff may pass any userId.
+  const session = await getSession();
+  if (!session?.user) return [];
+  if (!isStaff(session.user)) userId = session.user.id;
   try {
     const conditions = [eq(businesses.userId, userId)];
 
@@ -376,10 +382,8 @@ export async function updateBusinessProfileWithMaterials(prevState: FormState, f
 
 
 export async function archiveBusiness(businessId: number): Promise<FormState> {
-  const userId = await getUserIdFromSession();
-
-  if (!userId) {
-    return { message: "", error: "User not authenticated." };
+  if (!(await businessAccess(businessId))) {
+    return { message: "", error: "You can only archive your own business." };
   }
 
   try {
@@ -482,6 +486,9 @@ export async function updateBusinessMaterials(prevState: FormState, formData: Fo
   if (isNaN(businessId)) {
     return { message: "", error: "Business ID is invalid." };
   }
+  if (!(await businessAccess(businessId))) {
+    return { message: "", error: "You can only edit your own business." };
+  }
 
   try {
     const materialUpdates: { urlField: string; titleField: string; url?: string; title?: string; }[] = [];
@@ -531,6 +538,8 @@ export async function updateBusinessMaterials(prevState: FormState, formData: Fo
 
 
 export async function searchBusinesses(query: string): Promise<Business[]> {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return []; // staff only
   try {
     const allBusinesses = await db.query.businesses.findMany({
       where: like(businesses.businessName, `%${query}%`),

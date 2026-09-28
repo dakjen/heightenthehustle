@@ -1,4 +1,7 @@
 import { redirect } from "next/navigation";
+import { and, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { businesses } from "@/db/schema";
 import { getSession, type SessionPayload } from "@/app/login/actions";
 
 type SessionUser = NonNullable<SessionPayload["user"]>;
@@ -37,4 +40,28 @@ export async function requirePermission(permission?: Permission): Promise<Sessio
     throw new Error("Unauthorized");
   }
   return session.user;
+}
+
+/** Staff = admin, or a team member holding at least one admin permission. */
+export function isStaff(user: SessionUser): boolean {
+  return canAccessAdminArea(user);
+}
+
+/**
+ * For server actions that touch a specific business: returns the signed-in user
+ * if they own the business or are staff; otherwise null. Never throws.
+ */
+export async function businessAccess(businessId: number): Promise<{ user: SessionUser; isOwner: boolean } | null> {
+  const session = await getSession();
+  if (!session?.user || !Number.isInteger(businessId)) return null;
+  const user = session.user;
+  if (isStaff(user)) {
+    const exists = await db.query.businesses.findFirst({ where: eq(businesses.id, businessId), columns: { id: true } });
+    return exists ? { user, isOwner: false } : null;
+  }
+  const owned = await db.query.businesses.findFirst({
+    where: and(eq(businesses.id, businessId), eq(businesses.userId, user.id)),
+    columns: { id: true },
+  });
+  return owned ? { user, isOwner: true } : null;
 }

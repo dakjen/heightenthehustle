@@ -5,6 +5,7 @@ import { pitchCompetitionEvents, pitchSubmissions } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
+import { isStaff } from "@/lib/auth";
 
 export async function createPitchCompetitionEvent(event: {
   name: string;
@@ -33,6 +34,8 @@ export async function getPitchCompetitionEvents() {
 }
 
 export async function getPitchSubmissionsForEvent(eventId: number) {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return []; // staff only
   return await db.query.pitchSubmissions.findMany({
     where: eq(pitchSubmissions.competitionEventId, eventId),
     with: {
@@ -43,6 +46,8 @@ export async function getPitchSubmissionsForEvent(eventId: number) {
 }
 
 export async function getSubmissionById(submissionId: number) {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return null; // staff only
   return await db.query.pitchSubmissions.findFirst({
     where: eq(pitchSubmissions.id, submissionId),
     with: {
