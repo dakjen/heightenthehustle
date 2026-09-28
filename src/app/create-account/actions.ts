@@ -4,9 +4,22 @@ import { db } from "@/db";
 import { users } from "@/db/schema"; // Import userStatus
 import bcrypt from "bcrypt";
 import { FormState } from "@/types/form-state"; // Import FormState
-import { sendEmail, accountRequestedEmail, appUrl } from "@/lib/email";
+import { sendEmail, accountRequestedEmail } from "@/lib/email";
+import { notifyApprovers, notifyHtml, esc, appUrl } from "@/lib/notify";
 import { pitchCompetitionEvents } from "@/db/schema";
-import { eq, or, and, inArray } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
+import { clientIp, hit, retryMessage } from "@/lib/rate-limit";
+
+/** Account requests allowed per IP per hour. Real signups are a handful a day. */
+const SIGNUP_WINDOW_MS = 60 * 60 * 1000;
+const SIGNUP_LIMIT_PER_IP = 5;
+
+/**
+ * The same answer whether or not the address already has an account, so this
+ * form can't be used to check who is a member. A duplicate request is simply
+ * not inserted; the real account holder is unaffected.
+ */
+const REQUEST_RECEIVED = "Thank you for your request. We will get back to you shortly.";
 
 export async function createAccount(prevState: FormState, formData: FormData): Promise<FormState> {
   const name = ((formData.get("name") as string | null) ?? "").trim();
@@ -20,6 +33,15 @@ export async function createAccount(prevState: FormState, formData: FormData): P
   const noPitchYet = pitchChoice === "none";
   const pitchEventId = Number(pitchChoice);
   const pitchEventIds = Number.isInteger(pitchEventId) && pitchEventId > 0 ? [pitchEventId] : [];
+
+  const rate = hit(`signup:ip:${await clientIp()}`, SIGNUP_LIMIT_PER_IP, SIGNUP_WINDOW_MS);
+  if (rate.limited) {
+    return {
+      message: "",
+      error: `Too many account requests from this connection. Please try again in ${retryMessage(rate.retryAfterSeconds)}.`,
+      businessName,
+    };
+  }
 
   // Basic validation
   if (!name || !phone || !email || !password) {
@@ -53,41 +75,25 @@ export async function createAccount(prevState: FormState, formData: FormData): P
     await sendEmail({ to: { email, name }, ...accountRequestedEmail(name) });
 
     // Tell the team: every admin, plus team members who can approve requests.
-    try {
-      const approvers = await db.query.users.findMany({
-        where: and(
-          eq(users.status, "approved"),
-          or(eq(users.role, "admin"), and(eq(users.role, "internal"), eq(users.canApproveRequests, true))),
-        ),
-        columns: { email: true, name: true },
-      });
-      const events = pitchEventIds.length
-        ? await db.query.pitchCompetitionEvents.findMany({ where: inArray(pitchCompetitionEvents.id, pitchEventIds), columns: { name: true } })
-        : [];
-      const pitchLabel = [...events.map((e) => e.name), pitchChoice === "other" ? pitchEventOther : noPitchYet ? "Has not pitched yet" : ""].filter(Boolean).join(", ") || "Not answered";
-      const link = `${appUrl()}/dashboard/admin/users`;
-      const esc = (v: string) => v.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c] as string));
-      await Promise.all(
-        approvers.map((a) =>
-          sendEmail({
-            to: { email: a.email, name: a.name },
-            subject: `New account request: ${name}${businessName ? ` (${businessName})` : ""}`,
-            text: `${name} requested a portal account.\n\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${businessName ?? "—"}\nPitch competition: ${pitchLabel}\n\nApprove or reject: ${link}`,
-            html: `<p><strong>${esc(name)}</strong> requested a portal account.</p><p><strong>Email:</strong> ${esc(email)}<br/><strong>Phone:</strong> ${esc(phone)}<br/><strong>Business:</strong> ${esc(businessName ?? "—")}<br/><strong>Pitch competition:</strong> ${esc(pitchLabel)}</p><p><a href="${link}" style="display:inline-block;background:#910000;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600">Review request</a></p><p style="color:#666;font-size:12px">${link}</p>`,
-          }),
-        ),
-      );
-    } catch (notifyError) {
-      console.warn("Account request notification failed:", notifyError);
-    }
+    const events = pitchEventIds.length
+      ? await db.query.pitchCompetitionEvents.findMany({ where: inArray(pitchCompetitionEvents.id, pitchEventIds), columns: { name: true } })
+      : [];
+    const pitchLabel = [...events.map((e) => e.name), pitchChoice === "other" ? pitchEventOther : noPitchYet ? "Has not pitched yet" : ""].filter(Boolean).join(", ") || "Not answered";
+    const link = { href: `${appUrl()}/dashboard/admin/users`, label: "Review request" };
+    await notifyApprovers(
+      `New account request: ${name}${businessName ? ` (${businessName})` : ""}`,
+      `${name} requested a portal account.\n\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${businessName ?? "—"}\nPitch competition: ${pitchLabel}\n\nApprove or reject: ${link.href}`,
+      notifyHtml(`${esc(name)} requested an account`, `<p><strong>Email:</strong> ${esc(email)}<br/><strong>Phone:</strong> ${esc(phone)}<br/><strong>Business:</strong> ${esc(businessName ?? "—")}<br/><strong>Pitch competition:</strong> ${esc(pitchLabel)}</p>`, link),
+    );
 
-    return { message: "Thank you for your request. We will get back to you shortly.", error: "", businessName }; // Include businessName in success state
+    return { message: REQUEST_RECEIVED, error: "", businessName };
   } catch (error) {
-    console.error("Error creating account:", error);
-    // Check for unique email constraint violation
+    // An address that already has an account gets the same reply as a new one.
     if (error instanceof Error && error.message.includes('duplicate key value violates unique constraint "users_email_unique"')) {
-      return { message: "", error: "An account with this email already exists.", businessName }; // Include businessName in error state
+      console.warn("Account request for an address that already exists; answered generically.");
+      return { message: REQUEST_RECEIVED, error: "", businessName };
     }
+    console.error("Error creating account:", error);
     return { message: "", error: "Failed to submit account request.", businessName }; // Include businessName in error state
   }
 }

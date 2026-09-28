@@ -86,7 +86,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
                 <span className="text-xs text-gray-400">Preview</span>
               )}
             </div>
-            <input id="logo" name="logo" type="file" accept="image/*" onChange={onLogoChange} className={fileInputClass} {...invalid("logo")} />
+            <input id="logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.webp,.gif" onChange={onLogoChange} className={fileInputClass} {...invalid("logo")} />
           </div>
         </Field>
       </FormSection>

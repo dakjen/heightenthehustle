@@ -3,11 +3,10 @@
 import { useState, useEffect } from 'react';
 import { getAllPendingUserRequests, approveUser, rejectUser } from './actions';
 import { getPitchEventOptions, type PitchEventOption } from '@/app/dashboard/intake-form/actions';
-import { InferSelectModel } from 'drizzle-orm';
-import { users } from '@/db/schema';
 import { FormState } from '@/types/form-state';
+import type { SafeUser } from "@/lib/users";
 
-type User = InferSelectModel<typeof users> & { businessName?: string | null };
+type User = SafeUser & { businessName?: string | null };
 
 export default function UserRequestsClientPage() {
   const [pendingUsers, setPendingUsers] = useState<User[]>([]);

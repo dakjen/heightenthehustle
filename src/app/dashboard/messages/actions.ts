@@ -3,6 +3,7 @@
 import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
 import { isStaff } from "@/lib/auth";
+import { safeUserSelect } from "@/lib/users";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
 import { eq, inArray, and, or, asc, arrayOverlaps, count } from "drizzle-orm";
@@ -91,11 +92,12 @@ export async function getMassMessages() {
   }
 }
 
+/** The recipient list for mass messaging. Staff only, and never the password hash. */
 export async function getAllInternalUsers() {
-  if (!(await getSession())?.user) return []; // signed-in only
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) return []; // staff only
   try {
-    const allUsers = await db.select().from(users);
-    return allUsers;
+    return await db.select(safeUserSelect).from(users);
   } catch (error) {
     console.error("Error fetching all internal users:", error);
     return [];

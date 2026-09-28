@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
 import { getAllInternalUsers, getMassMessages, getAvailableLocations, getAvailableDemographics, getIndividualMessages, getUserById } from "./actions";
 import MessagesClientPage from "./MessagesClientPage";
-import { Location, Demographic, User, MassMessage } from "@/db/schema";
+import { Location, Demographic, MassMessage } from "@/db/schema";
+import type { SafeUser } from "@/lib/users";
 
 interface IndividualMessage {
   id: number;
@@ -24,7 +25,7 @@ export default async function MessagesPage() {
   const isAdmin = session?.user?.role === 'admin';
   const currentUserId = session?.user?.id || null;
 
-  let initialInternalUsers: User[] = [];
+  let initialInternalUsers: SafeUser[] = [];
   let initialMassMessages: MassMessage[] = [];
   let initialLocations: Location[] = [];
   let initialDemographics: Demographic[] = [];

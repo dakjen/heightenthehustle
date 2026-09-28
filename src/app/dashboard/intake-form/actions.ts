@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { clientIntakeForms, pitchCompetitionEvents, businessStageEnum, ClientIntakeForm, User } from "@/db/schema";
 import { eq, desc, asc, sql } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
+import { isStaff, requireStaff, userScope } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
 import { FormState } from "@/types/form-state";
@@ -90,10 +91,16 @@ export async function getPitchEventOptions(): Promise<PitchEventOption[]> {
   }
 }
 
+/**
+ * A member's intake submissions. Members always get their own, whatever id
+ * they pass; staff may look up anyone.
+ */
 export async function getUserIntakeForms(userId: number): Promise<ClientIntakeForm[]> {
+  const scope = await userScope(userId);
+  if (!scope) return [];
   try {
     const forms = await db.query.clientIntakeForms.findMany({
-      where: eq(clientIntakeForms.userId, userId),
+      where: eq(clientIntakeForms.userId, scope.userId),
       orderBy: [desc(clientIntakeForms.submittedAt)],
     });
     return forms;
@@ -108,7 +115,9 @@ export type IntakeFormWithUser = ClientIntakeForm & {
   pitchEventNames: string[];
 };
 
+/** Every submitted intake form, for the admin review screen. Staff only. */
 export async function getAllIntakeForms(): Promise<IntakeFormWithUser[]> {
+  await requireStaff();
   try {
     const forms = await db.query.clientIntakeForms.findMany({
       orderBy: [desc(clientIntakeForms.submittedAt)],
@@ -135,10 +144,11 @@ export async function getAllIntakeForms(): Promise<IntakeFormWithUser[]> {
   }
 }
 
+/** Mark an intake form reviewed or archived. Staff only. */
 export async function updateIntakeFormStatus(formId: number, newStatus: 'submitted' | 'reviewed' | 'archived'): Promise<FormState> {
-  const userId = await getUserIdFromSession();
-  if (!userId) {
-    return { message: "", error: "User not authenticated." };
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) {
+    return { message: "", error: "Unauthorized." };
   }
 
   try {
