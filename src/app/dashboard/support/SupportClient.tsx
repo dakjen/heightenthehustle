@@ -27,9 +27,10 @@ export default function SupportClient({ requests, categories, businesses }: Prop
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between hth-fade-up">
         <div>
           <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Specialized Support</p>
-          <h1 className="text-5xl text-gray-900 leading-none">Need a hand with something specific?</h1>
+          <h1 className="text-5xl text-gray-900 leading-none">Hit a wall? Tell us.</h1>
           <p className="mt-3 max-w-2xl text-lg text-gray-600">
-            Lines of credit, legal questions, licensing, contracts. Tell us what you&apos;re up against and the team will work it with you.
+            Emergencies, disputes, a lease problem, a contract you don&apos;t understand, cash running short. Whatever the issue,
+            describe it here and an HTH advisor will get on it with you.
           </p>
         </div>
         {requests.length > 0 && (
@@ -63,7 +64,7 @@ export default function SupportClient({ requests, categories, businesses }: Prop
                   Sent {date.format(new Date(r.createdAt))}
                   {r.amountNeeded ? ` · ${r.amountNeeded}` : ""}
                   {r.neededBy ? ` · needed by ${date.format(new Date(r.neededBy))}` : ""}
-                  {r.urgency === "high" ? " · time-sensitive" : ""}
+                  {r.urgency === "high" ? " · marked urgent" : ""}
                 </p>
               </article>
             ))}

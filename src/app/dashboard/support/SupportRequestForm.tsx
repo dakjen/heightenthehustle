@@ -31,8 +31,8 @@ export default function SupportRequestForm({ categories, businesses, onDone }: P
 
   return (
     <form action={formAction} className="space-y-6" noValidate>
-      <FormSection step="01" title="What do you need help with?" description="Pick the closest category. If it's a line of credit, loan or grant, say roughly how much.">
-        <Field name="category" label="Type of help" required error={errors.category}>
+      <FormSection step="01" title="What's going on?" description="Pick the closest category, then tell us the situation in your own words.">
+        <Field name="category" label="What kind of issue is it?" required error={errors.category}>
           <select id="category" name="category" required defaultValue="" className={inputClass} {...invalidProps("category", errors)}>
             <option value="" disabled>Choose one…</option>
             {categories.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -47,25 +47,25 @@ export default function SupportRequestForm({ categories, businesses, onDone }: P
           </Field>
         )}
         <Field name="subject" label="Short title" required error={errors.subject} className="sm:col-span-2">
-          <input id="subject" name="subject" type="text" required placeholder="e.g. Help securing a $50k line of credit" className={inputClass} {...invalidProps("subject", errors)} />
+          <input id="subject" name="subject" type="text" required placeholder="e.g. Landlord is trying to end my lease early" className={inputClass} {...invalidProps("subject", errors)} />
         </Field>
-        <Field name="details" label="Tell us the situation" required error={errors.details} className="sm:col-span-2" hint="What you've tried, where you're stuck, and what a win looks like.">
+        <Field name="details" label="Tell us the situation" required error={errors.details} className="sm:col-span-2" hint="What happened, what you've tried, any deadlines, and what a good outcome looks like.">
           <textarea id="details" name="details" rows={5} required className={inputClass} {...invalidProps("details", errors)} />
         </Field>
       </FormSection>
 
-      <FormSection step="02" title="Amount & timing" description="Optional, but it helps us prioritize.">
-        <Field name="amountNeeded" label="Amount (if funding)" error={errors.amountNeeded}>
+      <FormSection step="02" title="How urgent is it?" description="Emergencies go to the top of the queue.">
+        <Field name="amountNeeded" label="Money involved (if any)" error={errors.amountNeeded} hint="e.g. what's owed, at stake, or needed">
           <input id="amountNeeded" name="amountNeeded" type="text" inputMode="decimal" placeholder="$50,000" className={inputClass} />
         </Field>
-        <Field name="neededBy" label="Needed by" error={errors.neededBy}>
+        <Field name="neededBy" label="Deadline (if any)" error={errors.neededBy}>
           <input id="neededBy" name="neededBy" type="date" className={inputClass} {...invalidProps("neededBy", errors)} />
         </Field>
         <Field name="urgency" label="Urgency" required error={errors.urgency}>
           <select id="urgency" name="urgency" defaultValue="normal" className={inputClass}>
-            <option value="low">Low: whenever you can</option>
-            <option value="normal">Normal: in the next few weeks</option>
-            <option value="high">High: this is time-sensitive</option>
+            <option value="low">Low: advice when you have a moment</option>
+            <option value="normal">Normal: I need a plan in the next week or two</option>
+            <option value="high">Emergency: I need help now</option>
           </select>
         </Field>
       </FormSection>
@@ -73,7 +73,7 @@ export default function SupportRequestForm({ categories, businesses, onDone }: P
       <FormError message={state.error} />
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
         <RequiredNote />
-        <SubmitButton pendingText="Sending…">Send request</SubmitButton>
+        <SubmitButton pendingText="Sending…">Send to an advisor</SubmitButton>
       </div>
     </form>
   );

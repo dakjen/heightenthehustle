@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/login/actions";
-import LogoutButton from "@/app/components/LogoutButton";
+import SidebarUserMenu from "@/app/components/SidebarUserMenu";
+import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import SidebarNav, { type NavItem } from "@/app/components/SidebarNav";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,8 +46,6 @@ export default async function DashboardLayout({
     ...(isExternal ? [{ href: "/dashboard/documents", label: "My Documents" }] : []),
     ...(isExternal ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
     { href: "/dashboard/resources", label: "Resources" },
-    { href: "/dashboard/settings", label: "Settings" },
-    { href: "/dashboard/profile", label: "Profile" },
   ];
 
   const adminItems: NavItem[] = [
@@ -60,6 +61,9 @@ export default async function DashboardLayout({
   ];
 
   const roleLabel = isAdmin ? "Admin" : session.user.role === 'internal' ? "Team" : "Member";
+  // The session cookie can be stale after a photo change, so read the current headshot.
+  const me = await db.query.users.findFirst({ where: eq(users.id, session.user.id), columns: { profilePhotoUrl: true } });
+  const profilePhotoUrl = me?.profilePhotoUrl ?? session.user.profilePhotoUrl ?? null;
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-[#f6f6f6]">
@@ -79,17 +83,8 @@ export default async function DashboardLayout({
         {/* Admin View Toggle */}
         {/* <AdminViewToggle isAdmin={isAdmin} /> */}
 
-        <div className="p-4 border-t border-white/10">
-          <div className="flex items-center gap-3 px-2 pb-3">
-            <div className="h-9 w-9 rounded-full bg-[#910000] flex items-center justify-center font-display text-lg leading-none">
-              {(session.user.name || session.user.email || "?").charAt(0).toUpperCase()}
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-medium truncate">{session.user.name || session.user.email}</p>
-              <p className="text-xs text-gray-400">{roleLabel}</p>
-            </div>
-          </div>
-          <LogoutButton />
+        <div className="p-3 border-t border-white/10">
+          <SidebarUserMenu name={session.user.name || session.user.email} roleLabel={roleLabel} photoUrl={profilePhotoUrl} />
         </div>
       </aside>
 

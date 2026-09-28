@@ -97,7 +97,7 @@ async function MemberHome({ userId, name }: { userId: number; name: string }) {
               {cohort ? `Curriculum cohort: ${cohort.name}` : "Curriculum coming soon"}
             </Link>
             <Link href="/dashboard/support" className="inline-flex justify-center px-6 py-3 bg-white/10 text-white font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-              Request specialized support
+              Get help with an issue
             </Link>
           </div>
         </div>

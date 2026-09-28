@@ -84,7 +84,7 @@ export async function createSupportRequest(prevState: FormState, formData: FormD
         admins.map((a) =>
           sendEmail({
             to: { email: a.email, name: a.name },
-            subject: `New support request: ${subject} (${category})`,
+            subject: `${urgency === "high" ? "URGENT: " : ""}Support request: ${subject} (${category})`,
             text: `${user.name} (${user.email}) submitted a ${urgency}-urgency support request.\n\nCategory: ${category}\nSubject: ${subject}\n\n${details}\n\nReview it: ${link}`,
             html: `<p><strong>${user.name}</strong> (${user.email}) submitted a <strong>${urgency}</strong>-urgency support request.</p><p><strong>Category:</strong> ${category}<br/><strong>Subject:</strong> ${subject}</p><p>${details.replace(/\n/g, "<br/>")}</p><p><a href="${link}">Review it in the portal</a></p>`,
           }),
