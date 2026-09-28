@@ -26,6 +26,8 @@ export default async function DashboardLayout({
   const canAccessAdminUsers = isAdmin || (session.user.role === 'internal' && session.user.canApproveRequests);
   const canAccessAdminClasses = isAdmin || (session.user.role === 'internal' && session.user.canManageClasses);
   const canAccessAdminBusinesses = isAdmin || (session.user.role === 'internal' && session.user.canManageBusinesses);
+  // Anyone who is staff (admin, or a team member with any admin permission). Members never see admin tools.
+  const isAdminArea = isAdmin || (session.user.role === 'internal' && (canAccessAdminUsers || canAccessAdminClasses || canAccessAdminBusinesses));
 
   // Same links and visibility rules as before, just built as data so the
   // client-side nav can highlight the current page.
@@ -47,9 +49,9 @@ export default async function DashboardLayout({
 
   const adminItems: NavItem[] = [
     ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Admin Users" }] : []),
-    { href: "/dashboard/admin/support", label: "Support Requests" },
-    { href: "/dashboard/admin/documents", label: "Member Documents" },
-    { href: "/dashboard/admin/resources", label: "Manage Resources" },
+    ...(isAdminArea ? [{ href: "/dashboard/admin/support", label: "Support Requests" }] : []),
+    ...(isAdminArea ? [{ href: "/dashboard/admin/documents", label: "Member Documents" }] : []),
+    ...(isAdminArea ? [{ href: "/dashboard/admin/resources", label: "Manage Resources" }] : []),
     ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Admin Businesses" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),
