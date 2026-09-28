@@ -1,317 +1,161 @@
-'use client';
+"use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { BusinessWithLocation, Location } from "@/db/schema";
 import { updateBusinessProfile } from "./edit/actions";
-import { useActionState } from "react";
-import Image from "next/image";
-
-interface Demographic {
-  id: number;
-  name: string;
-}
-
 import { FormState } from "@/types/form-state";
+import {
+  Field, FormSection, SubmitButton, FormError, FormSuccess, RequiredNote,
+  inputClass, fileInputClass, invalidProps,
+} from "@/app/components/form";
 
-interface EditBusinessProfileFormProps {
+const US_STATES: [string, string][] = [
+  ["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"], ["CA", "California"],
+  ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"], ["DC", "District of Columbia"],
+  ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"], ["IL", "Illinois"],
+  ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"],
+  ["ME", "Maine"], ["MD", "Maryland"], ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"],
+  ["MS", "Mississippi"], ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"],
+  ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"],
+  ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"],
+  ["PA", "Pennsylvania"], ["PR", "Puerto Rico"], ["RI", "Rhode Island"], ["SC", "South Carolina"],
+  ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"], ["VT", "Vermont"],
+  ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"], ["WI", "Wisconsin"], ["WY", "Wyoming"],
+];
+
+interface Props {
   initialBusiness: BusinessWithLocation;
-  availableDemographics: Demographic[];
+  availableDemographics: { id: number; name: string }[];
   availableLocations: Location[];
+  onSaved?: () => Promise<void>;
 }
 
-export default function EditBusinessProfileForm({ initialBusiness, availableLocations }: EditBusinessProfileFormProps) {
-  const business: BusinessWithLocation = initialBusiness;
-  const [logoPreview, setLogoPreview] = useState<string | null>(business.logoUrl);
+function ImagePicker({ name, label, hint, current, error, square }: { name: string; label: string; hint: string; current: string | null; error?: string; square?: boolean }) {
+  const [preview, setPreview] = useState<string | null>(null);
+  const shown = preview ?? current;
+  return (
+    <Field name={name} label={label} error={error} hint={hint}>
+      <div className="flex items-center gap-4">
+        <div className={`flex shrink-0 items-center justify-center overflow-hidden border border-dashed border-gray-300 bg-gray-50 ${square ? "h-16 w-16 rounded-xl" : "h-16 w-28 rounded-lg"}`}>
+          {shown ? (
+            <Image src={shown} alt="" width={112} height={64} unoptimized className="h-full w-full object-cover" />
+          ) : (
+            <span className="text-xs text-gray-400">Preview</span>
+          )}
+        </div>
+        <input
+          id={name}
+          name={name}
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            setPreview((prev) => { if (prev) URL.revokeObjectURL(prev); return f && f.type.startsWith("image/") ? URL.createObjectURL(f) : null; });
+          }}
+          className={fileInputClass}
+        />
+      </div>
+    </Field>
+  );
+}
 
-  const [editState, editFormAction] = useActionState<FormState, FormData>(updateBusinessProfile, { message: "" });
-
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (business.logoUrl && !confirm("Are you sure you want to override your current logo?")) {
-        e.target.value = ''; // Clear the input if user cancels
-        setLogoPreview(business.logoUrl);
-        return;
-      }
-      setLogoPreview(URL.createObjectURL(file));
-    } else {
-      setLogoPreview(business.logoUrl);
-    }
-  };
+export default function EditBusinessProfileForm({ initialBusiness: b, availableLocations, onSaved }: Props) {
+  const [state, formAction] = useActionState<FormState, FormData>(updateBusinessProfile, { message: "" });
+  const errors = state.fieldErrors ?? {};
+  const last = useRef(state);
+  useEffect(() => {
+    if (state === last.current) return;
+    last.current = state;
+    if (state.message && !state.error) onSaved?.();
+  }, [state, onSaved]);
+  const invalid = (n: string) => invalidProps(n, errors);
+  const cities = availableLocations.filter((l) => l.category === "City");
 
   return (
-    <form action={editFormAction} className="space-y-6">
-      <input type="hidden" name="businessId" value={business.id} />
-      {/* Business Name */}
-      <div>
-        <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
-          Business Name
-        </label>
-        <input
-          id="businessName"
-          name="businessName"
-          type="text"
-          defaultValue={business.businessName}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
+    <form action={formAction} className="space-y-6" noValidate>
+      <input type="hidden" name="businessId" value={b.id} />
 
-      {/* Owner Name */}
-      <div>
-        <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-          Owner Name
-        </label>
-        <input
-          id="ownerName"
-          name="ownerName"
-          type="text"
-          defaultValue={business.ownerName}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
+      <FormSection step="01" title="The basics" description="What you're called and what you do.">
+        <Field name="businessName" label="Business name" required error={errors.businessName} className="sm:col-span-2">
+          <input id="businessName" name="businessName" type="text" required defaultValue={b.businessName} className={inputClass} {...invalid("businessName")} />
+        </Field>
+        <Field name="businessIndustry" label="Industry" required error={errors.businessIndustry}>
+          <input id="businessIndustry" name="businessIndustry" type="text" required defaultValue={b.businessIndustry} className={inputClass} {...invalid("businessIndustry")} />
+        </Field>
+        <Field name="naicsCode" label="NAICS code" error={errors.naicsCode} hint="2 to 6 digits, if you know it.">
+          <input id="naicsCode" name="naicsCode" type="text" inputMode="numeric" maxLength={6} defaultValue={b.naicsCode ?? ""} className={inputClass} {...invalid("naicsCode")} />
+        </Field>
+        <Field name="businessDescription" label="What does your business do?" error={errors.businessDescription} className="sm:col-span-2">
+          <textarea id="businessDescription" name="businessDescription" rows={4} defaultValue={b.businessDescription ?? ""} className={inputClass} />
+        </Field>
+        <ImagePicker name="logo" label="Logo" hint="Square images look best. Up to 5 MB." current={b.logoUrl} error={errors.logo} square />
+        <ImagePicker name="businessProfilePhoto" label="Cover photo" hint="Shown behind your business name. Up to 5 MB." current={b.businessProfilePhotoUrl} error={errors.businessProfilePhoto} />
+      </FormSection>
 
-      {/* Percent Ownership */}
-      <div>
-        <label htmlFor="percentOwnership" className="block text-sm font-medium text-gray-700">
-          Percent Ownership
-        </label>
-        <input
-          id="percentOwnership"
-          name="percentOwnership"
-          type="number"
-          step="0.01"
-          defaultValue={business.percentOwnership}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
+      <FormSection step="02" title="Ownership & structure" description="How the business is set up legally.">
+        <Field name="ownerName" label="Owner's full name" required error={errors.ownerName}>
+          <input id="ownerName" name="ownerName" type="text" required defaultValue={b.ownerName} className={inputClass} {...invalid("ownerName")} />
+        </Field>
+        <Field name="percentOwnership" label="Your ownership %" required error={errors.percentOwnership}>
+          <input id="percentOwnership" name="percentOwnership" type="number" min={1} max={100} step="0.01" required defaultValue={b.percentOwnership} className={inputClass} {...invalid("percentOwnership")} />
+        </Field>
+        <Field name="businessType" label="Business type" required error={errors.businessType}>
+          <select id="businessType" name="businessType" required defaultValue={b.businessType} className={inputClass} {...invalid("businessType")}>
+            <option value="Sole Proprietorship">Sole Proprietorship</option>
+            <option value="Limited Liability Company (LLC)">LLC (Limited Liability Company)</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Corporation">Corporation</option>
+          </select>
+        </Field>
+        <Field name="businessTaxStatus" label="Tax status" required error={errors.businessTaxStatus}>
+          <select id="businessTaxStatus" name="businessTaxStatus" required defaultValue={b.businessTaxStatus} className={inputClass} {...invalid("businessTaxStatus")}>
+            <option value="Not Applicable">Not Applicable</option>
+            <option value="S-Corporation">S-Corporation</option>
+            <option value="C-Corporation">C-Corporation</option>
+          </select>
+        </Field>
+      </FormSection>
 
-      {/* Business Type */}
-      <div>
-        <label htmlFor="businessType" className="block text-sm font-medium text-gray-700">
-          Business Type
-        </label>
-        <select
-          id="businessType"
-          name="businessType"
-          defaultValue={business.businessType}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        >
-          <option value="">Select Business Type</option>
-          <option value="Sole Proprietorship">Sole Proprietorship</option>
-          <option value="Partnership">Partnership</option>
-          <option value="Limited Liability Company (LLC)">Limited Liability Company (LLC)</option>
-          <option value="Corporation">Corporation</option>
-        </select>
-      </div>
-
-      {/* Business Tax Status */}
-      <div>
-        <label htmlFor="businessTaxStatus" className="block text-sm font-medium text-gray-700">
-          Business Tax Status
-        </label>
-        <select
-          id="businessTaxStatus"
-          name="businessTaxStatus"
-          defaultValue={business.businessTaxStatus}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        >
-          <option value="">Select Tax Status</option>
-          <option value="S-Corporation">S-Corporation</option>
-          <option value="C-Corporation">C-Corporation</option>
-          <option value="Not Applicable">Not Applicable</option>
-        </select>
-      </div>
-
-      {/* Business Description */}
-      <div>
-        <label htmlFor="businessDescription" className="block text-sm font-medium text-gray-700">
-          Business Description
-        </label>
-        <textarea
-          id="businessDescription"
-          name="businessDescription"
-          rows={3}
-          defaultValue={business.businessDescription || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        ></textarea>
-      </div>
-
-      {/* Business Industry */}
-      <div>
-        <label htmlFor="businessIndustry" className="block text-sm font-medium text-gray-700">
-          Business Industry
-        </label>
-        <input
-          id="businessIndustry"
-          name="businessIndustry"
-          type="text"
-          defaultValue={business.businessIndustry}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* Street Address */}
-      <div>
-        <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">
-          Street Address
-        </label>
-        <input
-          id="streetAddress"
-          name="streetAddress"
-          type="text"
-          defaultValue={business.streetAddress || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* City */}
-      <div>
-        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-          City
-        </label>
-        <input
-          id="city"
-          name="city"
-          type="text"
-          defaultValue={business.city || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* State */}
-      <div>
-        <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-          State
-        </label>
-        <input
-          id="state"
-          name="state"
-          type="text"
-          maxLength={2}
-          defaultValue={business.state || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* Zip Code */}
-      <div>
-        <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
-          Zip Code
-        </label>
-        <input
-          id="zipCode"
-          name="zipCode"
-          type="text"
-          maxLength={10}
-          defaultValue={business.zipCode || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* Location */}
-      <div>
-        <label htmlFor="locationId" className="block text-sm font-medium text-gray-700">
-          Location
-        </label>
-        <select
-          id="locationId"
-          name="locationId"
-          defaultValue={business.locationId || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        >
-          <option value="">Select Location</option>
-          {availableLocations.map(location => (
-            <option key={location.id} value={location.id}>
-              {location.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Phone */}
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-          Phone
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="text"
-          defaultValue={business.phone || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* Website */}
-      <div>
-        <label htmlFor="website" className="block text-sm font-medium text-gray-700">
-          Website
-        </label>
-        <input
-          id="website"
-          name="website"
-          type="text"
-          defaultValue={business.website || ''}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-        />
-      </div>
-
-      {/* Business Logo Upload */}
-      <div>
-        <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
-          Business Logo
-        </label>
-        <div className="mt-2">
-          <input
-            id="logo"
-            name="logo"
-            type="file"
-            onChange={handleLogoChange}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-          />
+      <FormSection step="03" title="Location & contact" description="Where you operate and how people reach you.">
+        <Field name="streetAddress" label="Street address" error={errors.streetAddress} className="sm:col-span-2">
+          <input id="streetAddress" name="streetAddress" type="text" autoComplete="street-address" defaultValue={b.streetAddress ?? ""} className={inputClass} />
+        </Field>
+        <Field name="city" label="City" error={errors.city}>
+          <input id="city" name="city" type="text" autoComplete="address-level2" defaultValue={b.city ?? ""} className={inputClass} />
+        </Field>
+        <div className="grid grid-cols-2 gap-4">
+          <Field name="state" label="State" error={errors.state}>
+            <select id="state" name="state" defaultValue={b.state ?? ""} className={inputClass} {...invalid("state")}>
+              <option value="">—</option>
+              {US_STATES.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+            </select>
+          </Field>
+          <Field name="zipCode" label="ZIP" error={errors.zipCode}>
+            <input id="zipCode" name="zipCode" type="text" inputMode="numeric" maxLength={10} defaultValue={b.zipCode ?? ""} className={inputClass} {...invalid("zipCode")} />
+          </Field>
         </div>
-        {logoPreview && (
-          <div className="mt-4">
-            <Image src={logoPreview} alt="Logo Preview" width={96} height={96} className="rounded-md object-cover" />
-          </div>
+        {cities.length > 0 && (
+          <Field name="locationId" label="HTH service area" error={errors.locationId} hint="Which HTH city you're closest to.">
+            <select id="locationId" name="locationId" defaultValue={b.locationId ?? ""} className={inputClass}>
+              <option value="">Not sure</option>
+              {cities.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
+          </Field>
         )}
-      </div>
+        <Field name="phone" label="Business phone" error={errors.phone}>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" defaultValue={b.phone ?? ""} className={inputClass} {...invalid("phone")} />
+        </Field>
+        <Field name="website" label="Website" error={errors.website}>
+          <input id="website" name="website" type="text" inputMode="url" defaultValue={b.website ?? ""} placeholder="mybusiness.com" className={inputClass} />
+        </Field>
+      </FormSection>
 
-      {/* Business Profile Photo Upload */}
-      <div>
-        <label htmlFor="businessProfilePhoto" className="block text-sm font-medium text-gray-700">
-          Business Profile Photo
-        </label>
-        <div className="mt-2">
-          <input
-            id="businessProfilePhoto"
-            name="businessProfilePhoto"
-            type="file"
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-          />
-        </div>
-      </div>
-
-      {editState?.message && (
-        <p className="text-sm text-green-600 mt-2">{editState.message}</p>
-      )}
-      {editState?.error && (
-        <p className="text-sm text-red-600 mt-2">{editState.error}</p>
-      )}
-
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
-        >
-          Save Changes
-        </button>
+      <FormError message={state.error} />
+      <FormSuccess message={state.message && !state.error ? state.message : undefined} />
+      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <RequiredNote />
+        <SubmitButton>Save changes</SubmitButton>
       </div>
     </form>
   );

@@ -1,68 +1,61 @@
-'use client';
+"use client";
 
+import { useActionState, useEffect, useRef } from "react";
 import { BusinessWithLocation } from "@/db/schema";
-import { useActionState } from "react";
 import { updateBusinessMaterials } from "../actions";
-
 import { FormState } from "@/types/form-state";
+import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, fileInputClass } from "@/app/components/form";
 
-interface BusinessDocumentsProps {
+interface Props {
   business: BusinessWithLocation;
+  onSaved?: () => Promise<void>;
 }
 
-export default function BusinessDocuments({ business }: BusinessDocumentsProps) {
-  const [updateState, updateFormAction] = useActionState<FormState, FormData>(updateBusinessMaterials, { message: "" });
+/** Up to five public-facing materials (deck, one-pager, brochure…). */
+export default function BusinessMaterials({ business, onSaved }: Props) {
+  const [state, formAction] = useActionState<FormState, FormData>(updateBusinessMaterials, { message: "" });
+  const last = useRef(state);
+  useEffect(() => {
+    if (state === last.current) return;
+    last.current = state;
+    if (state.message && !state.error) onSaved?.();
+  }, [state, onSaved]);
+
+  const slot = (i: number) => ({
+    url: business[`material${i}Url` as keyof BusinessWithLocation] as string | null,
+    title: (business[`material${i}Title` as keyof BusinessWithLocation] as string | null) ?? "",
+  });
 
   return (
-    <div className="mt-8">
-      <h2 className="text-2xl font-bold">Business Documents</h2>
-      <form action={updateFormAction} className="space-y-6 mt-4">
-        <input type="hidden" name="businessId" value={business.id} />
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i}>
-            <label htmlFor={`material${i}Title`} className="block text-sm font-medium text-gray-700">
-              Document {i} Title
-            </label>
-            <input
-              id={`material${i}Title`}
-              name={`material${i}Title`}
-              type="text"
-              defaultValue={(business as any)[`material${i}Title`] || ''}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#910000] focus:ring-[#910000] text-gray-900"
-            />
-            <label htmlFor={`material${i}`} className="block text-sm font-medium text-gray-700 mt-2">
-              Document {i} File
-            </label>
-            <input
-              id={`material${i}`}
-              name={`material${i}`}
-              type="file"
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-            />
-            {(business as any)[`material${i}Url`] && (
-              <a href={(business as any)[`material${i}Url`]} target="_blank" rel="noopener noreferrer" className="text-[#910000] hover:underline">
-                View Current Document {i}
-              </a>
-            )}
-          </div>
-        ))}
-
-        {updateState?.message && (
-          <p className="text-sm text-green-600 mt-2">{updateState.message}</p>
-        )}
-        {updateState?.error && (
-          <p className="text-sm text-red-600 mt-2">{updateState.error}</p>
-        )}
-
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="inline-flex justify-center rounded-md border border-transparent bg-[#910000] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#7a0000] focus:outline-none focus:ring-2 focus:ring-[#910000] focus:ring-offset-2"
-          >
-            Save Changes
-          </button>
-        </div>
-      </form>
-    </div>
+    <form action={formAction} className="space-y-6">
+      <input type="hidden" name="businessId" value={business.id} />
+      <FormSection title="Business materials" description="Pitch decks, one-pagers, brochures, menus. These can be shared with partners and judges. Give each a title so we know what it is." columns={1}>
+        {[1, 2, 3, 4, 5].map((i) => {
+          const s = slot(i);
+          return (
+            <div key={i} className="grid gap-4 rounded-lg border border-gray-200 p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+              <Field name={`material${i}Title`} label={`Title ${i}`} hideOptional>
+                <input id={`material${i}Title`} name={`material${i}Title`} type="text" defaultValue={s.title} placeholder="e.g. 2026 pitch deck" className={inputClass} />
+              </Field>
+              <Field name={`material${i}`} label={s.url ? "Replace file" : "File"} hideOptional>
+                <input id={`material${i}`} name={`material${i}`} type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg" className={fileInputClass} />
+              </Field>
+              <div className="pb-1 text-sm">
+                {s.url ? (
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#910000] hover:underline">View current</a>
+                ) : (
+                  <span className="text-gray-400">Empty</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </FormSection>
+      <FormError message={state.error} />
+      <FormSuccess message={state.message && !state.error ? state.message : undefined} />
+      <div className="flex justify-end">
+        <SubmitButton>Save materials</SubmitButton>
+      </div>
+    </form>
   );
 }
