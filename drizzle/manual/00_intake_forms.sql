@@ -1,10 +1,6 @@
--- Client intake forms. No-op if already present. Applied by: npm run db:apply
-DO $$ BEGIN
-  CREATE TYPE "public"."business_stage" AS ENUM('Idea', 'Startup', 'Growing', 'Established');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-DO $$ BEGIN
-  CREATE TYPE "public"."intake_status" AS ENUM('submitted', 'reviewed', 'archived');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+-- Client intake forms. Each statement is skipped if it already exists. Applied by: npm run db:apply
+CREATE TYPE "public"."business_stage" AS ENUM('Idea', 'Startup', 'Growing', 'Established');
+CREATE TYPE "public"."intake_status" AS ENUM('submitted', 'reviewed', 'archived');
 CREATE TABLE IF NOT EXISTS "client_intake_forms" (
   "id" serial PRIMARY KEY NOT NULL,
   "user_id" integer NOT NULL REFERENCES "users"("id"),
