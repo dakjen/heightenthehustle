@@ -12,6 +12,8 @@ Working order agreed with Dakotah on 2026-09-27. Each sub-phase is meant to ship
   - Admin: create cohorts with a start date, see each cohort's waitlist
   - Home screen checklist: profile, business, intake, waitlist
 
+## In progress (2026-09-28): 3.1 secure documents, 3.4 messaging upgrades, 3.6 resources hub
+
 ## Next (in this order)
 - **3.1 Secure documents**
   - Private (non-public) uploads incl. W-9s, pitch decks; per-user access; admin review

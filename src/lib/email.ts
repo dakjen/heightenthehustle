@@ -219,3 +219,39 @@ export function accountApprovedEmail(name: string, link: string): EmailTemplate 
 
   return { subject, html, text };
 }
+
+/**
+ * Email sent when someone receives a new portal message (individual reply or
+ * mass message). Shows a preview of the message (first ~300 chars) and a
+ * button into the Messages page.
+ */
+export function newMessageEmail(recipientName: string, senderName: string, content: string, link: string): EmailTemplate {
+  const safeName = escapeHtml(recipientName);
+  const safeSender = escapeHtml(senderName);
+  const trimmed = content.trim();
+  const preview = trimmed.length > 300 ? `${trimmed.slice(0, 300).trimEnd()}…` : trimmed;
+  const safePreview = escapeHtml(preview).replace(/\n/g, "<br />");
+  const subject = `New message from ${senderName} on the HTH portal`;
+
+  const html = layout(`
+    <p style="margin:0 0 16px;">Hi ${safeName},</p>
+    <p style="margin:0 0 16px;"><strong>${safeSender}</strong> sent you a message on the Heighten The Hustle portal:</p>
+    <blockquote style="margin:0 0 16px;padding:14px 18px;border-left:4px solid #910000;background:#f9f9f9;border-radius:6px;color:#2b2b2b;">${safePreview}</blockquote>
+    ${button(link, "Open Messages")}
+    <p style="margin:0;">The Heighten The Hustle team</p>
+  `);
+
+  const text = [
+    `Hi ${recipientName},`,
+    "",
+    `${senderName} sent you a message on the Heighten The Hustle portal:`,
+    "",
+    preview,
+    "",
+    `Reply in the portal: ${link}`,
+    "",
+    "The Heighten The Hustle team",
+  ].join("\n");
+
+  return { subject, html, text };
+}

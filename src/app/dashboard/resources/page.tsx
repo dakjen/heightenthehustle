@@ -1,8 +1,11 @@
-export default function ResourcesPage() {
-  return (
-    <div className="flex-1 p-6">
-      <h1 className="text-3xl font-bold text-gray-900">Resources</h1>
-      <p className="mt-4 text-gray-700">This page will contain resources for internal users.</p>
-    </div>
-  );
+import { requireUser } from "@/lib/auth";
+import { getPublishedResources } from "./actions";
+import ResourcesClient from "./ResourcesClient";
+
+export const dynamic = "force-dynamic";
+
+export default async function ResourcesPage() {
+  await requireUser();
+  const resources = await getPublishedResources();
+  return <ResourcesClient resources={resources} />;
 }

@@ -8,6 +8,8 @@ export interface NavItem {
   label: string;
   /** Indented sub-item (e.g. an individual business under "Businesses") */
   sub?: boolean;
+  /** Unread / pending count shown as a small red pill on the right. Hidden when 0 or undefined. */
+  badge?: number;
 }
 
 interface SidebarNavProps {
@@ -17,15 +19,25 @@ interface SidebarNavProps {
 
 function NavLink({ item, active }: { item: NavItem; active: boolean }) {
   const base = item.sub
-    ? "block py-1.5 pl-8 pr-3 text-sm rounded-md transition-colors duration-150"
-    : "block py-2 px-3 rounded-md transition-colors duration-150 font-medium";
+    ? "flex items-center justify-between gap-2 py-1.5 pl-8 pr-3 text-sm rounded-md transition-colors duration-150"
+    : "flex items-center justify-between gap-2 py-2 px-3 rounded-md transition-colors duration-150 font-medium";
   const state = active
     ? "bg-[#910000] text-white shadow-sm"
     : "text-gray-300 hover:bg-white/10 hover:text-white";
 
   return (
     <Link href={item.href} className={`${base} ${state}`} aria-current={active ? "page" : undefined}>
-      {item.label}
+      <span className="truncate">{item.label}</span>
+      {item.badge ? (
+        <span
+          className={`inline-flex min-w-[1.25rem] shrink-0 items-center justify-center rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none ${
+            active ? "bg-white text-[#910000]" : "bg-[#910000] text-white"
+          }`}
+          aria-label={`${item.badge} unread`}
+        >
+          {item.badge > 99 ? "99+" : item.badge}
+        </span>
+      ) : null}
     </Link>
   );
 }

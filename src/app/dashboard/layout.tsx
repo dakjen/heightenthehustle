@@ -5,6 +5,7 @@ import SidebarNav, { type NavItem } from "@/app/components/SidebarNav";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
+import { getUnreadCount } from "./messages/actions";
 // import AdminViewToggle from "./components/AdminViewToggle"; // New import
 // import { headers, cookies } from "next/headers"; // New import for searchParams and cookies
 
@@ -19,6 +20,7 @@ export default async function DashboardLayout({
   }
 
   const businesses = await getAllUserBusinesses(session.user.id); // Fetch businesses
+  const unreadMessages = await getUnreadCount();
   const isAdmin = session.user.role === 'admin';
   const isExternal = session.user.role === 'external';
   const canAccessAdminUsers = isAdmin || (session.user.role === 'internal' && session.user.canApproveRequests);
@@ -34,10 +36,11 @@ export default async function DashboardLayout({
     ...(isExternal
       ? businesses.map((b) => ({ href: `/dashboard/businesses/${b.id}`, label: b.businessName, sub: true }))
       : []),
-    { href: "/dashboard/messages", label: "Messages" },
+    { href: "/dashboard/messages", label: "Messages", badge: unreadMessages },
     ...(isExternal ? [{ href: "/dashboard/support", label: "Get Support" }] : []),
+    ...(isExternal ? [{ href: "/dashboard/documents", label: "My Documents" }] : []),
     ...(isExternal ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
-    ...(session.user.role === 'internal' ? [{ href: "/dashboard/resources", label: "Resources" }] : []),
+    { href: "/dashboard/resources", label: "Resources" },
     { href: "/dashboard/settings", label: "Settings" },
     { href: "/dashboard/profile", label: "Profile" },
   ];
@@ -45,6 +48,8 @@ export default async function DashboardLayout({
   const adminItems: NavItem[] = [
     ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Admin Users" }] : []),
     { href: "/dashboard/admin/support", label: "Support Requests" },
+    { href: "/dashboard/admin/documents", label: "Member Documents" },
+    { href: "/dashboard/admin/resources", label: "Manage Resources" },
     ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Admin Businesses" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),

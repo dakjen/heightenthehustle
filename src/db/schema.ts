@@ -16,6 +16,8 @@ export const cohortStatusEnum = pgEnum('cohort_status', ['upcoming', 'open', 'in
 export const supportCategoryEnum = pgEnum('support_category', ['Line of Credit / Loans', 'Grants & Funding', 'Legal', 'Accounting & Taxes', 'Licensing & Permits', 'Marketing & Branding', 'Contracts & Procurement', 'Other']);
 export const supportUrgencyEnum = pgEnum('support_urgency', ['low', 'normal', 'high']);
 export const supportStatusEnum = pgEnum('support_status', ['open', 'in_progress', 'resolved', 'closed']);
+export const resourceCategoryEnum = pgEnum('resource_category', ['Grants & Opportunities', 'Business Resources', 'Deals & Discounts']);
+export const documentKindEnum = pgEnum('document_kind', ['W-9', 'Pitch Deck', 'Business Plan', 'Financials', 'ID / Verification', 'Certification', 'Other']);
 
 // --- Tables ---
 export const users = pgTable('users', {
@@ -214,6 +216,41 @@ export const supportRequests = pgTable('support_requests', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// --- Resources hub (grants, business resources, provider deals) ---
+export const resources = pgTable('resources', {
+  id: serial('id').primaryKey(),
+  category: resourceCategoryEnum('category').notNull(),
+  title: text('title').notNull(),
+  description: text('description'),
+  url: text('url'), // external link (application page, provider site, etc.)
+  provider: text('provider'), // who offers it, e.g. "SBA", "QuickBooks"
+  deadline: timestamp('deadline', { withTimezone: true }), // grants/opportunities
+  discountCode: text('discount_code'), // deals
+  amount: text('amount'), // e.g. "$5,000 – $25,000" or "30% off"
+  tags: text('tags').array(),
+  isPublished: boolean('is_published').notNull().default(true),
+  isFeatured: boolean('is_featured').notNull().default(false),
+  createdById: integer('created_by_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// --- Secure documents (private blob storage; served only through an authenticated route) ---
+export const documents = pgTable('documents', {
+  id: serial('id').primaryKey(),
+  ownerId: integer('owner_id').notNull().references(() => users.id),
+  businessId: integer('business_id').references(() => businesses.id),
+  kind: documentKindEnum('kind').notNull(),
+  title: text('title').notNull(),
+  fileName: text('file_name').notNull(),
+  contentType: text('content_type').notNull(),
+  sizeBytes: integer('size_bytes').notNull(),
+  blobPathname: text('blob_pathname').notNull(), // private blob key; never exposed to the client
+  notes: text('notes'),
+  uploadedById: integer('uploaded_by_id').notNull().references(() => users.id), // member or admin on their behalf
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const clientIntakeForms = pgTable('client_intake_forms', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
@@ -248,6 +285,8 @@ export type BusinessToCompetition = InferSelectModel<typeof businessToCompetitio
 export type ClientIntakeForm = InferSelectModel<typeof clientIntakeForms>;
 export type Cohort = InferSelectModel<typeof cohorts>;
 export type SupportRequest = InferSelectModel<typeof supportRequests>;
+export type Resource = InferSelectModel<typeof resources>;
+export type SecureDocument = InferSelectModel<typeof documents>;
 export type CohortWaitlistEntry = InferSelectModel<typeof cohortWaitlist>;
 
 
@@ -387,4 +426,14 @@ export const supportRequestsRelations = relations(supportRequests, ({ one }) => 
   user: one(users, { fields: [supportRequests.userId], references: [users.id], relationName: 'support_requester' }),
   business: one(businesses, { fields: [supportRequests.businessId], references: [businesses.id] }),
   assignedTo: one(users, { fields: [supportRequests.assignedToId], references: [users.id], relationName: 'support_assignee' }),
+}));
+
+export const resourcesRelations = relations(resources, ({ one }) => ({
+  createdBy: one(users, { fields: [resources.createdById], references: [users.id] }),
+}));
+
+export const documentsRelations = relations(documents, ({ one }) => ({
+  owner: one(users, { fields: [documents.ownerId], references: [users.id], relationName: 'document_owner' }),
+  business: one(businesses, { fields: [documents.businessId], references: [businesses.id] }),
+  uploadedBy: one(users, { fields: [documents.uploadedById], references: [users.id], relationName: 'document_uploader' }),
 }));

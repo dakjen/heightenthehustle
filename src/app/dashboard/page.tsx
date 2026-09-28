@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { count, eq, and } from "drizzle-orm";
 import { db } from "@/db";
-import { businesses, clientIntakeForms, cohortWaitlist, users, cohorts, supportRequests } from "@/db/schema";
+import { businesses, clientIntakeForms, cohortWaitlist, users, cohorts, supportRequests, documents } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
 import WelcomeModal from "@/app/components/WelcomeModal";
 import { getFeaturedCohort } from "./hth-class/cohort-actions";
@@ -68,12 +68,14 @@ async function MemberHome({ userId, name }: { userId: number; name: string }) {
     ? (await safeCount(db.select({ n: count() }).from(cohortWaitlist).where(and(eq(cohortWaitlist.cohortId, cohort.id), eq(cohortWaitlist.userId, userId))))) > 0
     : false;
   const profileDone = Boolean(me?.phone && (me.personalCity || me.profilePhotoUrl));
+  const hasW9 = (await safeCount(db.select({ n: count() }).from(documents).where(and(eq(documents.ownerId, userId), eq(documents.kind, "W-9"))))) > 0;
 
   const steps: Step[] = [
     { key: "intake", title: "Complete your intake form", body: "Tell us where your business is and what you need. Takes about 5 minutes.", href: "/dashboard/intake-form", cta: "Start", done: intake[0].n > 0 },
     { key: "business", title: "Add your business", body: "Your business profile powers grant matching and messaging.", href: "/dashboard/businesses", cta: "Add", done: biz[0].n > 0 },
     { key: "profile", title: "Finish your profile", body: "Add a photo and your city so the team can reach you.", href: "/dashboard/profile", cta: "Edit", done: profileDone },
     { key: "waitlist", title: cohort ? `Join the ${cohort.name} waitlist` : "Join the curriculum waitlist", body: "Our next cohort is coming. Reserve your spot early.", href: "/dashboard/hth-class", cta: "Join", done: onWaitlist },
+    { key: "w9", title: "Upload your W-9", body: "Required before we can send any funding or prize money. Stored privately.", href: "/dashboard/documents", cta: "Upload", done: hasW9 },
   ];
 
   const first = name.split(" ")[0] || "there";
@@ -165,6 +167,8 @@ async function AdminHome({ name, role }: { name: string; role: string }) {
             <li><Link href="/dashboard/admin/hth-class/cohorts" className="hover:underline">Create a cohort / view waitlist →</Link></li>
             <li><Link href="/dashboard/messages" className="hover:underline">Send a mass message →</Link></li>
             <li><Link href="/dashboard/admin/businesses/manage" className="hover:underline">Browse member businesses →</Link></li>
+            <li><Link href="/dashboard/admin/documents" className="hover:underline">Member documents (W-9s, decks) →</Link></li>
+            <li><Link href="/dashboard/admin/resources" className="hover:underline">Manage the resources hub →</Link></li>
           </ul>
         </section>
         <section className="hth-card p-7">

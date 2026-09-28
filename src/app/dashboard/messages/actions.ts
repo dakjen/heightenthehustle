@@ -4,8 +4,14 @@ import { FormState } from "@/types/form-state";
 import { getSession } from "@/app/login/actions";
 import { db } from "@/db";
 import { users, massMessages, locations, demographics, businesses, individualMessages } from "@/db/schema";
-import { eq, inArray, and, or, asc, arrayOverlaps } from "drizzle-orm";
+import { eq, inArray, and, or, asc, arrayOverlaps, count } from "drizzle-orm";
 import { revalidateMessagesPath } from "./revalidate";
+import { sendEmail, newMessageEmail, appUrl } from "@/lib/email";
+
+/** Link every message-notification email points at. */
+function messagesLink() {
+  return `${appUrl()}/dashboard/messages`;
+}
 
 export async function sendMessage(prevState: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();
@@ -20,7 +26,7 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
     return { message: "", error: "Message content and recipient are required." };
   }
 
-  let targetRecipientId: number | undefined;
+  let targetRecipient: { id: number; name: string; email: string } | undefined;
 
   // Check if recipient is a user ID
   if (!isNaN(parseInt(recipient))) {
@@ -28,27 +34,43 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
     if (recipientUser.length === 0) {
       return { message: "", error: "Recipient user not found." };
     }
-    targetRecipientId = recipientUser[0].id;
+    targetRecipient = recipientUser[0];
   } else {
     // If recipient is not a user ID, assume it's an admin or internal user by email/role
     // For now, we'll just assume it's an admin if not a user ID
     const adminUser = await db.select().from(users).where(eq(users.role, 'admin')).limit(1);
     if (adminUser.length > 0) {
-      targetRecipientId = adminUser[0].id;
+      targetRecipient = adminUser[0];
     }
   }
 
-  if (!targetRecipientId) {
+  if (!targetRecipient) {
     return { message: "", error: "Recipient not found." };
   }
 
   try {
     await db.insert(individualMessages).values({
       senderId: session.user.id,
-      recipientId: targetRecipientId,
+      recipientId: targetRecipient.id,
       content: messageContent,
       timestamp: new Date(),
     });
+
+    // Notify the recipient by email. Direct messages are sent even when the
+    // recipient has isOptedOut = true: opt-out covers marketing / mass
+    // messages, not one-to-one replies in an ongoing support conversation.
+    // sendEmail never throws, but guard anyway so the send never fails on email.
+    try {
+      const senderName = session.user.name || session.user.email || "the HTH team";
+      await sendEmail({
+        to: { email: targetRecipient.email, name: targetRecipient.name },
+        ...newMessageEmail(targetRecipient.name, senderName, messageContent, messagesLink()),
+      });
+    } catch (error) {
+      console.warn("New message email failed:", error);
+    }
+
+    await revalidateMessagesPath();
     return { message: "Message sent successfully!", error: "" };
   } catch (error) {
     console.error("Error sending individual message:", error);
@@ -116,17 +138,18 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
       userConditions.push(eq(users.isOptedOut, false));
     }
 
-    let targetedUsers: { id: number }[] = [];
+    let targetedUsers: { id: number; name: string; email: string; isOptedOut: boolean }[] = [];
+    const targetColumns = { id: users.id, name: users.name, email: users.email, isOptedOut: users.isOptedOut };
 
     if (conditions.length > 0) {
-      targetedUsers = await db.selectDistinct({ id: users.id }) // Use distinct to avoid duplicate users
+      targetedUsers = await db.selectDistinct(targetColumns) // Use distinct to avoid duplicate users
         .from(users)
         .innerJoin(businesses, eq(users.id, businesses.userId))
         .where(and(...conditions, ...userConditions));
     } else {
       // If no specific locations or demographics are selected, target all users that match the userConditions
       userConditions.push(eq(users.role, 'internal')); // Original logic was to target internal users
-      targetedUsers = await db.select({ id: users.id }).from(users).where(and(...userConditions));
+      targetedUsers = await db.select(targetColumns).from(users).where(and(...userConditions));
     }
 
     // Send individual messages to targeted users
@@ -138,6 +161,26 @@ export async function sendMassMessage(prevState: FormState, formData: FormData):
         timestamp: new Date(),
       }));
       await db.insert(individualMessages).values(messagesToInsert);
+
+      // Email each targeted recipient. Mass messages respect opt-out
+      // regardless of the "exclude opted out" checkbox (which only controls
+      // who gets the in-portal message). Email failures never fail the send.
+      try {
+        const senderName = session.user.name || session.user.email || "the HTH team";
+        const link = messagesLink();
+        await Promise.all(
+          targetedUsers
+            .filter((user) => !user.isOptedOut && user.email)
+            .map((user) =>
+              sendEmail({
+                to: { email: user.email, name: user.name },
+                ...newMessageEmail(user.name, senderName, massMessageContent, link),
+              }),
+            ),
+        );
+      } catch (error) {
+        console.warn("Mass message email failed:", error);
+      }
     }
 
     await revalidateMessagesPath();
@@ -224,6 +267,44 @@ export async function getConversations(currentUserId: number, teamChat: boolean 
 }
 
 
+
+/** Number of unread messages addressed to the signed-in user. 0 when signed out or on error. */
+export async function getUnreadCount(): Promise<number> {
+  const session = await getSession();
+  if (!session || !session.user) return 0;
+  try {
+    const [row] = await db
+      .select({ value: count() })
+      .from(individualMessages)
+      .where(and(eq(individualMessages.recipientId, session.user.id), eq(individualMessages.read, false)));
+    return row?.value ?? 0;
+  } catch (error) {
+    console.error("Error counting unread messages:", error);
+    return 0;
+  }
+}
+
+/** Mark every message from `otherUserId` to the signed-in user as read. */
+export async function markConversationRead(otherUserId: number): Promise<void> {
+  const session = await getSession();
+  if (!session || !session.user) return;
+  try {
+    await db
+      .update(individualMessages)
+      .set({ read: true })
+      .where(
+        and(
+          eq(individualMessages.senderId, otherUserId),
+          eq(individualMessages.recipientId, session.user.id),
+          eq(individualMessages.read, false),
+        ),
+      );
+    // Refresh the sidebar badge (dashboard layout) on the next navigation.
+    await revalidateMessagesPath();
+  } catch (error) {
+    console.error("Error marking conversation read:", error);
+  }
+}
 
 export async function getUserById(userId: number) {
   try {
