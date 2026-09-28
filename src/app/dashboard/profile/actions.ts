@@ -4,10 +4,11 @@ import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { getSession, encrypt, SessionPayload } from "@/app/login/actions";
+import { getSession } from "@/app/login/actions";
+import { createSession } from "@/lib/session";
+import { safeUserColumns } from "@/lib/users";
+import { checkUpload, chosenFile, uploadPublicFile } from "@/lib/uploads";
 import { revalidatePath } from "next/cache";
-import { put } from "@vercel/blob";
-import { cookies } from "next/headers";
 
 export async function updateProfile(prevState: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();
@@ -22,18 +23,20 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   const personalCity = formData.get("personalCity") as string;
   const personalState = formData.get("personalState") as string;
   const personalZipCode = formData.get("personalZipCode") as string;
-  const profilePhoto = formData.get("profilePhoto") as File; // New field (File)
+  const profilePhoto = chosenFile(formData.get("profilePhoto"));
 
   if (!name || !phone) {
     return { message: "", error: "Name and Phone are required." };
   }
+  if (profilePhoto) {
+    const problem = checkUpload(profilePhoto, "image");
+    if (problem) return { message: "", error: problem, fieldErrors: { profilePhoto: problem } };
+  }
 
   try {
-    let profilePhotoUrl: string | undefined;
-    if (profilePhoto && profilePhoto.size > 0) {
-      const blob = await put(profilePhoto.name, profilePhoto, { access: 'public', allowOverwrite: true });
-      profilePhotoUrl = blob.url;
-    }
+    const profilePhotoUrl = profilePhoto
+      ? await uploadPublicFile(profilePhoto, 'profile-photos', session.user.id)
+      : undefined;
 
     await db.update(users)
       .set({
@@ -47,23 +50,12 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
       })
       .where(eq(users.id, session.user.id));
 
-    // Fetch the updated user from the database
+    // Refresh the session so the sidebar and profile show the new details.
     const updatedUser = await db.query.users.findFirst({
       where: eq(users.id, session.user.id),
+      columns: safeUserColumns,
     });
-
-    if (updatedUser) {
-      // Create a new session payload with the updated user data
-      const newSessionPayload: SessionPayload = {
-        user: updatedUser,
-        expires: session.expires, // Keep the original expiration
-      };
-
-      // Encrypt the new session payload and set the cookie
-      const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-      const cookieStore = await cookies();
-      cookieStore.set("session", await encrypt(newSessionPayload), { expires, httpOnly: true });
-    }
+    if (updatedUser) await createSession(updatedUser);
 
     revalidatePath("/dashboard"); // Revalidate the entire dashboard path to show updated data
     return { message: "Profile updated successfully!", error: "" };

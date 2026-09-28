@@ -5,25 +5,10 @@ import { updateUserPermissions } from "./actions"; // Will create this action
 import { useActionState } from "react";
 
 import { FormState } from "@/types/form-state";
+import type { SafeUser } from "@/lib/users";
 
-interface User {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  password: string; // Note: In a real app, you\'t fetch password to client
-  role: 'admin' | 'internal' | 'external';
-  hasBusinessProfile: boolean;
-  personalAddress: string | null;
-  personalCity: string | null;
-  personalState: string | null;
-  personalZipCode: string | null;
-  profilePhotoUrl: string | null;
-  canApproveRequests: boolean; // New permission field
-  canMessageAdmins: boolean; // New permission field
-  canManageClasses: boolean; // New permission field
-  canManageBusinesses: boolean; // New permission field
-}
+// A user row as the server hands it over: every column except the password hash.
+type User = SafeUser;
 
 interface PermissionsManagementClientPageProps {
   initialUsers: User[];

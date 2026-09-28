@@ -33,7 +33,7 @@ export default function SyllabusUploadInput({ onUploadSuccess, initialUrl }: Syl
 
     try {
       const response = await fetch(
-        `/api/upload/file?filename=${file.name}`,
+        `/api/upload/file?filename=${encodeURIComponent(file.name)}`,
         {
           method: 'POST',
           body: file,
@@ -41,7 +41,9 @@ export default function SyllabusUploadInput({ onUploadSuccess, initialUrl }: Syl
       );
 
       if (!response.ok) {
-        throw new Error(`Upload failed: ${response.statusText}`);
+        // The route explains what was wrong (file type, size, permission).
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || `Upload failed: ${response.statusText}`);
       }
 
       const newBlob = await response.json();

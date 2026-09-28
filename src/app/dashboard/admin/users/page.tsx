@@ -16,7 +16,9 @@ export default async function UserManagementPage({ searchParams }: { searchParam
     redirect("/dashboard");
   }
 
-  const allUsers = await getAllUsers(); // Fetch users on the server
+  // Only admins see the user and permission tabs, and only they may read the
+  // user list; team members with canApproveRequests get the Requests tab only.
+  const allUsers = session.user.role === 'admin' ? await getAllUsers() : [];
   const isInternalUserView = resolvedSearchParams.viewMode === "internal"; // Re-introduce this definition
   let activeTab = resolvedSearchParams.tab || "users"; // Default to 'users' tab
 

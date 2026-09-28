@@ -5,6 +5,18 @@ import { users } from "@/db/schema"; // Import userStatus
 import bcrypt from "bcrypt";
 import { FormState } from "@/types/form-state"; // Import FormState
 import { sendEmail, accountRequestedEmail } from "@/lib/email";
+import { clientIp, hit, retryMessage } from "@/lib/rate-limit";
+
+/** Account requests allowed per IP per hour. Real signups are a handful a day. */
+const SIGNUP_WINDOW_MS = 60 * 60 * 1000;
+const SIGNUP_LIMIT_PER_IP = 5;
+
+/**
+ * The same answer whether or not the address already has an account, so this
+ * form can't be used to check who is a member. A duplicate request is simply
+ * not inserted; the real account holder is unaffected.
+ */
+const REQUEST_RECEIVED = "Thank you for your request. We will get back to you shortly.";
 
 export async function createAccount(prevState: FormState, formData: FormData): Promise<FormState> {
   const name = ((formData.get("name") as string | null) ?? "").trim();
@@ -18,6 +30,15 @@ export async function createAccount(prevState: FormState, formData: FormData): P
   const noPitchYet = pitchChoice === "none";
   const pitchEventId = Number(pitchChoice);
   const pitchEventIds = Number.isInteger(pitchEventId) && pitchEventId > 0 ? [pitchEventId] : [];
+
+  const rate = hit(`signup:ip:${await clientIp()}`, SIGNUP_LIMIT_PER_IP, SIGNUP_WINDOW_MS);
+  if (rate.limited) {
+    return {
+      message: "",
+      error: `Too many account requests from this connection. Please try again in ${retryMessage(rate.retryAfterSeconds)}.`,
+      businessName,
+    };
+  }
 
   // Basic validation
   if (!name || !phone || !email || !password) {
@@ -50,13 +71,14 @@ export async function createAccount(prevState: FormState, formData: FormData): P
     // Confirmation email. Never fails the request if email is down or unconfigured.
     await sendEmail({ to: { email, name }, ...accountRequestedEmail(name) });
 
-    return { message: "Thank you for your request. We will get back to you shortly.", error: "", businessName }; // Include businessName in success state
+    return { message: REQUEST_RECEIVED, error: "", businessName };
   } catch (error) {
-    console.error("Error creating account:", error);
-    // Check for unique email constraint violation
+    // An address that already has an account gets the same reply as a new one.
     if (error instanceof Error && error.message.includes('duplicate key value violates unique constraint "users_email_unique"')) {
-      return { message: "", error: "An account with this email already exists.", businessName }; // Include businessName in error state
+      console.warn("Account request for an address that already exists; answered generically.");
+      return { message: REQUEST_RECEIVED, error: "", businessName };
     }
+    console.error("Error creating account:", error);
     return { message: "", error: "Failed to submit account request.", businessName }; // Include businessName in error state
   }
 }

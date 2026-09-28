@@ -3,9 +3,9 @@
 import { db } from "@/db";
 import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { businessAccess } from "@/lib/auth";
+import { checkUpload, chosenFile, uploadPublicFile } from "@/lib/uploads";
 import { FormState } from "@/types/form-state";
 
 function text(formData: FormData, name: string): string {
@@ -23,14 +23,7 @@ function normalizeWebsite(raw: string): string | null {
   }
 }
 
-const IMAGE_MAX_BYTES = 5 * 1024 * 1024;
 
-async function uploadImage(file: FormDataEntryValue | null, folder: string, ownerId: number): Promise<string | null | undefined> {
-  if (!(file instanceof File) || file.size === 0) return undefined; // nothing chosen: leave as is
-  const safeName = file.name.replace(/[^\w.-]+/g, "_");
-  const blob = await put(`${folder}/${ownerId}/${Date.now()}-${safeName}`, file, { access: "public" });
-  return blob.url;
-}
 
 export async function updateBusinessProfile(prevState: FormState, formData: FormData): Promise<FormState> {
   const businessId = Number(text(formData, "businessId"));
@@ -69,17 +62,22 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
   if (state && !/^[A-Z]{2}$/.test(state)) fieldErrors.state = "Use the 2-letter state code.";
   if (zipCode && !/^\d{5}(-\d{4})?$/.test(zipCode)) fieldErrors.zipCode = "Enter a 5-digit ZIP code (or ZIP+4).";
   if (phone && phone.replace(/\D/g, "").length < 10) fieldErrors.phone = "Enter a 10-digit phone number.";
-  for (const [name, f] of [["logo", logo], ["businessProfilePhoto", photo]] as const) {
-    if (f instanceof File && f.size > 0) {
-      if (f.size > IMAGE_MAX_BYTES) fieldErrors[name] = "Image must be 5 MB or smaller.";
-      else if (!f.type.startsWith("image/")) fieldErrors[name] = "Upload an image file.";
-    }
+  for (const [name, value] of [["logo", logo], ["businessProfilePhoto", photo]] as const) {
+    const file = chosenFile(value);
+    if (!file) continue;
+    const problem = checkUpload(file, "image");
+    if (problem) fieldErrors[name] = problem;
   }
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
   try {
-    const logoUrl = await uploadImage(logo, "business-logos", access.user.id);
-    const businessProfilePhotoUrl = await uploadImage(photo, "business-photos", access.user.id);
+    const logoFile = chosenFile(logo);
+    const photoFile = chosenFile(photo);
+    // undefined means "nothing chosen": leave the existing image as it is.
+    const logoUrl = logoFile ? await uploadPublicFile(logoFile, "business-logos", access.user.id) : undefined;
+    const businessProfilePhotoUrl = photoFile
+      ? await uploadPublicFile(photoFile, "business-photos", access.user.id)
+      : undefined;
 
     await db
       .update(businesses)

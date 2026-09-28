@@ -106,7 +106,7 @@ export default function ProfilePage() {
                 id="profilePhoto"
                 name="profilePhoto"
                 type="file"
-                accept="image/*"
+                accept=".png,.jpg,.jpeg,.webp,.gif"
                 onChange={onPhotoChange}
                 className={fileInputClass}
               />

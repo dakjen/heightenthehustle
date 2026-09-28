@@ -5,18 +5,22 @@ import { db } from "@/db";
 import { users, userRole } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
+import { createSession } from "@/lib/session";
+import { hasPermission, requireAdmin } from "@/lib/auth";
+import { safeUserColumns, type SafeUser } from "@/lib/users";
 import { revalidatePath } from "next/cache";
 import bcrypt from 'bcrypt';
 import { getAllBusinesses } from "../businesses/actions"; // Added import
 import { sendEmail, accountApprovedEmail, appUrl } from "@/lib/email";
 
-// Define a type for a single user with status
-type UserWithStatus = typeof users.$inferSelect;
+// Define a type for a single user with status (never carries the password hash)
+type UserWithStatus = SafeUser;
 
+/** Every user, for the admin user-management screens. Admins only. */
 export async function getAllUsers(): Promise<UserWithStatus[]> {
+  await requireAdmin();
   try {
-    const allUsers = await db.query.users.findMany();
-    return allUsers;
+    return await db.query.users.findMany({ columns: safeUserColumns });
   } catch (error) {
     console.error("Error fetching all users:", error);
     return [];
@@ -25,40 +29,15 @@ export async function getAllUsers(): Promise<UserWithStatus[]> {
 
 export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
   const session = await getSession();
-  if (!session || !session.user || (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests))) {
+  if (!session?.user || !hasPermission(session.user, 'canApproveRequests')) {
     return []; // Unauthorized
   }
 
   try {
-    const pendingUsers = await db.query.users.findMany({
+    return await db.query.users.findMany({
       where: eq(users.status, 'pending'),
-      columns: {
-        id: true,
-        name: true,
-        phone: true,
-        email: true,
-        password: true,
-        role: true,
-        status: true,
-        hasBusinessProfile: true,
-        personalAddress: true,
-        personalCity: true,
-        personalState: true,
-        personalZipCode: true,
-        profilePhotoUrl: true,
-        isOptedOut: true,
-        businessName: true, // Explicitly select businessName
-        pitchEventIds: true,
-        pitchEventOther: true,
-        canApproveRequests: true, // Explicitly select canApproveRequests
-        canMessageAdmins: true, // Explicitly select canMessageAdmins
-        canManageClasses: true, // Explicitly select canManageClasses
-        canManageBusinesses: true,
-        isCisgender: true,
-        isTransgender: true,
-      }
+      columns: safeUserColumns,
     });
-    return pendingUsers;
   } catch (error) {
     console.error("Error fetching pending users:", error);
     return [];
@@ -72,7 +51,7 @@ export async function approveUser(userId: number): Promise<FormState> {
   }
 
   // Admins can always approve. Internal users need specific permission.
-  if (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests)) {
+  if (!hasPermission(session.user, 'canApproveRequests')) {
     return { message: "", error: "Unauthorized to approve users." };
   }
 
@@ -112,7 +91,7 @@ export async function rejectUser(userId: number): Promise<FormState> {
   }
 
   // Admins can always reject. Internal users need specific permission.
-  if (session.user.role !== 'admin' && (session.user.role !== 'internal' || !session.user.canApproveRequests)) {
+  if (!hasPermission(session.user, 'canApproveRequests')) {
     return { message: "", error: "Unauthorized to reject users." };
   }
 
@@ -206,19 +185,14 @@ export async function updateUserPermissions(prevState: FormState, formData: Form
       canManageBusinesses: canManageBusinesses,
     }).where(eq(users.id, userId));
 
-    // If the updated user is the currently logged-in user, update their session
+    // If the updated user is the currently logged-in user, refresh their session
+    // so the new permissions take effect without a sign-out.
     if (session.user.id === userId) {
       const updatedUser = await db.query.users.findFirst({
         where: eq(users.id, userId),
+        columns: safeUserColumns,
       });
-
-      if (updatedUser) {
-        const { encrypt } = await import("@/app/login/actions"); // Dynamically import encrypt
-        const { cookies } = await import("next/headers"); // Dynamically import cookies
-        const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-        const cookieStore = await cookies(); // Await the cookies() call
-        cookieStore.set("session", await encrypt({ user: updatedUser, expires }), { expires, httpOnly: true });
-      }
+      if (updatedUser) await createSession(updatedUser);
     }
 
     revalidatePath("/dashboard/admin/users");

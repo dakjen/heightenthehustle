@@ -2,9 +2,9 @@ import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { businesses } from "@/db/schema";
-import { getSession, type SessionPayload } from "@/app/login/actions";
+import { getSession, type UserSession } from "@/lib/session";
 
-type SessionUser = NonNullable<SessionPayload["user"]>;
+type SessionUser = UserSession;
 export type Permission = "canApproveRequests" | "canManageClasses" | "canManageBusinesses";
 
 /** Returns the signed-in user or redirects to /login. Use in pages/layouts. */
@@ -45,6 +45,39 @@ export async function requirePermission(permission?: Permission): Promise<Sessio
 /** Staff = admin, or a team member holding at least one admin permission. */
 export function isStaff(user: SessionUser): boolean {
   return canAccessAdminArea(user);
+}
+
+/** For server actions: throws unless the caller is staff (admin or a team member). */
+export async function requireStaff(): Promise<SessionUser> {
+  const session = await getSession();
+  if (!session?.user || !isStaff(session.user)) {
+    throw new Error("Unauthorized");
+  }
+  return session.user;
+}
+
+/** For server actions that only admins may run. Throws for everyone else. */
+export async function requireAdmin(): Promise<SessionUser> {
+  const session = await getSession();
+  if (!session?.user || session.user.role !== "admin") {
+    throw new Error("Unauthorized");
+  }
+  return session.user;
+}
+
+/**
+ * For "show me user X's records" actions.
+ *
+ * Staff may ask about anybody; everyone else is silently scoped to
+ * themselves, so a caller-supplied id can never be used to read someone
+ * else's data. Returns null when signed out.
+ */
+export async function userScope(requestedUserId?: number): Promise<{ user: SessionUser; userId: number } | null> {
+  const session = await getSession();
+  if (!session?.user) return null;
+  const user = session.user;
+  const wanted = Number.isInteger(requestedUserId) ? (requestedUserId as number) : user.id;
+  return { user, userId: isStaff(user) ? wanted : user.id };
 }
 
 /**

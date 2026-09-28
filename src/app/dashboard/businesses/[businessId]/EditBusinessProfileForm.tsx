@@ -48,7 +48,7 @@ function ImagePicker({ name, label, hint, current, error, square }: { name: stri
           id={name}
           name={name}
           type="file"
-          accept="image/*"
+          accept=".png,.jpg,.jpeg,.webp,.gif"
           onChange={(e) => {
             const f = e.target.files?.[0];
             setPreview((prev) => { if (prev) URL.revokeObjectURL(prev); return f && f.type.startsWith("image/") ? URL.createObjectURL(f) : null; });
