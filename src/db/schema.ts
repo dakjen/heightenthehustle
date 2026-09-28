@@ -230,6 +230,7 @@ export const resources = pgTable('resources', {
   tags: text('tags').array(),
   isPublished: boolean('is_published').notNull().default(true),
   isFeatured: boolean('is_featured').notNull().default(false),
+  notifiedAt: timestamp('notified_at', { withTimezone: true }), // when members were emailed about it
   createdById: integer('created_by_id').notNull().references(() => users.id),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),

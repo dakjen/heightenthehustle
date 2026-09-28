@@ -6,6 +6,7 @@ import { asc, desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { canAccessAdminArea, requireUser } from "@/lib/auth";
 import { FormState } from "@/types/form-state";
+import { notifyMembers, notifyHtml, esc, appUrl } from "@/lib/notify";
 
 function text(formData: FormData, name: string): string {
   const v = formData.get(name);
@@ -72,7 +73,7 @@ export async function getAllResources(): Promise<Resource[]> {
   }
 }
 
-type ResourceInput = Omit<Resource, "id" | "createdById" | "createdAt" | "updatedAt">;
+type ResourceInput = Omit<Resource, "id" | "createdById" | "createdAt" | "updatedAt" | "notifiedAt">;
 
 function parseResourceForm(formData: FormData): { data?: ResourceInput; fieldErrors?: Record<string, string> } {
   const category = text(formData, "category") as Resource["category"];
@@ -110,6 +111,23 @@ function parseResourceForm(formData: FormData): { data?: ResourceInput; fieldErr
   };
 }
 
+/** Email every member about a newly published resource, once. */
+async function announceIfNew(id: number): Promise<void> {
+  const r = await db.query.resources.findFirst({ where: eq(resources.id, id) });
+  if (!r || !r.isPublished || r.notifiedAt) return;
+  const link = { href: `${appUrl()}/dashboard/resources`, label: "See it in the Resources Hub" };
+  const lines = [
+    r.provider ? `<strong>From:</strong> ${esc(r.provider)}` : "",
+    r.amount ? `<strong>Amount:</strong> ${esc(r.amount)}` : "",
+    r.deadline ? `<strong>Deadline:</strong> ${new Date(r.deadline).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}` : "",
+    r.discountCode ? `<strong>Code:</strong> ${esc(r.discountCode)}` : "",
+  ].filter(Boolean).join("<br/>");
+  const html = notifyHtml(`New: ${esc(r.title)}`, `<p style="color:#910000;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 8px">${esc(r.category)}</p>${r.description ? `<p>${esc(r.description)}</p>` : ""}${lines ? `<p>${lines}</p>` : ""}`, link);
+  const text = `New in the HTH Resources Hub: ${r.title} (${r.category})\n\n${r.description ?? ""}\n${r.provider ? `From: ${r.provider}\n` : ""}${r.amount ? `Amount: ${r.amount}\n` : ""}${r.discountCode ? `Code: ${r.discountCode}\n` : ""}\n${link.href}`;
+  await notifyMembers(`New resource: ${r.title}`, text, html);
+  await db.update(resources).set({ notifiedAt: new Date() }).where(eq(resources.id, id));
+}
+
 export async function createResource(prevState: FormState, formData: FormData): Promise<FormState> {
   const user = await requireUser();
   if (!canAccessAdminArea(user)) return { message: "", error: "Unauthorized." };
@@ -118,9 +136,10 @@ export async function createResource(prevState: FormState, formData: FormData): 
   if (!data) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
   try {
-    await db.insert(resources).values({ ...data, createdById: user.id });
+    const [created] = await db.insert(resources).values({ ...data, createdById: user.id }).returning({ id: resources.id });
+    await announceIfNew(created.id);
     revalidate();
-    return { message: `"${data.title}" added.`, error: "" };
+    return { message: `"${data.title}" added.${data.isPublished ? " Members have been emailed." : ""}`, error: "" };
   } catch (error) {
     console.error("createResource failed:", error);
     return { message: "", error: "Something went wrong saving the resource. Please try again." };
@@ -144,6 +163,7 @@ export async function updateResource(prevState: FormState, formData: FormData): 
       .where(eq(resources.id, id))
       .returning({ id: resources.id });
     if (!updated.length) return { message: "", error: "That resource no longer exists." };
+    await announceIfNew(id);
     revalidate();
     return { message: `"${data.title}" saved.`, error: "" };
   } catch (error) {
@@ -176,6 +196,7 @@ export async function toggleResource(id: number, patch: { isPublished?: boolean;
   if (!Object.keys(set).length) return { message: "", error: "Nothing to change." };
   try {
     await db.update(resources).set({ ...set, updatedAt: new Date() }).where(eq(resources.id, id));
+    if (set.isPublished) await announceIfNew(id);
     revalidate();
     return { message: "Saved.", error: "" };
   } catch (error) {

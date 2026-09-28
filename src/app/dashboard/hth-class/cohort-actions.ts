@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "@/app/login/actions";
 import { requirePermission } from "@/lib/auth";
 import { FormState } from "@/types/form-state";
+import { sendEmail } from "@/lib/email";
+import { notifyApprovers, notifyHtml, esc, appUrl } from "@/lib/notify";
 
 function text(formData: FormData, name: string): string {
   const v = formData.get(name);
@@ -76,6 +78,20 @@ export async function joinWaitlist(prevState: FormState, formData: FormData): Pr
       .insert(cohortWaitlist)
       .values({ cohortId, userId: session.user.id, name, email, phone: phone || null, businessName: businessName || null, notes: notes || null })
       .onConflictDoNothing();
+    // Confirmation to the member, heads-up to the team. Neither can fail the join.
+    const start = cohort.startDate ? new Date(cohort.startDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "soon";
+    await sendEmail({
+      to: { email, name },
+      subject: `You're on the ${cohort.name} waitlist`,
+      text: `Hi ${name},\n\nYou're on the waitlist for ${cohort.name}, starting ${start}. We'll email you as soon as enrollment opens.\n\n${appUrl()}/dashboard/hth-class`,
+      html: notifyHtml("You're on the list", `<p>Hi ${esc(name)},</p><p>You're on the waitlist for <strong>${esc(cohort.name)}</strong>, starting ${esc(start)}. We'll email you as soon as enrollment opens.</p>`, { href: `${appUrl()}/dashboard/hth-class`, label: "View the cohort" }),
+    });
+    await notifyApprovers(
+      `Waitlist: ${name} joined ${cohort.name}`,
+      `${name} (${email}${phone ? `, ${phone}` : ""}) joined the ${cohort.name} waitlist.${businessName ? `\nBusiness: ${businessName}` : ""}${notes ? `\nNotes: ${notes}` : ""}\n\n${appUrl()}/dashboard/admin/hth-class/cohorts`,
+      notifyHtml(`${esc(name)} joined the ${esc(cohort.name)} waitlist`, `<p><strong>Email:</strong> ${esc(email)}<br/>${phone ? `<strong>Phone:</strong> ${esc(phone)}<br/>` : ""}${businessName ? `<strong>Business:</strong> ${esc(businessName)}<br/>` : ""}${notes ? `<strong>Notes:</strong> ${esc(notes)}` : ""}</p>`, { href: `${appUrl()}/dashboard/admin/hth-class/cohorts`, label: "See the waitlist" }),
+    );
+
     revalidatePath("/dashboard/hth-class");
     revalidatePath("/dashboard");
     return { message: `You're on the waitlist for ${cohort.name}. We'll email you when enrollment opens.`, error: "" };

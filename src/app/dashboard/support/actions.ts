@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "@/app/login/actions";
 import { canAccessAdminArea, requireUser } from "@/lib/auth";
 import { sendEmail, appUrl } from "@/lib/email";
+import { notifyHtml, esc } from "@/lib/notify";
 import { FormState } from "@/types/form-state";
 
 function text(formData: FormData, name: string): string {
@@ -75,6 +76,14 @@ export async function createSupportRequest(prevState: FormState, formData: FormD
         urgency,
       })
       .returning({ id: supportRequests.id });
+
+    // Confirmation to the member. Never fails the request if email is down.
+    await sendEmail({
+      to: { email: user.email, name: user.name },
+      subject: `We got your request: ${subject}`,
+      text: `Hi ${user.name},\n\nWe received your support request "${subject}" (${category}). An HTH advisor will follow up${urgency === "high" ? " as soon as possible" : " within a few business days"} by email or in Messages.\n\n${appUrl()}/dashboard/support`,
+      html: notifyHtml("We got your request", `<p>Hi ${esc(user.name)},</p><p>We received your support request <strong>${esc(subject)}</strong> (${esc(category)}). An HTH advisor will follow up ${urgency === "high" ? "as soon as possible" : "within a few business days"} by email or in Messages.</p>`, { href: `${appUrl()}/dashboard/support`, label: "View your requests" }),
+    });
 
     // Let the team know. Never fails the request if email is down.
     try {
