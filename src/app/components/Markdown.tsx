@@ -7,14 +7,14 @@ import { toEmbedUrl } from "@/lib/video";
  * Links to YouTube, Vimeo or Loom are rendered as an inline video player with
  * the link text as the caption, so "Required videos" lists play in place.
  */
-export default function Markdown({ content, className = "" }: { content: string; className?: string }) {
+export default function Markdown({ content, className = "", embedVideos = true }: { content: string; className?: string; embedVideos?: boolean }) {
   return (
     <div className={`hth-prose ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           a: ({ href, children }) => {
-            const embed = href ? toEmbedUrl(href) : null;
+            const embed = embedVideos && href ? toEmbedUrl(href) : null;
             if (embed) {
               return (
                 <span className="hth-video">

@@ -1,4 +1,5 @@
-import { toEmbedUrl } from "@/lib/video";
+import { toEmbedUrl, extractVideos } from "@/lib/video";
+import LessonVideos from "../../LessonVideos";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
@@ -27,6 +28,11 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
   const { lesson, course, prev, next, completed, index, total, attachments } = view;
   const pct = percent(index + 1, total);
   const embed = lesson.videoUrl ? toEmbedUrl(lesson.videoUrl) : null;
+  // Featured video first (if set on the lesson), then every video linked in the content.
+  const videos = [
+    ...(lesson.videoUrl && embed ? [{ title: lesson.title, url: lesson.videoUrl, embed }] : []),
+    ...extractVideos(lesson.content).filter((v) => v.embed !== embed),
+  ];
   const duration = formatDuration(lesson.durationMinutes);
   const courseHref = `/dashboard/hth-class/${course.id}`;
 
@@ -60,35 +66,18 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
         )}
       </header>
 
-      {lesson.videoUrl && (
-        <section className="mt-6 hth-fade-up hth-fade-up-delay-1">
-          {embed ? (
-            <div className="relative w-full overflow-hidden rounded-2xl bg-black shadow-md" style={{ aspectRatio: "16 / 9" }}>
-              <iframe
-                src={embed}
-                title={lesson.title}
-                className="absolute inset-0 h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            </div>
-          ) : (
-            <a
-              href={lesson.videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-[#910000] bg-white px-5 py-2.5 font-semibold text-[#910000] transition hover:bg-[#910000] hover:text-white"
-            >
-              Watch the video
-            </a>
-          )}
-        </section>
+      <LessonVideos videos={videos} lessonTitle={lesson.title} />
+      {lesson.videoUrl && !embed && (
+        <p className="mt-4">
+          <a href={lesson.videoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-lg border-2 border-[#910000] bg-white px-5 py-2.5 font-semibold text-[#910000] transition hover:bg-[#910000] hover:text-white">
+            Watch the video
+          </a>
+        </p>
       )}
 
       <article className="mt-6 hth-card p-6 sm:p-8 lg:p-10 hth-fade-up hth-fade-up-delay-1">
         {lesson.content ? (
-          <Markdown content={lesson.content} />
+          <Markdown content={lesson.content} embedVideos={false} />
         ) : (
           <p className="text-gray-600">This lesson doesn&apos;t have written content yet.</p>
         )}
