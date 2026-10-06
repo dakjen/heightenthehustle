@@ -57,7 +57,7 @@ export default async function DashboardLayout({
     ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
     ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),
     ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
-    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Admin HTH Class" }] : []),
+    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Courses & Lessons" }] : []),
   ];
 
   const roleLabel = isAdmin ? "Admin" : session.user.role === 'internal' ? "Team" : "Member";

@@ -12,7 +12,8 @@ Working order agreed with Dakotah on 2026-09-27. Each sub-phase is meant to ship
   - Admin: create cohorts with a start date, see each cohort's waitlist
   - Home screen checklist: profile, business, intake, waitlist
 
-## In progress (2026-09-28): 3.1 secure documents, 3.4 messaging upgrades, 3.6 resources hub
+## Shipped 2026-09-28: 3.1 secure documents, 3.4 messaging upgrades, 3.6 resources hub
+## In progress (2026-10-05): 3.7 course delivery (admin course manager, member lessons, progress, cohort enrollment)
 
 ## Next (in this order)
 - **3.1 Secure documents**

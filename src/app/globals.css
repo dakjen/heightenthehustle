@@ -81,3 +81,22 @@ h1, h2, h3, h4, h5, h6 {
 .hth-pop {
   animation: hth-pop 0.25s ease-out both;
 }
+
+/* Markdown content (lessons, course descriptions) */
+.hth-prose { color: #2b2b2b; line-height: 1.65; }
+.hth-prose > * + * { margin-top: 0.9em; }
+.hth-prose h1, .hth-prose h2, .hth-prose h3 { font-family: var(--font-bebas-neue); letter-spacing: 0.02em; line-height: 1.1; color: #171717; margin-top: 1.6em; }
+.hth-prose h1 { font-size: 2.25rem; } .hth-prose h2 { font-size: 1.75rem; } .hth-prose h3 { font-size: 1.35rem; }
+.hth-prose h1:first-child, .hth-prose h2:first-child, .hth-prose h3:first-child { margin-top: 0; }
+.hth-prose ul { list-style: disc; padding-left: 1.4em; } .hth-prose ol { list-style: decimal; padding-left: 1.4em; }
+.hth-prose li + li { margin-top: 0.3em; }
+.hth-prose a { color: var(--brand); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.hth-prose a:hover { color: var(--brand-dark); }
+.hth-prose blockquote { border-left: 4px solid var(--brand); padding-left: 1em; color: #606060; }
+.hth-prose code { background: #f3f3f3; padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+.hth-prose pre { background: #2b2b2b; color: #fff; padding: 1em; border-radius: 0.75rem; overflow-x: auto; }
+.hth-prose table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+.hth-prose th, .hth-prose td { border: 1px solid #e8e8e8; padding: 0.5em 0.75em; text-align: left; }
+.hth-prose th { background: #f6f6f6; }
+.hth-prose hr { border: 0; border-top: 1px solid #e8e8e8; }
+.hth-prose img { max-width: 100%; border-radius: 0.75rem; }

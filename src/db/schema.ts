@@ -144,6 +144,8 @@ export const classes = pgTable('classes', {
   teacherId: integer('teacher_id').notNull().references(() => users.id),
   type: classTypeEnum('type').notNull().default('hth-course'),
   syllabusUrl: text('syllabus_url'),
+  isPublished: boolean('is_published').notNull().default(false), // hidden from members until published
+  coverImageUrl: text('cover_image_url'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
@@ -152,7 +154,11 @@ export const lessons = pgTable('lessons', {
   id: serial('id').primaryKey(),
   classId: integer('class_id').notNull().references(() => classes.id),
   title: text('title').notNull(),
-  content: text('content'),
+  summary: text('summary'), // one or two lines shown in the lesson list
+  content: text('content'), // Markdown
+  videoUrl: text('video_url'), // YouTube/Vimeo/Loom link embedded at the top of the lesson
+  durationMinutes: integer('duration_minutes'),
+  isPublished: boolean('is_published').notNull().default(true),
   order: integer('order').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
@@ -162,9 +168,18 @@ export const enrollments = pgTable('enrollments', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
   classId: integer('class_id').notNull().references(() => classes.id),
+  cohortId: integer('cohort_id').references(() => cohorts.id), // which cohort run they're in
   status: enrollmentStatusEnum('status').notNull().default('pending'),
   enrollmentDate: timestamp('enrollment_date', { withTimezone: true }).notNull().defaultNow(),
 });
+
+// Which lessons a member has completed.
+export const lessonProgress = pgTable('lesson_progress', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
+  lessonId: integer('lesson_id').notNull().references(() => lessons.id, { onDelete: 'cascade' }),
+  completedAt: timestamp('completed_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex('lesson_progress_user_lesson_idx').on(t.userId, t.lessonId)]);
 
 export const businessToCompetition = pgTable('business_to_competition', {
   id: serial('id').primaryKey(),
@@ -285,6 +300,10 @@ export type PitchSubmission = InferSelectModel<typeof pitchSubmissions>;
 export type BusinessToCompetition = InferSelectModel<typeof businessToCompetition>;
 export type ClientIntakeForm = InferSelectModel<typeof clientIntakeForms>;
 export type Cohort = InferSelectModel<typeof cohorts>;
+export type Lesson = InferSelectModel<typeof lessons>;
+export type Class = InferSelectModel<typeof classes>;
+export type Enrollment = InferSelectModel<typeof enrollments>;
+export type LessonProgress = InferSelectModel<typeof lessonProgress>;
 export type SupportRequest = InferSelectModel<typeof supportRequests>;
 export type Resource = InferSelectModel<typeof resources>;
 export type SecureDocument = InferSelectModel<typeof documents>;
@@ -393,6 +412,10 @@ export const enrollmentsRelations = relations(enrollments, ({ one }) => ({
     fields: [enrollments.classId],
     references: [classes.id],
   }),
+  cohort: one(cohorts, {
+    fields: [enrollments.cohortId],
+    references: [cohorts.id],
+  }),
 }));
 
 export const businessToCompetitionRelations = relations(businessToCompetition, ({ one }) => ({
@@ -437,4 +460,9 @@ export const documentsRelations = relations(documents, ({ one }) => ({
   owner: one(users, { fields: [documents.ownerId], references: [users.id], relationName: 'document_owner' }),
   business: one(businesses, { fields: [documents.businessId], references: [businesses.id] }),
   uploadedBy: one(users, { fields: [documents.uploadedById], references: [users.id], relationName: 'document_uploader' }),
+}));
+
+export const lessonProgressRelations = relations(lessonProgress, ({ one }) => ({
+  user: one(users, { fields: [lessonProgress.userId], references: [users.id] }),
+  lesson: one(lessons, { fields: [lessonProgress.lessonId], references: [lessons.id] }),
 }));
