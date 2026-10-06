@@ -101,15 +101,12 @@ h1, h2, h3, h4, h5, h6 {
 .hth-prose hr { border: 0; border-top: 1px solid #e8e8e8; }
 .hth-prose img { max-width: 100%; border-radius: 0.75rem; }
 
-/* Video cards inside Markdown (video links in a list render as compact players with captions) */
-.hth-prose .hth-video-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; margin: 0.75em 0 1em; }
-@media (min-width: 640px) { .hth-prose .hth-video-grid:not(.hth-video-grid-single) { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .hth-prose .hth-video-grid:not(.hth-video-grid-single) { grid-template-columns: repeat(3, 1fr); } }
-.hth-prose .hth-video-grid-single { max-width: 560px; }
-.hth-prose .hth-video-card { margin: 0; }
-.hth-prose .hth-video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 0.6rem; overflow: hidden; background: #2b2b2b; box-shadow: 0 6px 18px -10px rgba(0,0,0,0.3); }
-.hth-prose .hth-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.hth-prose .hth-video-card figcaption { margin-top: 0.45em; font-size: 0.85em; line-height: 1.35; }
+/* Videos inside Markdown: title line, then the player, stacked one after another */
+.hth-prose .hth-video-list { display: flex; flex-direction: column; gap: 1.5rem; margin: 0.5em 0 1.25em; }
+.hth-prose .hth-video-card { margin: 0; max-width: 640px; }
+.hth-prose .hth-video-card figcaption { margin-bottom: 0.5em; font-size: 1em; line-height: 1.4; }
 .hth-prose .hth-video-card figcaption a { font-weight: 600; }
 .hth-prose .hth-video-source { color: #606060; }
-.hth-prose .hth-video-grid + ul, .hth-prose .hth-video-grid + ol { margin-top: 0.25em; }
+.hth-prose .hth-video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 0.6rem; overflow: hidden; background: #2b2b2b; box-shadow: 0 6px 18px -10px rgba(0,0,0,0.3); }
+.hth-prose .hth-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.hth-prose .hth-video-list + ul, .hth-prose .hth-video-list + ol { margin-top: 0.25em; }

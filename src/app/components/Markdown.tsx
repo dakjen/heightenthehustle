@@ -49,9 +49,13 @@ function splitVideoBlocks(content: string): Block[] {
 
 function VideoGrid({ items }: { items: VideoItem[] }) {
   return (
-    <div className={`hth-video-grid ${items.length === 1 ? "hth-video-grid-single" : ""}`}>
+    <div className="hth-video-list">
       {items.map((v) => (
         <figure key={v.embed} className="hth-video-card">
+          <figcaption>
+            <a href={v.url} target="_blank" rel="noopener noreferrer">{v.title}</a>
+            {v.caption && <span className="hth-video-source">, {v.caption}</span>}
+          </figcaption>
           <div className="hth-video-frame">
             <iframe
               src={v.embed}
@@ -62,10 +66,6 @@ function VideoGrid({ items }: { items: VideoItem[] }) {
               referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
-          <figcaption>
-            <a href={v.url} target="_blank" rel="noopener noreferrer">{v.title}</a>
-            {v.caption && <span className="hth-video-source"> · {v.caption}</span>}
-          </figcaption>
         </figure>
       ))}
     </div>
