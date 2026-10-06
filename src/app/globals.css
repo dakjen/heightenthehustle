@@ -110,6 +110,3 @@ h1, h2, h3, h4, h5, h6 {
 .hth-prose .hth-video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 0.6rem; overflow: hidden; background: #2b2b2b; box-shadow: 0 6px 18px -10px rgba(0,0,0,0.3); }
 .hth-prose .hth-video-frame iframe, .hth-prose .hth-video-frame > div { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .hth-prose .hth-video-list + ul, .hth-prose .hth-video-list + ol { margin-top: 0.25em; }
-
-/* YouTube API players fill their host box (used inside Markdown cards and the featured player) */
-.hth-yt-host > div, .hth-yt-host > iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
