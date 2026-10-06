@@ -39,7 +39,8 @@ function splitVideoBlocks(content: string): Block[] {
     list = [];
   };
 
-  for (const line of content.split("\n")) {
+  // Browser textareas submit \r\n; strip the \r so line-anchored matching works on every line.
+  for (const line of content.replace(/\r\n?/g, "\n").split("\n")) {
     if (LIST_LINE.test(line)) list.push(line);
     else { flushList(); md.push(line); }
   }

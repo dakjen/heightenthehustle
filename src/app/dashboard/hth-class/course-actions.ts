@@ -254,7 +254,7 @@ export async function saveLesson(prevState: FormState, formData: FormData): Prom
   const classId = Number(text(formData, "classId"));
   const title = text(formData, "title");
   const summary = text(formData, "summary");
-  const content = text(formData, "content");
+  const content = text(formData, "content").replace(/\r\n?/g, "\n"); // normalize textarea line endings
   const videoUrl = text(formData, "videoUrl");
   const durationRaw = text(formData, "durationMinutes");
   const isPublished = formData.get("isPublished") !== "off";
