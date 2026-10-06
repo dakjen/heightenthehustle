@@ -5,34 +5,45 @@ import { toEmbedUrl } from "@/lib/video";
 interface VideoItem { title: string; url: string; embed: string; caption: string }
 type Block = { kind: "md"; text: string } | { kind: "videos"; items: VideoItem[] };
 
+const LIST_LINE = /^\s*(?:[-*+]|\d+[.)])\s+/;
 const VIDEO_LINE = /^\s*(?:[-*+]|\d+[.)])\s+\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\s*(.*)$/;
 
 /**
- * Splits Markdown into normal blocks and runs of list items that are video links,
- * e.g. `- [Title](https://youtube.com/...) — Source (note)`. Those runs render as
- * embedded players with the link text + trailing text as the caption.
+ * Splits Markdown into blocks. Each contiguous list is examined: its video links
+ * (YouTube / Vimeo / Loom) are pulled into one grid of embedded players with
+ * captions, and any remaining non-video items stay as a normal list after it.
  */
 function splitVideoBlocks(content: string): Block[] {
   const blocks: Block[] = [];
   let md: string[] = [];
-  let videos: VideoItem[] = [];
+  let list: string[] = [];
   const flushMd = () => { if (md.length) { blocks.push({ kind: "md", text: md.join("\n") }); md = []; } };
-  const flushVideos = () => { if (videos.length) { blocks.push({ kind: "videos", items: videos }); videos = []; } };
+  const flushList = () => {
+    if (!list.length) return;
+    const videos: VideoItem[] = [];
+    const rest: string[] = [];
+    for (const line of list) {
+      const m = line.match(VIDEO_LINE);
+      const embed = m ? toEmbedUrl(m[2]) : null;
+      if (m && embed) videos.push({ title: m[1].trim(), url: m[2], embed, caption: m[3].replace(/^\s*[—–-]\s*/, "").trim() });
+      else rest.push(line);
+    }
+    if (videos.length) {
+      flushMd();
+      blocks.push({ kind: "videos", items: videos });
+      if (rest.length) blocks.push({ kind: "md", text: rest.join("\n") });
+    } else {
+      md.push(...list);
+    }
+    list = [];
+  };
 
   for (const line of content.split("\n")) {
-    const m = line.match(VIDEO_LINE);
-    const embed = m ? toEmbedUrl(m[2]) : null;
-    if (m && embed) {
-      flushMd();
-      const trailing = m[3].replace(/^\s*[—–-]\s*/, "").trim();
-      videos.push({ title: m[1].trim(), url: m[2], embed, caption: trailing });
-    } else {
-      flushVideos();
-      md.push(line);
-    }
+    if (LIST_LINE.test(line)) list.push(line);
+    else { flushList(); md.push(line); }
   }
+  flushList();
   flushMd();
-  flushVideos();
   return blocks;
 }
 

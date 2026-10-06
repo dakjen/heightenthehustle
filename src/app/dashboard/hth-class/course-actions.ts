@@ -179,9 +179,21 @@ export async function getAdminCourse(classId: number): Promise<AdminCourseDetail
   };
 }
 
+/** Staff who can be set as a course's teacher: admins and approved team members. */
+export async function getTeacherOptions(): Promise<{ id: number; name: string; role: string }[]> {
+  await requirePermission("canManageClasses");
+  return db.query.users.findMany({
+    where: and(eq(users.status, "approved"), inArray(users.role, ["admin", "internal"])),
+    columns: { id: true, name: true, role: true },
+    orderBy: [asc(users.name)],
+  });
+}
+
 export async function saveCourse(prevState: FormState, formData: FormData): Promise<FormState> {
   const user = await requirePermission("canManageClasses");
   const id = Number(text(formData, "id"));
+  const teacherIdRaw = text(formData, "teacherId");
+  let teacherId = teacherIdRaw ? Number(teacherIdRaw) : user.id;
   const title = text(formData, "title");
   const description = text(formData, "description");
   const type = text(formData, "type") as Class["type"];
@@ -191,15 +203,20 @@ export async function saveCourse(prevState: FormState, formData: FormData): Prom
   const fieldErrors: Record<string, string> = {};
   if (!title) fieldErrors.title = "Give the course a title.";
   if (!classTypeEnum.enumValues.includes(type)) fieldErrors.type = "Choose a course type.";
+  if (teacherIdRaw) {
+    const t = await db.query.users.findFirst({ where: and(eq(users.id, teacherId), eq(users.status, "approved"), inArray(users.role, ["admin", "internal"])), columns: { id: true } });
+    if (!t) fieldErrors.teacherId = "Choose a team member.";
+    else teacherId = t.id;
+  }
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
   try {
     if (id) {
-      await db.update(classes).set({ title, description: description || null, type, syllabusUrl: syllabusUrl || null, isPublished, updatedAt: new Date() }).where(eq(classes.id, id));
+      await db.update(classes).set({ title, description: description || null, type, syllabusUrl: syllabusUrl || null, isPublished, teacherId, updatedAt: new Date() }).where(eq(classes.id, id));
       revalidateCourses();
       return { message: "Course saved.", error: "", businessId: id };
     }
-    const [created] = await db.insert(classes).values({ title, description: description || null, type, syllabusUrl: syllabusUrl || null, isPublished, teacherId: user.id }).returning({ id: classes.id });
+    const [created] = await db.insert(classes).values({ title, description: description || null, type, syllabusUrl: syllabusUrl || null, isPublished, teacherId }).returning({ id: classes.id });
     revalidateCourses();
     return { message: "Course created.", error: "", businessId: created.id };
   } catch (error) {

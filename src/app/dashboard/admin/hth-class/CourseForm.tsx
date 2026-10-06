@@ -1,8 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { saveCourse, type AdminCourse } from "@/app/dashboard/hth-class/course-actions";
+import { getTeacherOptions, saveCourse, type AdminCourse } from "@/app/dashboard/hth-class/course-actions";
 import { FormState } from "@/types/form-state";
 import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, checkboxClass, ghostButtonClass, invalidProps } from "@/app/components/form";
 
@@ -13,7 +13,7 @@ export const COURSE_TYPE_LABEL: Record<AdminCourse["type"], string> = {
 
 type CourseFormProps = {
   /** Existing course to edit. Omit to create a new one. */
-  course?: Pick<AdminCourse, "id" | "title" | "description" | "type" | "syllabusUrl" | "isPublished">;
+  course?: Pick<AdminCourse, "id" | "title" | "description" | "type" | "syllabusUrl" | "isPublished" | "teacherId">;
   /** Called after a successful save with the saved course id. */
   onSaved?: (courseId: number) => void;
   onCancel?: () => void;
@@ -21,6 +21,12 @@ type CourseFormProps = {
 
 /** Create/edit form for a course. Shared by the course list and the course editor's "Course details" tab. */
 export default function CourseForm({ course, onSaved, onCancel }: CourseFormProps) {
+  const [teachers, setTeachers] = useState<{ id: number; name: string; role: string }[]>([]);
+  useEffect(() => {
+    let alive = true;
+    getTeacherOptions().then((t) => { if (alive) setTeachers(t); });
+    return () => { alive = false; };
+  }, []);
   const router = useRouter();
   const [state, formAction] = useActionState<FormState, FormData>(saveCourse, { message: "" });
   const errors = state.fieldErrors ?? {};
@@ -49,6 +55,14 @@ export default function CourseForm({ course, onSaved, onCancel }: CourseFormProp
           <select id="type" name="type" required defaultValue={course?.type ?? "hth-course"} className={inputClass} {...invalidProps("type", errors)}>
             {(Object.keys(COURSE_TYPE_LABEL) as AdminCourse["type"][]).map((t) => (
               <option key={t} value={t}>{COURSE_TYPE_LABEL[t]}</option>
+            ))}
+          </select>
+        </Field>
+        <Field name="teacherId" label="Teacher" required error={errors.teacherId} hint="Receives homework submissions and is shown as the instructor.">
+          <select id="teacherId" name="teacherId" defaultValue={course?.teacherId ?? ""} className={inputClass} {...invalidProps("teacherId", errors)}>
+            <option value="">Me (current user)</option>
+            {teachers.map((t) => (
+              <option key={t.id} value={t.id}>{t.name}{t.role === "admin" ? " · Admin" : " · Team"}</option>
             ))}
           </select>
         </Field>
