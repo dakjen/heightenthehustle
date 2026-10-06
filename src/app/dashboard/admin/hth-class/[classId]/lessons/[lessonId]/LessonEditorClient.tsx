@@ -8,8 +8,7 @@ import { saveLesson, deleteLesson } from "@/app/dashboard/hth-class/course-actio
 import { FormState } from "@/types/form-state";
 import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, checkboxClass, secondaryButtonClass, ghostButtonClass, invalidProps } from "@/app/components/form";
 import Markdown from "@/app/components/Markdown";
-import { toEmbedUrl, extractVideos } from "@/lib/video";
-import LessonVideos from "@/app/dashboard/hth-class/LessonVideos";
+import { toEmbedUrl } from "@/lib/video";
 import AttachmentsPanel from "../../AttachmentsPanel";
 import AssignmentsPanel, { type AdminAssignment } from "../../AssignmentsPanel";
 
@@ -34,10 +33,6 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
   const [pending, start] = useTransition();
   const lastHandled = useRef<FormState | null>(null);
   const embed = videoUrl ? toEmbedUrl(videoUrl) : null;
-  const videos = [
-    ...(videoUrl && embed ? [{ title: lesson?.title ?? "Featured video", url: videoUrl, embed }] : []),
-    ...extractVideos(draft).filter((v) => v.embed !== embed),
-  ];
 
   useEffect(() => {
     if (state === lastHandled.current) return;
@@ -84,11 +79,13 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
         </div>
       </header>
 
-      {videos.length > 0 && (
-        <div className="mb-6">
-          <LessonVideos videos={videos} lessonTitle={lesson?.title ?? "Lesson"} />
-          <p className="mt-2 text-xs text-gray-500">This is the video player members see at the top of the lesson. The featured video comes first, then every video linked in the content.</p>
-        </div>
+      {embed && (
+        <section className="mb-6 hth-card overflow-hidden">
+          <div className="relative aspect-video w-full bg-[#2b2b2b]">
+            <iframe src={embed} title="Featured video" className="absolute inset-0 h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+          </div>
+          <p className="px-5 py-2 text-xs text-gray-500">Featured video, shown above the lesson content. Videos linked inside the content also embed with their captions (use Preview to check).</p>
+        </section>
       )}
 
       <form action={formAction} className="space-y-5" noValidate>

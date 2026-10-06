@@ -35,29 +35,3 @@ export function toEmbedUrl(raw: string): string | null {
   }
   return null;
 }
-
-export interface LessonVideo {
-  title: string;
-  url: string;
-  embed: string;
-}
-
-/**
- * Pulls every embeddable video out of a Markdown string: `[Title](url)` links and bare URLs.
- * Order is preserved; duplicates (same embed) are dropped.
- */
-export function extractVideos(markdown: string | null | undefined): LessonVideo[] {
-  if (!markdown) return [];
-  const out: LessonVideo[] = [];
-  const seen = new Set<string>();
-  const push = (title: string, url: string) => {
-    const embed = toEmbedUrl(url);
-    if (!embed || seen.has(embed)) return;
-    seen.add(embed);
-    out.push({ title: title.trim() || "Video", url, embed });
-  };
-  for (const m of markdown.matchAll(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g)) push(m[1], m[2]);
-  const withoutLinks = markdown.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, "");
-  for (const m of withoutLinks.matchAll(/https?:\/\/[^\s<>)]+/g)) push("Video", m[0]);
-  return out;
-}

@@ -2,35 +2,88 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toEmbedUrl } from "@/lib/video";
 
+interface VideoItem { title: string; url: string; embed: string; caption: string }
+type Block = { kind: "md"; text: string } | { kind: "videos"; items: VideoItem[] };
+
+const VIDEO_LINE = /^\s*(?:[-*+]|\d+[.)])\s+\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\s*(.*)$/;
+
+/**
+ * Splits Markdown into normal blocks and runs of list items that are video links,
+ * e.g. `- [Title](https://youtube.com/...) — Source (note)`. Those runs render as
+ * embedded players with the link text + trailing text as the caption.
+ */
+function splitVideoBlocks(content: string): Block[] {
+  const blocks: Block[] = [];
+  let md: string[] = [];
+  let videos: VideoItem[] = [];
+  const flushMd = () => { if (md.length) { blocks.push({ kind: "md", text: md.join("\n") }); md = []; } };
+  const flushVideos = () => { if (videos.length) { blocks.push({ kind: "videos", items: videos }); videos = []; } };
+
+  for (const line of content.split("\n")) {
+    const m = line.match(VIDEO_LINE);
+    const embed = m ? toEmbedUrl(m[2]) : null;
+    if (m && embed) {
+      flushMd();
+      const trailing = m[3].replace(/^\s*[—–-]\s*/, "").trim();
+      videos.push({ title: m[1].trim(), url: m[2], embed, caption: trailing });
+    } else {
+      flushVideos();
+      md.push(line);
+    }
+  }
+  flushMd();
+  flushVideos();
+  return blocks;
+}
+
+function VideoGrid({ items }: { items: VideoItem[] }) {
+  return (
+    <div className={`hth-video-grid ${items.length === 1 ? "hth-video-grid-single" : ""}`}>
+      {items.map((v) => (
+        <figure key={v.embed} className="hth-video-card">
+          <div className="hth-video-frame">
+            <iframe
+              src={v.embed}
+              title={v.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+          <figcaption>
+            <a href={v.url} target="_blank" rel="noopener noreferrer">{v.title}</a>
+            {v.caption && <span className="hth-video-source"> · {v.caption}</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 /**
  * Renders lesson/course Markdown with portal styling. Links open in a new tab.
- * Links to YouTube, Vimeo or Loom are rendered as an inline video player with
- * the link text as the caption, so "Required videos" lists play in place.
+ * List items that link to YouTube / Vimeo / Loom become embedded players with captions.
  */
 export default function Markdown({ content, className = "", embedVideos = true }: { content: string; className?: string; embedVideos?: boolean }) {
+  const blocks = embedVideos ? splitVideoBlocks(content) : [{ kind: "md", text: content } as Block];
   return (
     <div className={`hth-prose ${className}`}>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          a: ({ href, children }) => {
-            const embed = embedVideos && href ? toEmbedUrl(href) : null;
-            if (embed) {
-              return (
-                <span className="hth-video">
-                  <span className="hth-video-frame">
-                    <iframe src={embed} title={typeof children === "string" ? children : "Video"} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy" />
-                  </span>
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="hth-video-caption">{children}</a>
-                </span>
-              );
-            }
-            return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
-          },
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+      {blocks.map((b, i) =>
+        b.kind === "videos" ? (
+          <VideoGrid key={i} items={b.items} />
+        ) : (
+          <ReactMarkdown
+            key={i}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>,
+            }}
+          >
+            {b.text}
+          </ReactMarkdown>
+        ),
+      )}
     </div>
   );
 }
