@@ -1,4 +1,5 @@
 import { toEmbedUrl } from "@/lib/video";
+import VideoEmbed from "@/app/components/VideoEmbed";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
@@ -63,7 +64,7 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
       {embed && (
         <section className="mt-6 hth-fade-up hth-fade-up-delay-1">
           <div className="relative w-full overflow-hidden rounded-2xl bg-black shadow-md" style={{ aspectRatio: "16 / 9" }}>
-            <iframe src={embed} title={lesson.title} className="absolute inset-0 h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+            <VideoEmbed embed={embed} url={lesson.videoUrl!} title={lesson.title} />
           </div>
         </section>
       )}

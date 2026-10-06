@@ -9,6 +9,7 @@ import { FormState } from "@/types/form-state";
 import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, checkboxClass, secondaryButtonClass, ghostButtonClass, invalidProps } from "@/app/components/form";
 import Markdown from "@/app/components/Markdown";
 import { toEmbedUrl } from "@/lib/video";
+import VideoEmbed from "@/app/components/VideoEmbed";
 import AttachmentsPanel from "../../AttachmentsPanel";
 import AssignmentsPanel, { type AdminAssignment } from "../../AssignmentsPanel";
 
@@ -82,7 +83,7 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
       {embed && (
         <section className="mb-6 hth-card overflow-hidden">
           <div className="relative aspect-video w-full bg-[#2b2b2b]">
-            <iframe src={embed} title="Featured video" className="absolute inset-0 h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+            <VideoEmbed embed={embed} url={videoUrl} title="Featured video" />
           </div>
           <p className="px-5 py-2 text-xs text-gray-500">Featured video, shown above the lesson content. Videos linked inside the content also embed with their captions (use Preview to check).</p>
         </section>

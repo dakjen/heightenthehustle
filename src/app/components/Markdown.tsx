@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toEmbedUrl } from "@/lib/video";
+import VideoEmbed from "./VideoEmbed";
 
 interface VideoItem { title: string; url: string; embed: string; caption: string }
 type Block = { kind: "md"; text: string } | { kind: "videos"; items: VideoItem[] };
@@ -57,14 +58,7 @@ function VideoGrid({ items }: { items: VideoItem[] }) {
             {v.caption && <span className="hth-video-source">, {v.caption}</span>}
           </figcaption>
           <div className="hth-video-frame">
-            <iframe
-              src={v.embed}
-              title={v.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
+            <VideoEmbed embed={v.embed} url={v.url} title={v.title} />
           </div>
         </figure>
       ))}
