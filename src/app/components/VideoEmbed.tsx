@@ -40,24 +40,29 @@ export default function VideoEmbed({ embed, url, title, className = "" }: { embe
   const videoId = embed.match(YT_ID)?.[1] ?? null;
 
   useEffect(() => {
-    if (!videoId || !hostRef.current) return;
-    let player: unknown;
+    const host = hostRef.current;
+    if (!videoId || !host) return;
+    // Give the YouTube API its own node (it replaces it with an iframe). React
+    // only ever owns `host`, so unmounting never tries to remove a swapped node.
+    const target = document.createElement("div");
+    host.appendChild(target);
+    let player: { destroy?: () => void } | undefined;
     let cancelled = false;
     loadYouTubeApi().then(() => {
-      if (cancelled || !hostRef.current || !window.YT?.Player) return;
-      player = new window.YT.Player(hostRef.current, {
+      if (cancelled || !window.YT?.Player) return;
+      player = new window.YT.Player(target, {
         videoId,
         host: "https://www.youtube.com",
         playerVars: { rel: 0, modestbranding: 1, origin: window.location.origin },
         events: {
           onError: (e: { data: number }) => { if ([100, 101, 150].includes(e.data)) setBlocked(true); },
         },
-      });
+      }) as { destroy?: () => void };
     });
     return () => {
       cancelled = true;
-      const p = player as { destroy?: () => void } | undefined;
-      p?.destroy?.();
+      try { player?.destroy?.(); } catch { /* ignore */ }
+      host.replaceChildren();
     };
   }, [videoId]);
 
@@ -77,7 +82,7 @@ export default function VideoEmbed({ embed, url, title, className = "" }: { embe
   }
 
   if (videoId) {
-    return <div id={id} ref={hostRef} className={`absolute inset-0 h-full w-full ${className}`} />;
+    return <div id={id} ref={hostRef} className={`hth-yt-host absolute inset-0 h-full w-full ${className}`} />;
   }
 
   return (
