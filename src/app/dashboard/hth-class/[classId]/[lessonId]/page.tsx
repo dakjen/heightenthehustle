@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import Markdown from "@/app/components/Markdown";
 import AttachmentList from "../../AttachmentList";
+import AssignmentCard from "../../AssignmentCard";
+import { getMyAssignments } from "../../assignment-actions";
 import { getLessonForMember } from "../../course-actions";
 import { ProgressBar, formatDuration, percent } from "../../course-ui";
 import LessonClient from "./LessonClient";
@@ -20,6 +22,7 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
 
   const view = await getLessonForMember(classId, lessonId);
   if (!view) notFound();
+  const homework = await getMyAssignments(classId, lessonId);
 
   const { lesson, course, prev, next, completed, index, total, attachments } = view;
   const pct = percent(index + 1, total);
@@ -92,6 +95,20 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
       </article>
 
       <AttachmentList attachments={attachments} title="Downloads & templates for this lesson" />
+
+      {homework.length > 0 && (
+        <section className="mt-6 hth-fade-up hth-fade-up-delay-2" aria-labelledby="lesson-homework">
+          <div className="flex items-end justify-between gap-4 px-1">
+            <h2 id="lesson-homework" className="text-3xl text-gray-900">Homework for this lesson</h2>
+            <p className="text-sm text-gray-500">{homework.length} assignment{homework.length === 1 ? "" : "s"}</p>
+          </div>
+          <div className="mt-3 space-y-4">
+            {homework.map((a) => (
+              <AssignmentCard key={a.id} assignment={a} courseId={course.id} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <LessonClient
         lessonId={lesson.id}

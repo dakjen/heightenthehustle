@@ -13,7 +13,7 @@ Working order agreed with Dakotah on 2026-09-27. Each sub-phase is meant to ship
   - Home screen checklist: profile, business, intake, waitlist
 
 ## Shipped 2026-09-28: 3.1 secure documents, 3.4 messaging upgrades, 3.6 resources hub
-## In progress (2026-10-05): 3.7 course delivery (admin course manager, member lessons, progress, cohort enrollment)
+## In progress (2026-10-05): 3.7 course delivery (admin course manager, lesson pages, member lessons + progress, cohort enrollment, downloads/templates, homework with grading)
 
 ## Next (in this order)
 - **3.1 Secure documents**

@@ -4,7 +4,7 @@ import SidebarUserMenu from "@/app/components/SidebarUserMenu";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import SidebarNav, { type NavItem } from "@/app/components/SidebarNav";
+import SidebarNav, { type NavItem, type NavSection } from "@/app/components/SidebarNav";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllUserBusinesses } from "./businesses/actions";
@@ -48,17 +48,33 @@ export default async function DashboardLayout({
     { href: "/dashboard/resources", label: "Resources" },
   ];
 
-  const adminItems: NavItem[] = [
-    ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Admin Users" }] : []),
-    ...(isAdminArea ? [{ href: "/dashboard/admin/support", label: "Support Requests" }] : []),
-    ...(isAdminArea ? [{ href: "/dashboard/admin/documents", label: "Member Documents" }] : []),
-    ...(isAdminArea ? [{ href: "/dashboard/admin/resources", label: "Manage Resources" }] : []),
-    ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Admin Businesses" }] : []),
-    ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Admin Intake Forms" }] : []),
-    ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Admin Pitch Competition" }] : []),
-    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
-    ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Courses & Lessons" }] : []),
-  ];
+  // Staff navigation, grouped so "Admin Tools" doesn't become a junk drawer.
+  const sections: NavSection[] = [
+    {
+      label: "Admin Tools",
+      items: [
+        ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Users & Approvals" }] : []),
+        ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Businesses" }] : []),
+        ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Intake Forms" }] : []),
+        ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Pitch Competition" }] : []),
+      ],
+    },
+    {
+      label: "Team Tools",
+      items: [
+        ...(isAdminArea ? [{ href: "/dashboard/admin/support", label: "Support Requests" }] : []),
+        ...(isAdminArea ? [{ href: "/dashboard/admin/documents", label: "Member Documents" }] : []),
+        ...(isAdminArea ? [{ href: "/dashboard/admin/resources", label: "Resources Hub" }] : []),
+      ],
+    },
+    {
+      label: "Education",
+      items: [
+        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Courses & Lessons" }] : []),
+        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
+      ],
+    },
+  ].filter((s) => s.items.length > 0);
 
   const roleLabel = isAdmin ? "Admin" : session.user.role === 'internal' ? "Team" : "Member";
   // The session cookie can be stale after a photo change, so read the current headshot.
@@ -77,7 +93,7 @@ export default async function DashboardLayout({
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          <SidebarNav items={items} adminItems={adminItems} />
+          <SidebarNav items={items} sections={sections} />
         </div>
 
         {/* Admin View Toggle */}

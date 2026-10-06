@@ -3,8 +3,10 @@ import { notFound } from "next/navigation";
 import { requireUser, hasPermission } from "@/lib/auth";
 import Markdown from "@/app/components/Markdown";
 import AttachmentList from "../AttachmentList";
+import AssignmentCard from "../AssignmentCard";
+import { getMyAssignments } from "../assignment-actions";
 import { getMyCourses } from "../course-actions";
-import { ProgressBar, TypeChip, formatDuration, percent } from "../course-ui";
+import { AssignmentStatusChip, ProgressBar, TypeChip, formatDuration, formatShortDate, percent } from "../course-ui";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +33,10 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
   const nextLesson = course.lessons.find((l) => !l.completed) ?? null;
   const finished = total > 0 && course.completedCount === total;
   const cohortName = course.enrollment.cohort?.name ?? null;
+  const homework = await getMyAssignments(classId, null);
+  const homeworkDone = homework.filter((a) => a.submission !== null).length;
+  const lessonHomework = homework.filter((a) => a.lessonId !== null);
+  const courseHomework = homework.filter((a) => a.lessonId === null);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -64,6 +70,13 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
             <p className="font-display text-3xl leading-none text-[#ff5c5c]">{pct}%</p>
           </div>
           <ProgressBar value={pct} dark className="mt-2" />
+          {homework.length > 0 && (
+            <p className="mt-2 text-sm text-gray-300">
+              <a href="#homework" className="hover:underline">
+                Homework: <span className="font-semibold text-white">{homeworkDone} of {homework.length}</span> submitted
+              </a>
+            </p>
+          )}
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             {nextLesson && (
               <Link
@@ -147,6 +160,51 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
           </ol>
         )}
       </section>
+
+      {/* Homework */}
+      {homework.length > 0 && (
+        <section id="homework" className="mt-6 hth-card p-6 lg:p-8 hth-fade-up hth-fade-up-delay-3 scroll-mt-6" aria-labelledby="homework-heading">
+          <div className="flex items-end justify-between gap-4">
+            <h2 id="homework-heading" className="text-3xl text-gray-900">Homework</h2>
+            <p className="text-sm text-gray-500">{homeworkDone} of {homework.length} submitted</p>
+          </div>
+          {lessonHomework.length > 0 && (
+          <ul className="mt-4 divide-y divide-gray-100">
+            {lessonHomework.map((a) => {
+              const lessonNum = course.lessons.find((l) => l.id === a.lessonId)?.order ?? null;
+              const meta = [
+                a.lessonTitle ? `${lessonNum !== null ? `Unit ${lessonNum} · ` : ""}${a.lessonTitle}` : null,
+                a.dueDate ? `Due ${formatShortDate(a.dueDate)}` : null,
+                a.points != null ? `${a.points} pt${a.points === 1 ? "" : "s"}` : null,
+              ].filter((m): m is string => m !== null);
+              return (
+                <li key={a.id}>
+                  <Link
+                    href={`/dashboard/hth-class/${course.id}/${a.lessonId}`}
+                    className="-mx-3 flex flex-col gap-2 rounded-xl px-3 py-3.5 transition hover:bg-gray-50 sm:flex-row sm:items-center sm:gap-4"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-gray-900">{a.title}</p>
+                      {meta.length > 0 && <p className="mt-0.5 text-xs text-gray-500">{meta.join(" · ")}</p>}
+                    </div>
+                    <AssignmentStatusChip assignment={a} className="self-start sm:self-center" />
+                    <span aria-hidden="true" className="hidden text-gray-300 sm:block">→</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          )}
+          {courseHomework.length > 0 && (
+            <div className="mt-6 space-y-4">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Course-wide assignments</h3>
+              {courseHomework.map((a) => (
+                <AssignmentCard key={a.id} assignment={a} courseId={course.id} />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

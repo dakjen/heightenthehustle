@@ -12,11 +12,13 @@ import { FormState } from "@/types/form-state";
 import { Field, FormError, FormSuccess, inputClass, checkboxClass, primaryButtonClass, secondaryButtonClass, ghostButtonClass } from "@/app/components/form";
 import CourseForm, { COURSE_TYPE_LABEL } from "../CourseForm";
 import AttachmentsPanel from "./AttachmentsPanel";
+import AssignmentsPanel, { formatDue, type AdminAssignment } from "./AssignmentsPanel";
+import SubmissionsPanel from "./SubmissionsPanel";
 
-type Tab = "lessons" | "details" | "enrollment";
+export type Tab = "lessons" | "details" | "enrollment" | "submissions";
 type CohortOption = Pick<Cohort, "id" | "name" | "startDate">;
 
-const TAB_LABEL: Record<Tab, string> = { lessons: "Lessons", details: "Course details", enrollment: "Enrollment" };
+const TAB_LABEL: Record<Tab, string> = { lessons: "Lessons", details: "Course details", enrollment: "Enrollment", submissions: "Homework" };
 const ENROLLMENT_STATUS_LABEL: Record<Enrollment["status"], string> = {
   enrolled: "Enrolled",
   completed: "Completed",
@@ -279,11 +281,83 @@ function EnrollmentTab({ course, cohorts }: { course: AdminCourseDetail; cohorts
 }
 
 // ---------------------------------------------------------------------------
+// Homework
+// ---------------------------------------------------------------------------
+
+function HomeworkTab({ course, cohorts, assignments }: { course: AdminCourseDetail; cohorts: CohortOption[]; assignments: AdminAssignment[] }) {
+  const ungraded = assignments.reduce((n, a) => n + (a.ungradedCount ?? 0), 0);
+  return (
+    <div className="space-y-6">
+      <AssignmentsPanel classId={course.id} assignments={assignments.filter((a) => a.lessonId === null)} />
+
+      <section className="hth-card overflow-hidden">
+        <div className="px-5 pt-5 sm:px-6">
+          <h3 className="text-2xl leading-tight text-gray-900">All assignments</h3>
+          <p className="text-sm text-gray-600">
+            {assignments.length} assignment{assignments.length === 1 ? "" : "s"} across the course{ungraded ? ` · ${ungraded} submission${ungraded === 1 ? "" : "s"} to grade` : ""}. Lesson homework is edited on the lesson page.
+          </p>
+        </div>
+        {assignments.length === 0 ? (
+          <p className="px-5 pb-5 pt-3 text-sm text-gray-500 sm:px-6">No assignments yet.</p>
+        ) : (
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[32rem] text-sm">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wider text-gray-500">
+                <tr>
+                  <th className="px-5 py-2 sm:px-6">Assignment</th>
+                  <th className="px-3 py-2">Lesson</th>
+                  <th className="px-3 py-2">Due</th>
+                  <th className="px-3 py-2 text-right">Submissions</th>
+                  <th className="px-5 py-2 text-right sm:px-6">To grade</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {assignments.map((a) => (
+                  <tr key={a.id}>
+                    <td className="px-5 py-2 sm:px-6">
+                      <span className="font-medium text-gray-900">{a.title}</span>
+                      {!a.isPublished && <span className="ml-2 rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-semibold text-yellow-800">Draft</span>}
+                    </td>
+                    <td className="px-3 py-2 text-gray-700">
+                      {a.lessonId ? (
+                        <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${a.lessonId}`} className="hover:text-[#910000] hover:underline">{a.lessonTitle ?? "Lesson"}</Link>
+                      ) : (
+                        <span className="text-gray-500">Course</span>
+                      )}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-2 text-gray-700">{formatDue(a.dueDate).replace(/^Due /, "")}</td>
+                    <td className="px-3 py-2 text-right text-gray-700">{a.submissionCount ?? 0}</td>
+                    <td className="px-5 py-2 text-right sm:px-6">
+                      {a.ungradedCount ? <span className="rounded-full bg-[#910000]/10 px-2 py-0.5 text-xs font-semibold text-[#910000]">{a.ungradedCount}</span> : <span className="text-gray-400">0</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+
+      <SubmissionsPanel classId={course.id} cohorts={cohorts} assignments={assignments} />
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------------
 
-export default function CourseEditorClient({ course, cohorts }: { course: AdminCourseDetail; cohorts: CohortOption[] }) {
-  const [tab, setTab] = useState<Tab>("lessons");
+interface Props {
+  course: AdminCourseDetail;
+  cohorts: CohortOption[];
+  assignments: AdminAssignment[];
+  /** From `?tab=` on the page, e.g. the "Review submissions" email link. */
+  initialTab?: Tab;
+}
+
+export default function CourseEditorClient({ course, cohorts, assignments, initialTab = "lessons" }: Props) {
+  const [tab, setTab] = useState<Tab>(initialTab);
+  useEffect(() => { setTab(initialTab); }, [initialTab]);
 
   return (
     <div className="w-full max-w-5xl">
@@ -320,6 +394,7 @@ export default function CourseEditorClient({ course, cohorts }: { course: AdminC
         </div>
       )}
       {tab === "enrollment" && <EnrollmentTab course={course} cohorts={cohorts} />}
+      {tab === "submissions" && <HomeworkTab course={course} cohorts={cohorts} assignments={assignments} />}
     </div>
   );
 }

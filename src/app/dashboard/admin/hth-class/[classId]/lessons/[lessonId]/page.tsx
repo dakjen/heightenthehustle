@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getAdminCourse } from "@/app/dashboard/hth-class/course-actions";
+import { getAssignmentsForAdmin } from "@/app/dashboard/hth-class/assignment-actions";
 import LessonEditorClient from "./LessonEditorClient";
 
 export const dynamic = "force-dynamic";
@@ -14,12 +15,14 @@ export default async function AdminLessonPage({ params }: { params: Promise<{ cl
   if (!course) notFound();
 
   if (rawLesson === "new") {
-    return <LessonEditorClient classId={classId} courseTitle={course.title} lesson={null} lessonNumber={course.lessons.length + 1} attachments={[]} />;
+    return <LessonEditorClient classId={classId} courseTitle={course.title} lesson={null} lessonNumber={course.lessons.length + 1} attachments={[]} assignments={[]} />;
   }
 
   const lessonId = Number(rawLesson);
   const index = course.lessons.findIndex((l) => l.id === lessonId);
   if (index === -1) notFound();
+
+  const assignments = (await getAssignmentsForAdmin(classId)).filter((a) => a.lessonId === lessonId);
 
   return (
     <LessonEditorClient
@@ -28,6 +31,7 @@ export default async function AdminLessonPage({ params }: { params: Promise<{ cl
       lesson={course.lessons[index]}
       lessonNumber={index + 1}
       attachments={course.attachments.filter((a) => a.lessonId === lessonId)}
+      assignments={assignments}
     />
   );
 }

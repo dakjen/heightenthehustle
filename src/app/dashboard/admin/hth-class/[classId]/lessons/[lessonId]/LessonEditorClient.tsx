@@ -10,6 +10,7 @@ import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, c
 import Markdown from "@/app/components/Markdown";
 import { toEmbedUrl } from "@/lib/video";
 import AttachmentsPanel from "../../AttachmentsPanel";
+import AssignmentsPanel, { type AdminAssignment } from "../../AssignmentsPanel";
 
 interface Props {
   classId: number;
@@ -17,9 +18,10 @@ interface Props {
   lesson: Lesson | null; // null = creating
   lessonNumber: number;
   attachments: CourseAttachment[];
+  assignments: AdminAssignment[];
 }
 
-export default function LessonEditorClient({ classId, courseTitle, lesson, lessonNumber, attachments }: Props) {
+export default function LessonEditorClient({ classId, courseTitle, lesson, lessonNumber, attachments, assignments }: Props) {
   const router = useRouter();
   const backHref = `/dashboard/admin/hth-class/${classId}`;
   const [state, formAction] = useActionState<FormState, FormData>(saveLesson, { message: "" });
@@ -155,11 +157,12 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
       </form>
 
       {lesson ? (
-        <div className="mt-6">
+        <div className="mt-6 space-y-6">
           <AttachmentsPanel classId={classId} lessonId={lesson.id} attachments={attachments} />
+          <AssignmentsPanel classId={classId} lessonId={lesson.id} assignments={assignments} />
         </div>
       ) : (
-        <p className="mt-6 text-sm text-gray-500">Create the lesson first, then you can add downloads and templates to it.</p>
+        <p className="mt-6 text-sm text-gray-500">Create the lesson first, then you can add downloads, templates and homework to it.</p>
       )}
     </div>
   );

@@ -17,6 +17,7 @@ export const supportCategoryEnum = pgEnum('support_category', ['Emergency / Urge
 export const supportUrgencyEnum = pgEnum('support_urgency', ['low', 'normal', 'high']);
 export const supportStatusEnum = pgEnum('support_status', ['open', 'in_progress', 'resolved', 'closed']);
 export const resourceCategoryEnum = pgEnum('resource_category', ['Grants & Opportunities', 'Business Resources', 'Deals & Discounts']);
+export const submissionStatusEnum = pgEnum('submission_status', ['submitted', 'graded', 'returned']);
 export const documentKindEnum = pgEnum('document_kind', ['W-9', 'Pitch Deck', 'Business Plan', 'Financials', 'ID / Verification', 'Certification', 'Other']);
 
 // --- Tables ---
@@ -187,6 +188,41 @@ export const courseAttachments = pgTable('course_attachments', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Homework. Attached to a lesson (or the course when lessonId is null).
+export const assignments = pgTable('assignments', {
+  id: serial('id').primaryKey(),
+  classId: integer('class_id').notNull().references(() => classes.id, { onDelete: 'cascade' }),
+  lessonId: integer('lesson_id').references(() => lessons.id, { onDelete: 'cascade' }),
+  title: text('title').notNull(),
+  instructions: text('instructions'), // Markdown
+  dueDate: timestamp('due_date', { withTimezone: true }),
+  allowsText: boolean('allows_text').notNull().default(true),
+  allowsFile: boolean('allows_file').notNull().default(true),
+  points: integer('points'), // null = pass/fail or ungraded
+  isPublished: boolean('is_published').notNull().default(true),
+  order: integer('order').notNull().default(1),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const assignmentSubmissions = pgTable('assignment_submissions', {
+  id: serial('id').primaryKey(),
+  assignmentId: integer('assignment_id').notNull().references(() => assignments.id, { onDelete: 'cascade' }),
+  userId: integer('user_id').notNull().references(() => users.id),
+  cohortId: integer('cohort_id').references(() => cohorts.id),
+  text: text('text'),
+  fileName: text('file_name'),
+  fileBlobPathname: text('file_blob_pathname'), // private blob; served via /api/submissions/[id]/file
+  fileContentType: text('file_content_type'),
+  fileSizeBytes: integer('file_size_bytes'),
+  status: submissionStatusEnum('status').notNull().default('submitted'),
+  score: integer('score'),
+  feedback: text('feedback'),
+  gradedById: integer('graded_by_id').references(() => users.id),
+  gradedAt: timestamp('graded_at', { withTimezone: true }),
+  submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex('assignment_submissions_assignment_user_idx').on(t.assignmentId, t.userId)]);
+
 // Which lessons a member has completed.
 export const lessonProgress = pgTable('lesson_progress', {
   id: serial('id').primaryKey(),
@@ -319,6 +355,8 @@ export type Class = InferSelectModel<typeof classes>;
 export type Enrollment = InferSelectModel<typeof enrollments>;
 export type LessonProgress = InferSelectModel<typeof lessonProgress>;
 export type CourseAttachment = InferSelectModel<typeof courseAttachments>;
+export type Assignment = InferSelectModel<typeof assignments>;
+export type AssignmentSubmission = InferSelectModel<typeof assignmentSubmissions>;
 export type SupportRequest = InferSelectModel<typeof supportRequests>;
 export type Resource = InferSelectModel<typeof resources>;
 export type SecureDocument = InferSelectModel<typeof documents>;
@@ -485,4 +523,17 @@ export const lessonProgressRelations = relations(lessonProgress, ({ one }) => ({
 export const courseAttachmentsRelations = relations(courseAttachments, ({ one }) => ({
   class: one(classes, { fields: [courseAttachments.classId], references: [classes.id] }),
   lesson: one(lessons, { fields: [courseAttachments.lessonId], references: [lessons.id] }),
+}));
+
+export const assignmentsRelations = relations(assignments, ({ one, many }) => ({
+  class: one(classes, { fields: [assignments.classId], references: [classes.id] }),
+  lesson: one(lessons, { fields: [assignments.lessonId], references: [lessons.id] }),
+  submissions: many(assignmentSubmissions),
+}));
+
+export const assignmentSubmissionsRelations = relations(assignmentSubmissions, ({ one }) => ({
+  assignment: one(assignments, { fields: [assignmentSubmissions.assignmentId], references: [assignments.id] }),
+  user: one(users, { fields: [assignmentSubmissions.userId], references: [users.id], relationName: 'submission_author' }),
+  cohort: one(cohorts, { fields: [assignmentSubmissions.cohortId], references: [cohorts.id] }),
+  gradedBy: one(users, { fields: [assignmentSubmissions.gradedById], references: [users.id], relationName: 'submission_grader' }),
 }));

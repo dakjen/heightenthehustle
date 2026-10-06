@@ -12,9 +12,15 @@ export interface NavItem {
   badge?: number;
 }
 
+export interface NavSection {
+  label: string;
+  items: NavItem[];
+}
+
 interface SidebarNavProps {
   items: NavItem[];
-  adminItems: NavItem[];
+  /** Grouped staff links, e.g. Admin Tools / Team Tools / Education. */
+  sections?: NavSection[];
 }
 
 function NavLink({ item, active }: { item: NavItem; active: boolean }) {
@@ -42,7 +48,8 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
   );
 }
 
-export default function SidebarNav({ items, adminItems }: SidebarNavProps) {
+export default function SidebarNav({ items, sections = [] }: SidebarNavProps) {
+  const adminItems = sections.flatMap((s) => s.items);
   const pathname = usePathname();
 
   // Prefix match so nested pages (e.g. /dashboard/businesses/3/edit) keep their
@@ -61,16 +68,16 @@ export default function SidebarNav({ items, adminItems }: SidebarNavProps) {
         <NavLink key={item.href} item={item} active={isActive(item.href)} />
       ))}
 
-      {adminItems.length > 0 && (
-        <>
+      {sections.map((section) => (
+        <div key={section.label}>
           <p className="pt-6 pb-2 px-3 text-xs font-semibold tracking-[0.2em] uppercase text-gray-400">
-            Admin Tools
+            {section.label}
           </p>
-          {adminItems.map((item) => (
+          {section.items.map((item) => (
             <NavLink key={item.href} item={item} active={isActive(item.href)} />
           ))}
-        </>
-      )}
+        </div>
+      ))}
     </nav>
   );
 }
