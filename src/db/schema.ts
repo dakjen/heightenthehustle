@@ -173,6 +173,20 @@ export const enrollments = pgTable('enrollments', {
   enrollmentDate: timestamp('enrollment_date', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Files attached to a course (lessonId null) or a specific lesson: templates, worksheets, slides.
+export const courseAttachments = pgTable('course_attachments', {
+  id: serial('id').primaryKey(),
+  classId: integer('class_id').notNull().references(() => classes.id, { onDelete: 'cascade' }),
+  lessonId: integer('lesson_id').references(() => lessons.id, { onDelete: 'cascade' }),
+  title: text('title').notNull(),
+  fileName: text('file_name').notNull(),
+  url: text('url').notNull(),
+  contentType: text('content_type').notNull(),
+  sizeBytes: integer('size_bytes').notNull(),
+  uploadedById: integer('uploaded_by_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 // Which lessons a member has completed.
 export const lessonProgress = pgTable('lesson_progress', {
   id: serial('id').primaryKey(),
@@ -304,6 +318,7 @@ export type Lesson = InferSelectModel<typeof lessons>;
 export type Class = InferSelectModel<typeof classes>;
 export type Enrollment = InferSelectModel<typeof enrollments>;
 export type LessonProgress = InferSelectModel<typeof lessonProgress>;
+export type CourseAttachment = InferSelectModel<typeof courseAttachments>;
 export type SupportRequest = InferSelectModel<typeof supportRequests>;
 export type Resource = InferSelectModel<typeof resources>;
 export type SecureDocument = InferSelectModel<typeof documents>;
@@ -465,4 +480,9 @@ export const documentsRelations = relations(documents, ({ one }) => ({
 export const lessonProgressRelations = relations(lessonProgress, ({ one }) => ({
   user: one(users, { fields: [lessonProgress.userId], references: [users.id] }),
   lesson: one(lessons, { fields: [lessonProgress.lessonId], references: [lessons.id] }),
+}));
+
+export const courseAttachmentsRelations = relations(courseAttachments, ({ one }) => ({
+  class: one(classes, { fields: [courseAttachments.classId], references: [classes.id] }),
+  lesson: one(lessons, { fields: [courseAttachments.lessonId], references: [lessons.id] }),
 }));

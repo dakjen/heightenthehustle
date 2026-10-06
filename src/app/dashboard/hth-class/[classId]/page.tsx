@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser, hasPermission } from "@/lib/auth";
 import Markdown from "@/app/components/Markdown";
+import AttachmentList from "../AttachmentList";
 import { getMyCourses } from "../course-actions";
 import { ProgressBar, TypeChip, formatDuration, percent } from "../course-ui";
 
@@ -93,6 +94,8 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
           <Markdown content={course.description} />
         </section>
       )}
+
+      <AttachmentList attachments={course.attachments} title="Course templates & downloads" />
 
       {/* Lessons */}
       <section className="mt-6 hth-card p-6 lg:p-8 hth-fade-up hth-fade-up-delay-2">

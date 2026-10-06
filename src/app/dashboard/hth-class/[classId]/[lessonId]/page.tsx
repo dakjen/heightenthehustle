@@ -1,7 +1,9 @@
+import { toEmbedUrl } from "@/lib/video";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import Markdown from "@/app/components/Markdown";
+import AttachmentList from "../../AttachmentList";
 import { getLessonForMember } from "../../course-actions";
 import { ProgressBar, formatDuration, percent } from "../../course-ui";
 import LessonClient from "./LessonClient";
@@ -9,43 +11,6 @@ import LessonClient from "./LessonClient";
 export const dynamic = "force-dynamic";
 
 /** Turn a YouTube / Vimeo / Loom share link into an embeddable URL, or null if we don't recognise it. */
-function toEmbedUrl(raw: string): string | null {
-  let url: URL;
-  try {
-    url = new URL(raw);
-  } catch {
-    return null;
-  }
-  const host = url.hostname.replace(/^www\./, "").toLowerCase();
-  const seg = url.pathname.split("/").filter(Boolean);
-  const safeId = (s: string | undefined) => (s && /^[\w-]+$/.test(s) ? s : null);
-
-  if (host === "youtu.be") {
-    const id = safeId(seg[0]);
-    return id ? `https://www.youtube.com/embed/${id}` : null;
-  }
-  if (host === "youtube.com" || host === "m.youtube.com" || host === "youtube-nocookie.com") {
-    if (seg[0] === "watch") {
-      const id = safeId(url.searchParams.get("v") ?? undefined);
-      return id ? `https://www.youtube.com/embed/${id}` : null;
-    }
-    if ((seg[0] === "embed" || seg[0] === "shorts" || seg[0] === "live") && safeId(seg[1])) return `https://www.youtube.com/embed/${seg[1]}`;
-    return null;
-  }
-  if (host === "vimeo.com") {
-    const id = seg.find((s) => /^\d+$/.test(s));
-    return id ? `https://player.vimeo.com/video/${id}` : null;
-  }
-  if (host === "player.vimeo.com") {
-    return seg[0] === "video" && /^\d+$/.test(seg[1] ?? "") ? `https://player.vimeo.com/video/${seg[1]}` : null;
-  }
-  if (host === "loom.com") {
-    if ((seg[0] === "share" || seg[0] === "embed") && safeId(seg[1])) return `https://www.loom.com/embed/${seg[1]}`;
-    return null;
-  }
-  return null;
-}
-
 export default async function LessonPage({ params }: { params: Promise<{ classId: string; lessonId: string }> }) {
   await requireUser();
   const { classId: rawClass, lessonId: rawLesson } = await params;
@@ -56,7 +21,7 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
   const view = await getLessonForMember(classId, lessonId);
   if (!view) notFound();
 
-  const { lesson, course, prev, next, completed, index, total } = view;
+  const { lesson, course, prev, next, completed, index, total, attachments } = view;
   const pct = percent(index + 1, total);
   const embed = lesson.videoUrl ? toEmbedUrl(lesson.videoUrl) : null;
   const duration = formatDuration(lesson.durationMinutes);
@@ -125,6 +90,8 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
           <p className="text-gray-600">This lesson doesn&apos;t have written content yet.</p>
         )}
       </article>
+
+      <AttachmentList attachments={attachments} title="Downloads & templates for this lesson" />
 
       <LessonClient
         lessonId={lesson.id}

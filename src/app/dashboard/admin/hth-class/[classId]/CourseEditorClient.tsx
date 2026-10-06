@@ -1,17 +1,17 @@
 "use client";
 
-import { useActionState, useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  saveLesson, deleteLesson, reorderLessons, getEnrollCandidates, enrollMembers, setEnrollmentStatus,
+  deleteLesson, reorderLessons, getEnrollCandidates, enrollMembers, setEnrollmentStatus,
   type AdminCourseDetail, type EnrollCandidate,
 } from "@/app/dashboard/hth-class/course-actions";
 import type { Lesson, Enrollment, Cohort } from "@/db/schema";
 import { FormState } from "@/types/form-state";
-import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, checkboxClass, primaryButtonClass, secondaryButtonClass, ghostButtonClass, invalidProps } from "@/app/components/form";
-import Markdown from "@/app/components/Markdown";
+import { Field, FormError, FormSuccess, inputClass, checkboxClass, primaryButtonClass, secondaryButtonClass, ghostButtonClass } from "@/app/components/form";
 import CourseForm, { COURSE_TYPE_LABEL } from "../CourseForm";
+import AttachmentsPanel from "./AttachmentsPanel";
 
 type Tab = "lessons" | "details" | "enrollment";
 type CohortOption = Pick<Cohort, "id" | "name" | "startDate">;
@@ -39,175 +39,65 @@ function PublishedChip({ published }: { published: boolean }) {
 // Lessons
 // ---------------------------------------------------------------------------
 
-function LessonEditor({ classId, lesson, onClose }: { classId: number; lesson: Lesson | null; onClose: () => void }) {
-  const router = useRouter();
-  const [state, formAction] = useActionState<FormState, FormData>(saveLesson, { message: "" });
-  const errors = state.fieldErrors ?? {};
-  const [draft, setDraft] = useState(lesson?.content ?? "");
-  const [published, setPublished] = useState(lesson?.isPublished ?? true);
-  const [showPreview, setShowPreview] = useState(false);
-  const lastHandled = useRef<FormState | null>(null);
-
-  useEffect(() => {
-    if (state === lastHandled.current) return;
-    lastHandled.current = state;
-    if (state.message && !state.error) {
-      router.refresh();
-      onClose();
-    }
-  }, [state, router, onClose]);
-
-  return (
-    <form action={formAction} className="hth-pop space-y-5" noValidate>
-      {lesson && <input type="hidden" name="id" value={lesson.id} />}
-      <input type="hidden" name="classId" value={classId} />
-      {/* saveLesson treats anything other than "off" as published, so send an explicit value. */}
-      <input type="hidden" name="isPublished" value={published ? "on" : "off"} />
-      <FormSection title={lesson ? `Edit lesson ${lesson.order}` : "New lesson"} description="Lessons appear to members in order. Unpublished lessons stay hidden.">
-        <Field name="title" label="Title" required error={errors.title} className="sm:col-span-2">
-          <input id="title" name="title" type="text" required defaultValue={lesson?.title ?? ""} className={inputClass} {...invalidProps("title", errors)} />
-        </Field>
-        <Field name="summary" label="Summary" error={errors.summary} className="sm:col-span-2" hint="One or two lines shown in the lesson list.">
-          <input id="summary" name="summary" type="text" defaultValue={lesson?.summary ?? ""} className={inputClass} {...invalidProps("summary", errors)} />
-        </Field>
-        <Field name="videoUrl" label="Video link" error={errors.videoUrl} hint="YouTube, Vimeo, or Loom link, embedded at the top of the lesson.">
-          <input id="videoUrl" name="videoUrl" type="url" inputMode="url" defaultValue={lesson?.videoUrl ?? ""} placeholder="https://" className={inputClass} {...invalidProps("videoUrl", errors)} />
-        </Field>
-        <Field name="durationMinutes" label="Duration (minutes)" error={errors.durationMinutes}>
-          <input id="durationMinutes" name="durationMinutes" type="text" inputMode="numeric" pattern="\d{1,3}" defaultValue={lesson?.durationMinutes ?? ""} placeholder="45" className={inputClass} {...invalidProps("durationMinutes", errors)} />
-        </Field>
-        <label className="flex items-center gap-3 text-sm text-gray-800 sm:col-span-2">
-          <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className={checkboxClass} />
-          Published (visible to enrolled members)
-        </label>
-
-        <div className="sm:col-span-2">
-          <div className="flex items-end justify-between gap-3">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-800">
-              Content <span className="ml-1 text-xs font-normal text-gray-400">Markdown</span>
-            </label>
-            <button
-              type="button"
-              onClick={() => setShowPreview((v) => !v)}
-              aria-pressed={showPreview}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold ${showPreview ? "bg-[#910000] text-white" : "border border-gray-300 bg-white text-gray-700"}`}
-            >
-              {showPreview ? "Hide preview" : "Preview"}
-            </button>
-          </div>
-          <div className={`mt-1 grid gap-4 ${showPreview ? "lg:grid-cols-2" : ""}`}>
-            <textarea
-              id="content"
-              name="content"
-              rows={18}
-              value={draft}
-              onChange={(e) => setDraft(e.target.value)}
-              placeholder={"## Welcome\n\nWrite the lesson here. Use **bold**, lists, and [links](https://)."}
-              className={`${inputClass} min-h-[24rem] font-mono text-sm leading-relaxed`}
-              {...invalidProps("content", errors)}
-            />
-            {showPreview && (
-              <div className="min-h-[24rem] overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-4">
-                {draft.trim() ? <Markdown content={draft} /> : <p className="text-sm text-gray-400">Nothing to preview yet.</p>}
-              </div>
-            )}
-          </div>
-          {errors.content && <p className="mt-1 text-sm text-red-700">{errors.content}</p>}
-        </div>
-
-        <div className="space-y-3 sm:col-span-2">
-          <FormError message={state.error} />
-          <FormSuccess message={state.message} />
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <SubmitButton pendingText="Saving…">{lesson ? "Save lesson" : "Add lesson"}</SubmitButton>
-            <button type="button" onClick={onClose} className={ghostButtonClass}>Cancel</button>
-          </div>
-        </div>
-      </FormSection>
-    </form>
-  );
-}
-
 function LessonsTab({ course }: { course: AdminCourseDetail }) {
   const router = useRouter();
-  const [pending, startTransition] = useTransition();
+  const [pending, start] = useTransition();
   const [msg, setMsg] = useState("");
-  const [editing, setEditing] = useState<{ open: false } | { open: true; lesson: Lesson | null }>({ open: false });
-  const closeEditor = useCallback(() => setEditing({ open: false }), []);
+  const ids = course.lessons.map((l) => l.id);
+  const files = (lessonId: number) => course.attachments.filter((a) => a.lessonId === lessonId).length;
 
-  const run = (fn: () => Promise<FormState>) =>
-    startTransition(async () => {
-      const r = await fn();
+  const move = (index: number, dir: -1 | 1) => {
+    const next = [...ids];
+    const j = index + dir;
+    if (j < 0 || j >= next.length) return;
+    [next[index], next[j]] = [next[j], next[index]];
+    start(async () => {
+      const r = await reorderLessons(course.id, next);
+      setMsg(r.error || "");
+      router.refresh();
+    });
+  };
+  const remove = (lesson: Lesson) => {
+    if (!confirm(`Delete "${lesson.title}"? Members' progress on it is removed too.`)) return;
+    start(async () => {
+      const r = await deleteLesson(lesson.id);
       setMsg(r.error || r.message);
       router.refresh();
     });
-
-  const move = (index: number, delta: -1 | 1) => {
-    const target = index + delta;
-    if (target < 0 || target >= course.lessons.length) return;
-    const ids = course.lessons.map((l) => l.id);
-    [ids[index], ids[target]] = [ids[target], ids[index]];
-    run(() => reorderLessons(course.id, ids));
   };
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-gray-600">
-          {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"} · {course.lessons.filter((l) => l.isPublished).length} published
-        </p>
-        {!editing.open && (
-          <button type="button" onClick={() => setEditing({ open: true, lesson: null })} className={`${secondaryButtonClass} py-2 text-sm`}>
-            + Add lesson
-          </button>
-        )}
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-gray-600">{course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}. Open one to edit its content, video and downloads.</p>
+        <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/new`} className={secondaryButtonClass}>+ Add lesson</Link>
       </div>
-
-      {editing.open && <LessonEditor key={editing.lesson?.id ?? "new"} classId={course.id} lesson={editing.lesson} onClose={closeEditor} />}
-
       {msg && <p className="text-sm text-gray-600">{msg}</p>}
-
       {course.lessons.length === 0 ? (
-        !editing.open && <p className="hth-card p-6 text-gray-600">No lessons yet. Add the first one.</p>
+        <p className="hth-card p-6 text-gray-600">No lessons yet.</p>
       ) : (
-        <ol className="space-y-3">
+        <ol className="hth-card divide-y divide-gray-100 overflow-hidden">
           {course.lessons.map((l, i) => (
-            <li key={l.id} className="hth-card p-4 sm:p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex min-w-0 gap-3">
-                  <span className="font-display shrink-0 text-3xl leading-none text-[#910000]">{String(i + 1).padStart(2, "0")}</span>
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-xl leading-tight text-gray-900">{l.title}</h3>
-                      <PublishedChip published={l.isPublished} />
-                    </div>
-                    {l.summary && <p className="mt-1 text-sm text-gray-600">{l.summary}</p>}
-                    <p className="mt-1 text-xs text-gray-500">
-                      {l.durationMinutes ? `${l.durationMinutes} min` : "No duration"}
-                      {l.videoUrl ? " · Video" : ""}
-                      {l.content ? " · Content" : " · No content yet"}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2 sm:shrink-0">
-                  <button type="button" disabled={pending || i === 0} aria-label="Move up" onClick={() => move(i, -1)} className={`${ghostButtonClass} px-3 py-1.5 text-sm disabled:opacity-40`}>
-                    Up
-                  </button>
-                  <button type="button" disabled={pending || i === course.lessons.length - 1} aria-label="Move down" onClick={() => move(i, 1)} className={`${ghostButtonClass} px-3 py-1.5 text-sm disabled:opacity-40`}>
-                    Down
-                  </button>
-                  <button type="button" disabled={pending} onClick={() => setEditing({ open: true, lesson: l })} className={`${secondaryButtonClass} py-1.5 text-sm`}>
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    disabled={pending}
-                    onClick={() => { if (confirm(`Delete "${l.title}"? Member progress on this lesson is removed too.`)) run(() => deleteLesson(l.id)); }}
-                    className="rounded-lg px-3 py-1.5 text-sm font-semibold text-red-700 hover:bg-red-50 disabled:opacity-60"
-                  >
-                    Delete
-                  </button>
-                </div>
+            <li key={l.id} className="flex items-center gap-4 px-5 py-4">
+              <span className="font-display text-3xl leading-none text-[#910000] w-10 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+              <div className="min-w-0 flex-1">
+                <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${l.id}`} className="block truncate text-lg font-semibold text-gray-900 hover:text-[#910000]">{l.title}</Link>
+                <p className="truncate text-sm text-gray-600">
+                  {l.summary || <span className="text-gray-400">No summary yet</span>}
+                </p>
+                <p className="mt-1 flex flex-wrap gap-2 text-xs">
+                  <PublishedChip published={l.isPublished} />
+                  {l.videoUrl && <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">Video</span>}
+                  {l.durationMinutes ? <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">{l.durationMinutes} min</span> : null}
+                  {files(l.id) > 0 && <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">{files(l.id)} file{files(l.id) === 1 ? "" : "s"}</span>}
+                  {!l.content?.trim() && <span className="rounded-full bg-amber-100 px-2 py-0.5 text-amber-800">Needs content</span>}
+                </p>
+              </div>
+              <div className="flex shrink-0 items-center gap-1">
+                <button type="button" disabled={pending || i === 0} onClick={() => move(i, -1)} aria-label="Move up" className="rounded px-2 py-1 text-gray-500 hover:bg-gray-100 disabled:opacity-30">↑</button>
+                <button type="button" disabled={pending || i === course.lessons.length - 1} onClick={() => move(i, 1)} aria-label="Move down" className="rounded px-2 py-1 text-gray-500 hover:bg-gray-100 disabled:opacity-30">↓</button>
+                <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${l.id}`} className="rounded-lg border-2 border-[#910000] px-3 py-1.5 text-sm font-semibold text-[#910000] hover:bg-[#910000] hover:text-white">Open</Link>
+                <button type="button" disabled={pending} onClick={() => remove(l)} className="rounded-lg px-2 py-1.5 text-sm font-semibold text-red-700 hover:bg-red-50">Delete</button>
               </div>
             </li>
           ))}
@@ -216,10 +106,6 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
     </div>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Enrollment
-// ---------------------------------------------------------------------------
 
 function EnrollmentRow({ e, totalLessons }: { e: AdminCourseDetail["enrollments"][number]; totalLessons: number }) {
   const router = useRouter();
@@ -427,7 +313,12 @@ export default function CourseEditorClient({ course, cohorts }: { course: AdminC
       </nav>
 
       {tab === "lessons" && <LessonsTab course={course} />}
-      {tab === "details" && <CourseForm course={course} />}
+      {tab === "details" && (
+        <div className="space-y-6">
+          <CourseForm course={course} />
+          <AttachmentsPanel classId={course.id} attachments={course.attachments.filter((a) => a.lessonId === null)} />
+        </div>
+      )}
       {tab === "enrollment" && <EnrollmentTab course={course} cohorts={cohorts} />}
     </div>
   );

@@ -2,9 +2,10 @@
 
 import { db } from "@/db";
 import {
-  classes, lessons, enrollments, lessonProgress, cohorts, cohortWaitlist, users,
-  classTypeEnum, type Class, type Lesson, type Enrollment, type Cohort,
+  classes, lessons, enrollments, lessonProgress, cohorts, cohortWaitlist, users, courseAttachments,
+  classTypeEnum, type Class, type Lesson, type Enrollment, type Cohort, type CourseAttachment,
 } from "@/db/schema";
+import { put, del } from "@vercel/blob";
 import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { getSession } from "@/app/login/actions";
@@ -28,7 +29,7 @@ function revalidateCourses() {
 // ============================================================================
 
 export type LessonListItem = Pick<Lesson, "id" | "title" | "summary" | "order" | "durationMinutes" | "videoUrl"> & { completed: boolean };
-export type MemberCourse = Class & { lessons: LessonListItem[]; completedCount: number; enrollment: Enrollment & { cohort: Cohort | null } };
+export type MemberCourse = Class & { lessons: LessonListItem[]; completedCount: number; enrollment: Enrollment & { cohort: Cohort | null }; attachments: CourseAttachment[] };
 
 /** Courses the signed-in member is enrolled in (published only), with per-lesson progress. */
 export async function getMyCourses(): Promise<MemberCourse[]> {
@@ -45,12 +46,16 @@ export async function getMyCourses(): Promise<MemberCourse[]> {
       ? await db.query.lessonProgress.findMany({ where: and(eq(lessonProgress.userId, session.user.id), inArray(lessonProgress.lessonId, lessonIds)), columns: { lessonId: true } })
       : [];
     const doneSet = new Set(done.map((d) => d.lessonId));
+    const classIds = published.map((r) => r.class.id);
+    const courseFiles = classIds.length
+      ? await db.query.courseAttachments.findMany({ where: and(inArray(courseAttachments.classId, classIds), sql`${courseAttachments.lessonId} IS NULL`), orderBy: [asc(courseAttachments.title)] })
+      : [];
     return published.map((r) => {
       const { class: c, ...enrollment } = r;
       const ls = c.lessons.map((l) => ({ id: l.id, title: l.title, summary: l.summary, order: l.order, durationMinutes: l.durationMinutes, videoUrl: l.videoUrl, completed: doneSet.has(l.id) }));
       const { lessons: _omit, ...classOnly } = c;
       void _omit;
-      return { ...classOnly, lessons: ls, completedCount: ls.filter((l) => l.completed).length, enrollment };
+      return { ...classOnly, lessons: ls, completedCount: ls.filter((l) => l.completed).length, enrollment, attachments: courseFiles.filter((f) => f.classId === c.id) };
     });
   } catch (error) {
     console.error("getMyCourses failed (run `npm run db:apply`?):", error);
@@ -58,7 +63,7 @@ export async function getMyCourses(): Promise<MemberCourse[]> {
   }
 }
 
-export type LessonView = { lesson: Lesson; course: Pick<Class, "id" | "title">; prev: Pick<Lesson, "id" | "title"> | null; next: Pick<Lesson, "id" | "title"> | null; completed: boolean; index: number; total: number };
+export type LessonView = { lesson: Lesson; course: Pick<Class, "id" | "title">; prev: Pick<Lesson, "id" | "title"> | null; next: Pick<Lesson, "id" | "title"> | null; completed: boolean; index: number; total: number; attachments: CourseAttachment[] };
 
 /** One lesson for the signed-in member. Null if not enrolled, unpublished, or missing. Staff can preview anything. */
 export async function getLessonForMember(classId: number, lessonId: number): Promise<LessonView | null> {
@@ -85,7 +90,9 @@ export async function getLessonForMember(classId: number, lessonId: number): Pro
   if (index === -1) return null;
   const done = await db.query.lessonProgress.findFirst({ where: and(eq(lessonProgress.userId, me.id), eq(lessonProgress.lessonId, lessonId)), columns: { id: true } });
   const pick = (l: Lesson | undefined) => (l ? { id: l.id, title: l.title } : null);
+  const attachments = await db.query.courseAttachments.findMany({ where: eq(courseAttachments.lessonId, lessonId), orderBy: [asc(courseAttachments.title)] });
   return {
+    attachments,
     lesson: visible[index],
     course: { id: course.id, title: course.title },
     prev: pick(visible[index - 1]),
@@ -143,6 +150,7 @@ export async function getAdminCourses(): Promise<AdminCourse[]> {
 
 export type AdminCourseDetail = AdminCourse & {
   enrollments: (Enrollment & { user: { id: number; name: string; email: string }; cohort: Cohort | null; completedCount: number })[];
+  attachments: CourseAttachment[]; // course-level and lesson-level; filter by lessonId
 };
 
 export async function getAdminCourse(classId: number): Promise<AdminCourseDetail | null> {
@@ -161,9 +169,11 @@ export async function getAdminCourse(classId: number): Promise<AdminCourseDetail
     ? await db.select({ userId: lessonProgress.userId, n: sql<number>`count(*)::int` }).from(lessonProgress).where(inArray(lessonProgress.lessonId, lessonIds)).groupBy(lessonProgress.userId)
     : [];
   const byUser = new Map(progress.map((p) => [p.userId, p.n]));
+  const attachments = await db.query.courseAttachments.findMany({ where: eq(courseAttachments.classId, classId), orderBy: [asc(courseAttachments.title)] });
   const { enrollments: e, ...rest } = c;
   return {
     ...rest,
+    attachments,
     enrollmentCount: e.filter((x) => x.status === "enrolled" || x.status === "completed").length,
     enrollments: e.map((x) => ({ ...x, completedCount: byUser.get(x.userId) ?? 0 })),
   };
@@ -346,4 +356,58 @@ export async function setEnrollmentStatus(enrollmentId: number, status: Enrollme
   await db.update(enrollments).set({ status }).where(eq(enrollments.id, enrollmentId));
   revalidateCourses();
   return { message: "Updated.", error: "" };
+}
+
+// ---------- Attachments (templates, worksheets, slides) ----------
+
+const ATTACHMENT_MAX_BYTES = 25 * 1024 * 1024;
+
+/** FormData: classId, lessonId (optional), title, file. Stored on public blob storage (course materials are not sensitive). */
+export async function uploadAttachment(prevState: FormState, formData: FormData): Promise<FormState> {
+  const user = await requirePermission("canManageClasses");
+  const classId = Number(text(formData, "classId"));
+  const lessonIdRaw = text(formData, "lessonId");
+  const lessonId = lessonIdRaw ? Number(lessonIdRaw) : null;
+  const file = formData.get("file");
+  let title = text(formData, "title");
+
+  const fieldErrors: Record<string, string> = {};
+  if (!classId) fieldErrors.classId = "Missing course.";
+  if (!(file instanceof File) || file.size === 0) fieldErrors.file = "Choose a file.";
+  else if (file.size > ATTACHMENT_MAX_BYTES) fieldErrors.file = "File must be 25 MB or smaller.";
+  if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
+  const upload = file as File;
+  if (!title) title = upload.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+
+  try {
+    if (lessonId) {
+      const owned = await db.query.lessons.findFirst({ where: and(eq(lessons.id, lessonId), eq(lessons.classId, classId)), columns: { id: true } });
+      if (!owned) return { message: "", error: "That lesson isn't in this course." };
+    }
+    const safeName = upload.name.replace(/[^\w.-]+/g, "_");
+    const blob = await put(`course-materials/${classId}/${Date.now()}-${safeName}`, upload, { access: "public" });
+    await db.insert(courseAttachments).values({
+      classId, lessonId, title, fileName: upload.name, url: blob.url,
+      contentType: upload.type || "application/octet-stream", sizeBytes: upload.size, uploadedById: user.id,
+    });
+    revalidateCourses();
+    return { message: `"${title}" uploaded.`, error: "" };
+  } catch (error) {
+    console.error("uploadAttachment failed:", error);
+    return { message: "", error: "Upload failed. Please try again." };
+  }
+}
+
+export async function deleteAttachment(id: number): Promise<FormState> {
+  await requirePermission("canManageClasses");
+  const row = await db.query.courseAttachments.findFirst({ where: eq(courseAttachments.id, id) });
+  if (!row) return { message: "", error: "File not found." };
+  try {
+    await del(row.url);
+  } catch (error) {
+    console.warn("Blob delete failed (removing record anyway):", error);
+  }
+  await db.delete(courseAttachments).where(eq(courseAttachments.id, id));
+  revalidateCourses();
+  return { message: "File removed.", error: "" };
 }
