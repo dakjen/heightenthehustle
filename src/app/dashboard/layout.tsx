@@ -36,16 +36,16 @@ export default async function DashboardLayout({
   // client-side nav can highlight the current page.
   const items: NavItem[] = [
     { href: "/dashboard", label: "Home" },
-    ...(isExternal ? [{ href: "/dashboard/intake-form", label: "Client Intake Form" }] : []),
+    { href: "/dashboard/resources", label: "Resources" },
+    { href: "/dashboard/messages", label: "Messages", badge: unreadMessages },
     ...(isExternal ? [{ href: "/dashboard/businesses", label: "Businesses" }] : []),
     ...(isExternal
       ? businesses.map((b) => ({ href: `/dashboard/businesses/${b.id}`, label: b.businessName, sub: true }))
       : []),
-    { href: "/dashboard/messages", label: "Messages", badge: unreadMessages },
     ...(isExternal ? [{ href: "/dashboard/support", label: "Get Support" }] : []),
     ...(isExternal ? [{ href: "/dashboard/documents", label: "My Documents" }] : []),
     ...(isExternal ? [{ href: "/dashboard/hth-class", label: "HTH Class" }] : []),
-    { href: "/dashboard/resources", label: "Resources" },
+    ...(isExternal ? [{ href: "/dashboard/intake-form", label: "Intake" }] : []),
   ];
 
   // Staff navigation, grouped so "Admin Tools" doesn't become a junk drawer.
