@@ -1,5 +1,6 @@
 "use client";
 
+import type { ResourceStats } from "@/app/dashboard/resources/actions";
 import { useActionState, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import type { Resource } from "@/db/schema";
 import { createResource, updateResource, deleteResource, toggleResource } from "@/app/dashboard/resources/actions";
@@ -97,7 +98,7 @@ function ResourceForm({ editing, onDone }: { editing: Resource | null; onDone: (
   );
 }
 
-function ResourceRow({ r, onEdit }: { r: Resource; onEdit: () => void }) {
+function ResourceRow({ r, onEdit, stats }: { r: Resource; onEdit: () => void; stats?: ResourceStats }) {
   const [pending, start] = useTransition();
   const [msg, setMsg] = useState("");
   const run = (fn: () => Promise<FormState>) =>
@@ -126,6 +127,12 @@ function ResourceRow({ r, onEdit }: { r: Resource; onEdit: () => void }) {
             {r.discountCode ? ` · Code ${r.discountCode}` : ""}
           </p>
           {r.description && <p className="mt-2 line-clamp-2 text-sm text-gray-700">{r.description}</p>}
+          <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+            <span className="rounded-full bg-[#2b2b2b] px-2 py-0.5 font-semibold text-white">{stats?.clicks ?? 0} open{(stats?.clicks ?? 0) === 1 ? "" : "s"}</span>
+            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">{stats?.uniqueUsers ?? 0} member{(stats?.uniqueUsers ?? 0) === 1 ? "" : "s"}</span>
+            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">{stats?.last30 ?? 0} in last 30 days</span>
+            {r.discountCode && <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-700">{stats?.copies ?? 0} code cop{(stats?.copies ?? 0) === 1 ? "y" : "ies"}</span>}
+          </p>
           <p className="mt-2 text-xs text-gray-500">
             {r.url ? (
               <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-[#910000] hover:underline">{r.url}</a>
@@ -163,7 +170,7 @@ function ResourceRow({ r, onEdit }: { r: Resource; onEdit: () => void }) {
 
 type Filter = "all" | "published" | "draft";
 
-export default function ResourcesAdminClient({ resources }: { resources: Resource[] }) {
+export default function ResourcesAdminClient({ resources, stats = {} }: { resources: Resource[]; stats?: Record<number, ResourceStats> }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [formOpen, setFormOpen] = useState(resources.length === 0);
   const [editing, setEditing] = useState<Resource | null>(null);
@@ -218,7 +225,7 @@ export default function ResourcesAdminClient({ resources }: { resources: Resourc
       {shown.length === 0 ? (
         <p className="text-gray-600">{resources.length === 0 ? "No resources yet. Add your first one above." : "Nothing here right now."}</p>
       ) : (
-        <div className="space-y-4">{shown.map((r) => <ResourceRow key={r.id} r={r} onEdit={() => openEdit(r)} />)}</div>
+        <div className="space-y-4">{shown.map((r) => <ResourceRow key={r.id} r={r} stats={stats[r.id]} onEdit={() => openEdit(r)} />)}</div>
       )}
     </div>
   );

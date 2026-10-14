@@ -38,6 +38,8 @@ export const users = pgTable('users', {
   businessName: text('business_name'), // Optional business name for account requests
   pitchEventIds: integer('pitch_event_ids').array(), // Pitch competitions they took part in (asked at account request)
   pitchEventOther: text('pitch_event_other'), // Free text when their competition isn't in the list
+  lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   isCisgender: boolean('is_cisgender').notNull().default(false),
   isTransgender: boolean('is_transgender').notNull().default(false),
   isOptedOut: boolean('is_opted_out').notNull().default(false),
@@ -301,6 +303,15 @@ export const resources = pgTable('resources', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Resource usage: one row per Open click or code copy.
+export const resourceClicks = pgTable('resource_clicks', {
+  id: serial('id').primaryKey(),
+  resourceId: integer('resource_id').notNull().references(() => resources.id, { onDelete: 'cascade' }),
+  userId: integer('user_id').references(() => users.id),
+  action: text('action').notNull().default('open'), // 'open' | 'copy_code'
+  clickedAt: timestamp('clicked_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 // --- Secure documents (private blob storage; served only through an authenticated route) ---
 export const documents = pgTable('documents', {
   id: serial('id').primaryKey(),
@@ -359,6 +370,7 @@ export type Assignment = InferSelectModel<typeof assignments>;
 export type AssignmentSubmission = InferSelectModel<typeof assignmentSubmissions>;
 export type SupportRequest = InferSelectModel<typeof supportRequests>;
 export type Resource = InferSelectModel<typeof resources>;
+export type ResourceClick = InferSelectModel<typeof resourceClicks>;
 export type SecureDocument = InferSelectModel<typeof documents>;
 export type CohortWaitlistEntry = InferSelectModel<typeof cohortWaitlist>;
 

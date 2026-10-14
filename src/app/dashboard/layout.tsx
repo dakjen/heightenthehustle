@@ -51,12 +51,10 @@ export default async function DashboardLayout({
   // Staff navigation, grouped so "Admin Tools" doesn't become a junk drawer.
   const sections: NavSection[] = [
     {
-      label: "Admin Tools",
+      label: "Education",
       items: [
-        ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Users & Approvals" }] : []),
-        ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Businesses" }] : []),
-        ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Intake Forms" }] : []),
-        ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Pitch Competition" }] : []),
+        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Courses & Lessons" }] : []),
+        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
       ],
     },
     {
@@ -68,10 +66,12 @@ export default async function DashboardLayout({
       ],
     },
     {
-      label: "Education",
+      label: "Admin Tools",
       items: [
-        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class", label: "Courses & Lessons" }] : []),
-        ...(canAccessAdminClasses ? [{ href: "/dashboard/admin/hth-class/cohorts", label: "Cohorts & Waitlist" }] : []),
+        ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Users & Approvals" }] : []),
+        ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Businesses" }] : []),
+        ...(isAdmin ? [{ href: "/dashboard/admin/intake-forms", label: "Intake Forms" }] : []),
+        ...(isAdmin ? [{ href: "/dashboard/admin/pitch-competition", label: "Pitch Competition" }] : []),
       ],
     },
   ].filter((s) => s.items.length > 0);

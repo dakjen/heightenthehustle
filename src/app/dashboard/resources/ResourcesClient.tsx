@@ -1,5 +1,6 @@
 "use client";
 
+import { trackResourceClick } from "./actions";
 import { useMemo, useState } from "react";
 import type { Resource } from "@/db/schema";
 import { RESOURCE_CATEGORIES, type ResourceCategory } from "./constants";
@@ -32,11 +33,12 @@ function deadlineInfo(deadline: Date | string | null): { label: string; closed: 
   return { label: `${rel} · ${date.format(d)}`, closed: false };
 }
 
-function CopyChip({ code }: { code: string }) {
+function CopyChip({ code, resourceId }: { code: string; resourceId: number }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(code);
+      void trackResourceClick(resourceId, "copy_code");
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -81,14 +83,14 @@ function ResourceCard({ r }: { r: Resource }) {
         <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-1 text-sm md:w-64 md:flex-col md:items-start md:justify-center md:border-l md:border-gray-100 md:pl-5">
           {r.amount && <p className="font-semibold text-gray-900">{r.amount}</p>}
           {dl && <p className={dl.closed ? "text-gray-500" : "font-medium text-[#910000]"}>{dl.label}</p>}
-          {r.discountCode && <CopyChip code={r.discountCode} />}
+          {r.discountCode && <CopyChip code={r.discountCode} resourceId={r.id} />}
         </div>
       )}
 
       {/* Right: action */}
       {r.url && (
         <div className="shrink-0 md:pl-2">
-          <a href={r.url} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center rounded-lg bg-[#910000] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#7a0000] md:w-auto">
+          <a href={r.url} target="_blank" rel="noopener noreferrer" onClick={() => void trackResourceClick(r.id, "open")} className="inline-flex w-full items-center justify-center rounded-lg bg-[#910000] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#7a0000] md:w-auto">
             Open →
           </a>
         </div>

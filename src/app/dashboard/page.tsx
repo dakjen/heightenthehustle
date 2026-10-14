@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { count, eq, and } from "drizzle-orm";
+import { count, eq, and, gte, desc, sql } from "drizzle-orm";
 import { db } from "@/db";
-import { businesses, clientIntakeForms, cohortWaitlist, users, cohorts, supportRequests, documents } from "@/db/schema";
+import { businesses, clientIntakeForms, cohortWaitlist, users, cohorts, supportRequests, documents, resourceClicks, resources, individualMessages, assignmentSubmissions } from "@/db/schema";
 import { requireUser } from "@/lib/auth";
 import WelcomeModal from "@/app/components/WelcomeModal";
 import { getFeaturedCohort } from "./hth-class/cohort-actions";
@@ -125,21 +125,53 @@ async function MemberHome({ userId, name }: { userId: number; name: string }) {
 }
 
 async function AdminHome({ name, role }: { name: string; role: string }) {
-  const [pending, members, intakes, waitlist, openCohorts, openSupport] = await Promise.all([
+  const since = new Date(Date.now() - 30 * 86_400_000);
+  const [pending, members, newMembers, activeMembers, intakes, waitlist, openCohorts, openSupport, clicksAll, clicks30, messages30, docs, submissions30, businessCount] = await Promise.all([
     safeCount(db.select({ n: count() }).from(users).where(eq(users.status, "pending"))),
     safeCount(db.select({ n: count() }).from(users).where(and(eq(users.role, "external"), eq(users.status, "approved")))),
+    safeCount(db.select({ n: count() }).from(users).where(and(eq(users.role, "external"), gte(users.createdAt, since)))),
+    safeCount(db.select({ n: count() }).from(users).where(and(eq(users.role, "external"), gte(users.lastLoginAt, since)))),
     safeCount(db.select({ n: count() }).from(clientIntakeForms).where(eq(clientIntakeForms.status, "submitted"))),
     safeCount(db.select({ n: count() }).from(cohortWaitlist)),
     safeCount(db.select({ n: count() }).from(cohorts).where(eq(cohorts.isWaitlistOpen, true))),
     safeCount(db.select({ n: count() }).from(supportRequests).where(eq(supportRequests.status, "open"))),
+    safeCount(db.select({ n: count() }).from(resourceClicks).where(eq(resourceClicks.action, "open"))),
+    safeCount(db.select({ n: count() }).from(resourceClicks).where(and(eq(resourceClicks.action, "open"), gte(resourceClicks.clickedAt, since)))),
+    safeCount(db.select({ n: count() }).from(individualMessages).where(gte(individualMessages.timestamp, since))),
+    safeCount(db.select({ n: count() }).from(documents)),
+    safeCount(db.select({ n: count() }).from(assignmentSubmissions).where(gte(assignmentSubmissions.submittedAt, since))),
+    safeCount(db.select({ n: count() }).from(businesses).where(eq(businesses.isArchived, false))),
   ]);
 
-  const tiles = [
+  let topResources: { title: string; n: number }[] = [];
+  try {
+    topResources = (await db
+      .select({ title: resources.title, n: count() })
+      .from(resourceClicks)
+      .innerJoin(resources, eq(resourceClicks.resourceId, resources.id))
+      .where(eq(resourceClicks.action, "open"))
+      .groupBy(resources.id, resources.title)
+      .orderBy(desc(count()), sql`${resources.title}`)
+      .limit(5)).map((r) => ({ title: r.title, n: Number(r.n) }));
+  } catch (error) {
+    console.error("top resources failed:", error);
+  }
+
+  const needsAttention = [
     { label: "Account requests", value: pending, href: "/dashboard/admin/users", hint: "waiting for approval" },
-    { label: "Active members", value: members, href: "/dashboard/admin/users", hint: "approved accounts" },
+    { label: "Support requests", value: openSupport, href: "/dashboard/admin/support", hint: "open, need a reply" },
     { label: "Intake forms", value: intakes, href: "/dashboard/admin/intake-forms", hint: "not yet reviewed" },
     { label: "On the waitlist", value: waitlist, href: "/dashboard/admin/hth-class/cohorts", hint: `${openCohorts} cohort${openCohorts === 1 ? "" : "s"} open` },
-    { label: "Support requests", value: openSupport, href: "/dashboard/admin/support", hint: "open, need a reply" },
+  ];
+  const usage = [
+    { label: "Active members", value: members, hint: "approved accounts" },
+    { label: "New members", value: newMembers, hint: "joined in last 30 days" },
+    { label: "Signed in", value: activeMembers, hint: "members active in last 30 days" },
+    { label: "Businesses", value: businessCount, hint: "on file" },
+    { label: "Resource opens", value: clicks30, hint: `${clicksAll} all time` },
+    { label: "Messages", value: messages30, hint: "sent in last 30 days" },
+    { label: "Homework turned in", value: submissions30, hint: "last 30 days" },
+    { label: "Documents", value: docs, hint: "W-9s, decks, etc. on file" },
   ];
 
   return (
@@ -147,10 +179,12 @@ async function AdminHome({ name, role }: { name: string; role: string }) {
       <header className="mb-6 hth-fade-up">
         <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">{role === "admin" ? "Admin" : "Team"} dashboard</p>
         <h1 className="text-5xl text-gray-900 leading-none">Hey, {name.split(" ")[0]}.</h1>
-        <p className="mt-2 text-gray-600">Here&apos;s what needs your attention.</p>
+        <p className="mt-2 text-gray-600">Here&apos;s what needs your attention, and how the portal is being used.</p>
       </header>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 hth-fade-up hth-fade-up-delay-1">
-        {tiles.map((t) => (
+
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Needs attention</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 hth-fade-up hth-fade-up-delay-1">
+        {needsAttention.map((t) => (
           <Link key={t.label} href={t.href} className="hth-card p-6 transition hover:shadow-lg">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500">{t.label}</p>
             <p className="mt-2 font-display text-5xl leading-none text-[#910000]">{t.value}</p>
@@ -158,26 +192,49 @@ async function AdminHome({ name, role }: { name: string; role: string }) {
           </Link>
         ))}
       </div>
-      <div className="mt-6 grid gap-6 md:grid-cols-2 hth-fade-up hth-fade-up-delay-2">
+
+      <h2 className="mb-3 mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Usage</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 hth-fade-up hth-fade-up-delay-2">
+        {usage.map((t) => (
+          <div key={t.label} className="hth-card p-5">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500">{t.label}</p>
+            <p className="mt-2 font-display text-4xl leading-none text-[#2b2b2b]">{t.value}</p>
+            <p className="mt-1 text-sm text-gray-600">{t.hint}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 grid gap-6 md:grid-cols-2 hth-fade-up hth-fade-up-delay-3">
+        <section className="hth-card p-7">
+          <div className="flex items-end justify-between">
+            <h2 className="text-2xl text-gray-900">Most opened resources</h2>
+            <Link href="/dashboard/admin/resources" className="text-sm font-semibold text-[#910000] hover:underline">Manage →</Link>
+          </div>
+          {topResources.length === 0 ? (
+            <p className="mt-3 text-sm text-gray-500">No clicks recorded yet.</p>
+          ) : (
+            <ol className="mt-3 space-y-2">
+              {topResources.map((r, i) => (
+                <li key={r.title} className="flex items-center gap-3 text-sm">
+                  <span className="w-5 text-right font-display text-xl leading-none text-[#910000]">{i + 1}</span>
+                  <span className="min-w-0 flex-1 truncate text-gray-900">{r.title}</span>
+                  <span className="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-700">{r.n} open{r.n === 1 ? "" : "s"}</span>
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
         <section className="hth-card p-7">
           <h2 className="text-2xl text-gray-900 mb-3">Quick actions</h2>
           <ul className="space-y-2 text-[#910000] font-semibold">
             <li><Link href="/dashboard/admin/users" className="hover:underline">Review account requests →</Link></li>
             <li><Link href="/dashboard/admin/support" className="hover:underline">Answer support requests →</Link></li>
-            <li><Link href="/dashboard/admin/hth-class/cohorts" className="hover:underline">Create a cohort / view waitlist →</Link></li>
+            <li><Link href="/dashboard/admin/hth-class" className="hover:underline">Courses &amp; lessons →</Link></li>
+            <li><Link href="/dashboard/admin/hth-class/cohorts" className="hover:underline">Cohorts &amp; waitlist →</Link></li>
             <li><Link href="/dashboard/messages" className="hover:underline">Send a mass message →</Link></li>
-            <li><Link href="/dashboard/admin/businesses/manage" className="hover:underline">Browse member businesses →</Link></li>
-            <li><Link href="/dashboard/admin/documents" className="hover:underline">Member documents (W-9s, decks) →</Link></li>
-            <li><Link href="/dashboard/admin/resources" className="hover:underline">Manage the resources hub →</Link></li>
+            <li><Link href="/dashboard/admin/resources" className="hover:underline">Add a resource →</Link></li>
+            <li><Link href="/dashboard/admin/documents" className="hover:underline">Member documents →</Link></li>
           </ul>
-        </section>
-        <section className="hth-card p-7">
-          <h2 className="text-2xl text-gray-900 mb-3">Onboarding flow</h2>
-          <ol className="list-decimal space-y-1 pl-5 text-gray-700 text-sm">
-            <li>Member requests an account and gets a &quot;we&apos;ll reply within 48 hours&quot; email.</li>
-            <li>You approve them here. They get a welcome email with a sign-in link.</li>
-            <li>Their first sign-in lands on the intake form, then the home checklist.</li>
-          </ol>
         </section>
       </div>
     </div>

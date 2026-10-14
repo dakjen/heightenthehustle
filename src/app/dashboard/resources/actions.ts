@@ -1,10 +1,11 @@
 "use server";
 
 import { db } from "@/db";
-import { resources, resourceCategoryEnum, type Resource } from "@/db/schema";
-import { asc, desc, eq, sql } from "drizzle-orm";
+import { resources, resourceClicks, resourceCategoryEnum, type Resource } from "@/db/schema";
+import { asc, desc, eq, sql, gte, count, countDistinct } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { canAccessAdminArea, requireUser } from "@/lib/auth";
+import { getSession } from "@/app/login/actions";
 import { FormState } from "@/types/form-state";
 import { notifyMembers, notifyHtml, esc, appUrl } from "@/lib/notify";
 
@@ -202,5 +203,43 @@ export async function toggleResource(id: number, patch: { isPublished?: boolean;
   } catch (error) {
     console.error("toggleResource failed:", error);
     return { message: "", error: "Failed to save." };
+  }
+}
+
+// ---------- Usage tracking ----------
+
+/** Logs an Open click or code copy for the signed-in member. Never throws. */
+export async function trackResourceClick(resourceId: number, action: "open" | "copy_code" = "open"): Promise<void> {
+  try {
+    const session = await getSession();
+    await db.insert(resourceClicks).values({ resourceId, userId: session?.user?.id ?? null, action });
+  } catch (error) {
+    console.warn("trackResourceClick failed:", error);
+  }
+}
+
+export type ResourceStats = { resourceId: number; clicks: number; copies: number; uniqueUsers: number; last30: number };
+
+/** Per-resource usage for the admin view. */
+export async function getResourceStats(): Promise<Record<number, ResourceStats>> {
+  const user = await requireUser();
+  if (!canAccessAdminArea(user)) return {};
+  try {
+    const since = new Date(Date.now() - 30 * 86_400_000);
+    const rows = await db
+      .select({
+        resourceId: resourceClicks.resourceId,
+        clicks: count(sql`case when ${resourceClicks.action} = 'open' then 1 end`),
+        copies: count(sql`case when ${resourceClicks.action} = 'copy_code' then 1 end`),
+        uniqueUsers: countDistinct(resourceClicks.userId),
+        last30: count(sql`case when ${resourceClicks.clickedAt} >= ${since} then 1 end`),
+      })
+      .from(resourceClicks)
+      .groupBy(resourceClicks.resourceId);
+    void gte;
+    return Object.fromEntries(rows.map((r) => [r.resourceId, { resourceId: r.resourceId, clicks: Number(r.clicks), copies: Number(r.copies), uniqueUsers: Number(r.uniqueUsers), last30: Number(r.last30) }]));
+  } catch (error) {
+    console.error("getResourceStats failed (run `npm run db:apply`?):", error);
+    return {};
   }
 }

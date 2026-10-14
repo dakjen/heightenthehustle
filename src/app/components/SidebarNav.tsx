@@ -63,11 +63,12 @@ export default function SidebarNav({ items, sections = [] }: SidebarNavProps) {
   const isActive = (href: string) => href === activeHref;
 
   return (
-    <nav className="space-y-1">
+    <nav className="flex min-h-full flex-col space-y-1">
       {items.map((item) => (
         <NavLink key={item.href} item={item} active={isActive(item.href)} />
       ))}
 
+      {sections.length > 0 && <div className="mt-auto" />}
       {sections.map((section) => (
         <div key={section.label}>
           <p className="pt-6 pb-2 px-3 text-xs font-semibold tracking-[0.2em] uppercase text-gray-400">
