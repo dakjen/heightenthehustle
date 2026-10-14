@@ -57,35 +57,38 @@ function CopyChip({ code }: { code: string }) {
 function ResourceCard({ r }: { r: Resource }) {
   const dl = deadlineInfo(r.deadline);
   return (
-    <article className={`hth-card flex h-full flex-col p-5 ${r.isFeatured ? "border-l-4 border-l-[#910000]" : ""}`}>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${CATEGORY_CLS[r.category]}`}>{r.category}</span>
-        {r.isFeatured && <span className="text-xs font-semibold uppercase tracking-wide text-[#910000]">Featured</span>}
+    <article className={`hth-card flex flex-col gap-4 p-5 md:flex-row md:items-center ${r.isFeatured ? "border-l-4 border-l-[#910000]" : ""}`}>
+      {/* Left: what it is */}
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${CATEGORY_CLS[r.category]}`}>{r.category}</span>
+          {r.isFeatured && <span className="text-xs font-semibold uppercase tracking-wide text-[#910000]">Featured</span>}
+          {r.provider && <span className="text-xs text-gray-500">· {r.provider}</span>}
+        </div>
+        <h3 className="mt-1.5 text-xl leading-tight text-gray-900">{r.title}</h3>
+        {r.description && <p className="mt-1 line-clamp-2 text-sm text-gray-700">{r.description}</p>}
+        {r.tags && r.tags.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {r.tags.map((t) => (
+              <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{t}</span>
+            ))}
+          </div>
+        )}
       </div>
-      <h3 className="mt-2 text-xl leading-tight text-gray-900">{r.title}</h3>
-      {r.provider && <p className="text-sm text-gray-500">{r.provider}</p>}
-      {r.description && <p className="mt-2 whitespace-pre-line text-sm text-gray-700">{r.description}</p>}
 
-      {(r.amount || dl) && (
-        <div className="mt-3 space-y-1 text-sm">
+      {/* Middle: the numbers */}
+      {(r.amount || dl || r.discountCode) && (
+        <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-1 text-sm md:w-64 md:flex-col md:items-start md:justify-center md:border-l md:border-gray-100 md:pl-5">
           {r.amount && <p className="font-semibold text-gray-900">{r.amount}</p>}
-          {dl && <p className={dl.closed ? "text-gray-500" : "text-[#910000] font-medium"}>{dl.label}</p>}
+          {dl && <p className={dl.closed ? "text-gray-500" : "font-medium text-[#910000]"}>{dl.label}</p>}
+          {r.discountCode && <CopyChip code={r.discountCode} />}
         </div>
       )}
 
-      {r.discountCode && <CopyChip code={r.discountCode} />}
-
-      {r.tags && r.tags.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {r.tags.map((t) => (
-            <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{t}</span>
-          ))}
-        </div>
-      )}
-
+      {/* Right: action */}
       {r.url && (
-        <div className="mt-auto pt-4">
-          <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#910000] hover:underline">
+        <div className="shrink-0 md:pl-2">
+          <a href={r.url} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center rounded-lg bg-[#910000] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#7a0000] md:w-auto">
             Open →
           </a>
         </div>
@@ -156,7 +159,7 @@ export default function ResourcesClient({ resources }: { resources: Resource[] }
           <p className="text-gray-600">{query.trim() ? `Nothing matches "${query.trim()}".` : EMPTY_COPY[tab]}</p>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 hth-fade-up hth-fade-up-delay-1">
+        <div className="flex flex-col gap-3 hth-fade-up hth-fade-up-delay-1">
           {shown.map((r) => <ResourceCard key={r.id} r={r} />)}
         </div>
       )}
