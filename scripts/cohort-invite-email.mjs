@@ -6,7 +6,7 @@ dotenv.config({ path: ".env.local" });
 const app = (process.env.NEXT_PUBLIC_APP_URL ?? "https://portal.heightenthehustle.net").replace(/\/$/, "");
 const site = "https://portal.heightenthehustle.net";
 const HERO_IMAGE = `${site}/hero.jpg`; // swap for the Pexels photo once it's on the site
-const PRIZE = "prize money"; // e.g. "a $10,000 prize"
+const PRIZE = "a $10,000 top prize";
 
 const toEmail = process.argv[2];
 if (!toEmail) { console.error("Usage: node scripts/cohort-invite-email.mjs recipient@example.com"); process.exit(1); }
@@ -52,7 +52,7 @@ const html = `<div style="background:#f3f3f3;padding:24px 12px">
 
   <div style="margin:18px 28px;border-left:5px solid #910000;background:#fff5f5;border-radius:0 12px 12px 0;padding:16px 18px">
     <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#910000;font-weight:800">The Grand Pitch</div>
-    <p style="margin:8px 0 0">The cohort ends on stage. In fall 2027, cohort graduates pitch their business plans to a panel of judges at the <strong>Grand Pitch</strong>, same format as our Cleveland and DC competitions, <strong>with ${PRIZE} on the line</strong> for the winners.</p>
+    <p style="margin:8px 0 0">The cohort ends on stage. In fall 2027, cohort graduates pitch their business plans to a panel of judges at the <strong>Grand Pitch</strong>, same format as our Cleveland and DC competitions, <strong>with ${PRIZE} on the line</strong>.</p>
     <p style="margin:8px 0 0"><strong>Completing the cohort is the only way in.</strong> You have to finish the January cohort to be entered into the running to pitch at the Grand Pitch.</p>
     <p style="margin:8px 0 0">You don't need a polished pitch to join. Building it is what the cohort is for.</p>
   </div>
