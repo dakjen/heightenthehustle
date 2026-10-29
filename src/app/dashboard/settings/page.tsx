@@ -1,6 +1,7 @@
 import { getSession } from "@/app/login/actions";
 import { redirect } from "next/navigation";
 import OptOutForm from "./OptOutForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -25,6 +26,11 @@ export default async function SettingsPage() {
       <h1 className="text-2xl font-bold mb-8">Settings</h1>
       
       <div className="space-y-8">
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Password</h2>
+          <ChangePasswordForm />
+        </div>
+
         <div>
           <h2 className="text-xl font-semibold mb-4">Communication Preferences</h2>
           <OptOutForm userName={currentUser.name} isOptedOut={currentUser.isOptedOut} />

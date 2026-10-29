@@ -255,3 +255,78 @@ export function newMessageEmail(recipientName: string, senderName: string, conte
 
   return { subject, html, text };
 }
+
+/**
+ * Email carrying a password reset link. Sent only to an address that has an
+ * approved account — the form itself answers identically either way, so this
+ * email arriving is the only signal that the address is a member.
+ */
+export function passwordResetEmail(name: string, link: string, ttlLabel: string): EmailTemplate {
+  const safeName = escapeHtml(name);
+  const safeLink = escapeHtml(link);
+  const subject = "Reset your Heighten The Hustle password";
+
+  const html = layout(`
+    <p style="margin:0 0 16px;">Hi ${safeName},</p>
+    <p style="margin:0 0 16px;">We received a request to reset the password for your Heighten The Hustle portal account.</p>
+    ${button(link, "Choose a new password")}
+    <p style="margin:0 0 4px;font-size:13px;color:#555555;">If the button doesn't work, copy and paste this link into your browser:</p>
+    <p style="margin:0 0 16px;font-size:13px;word-break:break-all;"><a href="${safeLink}" style="color:#910000;">${safeLink}</a></p>
+    <p style="margin:0 0 16px;">This link works once and expires in <strong>${escapeHtml(ttlLabel)}</strong>.</p>
+    <p style="margin:0 0 16px;">If you didn't ask for this, you can ignore this email — your password stays as it is.</p>
+    <p style="margin:0;">The Heighten The Hustle team</p>
+  `);
+
+  const text = [
+    `Hi ${name},`,
+    "",
+    "We received a request to reset the password for your Heighten The Hustle portal account.",
+    "",
+    "Choose a new password:",
+    link,
+    "",
+    `This link works once and expires in ${ttlLabel}.`,
+    "",
+    "If you didn't ask for this, you can ignore this email — your password stays as it is.",
+    "",
+    "The Heighten The Hustle team",
+  ].join("\n");
+
+  return { subject, html, text };
+}
+
+/**
+ * Confirmation that a password was changed, by the reset link or from the
+ * Settings page. This is the alarm bell: if it wasn't them, it tells them to
+ * get in touch while the account is still recoverable.
+ */
+export function passwordChangedEmail(name: string): EmailTemplate {
+  const safeName = escapeHtml(name);
+  const link = `${appUrl()}/login`;
+  const subject = "Your Heighten The Hustle password was changed";
+
+  const html = layout(`
+    <p style="margin:0 0 16px;">Hi ${safeName},</p>
+    <p style="margin:0 0 16px;">The password on your Heighten The Hustle portal account was just changed.</p>
+    <p style="margin:0 0 16px;">If that was you, there's nothing to do.</p>
+    <p style="margin:0 0 16px;"><strong>If it wasn't you</strong>, reply to this email right away so we can secure your account.</p>
+    ${button(link, "Sign in")}
+    <p style="margin:0;">The Heighten The Hustle team</p>
+  `);
+
+  const text = [
+    `Hi ${name},`,
+    "",
+    "The password on your Heighten The Hustle portal account was just changed.",
+    "",
+    "If that was you, there's nothing to do.",
+    "",
+    "If it wasn't you, reply to this email right away so we can secure your account.",
+    "",
+    `Sign in: ${link}`,
+    "",
+    "The Heighten The Hustle team",
+  ].join("\n");
+
+  return { subject, html, text };
+}

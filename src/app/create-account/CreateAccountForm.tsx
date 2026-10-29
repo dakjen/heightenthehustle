@@ -10,6 +10,7 @@ import {
 } from "@/app/components/form";
 import type { PitchEventOption } from "@/app/dashboard/intake-form/actions";
 import SearchSelect from "@/app/components/SearchSelect";
+import { PASSWORD_HINT, PASSWORD_MIN_LENGTH } from "@/lib/password";
 
 const initialState = {
   message: "",
@@ -84,13 +85,13 @@ export default function CreateAccountForm({ pitchEvents }: { pitchEvents: PitchE
                 className={inputClass}
               />
             </Field>
-            <Field name="password" label="Password" required hint="At least 8 characters. Mix letters and numbers for a stronger password.">
+            <Field name="password" label="Password" required hint={PASSWORD_HINT} error={errors.password}>
               <input
                 id="password"
                 name="password"
                 type="password"
                 autoComplete="new-password"
-                minLength={8}
+                minLength={PASSWORD_MIN_LENGTH}
                 required
                 className={inputClass}
               />

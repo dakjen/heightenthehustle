@@ -9,7 +9,8 @@ import { createSession } from "@/lib/session";
 import { hasPermission, requireAdmin } from "@/lib/auth";
 import { safeUserColumns, type SafeUser } from "@/lib/users";
 import { revalidatePath } from "next/cache";
-import bcrypt from 'bcrypt';
+import { validatePasswordStrength } from "@/lib/password";
+import { hashPassword } from "@/lib/password-hash";
 import { getAllBusinesses } from "../businesses/actions"; // Added import
 import { sendEmail, accountApprovedEmail, appUrl } from "@/lib/email";
 
@@ -141,9 +142,13 @@ export async function createUser(prevState: FormState, formData: FormData): Prom
   if (!name || !email || !phone || !password || !role) {
     return { message: "", error: "All fields are required." };
   }
+  const weakPassword = validatePasswordStrength(password);
+  if (weakPassword) {
+    return { message: "", error: weakPassword, fieldErrors: { password: weakPassword } };
+  }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+    const hashedPassword = await hashPassword(password);
 
     await db.insert(users).values({
       name,
