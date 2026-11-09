@@ -143,40 +143,36 @@ function CohortCard({ cohort }: { cohort: CohortWithWaitlist }) {
       {cohort.waitlist.length === 0 ? (
         <p className="mt-5 text-sm text-gray-500">Nobody on the waitlist yet.</p>
       ) : (
-        <div className="mt-5 overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-200 text-left text-xs uppercase tracking-wide text-gray-500">
-                <th className="py-2 pr-4">#</th>
-                <th className="py-2 pr-4">Name</th>
-                <th className="py-2 pr-4">Email</th>
-                <th className="py-2 pr-4">Phone</th>
-                <th className="py-2 pr-4">Business</th>
-                <th className="py-2 pr-4">Notes</th>
-                <th className="py-2 pr-4">Joined</th>
-                <th className="py-2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {cohort.waitlist.map((w, i) => (
-                <tr key={w.id} className="border-b border-gray-100 align-top">
-                  <td className="py-2 pr-4 text-gray-400">{i + 1}</td>
-                  <td className="py-2 pr-4 font-medium text-gray-900">{w.name}</td>
-                  <td className="py-2 pr-4"><a href={`mailto:${w.email}`} className="text-[#910000] hover:underline">{w.email}</a></td>
-                  <td className="py-2 pr-4 text-gray-700">{w.phone ?? "—"}</td>
-                  <td className="py-2 pr-4 text-gray-700">{w.businessName ?? "—"}</td>
-                  <td className="min-w-[16rem] py-2 pr-4 text-gray-600"><NotesCell text={w.notes} /></td>
-                  <td className="py-2 pr-4 whitespace-nowrap text-gray-600">{longDate.format(new Date(w.createdAt))}</td>
-                  <td className="py-2">
-                    <button type="button" disabled={pending} onClick={() => { if (confirm(`Remove ${w.name} from the waitlist?`)) run(() => removeWaitlistEntry(w.id)); }} className="text-xs font-semibold text-red-700 hover:underline">
+        <ol className="mt-5 divide-y divide-gray-100 border-t border-gray-200">
+          {cohort.waitlist.map((w, i) => (
+            <li key={w.id} className="flex gap-3 py-4 text-sm">
+              <span className="w-6 shrink-0 pt-0.5 text-right text-gray-400">{i + 1}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <p className="font-semibold text-gray-900">
+                    {w.name}
+                    {w.businessName && <span className="font-normal text-gray-600"> · {w.businessName}</span>}
+                  </p>
+                  <p className="flex shrink-0 items-center gap-3 text-xs text-gray-500">
+                    Joined {longDate.format(new Date(w.createdAt))}
+                    <button type="button" disabled={pending} onClick={() => { if (confirm(`Remove ${w.name} from the waitlist?`)) run(() => removeWaitlistEntry(w.id)); }} className="font-semibold text-red-700 hover:underline">
                       Remove
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                  </p>
+                </div>
+                <p className="mt-0.5 flex flex-wrap gap-x-4 gap-y-0.5 text-gray-700">
+                  <a href={`mailto:${w.email}`} className="break-all text-[#910000] hover:underline">{w.email}</a>
+                  {w.phone && <a href={`tel:${w.phone}`} className="hover:underline">{w.phone}</a>}
+                </p>
+                {w.notes && (
+                  <div className="mt-2 rounded-lg bg-gray-50 px-3 py-2 text-gray-600">
+                    <NotesCell text={w.notes} />
+                  </div>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
       )}
     </section>
   );
