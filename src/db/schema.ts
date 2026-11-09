@@ -328,6 +328,24 @@ export const documents = pgTable('documents', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// --- Password resets ---
+/**
+ * One row per "forgot my password" request.
+ *
+ * Only the SHA-256 of the token is stored, so a leaked database row cannot be
+ * turned back into a working reset link. A row is single-use (`usedAt`) and
+ * short-lived (`expiresAt`); see src/lib/password-reset.ts.
+ */
+export const passwordResetTokens = pgTable('password_reset_tokens', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  tokenHash: text('token_hash').notNull().unique(), // sha256 hex of the token in the emailed link
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: true }), // set the moment the token is redeemed
+  requestedIp: text('requested_ip'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const clientIntakeForms = pgTable('client_intake_forms', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id),
@@ -373,6 +391,7 @@ export type Resource = InferSelectModel<typeof resources>;
 export type ResourceClick = InferSelectModel<typeof resourceClicks>;
 export type SecureDocument = InferSelectModel<typeof documents>;
 export type CohortWaitlistEntry = InferSelectModel<typeof cohortWaitlist>;
+export type PasswordResetToken = InferSelectModel<typeof passwordResetTokens>;
 
 
 // --- Relations ---
@@ -492,6 +511,10 @@ export const businessToCompetitionRelations = relations(businessToCompetition, (
     fields: [businessToCompetition.competitionEventId],
     references: [pitchCompetitionEvents.id],
   }),
+}));
+
+export const passwordResetTokensRelations = relations(passwordResetTokens, ({ one }) => ({
+  user: one(users, { fields: [passwordResetTokens.userId], references: [users.id] }),
 }));
 
 export const clientIntakeFormsRelations = relations(clientIntakeForms, ({ one }) => ({

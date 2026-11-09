@@ -2,7 +2,8 @@
 
 import { db } from "@/db";
 import { users } from "@/db/schema"; // Import userStatus
-import bcrypt from "bcrypt";
+import { validatePasswordStrength } from "@/lib/password";
+import { hashPassword } from "@/lib/password-hash";
 import { FormState } from "@/types/form-state"; // Import FormState
 import { sendEmail, accountRequestedEmail } from "@/lib/email";
 import { notifyApprovers, notifyHtml, esc, appUrl } from "@/lib/notify";
@@ -47,6 +48,12 @@ export async function createAccount(prevState: FormState, formData: FormData): P
   if (!name || !phone || !email || !password) {
     return { message: "", error: "All fields are required.", businessName }; // Include businessName in error state
   }
+  // The input carries minLength={8}; check it here too so the rule holds for
+  // requests that don't come from our form.
+  const weakPassword = validatePasswordStrength(password);
+  if (weakPassword) {
+    return { message: "", error: weakPassword, fieldErrors: { password: weakPassword }, businessName };
+  }
   if (!pitchChoice) {
     return { message: "", error: "Please tell us which pitch competition you were in.", fieldErrors: { pitchEvents: "Choose one from the list." }, businessName };
   }
@@ -58,7 +65,7 @@ export async function createAccount(prevState: FormState, formData: FormData): P
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password);
 
     await db.insert(users).values({
       name,
