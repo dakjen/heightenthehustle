@@ -59,12 +59,13 @@ function CopyChip({ code, resourceId }: { code: string; resourceId: number }) {
 function ResourceCard({ r }: { r: Resource }) {
   const dl = deadlineInfo(r.deadline);
   return (
-    <article className={`hth-card flex flex-col gap-4 p-5 md:flex-row md:items-center ${r.isFeatured ? "border-l-4 border-l-[#910000]" : ""}`}>
+    <article className={`hth-card flex flex-col gap-4 p-5 md:flex-row md:items-center ${dl?.closed ? "bg-gray-50 opacity-60 grayscale" : r.isFeatured ? "border-l-4 border-l-[#910000]" : ""}`}>
       {/* Left: what it is */}
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${CATEGORY_CLS[r.category]}`}>{r.category}</span>
-          {r.isFeatured && <span className="text-xs font-semibold uppercase tracking-wide text-[#910000]">Featured</span>}
+          {dl?.closed && <span className="rounded-full bg-gray-200 px-2.5 py-0.5 text-xs font-semibold text-gray-700">Closed</span>}
+          {r.isFeatured && !dl?.closed && <span className="text-xs font-semibold uppercase tracking-wide text-[#910000]">Featured</span>}
           {r.provider && <span className="text-xs text-gray-500">· {r.provider}</span>}
         </div>
         <h3 className="mt-1.5 text-xl leading-tight text-gray-900">{r.title}</h3>
@@ -111,12 +112,19 @@ export default function ResourcesClient({ resources }: { resources: Resource[] }
 
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return resources.filter((r) => {
+    const matched = resources.filter((r) => {
       if (tab !== "All" && r.category !== tab) return false;
       if (!q) return true;
       const hay = [r.title, r.description, r.provider, ...(r.tags ?? [])].filter(Boolean).join(" ").toLowerCase();
       return hay.includes(q);
     });
+    // Closed opportunities (deadline passed) sink to the bottom, most recently closed first.
+    const isClosed = (r: Resource) => Boolean(deadlineInfo(r.deadline)?.closed);
+    const open = matched.filter((r) => !isClosed(r));
+    const closed = matched
+      .filter(isClosed)
+      .sort((a, b) => new Date(b.deadline!).getTime() - new Date(a.deadline!).getTime());
+    return [...open, ...closed];
   }, [resources, tab, query]);
 
   const tabs: Tab[] = ["All", ...RESOURCE_CATEGORIES];
