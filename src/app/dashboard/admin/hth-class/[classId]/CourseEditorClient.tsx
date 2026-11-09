@@ -300,8 +300,8 @@ function HomeworkTab({ course, cohorts, assignments }: { course: AdminCourseDeta
         {assignments.length === 0 ? (
           <p className="px-5 pb-5 pt-3 text-sm text-gray-500 sm:px-6">No assignments yet.</p>
         ) : (
-          <div className="mt-3 overflow-x-auto">
-            <table className="w-full min-w-[32rem] text-sm">
+          <div className="mt-3">
+            <table className="w-full text-sm">
               <thead className="bg-gray-50 text-left text-xs uppercase tracking-wider text-gray-500">
                 <tr>
                   <th className="px-5 py-2 sm:px-6">Assignment</th>
@@ -325,7 +325,7 @@ function HomeworkTab({ course, cohorts, assignments }: { course: AdminCourseDeta
                         <span className="text-gray-500">Course</span>
                       )}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-2 text-gray-700">{formatDue(a.dueDate).replace(/^Due /, "")}</td>
+                    <td className="px-3 py-2 text-gray-700">{formatDue(a.dueDate).replace(/^Due /, "")}</td>
                     <td className="px-3 py-2 text-right text-gray-700">{a.submissionCount ?? 0}</td>
                     <td className="px-5 py-2 text-right sm:px-6">
                       {a.ungradedCount ? <span className="rounded-full bg-[#910000]/10 px-2 py-0.5 text-xs font-semibold text-[#910000]">{a.ungradedCount}</span> : <span className="text-gray-400">0</span>}

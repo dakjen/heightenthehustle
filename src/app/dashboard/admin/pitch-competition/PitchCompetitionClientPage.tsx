@@ -53,24 +53,24 @@ export default function PitchCompetitionClientPage({ initialEvents }: PitchCompe
         <h1 className="text-2xl font-bold mb-4">Submissions for {selectedEvent.name}</h1>
         {isLoadingSubmissions ? <p>Loading submissions...</p> : (
           <div className="mt-8">
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Name</th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitter</th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                  <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Name</th>
+                  <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitter</th>
+                  <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {submissions.map((submission) => (
                   <tr key={submission.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-3 py-3 break-words align-top text-sm font-medium text-gray-900">
                       <Link href={`/dashboard/admin/pitch-competition/projects/${submission.id}`} className="text-[#910000] hover:underline">
                         {submission.projectName}
                       </Link>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{submission.user.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(submission.submittedAt).toLocaleDateString()}</td>
+                    <td className="px-3 py-3 break-words align-top text-sm text-gray-500">{submission.user.name}</td>
+                    <td className="px-3 py-3 break-words align-top text-sm text-gray-500">{new Date(submission.submittedAt).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>
