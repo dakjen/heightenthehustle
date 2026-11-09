@@ -32,6 +32,23 @@ function downloadCsv(c: CohortWithWaitlist) {
   URL.revokeObjectURL(url);
 }
 
+/** Long waitlist notes collapse to three lines so one entry can't stretch the whole table. */
+function NotesCell({ text }: { text: string | null }) {
+  const [open, setOpen] = useState(false);
+  if (!text) return <>—</>;
+  const long = text.length > 160;
+  return (
+    <div>
+      <p className={open || !long ? "whitespace-pre-line" : "line-clamp-3"}>{text}</p>
+      {long && (
+        <button type="button" onClick={() => setOpen((v) => !v)} className="mt-1 text-xs font-semibold text-[#910000] hover:underline">
+          {open ? "Show less" : "Show more"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 function CreateCohortForm() {
   const [state, formAction] = useActionState<FormState, FormData>(createCohort, { message: "" });
   const errors = state.fieldErrors ?? {};
@@ -148,7 +165,7 @@ function CohortCard({ cohort }: { cohort: CohortWithWaitlist }) {
                   <td className="py-2 pr-4"><a href={`mailto:${w.email}`} className="text-[#910000] hover:underline">{w.email}</a></td>
                   <td className="py-2 pr-4 text-gray-700">{w.phone ?? "—"}</td>
                   <td className="py-2 pr-4 text-gray-700">{w.businessName ?? "—"}</td>
-                  <td className="max-w-xs py-2 pr-4 text-gray-600">{w.notes ?? "—"}</td>
+                  <td className="min-w-[16rem] py-2 pr-4 text-gray-600"><NotesCell text={w.notes} /></td>
                   <td className="py-2 pr-4 whitespace-nowrap text-gray-600">{longDate.format(new Date(w.createdAt))}</td>
                   <td className="py-2">
                     <button type="button" disabled={pending} onClick={() => { if (confirm(`Remove ${w.name} from the waitlist?`)) run(() => removeWaitlistEntry(w.id)); }} className="text-xs font-semibold text-red-700 hover:underline">
@@ -168,7 +185,7 @@ function CohortCard({ cohort }: { cohort: CohortWithWaitlist }) {
 export default function CohortsAdminClient({ cohorts }: { cohorts: CohortWithWaitlist[] }) {
   const [showCreate, setShowCreate] = useState(cohorts.length === 0);
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-full">
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">HTH Curriculum</p>
