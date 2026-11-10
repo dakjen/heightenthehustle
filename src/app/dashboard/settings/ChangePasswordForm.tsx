@@ -18,7 +18,7 @@ export default function ChangePasswordForm() {
   }, [done]);
 
   return (
-    <form ref={formRef} action={formAction} className="hth-card max-w-lg space-y-5 p-6">
+    <form ref={formRef} action={formAction} className="hth-card space-y-5 p-6">
       <Field
         name="currentPassword"
         label="Current password"

@@ -29,7 +29,7 @@ export default function EditBusinessProfileClientPage({ initialBusiness, availab
   };
 
   return (
-    <div className="flex-1 p-6">
+    <div className="w-full">
       <h1 className="text-3xl font-bold text-gray-900">Edit Business: {business.businessName}</h1>
 
       {/* Tabs */}

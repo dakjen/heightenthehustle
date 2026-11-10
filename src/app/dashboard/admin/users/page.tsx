@@ -28,7 +28,7 @@ export default async function UserManagementPage({ searchParams }: { searchParam
   }
 
   return (
-    <div className="flex-1 p-6">
+    <div className="w-full">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Admin User Management</h1>

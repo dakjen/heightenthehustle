@@ -10,7 +10,7 @@ export default async function AdminLayout({
   if (!canAccessAdminArea(user)) redirect("/dashboard");
 
   return (
-    <div className="flex-1 flex flex-col text-gray-900 p-6">
+    <div className="flex-1 flex flex-col text-gray-900">
       {children}
     </div>
   );
