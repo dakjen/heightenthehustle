@@ -97,7 +97,7 @@ function AssignmentForm({ classId, lessonId, assignment, onDone }: { classId: nu
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               placeholder={"What should members hand in? Use **bold**, lists, and [links](https://)."}
-              className={`${inputClass} min-h-[12rem] font-mono text-sm leading-relaxed`}
+              className={`${inputClass} min-h-[12rem] text-sm leading-relaxed`}
               {...invalidProps("instructions", errors)}
             />
             {showPreview && (

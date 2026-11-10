@@ -70,7 +70,7 @@ export default function CourseForm({ course, onSaved, onCancel }: CourseFormProp
           <input id="syllabusUrl" name="syllabusUrl" type="url" inputMode="url" defaultValue={course?.syllabusUrl ?? ""} placeholder="https://" className={inputClass} {...invalidProps("syllabusUrl", errors)} />
         </Field>
         <Field name="description" label="Description" error={errors.description} className="sm:col-span-2" hint="Markdown is supported: headings, lists, bold, links.">
-          <textarea id="description" name="description" rows={6} defaultValue={course?.description ?? ""} className={`${inputClass} font-mono text-sm`} />
+          <textarea id="description" name="description" rows={6} defaultValue={course?.description ?? ""} className={`${inputClass} text-sm`} />
         </Field>
         <label className="flex items-center gap-3 text-sm text-gray-800 sm:col-span-2">
           <input type="checkbox" name="isPublished" defaultChecked={course?.isPublished ?? false} className={checkboxClass} />

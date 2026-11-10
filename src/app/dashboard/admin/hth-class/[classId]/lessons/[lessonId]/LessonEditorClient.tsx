@@ -134,7 +134,7 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               placeholder={"## Welcome\n\nWrite the lesson here. Use **bold**, lists, and [links](https://)."}
-              className={`${inputClass} min-h-[24rem] font-mono text-sm leading-relaxed`}
+              className={`${inputClass} min-h-[24rem] text-sm leading-relaxed`}
               {...invalidProps("content", errors)}
             />
             {showPreview && (

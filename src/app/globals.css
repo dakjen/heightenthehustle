@@ -21,7 +21,7 @@
   --color-charcoal-light: var(--charcoal-light);
   --font-sans: var(--font-dm-sans); /* Use DM Sans for sans-serif */
   --font-display: var(--font-bebas-neue);
-  --font-mono: var(--font-bebas-neue); /* You can adjust this if you have a specific mono font */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 body {
