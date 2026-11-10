@@ -499,7 +499,7 @@ export default function MessagesPage({
   );
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full">
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between hth-fade-up">
         <div>
           <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Support</p>

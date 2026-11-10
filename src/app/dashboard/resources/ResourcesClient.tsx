@@ -130,7 +130,7 @@ export default function ResourcesClient({ resources }: { resources: Resource[] }
   const tabs: Tab[] = ["All", ...RESOURCE_CATEGORIES];
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full">
       <header className="mb-6 hth-fade-up">
         <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Resources Hub</p>
         <h1 className="text-5xl text-gray-900 leading-none">Grants, tools and deals for your business</h1>

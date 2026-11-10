@@ -27,7 +27,7 @@ export default function DocumentsAdminClient({ documents, members, kinds }: { do
   const missingW9 = members.filter((m) => !withW9.has(m.id));
 
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-full">
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">Admin</p>

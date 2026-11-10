@@ -360,7 +360,7 @@ export default function CourseEditorClient({ course, cohorts, assignments, initi
   useEffect(() => { setTab(initialTab); }, [initialTab]);
 
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-full">
       <header className="mb-6">
         <Link href="/dashboard/admin/hth-class" className="text-sm font-semibold text-[#910000] hover:underline">&larr; All courses</Link>
         <p className="mb-2 mt-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#910000]">HTH Curriculum</p>

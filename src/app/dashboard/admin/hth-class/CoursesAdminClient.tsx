@@ -71,7 +71,7 @@ export default function CoursesAdminClient({ courses }: { courses: AdminCourse[]
   const [showCreate, setShowCreate] = useState(courses.length === 0);
 
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-full">
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#910000]">HTH Curriculum</p>

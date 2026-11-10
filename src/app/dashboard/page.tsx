@@ -175,7 +175,7 @@ async function AdminHome({ name, role }: { name: string; role: string }) {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full">
       <header className="mb-6 hth-fade-up">
         <p className="text-[#910000] uppercase tracking-[0.3em] text-xs font-semibold mb-2">{role === "admin" ? "Admin" : "Team"} dashboard</p>
         <h1 className="text-5xl text-gray-900 leading-none">Hey, {name.split(" ")[0]}.</h1>
@@ -194,7 +194,7 @@ async function AdminHome({ name, role }: { name: string; role: string }) {
       </div>
 
       <h2 className="mb-3 mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Usage</h2>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 hth-fade-up hth-fade-up-delay-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-8 hth-fade-up hth-fade-up-delay-2">
         {usage.map((t) => (
           <div key={t.label} className="hth-card p-5">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500">{t.label}</p>

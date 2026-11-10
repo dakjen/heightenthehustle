@@ -56,7 +56,7 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
   };
 
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-full">
       <nav className="mb-4 text-sm text-gray-600">
         <Link href="/dashboard/admin/hth-class" className="hover:text-[#910000]">Courses</Link>
         <span className="mx-2">›</span>
