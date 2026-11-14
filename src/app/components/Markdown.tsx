@@ -56,7 +56,18 @@ function VideoGrid({ items }: { items: VideoItem[] }) {
         <figure key={v.embed} className="hth-video-card">
           <figcaption>
             <a href={v.url} target="_blank" rel="noopener noreferrer">{v.title}</a>
-            {v.caption && <span className="hth-video-source">, {v.caption}</span>}
+            {v.caption && (
+              <span className="hth-video-source">
+                ,{" "}
+                <ReactMarkdown
+                  allowedElements={["a", "strong", "em"]}
+                  unwrapDisallowed
+                  components={{ a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer">{children}</a> }}
+                >
+                  {v.caption}
+                </ReactMarkdown>
+              </span>
+            )}
           </figcaption>
           <div className="hth-video-frame">
             <VideoEmbed embed={v.embed} url={v.url} title={v.title} />
