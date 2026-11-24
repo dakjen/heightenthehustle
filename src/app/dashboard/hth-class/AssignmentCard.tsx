@@ -9,7 +9,6 @@ import type { FormState } from "@/types/form-state";
 import { submitAssignment, type MemberAssignment } from "./assignment-actions";
 import { AssignmentStatusChip, assignmentState, formatShortDate, scoreLabel } from "./course-ui";
 
-const ACCEPT = ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg";
 const initialState: FormState = { message: "", error: "" };
 
 /** Like form.tsx's invalidProps, but keyed by a per-card element id so several cards on one page don't collide. */
@@ -112,8 +111,8 @@ export default function AssignmentCard({ assignment, courseId }: AssignmentCardP
             </Field>
           )}
           {assignment.allowsFile && (
-            <Field name={`${formId}-file`} label={sub?.fileName ? "Replace file" : "Attach a file"} hideOptional error={errors?.file} hint="PDF, Word, Excel, PowerPoint, PNG or JPG · up to 25 MB">
-              <input id={`${formId}-file`} type="file" name="file" accept={ACCEPT} className={fileInputClass} {...invalid(`${formId}-file`, errors?.file)} />
+            <Field name={`${formId}-file`} label={sub?.fileName ? "Replace file" : "Attach a file"} hideOptional error={errors?.file} hint="Documents, spreadsheets, decks, images, audio or video. Up to 250 MB.">
+              <input id={`${formId}-file`} type="file" name="file" className={fileInputClass} {...invalid(`${formId}-file`, errors?.file)} />
             </Field>
           )}
           <FormError message={uploadError || formState.error} />

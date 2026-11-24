@@ -6,7 +6,7 @@ import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { businessAccess, isStaff } from "@/lib/auth";
 import { revalidatePath, unstable_noStore } from "next/cache";
-import { claimUpload, isClaimError } from "@/lib/direct-uploads";
+import { claimUpload, isClaimError, prepareUpload, preparedError, storePrepared } from "@/lib/direct-uploads";
 import { chosenFile, checkUpload, uploadPublicFile } from "@/lib/uploads";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
@@ -160,8 +160,9 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   const zipCode = text(formData, "zipCode");
   const phone = text(formData, "phone");
   const website = text(formData, "website");
-  const materialsFile = chosenFile(formData.get("businessMaterials"));
-  const logoFile = chosenFile(formData.get("logo"));
+  // Direct-to-storage upload when the form used one, otherwise a small file sent with the form.
+  const materialsUp = await prepareUpload(formData, "businessMaterials", "business-material", "material", userId);
+  const logoUp = await prepareUpload(formData, "logo", "image", "image", userId);
 
   // Validate every field up front so the user sees all problems at once.
   const fieldErrors: Record<string, string> = {};
@@ -181,24 +182,17 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
   if (state && !US_STATES.has(state)) fieldErrors.state = "Choose a state.";
   if (zipCode && !/^\d{5}(-\d{4})?$/.test(zipCode)) fieldErrors.zipCode = "Enter a 5-digit ZIP code (or ZIP+4).";
   if (phone && phone.replace(/\D/g, '').length < 10) fieldErrors.phone = "Enter a 10-digit phone number.";
-  if (logoFile) {
-    const problem = checkUpload(logoFile, "image");
-    if (problem) fieldErrors.logo = problem;
-  }
-  if (materialsFile) {
-    const problem = checkUpload(materialsFile, "material");
-    if (problem) fieldErrors.businessMaterials = problem;
-  }
+  if (preparedError(logoUp)) fieldErrors.logo = preparedError(logoUp)!;
+  if (preparedError(materialsUp)) fieldErrors.businessMaterials = preparedError(materialsUp)!;
 
   if (Object.keys(fieldErrors).length > 0) {
     return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
   }
 
   try {
-    const logoUrl = logoFile ? await uploadPublicFile(logoFile, 'business-logos', userId) : null;
-    const businessMaterialsUrl = materialsFile
-      ? await uploadPublicFile(materialsFile, 'business-materials', userId)
-      : null;
+    const logoUrl = (await storePrepared(logoUp, 'business-logos', userId))?.url ?? null;
+    const materialsStored = await storePrepared(materialsUp, 'business-materials', userId);
+    const businessMaterialsUrl = materialsStored?.url ?? null;
 
     const newBusinessData: NewBusiness = {
       userId,
@@ -220,7 +214,7 @@ export async function createBusinessProfile(prevState: FormState, formData: Form
       businessMaterialsUrl,
       // Also surface the upload in the Materials tab so it isn't orphaned.
       material1Url: businessMaterialsUrl,
-      material1Title: businessMaterialsUrl ? (materialsFile?.name ?? 'Business materials') : null,
+      material1Title: businessMaterialsUrl ? (materialsStored?.fileName ?? 'Business materials') : null,
     };
 
     const [created] = await db.insert(businesses).values(newBusinessData).returning({ id: businesses.id });

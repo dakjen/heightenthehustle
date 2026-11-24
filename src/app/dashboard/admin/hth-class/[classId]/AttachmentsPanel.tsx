@@ -74,7 +74,7 @@ export default function AttachmentsPanel({ classId, lessonId, attachments }: Pro
         <Field name="title" label="Title" hideOptional hint="Leave blank to use the file name.">
           <input id="title" name="title" type="text" placeholder="e.g. List of Services Template" className={inputClass} />
         </Field>
-        <Field name="file" label="File" required error={errors.file} hint="Up to 100 MB.">
+        <Field name="file" label="File" required error={errors.file} hint="Any document, deck, image, audio or video. Up to 1 GB.">
           <input id="file" name="file" type="file" required className={fileInputClass} {...invalidProps("file", errors)} />
         </Field>
         <div className="pb-1">

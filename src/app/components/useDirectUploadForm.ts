@@ -41,7 +41,7 @@ export function useDirectUploadForm(formAction: (formData: FormData) => void, fi
           const res = await fetch(`/api/blob/upload?kind=${encodeURIComponent(kind)}`);
           if (!res.ok) throw new Error(res.status === 401 ? "Your session expired. Please sign in again." : "You can't upload here.");
           const info = (await res.json()) as { prefix: string; access: "public" | "private"; maxBytes: number };
-          if (file.size > info.maxBytes) throw new TooLarge(`"${file.name}" is too large. The limit is ${Math.round(info.maxBytes / MB)} MB.`);
+          if (file.size > info.maxBytes) throw new TooLarge(`"${file.name}" is too large. The limit is ${info.maxBytes >= 1024 * MB ? `${Math.round(info.maxBytes / (1024 * MB))} GB` : `${Math.round(info.maxBytes / MB)} MB`}.`);
 
           const safeName = file.name.replace(/[^\w.-]+/g, "_").slice(-100);
           const blob = await upload(`${info.prefix}${Date.now()}-${safeName}`, file, {

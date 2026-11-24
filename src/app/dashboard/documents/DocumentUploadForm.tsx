@@ -3,7 +3,6 @@
 import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState } from "react";
 import { uploadDocument } from "./actions";
-import { DOCUMENT_ACCEPT } from "./constants";
 import { FormState } from "@/types/form-state";
 import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, fileInputClass, invalidProps } from "@/app/components/form";
 
@@ -44,8 +43,8 @@ export default function DocumentUploadForm({ kinds, businesses, ownerId, ownerNa
             </select>
           </Field>
         )}
-        <Field name="file" label="File" required error={errors.file} hint="PDF, Word, Excel, PowerPoint, PNG or JPG. Up to 25 MB." className={businesses.length > 0 ? "" : "sm:col-span-2"}>
-          <input id="file" name="file" type="file" required accept={DOCUMENT_ACCEPT} className={fileInputClass} {...invalidProps("file", errors)} />
+        <Field name="file" label="File" required error={errors.file} hint="Documents, spreadsheets, decks, images, audio or video. Up to 250 MB." className={businesses.length > 0 ? "" : "sm:col-span-2"}>
+          <input id="file" name="file" type="file" required className={fileInputClass} {...invalidProps("file", errors)} />
         </Field>
         <Field name="notes" label="Notes" error={errors.notes} className="sm:col-span-2">
           <input id="notes" name="notes" type="text" placeholder="Anything the team should know about this file" className={inputClass} />

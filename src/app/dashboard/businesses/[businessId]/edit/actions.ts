@@ -5,7 +5,7 @@ import { businesses, businessTypeEnum, businessTaxStatusEnum } from "@/db/schema
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { businessAccess } from "@/lib/auth";
-import { checkUpload, chosenFile, uploadPublicFile } from "@/lib/uploads";
+import { prepareUpload, preparedError, storePrepared } from "@/lib/direct-uploads";
 import { FormState } from "@/types/form-state";
 
 function text(formData: FormData, name: string): string {
@@ -48,8 +48,6 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
   const phone = text(formData, "phone");
   const website = text(formData, "website");
   const locationIdRaw = text(formData, "locationId");
-  const logo = formData.get("logo");
-  const photo = formData.get("businessProfilePhoto");
 
   const fieldErrors: Record<string, string> = {};
   if (!businessName) fieldErrors.businessName = "Enter your business name.";
@@ -62,22 +60,16 @@ export async function updateBusinessProfile(prevState: FormState, formData: Form
   if (state && !/^[A-Z]{2}$/.test(state)) fieldErrors.state = "Use the 2-letter state code.";
   if (zipCode && !/^\d{5}(-\d{4})?$/.test(zipCode)) fieldErrors.zipCode = "Enter a 5-digit ZIP code (or ZIP+4).";
   if (phone && phone.replace(/\D/g, "").length < 10) fieldErrors.phone = "Enter a 10-digit phone number.";
-  for (const [name, value] of [["logo", logo], ["businessProfilePhoto", photo]] as const) {
-    const file = chosenFile(value);
-    if (!file) continue;
-    const problem = checkUpload(file, "image");
-    if (problem) fieldErrors[name] = problem;
-  }
+  const logoUp = await prepareUpload(formData, "logo", "image", "image", access.user.id);
+  const photoUp = await prepareUpload(formData, "businessProfilePhoto", "image", "image", access.user.id);
+  if (preparedError(logoUp)) fieldErrors.logo = preparedError(logoUp)!;
+  if (preparedError(photoUp)) fieldErrors.businessProfilePhoto = preparedError(photoUp)!;
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
   try {
-    const logoFile = chosenFile(logo);
-    const photoFile = chosenFile(photo);
     // undefined means "nothing chosen": leave the existing image as it is.
-    const logoUrl = logoFile ? await uploadPublicFile(logoFile, "business-logos", access.user.id) : undefined;
-    const businessProfilePhotoUrl = photoFile
-      ? await uploadPublicFile(photoFile, "business-photos", access.user.id)
-      : undefined;
+    const logoUrl = (await storePrepared(logoUp, "business-logos", access.user.id))?.url;
+    const businessProfilePhotoUrl = (await storePrepared(photoUp, "business-photos", access.user.id))?.url;
 
     await db
       .update(businesses)

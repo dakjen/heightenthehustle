@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { BusinessWithLocation, Location } from "@/db/schema";
@@ -48,7 +49,7 @@ function ImagePicker({ name, label, hint, current, error, square }: { name: stri
           id={name}
           name={name}
           type="file"
-          accept=".png,.jpg,.jpeg,.webp,.gif"
+          accept="image/*"
           onChange={(e) => {
             const f = e.target.files?.[0];
             setPreview((prev) => { if (prev) URL.revokeObjectURL(prev); return f && f.type.startsWith("image/") ? URL.createObjectURL(f) : null; });
@@ -62,6 +63,7 @@ function ImagePicker({ name, label, hint, current, error, square }: { name: stri
 
 export default function EditBusinessProfileForm({ initialBusiness: b, availableLocations, onSaved }: Props) {
   const [state, formAction] = useActionState<FormState, FormData>(updateBusinessProfile, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { logo: "image", businessProfilePhoto: "image" });
   const errors = state.fieldErrors ?? {};
   const last = useRef(state);
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function EditBusinessProfileForm({ initialBusiness: b, availableL
   const cities = availableLocations.filter((l) => l.category === "City");
 
   return (
-    <form action={formAction} className="space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="space-y-6" noValidate>
       <input type="hidden" name="businessId" value={b.id} />
 
       <FormSection step="01" title="The basics" description="What you're called and what you do.">
@@ -89,8 +91,8 @@ export default function EditBusinessProfileForm({ initialBusiness: b, availableL
         <Field name="businessDescription" label="What does your business do?" error={errors.businessDescription} className="sm:col-span-2">
           <textarea id="businessDescription" name="businessDescription" rows={4} defaultValue={b.businessDescription ?? ""} className={inputClass} />
         </Field>
-        <ImagePicker name="logo" label="Logo" hint="Square images look best. Up to 4 MB." current={b.logoUrl} error={errors.logo} square />
-        <ImagePicker name="businessProfilePhoto" label="Cover photo" hint="Shown behind your business name. Up to 4 MB." current={b.businessProfilePhotoUrl} error={errors.businessProfilePhoto} />
+        <ImagePicker name="logo" label="Logo" hint="Square images look best. Up to 25 MB." current={b.logoUrl} error={errors.logo} square />
+        <ImagePicker name="businessProfilePhoto" label="Cover photo" hint="Shown behind your business name. Up to 25 MB." current={b.businessProfilePhotoUrl} error={errors.businessProfilePhoto} />
       </FormSection>
 
       <FormSection step="02" title="Ownership & structure" description="How the business is set up legally.">
@@ -151,11 +153,11 @@ export default function EditBusinessProfileForm({ initialBusiness: b, availableL
         </Field>
       </FormSection>
 
-      <FormError message={state.error} />
+      <FormError message={uploadError || state.error} />
       <FormSuccess message={state.message && !state.error ? state.message : undefined} />
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
         <RequiredNote />
-        <SubmitButton>Save changes</SubmitButton>
+        <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Saving…"}>Save changes</SubmitButton>
       </div>
     </form>
   );

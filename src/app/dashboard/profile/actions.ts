@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { createSession } from "@/lib/session";
 import { safeUserColumns } from "@/lib/users";
-import { checkUpload, chosenFile, uploadPublicFile } from "@/lib/uploads";
+import { prepareUpload, preparedError, storePrepared } from "@/lib/direct-uploads";
 import { revalidatePath } from "next/cache";
 
 export async function updateProfile(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -23,20 +23,16 @@ export async function updateProfile(prevState: FormState, formData: FormData): P
   const personalCity = formData.get("personalCity") as string;
   const personalState = formData.get("personalState") as string;
   const personalZipCode = formData.get("personalZipCode") as string;
-  const profilePhoto = chosenFile(formData.get("profilePhoto"));
+  const photoUp = await prepareUpload(formData, "profilePhoto", "image", "image", session.user.id);
 
   if (!name || !phone) {
     return { message: "", error: "Name and Phone are required." };
   }
-  if (profilePhoto) {
-    const problem = checkUpload(profilePhoto, "image");
-    if (problem) return { message: "", error: problem, fieldErrors: { profilePhoto: problem } };
-  }
+  const photoProblem = preparedError(photoUp);
+  if (photoProblem) return { message: "", error: photoProblem, fieldErrors: { profilePhoto: photoProblem } };
 
   try {
-    const profilePhotoUrl = profilePhoto
-      ? await uploadPublicFile(profilePhoto, 'profile-photos', session.user.id)
-      : undefined;
+    const profilePhotoUrl = (await storePrepared(photoUp, 'profile-photos', session.user.id))?.url;
 
     await db.update(users)
       .set({

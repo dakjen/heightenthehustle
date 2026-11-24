@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useState, useEffect } from "react";
 import { useActionState } from "react";
 import { FormState } from "@/types/form-state";
@@ -32,6 +33,7 @@ const isPlaceholder = (url: string | null | undefined): boolean => {
 
 export default function ProfilePage() {
   const [state, formAction] = useActionState<FormState, FormData>(updateProfile, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { profilePhoto: "image" });
   const [user, setUser] = useState<UserProfile | null>(null); // Use UserProfile type
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
@@ -88,7 +90,7 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      <form action={formAction} className="space-y-6 hth-fade-up hth-fade-up-delay-1">
+      <form onSubmit={onSubmit} className="space-y-6 hth-fade-up hth-fade-up-delay-1">
         <FormSection step="01" title="Photo" description="A face helps our team and other members recognize you.">
           <Field name="profilePhoto" label="Profile photo" className="sm:col-span-2" hint="PNG or JPG. Square images look best.">
             <div className="flex items-center gap-4">
@@ -106,7 +108,7 @@ export default function ProfilePage() {
                 id="profilePhoto"
                 name="profilePhoto"
                 type="file"
-                accept=".png,.jpg,.jpeg,.webp,.gif"
+                accept="image/*"
                 onChange={onPhotoChange}
                 className={fileInputClass}
               />
@@ -201,12 +203,12 @@ export default function ProfilePage() {
           </div>
         </FormSection>
 
-        <FormError message={state?.error} />
+        <FormError message={uploadError || state?.error} />
         {!state?.error && <FormSuccess message={state?.message} />}
 
         <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
           <RequiredNote />
-          <SubmitButton>Update profile</SubmitButton>
+          <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Saving…"}>Update profile</SubmitButton>
         </div>
       </form>
     </div>

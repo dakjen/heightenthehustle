@@ -40,7 +40,7 @@ export default function BusinessMaterials({ business, onSaved }: Props) {
                 <input id={`material${i}Title`} name={`material${i}Title`} type="text" defaultValue={s.title} placeholder="e.g. 2026 pitch deck" className={inputClass} />
               </Field>
               <Field name={`material${i}`} label={s.url ? "Replace file" : "File"} hideOptional>
-                <input id={`material${i}`} name={`material${i}`} type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg" className={fileInputClass} />
+                <input id={`material${i}`} name={`material${i}`} type="file" className={fileInputClass} />
               </Field>
               <div className="pb-1 text-sm">
                 {s.url ? (

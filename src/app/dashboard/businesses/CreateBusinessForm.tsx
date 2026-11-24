@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createBusinessProfile } from "./actions";
@@ -38,6 +39,7 @@ interface CreateBusinessFormProps {
 export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: CreateBusinessFormProps) {
   const router = useRouter();
   const [state, formAction] = useActionState<FormState, FormData>(createBusinessProfile, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { logo: "image", businessMaterials: "business-material" });
   const errors = state.fieldErrors ?? {};
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
@@ -59,7 +61,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
   const invalid = (name: string) => invalidProps(name, errors);
 
   return (
-    <form action={formAction} className="space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="space-y-6" noValidate>
       <FormSection step="01" title="The basics" description="What you're called and what you do.">
         <Field name="businessName" label="Business name" required error={errors.businessName} className="sm:col-span-2">
           <input id="businessName" name="businessName" type="text" required autoComplete="organization" placeholder="e.g. Hustle Coffee Co." className={inputClass} {...invalid("businessName")} />
@@ -76,7 +78,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
         <Field name="businessDescription" label="What does your business do?" error={errors.businessDescription} className="sm:col-span-2" hint="A sentence or two is plenty. We use this to find the right opportunities for you.">
           <textarea id="businessDescription" name="businessDescription" rows={3} placeholder="We roast small-batch coffee and run a cafe in Brooklyn…" className={inputClass} />
         </Field>
-        <Field name="logo" label="Logo" error={errors.logo} className="sm:col-span-2" hint="PNG, JPG, SVG or WebP up to 4 MB. Square images look best.">
+        <Field name="logo" label="Logo" error={errors.logo} className="sm:col-span-2" hint="PNG, JPG, WebP, GIF or HEIC up to 25 MB. Square images look best.">
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed border-gray-300 bg-gray-50">
               {logoPreview ? (
@@ -86,7 +88,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
                 <span className="text-xs text-gray-400">Preview</span>
               )}
             </div>
-            <input id="logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.webp,.gif" onChange={onLogoChange} className={fileInputClass} {...invalid("logo")} />
+            <input id="logo" name="logo" type="file" accept="image/*" onChange={onLogoChange} className={fileInputClass} {...invalid("logo")} />
           </div>
         </Field>
       </FormSection>
@@ -144,18 +146,18 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
       </FormSection>
 
       <FormSection step="04" title="Materials" description="Optional now. You can add more from your business page later.">
-        <Field name="businessMaterials" label="Pitch deck, one-pager or brochure" error={errors.businessMaterials} className="sm:col-span-2" hint="PDF, Word, PowerPoint, PNG or JPG. Up to 4 MB.">
+        <Field name="businessMaterials" label="Pitch deck, one-pager or brochure" error={errors.businessMaterials} className="sm:col-span-2" hint="Any document, deck or image. Up to 250 MB.">
           <input
             id="businessMaterials"
             name="businessMaterials"
             type="file"
-            accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg"
+            
             className={fileInputClass}
           />
         </Field>
       </FormSection>
 
-      {!state.businessId && <FormError message={state.error} />}
+      {!state.businessId && <FormError message={uploadError || state.error} />}
       {state.businessId && <FormSuccess message={`${state.message} Taking you to your business page…`} />}
 
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -166,7 +168,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
               Cancel
             </button>
           )}
-          <SubmitButton>Save my business</SubmitButton>
+          <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Saving…"}>Save my business</SubmitButton>
         </div>
       </div>
     </form>
