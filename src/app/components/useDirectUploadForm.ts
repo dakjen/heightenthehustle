@@ -32,6 +32,7 @@ export function useDirectUploadForm(formAction: (formData: FormData) => void, fi
     setUploadError("");
     setUploading(true);
     try {
+      let fallbackBytes = 0;
       for (const [name, kind] of Object.entries(fields)) {
         const file = formData.get(name);
         formData.delete(name);
@@ -55,8 +56,14 @@ export function useDirectUploadForm(formAction: (formData: FormData) => void, fi
         } catch (error) {
           // Small files can still travel with the form itself, so a hiccup in the
           // direct upload never blocks them. Big ones have no other route.
-          if (error instanceof TooLarge || file.size > SERVER_SAFE_BYTES) throw error;
+          // The whole form post has to stay under the host's limit, so count every fallback file.
+          if (error instanceof TooLarge || fallbackBytes + file.size > SERVER_SAFE_BYTES) {
+            if (error instanceof TooLarge) throw error;
+            const detail = error instanceof Error ? error.message : "";
+            throw new Error(`"${file.name}" couldn't be uploaded${detail ? `: ${detail}` : "."} Please try again, and tell the HTH team if it keeps happening.`);
+          }
           console.warn("Direct upload failed; sending the file with the form instead.", error);
+          fallbackBytes += file.size;
           formData.set(name, file);
         }
       }
