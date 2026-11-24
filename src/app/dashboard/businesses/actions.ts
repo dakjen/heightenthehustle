@@ -6,6 +6,7 @@ import { eq, like, and } from "drizzle-orm";
 import { getSession, SessionPayload } from "@/app/login/actions";
 import { businessAccess, isStaff } from "@/lib/auth";
 import { revalidatePath, unstable_noStore } from "next/cache";
+import { claimUpload, isClaimError } from "@/lib/direct-uploads";
 import { chosenFile, checkUpload, uploadPublicFile } from "@/lib/uploads";
 import { InferInsertModel } from "drizzle-orm"; // Import InferInsertModel
 
@@ -341,15 +342,18 @@ export async function updateBusinessMaterials(prevState: FormState, formData: Fo
 
   // Check every chosen file before storing any of them, so a bad file in slot 4
   // doesn't leave slots 1-3 half-saved.
-  const slots = [1, 2, 3, 4, 5].map((i) => ({
+  const slots = await Promise.all([1, 2, 3, 4, 5].map(async (i) => ({
     i,
     file: chosenFile(formData.get(`material${i}`)),
+    // Large files arrive as a reference to a direct-to-storage upload.
+    claimed: await claimUpload(formData, `material${i}`, "business-material", access.user.id),
     title: formData.get(`material${i}Title`) as string | null,
-  }));
+  })));
 
   const fieldErrors: Record<string, string> = {};
   for (const slot of slots) {
-    if (!slot.file) continue;
+    if (isClaimError(slot.claimed)) { fieldErrors[`material${slot.i}`] = slot.claimed.error; continue; }
+    if (slot.claimed || !slot.file) continue;
     const problem = checkUpload(slot.file, "material");
     if (problem) fieldErrors[`material${slot.i}`] = problem;
   }
@@ -361,7 +365,9 @@ export async function updateBusinessMaterials(prevState: FormState, formData: Fo
     const updateData: Partial<InferInsertModel<typeof businesses>> & { [key: string]: string | number | boolean | undefined | null } = {};
 
     for (const slot of slots) {
-      if (slot.file) {
+      if (slot.claimed && !isClaimError(slot.claimed)) {
+        updateData[`material${slot.i}Url`] = slot.claimed.url;
+      } else if (slot.file) {
         // Namespaced by the owner, never by the name the browser sent.
         updateData[`material${slot.i}Url`] = await uploadPublicFile(slot.file, "business-materials", access.user.id);
       }

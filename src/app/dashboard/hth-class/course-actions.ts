@@ -8,6 +8,7 @@ import {
 import { put, del } from "@vercel/blob";
 import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { claimUpload, isClaimError } from "@/lib/direct-uploads";
 import { getSession } from "@/app/login/actions";
 import { hasPermission, requirePermission } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
@@ -388,24 +389,36 @@ export async function uploadAttachment(prevState: FormState, formData: FormData)
   const file = formData.get("file");
   let title = text(formData, "title");
 
+  // Large files arrive as a reference to a direct-to-storage upload; small ones as the file itself.
+  const claimed = await claimUpload(formData, "file", "course-material", user.id);
+
   const fieldErrors: Record<string, string> = {};
   if (!classId) fieldErrors.classId = "Missing course.";
-  if (!(file instanceof File) || file.size === 0) fieldErrors.file = "Choose a file.";
-  else if (file.size > ATTACHMENT_MAX_BYTES) fieldErrors.file = "File must be 25 MB or smaller.";
+  if (isClaimError(claimed)) fieldErrors.file = claimed.error;
+  else if (!claimed) {
+    if (!(file instanceof File) || file.size === 0) fieldErrors.file = "Choose a file.";
+    else if (file.size > ATTACHMENT_MAX_BYTES) fieldErrors.file = "File must be 25 MB or smaller.";
+  }
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
-  const upload = file as File;
-  if (!title) title = upload.name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
 
   try {
     if (lessonId) {
       const owned = await db.query.lessons.findFirst({ where: and(eq(lessons.id, lessonId), eq(lessons.classId, classId)), columns: { id: true } });
       if (!owned) return { message: "", error: "That lesson isn't in this course." };
     }
-    const safeName = upload.name.replace(/[^\w.-]+/g, "_");
-    const blob = await put(`course-materials/${classId}/${Date.now()}-${safeName}`, upload, { access: "public" });
+    let stored: { url: string; fileName: string; contentType: string; size: number };
+    if (claimed && !isClaimError(claimed)) {
+      stored = claimed;
+    } else {
+      const upload = file as File;
+      const safeName = upload.name.replace(/[^\w.-]+/g, "_");
+      const blob = await put(`course-materials/${classId}/${Date.now()}-${safeName}`, upload, { access: "public", addRandomSuffix: true });
+      stored = { url: blob.url, fileName: upload.name, contentType: upload.type || "application/octet-stream", size: upload.size };
+    }
+    if (!title) title = stored.fileName.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
     await db.insert(courseAttachments).values({
-      classId, lessonId, title, fileName: upload.name, url: blob.url,
-      contentType: upload.type || "application/octet-stream", sizeBytes: upload.size, uploadedById: user.id,
+      classId, lessonId, title, fileName: stored.fileName, url: stored.url,
+      contentType: stored.contentType, sizeBytes: stored.size, uploadedById: user.id,
     });
     revalidateCourses();
     return { message: `"${title}" uploaded.`, error: "" };

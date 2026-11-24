@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { CourseAttachment } from "@/db/schema";
@@ -21,6 +22,7 @@ interface Props {
 export default function AttachmentsPanel({ classId, lessonId, attachments }: Props) {
   const router = useRouter();
   const [state, formAction] = useActionState<FormState, FormData>(uploadAttachment, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { file: "course-material" });
   const [pending, start] = useTransition();
   const [msg, setMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -66,20 +68,20 @@ export default function AttachmentsPanel({ classId, lessonId, attachments }: Pro
       )}
       {msg && <p className="mb-3 text-sm text-gray-600">{msg}</p>}
 
-      <form ref={formRef} action={formAction} className="grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end" noValidate>
+      <form ref={formRef} onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end" noValidate>
         <input type="hidden" name="classId" value={classId} />
         {lessonId && <input type="hidden" name="lessonId" value={lessonId} />}
         <Field name="title" label="Title" hideOptional hint="Leave blank to use the file name.">
           <input id="title" name="title" type="text" placeholder="e.g. List of Services Template" className={inputClass} />
         </Field>
-        <Field name="file" label="File" required error={errors.file} hint="Up to 25 MB.">
+        <Field name="file" label="File" required error={errors.file} hint="Up to 100 MB.">
           <input id="file" name="file" type="file" required className={fileInputClass} {...invalidProps("file", errors)} />
         </Field>
         <div className="pb-1">
-          <SubmitButton pendingText="Uploading…">Upload</SubmitButton>
+          <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Uploading…"}>Upload</SubmitButton>
         </div>
         <div className="sm:col-span-3">
-          <FormError message={state.error} />
+          <FormError message={uploadError || state.error} />
           <FormSuccess message={state.message && !state.error ? state.message : undefined} />
         </div>
       </form>

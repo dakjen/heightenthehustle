@@ -5,6 +5,7 @@ import { documents, documentKindEnum, businesses, type SecureDocument } from "@/
 import { and, desc, eq } from "drizzle-orm";
 import { put, del } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
+import { claimUpload, isClaimError } from "@/lib/direct-uploads";
 import { getSession } from "@/app/login/actions";
 import { canAccessAdminArea, requireUser } from "@/lib/auth";
 import { FormState } from "@/types/form-state";
@@ -81,17 +82,23 @@ export async function uploadDocument(prevState: FormState, formData: FormData): 
     ownerId = Number(ownerIdRaw);
   }
 
+  // Large files arrive as a reference to a direct-to-storage upload; small ones as the file itself.
+  const claimed = await claimUpload(formData, "file", "document", me.id);
+
   const fieldErrors: Record<string, string> = {};
   if (!documentKindEnum.enumValues.includes(kind)) fieldErrors.kind = "Choose a document type.";
   if (!title) fieldErrors.title = "Give the document a name.";
-  if (!(file instanceof File) || file.size === 0) {
-    fieldErrors.file = "Choose a file to upload.";
-  } else {
-    if (file.size > DOCUMENT_MAX_BYTES) fieldErrors.file = "File must be 15 MB or smaller.";
-    else if (file.type && !DOCUMENT_TYPES.has(file.type)) fieldErrors.file = "Upload a PDF, Word, Excel, PowerPoint, PNG or JPG file.";
+  if (isClaimError(claimed)) {
+    fieldErrors.file = claimed.error;
+  } else if (!claimed) {
+    if (!(file instanceof File) || file.size === 0) {
+      fieldErrors.file = "Choose a file to upload.";
+    } else {
+      if (file.size > DOCUMENT_MAX_BYTES) fieldErrors.file = "File must be 15 MB or smaller.";
+      else if (file.type && !DOCUMENT_TYPES.has(file.type)) fieldErrors.file = "Upload a PDF, Word, Excel, PowerPoint, PNG or JPG file.";
+    }
   }
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
-  const upload = file as File;
 
   let businessId: number | null = null;
   if (businessIdRaw) {
@@ -104,19 +111,25 @@ export async function uploadDocument(prevState: FormState, formData: FormData): 
   }
 
   try {
-    const safeName = upload.name.replace(/[^\w.-]+/g, "_");
-    const pathname = `documents/${ownerId}/${Date.now()}-${safeName}`;
-    const blob = await put(pathname, upload, { access: "private", addRandomSuffix: true });
+    let stored: { pathname: string; fileName: string; contentType: string; size: number };
+    if (claimed && !isClaimError(claimed)) {
+      stored = claimed;
+    } else {
+      const upload = file as File;
+      const safeName = upload.name.replace(/[^\w.-]+/g, "_");
+      const blob = await put(`documents/${ownerId}/${Date.now()}-${safeName}`, upload, { access: "private", addRandomSuffix: true });
+      stored = { pathname: blob.pathname, fileName: upload.name, contentType: upload.type || "application/octet-stream", size: upload.size };
+    }
 
     await db.insert(documents).values({
       ownerId,
       businessId,
       kind,
       title,
-      fileName: upload.name,
-      contentType: upload.type || "application/octet-stream",
-      sizeBytes: upload.size,
-      blobPathname: blob.pathname,
+      fileName: stored.fileName,
+      contentType: stored.contentType,
+      sizeBytes: stored.size,
+      blobPathname: stored.pathname,
       notes: notes || null,
       uploadedById: me.id,
     });

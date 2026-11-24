@@ -8,6 +8,7 @@ import {
 import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { put, del } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
+import { claimUpload, isClaimError } from "@/lib/direct-uploads";
 import { getSession } from "@/app/login/actions";
 import { hasPermission, requirePermission } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
@@ -67,7 +68,9 @@ export async function submitAssignment(prevState: FormState, formData: FormData)
   const assignmentId = Number(text(formData, "assignmentId"));
   const body = text(formData, "text");
   const file = formData.get("file");
-  const hasFile = file instanceof File && file.size > 0;
+  // Large files arrive as a reference to a direct-to-storage upload; small ones as the file itself.
+  const claimed = await claimUpload(formData, "file", "submission", me.id);
+  const hasFile = Boolean(claimed) || (file instanceof File && file.size > 0);
 
   const a = await db.query.assignments.findFirst({ where: eq(assignments.id, assignmentId), with: { class: { columns: { title: true, teacherId: true } } } });
   if (!a || !a.isPublished) return { message: "", error: "This assignment isn't available." };
@@ -80,18 +83,25 @@ export async function submitAssignment(prevState: FormState, formData: FormData)
   const fieldErrors: Record<string, string> = {};
   if (!body && !hasFile) fieldErrors.text = a.allowsFile ? "Write your answer or attach a file." : "Write your answer.";
   if (hasFile && !a.allowsFile) fieldErrors.file = "This assignment doesn't take file uploads.";
-  if (hasFile && (file as File).size > SUBMISSION_MAX_BYTES) fieldErrors.file = "File must be 25 MB or smaller.";
+  if (isClaimError(claimed)) fieldErrors.file = claimed.error;
+  else if (!claimed && hasFile && (file as File).size > SUBMISSION_MAX_BYTES) fieldErrors.file = "File must be 25 MB or smaller.";
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
   try {
     const existing = await db.query.assignmentSubmissions.findFirst({ where: and(eq(assignmentSubmissions.assignmentId, assignmentId), eq(assignmentSubmissions.userId, me.id)) });
     let filePatch: Partial<AssignmentSubmission> = {};
-    if (hasFile) {
+    let attachedName: string | null = null;
+    if (claimed && !isClaimError(claimed)) {
+      if (existing?.fileBlobPathname) { try { await del(existing.fileBlobPathname); } catch { /* ignore */ } }
+      filePatch = { fileName: claimed.fileName, fileBlobPathname: claimed.pathname, fileContentType: claimed.contentType, fileSizeBytes: claimed.size };
+      attachedName = claimed.fileName;
+    } else if (hasFile) {
       const f = file as File;
       const safeName = f.name.replace(/[^\w.-]+/g, "_");
       const blob = await put(`submissions/${a.classId}/${me.id}/${Date.now()}-${safeName}`, f, { access: "private", addRandomSuffix: true });
       if (existing?.fileBlobPathname) { try { await del(existing.fileBlobPathname); } catch { /* ignore */ } }
       filePatch = { fileName: f.name, fileBlobPathname: blob.pathname, fileContentType: f.type || "application/octet-stream", fileSizeBytes: f.size };
+      attachedName = f.name;
     }
     const values = { text: body || existing?.text || null, ...filePatch, status: "submitted" as const, score: null, feedback: existing?.feedback ?? null, updatedAt: new Date(), submittedAt: new Date(), cohortId: enrollment.cohortId };
     if (existing) {
@@ -108,7 +118,7 @@ export async function submitAssignment(prevState: FormState, formData: FormData)
         to: { email: teacher.email, name: teacher.name },
         subject: `${existing ? "Resubmission" : "New submission"}: ${a.title} — ${me.name}`,
         text: `${me.name} submitted "${a.title}" in ${a.class.title}.\n\n${link.href}`,
-        html: notifyHtml(`${esc(me.name)} submitted “${esc(a.title)}”`, `<p>Course: ${esc(a.class.title)}</p>${body ? `<blockquote>${esc(body.slice(0, 400))}${body.length > 400 ? "…" : ""}</blockquote>` : ""}${hasFile ? `<p>Attached: ${esc((file as File).name)}</p>` : ""}`, link),
+        html: notifyHtml(`${esc(me.name)} submitted “${esc(a.title)}”`, `<p>Course: ${esc(a.class.title)}</p>${body ? `<blockquote>${esc(body.slice(0, 400))}${body.length > 400 ? "…" : ""}</blockquote>` : ""}${attachedName ? `<p>Attached: ${esc(attachedName)}</p>` : ""}`, link),
       });
     }
     revalidate();

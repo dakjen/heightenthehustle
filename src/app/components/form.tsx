@@ -88,11 +88,12 @@ export function FormSection({ step, title, description, columns = 2, children }:
   );
 }
 
-export function SubmitButton({ children, pendingText = "Saving…", className = primaryButtonClass }: { children: React.ReactNode; pendingText?: string; className?: string }) {
+export function SubmitButton({ children, pendingText = "Saving…", className = primaryButtonClass, busy = false }: { children: React.ReactNode; pendingText?: string; className?: string; /** Extra in-progress state, e.g. a file still uploading. */ busy?: boolean }) {
   const { pending } = useFormStatus();
+  const working = pending || busy;
   return (
-    <button type="submit" disabled={pending} className={className}>
-      {pending ? pendingText : children}
+    <button type="submit" disabled={working} className={className}>
+      {working ? pendingText : children}
     </button>
   );
 }

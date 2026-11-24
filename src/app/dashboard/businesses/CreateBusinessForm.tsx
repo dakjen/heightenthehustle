@@ -76,7 +76,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
         <Field name="businessDescription" label="What does your business do?" error={errors.businessDescription} className="sm:col-span-2" hint="A sentence or two is plenty. We use this to find the right opportunities for you.">
           <textarea id="businessDescription" name="businessDescription" rows={3} placeholder="We roast small-batch coffee and run a cafe in Brooklyn…" className={inputClass} />
         </Field>
-        <Field name="logo" label="Logo" error={errors.logo} className="sm:col-span-2" hint="PNG, JPG, SVG or WebP up to 5 MB. Square images look best.">
+        <Field name="logo" label="Logo" error={errors.logo} className="sm:col-span-2" hint="PNG, JPG, SVG or WebP up to 4 MB. Square images look best.">
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed border-gray-300 bg-gray-50">
               {logoPreview ? (
@@ -144,7 +144,7 @@ export default function CreateBusinessForm({ defaultOwnerName = "", onCancel }: 
       </FormSection>
 
       <FormSection step="04" title="Materials" description="Optional now. You can add more from your business page later.">
-        <Field name="businessMaterials" label="Pitch deck, one-pager or brochure" error={errors.businessMaterials} className="sm:col-span-2" hint="PDF, Word, PowerPoint, PNG or JPG. Up to 10 MB.">
+        <Field name="businessMaterials" label="Pitch deck, one-pager or brochure" error={errors.businessMaterials} className="sm:col-span-2" hint="PDF, Word, PowerPoint, PNG or JPG. Up to 4 MB.">
           <input
             id="businessMaterials"
             name="businessMaterials"

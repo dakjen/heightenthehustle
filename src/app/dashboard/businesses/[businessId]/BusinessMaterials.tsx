@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState, useEffect, useRef } from "react";
 import { BusinessWithLocation } from "@/db/schema";
 import { updateBusinessMaterials } from "../actions";
@@ -14,6 +15,7 @@ interface Props {
 /** Up to five public-facing materials (deck, one-pager, brochure…). */
 export default function BusinessMaterials({ business, onSaved }: Props) {
   const [state, formAction] = useActionState<FormState, FormData>(updateBusinessMaterials, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { material1: "business-material", material2: "business-material", material3: "business-material", material4: "business-material", material5: "business-material" });
   const last = useRef(state);
   useEffect(() => {
     if (state === last.current) return;
@@ -27,7 +29,7 @@ export default function BusinessMaterials({ business, onSaved }: Props) {
   });
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form onSubmit={onSubmit} className="space-y-6">
       <input type="hidden" name="businessId" value={business.id} />
       <FormSection title="Business materials" description="Pitch decks, one-pagers, brochures, menus. These can be shared with partners and judges. Give each a title so we know what it is." columns={1}>
         {[1, 2, 3, 4, 5].map((i) => {
@@ -51,10 +53,10 @@ export default function BusinessMaterials({ business, onSaved }: Props) {
           );
         })}
       </FormSection>
-      <FormError message={state.error} />
+      <FormError message={uploadError || state.error} />
       <FormSuccess message={state.message && !state.error ? state.message : undefined} />
       <div className="flex justify-end">
-        <SubmitButton>Save materials</SubmitButton>
+        <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Saving…"}>Save materials</SubmitButton>
       </div>
     </form>
   );

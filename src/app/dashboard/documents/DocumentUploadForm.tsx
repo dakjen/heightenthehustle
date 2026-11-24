@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState } from "react";
 import { uploadDocument } from "./actions";
 import { DOCUMENT_ACCEPT } from "./constants";
@@ -16,10 +17,11 @@ interface Props {
 
 export default function DocumentUploadForm({ kinds, businesses, ownerId, ownerName }: Props) {
   const [state, formAction] = useActionState<FormState, FormData>(uploadDocument, { message: "" });
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(formAction, { file: "document" });
   const errors = state.fieldErrors ?? {};
 
   return (
-    <form action={formAction} className="space-y-5" noValidate key={state.message}>
+    <form onSubmit={onSubmit} className="space-y-5" noValidate key={state.message}>
       {ownerId && <input type="hidden" name="ownerId" value={ownerId} />}
       <FormSection
         title={ownerName ? `Upload for ${ownerName}` : "Upload a document"}
@@ -42,16 +44,16 @@ export default function DocumentUploadForm({ kinds, businesses, ownerId, ownerNa
             </select>
           </Field>
         )}
-        <Field name="file" label="File" required error={errors.file} hint="PDF, Word, Excel, PowerPoint, PNG or JPG. Up to 15 MB." className={businesses.length > 0 ? "" : "sm:col-span-2"}>
+        <Field name="file" label="File" required error={errors.file} hint="PDF, Word, Excel, PowerPoint, PNG or JPG. Up to 25 MB." className={businesses.length > 0 ? "" : "sm:col-span-2"}>
           <input id="file" name="file" type="file" required accept={DOCUMENT_ACCEPT} className={fileInputClass} {...invalidProps("file", errors)} />
         </Field>
         <Field name="notes" label="Notes" error={errors.notes} className="sm:col-span-2">
           <input id="notes" name="notes" type="text" placeholder="Anything the team should know about this file" className={inputClass} />
         </Field>
         <div className="sm:col-span-2 space-y-3">
-          <FormError message={state.error} />
+          <FormError message={uploadError || state.error} />
           <FormSuccess message={state.message && !state.error ? state.message : undefined} />
-          <SubmitButton pendingText="Uploading…">Upload securely</SubmitButton>
+          <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Uploading…"}>Upload securely</SubmitButton>
         </div>
       </FormSection>
     </form>

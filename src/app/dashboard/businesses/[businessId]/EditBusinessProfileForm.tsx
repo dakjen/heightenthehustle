@@ -89,8 +89,8 @@ export default function EditBusinessProfileForm({ initialBusiness: b, availableL
         <Field name="businessDescription" label="What does your business do?" error={errors.businessDescription} className="sm:col-span-2">
           <textarea id="businessDescription" name="businessDescription" rows={4} defaultValue={b.businessDescription ?? ""} className={inputClass} />
         </Field>
-        <ImagePicker name="logo" label="Logo" hint="Square images look best. Up to 5 MB." current={b.logoUrl} error={errors.logo} square />
-        <ImagePicker name="businessProfilePhoto" label="Cover photo" hint="Shown behind your business name. Up to 5 MB." current={b.businessProfilePhotoUrl} error={errors.businessProfilePhoto} />
+        <ImagePicker name="logo" label="Logo" hint="Square images look best. Up to 4 MB." current={b.logoUrl} error={errors.logo} square />
+        <ImagePicker name="businessProfilePhoto" label="Cover photo" hint="Shown behind your business name. Up to 4 MB." current={b.businessProfilePhotoUrl} error={errors.businessProfilePhoto} />
       </FormSection>
 
       <FormSection step="02" title="Ownership & structure" description="How the business is set up legally.">

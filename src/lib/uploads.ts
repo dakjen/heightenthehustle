@@ -14,8 +14,8 @@
  */
 import { put } from "@vercel/blob";
 
-export const IMAGE_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
-export const MATERIAL_MAX_BYTES = 10 * 1024 * 1024; // 10 MB, matches next.config serverActions bodySizeLimit
+export const IMAGE_MAX_BYTES = 4 * 1024 * 1024; // 4 MB: these go through the server, which rejects requests over ~4.5 MB
+export const MATERIAL_MAX_BYTES = 4 * 1024 * 1024; // 4 MB through the server; larger files use direct uploads (src/lib/direct-uploads.ts)
 
 /**
  * SVG is deliberately absent: it can carry script, and these files are served
@@ -42,13 +42,13 @@ const RULES: Record<UploadKind, { types: Set<string>; maxBytes: number; message:
     types: IMAGE_TYPES,
     maxBytes: IMAGE_MAX_BYTES,
     message: "Upload a PNG, JPG, WebP or GIF image.",
-    sizeMessage: "Image must be 5 MB or smaller.",
+    sizeMessage: "Image must be 4 MB or smaller.",
   },
   material: {
     types: MATERIAL_TYPES,
     maxBytes: MATERIAL_MAX_BYTES,
     message: "Upload a PDF, Word, Excel, PowerPoint, PNG or JPG file.",
-    sizeMessage: "File must be 10 MB or smaller.",
+    sizeMessage: "File must be 4 MB or smaller here. You can add larger files from your business page.",
   },
 };
 

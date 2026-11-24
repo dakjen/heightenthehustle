@@ -1,5 +1,6 @@
 "use client";
 
+import { useDirectUploadForm } from "@/app/components/useDirectUploadForm";
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Markdown from "@/app/components/Markdown";
@@ -27,6 +28,7 @@ export default function AssignmentCard({ assignment, courseId }: AssignmentCardP
   const state = assignmentState(assignment);
   const sub = assignment.submission;
   const [formState, action] = useActionState(submitAssignment, initialState);
+  const { onSubmit, busy, progress, uploadError } = useDirectUploadForm(action, { file: "submission" });
   // Returned work opens the form by default; submitted/graded work hides it behind "Resubmit".
   const [showForm, setShowForm] = useState(state === "none" || state === "overdue" || state === "returned");
 
@@ -102,7 +104,7 @@ export default function AssignmentCard({ assignment, courseId }: AssignmentCardP
       )}
 
       {showForm && (
-        <form action={action} className="mt-4 space-y-4">
+        <form onSubmit={onSubmit} className="mt-4 space-y-4">
           <input type="hidden" name="assignmentId" value={assignment.id} />
           {assignment.allowsText && (
             <Field name={`${formId}-text`} label={sub ? "Updated answer" : "Your answer"} hideOptional error={errors?.text} hint={assignment.allowsFile ? "Write here, attach a file, or both." : undefined}>
@@ -114,9 +116,9 @@ export default function AssignmentCard({ assignment, courseId }: AssignmentCardP
               <input id={`${formId}-file`} type="file" name="file" accept={ACCEPT} className={fileInputClass} {...invalid(`${formId}-file`, errors?.file)} />
             </Field>
           )}
-          <FormError message={formState.error} />
+          <FormError message={uploadError || formState.error} />
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <SubmitButton pendingText="Submitting…">{sub ? "Resubmit homework" : "Submit homework"}</SubmitButton>
+            <SubmitButton busy={busy} pendingText={progress !== null ? `Uploading… ${progress}%` : "Submitting…"}>{sub ? "Resubmit homework" : "Submit homework"}</SubmitButton>
             {sub && (
               <button type="button" onClick={() => setShowForm(false)} className="text-sm font-semibold text-gray-600 underline underline-offset-2 hover:text-gray-900">Cancel</button>
             )}
