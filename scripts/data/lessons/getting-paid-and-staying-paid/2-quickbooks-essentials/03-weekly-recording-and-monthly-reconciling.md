@@ -1,0 +1,118 @@
+# Weekly Recording and Monthly Reconciling
+
+> Fifteen minutes a week keeps your books current. Fifteen minutes a month proves they are right.
+
+## Why this matters
+
+Setting up QuickBooks is a one-time job. Keeping it up is what makes it worth having. Books that are three months behind cannot tell you whether you can afford new equipment, and catching up becomes a miserable weekend. Books that are current but wrong are worse, because you trust them. Dee, the caterer, once made a spending decision from a report that counted a $62 supply run twice. It was a small error, and she only found it because she checked her books against her bank statement. Two short routines, one weekly and one monthly, prevent both problems.
+
+## What you'll learn
+
+- The weekly fifteen-minute routine for recording transactions
+- Why to send invoices from inside QuickBooks
+- How to capture receipts with the mobile app
+- What reconciling means and how to do it each month
+- How to find and fix a difference when the numbers do not match
+
+## The lesson
+
+### The weekly routine: same day, fifteen minutes
+
+Pick one day of the week. Put a repeating reminder on your phone. On that day, you spend fifteen minutes on your books. Here is the routine.
+
+1. Open the banking area in QuickBooks, labeled Banking or Transactions.
+2. Look at the list of imported transactions waiting for review.
+3. For each one, read the name and amount, and check the category QuickBooks suggests.
+4. If the category is right, confirm it. If it is wrong, fix it.
+5. Add the transaction to your books. It leaves the review list.
+6. Keep going until the review list is empty.
+
+The first few weeks are the slowest. QuickBooks learns your patterns as you go. Once you have labeled your gas station as Car and Truck a few times, it starts suggesting that on its own. After a month or two, most of your weekly session is confirming good guesses.
+
+If you see a charge you do not recognize, do not guess. Leave it, look it up in your bank app or receipts, and label it once you know.
+
+### Send invoices from inside QuickBooks
+
+When you create and send invoices from QuickBooks, it knows what each customer owes. When the payment lands in your bank, QuickBooks can match the deposit to the invoice and mark it paid. That means you always know who has not paid. One glance at your open invoices shows every customer with a balance and how many days it has been.
+
+If you invoice somewhere else, QuickBooks only sees a deposit. It has no idea which job the deposit was for, or that another customer is 20 days late.
+
+### Photograph big receipts
+
+For larger purchases, use the QuickBooks mobile app to take a photo of the receipt and attach it to the transaction. Your bank line might just say the store name and $280. The receipt shows it was a commercial stand mixer for the business. Do it in the parking lot, before the receipt fades or disappears.
+
+### What reconciling means
+
+Weekly categorizing keeps the books current. Monthly reconciling proves they are right.
+
+To **reconcile** means to match your QuickBooks records against your actual bank statement, line by line, and confirm they agree. Three things must be true: the same starting balance, the same ending balance, and every transaction accounted for. When all three are true, you know nothing is missing, nothing is counted twice, and the bank made no errors.
+
+### How to reconcile, step by step
+
+Do this once a month, after your bank statement is ready.
+
+1. Get your bank statement for the month.
+2. Open the Reconcile feature in QuickBooks. It is usually found under the gear menu.
+3. Choose your business bank account.
+4. Enter the statement's ending date and ending balance.
+5. Confirm that the beginning balance QuickBooks shows matches the statement's beginning balance.
+6. Go down the statement and check off each transaction in QuickBooks as you find it.
+7. Watch the difference shown on screen. When it reaches $0.00, finish the reconciliation.
+
+### A worked example: Dee's March
+
+Dee's March statement shows these numbers.
+
+| Statement line | Amount |
+| --- | --- |
+| Beginning balance | $2,150 |
+| Deposits | $5,200 |
+| Payments and charges | $3,870 |
+| Ending balance | $3,480 |
+
+Check it: $2,150 + $5,200 - $3,870 = $3,480.
+
+Dee checks off the transactions in QuickBooks against the statement. When she has checked everything in the list, QuickBooks shows a difference of $62.00, not zero. She looks for a $62 item and finds two of them: a restaurant supply purchase, same store, same date, same amount. The statement shows that purchase only once. It was recorded twice in QuickBooks, once from the bank import and once when she typed it in by hand. She deletes the hand-typed copy. The difference drops to $0.00 and she finishes.
+
+Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now she trusts her reports.
+
+### When the difference is not zero
+
+Work through this list.
+
+- Look for a transaction that matches the difference exactly. It is often a duplicate or a missing item.
+- Look for a transaction in QuickBooks that is not on the statement, and one on the statement that is not in QuickBooks.
+- Compare amounts closely for typos, such as $45 entered as $54.
+- Check that the beginning balance matched before you started.
+
+Never force it to balance by entering an adjustment you cannot explain. Find the cause.
+
+## Do this now
+
+1. Choose your weekly bookkeeping day and set a repeating fifteen-minute reminder.
+2. Open the banking area and work through the review list until it is empty.
+3. Install the QuickBooks mobile app and attach a photo of one recent large receipt.
+4. Send your next invoice from inside QuickBooks.
+5. Set a monthly reminder for reconciling, a few days after your statement usually arrives.
+6. Reconcile your most recent complete month, following the seven steps above.
+
+You finish with an empty review list, one reconciled month with a $0.00 difference, and two reminders on your phone.
+
+## Common mistakes
+
+- **Letting weeks pile up.** Fix: fifteen minutes, same day, every week.
+- **Accepting suggested categories without reading them.** Fix: glance at every one before confirming.
+- **Typing in a transaction the bank will also import.** Fix: let the import bring it in, then label it.
+- **Skipping reconciliation because "the bank feed handles it."** Fix: reconcile every month, since the feed can miss or duplicate items.
+- **Forcing the reconciliation to balance.** Fix: hunt down the real cause of the difference.
+
+## Check yourself
+
+- What day is your weekly fifteen minutes?
+- Why should invoices be sent from inside QuickBooks?
+- What three things must match when you reconcile?
+- What is the first thing to look for when the difference is not zero?
+
+## What you walk away with
+
+A weekly routine that keeps your books current, a monthly routine that proves they are right, and reports you can trust.
