@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { logout } from "@/app/login/actions";
 
 interface Props {
   name: string;
@@ -44,7 +43,7 @@ export default function SidebarUserMenu({ name, roleLabel, photoUrl }: Props) {
           <Link href="/dashboard/profile" className={item} role="menuitem">My profile</Link>
           <Link href="/dashboard/settings" className={item} role="menuitem">Settings</Link>
           <div className="my-1 border-t border-white/10" />
-          <form action={logout}>
+          <form action="/logout" method="post">
             <button type="submit" className={`${item} text-[#ff8a8a] hover:text-white`} role="menuitem">Log out</button>
           </form>
         </div>
