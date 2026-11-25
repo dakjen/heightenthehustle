@@ -8,7 +8,7 @@
 const BRITTNI = { instructor: "Brittni Hardie", teacher: "Brittni Hardie" };
 const DAKOTAH = { instructor: "Dakotah Jennifer", teacher: "PCC Admin" };
 
-export const courses = [
+const minis = [
   // ───────────────────────────── The Basics ─────────────────────────────
   {
     title: "Getting Comfortable with Your Device",
@@ -437,135 +437,90 @@ export const courses = [
   },
 ];
 
-// ───────────── Combined courses: Brittni's and Dakotah's lessons, re-sequenced ─────────────
-// Each lesson is reused from a course above (`source` says which) unless marked as new.
-const base = [...courses];
-const pick = (courseTitle, lessonTitle, over = {}) => {
-  const c = base.find((x) => x.title === courseTitle);
-  const l = c?.lessons.find((x) => x.title === lessonTitle);
-  if (!l) throw new Error(`No lesson "${lessonTitle}" in "${courseTitle}"`);
-  return { ...l, source: `${c.instructor}, ${c.title}`, ...over };
+// ───────────── Supplementary courses: the mini courses above become units ─────────────
+// Lesson fields are unchanged. Each unit keeps its own instructor.
+const unit = (name, miniTitle, over = {}) => {
+  const m = minis.find((x) => x.title === miniTitle);
+  if (!m) throw new Error(`No mini course "${miniTitle}"`);
+  return { name, instructor: m.instructor, minutes: m.minutes, intro: m.description, lessons: m.lessons, ...over };
 };
-const COMBINED = "Combined Courses — Brittni + Dakotah";
-const SHEETS = "Spreadsheets for Your Business";
-const SLIDES = "Presentations: PowerPoint & Google Slides Basics";
-const PAID = "Getting Paid & Staying Paid";
-const QB = "QuickBooks Essentials";
-const GMAIL = "Email & Google Drive Essentials";
-const PRO = "Working Online Like a Pro";
 
-courses.push(
+const WORD_UNIT = {
+  name: "Word",
+  instructor: "Brittni Hardie",
+  minutes: 60,
+  lessons: [
+    {
+      title: "Word: Getting Started",
+      summary: "Open Word, type a document, format it properly, and save it.",
+      teach: "Opening Word, typing a document, changing the font, and saving. The formatting basics that apply to every business document: real headings (not just bold text), one clean font, and consistent spacing.",
+      do: "Create and save a formatted one-page Word document about your business.",
+      leave: "A formatted one-page document, and the formatting habits you will use in everything you write.",
+      note: "New lesson, written from the Module Library card (Brittni) and Dakotah's document formatting basics.",
+    },
+    {
+      title: "Word: Start from a Template",
+      summary: "Letters and flyers that are already designed — you fill in the words.",
+      teach: "Finding and opening a template, replacing the placeholder text, and saving as PDF. Start from an HTH template instead of a blank page whenever one exists: the template handles the look. Always send as PDF, because a PDF looks the same on every device.",
+      do: "Open a letter template, personalize it for your business, and save it as both an editable file and a PDF.",
+      leave: "A business letter on your own letterhead, ready to reuse.",
+      note: "New lesson, written from the Module Library card (Brittni) and Dakotah's Making Business Documents.",
+    },
+  ],
+};
+
+export const courses = [
+  {
+    title: "The Basics — Start Here",
+    teacher: "PCC Admin",
+    description:
+      "Supplementary course. Four short units that get you comfortable with the tools everything else is built on. Take the whole thing in order, or jump to the unit you need.\n\n1. **Getting Comfortable with Your Device** — Brittni Hardie\n2. **Email & Google Drive Essentials** — Dakotah Jennifer\n3. **AI Basics for Business** — Dakotah Jennifer\n4. **Staying Safe Online** — Brittni Hardie",
+    units: [
+      unit("Getting Comfortable with Your Device", "Getting Comfortable with Your Device"),
+      unit("Email & Google Drive Essentials", "Email & Google Drive Essentials"),
+      unit("AI Basics for Business", "AI Basics for Business"),
+      unit("Staying Safe Online", "Staying Safe Online"),
+    ],
+  },
   {
     title: "Microsoft Essentials",
-    group: COMBINED,
-    kind: "Combined course",
-    type: "hth-course",
-    instructor: "Brittni Hardie & Dakotah Jennifer",
     teacher: "Brittni Hardie",
-    minutes: 60,
     description:
-      "Word, Excel, and PowerPoint for your business, start to finish. You will leave with a formatted business letter, a monthly budget tracker, and a five-slide presentation.\n\nTaught by Brittni Hardie, with document basics from Dakotah Jennifer.",
-    lessons: [
-      {
-        title: "Word: Getting Started",
-        summary: "Open Word, type a document, format it properly, and save it.",
-        teach: "Opening Word, typing a document, changing the font, and saving. The formatting basics that apply to every business document: real headings (not just bold text), one clean font, and consistent spacing.",
-        do: "Create and save a formatted one-page Word document about your business.",
-        leave: "A formatted one-page document, and the formatting habits you will use in everything you write.",
-        source: "New, from the Module Library card (Brittni) and Dakotah's document formatting basics",
-      },
-      {
-        title: "Word: Start from a Template",
-        summary: "Letters and flyers that are already designed — you fill in the words.",
-        teach: "Finding and opening a template, replacing the placeholder text, and saving as PDF. Start from an HTH template instead of a blank page whenever one exists: the template handles the look. Always send as PDF, because a PDF looks the same on every device.",
-        do: "Open a letter template, personalize it for your business, and save it as both an editable file and a PDF.",
-        leave: "A business letter on your own letterhead, ready to reuse.",
-        source: "New, from the Module Library card (Brittni) and Dakotah's Making Business Documents",
-      },
-      pick(SHEETS, "Creating Your First Spreadsheet", { title: "Excel: Creating Your First Spreadsheet" }),
-      pick(SHEETS, "Organizing and Formatting Data", { title: "Excel: Organizing and Formatting Data" }),
-      pick(SHEETS, "Using Basic Formulas", { title: "Excel: Using Basic Formulas" }),
-      pick(SHEETS, "Building a Monthly Budget Tracker", { title: "Excel: Building a Monthly Budget Tracker" }),
-      pick(SLIDES, "Getting Started with PowerPoint", { title: "PowerPoint: Getting Started" }),
-      pick(SLIDES, "Creating Clean, Readable Slides", { title: "PowerPoint: Creating Clean, Readable Slides" }),
-      pick(SLIDES, "Building a Five-Slide Presentation", { title: "PowerPoint: Building a Five-Slide Presentation" }),
-      pick(SLIDES, "Presenting and Sharing Your Work", { title: "PowerPoint: Presenting and Sharing Your Work" }),
+      "Supplementary course. Word, Excel, and PowerPoint for your business, with the Google Sheets and Google Slides equivalents shown alongside. You will leave with a business letter, a monthly budget tracker, and a five-slide presentation.\n\n1. **Word** — Brittni Hardie\n2. **Spreadsheets for Your Business** (Excel & Google Sheets) — Brittni Hardie\n3. **Presentations** (PowerPoint & Google Slides) — Brittni Hardie",
+    units: [
+      WORD_UNIT,
+      unit("Spreadsheets for Your Business", "Spreadsheets for Your Business"),
+      unit("Presentations", "Presentations: PowerPoint & Google Slides Basics"),
     ],
   },
   {
-    title: "Google Essentials",
-    group: COMBINED,
-    kind: "Combined course",
-    type: "hth-course",
-    instructor: "Dakotah Jennifer & Brittni Hardie",
+    title: "Getting Paid & Staying Paid",
     teacher: "PCC Admin",
     description:
-      "Run your business on free Google tools: Gmail, Drive, Docs, Sheets, Slides, and Calendar. You will leave with a professional email, a filing system, a money tracker, and a short presentation.\n\nTaught by Dakotah Jennifer, with spreadsheet and presentation lessons from Brittni Hardie.",
-    lessons: [
-      pick(GMAIL, "Set Up Gmail"),
-      pick(GMAIL, "Send and Organize Email"),
-      pick(GMAIL, "Build Your Drive Filing System"),
-      {
-        title: "Google Docs: Write and Format a Document",
-        summary: "Type it, format it properly, start from a template, and send it as a PDF.",
-        teach: "Opening a new Google Doc, typing, and formatting: real headings (not just bold text), one clean font, and consistent spacing. Finding pre-made templates for letters, flyers, and agendas. Downloading as PDF so it looks the same on every device.",
-        do: "Type your name, your business name, and one sentence about what you do. Then find a template and customize it for your business.",
-        leave: "A formatted one-page document for your business, filed in your Drive and exported as PDF.",
-        source: "New, from the Module Library cards and Dakotah's document formatting basics",
-      },
-      pick(SHEETS, "Creating Your First Spreadsheet", { title: "Google Sheets: Creating Your First Spreadsheet" }),
-      pick(SHEETS, "Using Basic Formulas", { title: "Google Sheets: Using Basic Formulas" }),
-      pick(PAID, "Simple Money Tracker", { title: "Google Sheets: Simple Money Tracker" }),
-      pick(SLIDES, "Building a Five-Slide Presentation", {
-        title: "Google Slides: Building a Five-Slide Presentation",
-        teach: "The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency.",
-      }),
-      pick(PRO, "Sharing & Collaborating"),
-      pick(PRO, "Google Calendar"),
-      pick(PRO, "Your Business in Your Pocket"),
+      "Supplementary course. Know whether you actually made money, track it simply, invoice like a professional, and get paid faster — then set up QuickBooks and keep the books in fifteen minutes a week.\n\n1. **Live Sessions** — Dakotah Jennifer\n2. **QuickBooks Essentials** — Dakotah Jennifer\n\nThe spreadsheet skills used here are taught in *Microsoft Essentials*, in the Spreadsheets for Your Business unit.",
+    units: [
+      unit("Live Sessions", "Getting Paid & Staying Paid", { intro: undefined }),
+      unit("QuickBooks Essentials", "QuickBooks Essentials"),
     ],
   },
   {
-    title: "Business Money Basics",
-    group: COMBINED,
-    kind: "Combined course",
-    type: "hth-course",
-    instructor: "Dakotah Jennifer & Brittni Hardie",
+    title: "Your Online Business Presence",
     teacher: "PCC Admin",
     description:
-      "Know your numbers without accounting software. Track what comes in and goes out, build a budget, invoice properly, get paid faster, set aside taxes, and pay yourself. When you are ready for software, *QuickBooks Essentials* is the next step.\n\nTaught by Dakotah Jennifer, with spreadsheet lessons from Brittni Hardie.",
-    lessons: [
-      pick(PAID, "Income vs. Expenses"),
-      pick(SHEETS, "Creating Your First Spreadsheet"),
-      pick(SHEETS, "Using Basic Formulas"),
-      pick(PAID, "Simple Money Tracker"),
-      pick(SHEETS, "Building a Monthly Budget Tracker"),
-      pick(PAID, "Professional Invoice"),
-      pick(PAID, "Getting Paid Faster"),
-      pick(QB, "Taxes"),
-      pick(QB, "Paying Yourself"),
-      pick(QB, "Reading a P&L", { title: "Reading a Profit & Loss Report" }),
+      "Supplementary course. By the end, everything a stranger finds when they search for you says real business, real professional.\n\n1. **Live Sessions** — Dakotah Jennifer\n2. **Working Online Like a Pro** — Dakotah Jennifer",
+    units: [
+      unit("Live Sessions", "Your Online Business Presence", { intro: undefined }),
+      unit("Working Online Like a Pro", "Working Online Like a Pro"),
     ],
   },
-  {
-    title: "Look Professional: Email, Documents & Slides",
-    group: COMBINED,
-    kind: "Combined course",
-    type: "hth-course",
-    instructor: "Dakotah Jennifer & Brittni Hardie",
-    teacher: "PCC Admin",
-    description:
-      "Everything a customer, lender, or partner sees from you, done properly: your email, your core business documents, and a clean short presentation.\n\nTaught by Dakotah Jennifer and Brittni Hardie.",
-    lessons: [
-      pick("Your Online Business Presence", "Email Like a Professional"),
-      pick("AI Basics for Business", "Making Business Documents"),
-      pick(SLIDES, "Creating Clean, Readable Slides"),
-      pick(SLIDES, "Working with Images and Visuals"),
-      pick(SLIDES, "Building a Five-Slide Presentation"),
-      pick(SLIDES, "Presenting and Sharing Your Work"),
-    ],
-  },
-);
+];
+
+// Standalone courses created by the first version of this seed. They are now units above.
+export const retired = [
+  "Getting Comfortable with Your Device", "Email & Google Drive Essentials", "AI Basics for Business", "Staying Safe Online",
+  "Presentations: PowerPoint & Google Slides Basics", "QuickBooks Essentials", "Spreadsheets for Your Business", "Working Online Like a Pro",
+  "Google Essentials", "Business Money Basics", "Look Professional: Email, Documents & Slides",
+];
 
 export function lessonMarkdown(l) {
   const parts = [];
