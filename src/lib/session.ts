@@ -10,8 +10,12 @@
  * mints a valid session token, so it must never be reachable as a server
  * action.
  */
+import { cache } from "react";
 import { cookies } from "next/headers";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
+import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 
 /** Shape of the user object stored in the session cookie. Never includes the password hash. */
 export interface UserSession {
@@ -114,11 +118,42 @@ export async function createSession(user: UserSession): Promise<void> {
   });
 }
 
-/** The signed-in user's session, or null when signed out, expired or tampered with. */
+/**
+ * The account as it stands in the database right now. The cookie only proves
+ * who is signed in; role, status and permissions are read fresh so a change an
+ * admin makes (granting access, removing it, deactivating someone) applies on
+ * the person's very next page load, not at their next sign-in.
+ * `cache` keeps this to one query per page render.
+ */
+const currentAccount = cache(async (id: number) => {
+  return db.query.users.findFirst({
+    where: eq(users.id, id),
+    columns: {
+      id: true, name: true, email: true, phone: true, role: true, status: true,
+      hasBusinessProfile: true, personalAddress: true, personalCity: true, personalState: true,
+      personalZipCode: true, profilePhotoUrl: true, isOptedOut: true, isTransgender: true,
+      canApproveRequests: true, canMessageAdmins: true, canManageClasses: true, canManageBusinesses: true,
+    },
+  });
+});
+
+/** The signed-in user's session, or null when signed out, expired, tampered with, or no longer an approved account. */
 export async function getSession(): Promise<SessionPayload | null> {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  return await decrypt(token);
+  const payload = await decrypt(token);
+  if (!payload?.user) return payload;
+
+  let account: Awaited<ReturnType<typeof currentAccount>>;
+  try {
+    account = await currentAccount(payload.user.id);
+  } catch (error) {
+    // Database hiccup: fall back to what the cookie says rather than signing everyone out.
+    console.error("getSession: could not refresh account from the database:", error);
+    return payload;
+  }
+  if (!account || account.status !== "approved") return null; // deleted or deactivated
+  return { ...payload, user: toSessionUser(account) };
 }
 
 export async function clearSession(): Promise<void> {
