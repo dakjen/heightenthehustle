@@ -437,6 +437,136 @@ export const courses = [
   },
 ];
 
+// ───────────── Combined courses: Brittni's and Dakotah's lessons, re-sequenced ─────────────
+// Each lesson is reused from a course above (`source` says which) unless marked as new.
+const base = [...courses];
+const pick = (courseTitle, lessonTitle, over = {}) => {
+  const c = base.find((x) => x.title === courseTitle);
+  const l = c?.lessons.find((x) => x.title === lessonTitle);
+  if (!l) throw new Error(`No lesson "${lessonTitle}" in "${courseTitle}"`);
+  return { ...l, source: `${c.instructor}, ${c.title}`, ...over };
+};
+const COMBINED = "Combined Courses — Brittni + Dakotah";
+const SHEETS = "Spreadsheets for Your Business";
+const SLIDES = "Presentations: PowerPoint & Google Slides Basics";
+const PAID = "Getting Paid & Staying Paid";
+const QB = "QuickBooks Essentials";
+const GMAIL = "Email & Google Drive Essentials";
+const PRO = "Working Online Like a Pro";
+
+courses.push(
+  {
+    title: "Microsoft Essentials",
+    group: COMBINED,
+    kind: "Combined course",
+    type: "hth-course",
+    instructor: "Brittni Hardie & Dakotah Jennifer",
+    teacher: "Brittni Hardie",
+    minutes: 60,
+    description:
+      "Word, Excel, and PowerPoint for your business, start to finish. You will leave with a formatted business letter, a monthly budget tracker, and a five-slide presentation.\n\nTaught by Brittni Hardie, with document basics from Dakotah Jennifer.",
+    lessons: [
+      {
+        title: "Word: Getting Started",
+        summary: "Open Word, type a document, format it properly, and save it.",
+        teach: "Opening Word, typing a document, changing the font, and saving. The formatting basics that apply to every business document: real headings (not just bold text), one clean font, and consistent spacing.",
+        do: "Create and save a formatted one-page Word document about your business.",
+        leave: "A formatted one-page document, and the formatting habits you will use in everything you write.",
+        source: "New, from the Module Library card (Brittni) and Dakotah's document formatting basics",
+      },
+      {
+        title: "Word: Start from a Template",
+        summary: "Letters and flyers that are already designed — you fill in the words.",
+        teach: "Finding and opening a template, replacing the placeholder text, and saving as PDF. Start from an HTH template instead of a blank page whenever one exists: the template handles the look. Always send as PDF, because a PDF looks the same on every device.",
+        do: "Open a letter template, personalize it for your business, and save it as both an editable file and a PDF.",
+        leave: "A business letter on your own letterhead, ready to reuse.",
+        source: "New, from the Module Library card (Brittni) and Dakotah's Making Business Documents",
+      },
+      pick(SHEETS, "Creating Your First Spreadsheet", { title: "Excel: Creating Your First Spreadsheet" }),
+      pick(SHEETS, "Organizing and Formatting Data", { title: "Excel: Organizing and Formatting Data" }),
+      pick(SHEETS, "Using Basic Formulas", { title: "Excel: Using Basic Formulas" }),
+      pick(SHEETS, "Building a Monthly Budget Tracker", { title: "Excel: Building a Monthly Budget Tracker" }),
+      pick(SLIDES, "Getting Started with PowerPoint", { title: "PowerPoint: Getting Started" }),
+      pick(SLIDES, "Creating Clean, Readable Slides", { title: "PowerPoint: Creating Clean, Readable Slides" }),
+      pick(SLIDES, "Building a Five-Slide Presentation", { title: "PowerPoint: Building a Five-Slide Presentation" }),
+      pick(SLIDES, "Presenting and Sharing Your Work", { title: "PowerPoint: Presenting and Sharing Your Work" }),
+    ],
+  },
+  {
+    title: "Google Essentials",
+    group: COMBINED,
+    kind: "Combined course",
+    type: "hth-course",
+    instructor: "Dakotah Jennifer & Brittni Hardie",
+    teacher: "PCC Admin",
+    description:
+      "Run your business on free Google tools: Gmail, Drive, Docs, Sheets, Slides, and Calendar. You will leave with a professional email, a filing system, a money tracker, and a short presentation.\n\nTaught by Dakotah Jennifer, with spreadsheet and presentation lessons from Brittni Hardie.",
+    lessons: [
+      pick(GMAIL, "Set Up Gmail"),
+      pick(GMAIL, "Send and Organize Email"),
+      pick(GMAIL, "Build Your Drive Filing System"),
+      {
+        title: "Google Docs: Write and Format a Document",
+        summary: "Type it, format it properly, start from a template, and send it as a PDF.",
+        teach: "Opening a new Google Doc, typing, and formatting: real headings (not just bold text), one clean font, and consistent spacing. Finding pre-made templates for letters, flyers, and agendas. Downloading as PDF so it looks the same on every device.",
+        do: "Type your name, your business name, and one sentence about what you do. Then find a template and customize it for your business.",
+        leave: "A formatted one-page document for your business, filed in your Drive and exported as PDF.",
+        source: "New, from the Module Library cards and Dakotah's document formatting basics",
+      },
+      pick(SHEETS, "Creating Your First Spreadsheet", { title: "Google Sheets: Creating Your First Spreadsheet" }),
+      pick(SHEETS, "Using Basic Formulas", { title: "Google Sheets: Using Basic Formulas" }),
+      pick(PAID, "Simple Money Tracker", { title: "Google Sheets: Simple Money Tracker" }),
+      pick(SLIDES, "Building a Five-Slide Presentation", {
+        title: "Google Slides: Building a Five-Slide Presentation",
+        teach: "The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency. (Pitch strategy is taught by Dr. Merritt.)",
+      }),
+      pick(PRO, "Sharing & Collaborating"),
+      pick(PRO, "Google Calendar"),
+      pick(PRO, "Your Business in Your Pocket"),
+    ],
+  },
+  {
+    title: "Business Money Basics",
+    group: COMBINED,
+    kind: "Combined course",
+    type: "hth-course",
+    instructor: "Dakotah Jennifer & Brittni Hardie",
+    teacher: "PCC Admin",
+    description:
+      "Know your numbers without accounting software. Track what comes in and goes out, build a budget, invoice properly, get paid faster, set aside taxes, and pay yourself. When you are ready for software, *QuickBooks Essentials* is the next step.\n\nTaught by Dakotah Jennifer, with spreadsheet lessons from Brittni Hardie.",
+    lessons: [
+      pick(PAID, "Income vs. Expenses"),
+      pick(SHEETS, "Creating Your First Spreadsheet"),
+      pick(SHEETS, "Using Basic Formulas"),
+      pick(PAID, "Simple Money Tracker"),
+      pick(SHEETS, "Building a Monthly Budget Tracker"),
+      pick(PAID, "Professional Invoice"),
+      pick(PAID, "Getting Paid Faster"),
+      pick(QB, "Taxes"),
+      pick(QB, "Paying Yourself"),
+      pick(QB, "Reading a P&L", { title: "Reading a Profit & Loss Report" }),
+    ],
+  },
+  {
+    title: "Look Professional: Email, Documents & Slides",
+    group: COMBINED,
+    kind: "Combined course",
+    type: "hth-course",
+    instructor: "Dakotah Jennifer & Brittni Hardie",
+    teacher: "PCC Admin",
+    description:
+      "Everything a customer, lender, or partner sees from you, done properly: your email, your core business documents, and a clean short presentation.\n\nTaught by Dakotah Jennifer and Brittni Hardie.",
+    lessons: [
+      pick("Your Online Business Presence", "Email Like a Professional"),
+      pick("AI Basics for Business", "Making Business Documents"),
+      pick(SLIDES, "Creating Clean, Readable Slides"),
+      pick(SLIDES, "Working with Images and Visuals"),
+      pick(SLIDES, "Building a Five-Slide Presentation"),
+      pick(SLIDES, "Presenting and Sharing Your Work"),
+    ],
+  },
+);
+
 // Dr. Merritt's sections: outlined, content not yet written (Word export only, not seeded).
 export const pending = [
   {

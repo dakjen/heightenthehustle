@@ -723,3 +723,559 @@ FROM "classes" c
 WHERE c."title" = 'Working Online Like a Pro'
 AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Your Business in Your Pocket')
 ;
+
+INSERT INTO "classes" ("title", "description", "teacher_id", "type", "is_published")
+SELECT 'Microsoft Essentials', $md$Word, Excel, and PowerPoint for your business, start to finish. You will leave with a formatted business letter, a monthly budget tracker, and a five-slide presentation.
+
+Taught by Brittni Hardie, with document basics from Dakotah Jennifer.$md$,
+  COALESCE((SELECT "id" FROM "users" WHERE "name" = 'Brittni Hardie' ORDER BY "id" LIMIT 1), (SELECT "id" FROM "users" WHERE "role" = 'admin' ORDER BY "id" LIMIT 1)),
+  'hth-course', false
+WHERE NOT EXISTS (SELECT 1 FROM "classes" WHERE "title" = 'Microsoft Essentials')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Word: Getting Started', $md$Open Word, type a document, format it properly, and save it.$md$, $md$## What we cover
+
+Opening Word, typing a document, changing the font, and saving. The formatting basics that apply to every business document: real headings (not just bold text), one clean font, and consistent spacing.
+
+## What you'll do
+
+Create and save a formatted one-page Word document about your business.
+
+## What you'll walk away with
+
+A formatted one-page document, and the formatting habits you will use in everything you write.$md$, 60, true, 1
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Word: Getting Started')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Word: Start from a Template', $md$Letters and flyers that are already designed — you fill in the words.$md$, $md$## What we cover
+
+Finding and opening a template, replacing the placeholder text, and saving as PDF. Start from an HTH template instead of a blank page whenever one exists: the template handles the look. Always send as PDF, because a PDF looks the same on every device.
+
+## What you'll do
+
+Open a letter template, personalize it for your business, and save it as both an editable file and a PDF.
+
+## What you'll walk away with
+
+A business letter on your own letterhead, ready to reuse.$md$, 60, true, 2
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Word: Start from a Template')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Excel: Creating Your First Spreadsheet', $md$Rows, columns, cells, worksheets, and entering and editing data.$md$, $md$## What we cover
+
+An introduction to Excel and Google Sheets: rows, columns, cells, worksheets, and how to enter and edit data.
+
+## What you'll do
+
+Create a simple business expense list, save it, and reopen it.
+
+## What you'll walk away with
+
+A working spreadsheet and an understanding of how information is organized.$md$, 60, true, 3
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Excel: Creating Your First Spreadsheet')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Excel: Organizing and Formatting Data', $md$Headings, currency and date formats, sorting, and filtering.$md$, $md$## What we cover
+
+Headings, currency and date formats, column widths, sorting, and filtering. Two rules: one row per transaction, and sort the entire table rather than a single column.
+
+## What you'll do
+
+Organize a sample transaction list and filter it by category.
+
+## What you'll walk away with
+
+A clean, readable expense record.$md$, 60, true, 4
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Excel: Organizing and Formatting Data')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Excel: Using Basic Formulas', $md$SUM, AVERAGE, and basic subtraction and multiplication.$md$, $md$## What we cover
+
+How formulas begin with an equals sign, how cell references work, and how to use SUM, AVERAGE, and basic subtraction and multiplication.
+
+## What you'll do
+
+Calculate sales totals, expenses, and remaining income using sample business data.
+
+## What you'll walk away with
+
+You can create and check formulas instead of calculating every total by hand.$md$, 60, true, 5
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Excel: Using Basic Formulas')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Excel: Building a Monthly Budget Tracker', $md$Planned vs. actual income and expenses, category totals, and a remaining balance.$md$, $md$## What we cover
+
+How to copy formulas, check totals, and read the difference between planned and actual spending.
+
+## What you'll do
+
+Create a tracker with planned and actual income and expenses, category totals, and a remaining balance.
+
+## What you'll walk away with
+
+A reusable budget template you can update each month.$md$, 60, true, 6
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Excel: Building a Monthly Budget Tracker')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'PowerPoint: Getting Started', $md$The interface, slide layouts, text boxes, and editing vs. presenting.$md$, $md$## What we cover
+
+The PowerPoint interface, slide layouts, text boxes, and the difference between editing and presenting.
+
+## What you'll do
+
+Create, save, and reopen a short presentation, then practice adding and rearranging slides.
+
+## What you'll walk away with
+
+You are comfortable navigating the software.$md$, 60, true, 7
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'PowerPoint: Getting Started')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'PowerPoint: Creating Clean, Readable Slides', $md$Consistent fonts and colors, strong contrast, and one main idea per slide.$md$, $md$## What we cover
+
+Consistent fonts and colors, strong contrast, alignment, and limiting each slide to one main idea.
+
+## What you'll do
+
+Redesign a cluttered example slide and compare the results.
+
+## What you'll walk away with
+
+A practical set of design rules you can apply to any presentation.$md$, 60, true, 8
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'PowerPoint: Creating Clean, Readable Slides')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'PowerPoint: Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
+
+Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)
+
+## What you'll do
+
+Build a five-slide business introduction: a title, an overview, a product or service description, a supporting visual, and a closing slide.
+
+## What you'll walk away with
+
+An editable presentation you can build on.$md$, 60, true, 9
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'PowerPoint: Building a Five-Slide Presentation')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'PowerPoint: Presenting and Sharing Your Work', $md$Slideshow mode, presenter notes, transitions, and exporting to PDF.$md$, $md$## What we cover
+
+Slideshow mode, presenter notes, basic transitions, and exporting to PDF.
+
+## What you'll do
+
+Deliver a brief practice presentation, get feedback on readability and technical execution, and save both an editable version and a PDF.
+
+## What you'll walk away with
+
+You can operate PowerPoint independently and share your work professionally.$md$, 60, true, 10
+FROM "classes" c
+WHERE c."title" = 'Microsoft Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'PowerPoint: Presenting and Sharing Your Work')
+;
+
+INSERT INTO "classes" ("title", "description", "teacher_id", "type", "is_published")
+SELECT 'Google Essentials', $md$Run your business on free Google tools: Gmail, Drive, Docs, Sheets, Slides, and Calendar. You will leave with a professional email, a filing system, a money tracker, and a short presentation.
+
+Taught by Dakotah Jennifer, with spreadsheet and presentation lessons from Brittni Hardie.$md$,
+  COALESCE((SELECT "id" FROM "users" WHERE "name" = 'PCC Admin' ORDER BY "id" LIMIT 1), (SELECT "id" FROM "users" WHERE "role" = 'admin' ORDER BY "id" LIMIT 1)),
+  'hth-course', false
+WHERE NOT EXISTS (SELECT 1 FROM "classes" WHERE "title" = 'Google Essentials')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Set Up Gmail', $md$A dedicated business Gmail with 2-step verification and a signature.$md$, $md$Create a dedicated business Gmail — professional address, close to your business name, no nicknames or numbers. Turn on 2-step verification, add recovery info, and set a signature with your name, business, and phone so every email carries your contact info automatically.$md$, NULL, true, 1
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Set Up Gmail')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Send and Organize Email', $md$Emails that get read and answered, and an inbox that files itself.$md$, $md$A business email’s job is to get read and get answered: a subject line that says what it’s about, the point in the first two lines, a clear next step at the end. Then organize with three tools — archive what’s done, star what needs action, label by category (Clients, Money, Receipts) — and set filters so Gmail files recurring senders automatically.$md$, NULL, true, 2
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Send and Organize Email')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Build Your Drive Filing System', $md$One master business folder, five drawers, and a file-naming rule that sorts itself.$md$, $md$Drive is your filing cabinet. Build the drawers before you upload. One master business folder containing:
+
+- **01 Clients** (a folder per client)
+- **02 Money** (invoices, receipts, taxes — by year)
+- **03 Legal & Admin**
+- **04 Marketing**
+- **05 Operations**
+
+Name every file *Date — What — Who* (“2026-03 Invoice 004 — Johnson”) so it sorts itself and you can find anything in ten seconds. New file arrives? It goes in Drive, named, that day.$md$, NULL, true, 3
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Build Your Drive Filing System')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Docs: Write and Format a Document', $md$Type it, format it properly, start from a template, and send it as a PDF.$md$, $md$## What we cover
+
+Opening a new Google Doc, typing, and formatting: real headings (not just bold text), one clean font, and consistent spacing. Finding pre-made templates for letters, flyers, and agendas. Downloading as PDF so it looks the same on every device.
+
+## What you'll do
+
+Type your name, your business name, and one sentence about what you do. Then find a template and customize it for your business.
+
+## What you'll walk away with
+
+A formatted one-page document for your business, filed in your Drive and exported as PDF.$md$, NULL, true, 4
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Docs: Write and Format a Document')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Sheets: Creating Your First Spreadsheet', $md$Rows, columns, cells, worksheets, and entering and editing data.$md$, $md$## What we cover
+
+An introduction to Excel and Google Sheets: rows, columns, cells, worksheets, and how to enter and edit data.
+
+## What you'll do
+
+Create a simple business expense list, save it, and reopen it.
+
+## What you'll walk away with
+
+A working spreadsheet and an understanding of how information is organized.$md$, NULL, true, 5
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Sheets: Creating Your First Spreadsheet')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Sheets: Using Basic Formulas', $md$SUM, AVERAGE, and basic subtraction and multiplication.$md$, $md$## What we cover
+
+How formulas begin with an equals sign, how cell references work, and how to use SUM, AVERAGE, and basic subtraction and multiplication.
+
+## What you'll do
+
+Calculate sales totals, expenses, and remaining income using sample business data.
+
+## What you'll walk away with
+
+You can create and check formulas instead of calculating every total by hand.$md$, NULL, true, 6
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Sheets: Using Basic Formulas')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Sheets: Simple Money Tracker', $md$Build a Google Sheets tracker live and enter your real last two weeks.$md$, $md$Everyone builds a Google Sheets tracker live — date, what, who, money in, money out, running total (first formula, written together) — and enters their real last two weeks from their bank app. Habit set before leaving: ten minutes, same day weekly, reminder on. Simple survives and fancy gets abandoned.
+
+The tracker is the starter system: when you move to QuickBooks in Session 4, it takes over and the sheet retires — you run one system, never both.$md$, NULL, true, 7
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Sheets: Simple Money Tracker')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Slides: Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
+
+The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency. (Pitch strategy is taught by Dr. Merritt.)
+
+## What you'll do
+
+Build a five-slide business introduction: a title, an overview, a product or service description, a supporting visual, and a closing slide.
+
+## What you'll walk away with
+
+An editable presentation you can build on.$md$, NULL, true, 8
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Slides: Building a Five-Slide Presentation')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Sharing & Collaborating', $md$One live file instead of attachment ping-pong.$md$, $md$One file, in Drive, instead of attachment ping-pong. Share with specific people and give the lowest permission that works — Viewer looks, Commenter suggests, Editor changes (a client reviewing a proposal is a Commenter). Everyone works in the same live file with automatic saving and full version history. Share the folder, not file-by-file.$md$, NULL, true, 9
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Sharing & Collaborating')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Google Calendar', $md$If it matters, it has a time slot.$md$, $md$If it matters, it has a time slot — including the admin work itself (“Friday 9–11: invoices”), not just appointments. Addresses in the location field so your phone navigates, reminders set by default, color-code by type. For meetings, send real invites — an accepted invite is a commitment, and a “see you Tuesday” text is a hope.$md$, NULL, true, 10
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Google Calendar')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Your Business in Your Pocket', $md$Your phone as a branch office — with a boundary.$md$, $md$Gmail, Drive, Calendar, and Docs on your phone make it a branch office. Drive’s + → Scan turns receipts and signed paperwork into filed PDFs (goodbye scanner). Attach from Drive anywhere, navigate from Calendar, mark key files available offline. And a boundary: being able to answer at 9pm isn’t an obligation to.$md$, NULL, true, 11
+FROM "classes" c
+WHERE c."title" = 'Google Essentials'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Your Business in Your Pocket')
+;
+
+INSERT INTO "classes" ("title", "description", "teacher_id", "type", "is_published")
+SELECT 'Business Money Basics', $md$Know your numbers without accounting software. Track what comes in and goes out, build a budget, invoice properly, get paid faster, set aside taxes, and pay yourself. When you are ready for software, *QuickBooks Essentials* is the next step.
+
+Taught by Dakotah Jennifer, with spreadsheet lessons from Brittni Hardie.$md$,
+  COALESCE((SELECT "id" FROM "users" WHERE "name" = 'PCC Admin' ORDER BY "id" LIMIT 1), (SELECT "id" FROM "users" WHERE "role" = 'admin' ORDER BY "id" LIMIT 1)),
+  'hth-course', false
+WHERE NOT EXISTS (SELECT 1 FROM "classes" WHERE "title" = 'Business Money Basics')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Income vs. Expenses', $md$Did you make money last month — not “did money come in.”$md$, $md$The question most owners can’t answer: did you make money last month — not “did money come in.” Everyone lists their real last 30 days (the forgotten subscriptions always surface), calculates rough profit on the spot, and leaves with the separation rule: one business bank account, starting now.$md$, NULL, true, 1
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Income vs. Expenses')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Creating Your First Spreadsheet', $md$Rows, columns, cells, worksheets, and entering and editing data.$md$, $md$## What we cover
+
+An introduction to Excel and Google Sheets: rows, columns, cells, worksheets, and how to enter and edit data.
+
+## What you'll do
+
+Create a simple business expense list, save it, and reopen it.
+
+## What you'll walk away with
+
+A working spreadsheet and an understanding of how information is organized.$md$, NULL, true, 2
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Creating Your First Spreadsheet')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Using Basic Formulas', $md$SUM, AVERAGE, and basic subtraction and multiplication.$md$, $md$## What we cover
+
+How formulas begin with an equals sign, how cell references work, and how to use SUM, AVERAGE, and basic subtraction and multiplication.
+
+## What you'll do
+
+Calculate sales totals, expenses, and remaining income using sample business data.
+
+## What you'll walk away with
+
+You can create and check formulas instead of calculating every total by hand.$md$, NULL, true, 3
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Using Basic Formulas')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Simple Money Tracker', $md$Build a Google Sheets tracker live and enter your real last two weeks.$md$, $md$Everyone builds a Google Sheets tracker live — date, what, who, money in, money out, running total (first formula, written together) — and enters their real last two weeks from their bank app. Habit set before leaving: ten minutes, same day weekly, reminder on. Simple survives and fancy gets abandoned.
+
+The tracker is the starter system: when you move to QuickBooks in Session 4, it takes over and the sheet retires — you run one system, never both.$md$, NULL, true, 4
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Simple Money Tracker')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Building a Monthly Budget Tracker', $md$Planned vs. actual income and expenses, category totals, and a remaining balance.$md$, $md$## What we cover
+
+How to copy formulas, check totals, and read the difference between planned and actual spending.
+
+## What you'll do
+
+Create a tracker with planned and actual income and expenses, category totals, and a remaining balance.
+
+## What you'll walk away with
+
+A reusable budget template you can update each month.$md$, NULL, true, 5
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Building a Monthly Budget Tracker')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Professional Invoice', $md$A finished invoice template with every element that gets you paid.$md$, $md$Built live from a template with every element that gets you paid: both parties’ info, invoice number (start at 1001), itemized work, total, a real due date (never blank), and exactly how to pay — if paying you requires a question, you get paid later. Everyone leaves with their finished template, and most send a real one before the session ends.
+
+Use this template until you’re set up on QuickBooks — then switch to invoicing from QuickBooks and retire the template, continuing the same number sequence so you never run two invoice systems at once.$md$, NULL, true, 6
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Professional Invoice')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Getting Paid Faster', $md$Ways to accept money, how to prevent late payment, and the follow-up ladder.$md$, $md$**First, set up the ways to actually accept money** — everyone picks and sets up at least one in session.
+
+- **Zelle** is free, bank-to-bank, and instant (best for clients you know).
+- **Cash App and Venmo business accounts** are familiar to customers but take a cut of each payment.
+- **Square, Stripe, or QuickBooks Payments** let you accept cards and look most professional, for roughly 3% per transaction.
+
+The rule: the fee is the cost of getting paid *now* — a 3% fee beats a 30-day wait — but know each fee before you choose, and put your payment details on every invoice.
+
+**Then prevention:** deposits on larger jobs, terms agreed before work starts, invoice the day the work ends.
+
+**Then the follow-up ladder,** with scripts personalized in session — friendly nudge at 3 days, direct check-in at 2 weeks, firm final notice at 30. Saved as email templates, ready the day an invoice goes overdue. Polite and relentless gets paid.$md$, NULL, true, 7
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Getting Paid Faster')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Taxes', $md$Tax money was never yours. Set it aside on arrival.$md$, $md$Nobody withholds taxes for you now — that’s the money mistake that hurts self-employed people most. The fix is mechanical: every time you get paid, move 25–30% into a separate tax savings account before you touch the rest.
+
+The IRS also expects self-employed people to pay quarterly estimated taxes, not one bill in April — your P&L tells you your profit, and a tax professional (or last year’s return) tells you what to send each quarter. The habit is the lesson: tax money was never yours, so set it aside on arrival.$md$, NULL, true, 8
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Taxes')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Paying Yourself', $md$Owner’s draw, on a schedule, like a paycheck.$md$, $md$The question every new owner asks. As a sole proprietor or single-owner LLC, you pay yourself with an owner’s draw — transfer money from the business account to your personal account and record it as a draw, not an expense (it doesn’t reduce your profit, and you still owe taxes on profit whether you draw it or not).
+
+Payroll with a real paycheck comes later, mainly if you elect S-corp status — a decision to make with a tax professional. Either way: pay yourself the same amount on the same schedule, like a paycheck, instead of raiding the account when you need money.$md$, NULL, true, 9
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Paying Yourself')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Reading a Profit & Loss Report', $md$Three questions to ask every month, then one decision.$md$, $md$Income on top, expenses in the middle, profit at the bottom. Monthly, ask three questions:
+
+1. Did I make money?
+2. Where did it go (any surprises in the categories)?
+3. What changed vs. last month?
+
+Then make one decision based on the answer. That’s running your business on numbers instead of vibes.$md$, NULL, true, 10
+FROM "classes" c
+WHERE c."title" = 'Business Money Basics'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Reading a Profit & Loss Report')
+;
+
+INSERT INTO "classes" ("title", "description", "teacher_id", "type", "is_published")
+SELECT 'Look Professional: Email, Documents & Slides', $md$Everything a customer, lender, or partner sees from you, done properly: your email, your core business documents, and a clean short presentation.
+
+Taught by Dakotah Jennifer and Brittni Hardie.$md$,
+  COALESCE((SELECT "id" FROM "users" WHERE "name" = 'PCC Admin' ORDER BY "id" LIMIT 1), (SELECT "id" FROM "users" WHERE "role" = 'admin' ORDER BY "id" LIMIT 1)),
+  'hth-course', false
+WHERE NOT EXISTS (SELECT 1 FROM "classes" WHERE "title" = 'Look Professional: Email, Documents & Slides')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Email Like a Professional', $md$The address, the signature, the writing, and templates for the hard ones.$md$, $md$Three upgrades: the address (no more sparklequeen2004@ — fixed today), the signature (name, business, phone, one link — built in session), and the writing (point in the subject line, ask in the first two lines, one topic, clear next step).
+
+Plus saved templates for the hard ones: the unhappy-customer reply (acknowledge, own it, offer the fix — never argue in writing), the quote that protects your scope, and the polite no.$md$, NULL, true, 1
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Email Like a Professional')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Making Business Documents', $md$Template for the bones, AI for the first draft, you for the facts and the voice, PDF out the door.$md$, $md$Every business needs a handful of professional documents, and AI plus Google Docs or Word gets you all of them.
+
+**The formatting basics apply to everything:** real headings (not just bold text), one clean font, consistent spacing, and always send as PDF — a PDF looks the same on every device and a Doc file doesn’t. Start from an HTH template instead of a blank page whenever one exists. AI fills in the words and the template handles the look.
+
+**The documents to build:**
+
+- **A business letter on your letterhead.** Tell AI who it’s to, what it’s about, and the tone. It drafts, you fix.
+- **A flyer.** AI writes the headline and the short punchy lines. You drop them into a template with your photo and contact info.
+- **A one-page business overview.** The leave-behind with who you are, what you offer, and how to reach you. AI structures it from your rambling description.
+- **Service descriptions.** Two or three sentences per service, clear enough that a stranger knows what they’re buying. Paste your service list into AI and ask for plain-English descriptions, then make them true.
+
+The pattern every time: template for the bones, AI for the first draft, you for the facts and the voice, PDF out the door.
+
+## Do this now
+
+Pick the document your business is missing most and build it — template, AI draft, your edit, PDF.$md$, NULL, true, 2
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Making Business Documents')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Creating Clean, Readable Slides', $md$Consistent fonts and colors, strong contrast, and one main idea per slide.$md$, $md$## What we cover
+
+Consistent fonts and colors, strong contrast, alignment, and limiting each slide to one main idea.
+
+## What you'll do
+
+Redesign a cluttered example slide and compare the results.
+
+## What you'll walk away with
+
+A practical set of design rules you can apply to any presentation.$md$, NULL, true, 3
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Creating Clean, Readable Slides')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Working with Images and Visuals', $md$Inserting and resizing images, simple shapes and charts, and using images you have permission to use.$md$, $md$## What we cover
+
+Inserting and resizing images without distortion, adding simple shapes and charts, and using images you have permission to use.
+
+## What you'll do
+
+Insert a business-related image and a chart from your spreadsheet activity.
+
+## What you'll walk away with
+
+You can communicate information visually instead of relying entirely on text.$md$, NULL, true, 4
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Working with Images and Visuals')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
+
+Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)
+
+## What you'll do
+
+Build a five-slide business introduction: a title, an overview, a product or service description, a supporting visual, and a closing slide.
+
+## What you'll walk away with
+
+An editable presentation you can build on.$md$, NULL, true, 5
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Building a Five-Slide Presentation')
+;
+
+INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
+SELECT c."id", 'Presenting and Sharing Your Work', $md$Slideshow mode, presenter notes, transitions, and exporting to PDF.$md$, $md$## What we cover
+
+Slideshow mode, presenter notes, basic transitions, and exporting to PDF.
+
+## What you'll do
+
+Deliver a brief practice presentation, get feedback on readability and technical execution, and save both an editable version and a PDF.
+
+## What you'll walk away with
+
+You can operate PowerPoint independently and share your work professionally.$md$, NULL, true, 6
+FROM "classes" c
+WHERE c."title" = 'Look Professional: Email, Documents & Slides'
+AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."title" = 'Presenting and Sharing Your Work')
+;
