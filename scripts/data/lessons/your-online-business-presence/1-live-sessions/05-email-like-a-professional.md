@@ -49,6 +49,8 @@ Strong: Subject "Need final headcount by Friday for March 14 lunch." Body: "Hi M
 
 The strong version can be answered from a phone in one line, which is why it gets answered.
 
+![An email with four numbered parts: a business address, the point in the subject line, the ask in the opening two lines, and a four-line signature.](/lessons/your-online-business-presence--u1-05-email-like-a-professional.svg)
+
 ### The hard ones: save these as templates
 
 Write these three while you are calm, so you never have to compose them while you are upset or rushed.

@@ -41,6 +41,8 @@ Johnson Cleaning Co
 
 The numbers in front keep the drawers in the same order every time, so your eyes always know where to look. Here is what goes in each one.
 
+![Folder tree for the master folder Johnson Cleaning Co with five numbered drawers, client folders inside 01 Clients and year folders inside 02 Money](/lessons/the-basics--03-build-your-drive-filing-system.svg)
+
 - **01 Clients.** One folder per client. Their quotes, agreements, photos of the job, and anything they send you.
 - **02 Money.** Invoices, receipts, bank statements, and taxes, with a folder for each year. At tax time, you hand over one year's folder.
 - **03 Legal & Admin.** Your business license, registration papers, tax ID letter, insurance, permits, and contracts with vendors.

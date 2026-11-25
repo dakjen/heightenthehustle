@@ -19,6 +19,8 @@ A tool is only worth your time if it takes work off your plate. AI can do a thou
 
 The slowest part of most writing is the blank page. Once something is on the screen, fixing it goes quickly. That is where AI earns its keep. AI does the blank-page 80%, the structure and the opening set of words, in seconds. You do the final 20%, which is where your facts, your judgment and your voice live. That 20% is what makes the work true and makes it yours, so it cannot be skipped. Hold that split in mind for every use below.
 
+![A bar split between AI doing the blank-page 80% and you doing the final 20%, above the four uses covered in this lesson.](/lessons/the-basics--u3-03-using-it-in-your-business.svg)
+
 ### Use 1: Drafts of writing you already have to do
 
 Start with the writing already on your list, including the writing you keep putting off. Client emails, service descriptions and social posts are the big three. You are not adding work. You are speeding up work that is already there.

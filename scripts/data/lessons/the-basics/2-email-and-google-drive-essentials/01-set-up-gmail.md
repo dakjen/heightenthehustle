@@ -51,6 +51,8 @@ If your exact business name is taken, do not reach for numbers. Add a short, mea
 
 With 2-step verification, signing in takes two things: your password, and a second proof that it is really you, usually a code or a prompt sent to your phone. If someone steals or guesses your password, they still cannot get in without your phone. For a business, this matters a great deal. Your email is the key to almost everything else, because the "forgot my password" links for your bank, your payment app, and your social media all go to your inbox. Whoever controls the inbox can reset the rest.
 
+![With 2-step verification, your password plus a code or prompt on your phone signs you in, while a stolen password alone cannot get in](/lessons/the-basics--01-set-up-gmail.svg)
+
 To turn it on, open your Google Account settings (click your profile circle in the top corner, then "Manage your Google Account"), find the Security section, and look for 2-Step Verification. Follow the prompts to connect your phone.
 
 Recovery info is a phone number and a second email address that Google can use to get you back in if you forget your password or get locked out. It is in the same Security section. Add both. Use your personal email as the recovery email. Check this info once a year, and update it the same day you change your phone number.

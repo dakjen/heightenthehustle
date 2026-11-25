@@ -62,6 +62,8 @@ A good answer is brief. A flyer is read in about three seconds, so if AI gives y
 3. **You for the facts and the voice.** Correct every name, price, date and promise. Rewrite until it sounds like you.
 4. **PDF out the door.** Download as PDF, name it by date, what it is and who it is for, and save it in your Drive.
 
+![Four steps in a row, template for the bones, AI for the draft, you for the facts and the voice, and PDF out the door.](/lessons/the-basics--u3-05-making-business-documents.svg)
+
 ### What to keep ready
 
 Owners who win walk-in opportunities have finished documents on hand before anyone asks. Keep the current PDF of your overview and service descriptions in one Drive folder you can reach from your phone, so you can send it while you are still standing in the office.

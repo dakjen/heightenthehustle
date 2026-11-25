@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>A picture stretched out of shape by dragging a side handle, beside the same picture resized from a corner handle and keeping its shape</title>
+<rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+<text x="400" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#171717" text-anchor="middle" font-weight="bold">Resize from a corner, not from a side</text>
+<rect x="44" y="110" width="150" height="100" fill="#f6f6f6" stroke="#4b4b4b" stroke-width="1.5"/>
+<ellipse cx="89.0" cy="146.0" rx="22" ry="22" fill="#d4d4d4"/>
+<path d="M89.0 210 L146.0 160.0 L194 196.0 L194 210 Z" fill="#4b4b4b"/>
+<circle cx="44" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="44" cy="160.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="44" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="119.0" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="119.0" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="194" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="194" cy="160.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="194" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<text x="119" y="286" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717" text-anchor="middle" font-weight="bold">Original</text>
+<rect x="244" y="110" width="250" height="100" fill="#f6f6f6" stroke="#4b4b4b" stroke-width="1.5"/>
+<ellipse cx="319.0" cy="146.0" rx="37" ry="22" fill="#d4d4d4"/>
+<path d="M319.0 210 L414.0 160.0 L494 196.0 L494 210 Z" fill="#4b4b4b"/>
+<circle cx="244" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="244" cy="160.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="244" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="369.0" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="369.0" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="494" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="494" cy="160.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="494" cy="210" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="494" cy="160" r="6" fill="#910000"/>
+<line x1="504" y1="160" x2="530" y2="160" stroke="#910000" stroke-width="2"/>
+<path d="M522 153 L531 160 L522 167" fill="none" stroke="#910000" stroke-width="2"/>
+<text x="369" y="286" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#910000" text-anchor="middle" font-weight="bold">Side handle</text>
+<text x="369" y="308" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">stretches the picture</text>
+<line x1="349" y1="332" x2="389" y2="372" stroke="#910000" stroke-width="4"/>
+<line x1="389" y1="332" x2="349" y2="372" stroke="#910000" stroke-width="4"/>
+<rect x="556" y="110" width="195" height="130" fill="#f6f6f6" stroke="#4b4b4b" stroke-width="1.5"/>
+<ellipse cx="614.5" cy="156.8" rx="29" ry="29" fill="#d4d4d4"/>
+<path d="M614.5 240 L688.6 175.0 L751 221.8 L751 240 Z" fill="#4b4b4b"/>
+<circle cx="556" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="556" cy="175.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="556" cy="240" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="653.5" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="653.5" cy="240" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="751" cy="110" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="751" cy="175.0" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="751" cy="240" r="5" fill="#ffffff" stroke="#4b4b4b" stroke-width="1.5"/>
+<circle cx="751" cy="240" r="6" fill="#910000"/>
+<line x1="758" y1="246" x2="774" y2="260" stroke="#910000" stroke-width="2"/>
+<path d="M765 261 L775 261 L774 251" fill="none" stroke="#910000" stroke-width="2"/>
+<text x="653" y="286" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#910000" text-anchor="middle" font-weight="bold">Corner handle</text>
+<text x="653" y="308" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">width and height together</text>
+<path d="M633 354 L648 370 L677 334" fill="none" stroke="#171717" stroke-width="4"/>
+</svg>

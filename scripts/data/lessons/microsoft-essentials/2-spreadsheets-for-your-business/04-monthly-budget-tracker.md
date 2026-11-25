@@ -79,6 +79,8 @@ Look at column D for Sharp Lines Barbershop.
 
 Those numbers tell a story. Haircuts carried the month. Product sales were weak, and marketing was underspent, which may be connected. Supplies need a closer look. That is three decisions for next month from one small table.
 
+![Budget tracker grid with Planned, Actual and Difference columns, total income, total expenses and remaining balance rows, and the formulas behind the totals.](/lessons/microsoft-essentials--u2-04-monthly-budget-tracker.svg)
+
 ### Check the totals before you act on them
 
 1. Click each total and look at the formula bar. Make sure the range covers every row in its section and nothing else.

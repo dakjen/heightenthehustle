@@ -60,6 +60,9 @@ The reader does not know who this is, what it is about, or what to do. Here is t
 > (410) 555-0142
 
 The subject names the topic. The price and the offer are in the opening two lines. The last paragraph tells her exactly what to do next. Before you send any email, read it once out loud and check the name, the numbers, and the date.
+
+![The cleaning quote email to Ms. Reed with its three parts numbered: the subject line, the point in the opening two lines, and the next step at the end](/lessons/the-basics--02-send-and-organize-email.svg)
+
 ### Three tools for a clear inbox
 
 Your inbox should hold only what still needs something from you. Three Gmail tools make that possible.

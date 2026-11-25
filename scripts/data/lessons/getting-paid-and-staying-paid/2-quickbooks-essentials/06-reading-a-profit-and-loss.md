@@ -54,6 +54,8 @@ That last step matters. Every number on the report is a total, and you can alway
 
 Check the math. March expenses: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200, and $5,200 - $3,200 = $2,000. April expenses: $2,300 + $600 + $290 + $210 + $140 + $260 = $3,800, and $5,600 - $3,800 = $1,800.
 
+![Dee's profit and loss report with March beside April, income on top, expenses in the middle and profit at the bottom falling from $2,000 to $1,800.](/lessons/getting-paid-and-staying-paid--u2-06-reading-a-profit-and-loss.svg)
+
 ### Question 1: Did I make money?
 
 Go straight to the bottom line. In April, Dee's profit was $1,800. Yes, she made money. This question takes five seconds, and it comes first because it sets the tone for everything else. A "no" here means the other two questions are urgent.

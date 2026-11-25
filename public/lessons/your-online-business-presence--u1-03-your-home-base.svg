@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>A one-page home base for Little Sprouts Home Daycare with its four parts numbered: who you are, what you do, how to book and the reviews link</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="60" y="24" width="320" height="402" rx="16" fill="#ffffff" stroke="#d4d4d4" stroke-width="2"/>
+<rect x="80" y="44" width="64" height="64" fill="#f6f6f6" stroke="#d4d4d4"/>
+<path d="M80 108 L104 82 L120 96 L144 70" fill="none" stroke="#d4d4d4"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#171717">
+<text x="158" y="70" font-size="18" font-weight="bold">Little Sprouts</text>
+<text x="158" y="94" font-size="18" font-weight="bold">Home Daycare</text>
+<text x="80" y="132" font-size="14" fill="#4b4b4b">Licensed home child care</text>
+<text x="80" y="150" font-size="14" fill="#4b4b4b">in Capitol Heights</text>
+<text x="80" y="190" font-size="16" font-weight="bold">What we offer</text>
+<text x="80" y="286" font-size="16" font-weight="bold">How to enroll</text>
+<text x="80" y="372" font-size="16" font-weight="bold">What parents say</text>
+<text x="80" y="396" font-size="14" fill="#910000">Read our Google reviews</text>
+</g>
+<line x1="80" y1="400" x2="238" y2="400" stroke="#910000" stroke-width="1"/>
+<line x1="80" y1="164" x2="360" y2="164" stroke="#d4d4d4"/>
+<g fill="#4b4b4b"><circle cx="84" cy="208" r="3"/><circle cx="84" cy="224" r="3"/><circle cx="84" cy="240" r="3"/><circle cx="84" cy="256" r="3"/></g>
+<g fill="#d4d4d4"><rect x="96" y="204" width="220" height="8"/><rect x="96" y="220" width="180" height="8"/><rect x="96" y="236" width="160" height="8"/><rect x="96" y="252" width="240" height="8"/></g>
+<rect x="80" y="298" width="280" height="46" rx="8" fill="#910000"/>
+<text x="220" y="327" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Call or text Denise</text>
+<g stroke="#910000" stroke-width="1.5">
+<line x1="290" y1="76" x2="418" y2="76"/><line x1="344" y1="230" x2="418" y2="230"/><line x1="364" y1="321" x2="418" y2="321"/><line x1="244" y1="392" x2="418" y2="392"/>
+</g>
+<g fill="#910000"><circle cx="430" cy="76" r="12"/><circle cx="430" cy="230" r="12"/><circle cx="430" cy="321" r="12"/><circle cx="430" cy="392" r="12"/></g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+<text x="430" y="81">1</text><text x="430" y="235">2</text><text x="430" y="326">3</text><text x="430" y="397">4</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#171717">
+<text x="452" y="74">Who you are</text><text x="452" y="228">What you do</text><text x="452" y="319">How to book</text><text x="452" y="397">Your reviews link</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b">
+<text x="452" y="94">Name, photo, the area you serve</text>
+<text x="452" y="248">Three to six services</text>
+<text x="452" y="339">One clear action, the biggest</text>
+<text x="452" y="357">thing on the page</text>
+</g>
+</svg>

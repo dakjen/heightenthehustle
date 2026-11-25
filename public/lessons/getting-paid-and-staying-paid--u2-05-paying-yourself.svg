@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>Tasha's month: profit stays $2,350, and from it $1,200 goes out as two owner's draws while $1,150 stays in the business</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+    <text x="32" y="44" font-size="20" font-weight="bold">A draw is not an expense</text>
+
+    <rect x="32" y="66" width="330" height="218" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+    <rect x="32" y="66" width="330" height="44" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="52" y="94" font-size="16" font-weight="bold">Tasha's month</text>
+    <text x="52" y="142" font-size="15">Income</text>
+    <text x="342" y="142" font-size="15" text-anchor="end">$3,800</text>
+    <text x="52" y="176" font-size="15">Expenses</text>
+    <text x="342" y="176" font-size="15" text-anchor="end">$1,450</text>
+    <line x1="52" y1="192" x2="342" y2="192" stroke="#171717"/>
+    <rect x="42" y="202" width="310" height="36" fill="#f6e9e9"/>
+    <text x="52" y="226" font-size="16" font-weight="bold" fill="#910000">Profit</text>
+    <text x="342" y="226" font-size="16" font-weight="bold" fill="#910000" text-anchor="end">$2,350</text>
+    <text x="52" y="266" fill="#4b4b4b">Taxed on this, drawn or not</text>
+
+    <g stroke="#910000" stroke-width="2" fill="none">
+      <path d="M 352 220 L 396 220"/>
+      <path d="M 396 128 L 396 270"/>
+      <path d="M 396 128 L 416 128"/>
+      <path d="M 396 270 L 416 270"/>
+    </g>
+    <polygon points="428,128 414,120 414,136" fill="#910000"/>
+    <polygon points="428,270 414,262 414,278" fill="#910000"/>
+
+    <rect x="430" y="84" width="338" height="88" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <text x="448" y="118" font-size="16" font-weight="bold">Owner's draws</text>
+    <text x="750" y="120" font-size="22" font-weight="bold" fill="#910000" text-anchor="end">$1,200</text>
+    <text x="448" y="150" fill="#4b4b4b">$600 on the 1st, $600 on the 15th</text>
+
+    <rect x="430" y="226" width="338" height="88" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="448" y="260" font-size="16" font-weight="bold">Stays in the business</text>
+    <text x="750" y="262" font-size="22" font-weight="bold" text-anchor="end">$1,150</text>
+    <text x="448" y="292" fill="#4b4b4b">Tax set-aside and a cushion</text>
+
+    <line x1="32" y1="350" x2="768" y2="350" stroke="#d4d4d4"/>
+    <text x="32" y="386" font-size="16" font-weight="bold">$2,350 − $1,200 = $1,150</text>
+    <text x="32" y="414" fill="#4b4b4b">Draws go to the Owner's Draw account, never to an expense category.</text>
+  </g>
+</svg>

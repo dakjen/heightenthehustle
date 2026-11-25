@@ -50,6 +50,8 @@ Work from the top of the page to the bottom so nothing gets missed.
 5. The body, two to four short paragraphs.
 6. The closing, your name, and your title.
 
+![Business letter on letterhead with six numbered parts: letterhead, date, recipient, greeting, body, and closing.](/lessons/microsoft-essentials--u1-02-start-from-a-template.svg)
+
 A business letter body follows a dependable pattern. The opening paragraph says why you are writing. The middle gives the details, such as dates, amounts, and what you will provide. The last paragraph says what happens next and how to reach you. For a confirmation or a quote, put every number in the middle paragraph: the date of service, the headcount or quantity, the total, the deposit, and the date the deposit is due.
 
 If you paste words from somewhere else and the font suddenly changes, undo it with **Ctrl + Z** on Windows or **Cmd + Z** on a Mac. Then paste again, click the small paste options button that appears, and choose **Keep Text Only**. That makes the pasted words match the template.

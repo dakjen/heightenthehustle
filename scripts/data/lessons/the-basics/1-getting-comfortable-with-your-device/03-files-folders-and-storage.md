@@ -27,6 +27,8 @@ Inside Documents, create one folder named for your business, and inside that, th
 
 A file name should tell you what is inside. Compare "Document1" with "2026-03 Invoice 004 - Johnson." The second one tells you when, what, and who. The rule that works for almost everything is **date, then what it is, then who it is for**. Writing the date as year first, then month, keeps your files in time order when the list is sorted by name.
 
+![The file name 2026-03 Invoice 004 - Johnson split into date, what it is, and who it is for, above two files sorted in time order](/lessons/the-basics--03-files-folders-and-storage.svg)
+
 Keep names short and plain. Use letters, numbers, spaces, and dashes. Avoid symbols such as slashes, question marks, and colons, because some devices will not accept them and some upload systems reject them. To rename a file on a computer, right-click it and choose **Rename**. On a phone, press and hold the file and look for Rename in the menu.
 
 ### Send the file type they asked for

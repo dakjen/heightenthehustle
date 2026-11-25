@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>A generic invoice with the three points to check before paying: what was ordered, the amount and the payment details</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="40" y="28" width="330" height="394" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+<text x="62" y="68" font-size="20" font-weight="bold" fill="#171717">Invoice</text>
+<line x1="62" y1="84" x2="348" y2="84" stroke="#d4d4d4"/>
+<rect x="54" y="98" width="244" height="110" rx="4" fill="#f6f6f6"/>
+<g fill="#d4d4d4"><rect x="66" y="114" width="150" height="10"/><rect x="66" y="138" width="190" height="10"/><rect x="66" y="162" width="120" height="10"/><rect x="66" y="186" width="170" height="10"/></g>
+<rect x="54" y="226" width="244" height="54" rx="4" fill="#f6f6f6"/>
+<text x="66" y="259" font-size="16" font-weight="bold" fill="#171717">Amount due</text>
+<rect x="196" y="248" width="88" height="12" fill="#d4d4d4"/>
+<rect x="54" y="298" width="244" height="104" rx="4" fill="#f6e9e9"/>
+<text x="66" y="326" font-size="16" font-weight="bold" fill="#171717">Payment details</text>
+<g fill="#d4d4d4"><rect x="66" y="344" width="180" height="10"/><rect x="66" y="366" width="130" height="10"/></g>
+<g fill="#910000"><circle cx="334" cy="153" r="15"/><circle cx="334" cy="253" r="15"/><circle cx="334" cy="350" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="334" y="159">1</text><text x="334" y="259">2</text><text x="334" y="356">3</text></g>
+<text x="410" y="52" font-size="20" font-weight="bold" fill="#171717">Before paying, check three things</text>
+<g fill="#910000"><circle cx="425" cy="96" r="15"/><circle cx="425" cy="156" r="15"/><circle cx="425" cy="232" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="425" y="102">1</text><text x="425" y="162">2</text><text x="425" y="238">3</text></g>
+<g font-size="16" fill="#171717">
+<text x="452" y="102">Did you order this?</text>
+<text x="452" y="152">Does the amount match</text><text x="452" y="174">what you agreed to?</text>
+<text x="452" y="228">Are the payment details</text><text x="452" y="250">the same as last time?</text>
+</g>
+<rect x="410" y="296" width="350" height="126" rx="10" fill="#f6e9e9" stroke="#910000"/>
+<text x="430" y="330" font-size="16" font-weight="bold" fill="#910000">Unexpected, or details changed?</text>
+<g font-size="16" fill="#171717">
+<text x="430" y="362">Call the vendor at a number you</text>
+<text x="430" y="386">already have on file and confirm.</text>
+</g>
+</svg>

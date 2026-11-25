@@ -64,6 +64,8 @@ $3,800 - $1,450 = $2,350 profit.
 
 Tasha made $2,350, not $3,800. That is still a good month. Now she knows her real number, and she can see where the rest went. Helper pay, supplies, and gas were $1,150 of the $1,450. Those three rise with every job she adds, so they are the ones to watch when she quotes new work. She also found two subscriptions she no longer used.
 
+![Tasha's last 30 days as three boxes, $3,800 income minus $1,450 expenses equals $2,350 profit, above a bar splitting the $3,800 into what the business cost to run and what she kept.](/lessons/getting-paid-and-staying-paid--u1-01-income-vs-expenses.svg)
+
 ### The forgotten charges always surface
 
 When you scroll through 30 days line by line, small repeating charges show up. A free trial that turned into a monthly fee. An app you used once. A membership you meant to cancel. Each one looks small. Over a year they add up to real money. Tasha's two forgotten charges were $25 a month, which is $300 a year. You cannot cut what you cannot see.

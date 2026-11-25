@@ -63,6 +63,8 @@ You do not have to close one app to use another. Several can stay open at once, 
 
 This is how a customer's address gets from an email into an invoice with no retyping: select it in the email, copy, switch apps, click in the address field, paste. Four moves, and the address is exact.
 
+![A customer's address moving from an email into an invoice in four moves: select, copy, switch apps, paste](/lessons/the-basics--02-mouse-keyboard-and-shortcuts.svg)
+
 ## Try it
 
 1. Open a notes or word processing app and start a blank document.

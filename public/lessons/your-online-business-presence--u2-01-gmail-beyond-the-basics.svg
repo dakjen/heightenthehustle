@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>Four panels, one for each email tool: a template with bracketed blanks, schedule-send from Sunday night to Monday 8:30, a 30-second undo, and snooze from the 15th to the 13th</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<g fill="#ffffff" stroke="#d4d4d4" stroke-width="2">
+<rect x="32" y="28" width="360" height="188"/><rect x="408" y="28" width="360" height="188"/><rect x="32" y="234" width="360" height="188"/><rect x="408" y="234" width="360" height="188"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#171717">
+<text x="52" y="60">Templates</text><text x="428" y="60">Schedule-send</text><text x="52" y="266">Undo-send</text><text x="428" y="266">Snooze</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b">
+<text x="52" y="198">Written twice a month? Save it.</text>
+<text x="428" y="198">Write it now, deliver it later</text>
+<text x="52" y="404">Half a minute to click Undo</text>
+<text x="428" y="404">Comes back when you can act</text>
+</g>
+<rect x="52" y="74" width="320" height="100" fill="#f6f6f6"/>
+<g fill="#f6e9e9"><rect x="88" y="84" width="62" height="24"/><rect x="164" y="112" width="56" height="24"/><rect x="134" y="140" width="80" height="24"/></g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14">
+<text x="66" y="101" fill="#171717">Hi</text>
+<g fill="#910000" text-anchor="middle"><text x="119" y="101">[name]</text><text x="192" y="129">[date]</text><text x="174" y="157">[amount]</text></g>
+</g>
+<g fill="#d4d4d4"><rect x="66" y="120" width="90" height="8"/><rect x="228" y="120" width="70" height="8"/><rect x="66" y="148" width="60" height="8"/><rect x="222" y="148" width="110" height="8"/></g>
+<rect x="428" y="88" width="124" height="64" fill="#f6f6f6" stroke="#d4d4d4"/>
+<rect x="624" y="88" width="124" height="64" fill="#f6e9e9" stroke="#910000"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle">
+<text x="490" y="116" fill="#171717">Sunday night</text><text x="490" y="136" fill="#4b4b4b">11:40</text>
+<text x="686" y="116" fill="#171717">Monday</text><text x="686" y="136" fill="#910000" font-weight="bold">8:30</text>
+</g>
+<line x1="560" y1="120" x2="606" y2="120" stroke="#910000" stroke-width="2"/>
+<polygon points="618,120 604,113 604,127" fill="#910000"/>
+<rect x="52" y="302" width="210" height="18" fill="#f6f6f6" stroke="#d4d4d4"/>
+<rect x="52" y="302" width="130" height="18" fill="#910000"/>
+<text x="52" y="346" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#910000">30 seconds</text>
+<rect x="286" y="290" width="86" height="40" rx="6" fill="#ffffff" stroke="#910000" stroke-width="2"/>
+<text x="329" y="316" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#910000" text-anchor="middle">Undo</text>
+<g stroke="#d4d4d4" fill="#f6f6f6"><rect x="428" y="284" width="52" height="46"/><rect x="556" y="284" width="52" height="46"/></g>
+<rect x="492" y="284" width="52" height="46" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+<rect x="620" y="284" width="52" height="46" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#171717" text-anchor="middle">
+<text x="454" y="313" fill="#4b4b4b">12</text><text x="518" y="313" fill="#910000">13</text><text x="582" y="313" fill="#4b4b4b">14</text><text x="646" y="313">15</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle">
+<text x="518" y="352" fill="#910000">Snoozed to</text><text x="646" y="352" fill="#171717">Invoice due</text>
+</g>
+</svg>

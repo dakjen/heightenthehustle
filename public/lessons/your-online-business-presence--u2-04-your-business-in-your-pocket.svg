@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>Two scan file names split into date, who and what, above a Receipts folder holding a folder for each month with a named scan inside</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<text x="40" y="48" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#171717">Name every scan: date, who, what</text>
+<rect x="40" y="70" width="720" height="38" fill="#f6e9e9"/>
+<rect x="40" y="70" width="720" height="138" fill="none" stroke="#d4d4d4" stroke-width="2"/>
+<g stroke="#d4d4d4"><line x1="200" y1="70" x2="200" y2="208"/><line x1="420" y1="70" x2="420" y2="208"/><line x1="40" y1="108" x2="760" y2="108"/><line x1="40" y1="158" x2="760" y2="158"/></g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#910000">
+<text x="58" y="95">Date</text><text x="218" y="95">Who</text><text x="438" y="95">What</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717">
+<text x="58" y="139">2026-03-14</text><text x="218" y="139">Home Supply</text><text x="438" y="139">furnace filters receipt</text>
+<text x="58" y="189">2026-03-14</text><text x="218" y="189">Jackson</text><text x="438" y="189">signed estimate</text>
+</g>
+<g fill="#f6f6f6" stroke="#4b4b4b" stroke-width="1.5">
+<path d="M40 256 L40 282 L74 282 L74 252 L58 252 L54 246 L40 246 Z"/>
+<path d="M88 310 L88 336 L122 336 L122 306 L106 306 L102 300 L88 300 Z"/>
+<path d="M140 356 L140 390 L166 390 L166 364 L158 356 Z" fill="#ffffff"/>
+</g>
+<g fill="none" stroke="#d4d4d4" stroke-width="2"><path d="M56 286 L56 320 L84 320"/><path d="M104 340 L104 374 L136 374"/></g>
+<g font-family="Arial, Helvetica, sans-serif" fill="#171717">
+<text x="84" y="272" font-size="16" font-weight="bold">Receipts</text>
+<text x="132" y="324" font-size="14" fill="#4b4b4b">A folder for each month</text>
+<text x="176" y="379" font-size="14">2026-03-14 Home Supply furnace filters receipt</text>
+</g>
+<rect x="540" y="248" width="220" height="64" fill="#f6f6f6"/>
+<rect x="540" y="248" width="4" height="64" fill="#910000"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+<text x="558" y="275">Year first, so files sort</text><text x="558" y="295">themselves in order</text>
+</g>
+</svg>

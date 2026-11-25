@@ -31,6 +31,8 @@ A stretched photo makes people look too wide or a logo too tall. It happens when
 
 Always resize from a **corner handle**. A corner changes the width and height together, so the picture keeps its shape. Holding **Shift** while you drag a corner locks the shape for certain. If a picture gets stretched, undo with **Ctrl + Z** on Windows or **Cmd + Z** on a Mac.
 
+![A picture stretched out of shape by dragging a side handle, beside the same picture resized from a corner handle and keeping its shape.](/lessons/microsoft-essentials--u3-03-images-and-visuals.svg)
+
 Two more points. Do not enlarge a small picture to fill the slide, because it will turn blurry. Start with a large, sharp photo and make it smaller. And leave some room around the picture. It should not touch the edges of the slide or crowd the title.
 
 ### Crop to what matters

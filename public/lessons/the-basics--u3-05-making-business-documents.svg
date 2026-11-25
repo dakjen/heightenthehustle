@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>The four-step pattern for any business document: template, AI draft, your facts and voice, then PDF</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<text x="32" y="58" font-size="22" font-weight="bold" fill="#171717">The pattern every time</text>
+<g fill="#f6f6f6" stroke="#d4d4d4">
+<rect x="32" y="84" width="164" height="334" rx="10"/><rect x="220" y="84" width="164" height="334" rx="10"/><rect x="408" y="84" width="164" height="334" rx="10"/><rect x="596" y="84" width="164" height="334" rx="10"/>
+</g>
+<g fill="#910000"><path d="M200 246 h10 v-7 l12 12 l-12 12 v-7 h-10 z" transform="translate(-3 0)"/><path d="M388 246 h10 v-7 l12 12 l-12 12 v-7 h-10 z" transform="translate(-3 0)"/><path d="M576 246 h10 v-7 l12 12 l-12 12 v-7 h-10 z" transform="translate(-3 0)"/></g>
+<g fill="#910000"><circle cx="60" cy="112" r="15"/><circle cx="248" cy="112" r="15"/><circle cx="436" cy="112" r="15"/><circle cx="624" cy="112" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="60" y="118">1</text><text x="248" y="118">2</text><text x="436" y="118">3</text><text x="624" y="118">4</text></g>
+<!-- page icons -->
+<g fill="#ffffff" stroke="#171717" stroke-width="2"><rect x="82" y="140" width="64" height="84"/><rect x="270" y="140" width="64" height="84"/><rect x="458" y="140" width="64" height="84"/><rect x="646" y="140" width="64" height="84"/></g>
+<g stroke="#d4d4d4" stroke-width="4"><path d="M92 156 h28 M92 172 h44 M92 186 h44 M92 200 h44"/></g>
+<g stroke="#4b4b4b" stroke-width="3"><path d="M280 156 h28 M280 170 h44 M280 182 h44 M280 194 h44 M280 206 h30"/></g>
+<g stroke="#4b4b4b" stroke-width="3"><path d="M468 156 h28 M468 170 h44 M468 194 h44 M468 206 h30"/></g>
+<path d="M468 182 h44" stroke="#910000" stroke-width="3"/>
+<path d="M500 214 l5 6 l11 -14" fill="none" stroke="#910000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="654" y="170" width="48" height="26" fill="#910000"/>
+<text x="678" y="189" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">PDF</text>
+<g font-size="18" font-weight="bold" fill="#171717" text-anchor="middle">
+<text x="114" y="262">Template</text><text x="302" y="262">AI</text><text x="490" y="262">You</text><text x="678" y="262">PDF</text>
+</g>
+<g font-size="16" fill="#171717" text-anchor="middle">
+<text x="114" y="286">for the bones</text><text x="302" y="286">for the draft</text><text x="490" y="286">for the facts</text><text x="490" y="306">and the voice</text><text x="678" y="286">out the door</text>
+</g>
+<g font-size="14" fill="#4b4b4b" text-anchor="middle">
+<text x="114" y="348">Open it and</text><text x="114" y="368">make your copy</text>
+<text x="302" y="348">Context, a specific</text><text x="302" y="368">task and a format</text>
+<text x="490" y="348">Correct every name,</text><text x="490" y="368">price, date and</text><text x="490" y="388">promise</text>
+<text x="678" y="348">Name it and save</text><text x="678" y="368">it in your Drive</text>
+</g>
+</svg>

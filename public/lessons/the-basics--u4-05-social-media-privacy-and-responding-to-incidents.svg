@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>The seven steps for recovering a compromised account, starting from whether you can still sign in</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<g fill="#f6f6f6" stroke="#d4d4d4"><rect x="32" y="28" width="352" height="112" rx="10"/><rect x="416" y="28" width="352" height="112" rx="10"/></g>
+<g fill="#910000"><circle cx="62" cy="60" r="15"/><circle cx="446" cy="60" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="62" y="66">1</text><text x="446" y="66">2</text></g>
+<g font-size="18" font-weight="bold" fill="#171717"><text x="88" y="66">If you can still sign in</text><text x="472" y="66">If you cannot sign in</text></g>
+<g font-size="14" fill="#4b4b4b">
+<text x="88" y="96">Change the password, then sign</text><text x="88" y="118">out of all other devices</text>
+<text x="472" y="96">Use the official recovery option on</text><text x="472" y="118">the platform's own sign-in page</text>
+</g>
+<path d="M208 140 V164 M592 140 V164 H100 V184" fill="none" stroke="#910000" stroke-width="2"/>
+<path d="M92 182 l8 10 l8 -10 z" fill="#910000"/>
+<g fill="#ffffff" stroke="#d4d4d4">
+<rect x="32" y="198" width="136" height="150" rx="10"/><rect x="182" y="198" width="136" height="150" rx="10"/><rect x="332" y="198" width="136" height="150" rx="10"/><rect x="482" y="198" width="136" height="150" rx="10"/><rect x="632" y="198" width="136" height="150" rx="10"/>
+</g>
+<g fill="#910000"><circle cx="100" cy="230" r="15"/><circle cx="250" cy="230" r="15"/><circle cx="400" cy="230" r="15"/><circle cx="550" cy="230" r="15"/><circle cx="700" cy="230" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="100" y="236">3</text><text x="250" y="236">4</text><text x="400" y="236">5</text><text x="550" y="236">6</text><text x="700" y="236">7</text></g>
+<g fill="#910000"><path d="M170 268 l8 6 l-8 6 z"/><path d="M320 268 l8 6 l-8 6 z"/><path d="M470 268 l8 6 l-8 6 z"/><path d="M620 268 l8 6 l-8 6 z"/></g>
+<g font-size="14" fill="#171717" text-anchor="middle">
+<text x="100" y="274">Secure the</text><text x="100" y="294">connected email</text>
+<text x="250" y="274">Turn on two-step</text><text x="250" y="294">verification</text>
+<text x="400" y="274">Check settings</text><text x="400" y="294">for anything the</text><text x="400" y="314">intruder changed</text>
+<text x="550" y="274">Delete intruder</text><text x="550" y="294">posts and tell</text><text x="550" y="314">your customers</text>
+<text x="700" y="274">Call your bank</text><text x="700" y="294">and report</text><text x="700" y="314">the incident</text>
+</g>
+<rect x="32" y="372" width="736" height="48" rx="8" fill="#f6e9e9" stroke="#910000"/>
+<text x="400" y="402" font-size="16" font-weight="bold" fill="#910000" text-anchor="middle">Platforms do not charge to recover an account.</text>
+</svg>

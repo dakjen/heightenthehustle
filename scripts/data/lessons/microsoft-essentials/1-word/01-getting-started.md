@@ -54,6 +54,8 @@ Spacing is the room between lines and paragraphs, and the rule is consistency: w
 3. Choose **1.15** for the line spacing.
 4. In the same menu, choose **Add Space After Paragraph** if it is offered, so each paragraph gets the same small gap.
 
+![One-page business profile with the business name in the Title style, three section labels in the Heading 1 style, Normal body text, even spacing, and a clear file name.](/lessons/microsoft-essentials--u1-01-getting-started.svg)
+
 ### A file name that works for you later
 
 Go to **File > Save As**. Pick a place you will remember, such as your Documents folder or a folder named for your business. Name the file for the business and the topic, like `Marisol-Detailing-About-Us`. Word adds `.docx` to the end, the file type for an editable Word document. After the first save, press **Ctrl + S** on Windows or **Cmd + S** on a Mac every few minutes to save your changes.

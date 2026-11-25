@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>Three slide thumbnails for an open house deck, the first using the Title Slide layout and the next two using the Title and Content layout</title>
+<rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+<rect x="24" y="150" width="232" height="130" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<circle cx="36" cy="132" r="11" fill="#910000"/>
+<text x="36" y="137" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">1</text>
+<rect x="284" y="150" width="232" height="130" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<circle cx="296" cy="132" r="11" fill="#910000"/>
+<text x="296" y="137" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">2</text>
+<rect x="544" y="150" width="232" height="130" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<circle cx="556" cy="132" r="11" fill="#910000"/>
+<text x="556" y="137" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">3</text>
+<rect x="38" y="166" width="204" height="58" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="140" y="190" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717" text-anchor="middle" font-weight="bold">Bright Beginnings</text>
+<text x="140" y="210" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717" text-anchor="middle" font-weight="bold">Home Daycare</text>
+<rect x="38" y="234" width="204" height="32" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="140" y="255" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">Open House</text>
+<rect x="294" y="160" width="212" height="32" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="302" y="182" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717" text-anchor="start" font-weight="bold">Our Hours</text>
+<rect x="294" y="200" width="212" height="70" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="302" y="222" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Monday to Friday</text>
+<text x="302" y="242" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">6:30 a.m. to 6:00 p.m.</text>
+<rect x="554" y="160" width="212" height="32" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="562" y="182" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#171717" text-anchor="start" font-weight="bold">Our Daily Schedule</text>
+<rect x="554" y="200" width="212" height="70" fill="none" stroke="#4b4b4b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="562" y="219" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Breakfast and free play</text>
+<text x="562" y="239" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Learning time and lunch</text>
+<text x="562" y="259" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Nap, snack, and outdoor play</text>
+<text x="24" y="312" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#910000" text-anchor="start" font-weight="bold">Title Slide layout</text>
+<text x="24" y="334" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">a title box and a subtitle box</text>
+<text x="284" y="312" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#910000" text-anchor="start" font-weight="bold">Title and Content layout</text>
+<text x="284" y="334" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">a title on top, a larger content box below</text>
+<line x1="284" y1="290" x2="776" y2="290" stroke="#910000" stroke-width="1.5"/>
+<line x1="284" y1="284" x2="284" y2="290" stroke="#910000" stroke-width="1.5"/>
+<line x1="776" y1="284" x2="776" y2="290" stroke="#910000" stroke-width="1.5"/>
+<line x1="24" y1="290" x2="256" y2="290" stroke="#910000" stroke-width="1.5"/>
+<line x1="24" y1="284" x2="24" y2="290" stroke="#910000" stroke-width="1.5"/>
+<line x1="256" y1="284" x2="256" y2="290" stroke="#910000" stroke-width="1.5"/>
+<text x="24" y="84" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#171717" text-anchor="start" font-weight="bold">Three slides, built from two layouts</text>
+</svg>

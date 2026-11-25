@@ -34,6 +34,8 @@ Put together, the prompt reads:
 
 > I run a cleaning business in Baltimore. Write a short, friendly text offering past clients 15% off a spring deep-clean. Under 50 words, three options.
 
+![The cleaning business prompt split into its three parts, context, a specific task and a format.](/lessons/the-basics--u3-02-how-to-ask-for-what-you-need.svg)
+
 Compare that to the weak version: "Write a text about a sale." The weak prompt gets you a message with a made-up discount, no mention of cleaning, and a pile of exclamation points. The strong prompt gets you three short options that name your real offer, something like: "Hi! It's Tanya from Johnson Cleaning. Spring is here, and past clients get 15% off a deep-clean this month. Want me to save you a spot?" A good answer uses your details, stays inside your word limit, and sounds like something a real person would send.
 
 ### The same three parts in other trades

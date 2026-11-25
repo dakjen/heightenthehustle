@@ -52,6 +52,8 @@ Here is an invoice from a fictional business, Bright Path Cleaning, to a fiction
 
 Check the math before you send anything. $600 + $180 + $45 = $825. A wrong total is the fastest way to delay a payment, because the customer has to write back and wait for a corrected copy.
 
+![Sample invoice 1001 from Bright Path Cleaning to Oak Street Dental for $825, with the six elements numbered: both parties, invoice number, itemized work, total, due date and how to pay.](/lessons/getting-paid-and-staying-paid--u1-03-professional-invoice.svg)
+
 Notice who it is addressed to. "Attention Office Manager" sends the invoice to the person who pays the bills, not the person who booked the work. With a business customer, ask once who handles payables and whether they need anything on the invoice, such as a purchase order number.
 
 ### Writing the "how to pay" line

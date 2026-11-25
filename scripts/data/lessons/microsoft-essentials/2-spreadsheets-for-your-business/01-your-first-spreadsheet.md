@@ -34,6 +34,8 @@ Put labels in row 1 so every column has one job. For an expense list, use four h
 
 Columns run up and down and carry a letter at the top: A, B, C. Rows run side to side and carry a number on the left: 1, 2, 3. Each box where they meet is a cell, and its address is the column letter plus the row number. The cell in column B, row 3 is **B3**. Click any cell and the Name Box, the small box above column A, shows its address. Addresses matter because in the formulas lesson you will use them to tell the spreadsheet which numbers to add.
 
+![Spreadsheet grid with Date, Item, Category and Amount headings in row 1, three purchases below, and cell B3 highlighted where column B meets row 3.](/lessons/microsoft-essentials--u2-01-your-first-spreadsheet.svg)
+
 ### Enter data so it can be added and sorted
 
 Click a cell and type. Press **Enter** to finish and move down one cell. Press **Tab** to finish and move one cell to the right. Tab is the faster choice when you are filling in a row from left to right.

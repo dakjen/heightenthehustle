@@ -39,6 +39,8 @@ Send money only to people you know, and confirm the name, phone number, or usern
 
 Fraudsters send bills for things you never ordered, and they also pose as your real vendors with "updated" bank details. Before paying any invoice, check three things. Did you order this? Does the amount match what you agreed to? Are the payment details the same as last time? If the invoice is unexpected, or the bank account, mailing address, or payment method has changed, call the vendor at a number you already have on file and confirm. If you have staff, set a standing rule that changes to payment details and payments above an amount you choose need a second person's approval.
 
+![A generic invoice with the three points to check before paying, whether you ordered it, whether the amount matches, and whether the payment details are the same as last time.](/lessons/the-basics--u4-03-protecting-your-money-online.svg)
+
 ### Gift cards and verification codes
 
 No legitimate business, bank, court, utility, or government agency demands payment in gift cards. Anyone who asks you to buy gift cards and read them the numbers is committing fraud, every time. A common version targets employees: a text that appears to come from the owner asks a staff member to buy gift cards "for a client" and keep it quiet. Tell your team now that you will never ask for that.

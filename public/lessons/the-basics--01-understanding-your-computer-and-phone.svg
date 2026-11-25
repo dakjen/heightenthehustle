@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>The five-step fix sequence for software problems, ending with a problem report and a call to support</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="26" y="46" font-size="20" font-weight="bold" fill="#171717">The fix sequence for software problems</text>
+
+    <!-- step 1 -->
+    <rect x="26" y="80" width="224" height="124" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <circle cx="54" cy="110" r="16" fill="#910000"/>
+    <text x="54" y="116" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+    <text x="42" y="154" font-size="15" fill="#171717">Close the app completely</text>
+    <text x="42" y="176" font-size="15" fill="#171717">and open it again</text>
+
+    <!-- step 2 -->
+    <rect x="288" y="80" width="224" height="124" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <circle cx="316" cy="110" r="16" fill="#910000"/>
+    <text x="316" y="116" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+    <text x="304" y="154" font-size="15" fill="#171717">Check for an update</text>
+    <text x="304" y="176" font-size="15" fill="#171717">to the app</text>
+
+    <!-- step 3 -->
+    <rect x="550" y="80" width="224" height="124" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <circle cx="578" cy="110" r="16" fill="#910000"/>
+    <text x="578" y="116" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+    <text x="566" y="154" font-size="15" fill="#171717">Restart the device</text>
+
+    <!-- step 4 -->
+    <rect x="550" y="270" width="224" height="124" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <circle cx="578" cy="300" r="16" fill="#910000"/>
+    <text x="578" y="306" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+    <text x="566" y="344" font-size="15" fill="#171717">Check for an update to</text>
+    <text x="566" y="366" font-size="15" fill="#171717">the operating system</text>
+
+    <!-- step 5 -->
+    <rect x="288" y="270" width="224" height="124" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <circle cx="316" cy="300" r="16" fill="#910000"/>
+    <text x="316" y="306" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+    <text x="344" y="306" font-size="15" font-weight="bold" fill="#910000">Still failing?</text>
+    <text x="304" y="344" font-size="15" fill="#171717">Write your problem report</text>
+    <text x="304" y="366" font-size="15" fill="#171717">and call support</text>
+
+    <!-- arrows -->
+    <g stroke="#910000" stroke-width="2" fill="#910000">
+      <line x1="254" y1="142" x2="276" y2="142"/>
+      <polygon points="284,142 274,136 274,148" stroke="none"/>
+      <line x1="516" y1="142" x2="538" y2="142"/>
+      <polygon points="546,142 536,136 536,148" stroke="none"/>
+      <line x1="662" y1="208" x2="662" y2="256"/>
+      <polygon points="662,266 656,254 668,254" stroke="none"/>
+      <line x1="546" y1="332" x2="524" y2="332"/>
+      <polygon points="516,332 526,326 526,338" stroke="none"/>
+    </g>
+  </g>
+</svg>

@@ -40,6 +40,8 @@ Here is what the transfer looks like for a few payment sizes.
 
 If Marcus is paid $800 for a wedding party and uses 25%, he moves $200 to tax savings and has $600 left to run the business. At 30%, he moves $240 and has $560 left. Pick one percentage in that range and stick with it. Once a tax professional has looked at your numbers, they can tell you whether your percentage should change.
 
+![An $800 payment split at 25 percent, with $200 moving to the tax savings account first and $600 left to run the business.](/lessons/getting-paid-and-staying-paid--u2-04-taxes.svg)
+
 ### Tax money was never yours
 
 The rule rests on one idea: tax money was never yours. When $800 arrives, you did not earn $800 to spend. You earned the part that is left after the set-aside, and you are holding the rest for a short time.

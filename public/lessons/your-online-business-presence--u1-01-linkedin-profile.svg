@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>A profile card with its five parts numbered: headshot, headline, About, Experience and contact info</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="40" y="30" width="400" height="390" fill="#ffffff" stroke="#d4d4d4" stroke-width="2"/>
+<rect x="41" y="31" width="398" height="60" fill="#f6f6f6"/>
+<circle cx="100" cy="92" r="38" fill="#d4d4d4" stroke="#ffffff" stroke-width="4"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#171717">
+<text x="156" y="120" font-size="18" font-weight="bold">Your name</text>
+<text x="60" y="162" font-size="14">Office and medical cleaning for small businesses</text>
+<text x="60" y="182" font-size="14">in Prince George's County</text>
+<text x="60" y="226" font-size="16" font-weight="bold">About</text>
+<text x="60" y="338" font-size="16" font-weight="bold">Experience</text>
+<text x="60" y="360" font-size="14" fill="#4b4b4b">Owner, Bright Step Cleaning</text>
+<text x="60" y="402" font-size="16" font-weight="bold">Contact info</text>
+</g>
+<g stroke="#d4d4d4" stroke-width="1">
+<line x1="60" y1="200" x2="420" y2="200"/><line x1="60" y1="314" x2="420" y2="314"/><line x1="60" y1="376" x2="420" y2="376"/>
+</g>
+<g fill="#d4d4d4">
+<rect x="60" y="238" width="340" height="6"/><rect x="60" y="248" width="260" height="6"/>
+<rect x="60" y="264" width="340" height="6"/><rect x="60" y="274" width="300" height="6"/>
+<rect x="60" y="290" width="340" height="6"/><rect x="60" y="300" width="200" height="6"/>
+<rect x="200" y="392" width="100" height="8"/><rect x="312" y="392" width="100" height="8"/>
+</g>
+<g stroke="#910000" stroke-width="1.5">
+<line x1="140" y1="92" x2="478" y2="92"/><line x1="400" y1="170" x2="478" y2="170"/><line x1="410" y1="268" x2="478" y2="268"/><line x1="270" y1="344" x2="478" y2="344"/><line x1="420" y1="396" x2="478" y2="396"/>
+</g>
+<g fill="#910000">
+<circle cx="490" cy="92" r="12"/><circle cx="490" cy="170" r="12"/><circle cx="490" cy="268" r="12"/><circle cx="490" cy="344" r="12"/><circle cx="490" cy="396" r="12"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+<text x="490" y="97">1</text><text x="490" y="175">2</text><text x="490" y="273">3</text><text x="490" y="349">4</text><text x="490" y="401">5</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#171717">
+<text x="512" y="90">Headshot</text><text x="512" y="168">Headline</text><text x="512" y="266">About</text><text x="512" y="342">Experience</text><text x="512" y="394">Contact info</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b">
+<text x="512" y="110">Face, good light, plain background</text>
+<text x="512" y="188">What you do, for whom, where</text>
+<text x="512" y="286">Three short paragraphs</text>
+<text x="512" y="362">Your business and your role</text>
+<text x="512" y="414">Business email and phone</text>
+</g>
+</svg>

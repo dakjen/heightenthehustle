@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>A bar split 80 to 20 between AI and you, above the four uses that pay off</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<text x="40" y="58" font-size="22" font-weight="bold" fill="#171717">The 80/20 split</text>
+<rect x="40" y="80" width="576" height="120" fill="#f6f6f6" stroke="#d4d4d4"/>
+<rect x="616" y="80" width="144" height="120" fill="#f6e9e9" stroke="#910000"/>
+<text x="64" y="122" font-size="22" font-weight="bold" fill="#171717">AI</text>
+<text x="64" y="150" font-size="18" fill="#171717">The blank-page 80%</text>
+<text x="64" y="176" font-size="14" fill="#4b4b4b">The structure and the opening set of words, in seconds</text>
+<text x="688" y="122" font-size="22" font-weight="bold" fill="#910000" text-anchor="middle">You</text>
+<text x="688" y="150" font-size="16" fill="#171717" text-anchor="middle">The final 20%</text>
+<text x="760" y="228" font-size="14" fill="#910000" text-anchor="end">Your facts, your judgment and your voice</text>
+<line x1="40" y1="258" x2="760" y2="258" stroke="#d4d4d4"/>
+<text x="40" y="294" font-size="18" font-weight="bold" fill="#171717">Four uses</text>
+<g fill="#ffffff" stroke="#d4d4d4">
+<rect x="40" y="312" width="168" height="106" rx="8"/><rect x="224" y="312" width="168" height="106" rx="8"/><rect x="408" y="312" width="168" height="106" rx="8"/><rect x="592" y="312" width="168" height="106" rx="8"/>
+</g>
+<g font-size="14" font-weight="bold" fill="#910000"><text x="56" y="340">Use 1</text><text x="240" y="340">Use 2</text><text x="424" y="340">Use 3</text><text x="608" y="340">Use 4</text></g>
+<g font-size="15" fill="#171717">
+<text x="56" y="368">Drafts of writing</text><text x="56" y="390">you have to do</text>
+<text x="240" y="368">Thinking through</text><text x="240" y="390">decisions</text>
+<text x="424" y="368">Contract language</text><text x="424" y="390">into plain English</text>
+<text x="608" y="368">Summarizing</text><text x="608" y="390">anything long</text>
+</g>
+</svg>

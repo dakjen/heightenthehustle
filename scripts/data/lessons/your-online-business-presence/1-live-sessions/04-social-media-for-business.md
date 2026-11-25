@@ -62,6 +62,8 @@ One post a week is enough to show the business is active. Here is a month for An
 
 When week five comes, start the rotation over with new content. The question "what do I post?" is answered for the year.
 
+![A four-week posting plan with one post per week: finished job, tip, about you, and review, then week five starts the rotation over.](/lessons/your-online-business-presence--u1-04-social-media-for-business.svg)
+
 ### Plan the month in one sitting
 
 Writing four posts at once takes less time than writing one post four separate times. Pull the photos from your phone, write the four captions, and save them as drafts or in a note. Most platforms let a business account schedule posts ahead, so you can load the month and let it run. To keep the supply coming, make the before photo part of how you start a job and the after photo part of how you close it. Two taps on site saves you from hunting for content later.

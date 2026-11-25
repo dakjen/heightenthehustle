@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img">
+<title>One crowded slide with a long title and a block of small centered text, beside the same content rebuilt as three clear slides with short titles and short lines</title>
+<rect x="0" y="0" width="800" height="560" fill="#ffffff"/>
+<text x="24" y="40" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#171717" text-anchor="start" font-weight="bold">Before</text>
+<rect x="24" y="56" width="330" height="186" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<text x="189" y="86" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">About Us and Our Services</text>
+<text x="189" y="104" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">and Why Choose Us</text>
+<rect x="44.0" y="122" width="290" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="39.0" y="134" width="300" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="49.0" y="146" width="280" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="41.0" y="158" width="296" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="44.0" y="170" width="290" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="39.0" y="182" width="300" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="51.0" y="194" width="276" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="43.0" y="206" width="292" height="4" fill="#d4d4d4" rx="3"/>
+<rect x="99.0" y="218" width="180" height="4" fill="#d4d4d4" rx="3"/>
+<text x="24" y="270" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Three ideas, tiny gray text,</text>
+<text x="24" y="288" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">all centered</text>
+<line x1="366" y1="149" x2="404" y2="149" stroke="#910000" stroke-width="2"/>
+<path d="M394 141 L404 149 L394 157" fill="none" stroke="#910000" stroke-width="2"/>
+<text x="420" y="40" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#171717" text-anchor="start" font-weight="bold">After</text>
+<rect x="420" y="56" width="356" height="150" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<text x="440" y="92" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#910000" text-anchor="start" font-weight="bold">We Come to You</text>
+<text x="440" y="120" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Mobile mechanics since 2019</text>
+<text x="440" y="141" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Home or job site service</text>
+<rect x="420" y="220" width="356" height="150" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<text x="440" y="256" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#910000" text-anchor="start" font-weight="bold">What We Fix</text>
+<text x="440" y="284" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Oil changes</text>
+<text x="440" y="305" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Brakes</text>
+<text x="440" y="326" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Batteries</text>
+<text x="440" y="347" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Diagnostics</text>
+<rect x="420" y="384" width="356" height="150" fill="#ffffff" stroke="#171717" stroke-width="1.5"/>
+<text x="440" y="420" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#910000" text-anchor="start" font-weight="bold">Why Fleets Choose Us</text>
+<text x="440" y="448" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Fully insured</text>
+<text x="440" y="469" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">No waiting at a shop</text>
+<text x="440" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Discounts for 5 or more vehicles</text>
+</svg>

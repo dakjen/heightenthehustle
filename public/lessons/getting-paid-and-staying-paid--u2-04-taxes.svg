@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>An $800 payment split at 25 percent: $200 moves to tax savings first and $600 is left to run the business</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+    <text x="32" y="44" font-size="20" font-weight="bold">Every payment: set aside tax money first</text>
+
+    <rect x="290" y="66" width="220" height="84" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="400" y="96" font-size="16" text-anchor="middle" fill="#4b4b4b">Payment received</text>
+    <text x="400" y="134" font-size="30" font-weight="bold" text-anchor="middle">$800</text>
+
+    <g stroke-width="2" fill="none">
+      <path d="M 340 150 L 340 182 L 210 182 L 210 208" stroke="#910000"/>
+      <path d="M 460 150 L 460 182 L 590 182 L 590 208" stroke="#4b4b4b"/>
+    </g>
+    <polygon points="210,220 202,206 218,206" fill="#910000"/>
+    <polygon points="590,220 582,206 598,206" fill="#4b4b4b"/>
+    <text x="196" y="176" text-anchor="end" font-weight="bold" fill="#910000">25% moves first</text>
+    <text x="604" y="176" fill="#4b4b4b">Then the rest</text>
+
+    <rect x="60" y="220" width="300" height="124" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <text x="210" y="250" font-size="16" font-weight="bold" text-anchor="middle">Tax Savings account</text>
+    <text x="210" y="292" font-size="30" font-weight="bold" text-anchor="middle" fill="#910000">$200</text>
+    <text x="210" y="324" text-anchor="middle" fill="#4b4b4b">No debit card. Tax payments only.</text>
+
+    <rect x="440" y="220" width="300" height="124" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="590" y="250" font-size="16" font-weight="bold" text-anchor="middle">Left to run the business</text>
+    <text x="590" y="292" font-size="30" font-weight="bold" text-anchor="middle">$600</text>
+    <text x="590" y="324" text-anchor="middle" fill="#4b4b4b">Price, budget and pay yourself from this</text>
+
+    <text x="32" y="388" fill="#4b4b4b">At 30%: $240 to tax savings, $560 left.</text>
+    <text x="32" y="414" font-weight="bold" fill="#910000">Record it as a transfer, not as an expense.</text>
+  </g>
+</svg>

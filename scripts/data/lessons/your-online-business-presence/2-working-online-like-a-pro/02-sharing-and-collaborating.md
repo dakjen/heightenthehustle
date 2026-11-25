@@ -34,6 +34,8 @@ When you share, you choose how much each person can do. Give the lowest permissi
 
 In short: Viewer looks, Commenter suggests, Editor changes.
 
+![Three permission levels drawn as rising steps: Viewer looks, Commenter suggests, Editor changes, each with an example of who gets it.](/lessons/your-online-business-presence--u2-02-sharing-and-collaborating.svg)
+
 The proposal case is worth a closer look. A client reviewing a proposal is a Commenter. They can highlight a line and write "Can we use the less expensive tile here?" You see the note, reply, and make the change yourself. As an Editor, the same client could change your price or delete a paragraph, and you might not notice until after signing.
 
 ### How to share with specific people

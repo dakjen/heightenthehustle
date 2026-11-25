@@ -34,6 +34,8 @@ The cover story changes. The signals stay the same.
 
 One signal alone is enough reason to verify before acting.
 
+![A fake vendor email with four fraud signals numbered, a sender address that is slightly off, urgency, a change in payment details and an unexpected link.](/lessons/the-basics--u4-02-recognizing-scams-and-phishing.svg)
+
 ### Five attempts you will see
 
 **Fake emails.** A message says there is a problem with your account and gives you a button to "verify" or "sign in." The button leads to a copy of the real sign-in page, and whatever is typed there goes to the sender. On a computer, rest your pointer on a link without clicking to see where it really goes.

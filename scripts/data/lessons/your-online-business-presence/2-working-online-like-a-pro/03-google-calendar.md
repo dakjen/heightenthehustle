@@ -58,6 +58,8 @@ Calendar lets you give each event a color. Decide on a small set and stick to it
 
 The exact colors do not matter. What matters is the picture. A week that is all yellow and blue with no green means no money is coming in. A week of solid green with no blue means invoices are not going out. Looking a week or two ahead, a thin patch of green is your cue to send quotes and follow up on open ones now.
 
+![A Monday to Friday calendar with blocks shaded by type: paid customer work, admin, sales and meetings, and personal.](/lessons/your-online-business-presence--u2-03-google-calendar.svg)
+
 ### Send real invites
 
 When a meeting involves another person, do not leave it at a text. Add them to the event as a guest by typing their email address in the guests area, then save and choose to send the invitation. They receive an email with the date, time, and address, and buttons to answer Yes, No, or Maybe. When they answer yes, the event lands on their calendar with its own reminder.

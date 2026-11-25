@@ -34,6 +34,8 @@ Work through these in order.
 4. Check for an update to the device's operating system, the main software that runs it (Windows or macOS on a computer, iOS or Android on a phone). Look in **Settings** under **System**, **General**, or **Software update**.
 5. If it is still failing, write your problem report and call support.
 
+![The five-step fix sequence for software problems, from closing the app to writing a problem report and calling support](/lessons/the-basics--01-understanding-your-computer-and-phone.svg)
+
 ### Restart without losing work
 
 A restart clears out whatever was stuck and starts everything fresh, which is why support asks about it before anything else. Do it properly and you lose nothing.

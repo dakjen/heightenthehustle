@@ -62,6 +62,8 @@ Signs that someone else is in your account: posts or messages you did not send, 
 6. Delete posts and messages the intruder sent, and tell your customers what happened and what to ignore.
 7. If a card or bank account was linked, call your bank. Report the incident to the platform, and to the Federal Trade Commission if money was lost.
 
+![The seven account recovery steps as a flow, starting from whether you can still sign in and ending with calling your bank and reporting the incident.](/lessons/the-basics--u4-05-social-media-privacy-and-responding-to-incidents.svg)
+
 One caution: people who contact you offering to get your account back for a fee are running a second fraud, and so are most "recovery services" advertised in comment sections. Platforms do not charge to recover an account. Use only the platform's official help pages.
 
 ## Try it

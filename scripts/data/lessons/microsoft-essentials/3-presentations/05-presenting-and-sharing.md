@@ -40,6 +40,8 @@ A good note for a slide titled `What We Offer` might read: "Mention the kids' Sa
 
 To see your notes while you present, use **Presenter View**. On the **Slide Show** tab, check the box for **Use Presenter View**. When your laptop is connected to a projector or second screen, the audience sees only the slide. Your laptop shows the current slide, your notes, and the next slide. If you have only one screen, print your notes instead. Go to **File > Print** and choose **Notes Pages** in the layout options.
 
+![Two screens side by side: the audience screen shows only the slide, while the laptop shows the current slide, the next slide, and the presenter notes.](/lessons/microsoft-essentials--u3-05-presenting-and-sharing.svg)
+
 ### One quiet transition
 
 A transition is the effect that plays when one slide changes to the next. The best transition is one nobody notices. Choose one quiet effect and use it on every slide.

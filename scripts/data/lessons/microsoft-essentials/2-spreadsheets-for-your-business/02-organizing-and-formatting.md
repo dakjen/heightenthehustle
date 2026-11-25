@@ -68,6 +68,8 @@ Filtering hides the rows you do not need right now. It does not delete anything.
 5. Click **OK**. Only the supplies rows show. The row numbers on the left turn blue and skip, which tells you rows are hidden.
 6. To see everything again, click the arrow and choose **Clear Filter From "Category"**.
 
+![Expense list of eight transactions sorted by date with the phone bill row still showing $55.00, and the same list filtered to the three Supplies rows with row numbers that skip.](/lessons/microsoft-essentials--u2-02-organizing-and-formatting.svg)
+
 While the filter is on, drag down the visible amounts and look at the status bar along the bottom edge of the Excel window. It shows the sum of the cells you selected. That is your category total, with no formula needed.
 
 ### In Google Sheets

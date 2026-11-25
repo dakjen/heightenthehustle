@@ -29,6 +29,8 @@ You will chart the actual expenses from your budget tracker. The category names 
 5. Click the chart title and type a clear one, such as `March Expenses`.
 6. Drag the chart so it sits beside your numbers, not on top of them.
 
+![Cells A6 to A10 and C6 to C10 selected with the total row left out, beside a column chart titled March Expenses where Booth rent is the tallest bar.](/lessons/microsoft-essentials--u2-05-charts-sharing-records.svg)
+
 A chart that holds up in front of a lender has a title that says what it shows and when. Skip 3-D effects and extra colors. They make a chart harder to read, not clearer.
 
 ### One sheet per month

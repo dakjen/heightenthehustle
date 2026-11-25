@@ -49,6 +49,8 @@ The tool that keeps this tight is a one-page master-info doc: a single document 
 
 Keep it in Google Drive so it is on your phone. A blank copy is in this lesson's downloads. Then go down your search list and correct each listing by pasting from the doc. For old pages you cannot log in to, use the site's "claim this business" or "suggest an edit" option, or its account recovery.
 
+![A master-info doc with arrows pasting the same name, phone and hours into a listing, a social page and a review site.](/lessons/your-online-business-presence--u1-06-your-digital-reputation.svg)
+
 ### Fix two: reviews as a standing habit
 
 One burst of reviews fades. A steady trickle shows you are busy right now. Make asking part of how you close every job. Luis's habit: when he hands back the keys, he says, "I'm going to text you a link, would you leave a quick review?" and sends it before he drives off. Pick your moment, such as at payment, at delivery, or at pickup, and ask every time.

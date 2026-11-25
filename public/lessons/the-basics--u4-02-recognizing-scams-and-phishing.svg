@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>A fake vendor email with four fraud signals numbered: the sender address, urgency, changed payment details and an unexpected link</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="32" y="28" width="440" height="344" rx="10" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+<rect x="33" y="29" width="438" height="112" rx="9" fill="#f6f6f6"/>
+<line x1="32" y1="141" x2="472" y2="141" stroke="#d4d4d4"/>
+<text x="52" y="62" font-size="14" fill="#4b4b4b">From</text>
+<text x="118" y="62" font-size="16" font-weight="bold" fill="#171717">Your supply vendor</text>
+<g fill="#d4d4d4"><rect x="118" y="74" width="34" height="10"/><rect x="156" y="74" width="12" height="10"/><rect x="172" y="74" width="52" height="10"/><rect x="228" y="74" width="10" height="10"/><rect x="242" y="74" width="40" height="10"/><rect x="286" y="74" width="22" height="10"/></g>
+<text x="52" y="120" font-size="14" fill="#4b4b4b">Subject</text>
+<text x="118" y="120" font-size="16" font-weight="bold" fill="#171717">Final notice</text>
+<rect x="52" y="162" width="336" height="92" rx="4" fill="#f6e9e9"/>
+<g font-size="16" fill="#171717">
+<text x="64" y="188">Our bank details have changed.</text>
+<text x="64" y="214">Please send this month's payment</text>
+<text x="64" y="240">to the new account.</text>
+</g>
+<rect x="52" y="286" width="140" height="48" rx="6" fill="#171717"/>
+<text x="122" y="316" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Verify</text>
+<g fill="#910000"><circle cx="436" cy="72" r="15"/><circle cx="436" cy="114" r="15"/><circle cx="436" cy="208" r="15"/><circle cx="436" cy="310" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="436" y="78">1</text><text x="436" y="120">2</text><text x="436" y="214">3</text><text x="436" y="316">4</text></g>
+<g stroke="#910000" stroke-width="2"><path d="M316 79 H421 M228 114 H421 M388 208 H421 M192 310 H421"/></g>
+<g fill="#910000"><circle cx="520" cy="60" r="15"/><circle cx="520" cy="146" r="15"/><circle cx="520" cy="232" r="15"/><circle cx="520" cy="318" r="15"/></g>
+<g font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle"><text x="520" y="66">1</text><text x="520" y="152">2</text><text x="520" y="238">3</text><text x="520" y="324">4</text></g>
+<g font-size="16" font-weight="bold" fill="#171717">
+<text x="546" y="58">A sender address</text><text x="546" y="78">that is slightly off</text>
+<text x="546" y="152">Urgency or threats</text>
+<text x="546" y="230">A change in</text><text x="546" y="250">payment details</text>
+<text x="546" y="316">A link you were</text><text x="546" y="336">not expecting</text>
+</g>
+<rect x="32" y="388" width="736" height="40" rx="8" fill="#f6e9e9" stroke="#910000"/>
+<text x="400" y="414" font-size="16" font-weight="bold" fill="#910000" text-anchor="middle">One signal alone is enough reason to verify before acting.</text>
+</svg>

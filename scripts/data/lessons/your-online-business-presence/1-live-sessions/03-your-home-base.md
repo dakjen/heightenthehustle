@@ -52,6 +52,8 @@ Here is how a finished page reads for a fictional business.
 
 That is the whole page. A parent can read it in thirty seconds and knows exactly what to do next. Notice that it also answers the questions Denise would otherwise field by phone: ages, hours, meals, group size, and when visits happen. A good page cuts down the calls that go nowhere.
 
+![A one-page home base for Little Sprouts Home Daycare with four numbered parts: who you are, what you do, how to book, and the reviews link.](/lessons/your-online-business-presence--u1-03-your-home-base.svg)
+
 ### Pick your tool
 
 Three free options are named for this session. All of them work from a phone and none needs a designer.

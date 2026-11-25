@@ -63,6 +63,8 @@ To rebuild it, find the ideas. There are three: who they are, what they do, and 
 
 Then apply the rules. One font. Dark text on a white background. Titles in one accent color. Body text left-aligned at 28 points.
 
+![One crowded slide with a long title and a block of small centered text, beside the same content rebuilt as three clear slides with short titles and short lines.](/lessons/microsoft-essentials--u3-02-clean-readable-slides.svg)
+
 ### In Google Slides
 
 To change the theme, go to **Slide > Change theme** and choose a plain one from the panel. Guide lines appear when you drag objects, the same as in PowerPoint. To align several objects, select them, then go to **Arrange > Align**. Font and size controls are in the toolbar above the slide.

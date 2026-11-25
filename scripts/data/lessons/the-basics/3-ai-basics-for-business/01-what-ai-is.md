@@ -41,6 +41,8 @@ In practice that splits into two rules.
 - For words and ideas, lean on it heavily.
 - For facts that matter, such as tax rules, license requirements, legal questions, prices and deadlines, check a real source before you rely on the answer.
 
+![Two columns showing the four jobs to hand to AI, drafting, rewriting, summarizing and brainstorming, beside the facts to check at a real source, tax rules, license requirements, legal questions, prices and deadlines.](/lessons/the-basics--u3-01-what-ai-is.svg)
+
 The next lessons in this unit cover how to ask well and how to keep customer information protected.
 
 ### Set up the account

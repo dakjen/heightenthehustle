@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>Spreadsheet grid with Date, Item, Category and Amount headings, three purchases, and cell B3 highlighted</title>
+<rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+<text x="40" y="56" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#171717" text-anchor="start" font-weight="bold">One purchase per row, one job per column</text>
+<rect x="40" y="84" width="650" height="32" fill="#f6f6f6"/>
+<rect x="40" y="84" width="40" height="192" fill="#f6f6f6"/>
+<text x="140.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">A</text>
+<rect x="200" y="84" width="250" height="32" fill="#f6e9e9"/>
+<text x="325.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#910000" text-anchor="middle" font-weight="bold">B</text>
+<text x="515.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">C</text>
+<text x="635.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">D</text>
+<text x="60.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">1</text>
+<text x="88" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start" font-weight="bold">Date</text>
+<text x="208" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start" font-weight="bold">Item</text>
+<text x="458" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start" font-weight="bold">Category</text>
+<text x="682" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="end" font-weight="bold">Amount</text>
+<text x="60.0" y="181.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">2</text>
+<text x="88" y="181.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">3/2/2026</text>
+<text x="208" y="181.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Cleaning spray and cloths</text>
+<text x="458" y="181.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Supplies</text>
+<text x="682" y="181.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="end">64.50</text>
+<rect x="40" y="196" width="40" height="40" fill="#f6e9e9"/>
+<text x="60.0" y="221.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#910000" text-anchor="middle" font-weight="bold">3</text>
+<text x="88" y="221.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">3/5/2026</text>
+<rect x="200" y="196" width="250" height="40" fill="#f6e9e9"/>
+<text x="208" y="221.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Gas</text>
+<text x="458" y="221.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Travel</text>
+<text x="682" y="221.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="end">40.00</text>
+<text x="60.0" y="261.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="middle">4</text>
+<text x="88" y="261.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">3/9/2026</text>
+<text x="208" y="261.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Business cards</text>
+<text x="458" y="261.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="start">Marketing</text>
+<text x="682" y="261.0" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="end">35.00</text>
+<line x1="40" y1="116" x2="690" y2="116" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="156" x2="690" y2="156" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="196" x2="690" y2="196" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="236" x2="690" y2="236" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="276" x2="690" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="84" x2="690" y2="84" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="40" y1="84" x2="40" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="80" y1="84" x2="80" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="200" y1="84" x2="200" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="450" y1="84" x2="450" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="580" y1="84" x2="580" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<line x1="690" y1="84" x2="690" y2="276" stroke="#d4d4d4" stroke-width="1"/>
+<rect x="200" y="196" width="250" height="40" fill="none" stroke="#910000" stroke-width="2"/>
+<line x1="325" y1="276" x2="325" y2="322" stroke="#910000" stroke-width="1.5"/>
+<path d="M319 286 L325 276 L331 286" fill="none" stroke="#910000" stroke-width="1.5"/>
+<text x="325" y="350" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#910000" text-anchor="middle" font-weight="bold">Cell B3</text>
+<text x="325" y="376" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#4b4b4b" text-anchor="middle">column B, row 3</text>
+<text x="40" y="420" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b" text-anchor="start">Dates with slashes. Amounts as plain numbers.</text>
+</svg>

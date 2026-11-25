@@ -26,6 +26,8 @@ A passphrase is several unrelated words strung together, four or five of them. I
 
 An example of the pattern, for illustration only: **copper-lantern-seventeen-walrus-picnic**. Never use an example you saw in a lesson as a real password.
 
+![The example passphrase shown as five unrelated words joined by hyphens, with notes on what makes a passphrase strong.](/lessons/the-basics--u4-01-passwords-and-two-step-verification.svg)
+
 ### Let a password manager carry the load
 
 Nobody can remember a different long password for thirty accounts. A password manager stores all of them in a locked vault. You remember one strong passphrase, called the main or master password, and the manager remembers everything else. It also creates long random passwords for you and fills them in when you sign in.

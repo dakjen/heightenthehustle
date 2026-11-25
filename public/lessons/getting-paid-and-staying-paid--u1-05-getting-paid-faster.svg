@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>The follow-up ladder: friendly nudge at 3 days past due, direct check-in at 2 weeks, firm final notice at 30 days</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+    <text x="32" y="46" font-size="20" font-weight="bold">The follow-up ladder, counted from the due date</text>
+
+    <rect x="32" y="290" width="184" height="60" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="216" y="230" width="184" height="120" fill="#f6e9e9" stroke="#d4d4d4"/>
+    <rect x="400" y="170" width="184" height="180" fill="#f6e9e9" stroke="#d4d4d4"/>
+    <rect x="584" y="110" width="184" height="240" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <line x1="32" y1="350" x2="768" y2="350" stroke="#171717" stroke-width="2"/>
+
+    <text x="48" y="316" font-size="16" font-weight="bold">Due date</text>
+    <text x="48" y="338" fill="#4b4b4b">Invoice is due</text>
+
+    <text x="232" y="258" font-size="16" font-weight="bold" fill="#910000">3 days past due</text>
+    <text x="232" y="282">Friendly nudge</text>
+
+    <text x="416" y="198" font-size="16" font-weight="bold" fill="#910000">2 weeks past due</text>
+    <text x="416" y="222">Direct check-in</text>
+
+    <text x="600" y="138" font-size="16" font-weight="bold" fill="#910000">30 days past due</text>
+    <text x="600" y="162">Firm final notice</text>
+
+    <text x="32" y="388" fill="#4b4b4b">Every message states the invoice number, the amount and how to pay.</text>
+    <text x="32" y="414" font-weight="bold" fill="#910000">Polite and relentless gets paid.</text>
+  </g>
+</svg>

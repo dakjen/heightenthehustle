@@ -56,6 +56,8 @@ Typing a full web address into the address bar takes you straight to that site. 
 - Look at the address shown under the result's title. Government offices in the United States generally use addresses ending in .gov.
 - If a site charges a fee to file something a government office handles directly, stop and check the address again.
 
+![Two search results marked up: the top one carries a Sponsored label, and the one below shows an address ending in .gov](/lessons/the-basics--04-getting-connected-and-navigating-the-internet.svg)
+
 ### Download a form and file it
 
 Many offices post forms as PDF files. Click the link or the download button, usually marked with a downward arrow. The browser shows the download in a small panel, and the file lands in your Downloads folder. Rename it and move it to your business folder, as you did in the last lesson.

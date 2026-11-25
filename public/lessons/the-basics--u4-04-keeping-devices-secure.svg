@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>A locked device in the centre with the four settings that protect it: automatic updates, screen lock, find my device and a tested backup</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<g stroke="#d4d4d4" stroke-width="2"><path d="M300 110 H345 M300 340 H345 M500 110 H455 M500 340 H455"/></g>
+<rect x="345" y="85" width="110" height="280" rx="16" fill="#f6f6f6" stroke="#171717" stroke-width="2"/>
+<rect x="355" y="105" width="90" height="230" rx="4" fill="#ffffff" stroke="#d4d4d4"/>
+<circle cx="400" cy="350" r="6" fill="none" stroke="#171717" stroke-width="2"/>
+<path d="M386 212 v-14 a14 14 0 0 1 28 0 v14" fill="none" stroke="#910000" stroke-width="5"/>
+<rect x="376" y="210" width="48" height="38" rx="5" fill="#910000"/>
+<g fill="#f6f6f6" stroke="#d4d4d4">
+<rect x="32" y="50" width="268" height="120" rx="10"/><rect x="32" y="280" width="268" height="120" rx="10"/><rect x="500" y="50" width="268" height="120" rx="10"/><rect x="500" y="280" width="268" height="120" rx="10"/>
+</g>
+<g font-size="18" font-weight="bold" fill="#171717">
+<text x="52" y="86">Automatic updates</text><text x="52" y="316">Find my device</text><text x="520" y="86">Screen lock</text><text x="520" y="316">Tested backup</text>
+</g>
+<g font-size="14" fill="#4b4b4b">
+<text x="52" y="116">Operating system, apps</text><text x="52" y="138">and browser</text>
+<text x="52" y="346">Locate, lock or erase a lost</text><text x="52" y="368">device from another device</text>
+<text x="520" y="116">PIN of at least six digits,</text><text x="520" y="138">locks by itself after a short time</text>
+<text x="520" y="346">Cloud backup or external drive,</text><text x="520" y="368">one file opened to confirm</text>
+</g>
+<text x="400" y="426" font-size="16" font-weight="bold" fill="#910000" text-anchor="middle">Settings you configure once</text>
+</svg>

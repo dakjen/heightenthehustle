@@ -86,6 +86,8 @@ Here is what Dee saw at the end of the month.
 
 $3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. Now Dee can ask a sharper question: how many hours does each line take her? That is a decision she could not start to make when everything sat in one line.
 
+![Dee's four products and services with prices, each pointing to its income account: Catering Income $3,400 and Meal Prep Income $1,800, for $5,200 total income.](/lessons/getting-paid-and-staying-paid--u2-02-categories-services-and-business-lines.svg)
+
 ## Do this now
 
 1. Open the Chart of Accounts and count your expense categories.

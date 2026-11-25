@@ -62,6 +62,8 @@ Work through these in order.
 4. Check for an update to the device's operating system, the main software that runs it (Windows or macOS on a computer, iOS or Android on a phone). Look in **Settings** under **System**, **General**, or **Software update**.
 5. If it is still failing, write your problem report and call support.
 
+![The five-step fix sequence for software problems, from closing the app to writing a problem report and calling support](/lessons/the-basics--01-understanding-your-computer-and-phone.svg)
+
 ### Restart without losing work
 
 A restart clears out whatever was stuck and starts everything fresh, which is why support asks about it before anything else. Do it properly and you lose nothing.
@@ -152,6 +154,8 @@ Work through these in order.
 3. Restart the device (steps below).
 4. Check for an update to the device's operating system, the main software that runs it (Windows or macOS on a computer, iOS or Android on a phone). Look in **Settings** under **System**, **General**, or **Software update**.
 5. If it is still failing, write your problem report and call support.
+
+![The five-step fix sequence for software problems, from closing the app to writing a problem report and calling support](/lessons/the-basics--01-understanding-your-computer-and-phone.svg)
 
 ### Restart without losing work
 
@@ -273,6 +277,8 @@ You do not have to close one app to use another. Several can stay open at once, 
 
 This is how a customer's address gets from an email into an invoice with no retyping: select it in the email, copy, switch apps, click in the address field, paste. Four moves, and the address is exact.
 
+![A customer's address moving from an email into an invoice in four moves: select, copy, switch apps, paste](/lessons/the-basics--02-mouse-keyboard-and-shortcuts.svg)
+
 ## Try it
 
 1. Open a notes or word processing app and start a blank document.
@@ -368,6 +374,8 @@ You do not have to close one app to use another. Several can stay open at once, 
 
 This is how a customer's address gets from an email into an invoice with no retyping: select it in the email, copy, switch apps, click in the address field, paste. Four moves, and the address is exact.
 
+![A customer's address moving from an email into an invoice in four moves: select, copy, switch apps, paste](/lessons/the-basics--02-mouse-keyboard-and-shortcuts.svg)
+
 ## Try it
 
 1. Open a notes or word processing app and start a blank document.
@@ -426,6 +434,8 @@ Inside Documents, create one folder named for your business, and inside that, th
 ### Name files so you never have to open them to check
 
 A file name should tell you what is inside. Compare "Document1" with "2026-03 Invoice 004 - Johnson." The second one tells you when, what, and who. The rule that works for almost everything is **date, then what it is, then who it is for**. Writing the date as year first, then month, keeps your files in time order when the list is sorted by name.
+
+![The file name 2026-03 Invoice 004 - Johnson split into date, what it is, and who it is for, above two files sorted in time order](/lessons/the-basics--03-files-folders-and-storage.svg)
 
 Keep names short and plain. Use letters, numbers, spaces, and dashes. Avoid symbols such as slashes, question marks, and colons, because some devices will not accept them and some upload systems reject them. To rename a file on a computer, right-click it and choose **Rename**. On a phone, press and hold the file and look for Rename in the menu.
 
@@ -514,6 +524,8 @@ Inside Documents, create one folder named for your business, and inside that, th
 ### Name files so you never have to open them to check
 
 A file name should tell you what is inside. Compare "Document1" with "2026-03 Invoice 004 - Johnson." The second one tells you when, what, and who. The rule that works for almost everything is **date, then what it is, then who it is for**. Writing the date as year first, then month, keeps your files in time order when the list is sorted by name.
+
+![The file name 2026-03 Invoice 004 - Johnson split into date, what it is, and who it is for, above two files sorted in time order](/lessons/the-basics--03-files-folders-and-storage.svg)
 
 Keep names short and plain. Use letters, numbers, spaces, and dashes. Avoid symbols such as slashes, question marks, and colons, because some devices will not accept them and some upload systems reject them. To rename a file on a computer, right-click it and choose **Rename**. On a phone, press and hold the file and look for Rename in the menu.
 
@@ -632,6 +644,8 @@ Typing a full web address into the address bar takes you straight to that site. 
 - Look at the address shown under the result's title. Government offices in the United States generally use addresses ending in .gov.
 - If a site charges a fee to file something a government office handles directly, stop and check the address again.
 
+![Two search results marked up: the top one carries a Sponsored label, and the one below shows an address ending in .gov](/lessons/the-basics--04-getting-connected-and-navigating-the-internet.svg)
+
 ### Download a form and file it
 
 Many offices post forms as PDF files. Click the link or the download button, usually marked with a downward arrow. The browser shows the download in a small panel, and the file lands in your Downloads folder. Rename it and move it to your business folder, as you did in the last lesson.
@@ -722,6 +736,8 @@ Typing a full web address into the address bar takes you straight to that site. 
 - Look at the address shown under the result's title. Government offices in the United States generally use addresses ending in .gov.
 - If a site charges a fee to file something a government office handles directly, stop and check the address again.
 
+![Two search results marked up: the top one carries a Sponsored label, and the one below shows an address ending in .gov](/lessons/the-basics--04-getting-connected-and-navigating-the-internet.svg)
+
 ### Download a form and file it
 
 Many offices post forms as PDF files. Click the link or the download button, usually marked with a downward arrow. The browser shows the download in a small panel, and the file lands in your Downloads folder. Rename it and move it to your business folder, as you did in the last lesson.
@@ -795,6 +811,8 @@ You will meet the same handful of field types on every application. Each has one
 - **Checkboxes.** Small squares. You can check as many as apply, so read the whole list.
 - **Date picker.** A small calendar that opens when you click a date field.
 - **Upload button.** A button that says something like **Choose file**, **Browse**, **Attach**, or **Upload**.
+
+![A generic application form with each field type labelled: text box, dropdown menu, radio buttons, checkboxes, date picker, upload button, and the final Submit button](/lessons/the-basics--05-online-forms-and-submitting-documents.svg)
 
 Type answers exactly the way the form asks. If a phone field shows an example with dashes, use dashes. If it asks for your legal business name, type it the way it appears on your registration, not the name on your sign. A mismatch between the form and your registration is a common reason an application gets sent back.
 
@@ -891,6 +909,8 @@ You will meet the same handful of field types on every application. Each has one
 - **Checkboxes.** Small squares. You can check as many as apply, so read the whole list.
 - **Date picker.** A small calendar that opens when you click a date field.
 - **Upload button.** A button that says something like **Choose file**, **Browse**, **Attach**, or **Upload**.
+
+![A generic application form with each field type labelled: text box, dropdown menu, radio buttons, checkboxes, date picker, upload button, and the final Submit button](/lessons/the-basics--05-online-forms-and-submitting-documents.svg)
 
 Type answers exactly the way the form asks. If a phone field shows an example with dashes, use dashes. If it asks for your legal business name, type it the way it appears on your registration, not the name on your sign. A mismatch between the form and your registration is a common reason an application gets sent back.
 
@@ -999,6 +1019,8 @@ If your exact business name is taken, do not reach for numbers. Add a short, mea
 
 With 2-step verification, signing in takes two things: your password, and a second proof that it is really you, usually a code or a prompt sent to your phone. If someone steals or guesses your password, they still cannot get in without your phone. For a business, this matters a great deal. Your email is the key to almost everything else, because the "forgot my password" links for your bank, your payment app, and your social media all go to your inbox. Whoever controls the inbox can reset the rest.
 
+![With 2-step verification, your password plus a code or prompt on your phone signs you in, while a stolen password alone cannot get in](/lessons/the-basics--01-set-up-gmail.svg)
+
 To turn it on, open your Google Account settings (click your profile circle in the top corner, then "Manage your Google Account"), find the Security section, and look for 2-Step Verification. Follow the prompts to connect your phone.
 
 Recovery info is a phone number and a second email address that Google can use to get you back in if you forget your password or get locked out. It is in the same Security section. Add both. Use your personal email as the recovery email. Check this info once a year, and update it the same day you change your phone number.
@@ -1097,6 +1119,8 @@ If your exact business name is taken, do not reach for numbers. Add a short, mea
 ### Lock the door: 2-step verification and recovery info
 
 With 2-step verification, signing in takes two things: your password, and a second proof that it is really you, usually a code or a prompt sent to your phone. If someone steals or guesses your password, they still cannot get in without your phone. For a business, this matters a great deal. Your email is the key to almost everything else, because the "forgot my password" links for your bank, your payment app, and your social media all go to your inbox. Whoever controls the inbox can reset the rest.
+
+![With 2-step verification, your password plus a code or prompt on your phone signs you in, while a stolen password alone cannot get in](/lessons/the-basics--01-set-up-gmail.svg)
 
 To turn it on, open your Google Account settings (click your profile circle in the top corner, then "Manage your Google Account"), find the Security section, and look for 2-Step Verification. Follow the prompts to connect your phone.
 
@@ -1206,6 +1230,9 @@ The reader does not know who this is, what it is about, or what to do. Here is t
 > (410) 555-0142
 
 The subject names the topic. The price and the offer are in the opening two lines. The last paragraph tells her exactly what to do next. Before you send any email, read it once out loud and check the name, the numbers, and the date.
+
+![The cleaning quote email to Ms. Reed with its three parts numbered: the subject line, the point in the opening two lines, and the next step at the end](/lessons/the-basics--02-send-and-organize-email.svg)
+
 ### Three tools for a clear inbox
 
 Your inbox should hold only what still needs something from you. Three Gmail tools make that possible.
@@ -1317,6 +1344,9 @@ The reader does not know who this is, what it is about, or what to do. Here is t
 > (410) 555-0142
 
 The subject names the topic. The price and the offer are in the opening two lines. The last paragraph tells her exactly what to do next. Before you send any email, read it once out loud and check the name, the numbers, and the date.
+
+![The cleaning quote email to Ms. Reed with its three parts numbered: the subject line, the point in the opening two lines, and the next step at the end](/lessons/the-basics--02-send-and-organize-email.svg)
+
 ### Three tools for a clear inbox
 
 Your inbox should hold only what still needs something from you. Three Gmail tools make that possible.
@@ -1408,6 +1438,8 @@ Johnson Cleaning Co
 ```
 
 The numbers in front keep the drawers in the same order every time, so your eyes always know where to look. Here is what goes in each one.
+
+![Folder tree for the master folder Johnson Cleaning Co with five numbered drawers, client folders inside 01 Clients and year folders inside 02 Money](/lessons/the-basics--03-build-your-drive-filing-system.svg)
 
 - **01 Clients.** One folder per client. Their quotes, agreements, photos of the job, and anything they send you.
 - **02 Money.** Invoices, receipts, bank statements, and taxes, with a folder for each year. At tax time, you hand over one year's folder.
@@ -1519,6 +1551,8 @@ Johnson Cleaning Co
 
 The numbers in front keep the drawers in the same order every time, so your eyes always know where to look. Here is what goes in each one.
 
+![Folder tree for the master folder Johnson Cleaning Co with five numbered drawers, client folders inside 01 Clients and year folders inside 02 Money](/lessons/the-basics--03-build-your-drive-filing-system.svg)
+
 - **01 Clients.** One folder per client. Their quotes, agreements, photos of the job, and anything they send you.
 - **02 Money.** Invoices, receipts, bank statements, and taxes, with a folder for each year. At tax time, you hand over one year's folder.
 - **03 Legal & Admin.** Your business license, registration papers, tax ID letter, insurance, permits, and contracts with vendors.
@@ -1629,6 +1663,8 @@ In practice that splits into two rules.
 - For words and ideas, lean on it heavily.
 - For facts that matter, such as tax rules, license requirements, legal questions, prices and deadlines, check a real source before you rely on the answer.
 
+![Two columns showing the four jobs to hand to AI, drafting, rewriting, summarizing and brainstorming, beside the facts to check at a real source, tax rules, license requirements, legal questions, prices and deadlines.](/lessons/the-basics--u3-01-what-ai-is.svg)
+
 The next lessons in this unit cover how to ask well and how to keep customer information protected.
 
 ### Set up the account
@@ -1720,6 +1756,8 @@ In practice that splits into two rules.
 - For words and ideas, lean on it heavily.
 - For facts that matter, such as tax rules, license requirements, legal questions, prices and deadlines, check a real source before you rely on the answer.
 
+![Two columns showing the four jobs to hand to AI, drafting, rewriting, summarizing and brainstorming, beside the facts to check at a real source, tax rules, license requirements, legal questions, prices and deadlines.](/lessons/the-basics--u3-01-what-ai-is.svg)
+
 The next lessons in this unit cover how to ask well and how to keep customer information protected.
 
 ### Set up the account
@@ -1803,6 +1841,8 @@ Every strong prompt has three parts.
 Put together, the prompt reads:
 
 > I run a cleaning business in Baltimore. Write a short, friendly text offering past clients 15% off a spring deep-clean. Under 50 words, three options.
+
+![The cleaning business prompt split into its three parts, context, a specific task and a format.](/lessons/the-basics--u3-02-how-to-ask-for-what-you-need.svg)
 
 Compare that to the weak version: "Write a text about a sale." The weak prompt gets you a message with a made-up discount, no mention of cleaning, and a pile of exclamation points. The strong prompt gets you three short options that name your real offer, something like: "Hi! It's Tanya from Johnson Cleaning. Spring is here, and past clients get 15% off a deep-clean this month. Want me to save you a spot?" A good answer uses your details, stays inside your word limit, and sounds like something a real person would send.
 
@@ -1910,6 +1950,8 @@ Put together, the prompt reads:
 
 > I run a cleaning business in Baltimore. Write a short, friendly text offering past clients 15% off a spring deep-clean. Under 50 words, three options.
 
+![The cleaning business prompt split into its three parts, context, a specific task and a format.](/lessons/the-basics--u3-02-how-to-ask-for-what-you-need.svg)
+
 Compare that to the weak version: "Write a text about a sale." The weak prompt gets you a message with a made-up discount, no mention of cleaning, and a pile of exclamation points. The strong prompt gets you three short options that name your real offer, something like: "Hi! It's Tanya from Johnson Cleaning. Spring is here, and past clients get 15% off a deep-clean this month. Want me to save you a spot?" A good answer uses your details, stays inside your word limit, and sounds like something a real person would send.
 
 ### The same three parts in other trades
@@ -2001,6 +2043,8 @@ A tool is only worth your time if it takes work off your plate. AI can do a thou
 
 The slowest part of most writing is the blank page. Once something is on the screen, fixing it goes quickly. That is where AI earns its keep. AI does the blank-page 80%, the structure and the opening set of words, in seconds. You do the final 20%, which is where your facts, your judgment and your voice live. That 20% is what makes the work true and makes it yours, so it cannot be skipped. Hold that split in mind for every use below.
 
+![A bar split between AI doing the blank-page 80% and you doing the final 20%, above the four uses covered in this lesson.](/lessons/the-basics--u3-03-using-it-in-your-business.svg)
+
 ### Use 1: Drafts of writing you already have to do
 
 Start with the writing already on your list, including the writing you keep putting off. Client emails, service descriptions and social posts are the big three. You are not adding work. You are speeding up work that is already there.
@@ -2086,6 +2130,8 @@ A tool is only worth your time if it takes work off your plate. AI can do a thou
 ### The 80/20 split
 
 The slowest part of most writing is the blank page. Once something is on the screen, fixing it goes quickly. That is where AI earns its keep. AI does the blank-page 80%, the structure and the opening set of words, in seconds. You do the final 20%, which is where your facts, your judgment and your voice live. That 20% is what makes the work true and makes it yours, so it cannot be skipped. Hold that split in mind for every use below.
+
+![A bar split between AI doing the blank-page 80% and you doing the final 20%, above the four uses covered in this lesson.](/lessons/the-basics--u3-03-using-it-in-your-business.svg)
 
 ### Use 1: Drafts of writing you already have to do
 
@@ -2189,6 +2235,8 @@ Here is the safe version:
 
 The draft is the same quality. Then you fill in the real name and amount yourself, outside the AI tool.
 
+![An unsafe prompt with the customer's name, address, phone number and card marked, above the safe version that uses NAME and AMOUNT placeholders.](/lessons/the-basics--u3-04-using-it-safely.svg)
+
 ### Rule 2: Verify anything that matters against a real source
 
 AI can be confidently wrong. It can state a wrong tax deadline, a license rule from a different state, or a statistic it made up, and it sounds as sure as when it is right. So any answer that affects your money, your legal standing or your customers gets checked against a real source before you act on it.
@@ -2290,6 +2338,8 @@ Here is the safe version:
 > Write a polite late payment reminder to a client named [NAME] who owes [AMOUNT] for a cleaning service from three weeks ago. Friendly but firm. Under 80 words.
 
 The draft is the same quality. Then you fill in the real name and amount yourself, outside the AI tool.
+
+![An unsafe prompt with the customer's name, address, phone number and card marked, above the safe version that uses NAME and AMOUNT placeholders.](/lessons/the-basics--u3-04-using-it-safely.svg)
 
 ### Rule 2: Verify anything that matters against a real source
 
@@ -2420,6 +2470,8 @@ A good answer is brief. A flyer is read in about three seconds, so if AI gives y
 3. **You for the facts and the voice.** Correct every name, price, date and promise. Rewrite until it sounds like you.
 4. **PDF out the door.** Download as PDF, name it by date, what it is and who it is for, and save it in your Drive.
 
+![Four steps in a row, template for the bones, AI for the draft, you for the facts and the voice, and PDF out the door.](/lessons/the-basics--u3-05-making-business-documents.svg)
+
 ### What to keep ready
 
 Owners who win walk-in opportunities have finished documents on hand before anyone asks. Keep the current PDF of your overview and service descriptions in one Drive folder you can reach from your phone, so you can send it while you are still standing in the office.
@@ -2517,6 +2569,8 @@ A good answer is brief. A flyer is read in about three seconds, so if AI gives y
 3. **You for the facts and the voice.** Correct every name, price, date and promise. Rewrite until it sounds like you.
 4. **PDF out the door.** Download as PDF, name it by date, what it is and who it is for, and save it in your Drive.
 
+![Four steps in a row, template for the bones, AI for the draft, you for the facts and the voice, and PDF out the door.](/lessons/the-basics--u3-05-making-business-documents.svg)
+
 ### What to keep ready
 
 Owners who win walk-in opportunities have finished documents on hand before anyone asks. Keep the current PDF of your overview and service descriptions in one Drive folder you can reach from your phone, so you can send it while you are still standing in the office.
@@ -2577,6 +2631,8 @@ Two things make a password strong. The first is **length**. Attackers use softwa
 A passphrase is several unrelated words strung together, four or five of them. It is long, which makes it strong, and it is made of real words, which makes it quicker to remember and type. Choose words that have nothing to do with each other or with you. Leave out anything a person could find out about you: names of family or pets, birthdays, your street, your business name, your team. Leave out famous quotes and song lines too, because guessing software includes those. If a site requires a number or symbol, add one between words.
 
 An example of the pattern, for illustration only: **copper-lantern-seventeen-walrus-picnic**. Never use an example you saw in a lesson as a real password.
+
+![The example passphrase shown as five unrelated words joined by hyphens, with notes on what makes a passphrase strong.](/lessons/the-basics--u4-01-passwords-and-two-step-verification.svg)
 
 ### Let a password manager carry the load
 
@@ -2678,6 +2734,8 @@ Two things make a password strong. The first is **length**. Attackers use softwa
 A passphrase is several unrelated words strung together, four or five of them. It is long, which makes it strong, and it is made of real words, which makes it quicker to remember and type. Choose words that have nothing to do with each other or with you. Leave out anything a person could find out about you: names of family or pets, birthdays, your street, your business name, your team. Leave out famous quotes and song lines too, because guessing software includes those. If a site requires a number or symbol, add one between words.
 
 An example of the pattern, for illustration only: **copper-lantern-seventeen-walrus-picnic**. Never use an example you saw in a lesson as a real password.
+
+![The example passphrase shown as five unrelated words joined by hyphens, with notes on what makes a passphrase strong.](/lessons/the-basics--u4-01-passwords-and-two-step-verification.svg)
 
 ### Let a password manager carry the load
 
@@ -2788,6 +2846,8 @@ The cover story changes. The signals stay the same.
 
 One signal alone is enough reason to verify before acting.
 
+![A fake vendor email with four fraud signals numbered, a sender address that is slightly off, urgency, a change in payment details and an unexpected link.](/lessons/the-basics--u4-02-recognizing-scams-and-phishing.svg)
+
 ### Five attempts you will see
 
 **Fake emails.** A message says there is a problem with your account and gives you a button to "verify" or "sign in." The button leads to a copy of the real sign-in page, and whatever is typed there goes to the sender. On a computer, rest your pointer on a link without clicking to see where it really goes.
@@ -2877,6 +2937,8 @@ The cover story changes. The signals stay the same.
 - **A request for secrecy.** "Do not tell anyone about this."
 
 One signal alone is enough reason to verify before acting.
+
+![A fake vendor email with four fraud signals numbered, a sender address that is slightly off, urgency, a change in payment details and an unexpected link.](/lessons/the-basics--u4-02-recognizing-scams-and-phishing.svg)
 
 ### Five attempts you will see
 
@@ -2972,6 +3034,8 @@ Send money only to people you know, and confirm the name, phone number, or usern
 ### Invoices and payment requests
 
 Fraudsters send bills for things you never ordered, and they also pose as your real vendors with "updated" bank details. Before paying any invoice, check three things. Did you order this? Does the amount match what you agreed to? Are the payment details the same as last time? If the invoice is unexpected, or the bank account, mailing address, or payment method has changed, call the vendor at a number you already have on file and confirm. If you have staff, set a standing rule that changes to payment details and payments above an amount you choose need a second person's approval.
+
+![A generic invoice with the three points to check before paying, whether you ordered it, whether the amount matches, and whether the payment details are the same as last time.](/lessons/the-basics--u4-03-protecting-your-money-online.svg)
 
 ### Gift cards and verification codes
 
@@ -3069,6 +3133,8 @@ Send money only to people you know, and confirm the name, phone number, or usern
 ### Invoices and payment requests
 
 Fraudsters send bills for things you never ordered, and they also pose as your real vendors with "updated" bank details. Before paying any invoice, check three things. Did you order this? Does the amount match what you agreed to? Are the payment details the same as last time? If the invoice is unexpected, or the bank account, mailing address, or payment method has changed, call the vendor at a number you already have on file and confirm. If you have staff, set a standing rule that changes to payment details and payments above an amount you choose need a second person's approval.
+
+![A generic invoice with the three points to check before paying, whether you ordered it, whether the amount matches, and whether the payment details are the same as last time.](/lessons/the-basics--u4-03-protecting-your-money-online.svg)
 
 ### Gift cards and verification codes
 
@@ -3176,6 +3242,8 @@ Devices get dropped, stolen, soaked and worn out. A second copy of your files, k
 
 Phones can back up automatically. Look in Settings under your account name, or under **Backup**, and switch it on. On a computer, the built-in backup tools are in Settings as well. Whatever method you use, test it once by opening a backed-up file from a different device. A backup you have never tested is only a hope.
 
+![A locked device surrounded by the four settings that protect it, automatic updates, screen lock, find my device and a tested backup.](/lessons/the-basics--u4-04-keeping-devices-secure.svg)
+
 ### Shared devices
 
 On any computer other people also use, such as one at a library, a hotel, or a family computer at home:
@@ -3275,6 +3343,8 @@ Devices get dropped, stolen, soaked and worn out. A second copy of your files, k
 - **External drive.** A storage device you plug into a computer to copy files onto, then store somewhere safe.
 
 Phones can back up automatically. Look in Settings under your account name, or under **Backup**, and switch it on. On a computer, the built-in backup tools are in Settings as well. Whatever method you use, test it once by opening a backed-up file from a different device. A backup you have never tested is only a hope.
+
+![A locked device surrounded by the four settings that protect it, automatic updates, screen lock, find my device and a tested backup.](/lessons/the-basics--u4-04-keeping-devices-secure.svg)
 
 ### Shared devices
 
@@ -3390,6 +3460,8 @@ Signs that someone else is in your account: posts or messages you did not send, 
 6. Delete posts and messages the intruder sent, and tell your customers what happened and what to ignore.
 7. If a card or bank account was linked, call your bank. Report the incident to the platform, and to the Federal Trade Commission if money was lost.
 
+![The seven account recovery steps as a flow, starting from whether you can still sign in and ending with calling your bank and reporting the incident.](/lessons/the-basics--u4-05-social-media-privacy-and-responding-to-incidents.svg)
+
 One caution: people who contact you offering to get your account back for a fee are running a second fraud, and so are most "recovery services" advertised in comment sections. Platforms do not charge to recover an account. Use only the platform's official help pages.
 
 ## Try it
@@ -3482,6 +3554,8 @@ Signs that someone else is in your account: posts or messages you did not send, 
 5. Check the account settings for anything the intruder changed: the recovery email and phone number, connected apps, page roles, and any payment or advertising details. Remove what you do not recognize.
 6. Delete posts and messages the intruder sent, and tell your customers what happened and what to ignore.
 7. If a card or bank account was linked, call your bank. Report the incident to the platform, and to the Federal Trade Commission if money was lost.
+
+![The seven account recovery steps as a flow, starting from whether you can still sign in and ending with calling your bank and reporting the incident.](/lessons/the-basics--u4-05-social-media-privacy-and-responding-to-incidents.svg)
 
 One caution: people who contact you offering to get your account back for a fee are running a second fraud, and so are most "recovery services" advertised in comment sections. Platforms do not charge to recover an account. Use only the platform's official help pages.
 
@@ -3584,6 +3658,8 @@ Spacing is the room between lines and paragraphs, and the rule is consistency: w
 3. Choose **1.15** for the line spacing.
 4. In the same menu, choose **Add Space After Paragraph** if it is offered, so each paragraph gets the same small gap.
 
+![One-page business profile with the business name in the Title style, three section labels in the Heading 1 style, Normal body text, even spacing, and a clear file name.](/lessons/microsoft-essentials--u1-01-getting-started.svg)
+
 ### A file name that works for you later
 
 Go to **File > Save As**. Pick a place you will remember, such as your Documents folder or a folder named for your business. Name the file for the business and the topic, like `Marisol-Detailing-About-Us`. Word adds `.docx` to the end, the file type for an editable Word document. After the first save, press **Ctrl + S** on Windows or **Cmd + S** on a Mac every few minutes to save your changes.
@@ -3678,6 +3754,8 @@ Spacing is the room between lines and paragraphs, and the rule is consistency: w
 3. Choose **1.15** for the line spacing.
 4. In the same menu, choose **Add Space After Paragraph** if it is offered, so each paragraph gets the same small gap.
 
+![One-page business profile with the business name in the Title style, three section labels in the Heading 1 style, Normal body text, even spacing, and a clear file name.](/lessons/microsoft-essentials--u1-01-getting-started.svg)
+
 ### A file name that works for you later
 
 Go to **File > Save As**. Pick a place you will remember, such as your Documents folder or a folder named for your business. Name the file for the business and the topic, like `Marisol-Detailing-About-Us`. Word adds `.docx` to the end, the file type for an editable Word document. After the first save, press **Ctrl + S** on Windows or **Cmd + S** on a Mac every few minutes to save your changes.
@@ -3767,6 +3845,8 @@ Work from the top of the page to the bottom so nothing gets missed.
 4. The greeting, such as "Dear Ms. Alvarez,".
 5. The body, two to four short paragraphs.
 6. The closing, your name, and your title.
+
+![Business letter on letterhead with six numbered parts: letterhead, date, recipient, greeting, body, and closing.](/lessons/microsoft-essentials--u1-02-start-from-a-template.svg)
 
 A business letter body follows a dependable pattern. The opening paragraph says why you are writing. The middle gives the details, such as dates, amounts, and what you will provide. The last paragraph says what happens next and how to reach you. For a confirmation or a quote, put every number in the middle paragraph: the date of service, the headcount or quantity, the total, the deposit, and the date the deposit is due.
 
@@ -3869,6 +3949,8 @@ Work from the top of the page to the bottom so nothing gets missed.
 5. The body, two to four short paragraphs.
 6. The closing, your name, and your title.
 
+![Business letter on letterhead with six numbered parts: letterhead, date, recipient, greeting, body, and closing.](/lessons/microsoft-essentials--u1-02-start-from-a-template.svg)
+
 A business letter body follows a dependable pattern. The opening paragraph says why you are writing. The middle gives the details, such as dates, amounts, and what you will provide. The last paragraph says what happens next and how to reach you. For a confirmation or a quote, put every number in the middle paragraph: the date of service, the headcount or quantity, the total, the deposit, and the date the deposit is due.
 
 If you paste words from somewhere else and the font suddenly changes, undo it with **Ctrl + Z** on Windows or **Cmd + Z** on a Mac. Then paste again, click the small paste options button that appears, and choose **Keep Text Only**. That makes the pasted words match the template.
@@ -3953,6 +4035,8 @@ Put labels in row 1 so every column has one job. For an expense list, use four h
 | 3/9/2026 | Business cards | Marketing | 35.00 |
 
 Columns run up and down and carry a letter at the top: A, B, C. Rows run side to side and carry a number on the left: 1, 2, 3. Each box where they meet is a cell, and its address is the column letter plus the row number. The cell in column B, row 3 is **B3**. Click any cell and the Name Box, the small box above column A, shows its address. Addresses matter because in the formulas lesson you will use them to tell the spreadsheet which numbers to add.
+
+![Spreadsheet grid with Date, Item, Category and Amount headings in row 1, three purchases below, and cell B3 highlighted where column B meets row 3.](/lessons/microsoft-essentials--u2-01-your-first-spreadsheet.svg)
 
 ### Enter data so it can be added and sorted
 
@@ -4062,6 +4146,8 @@ Put labels in row 1 so every column has one job. For an expense list, use four h
 | 3/9/2026 | Business cards | Marketing | 35.00 |
 
 Columns run up and down and carry a letter at the top: A, B, C. Rows run side to side and carry a number on the left: 1, 2, 3. Each box where they meet is a cell, and its address is the column letter plus the row number. The cell in column B, row 3 is **B3**. Click any cell and the Name Box, the small box above column A, shows its address. Addresses matter because in the formulas lesson you will use them to tell the spreadsheet which numbers to add.
+
+![Spreadsheet grid with Date, Item, Category and Amount headings in row 1, three purchases below, and cell B3 highlighted where column B meets row 3.](/lessons/microsoft-essentials--u2-01-your-first-spreadsheet.svg)
 
 ### Enter data so it can be added and sorted
 
@@ -4206,6 +4292,8 @@ Filtering hides the rows you do not need right now. It does not delete anything.
 5. Click **OK**. Only the supplies rows show. The row numbers on the left turn blue and skip, which tells you rows are hidden.
 6. To see everything again, click the arrow and choose **Clear Filter From "Category"**.
 
+![Expense list of eight transactions sorted by date with the phone bill row still showing $55.00, and the same list filtered to the three Supplies rows with row numbers that skip.](/lessons/microsoft-essentials--u2-02-organizing-and-formatting.svg)
+
 While the filter is on, drag down the visible amounts and look at the status bar along the bottom edge of the Excel window. It shows the sum of the cells you selected. That is your category total, with no formula needed.
 
 ### In Google Sheets
@@ -4322,6 +4410,8 @@ Filtering hides the rows you do not need right now. It does not delete anything.
 5. Click **OK**. Only the supplies rows show. The row numbers on the left turn blue and skip, which tells you rows are hidden.
 6. To see everything again, click the arrow and choose **Clear Filter From "Category"**.
 
+![Expense list of eight transactions sorted by date with the phone bill row still showing $55.00, and the same list filtered to the three Supplies rows with row numbers that skip.](/lessons/microsoft-essentials--u2-02-organizing-and-formatting.svg)
+
 While the filter is on, drag down the visible amounts and look at the status bar along the bottom edge of the Excel window. It shows the sum of the cells you selected. That is your category total, with no formula needed.
 
 ### In Google Sheets
@@ -4429,6 +4519,8 @@ Subtraction uses the minus sign. If total sales are in B6 and total expenses are
 ### Multiplication: pricing an order
 
 Multiplication uses the asterisk, the star above the 8 on most keyboards. Say a customer orders 12 trays at $45 each. Put 12 in cell B9 and 45 in cell B10. The formula `=B9*B10` gives 540. If the customer changes the order to 15 trays, change B9 and the total updates to 675.
+
+![Spreadsheet grid of four weeks of sales and expenses with the SUM, AVERAGE, subtraction and multiplication formulas shown in the cells they belong in, and the answer for each.](/lessons/microsoft-essentials--u2-03-basic-formulas.svg)
 
 ### Four checks before you rely on an answer
 
@@ -4538,6 +4630,8 @@ Subtraction uses the minus sign. If total sales are in B6 and total expenses are
 ### Multiplication: pricing an order
 
 Multiplication uses the asterisk, the star above the 8 on most keyboards. Say a customer orders 12 trays at $45 each. Put 12 in cell B9 and 45 in cell B10. The formula `=B9*B10` gives 540. If the customer changes the order to 15 trays, change B9 and the total updates to 675.
+
+![Spreadsheet grid of four weeks of sales and expenses with the SUM, AVERAGE, subtraction and multiplication formulas shown in the cells they belong in, and the answer for each.](/lessons/microsoft-essentials--u2-03-basic-formulas.svg)
 
 ### Four checks before you rely on an answer
 
@@ -4667,6 +4761,8 @@ Look at column D for Sharp Lines Barbershop.
 
 Those numbers tell a story. Haircuts carried the month. Product sales were weak, and marketing was underspent, which may be connected. Supplies need a closer look. That is three decisions for next month from one small table.
 
+![Budget tracker grid with Planned, Actual and Difference columns, total income, total expenses and remaining balance rows, and the formulas behind the totals.](/lessons/microsoft-essentials--u2-04-monthly-budget-tracker.svg)
+
 ### Check the totals before you act on them
 
 1. Click each total and look at the formula bar. Make sure the range covers every row in its section and nothing else.
@@ -4790,6 +4886,8 @@ Look at column D for Sharp Lines Barbershop.
 
 Those numbers tell a story. Haircuts carried the month. Product sales were weak, and marketing was underspent, which may be connected. Supplies need a closer look. That is three decisions for next month from one small table.
 
+![Budget tracker grid with Planned, Actual and Difference columns, total income, total expenses and remaining balance rows, and the formulas behind the totals.](/lessons/microsoft-essentials--u2-04-monthly-budget-tracker.svg)
+
 ### Check the totals before you act on them
 
 1. Click each total and look at the formula bar. Make sure the range covers every row in its section and nothing else.
@@ -4862,6 +4960,8 @@ You will chart the actual expenses from your budget tracker. The category names 
 4. Click **Recommended Charts** and choose a column chart, or click the column chart button directly.
 5. Click the chart title and type a clear one, such as `March Expenses`.
 6. Drag the chart so it sits beside your numbers, not on top of them.
+
+![Cells A6 to A10 and C6 to C10 selected with the total row left out, beside a column chart titled March Expenses where Booth rent is the tallest bar.](/lessons/microsoft-essentials--u2-05-charts-sharing-records.svg)
 
 A chart that holds up in front of a lender has a title that says what it shows and when. Skip 3-D effects and extra colors. They make a chart harder to read, not clearer.
 
@@ -4971,6 +5071,8 @@ You will chart the actual expenses from your budget tracker. The category names 
 4. Click **Recommended Charts** and choose a column chart, or click the column chart button directly.
 5. Click the chart title and type a clear one, such as `March Expenses`.
 6. Drag the chart so it sits beside your numbers, not on top of them.
+
+![Cells A6 to A10 and C6 to C10 selected with the total row left out, beside a column chart titled March Expenses where Booth rent is the tallest bar.](/lessons/microsoft-essentials--u2-05-charts-sharing-records.svg)
 
 A chart that holds up in front of a lender has a title that says what it shows and when. Skip 3-D effects and extra colors. They make a chart harder to read, not clearer.
 
@@ -5087,6 +5189,8 @@ Each slide uses a layout, a ready-made arrangement of boxes. The boxes are calle
 
 The opening slide in a new deck uses the **Title Slide** layout, with one box for a title and one for a subtitle. The layout you will use most is **Title and Content**, which has a title at the top and a larger box below for bullets, a picture, or a chart. Other useful layouts are **Title Only**, **Two Content**, and **Blank**.
 
+![Three slide thumbnails: the first uses the Title Slide layout with a title and subtitle, and the next two use the Title and Content layout with a title on top and a content box below.](/lessons/microsoft-essentials--u3-01-getting-started-with-powerpoint.svg)
+
 To change the layout of a slide you already made:
 
 1. Click the slide in the thumbnail pane.
@@ -5200,6 +5304,8 @@ Open PowerPoint and choose **Blank Presentation**. Four areas do all the work.
 Each slide uses a layout, a ready-made arrangement of boxes. The boxes are called placeholders, and they say things like "Click to add title" and "Click to add text." Click inside one and type. The placeholder already has a font, a size, and a position, which is why slides built from layouts match each other with no extra effort.
 
 The opening slide in a new deck uses the **Title Slide** layout, with one box for a title and one for a subtitle. The layout you will use most is **Title and Content**, which has a title at the top and a larger box below for bullets, a picture, or a chart. Other useful layouts are **Title Only**, **Two Content**, and **Blank**.
+
+![Three slide thumbnails: the first uses the Title Slide layout with a title and subtitle, and the next two use the Title and Content layout with a title on top and a content box below.](/lessons/microsoft-essentials--u3-01-getting-started-with-powerpoint.svg)
 
 To change the layout of a slide you already made:
 
@@ -5343,6 +5449,8 @@ To rebuild it, find the ideas. There are three: who they are, what they do, and 
 
 Then apply the rules. One font. Dark text on a white background. Titles in one accent color. Body text left-aligned at 28 points.
 
+![One crowded slide with a long title and a block of small centered text, beside the same content rebuilt as three clear slides with short titles and short lines.](/lessons/microsoft-essentials--u3-02-clean-readable-slides.svg)
+
 ### In Google Slides
 
 To change the theme, go to **Slide > Change theme** and choose a plain one from the panel. Guide lines appear when you drag objects, the same as in PowerPoint. To align several objects, select them, then go to **Arrange > Align**. Font and size controls are in the toolbar above the slide.
@@ -5442,6 +5550,8 @@ To rebuild it, find the ideas. There are three: who they are, what they do, and 
 
 Then apply the rules. One font. Dark text on a white background. Titles in one accent color. Body text left-aligned at 28 points.
 
+![One crowded slide with a long title and a block of small centered text, beside the same content rebuilt as three clear slides with short titles and short lines.](/lessons/microsoft-essentials--u3-02-clean-readable-slides.svg)
+
 ### In Google Slides
 
 To change the theme, go to **Slide > Change theme** and choose a plain one from the panel. Guide lines appear when you drag objects, the same as in PowerPoint. To align several objects, select them, then go to **Arrange > Align**. Font and size controls are in the toolbar above the slide.
@@ -5508,6 +5618,8 @@ The picture lands on the slide with small circles around its border, called hand
 A stretched photo makes people look too wide or a logo too tall. It happens when you drag a handle on the side, top, or bottom, because those handles change only one direction.
 
 Always resize from a **corner handle**. A corner changes the width and height together, so the picture keeps its shape. Holding **Shift** while you drag a corner locks the shape for certain. If a picture gets stretched, undo with **Ctrl + Z** on Windows or **Cmd + Z** on a Mac.
+
+![A picture stretched out of shape by dragging a side handle, beside the same picture resized from a corner handle and keeping its shape.](/lessons/microsoft-essentials--u3-03-images-and-visuals.svg)
 
 Two more points. Do not enlarge a small picture to fill the slide, because it will turn blurry. Start with a large, sharp photo and make it smaller. And leave some room around the picture. It should not touch the edges of the slide or crowd the title.
 
@@ -5627,6 +5739,8 @@ The picture lands on the slide with small circles around its border, called hand
 A stretched photo makes people look too wide or a logo too tall. It happens when you drag a handle on the side, top, or bottom, because those handles change only one direction.
 
 Always resize from a **corner handle**. A corner changes the width and height together, so the picture keeps its shape. Holding **Shift** while you drag a corner locks the shape for certain. If a picture gets stretched, undo with **Ctrl + Z** on Windows or **Cmd + Z** on a Mac.
+
+![A picture stretched out of shape by dragging a side handle, beside the same picture resized from a corner handle and keeping its shape.](/lessons/microsoft-essentials--u3-03-images-and-visuals.svg)
 
 Two more points. Do not enlarge a small picture to fill the slide, because it will turn blurry. Start with a large, sharp photo and make it smaller. And leave some room around the picture. It should not touch the edges of the slide or crowd the title.
 
@@ -5750,6 +5864,8 @@ Here is the outline for Sharp Lines Barbershop, a fictional business. Notice how
 - **Slide 4, Title and Content layout.** Title: `Fresh Cuts Every Day`. Content: one photo of your work, or the expense chart with a title that states the point.
 - **Slide 5, Title and Content layout.** Title: `Come See Us`. Lines: `410 Maple Street`, `555-0142`, `Tuesday to Sunday, 9 a.m. to 7 p.m.`, `Book your first cut this week`.
 
+![Five slide thumbnails labelled title, overview, product or service, supporting visual, and closing, with every title in the same position.](/lessons/microsoft-essentials--u3-04-five-slide-presentation.svg)
+
 Write your outline on paper or in a blank document before you open PowerPoint. Deciding the words ahead of time keeps you from decorating slides that have nothing to say yet.
 
 ### Build it in order
@@ -5855,6 +5971,8 @@ Here is the outline for Sharp Lines Barbershop, a fictional business. Notice how
 - **Slide 3, Title and Content layout.** Title: `What We Offer`. Lines: `Adult and kids' cuts`, `Beard trims and line-ups`, `Walk-ins and appointments`, `Hair care products`.
 - **Slide 4, Title and Content layout.** Title: `Fresh Cuts Every Day`. Content: one photo of your work, or the expense chart with a title that states the point.
 - **Slide 5, Title and Content layout.** Title: `Come See Us`. Lines: `410 Maple Street`, `555-0142`, `Tuesday to Sunday, 9 a.m. to 7 p.m.`, `Book your first cut this week`.
+
+![Five slide thumbnails labelled title, overview, product or service, supporting visual, and closing, with every title in the same position.](/lessons/microsoft-essentials--u3-04-five-slide-presentation.svg)
 
 Write your outline on paper or in a blank document before you open PowerPoint. Deciding the words ahead of time keeps you from decorating slides that have nothing to say yet.
 
@@ -5967,6 +6085,8 @@ Presenter notes are reminders you type for yourself in the notes pane below each
 A good note for a slide titled `What We Offer` might read: "Mention the kids' Saturday special. Walk-ins welcome before noon. Products are by the register."
 
 To see your notes while you present, use **Presenter View**. On the **Slide Show** tab, check the box for **Use Presenter View**. When your laptop is connected to a projector or second screen, the audience sees only the slide. Your laptop shows the current slide, your notes, and the next slide. If you have only one screen, print your notes instead. Go to **File > Print** and choose **Notes Pages** in the layout options.
+
+![Two screens side by side: the audience screen shows only the slide, while the laptop shows the current slide, the next slide, and the presenter notes.](/lessons/microsoft-essentials--u3-05-presenting-and-sharing.svg)
 
 ### One quiet transition
 
@@ -6088,6 +6208,8 @@ Presenter notes are reminders you type for yourself in the notes pane below each
 A good note for a slide titled `What We Offer` might read: "Mention the kids' Saturday special. Walk-ins welcome before noon. Products are by the register."
 
 To see your notes while you present, use **Presenter View**. On the **Slide Show** tab, check the box for **Use Presenter View**. When your laptop is connected to a projector or second screen, the audience sees only the slide. Your laptop shows the current slide, your notes, and the next slide. If you have only one screen, print your notes instead. Go to **File > Print** and choose **Notes Pages** in the layout options.
+
+![Two screens side by side: the audience screen shows only the slide, while the laptop shows the current slide, the next slide, and the presenter notes.](/lessons/microsoft-essentials--u3-05-presenting-and-sharing.svg)
 
 ### One quiet transition
 
@@ -6251,6 +6373,8 @@ $3,800 - $1,450 = $2,350 profit.
 
 Tasha made $2,350, not $3,800. That is still a good month. Now she knows her real number, and she can see where the rest went. Helper pay, supplies, and gas were $1,150 of the $1,450. Those three rise with every job she adds, so they are the ones to watch when she quotes new work. She also found two subscriptions she no longer used.
 
+![Tasha's last 30 days as three boxes, $3,800 income minus $1,450 expenses equals $2,350 profit, above a bar splitting the $3,800 into what the business cost to run and what she kept.](/lessons/getting-paid-and-staying-paid--u1-01-income-vs-expenses.svg)
+
 ### The forgotten charges always surface
 
 When you scroll through 30 days line by line, small repeating charges show up. A free trial that turned into a monthly fee. An app you used once. A membership you meant to cancel. Each one looks small. Over a year they add up to real money. Tasha's two forgotten charges were $25 a month, which is $300 a year. You cannot cut what you cannot see.
@@ -6365,6 +6489,8 @@ Here is Tasha's real last 30 days, pulled from her bank app and her payment apps
 $3,800 - $1,450 = $2,350 profit.
 
 Tasha made $2,350, not $3,800. That is still a good month. Now she knows her real number, and she can see where the rest went. Helper pay, supplies, and gas were $1,150 of the $1,450. Those three rise with every job she adds, so they are the ones to watch when she quotes new work. She also found two subscriptions she no longer used.
+
+![Tasha's last 30 days as three boxes, $3,800 income minus $1,450 expenses equals $2,350 profit, above a bar splitting the $3,800 into what the business cost to run and what she kept.](/lessons/getting-paid-and-staying-paid--u1-01-income-vs-expenses.svg)
 
 ### The forgotten charges always surface
 
@@ -6484,6 +6610,8 @@ Marcus starts with $1,200 in his business account. Here is his first week.
 
 Check the math. Money in was $340 + $410 + $300 = $1,050. Money out was $250 + $62 + $75 = $387. Start with $1,200, add $1,050, subtract $387, and you get $1,863. The last running total matches. For the week, Marcus brought in $1,050, spent $387, and kept $663.
 
+![The six-column tracker filled in with Marcus's first week, from a $1,200 starting balance down to a final running total of $1,863.](/lessons/getting-paid-and-staying-paid--u1-02-simple-money-tracker.svg)
+
 The check that matters most is the last one: the final running total should equal the balance in the bank app. When it does, nothing is missing. When it does not, the gap is usually the exact amount of the row you skipped or mistyped, which tells you what to look for.
 
 ### The weekly slot is the real system
@@ -6596,6 +6724,8 @@ Marcus starts with $1,200 in his business account. Here is his first week.
 
 Check the math. Money in was $340 + $410 + $300 = $1,050. Money out was $250 + $62 + $75 = $387. Start with $1,200, add $1,050, subtract $387, and you get $1,863. The last running total matches. For the week, Marcus brought in $1,050, spent $387, and kept $663.
 
+![The six-column tracker filled in with Marcus's first week, from a $1,200 starting balance down to a final running total of $1,863.](/lessons/getting-paid-and-staying-paid--u1-02-simple-money-tracker.svg)
+
 The check that matters most is the last one: the final running total should equal the balance in the bank app. When it does, nothing is missing. When it does not, the gap is usually the exact amount of the row you skipped or mistyped, which tells you what to look for.
 
 ### The weekly slot is the real system
@@ -6692,6 +6822,8 @@ Here is an invoice from a fictional business, Bright Path Cleaning, to a fiction
 - **Note:** Thank you for your business. Questions about this invoice? Call or text 555-0142.
 
 Check the math before you send anything. $600 + $180 + $45 = $825. A wrong total is the fastest way to delay a payment, because the customer has to write back and wait for a corrected copy.
+
+![Sample invoice 1001 from Bright Path Cleaning to Oak Street Dental for $825, with the six elements numbered: both parties, invoice number, itemized work, total, due date and how to pay.](/lessons/getting-paid-and-staying-paid--u1-03-professional-invoice.svg)
 
 Notice who it is addressed to. "Attention Office Manager" sends the invoice to the person who pays the bills, not the person who booked the work. With a business customer, ask once who handles payables and whether they need anything on the invoice, such as a purchase order number.
 
@@ -6797,6 +6929,8 @@ Here is an invoice from a fictional business, Bright Path Cleaning, to a fiction
 - **Note:** Thank you for your business. Questions about this invoice? Call or text 555-0142.
 
 Check the math before you send anything. $600 + $180 + $45 = $825. A wrong total is the fastest way to delay a payment, because the customer has to write back and wait for a corrected copy.
+
+![Sample invoice 1001 from Bright Path Cleaning to Oak Street Dental for $825, with the six elements numbered: both parties, invoice number, itemized work, total, due date and how to pay.](/lessons/getting-paid-and-staying-paid--u1-03-professional-invoice.svg)
 
 Notice who it is addressed to. "Attention Office Manager" sends the invoice to the person who pays the bills, not the person who booked the work. With a business customer, ask once who handles payables and whether they need anything on the invoice, such as a purchase order number.
 
@@ -6923,6 +7057,8 @@ As you go, QuickBooks learns your patterns and its suggestions get better. Work 
 
 Create one invoice inside QuickBooks. Choose a customer, pick a service from your list, set a due date, and send it. A real invoice to a real customer is best. If you have none ready, send a small test invoice to yourself. When that invoice is paid and the deposit lands in your bank, QuickBooks can match the two. That is the full loop: invoice out, money in, books updated.
 
+![The five setup features in order, with connecting the bank marked as the one that matters most, followed by the full loop of invoice out, money in, books updated.](/lessons/getting-paid-and-staying-paid--u1-04-quickbooks-fast-version.svg)
+
 Matching matters. When a deposit is matched to its invoice, the invoice is marked paid and the income is counted once. Without the match, the same money can show up as an open invoice and as a separate deposit, and the books overstate what you earned.
 
 ### One system from here on
@@ -7036,6 +7172,8 @@ As you go, QuickBooks learns your patterns and its suggestions get better. Work 
 
 Create one invoice inside QuickBooks. Choose a customer, pick a service from your list, set a due date, and send it. A real invoice to a real customer is best. If you have none ready, send a small test invoice to yourself. When that invoice is paid and the deposit lands in your bank, QuickBooks can match the two. That is the full loop: invoice out, money in, books updated.
 
+![The five setup features in order, with connecting the bank marked as the one that matters most, followed by the full loop of invoice out, money in, books updated.](/lessons/getting-paid-and-staying-paid--u1-04-quickbooks-fast-version.svg)
+
 Matching matters. When a deposit is matched to its invoice, the invoice is marked paid and the income is counted once. Without the match, the same money can show up as an open invoice and as a separate deposit, and the books overstate what you earned.
 
 ### One system from here on
@@ -7139,6 +7277,8 @@ Even with good prevention, some invoices will go past due. Most late payers are 
 
 Notice what changes. The tone moves from friendly to direct to firm. It never becomes angry or insulting. Every message states the invoice number, the amount, and how to pay. Polite and relentless gets paid.
 
+![The follow-up ladder as rising steps from the due date: friendly nudge at 3 days past due, direct check-in at 2 weeks, firm final notice at 30 days.](/lessons/getting-paid-and-staying-paid--u1-05-getting-paid-faster.svg)
+
 ### Save them before you need them
 
 Follow-ups get put off when each one has to be written from scratch on a busy day. Write your three messages once, in your own voice, and save them as email templates. Then following up takes one minute. The day an invoice goes overdue, the message is ready and the decision is already made.
@@ -7239,6 +7379,8 @@ Even with good prevention, some invoices will go past due. Most late payers are 
 
 Notice what changes. The tone moves from friendly to direct to firm. It never becomes angry or insulting. Every message states the invoice number, the amount, and how to pay. Polite and relentless gets paid.
 
+![The follow-up ladder as rising steps from the due date: friendly nudge at 3 days past due, direct check-in at 2 weeks, firm final notice at 30 days.](/lessons/getting-paid-and-staying-paid--u1-05-getting-paid-faster.svg)
+
 ### Save them before you need them
 
 Follow-ups get put off when each one has to be written from scratch on a busy day. Write your three messages once, in your own voice, and save them as email templates. Then following up takes one minute. The day an invoice goes overdue, the message is ready and the decision is already made.
@@ -7312,6 +7454,8 @@ Here is Dee's month, sorted into categories.
 | **Profit** | **$2,000** |
 
 Check it: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200. Then $5,200 - $3,200 = $2,000. Dee brought in $5,200 and kept $2,000. Because the spending is sorted, she can also see that food is her biggest cost by far. That tells her where a better supplier price or a tighter menu would move profit most. A pile of receipts cannot tell her that.
+
+![Bar chart of Dee's month by category, with $5,200 income, six expense categories led by $1,900 for food and ingredients, $3,200 total expenses and $2,000 profit.](/lessons/getting-paid-and-staying-paid--u2-01-money-in-money-out-and-setup.svg)
 
 ### Categories pay for themselves
 
@@ -7424,6 +7568,8 @@ Here is Dee's month, sorted into categories.
 | **Profit** | **$2,000** |
 
 Check it: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200. Then $5,200 - $3,200 = $2,000. Dee brought in $5,200 and kept $2,000. Because the spending is sorted, she can also see that food is her biggest cost by far. That tells her where a better supplier price or a tighter menu would move profit most. A pile of receipts cannot tell her that.
+
+![Bar chart of Dee's month by category, with $5,200 income, six expense categories led by $1,900 for food and ingredients, $3,200 total expenses and $2,000 profit.](/lessons/getting-paid-and-staying-paid--u2-01-money-in-money-out-and-setup.svg)
 
 ### Categories pay for themselves
 
@@ -7587,6 +7733,8 @@ Here is what Dee saw at the end of the month.
 
 $3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. Now Dee can ask a sharper question: how many hours does each line take her? That is a decision she could not start to make when everything sat in one line.
 
+![Dee's four products and services with prices, each pointing to its income account: Catering Income $3,400 and Meal Prep Income $1,800, for $5,200 total income.](/lessons/getting-paid-and-staying-paid--u2-02-categories-services-and-business-lines.svg)
+
 ## Do this now
 
 1. Open the Chart of Accounts and count your expense categories.
@@ -7706,6 +7854,8 @@ Here is what Dee saw at the end of the month.
 
 $3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. Now Dee can ask a sharper question: how many hours does each line take her? That is a decision she could not start to make when everything sat in one line.
 
+![Dee's four products and services with prices, each pointing to its income account: Catering Income $3,400 and Meal Prep Income $1,800, for $5,200 total income.](/lessons/getting-paid-and-staying-paid--u2-02-categories-services-and-business-lines.svg)
+
 ## Do this now
 
 1. Open the Chart of Accounts and count your expense categories.
@@ -7812,6 +7962,8 @@ Dee's March statement shows these numbers.
 Check it: $2,150 + $5,200 - $3,870 = $3,480.
 
 Dee checks off the transactions in QuickBooks against the statement. When she has checked everything in the list, QuickBooks shows a difference of $62.00, not zero. She looks for a $62 item and finds two of them: a restaurant supply purchase, same store, same date, same amount. The statement shows that purchase only once. It was recorded twice in QuickBooks, once from the bank import and once when she typed it in by hand. She deletes the hand-typed copy. The difference drops to $0.00 and she finishes.
+
+![Dee's March bank statement adding up to a $3,480 ending balance, beside the reconcile difference dropping from $62.00 to $0.00 once the duplicate entry is deleted.](/lessons/getting-paid-and-staying-paid--u2-03-weekly-recording-and-monthly-reconciling.svg)
 
 Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now her reports are numbers she can act on.
 
@@ -7932,6 +8084,8 @@ Check it: $2,150 + $5,200 - $3,870 = $3,480.
 
 Dee checks off the transactions in QuickBooks against the statement. When she has checked everything in the list, QuickBooks shows a difference of $62.00, not zero. She looks for a $62 item and finds two of them: a restaurant supply purchase, same store, same date, same amount. The statement shows that purchase only once. It was recorded twice in QuickBooks, once from the bank import and once when she typed it in by hand. She deletes the hand-typed copy. The difference drops to $0.00 and she finishes.
 
+![Dee's March bank statement adding up to a $3,480 ending balance, beside the reconcile difference dropping from $62.00 to $0.00 once the duplicate entry is deleted.](/lessons/getting-paid-and-staying-paid--u2-03-weekly-recording-and-monthly-reconciling.svg)
+
 Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now her reports are numbers she can act on.
 
 ### When the difference is not zero
@@ -8016,6 +8170,8 @@ Here is what the transfer looks like for a few payment sizes.
 | $2,000 | $500 | $600 |
 
 If Marcus is paid $800 for a wedding party and uses 25%, he moves $200 to tax savings and has $600 left to run the business. At 30%, he moves $240 and has $560 left. Pick one percentage in that range and stick with it. Once a tax professional has looked at your numbers, they can tell you whether your percentage should change.
+
+![An $800 payment split at 25 percent, with $200 moving to the tax savings account first and $600 left to run the business.](/lessons/getting-paid-and-staying-paid--u2-04-taxes.svg)
 
 ### Tax money was never yours
 
@@ -8118,6 +8274,8 @@ Here is what the transfer looks like for a few payment sizes.
 
 If Marcus is paid $800 for a wedding party and uses 25%, he moves $200 to tax savings and has $600 left to run the business. At 30%, he moves $240 and has $560 left. Pick one percentage in that range and stick with it. Once a tax professional has looked at your numbers, they can tell you whether your percentage should change.
 
+![An $800 payment split at 25 percent, with $200 moving to the tax savings account first and $600 left to run the business.](/lessons/getting-paid-and-staying-paid--u2-04-taxes.svg)
+
 ### Tax money was never yours
 
 The rule rests on one idea: tax money was never yours. When $800 arrives, you did not earn $800 to spend. You earned the part that is left after the set-aside, and you are holding the rest for a short time.
@@ -8214,6 +8372,8 @@ Look at Tasha's month.
 | Owner's draws (two at $600) | $1,200 |
 
 $3,800 - $1,450 = $2,350. Tasha took two draws of $600, for $1,200 total. Her profit for the month is still $2,350. The draws do not appear among her expenses, and they do not change the profit line. What they change is how much cash is left in the business account: $2,350 - $1,200 = $1,150 of this month's profit stays in the business, where it covers her tax set-aside and a cushion.
+
+![Tasha's month with profit of $2,350 unchanged by draws, then split into $1,200 of owner's draws and $1,150 that stays in the business.](/lessons/getting-paid-and-staying-paid--u2-05-paying-yourself.svg)
 
 ### You owe taxes on profit, not on what you took
 
@@ -8319,6 +8479,8 @@ Look at Tasha's month.
 | Owner's draws (two at $600) | $1,200 |
 
 $3,800 - $1,450 = $2,350. Tasha took two draws of $600, for $1,200 total. Her profit for the month is still $2,350. The draws do not appear among her expenses, and they do not change the profit line. What they change is how much cash is left in the business account: $2,350 - $1,200 = $1,150 of this month's profit stays in the business, where it covers her tax set-aside and a cushion.
+
+![Tasha's month with profit of $2,350 unchanged by draws, then split into $1,200 of owner's draws and $1,150 that stays in the business.](/lessons/getting-paid-and-staying-paid--u2-05-paying-yourself.svg)
 
 ### You owe taxes on profit, not on what you took
 
@@ -8443,6 +8605,8 @@ That last step matters. Every number on the report is a total, and you can alway
 
 Check the math. March expenses: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200, and $5,200 - $3,200 = $2,000. April expenses: $2,300 + $600 + $290 + $210 + $140 + $260 = $3,800, and $5,600 - $3,800 = $1,800.
 
+![Dee's profit and loss report with March beside April, income on top, expenses in the middle and profit at the bottom falling from $2,000 to $1,800.](/lessons/getting-paid-and-staying-paid--u2-06-reading-a-profit-and-loss.svg)
+
 ### Question 1: Did I make money?
 
 Go straight to the bottom line. In April, Dee's profit was $1,800. Yes, she made money. This question takes five seconds, and it comes first because it sets the tone for everything else. A "no" here means the other two questions are urgent.
@@ -8562,6 +8726,8 @@ That last step matters. Every number on the report is a total, and you can alway
 
 Check the math. March expenses: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200, and $5,200 - $3,200 = $2,000. April expenses: $2,300 + $600 + $290 + $210 + $140 + $260 = $3,800, and $5,600 - $3,800 = $1,800.
 
+![Dee's profit and loss report with March beside April, income on top, expenses in the middle and profit at the bottom falling from $2,000 to $1,800.](/lessons/getting-paid-and-staying-paid--u2-06-reading-a-profit-and-loss.svg)
+
 ### Question 1: Did I make money?
 
 Go straight to the bottom line. In April, Dee's profit was $1,800. Yes, she made money. This question takes five seconds, and it comes first because it sets the tone for everything else. A "no" here means the other two questions are urgent.
@@ -8662,6 +8828,8 @@ Before a bank officer, a property manager, or a corporate buyer calls you back, 
 
 A buyer checking you out gives the profile about ten seconds. In that time they want to confirm three things: you are a real person, you run a real business, and it does the thing they need. Five parts of the profile carry that decision, and we finish all five in this session.
 
+![A profile card with its five parts numbered: headshot, headline, About, Experience and contact info.](/lessons/your-online-business-presence--u1-01-linkedin-profile.svg)
+
 ### The headshot
 
 Profiles without a photo get skipped, so this comes before anything else. A photographer is optional. The requirements are your face, good light, and a plain background. Stand facing a window so the light falls on your face. Hold the phone at eye level, or have a neighbor in the session hold it. Frame from the shoulders up. Wear what you would wear to meet a customer. Smile like you are greeting someone you like. Leave out sunglasses, a group shot cropped down, and the car selfie. If you do not have a photo you like, we take one in the session.
@@ -8760,6 +8928,8 @@ Before a bank officer, a property manager, or a corporate buyer calls you back, 
 ### Ten seconds to a decision
 
 A buyer checking you out gives the profile about ten seconds. In that time they want to confirm three things: you are a real person, you run a real business, and it does the thing they need. Five parts of the profile carry that decision, and we finish all five in this session.
+
+![A profile card with its five parts numbered: headshot, headline, About, Experience and contact info.](/lessons/your-online-business-presence--u1-01-linkedin-profile.svg)
 
 ### The headshot
 
@@ -8900,6 +9070,8 @@ It works because it is personal, short, says why it matters, and takes the custo
 
 Reply to every review, good or bad. A reply to a good review can be two sentences: thank them by name and mention the job. Future customers read your replies as closely as the reviews themselves. A calm, kind reply shows them how you treat people. Set aside ten minutes on the same day each week to answer whatever came in, so no review sits unanswered for long.
 
+![A business listing card with its parts numbered: name, primary category, hours and phone, work photos, services, and reviews with a reply.](/lessons/your-online-business-presence--u1-02-google-business-profile.svg)
+
 ## Do this now
 
 1. Search for your business and either claim the listing or start a new profile.
@@ -8993,6 +9165,8 @@ It works because it is personal, short, says why it matters, and takes the custo
 
 Reply to every review, good or bad. A reply to a good review can be two sentences: thank them by name and mention the job. Future customers read your replies as closely as the reviews themselves. A calm, kind reply shows them how you treat people. Set aside ten minutes on the same day each week to answer whatever came in, so no review sits unanswered for long.
 
+![A business listing card with its parts numbered: name, primary category, hours and phone, work photos, services, and reviews with a reply.](/lessons/your-online-business-presence--u1-02-google-business-profile.svg)
+
 ## Do this now
 
 1. Search for your business and either claim the listing or start a new profile.
@@ -9077,6 +9251,8 @@ Here is how a finished page reads for a fictional business.
 > Read our Google reviews [reviews link]
 
 That is the whole page. A parent can read it in thirty seconds and knows exactly what to do next. Notice that it also answers the questions Denise would otherwise field by phone: ages, hours, meals, group size, and when visits happen. A good page cuts down the calls that go nowhere.
+
+![A one-page home base for Little Sprouts Home Daycare with four numbered parts: who you are, what you do, how to book, and the reviews link.](/lessons/your-online-business-presence--u1-03-your-home-base.svg)
 
 ### Pick your tool
 
@@ -9191,6 +9367,8 @@ Here is how a finished page reads for a fictional business.
 > Read our Google reviews [reviews link]
 
 That is the whole page. A parent can read it in thirty seconds and knows exactly what to do next. Notice that it also answers the questions Denise would otherwise field by phone: ages, hours, meals, group size, and when visits happen. A good page cuts down the calls that go nowhere.
+
+![A one-page home base for Little Sprouts Home Daycare with four numbered parts: who you are, what you do, how to book, and the reviews link.](/lessons/your-online-business-presence--u1-03-your-home-base.svg)
 
 ### Pick your tool
 
@@ -9316,6 +9494,8 @@ One post a week is enough to show the business is active. Here is a month for An
 
 When week five comes, start the rotation over with new content. The question "what do I post?" is answered for the year.
 
+![A four-week posting plan with one post per week: finished job, tip, about you, and review, then week five starts the rotation over.](/lessons/your-online-business-presence--u1-04-social-media-for-business.svg)
+
 ### Plan the month in one sitting
 
 Writing four posts at once takes less time than writing one post four separate times. Pull the photos from your phone, write the four captions, and save them as drafts or in a note. Most platforms let a business account schedule posts ahead, so you can load the month and let it run. To keep the supply coming, make the before photo part of how you start a job and the after photo part of how you close it. Two taps on site saves you from hunting for content later.
@@ -9427,6 +9607,8 @@ One post a week is enough to show the business is active. Here is a month for An
 
 When week five comes, start the rotation over with new content. The question "what do I post?" is answered for the year.
 
+![A four-week posting plan with one post per week: finished job, tip, about you, and review, then week five starts the rotation over.](/lessons/your-online-business-presence--u1-04-social-media-for-business.svg)
+
 ### Plan the month in one sitting
 
 Writing four posts at once takes less time than writing one post four separate times. Pull the photos from your phone, write the four captions, and save them as drafts or in a note. Most platforms let a business account schedule posts ahead, so you can load the month and let it run. To keep the supply coming, make the before photo part of how you start a job and the after photo part of how you close it. Two taps on site saves you from hunting for content later.
@@ -9524,6 +9706,8 @@ Weak: Subject "Hey." Body: "Hope you're doing well! So I was thinking about the 
 Strong: Subject "Need final headcount by Friday for March 14 lunch." Body: "Hi Mr. Ellis, can you send me the final headcount by Friday at noon? I place the food order that afternoon. Right now I am planning for 60. Thank you, Tanya."
 
 The strong version can be answered from a phone in one line, which is why it gets answered.
+
+![An email with four numbered parts: a business address, the point in the subject line, the ask in the opening two lines, and a four-line signature.](/lessons/your-online-business-presence--u1-05-email-like-a-professional.svg)
 
 ### The hard ones: save these as templates
 
@@ -9651,6 +9835,8 @@ Strong: Subject "Need final headcount by Friday for March 14 lunch." Body: "Hi M
 
 The strong version can be answered from a phone in one line, which is why it gets answered.
 
+![An email with four numbered parts: a business address, the point in the subject line, the ask in the opening two lines, and a four-line signature.](/lessons/your-online-business-presence--u1-05-email-like-a-professional.svg)
+
 ### The hard ones: save these as templates
 
 Write these three while you are calm, so you never have to compose them while you are upset or rushed.
@@ -9777,6 +9963,8 @@ The tool that keeps this tight is a one-page master-info doc: a single document 
 
 Keep it in Google Drive so it is on your phone. A blank copy is in this lesson's downloads. Then go down your search list and correct each listing by pasting from the doc. For old pages you cannot log in to, use the site's "claim this business" or "suggest an edit" option, or its account recovery.
 
+![A master-info doc with arrows pasting the same name, phone and hours into a listing, a social page and a review site.](/lessons/your-online-business-presence--u1-06-your-digital-reputation.svg)
+
 ### Fix two: reviews as a standing habit
 
 One burst of reviews fades. A steady trickle shows you are busy right now. Make asking part of how you close every job. Luis's habit: when he hands back the keys, he says, "I'm going to text you a link, would you leave a quick review?" and sends it before he drives off. Pick your moment, such as at payment, at delivery, or at pickup, and ask every time.
@@ -9890,6 +10078,8 @@ The tool that keeps this tight is a one-page master-info doc: a single document 
 | Profiles | Every place you are listed, with the date you last checked it |
 
 Keep it in Google Drive so it is on your phone. A blank copy is in this lesson's downloads. Then go down your search list and correct each listing by pasting from the doc. For old pages you cannot log in to, use the site's "claim this business" or "suggest an edit" option, or its account recovery.
+
+![A master-info doc with arrows pasting the same name, phone and hours into a listing, a social page and a review site.](/lessons/your-online-business-presence--u1-06-your-digital-reputation.svg)
 
 ### Fix two: reviews as a standing habit
 
@@ -10015,6 +10205,8 @@ An inbox makes a poor to-do list. Messages you cannot act on yet sit on top of t
 
 Use it for anything real that you cannot act on yet. A supplier's invoice due on the 15th can be snoozed to the 13th. A customer who says "call me after the holidays" can be snoozed to the opening week of January. The goal is an inbox that shows only now things: messages you can and should deal with today. Everything else is either done, archived, or snoozed to the right day.
 
+![Four panels, one per tool: a template with bracketed blanks, an email written Sunday night arriving Monday at 8:30, a 30-second undo, and an invoice due on the 15th snoozed to the 13th.](/lessons/your-online-business-presence--u2-01-gmail-beyond-the-basics.svg)
+
 ### Sending from your own business address
 
 If you have a custom-domain address, an email at your own business name, you can run it from the Gmail you already use. In Gmail's settings, the Accounts section has a "Send mail as" area where you can add another address you own. Gmail will ask you to confirm you own it, and you will need the mail settings from whoever hosts that address. Once it is connected, you choose which address a message comes from in the From line, and you keep using templates, scheduling, and snooze. The exact server settings differ by provider, and your domain or email host's help page lists them.
@@ -10110,6 +10302,8 @@ An inbox makes a poor to-do list. Messages you cannot act on yet sit on top of t
 
 Use it for anything real that you cannot act on yet. A supplier's invoice due on the 15th can be snoozed to the 13th. A customer who says "call me after the holidays" can be snoozed to the opening week of January. The goal is an inbox that shows only now things: messages you can and should deal with today. Everything else is either done, archived, or snoozed to the right day.
 
+![Four panels, one per tool: a template with bracketed blanks, an email written Sunday night arriving Monday at 8:30, a 30-second undo, and an invoice due on the 15th snoozed to the 13th.](/lessons/your-online-business-presence--u2-01-gmail-beyond-the-basics.svg)
+
 ### Sending from your own business address
 
 If you have a custom-domain address, an email at your own business name, you can run it from the Gmail you already use. In Gmail's settings, the Accounts section has a "Send mail as" area where you can add another address you own. Gmail will ask you to confirm you own it, and you will need the mail settings from whoever hosts that address. Once it is connected, you choose which address a message comes from in the From line, and you keep using templates, scheduling, and snooze. The exact server settings differ by provider, and your domain or email host's help page lists them.
@@ -10179,6 +10373,8 @@ When you share, you choose how much each person can do. Give the lowest permissi
 | Editor | Change anything, and usually share it with others | A business partner, your bookkeeper, an employee who updates the file as part of the job |
 
 In short: Viewer looks, Commenter suggests, Editor changes.
+
+![Three permission levels drawn as rising steps: Viewer looks, Commenter suggests, Editor changes, each with an example of who gets it.](/lessons/your-online-business-presence--u2-02-sharing-and-collaborating.svg)
 
 The proposal case is worth a closer look. A client reviewing a proposal is a Commenter. They can highlight a line and write "Can we use the less expensive tile here?" You see the note, reply, and make the change yourself. As an Editor, the same client could change your price or delete a paragraph, and you might not notice until after signing.
 
@@ -10272,6 +10468,8 @@ When you share, you choose how much each person can do. Give the lowest permissi
 | Editor | Change anything, and usually share it with others | A business partner, your bookkeeper, an employee who updates the file as part of the job |
 
 In short: Viewer looks, Commenter suggests, Editor changes.
+
+![Three permission levels drawn as rising steps: Viewer looks, Commenter suggests, Editor changes, each with an example of who gets it.](/lessons/your-online-business-presence--u2-02-sharing-and-collaborating.svg)
 
 The proposal case is worth a closer look. A client reviewing a proposal is a Commenter. They can highlight a line and write "Can we use the less expensive tile here?" You see the note, reply, and make the change yourself. As an Editor, the same client could change your price or delete a paragraph, and you might not notice until after signing.
 
@@ -10390,6 +10588,8 @@ Calendar lets you give each event a color. Decide on a small set and stick to it
 
 The exact colors do not matter. What matters is the picture. A week that is all yellow and blue with no green means no money is coming in. A week of solid green with no blue means invoices are not going out. Looking a week or two ahead, a thin patch of green is your cue to send quotes and follow up on open ones now.
 
+![A Monday to Friday calendar with blocks shaded by type: paid customer work, admin, sales and meetings, and personal.](/lessons/your-online-business-presence--u2-03-google-calendar.svg)
+
 ### Send real invites
 
 When a meeting involves another person, do not leave it at a text. Add them to the event as a guest by typing their email address in the guests area, then save and choose to send the invitation. They receive an email with the date, time, and address, and buttons to answer Yes, No, or Maybe. When they answer yes, the event lands on their calendar with its own reminder.
@@ -10488,6 +10688,8 @@ Calendar lets you give each event a color. Decide on a small set and stick to it
 
 The exact colors do not matter. What matters is the picture. A week that is all yellow and blue with no green means no money is coming in. A week of solid green with no blue means invoices are not going out. Looking a week or two ahead, a thin patch of green is your cue to send quotes and follow up on open ones now.
 
+![A Monday to Friday calendar with blocks shaded by type: paid customer work, admin, sales and meetings, and personal.](/lessons/your-online-business-presence--u2-03-google-calendar.svg)
+
 ### Send real invites
 
 When a meeting involves another person, do not leave it at a text. Add them to the event as a guest by typing their email address in the guests area, then save and choose to send the invitation. They receive an email with the date, time, and address, and buttons to answer Yes, No, or Maybe. When they answer yes, the event lands on their calendar with its own reminder.
@@ -10563,6 +10765,8 @@ The Drive app turns your phone's camera into a scanner. Tap the + button and cho
 5. Name the file so you can find it later, then save.
 
 Naming is what makes this useful. Start with the date, then who and what: "2026-03-14 Home Supply furnace filters receipt" or "2026-03-14 Jackson signed estimate." Dates written year first sort themselves in order. Make a Receipts folder with a folder for each month, and scan each receipt before you leave the store's parking lot. At tax time, the shoebox is already filed. The same goes for signed contracts, permits, and inspection forms: scan them on the spot, and the paper can get rained on without costing you anything.
+
+![Two scan file names split into date, who and what, above a Receipts folder that holds a folder for each month with a named scan inside.](/lessons/your-online-business-presence--u2-04-your-business-in-your-pocket.svg)
 
 ### Attach from Drive anywhere
 
@@ -10654,6 +10858,8 @@ The Drive app turns your phone's camera into a scanner. Tap the + button and cho
 5. Name the file so you can find it later, then save.
 
 Naming is what makes this useful. Start with the date, then who and what: "2026-03-14 Home Supply furnace filters receipt" or "2026-03-14 Jackson signed estimate." Dates written year first sort themselves in order. Make a Receipts folder with a folder for each month, and scan each receipt before you leave the store's parking lot. At tax time, the shoebox is already filed. The same goes for signed contracts, permits, and inspection forms: scan them on the spot, and the paper can get rained on without costing you anything.
+
+![Two scan file names split into date, who and what, above a Receipts folder that holds a folder for each month with a named scan inside.](/lessons/your-online-business-presence--u2-04-your-business-in-your-pocket.svg)
 
 ### Attach from Drive anywhere
 

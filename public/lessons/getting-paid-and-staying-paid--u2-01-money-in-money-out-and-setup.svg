@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>Dee's month sorted into categories: $5,200 income, six expense categories totalling $3,200, and $2,000 profit</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+    <text x="32" y="44" font-size="20" font-weight="bold">Dee's month, sorted into categories</text>
+
+    <text x="32" y="90" font-size="15" font-weight="bold">Income from customers</text>
+    <rect x="230" y="72" width="440" height="24" fill="#4b4b4b"/>
+    <text x="682" y="90" font-size="15" font-weight="bold">$5,200</text>
+
+    <line x1="32" y1="112" x2="768" y2="112" stroke="#d4d4d4"/>
+
+    <text x="32" y="140">Food and ingredients</text>
+    <rect x="230" y="124" width="161" height="22" fill="#910000"/>
+    <text x="403" y="140" font-weight="bold" fill="#910000">$1,900</text>
+    <text x="470" y="140" fill="#910000">Biggest cost by far</text>
+
+    <text x="32" y="172">Kitchen rental</text>
+    <rect x="230" y="156" width="51" height="22" fill="#d4d4d4"/>
+    <text x="293" y="172">$600</text>
+
+    <text x="32" y="204">Packaging</text>
+    <rect x="230" y="188" width="21" height="22" fill="#d4d4d4"/>
+    <text x="263" y="204">$250</text>
+
+    <text x="32" y="236">Gas</text>
+    <rect x="230" y="220" width="15" height="22" fill="#d4d4d4"/>
+    <text x="257" y="236">$180</text>
+
+    <text x="32" y="268">Insurance</text>
+    <rect x="230" y="252" width="12" height="22" fill="#d4d4d4"/>
+    <text x="254" y="268">$140</text>
+
+    <text x="32" y="300">Marketing</text>
+    <rect x="230" y="284" width="11" height="22" fill="#d4d4d4"/>
+    <text x="253" y="300">$130</text>
+
+    <line x1="32" y1="320" x2="768" y2="320" stroke="#d4d4d4"/>
+
+    <text x="32" y="350" font-size="15" font-weight="bold">Total expenses</text>
+    <rect x="230" y="332" width="271" height="24" fill="#d4d4d4"/>
+    <text x="513" y="350" font-size="15" font-weight="bold">$3,200</text>
+
+    <text x="32" y="390" font-size="15" font-weight="bold" fill="#910000">Profit</text>
+    <rect x="230" y="372" width="169" height="24" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <text x="411" y="390" font-size="15" font-weight="bold" fill="#910000">$2,000</text>
+    <text x="768" y="390" text-anchor="end" fill="#4b4b4b">$5,200 − $3,200 = $2,000</text>
+  </g>
+</svg>

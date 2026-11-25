@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>Two columns: the four jobs to hand to AI, and the facts that always get checked at a real source</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="32" y="32" width="352" height="386" rx="10" fill="#f6f6f6" stroke="#d4d4d4"/>
+<text x="56" y="72" font-size="20" font-weight="bold" fill="#171717">Words and ideas</text>
+<text x="56" y="98" font-size="16" fill="#910000">Lean on it heavily</text>
+<g font-size="16" font-weight="bold" fill="#171717">
+<rect x="56" y="118" width="304" height="60" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="72" y="143">Drafting</text>
+<rect x="56" y="190" width="304" height="60" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="72" y="215">Rewriting</text>
+<rect x="56" y="262" width="304" height="60" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="72" y="287">Summarizing</text>
+<rect x="56" y="334" width="304" height="60" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="72" y="359">Brainstorming</text>
+</g>
+<g font-size="14" fill="#4b4b4b">
+<text x="72" y="165">A first version of an email or a post</text>
+<text x="72" y="237">Shorter, friendlier or clearer</text>
+<text x="72" y="309">A long document into the main points</text>
+<text x="72" y="381">Ten name ideas, twenty post topics</text>
+</g>
+<rect x="416" y="32" width="352" height="386" rx="10" fill="#f6e9e9" stroke="#910000"/>
+<text x="440" y="72" font-size="20" font-weight="bold" fill="#171717">Facts that matter</text>
+<text x="440" y="98" font-size="16" fill="#910000">Check a real source</text>
+<g font-size="16" font-weight="bold" fill="#171717">
+<rect x="440" y="118" width="304" height="46" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="486" y="147">Tax rules</text>
+<rect x="440" y="176" width="304" height="46" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="486" y="205">License requirements</text>
+<rect x="440" y="234" width="304" height="46" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="486" y="263">Legal questions</text>
+<rect x="440" y="292" width="304" height="46" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="486" y="321">Prices</text>
+<rect x="440" y="350" width="304" height="46" rx="6" fill="#ffffff" stroke="#d4d4d4"/><text x="486" y="379">Deadlines</text>
+</g>
+<g fill="none" stroke="#910000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M456 141 l6 6 l11 -13"/><path d="M456 199 l6 6 l11 -13"/><path d="M456 257 l6 6 l11 -13"/><path d="M456 315 l6 6 l11 -13"/><path d="M456 373 l6 6 l11 -13"/>
+</g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>The five setup features in order, then the full loop of invoice out, money in, books updated</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717" text-anchor="middle">
+    <text x="26" y="44" font-size="20" font-weight="bold" text-anchor="start">The five features that matter</text>
+
+    <rect x="26" y="68" width="140" height="136" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="178" y="68" width="140" height="136" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <rect x="330" y="68" width="140" height="136" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="482" y="68" width="140" height="136" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="634" y="68" width="140" height="136" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+
+    <g fill="#910000">
+      <circle cx="96" cy="100" r="15"/>
+      <circle cx="248" cy="100" r="15"/>
+      <circle cx="400" cy="100" r="15"/>
+      <circle cx="552" cy="100" r="15"/>
+      <circle cx="704" cy="100" r="15"/>
+    </g>
+    <g fill="#ffffff" font-size="16" font-weight="bold">
+      <text x="96" y="106">1</text>
+      <text x="248" y="106">2</text>
+      <text x="400" y="106">3</text>
+      <text x="552" y="106">4</text>
+      <text x="704" y="106">5</text>
+    </g>
+
+    <g font-size="15">
+      <text x="96" y="144">Create the</text>
+      <text x="96" y="164">account</text>
+      <text x="248" y="144">Connect</text>
+      <text x="248" y="164">the bank</text>
+      <text x="400" y="144">Fix the key</text>
+      <text x="400" y="164">settings</text>
+      <text x="552" y="144">Add services</text>
+      <text x="552" y="164">with prices</text>
+      <text x="704" y="144">Categorize the</text>
+      <text x="704" y="164">first batch</text>
+    </g>
+    <text x="248" y="190" font-weight="bold" fill="#910000">Matters most</text>
+
+    <text x="26" y="258" font-size="18" font-weight="bold" text-anchor="start">Close the loop: send one invoice</text>
+
+    <rect x="56" y="280" width="180" height="60" rx="30" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="310" y="280" width="180" height="60" rx="30" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="564" y="280" width="180" height="60" rx="30" fill="#f6e9e9" stroke="#910000"/>
+    <g font-size="16" font-weight="bold">
+      <text x="146" y="316">Invoice out</text>
+      <text x="400" y="316">Money in</text>
+      <text x="654" y="316" fill="#910000">Books updated</text>
+    </g>
+    <g stroke="#910000" stroke-width="2">
+      <line x1="248" y1="310" x2="290" y2="310"/>
+      <line x1="502" y1="310" x2="544" y2="310"/>
+    </g>
+    <polygon points="300,310 288,303 288,317" fill="#910000"/>
+    <polygon points="554,310 542,303 542,317" fill="#910000"/>
+
+    <text x="26" y="386" fill="#4b4b4b" text-anchor="start">A matched deposit marks the invoice paid and counts the income once.</text>
+  </g>
+</svg>

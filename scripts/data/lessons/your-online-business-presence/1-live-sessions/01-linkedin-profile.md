@@ -20,6 +20,8 @@ Before a bank officer, a property manager, or a corporate buyer calls you back, 
 
 A buyer checking you out gives the profile about ten seconds. In that time they want to confirm three things: you are a real person, you run a real business, and it does the thing they need. Five parts of the profile carry that decision, and we finish all five in this session.
 
+![A profile card with its five parts numbered: headshot, headline, About, Experience and contact info.](/lessons/your-online-business-presence--u1-01-linkedin-profile.svg)
+
 ### The headshot
 
 Profiles without a photo get skipped, so this comes before anything else. A photographer is optional. The requirements are your face, good light, and a plain background. Stand facing a window so the light falls on your face. Hold the phone at eye level, or have a neighbor in the session hold it. Frame from the shoulders up. Wear what you would wear to meet a customer. Smile like you are greeting someone you like. Leave out sunglasses, a group shot cropped down, and the car selfie. If you do not have a photo you like, we take one in the session.

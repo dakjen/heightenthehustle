@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img">
+  <title>Folder tree for the master folder Johnson Cleaning Co with five numbered drawers: 01 Clients, 02 Money, 03 Legal and Admin, 04 Marketing and 05 Operations, with client and year folders inside the first two</title>
+  <rect x="0" y="0" width="800" height="500" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <!-- connectors -->
+    <g stroke="#d4d4d4" stroke-width="2" fill="none">
+      <path d="M54,84 V444"/>
+      <path d="M54,124 H86"/>
+      <path d="M54,244 H86"/>
+      <path d="M54,364 H86"/>
+      <path d="M54,404 H86"/>
+      <path d="M54,444 H86"/>
+      <path d="M104,138 V199"/>
+      <path d="M104,164 H136"/>
+      <path d="M104,199 H136"/>
+      <path d="M104,258 V319"/>
+      <path d="M104,284 H136"/>
+      <path d="M104,319 H136"/>
+      <path d="M300,124 H424"/>
+      <path d="M300,244 H424"/>
+      <path d="M300,364 H424"/>
+      <path d="M300,404 H424"/>
+      <path d="M300,444 H424"/>
+    </g>
+
+    <!-- master -->
+    <path d="M40,57 h10 l4,4 h18 v18 h-32 z" fill="#910000" stroke="#910000" stroke-width="2"/>
+    <text x="84" y="78" font-size="20" font-weight="bold" fill="#171717">Johnson Cleaning Co</text>
+
+    <!-- drawers -->
+    <g fill="#f6e9e9" stroke="#910000" stroke-width="2">
+      <path d="M90,113 h9 l4,4 h15 v16 h-28 z"/>
+      <path d="M90,233 h9 l4,4 h15 v16 h-28 z"/>
+      <path d="M90,353 h9 l4,4 h15 v16 h-28 z"/>
+      <path d="M90,393 h9 l4,4 h15 v16 h-28 z"/>
+      <path d="M90,433 h9 l4,4 h15 v16 h-28 z"/>
+    </g>
+    <g font-size="17" font-weight="bold" fill="#171717">
+      <text x="130" y="130"><tspan fill="#910000">01</tspan> Clients</text>
+      <text x="130" y="250"><tspan fill="#910000">02</tspan> Money</text>
+      <text x="130" y="370"><tspan fill="#910000">03</tspan> Legal &amp; Admin</text>
+      <text x="130" y="410"><tspan fill="#910000">04</tspan> Marketing</text>
+      <text x="130" y="450"><tspan fill="#910000">05</tspan> Operations</text>
+    </g>
+
+    <!-- sub-folders -->
+    <g fill="#f6f6f6" stroke="#4b4b4b" stroke-width="2">
+      <path d="M140,154 h8 l4,4 h12 v14 h-24 z"/>
+      <path d="M140,189 h8 l4,4 h12 v14 h-24 z"/>
+      <path d="M140,274 h8 l4,4 h12 v14 h-24 z"/>
+      <path d="M140,309 h8 l4,4 h12 v14 h-24 z"/>
+    </g>
+    <g font-size="15" fill="#171717">
+      <text x="176" y="170">Johnson, Mary</text>
+      <text x="176" y="205">Reed Law Office</text>
+      <text x="176" y="290">2025</text>
+      <text x="176" y="325">2026</text>
+    </g>
+
+    <!-- notes -->
+    <g font-size="15" fill="#4b4b4b">
+      <text x="436" y="129">One folder per client</text>
+      <text x="436" y="249">Invoices, receipts, taxes, by year</text>
+      <text x="436" y="369">License, insurance, permits</text>
+      <text x="436" y="409">Logo, photos, flyers</text>
+      <text x="436" y="449">Price lists, checklists, templates</text>
+    </g>
+  </g>
+</svg>

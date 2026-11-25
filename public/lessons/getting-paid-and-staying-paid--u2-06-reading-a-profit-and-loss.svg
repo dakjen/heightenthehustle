@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img">
+  <title>Dee's profit and loss report with March beside April: income on top, expenses in the middle, profit at the bottom falling from $2,000 to $1,800</title>
+  <rect x="0" y="0" width="800" height="560" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#171717">
+    <text x="24" y="40" font-size="20" font-weight="bold">Dee's profit and loss, March beside April</text>
+
+    <rect x="196" y="58" width="580" height="34" fill="#f6f6f6"/>
+    <rect x="196" y="200" width="580" height="36" fill="#f6e9e9"/>
+    <rect x="196" y="452" width="580" height="38" fill="#f6e9e9"/>
+    <rect x="196" y="58" width="580" height="432" fill="none" stroke="#d4d4d4"/>
+    <g stroke="#d4d4d4">
+      <line x1="196" y1="92" x2="776" y2="92"/>
+      <line x1="196" y1="128" x2="776" y2="128"/>
+      <line x1="196" y1="236" x2="776" y2="236"/>
+      <line x1="196" y1="272" x2="776" y2="272"/>
+      <line x1="196" y1="308" x2="776" y2="308"/>
+      <line x1="196" y1="344" x2="776" y2="344"/>
+      <line x1="196" y1="380" x2="776" y2="380"/>
+    </g>
+    <g stroke="#171717">
+      <line x1="196" y1="164" x2="776" y2="164"/>
+      <line x1="196" y1="200" x2="776" y2="200"/>
+      <line x1="196" y1="416" x2="776" y2="416"/>
+      <line x1="196" y1="452" x2="776" y2="452"/>
+    </g>
+
+    <g font-weight="bold">
+      <text x="212" y="81">Line</text>
+      <text x="620" y="81" text-anchor="end">March</text>
+      <text x="756" y="81" text-anchor="end">April</text>
+    </g>
+
+    <text x="212" y="116">Catering Income</text>
+    <text x="620" y="116" text-anchor="end">$3,400</text>
+    <text x="756" y="116" text-anchor="end">$3,900</text>
+    <text x="212" y="152">Meal Prep Income</text>
+    <text x="620" y="152" text-anchor="end">$1,800</text>
+    <text x="756" y="152" text-anchor="end">$1,700</text>
+    <g font-weight="bold">
+      <text x="212" y="188">Total income</text>
+      <text x="620" y="188" text-anchor="end">$5,200</text>
+      <text x="756" y="188" text-anchor="end">$5,600</text>
+    </g>
+
+    <g fill="#910000">
+      <text x="212" y="224">Food and Ingredients</text>
+      <text x="620" y="224" text-anchor="end">$1,900</text>
+      <text x="756" y="224" text-anchor="end">$2,300</text>
+    </g>
+    <text x="212" y="260">Kitchen Rental</text>
+    <text x="620" y="260" text-anchor="end">$600</text>
+    <text x="756" y="260" text-anchor="end">$600</text>
+    <text x="212" y="296">Packaging</text>
+    <text x="620" y="296" text-anchor="end">$250</text>
+    <text x="756" y="296" text-anchor="end">$290</text>
+    <text x="212" y="332">Gas</text>
+    <text x="620" y="332" text-anchor="end">$180</text>
+    <text x="756" y="332" text-anchor="end">$210</text>
+    <text x="212" y="368">Insurance</text>
+    <text x="620" y="368" text-anchor="end">$140</text>
+    <text x="756" y="368" text-anchor="end">$140</text>
+    <text x="212" y="404">Marketing</text>
+    <text x="620" y="404" text-anchor="end">$130</text>
+    <text x="756" y="404" text-anchor="end">$260</text>
+    <g font-weight="bold">
+      <text x="212" y="440">Total expenses</text>
+      <text x="620" y="440" text-anchor="end">$3,200</text>
+      <text x="756" y="440" text-anchor="end">$3,800</text>
+    </g>
+    <g font-weight="bold" fill="#910000" font-size="16">
+      <text x="212" y="477">Profit</text>
+      <text x="620" y="477" text-anchor="end">$2,000</text>
+      <text x="756" y="477" text-anchor="end">$1,800</text>
+    </g>
+
+    <g stroke="#910000" stroke-width="2" fill="none">
+      <path d="M 184 96 L 176 96 L 176 196 L 184 196"/>
+      <path d="M 184 204 L 176 204 L 176 448 L 184 448"/>
+      <path d="M 184 456 L 176 456 L 176 486 L 184 486"/>
+    </g>
+    <g font-weight="bold" text-anchor="end" fill="#910000">
+      <text x="164" y="142">Income</text>
+      <text x="164" y="162">on top</text>
+      <text x="164" y="322">Expenses</text>
+      <text x="164" y="342">in the middle</text>
+      <text x="164" y="468">Profit at</text>
+      <text x="164" y="486">the bottom</text>
+    </g>
+
+    <text x="196" y="520" font-weight="bold">Income up $400, expenses up $600, profit down $200.</text>
+    <text x="196" y="542" font-size="14" fill="#4b4b4b">Food and Ingredients went up $400.</text>
+  </g>
+</svg>

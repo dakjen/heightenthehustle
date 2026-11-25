@@ -67,6 +67,8 @@ Marcus starts with $1,200 in his business account. Here is his first week.
 
 Check the math. Money in was $340 + $410 + $300 = $1,050. Money out was $250 + $62 + $75 = $387. Start with $1,200, add $1,050, subtract $387, and you get $1,863. The last running total matches. For the week, Marcus brought in $1,050, spent $387, and kept $663.
 
+![The six-column tracker filled in with Marcus's first week, from a $1,200 starting balance down to a final running total of $1,863.](/lessons/getting-paid-and-staying-paid--u1-02-simple-money-tracker.svg)
+
 The check that matters most is the last one: the final running total should equal the balance in the bank app. When it does, nothing is missing. When it does not, the gap is usually the exact amount of the row you skipped or mistyped, which tells you what to look for.
 
 ### The weekly slot is the real system

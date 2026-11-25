@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+<title>A four-week posting plan with one post per week: finished job, tip, about you and review, then the rotation starts over</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<text x="36" y="48" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#171717">One post a week, four kinds of post</text>
+<g fill="#ffffff" stroke="#d4d4d4" stroke-width="2">
+<rect x="36" y="72" width="170" height="250"/><rect x="222" y="72" width="170" height="250"/><rect x="408" y="72" width="170" height="250"/><rect x="594" y="72" width="170" height="250"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#910000">
+<text x="52" y="100">WEEK 1</text><text x="238" y="100">WEEK 2</text><text x="424" y="100">WEEK 3</text><text x="610" y="100">WEEK 4</text>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#171717">
+<text x="52" y="126">Finished job</text><text x="238" y="126">Tip</text><text x="424" y="126">About you</text><text x="610" y="126">Review</text>
+</g>
+<g fill="#f6f6f6" stroke="#d4d4d4">
+<rect x="52" y="142" width="66" height="90"/><rect x="124" y="142" width="66" height="90" fill="#f6e9e9"/>
+<rect x="238" y="142" width="138" height="90"/>
+<rect x="424" y="142" width="138" height="90"/>
+<rect x="610" y="142" width="138" height="90"/>
+</g>
+<path d="M424 232 L470 190 L500 212 L530 176 L562 206" fill="none" stroke="#d4d4d4"/>
+<g fill="#d4d4d4">
+<rect x="250" y="160" width="114" height="7"/><rect x="250" y="174" width="90" height="7"/><rect x="250" y="188" width="104" height="7"/><rect x="250" y="202" width="60" height="7"/>
+<rect x="622" y="176" width="114" height="7"/><rect x="622" y="190" width="100" height="7"/><rect x="622" y="204" width="70" height="7"/>
+</g>
+<g fill="#910000">
+<rect x="622" y="156" width="10" height="10"/><rect x="636" y="156" width="10" height="10"/><rect x="650" y="156" width="10" height="10"/><rect x="664" y="156" width="10" height="10"/><rect x="678" y="156" width="10" height="10"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b4b4b">
+<text x="85" y="192" text-anchor="middle">Before</text><text x="157" y="192" text-anchor="middle" fill="#910000">After</text>
+<text x="52" y="262">A front door,</text><text x="52" y="282">painted deep blue</text>
+<text x="238" y="262">Paint made for</text><text x="238" y="282">moisture</text>
+<text x="424" y="262">Andre and his</text><text x="424" y="282">daughter</text>
+<text x="610" y="262">Thank you,</text><text x="610" y="282">Ms. Patterson</text>
+</g>
+<path d="M679 322 L679 376 L121 376 L121 334" fill="none" stroke="#910000" stroke-width="2"/>
+<polygon points="121,324 114,338 128,338" fill="#910000"/>
+<rect x="280" y="362" width="240" height="28" fill="#ffffff"/>
+<text x="400" y="382" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#910000" text-anchor="middle">Week 5: start over</text>
+</svg>

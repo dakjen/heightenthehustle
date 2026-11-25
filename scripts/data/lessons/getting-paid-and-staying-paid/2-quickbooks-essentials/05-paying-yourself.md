@@ -36,6 +36,8 @@ Look at Tasha's month.
 
 $3,800 - $1,450 = $2,350. Tasha took two draws of $600, for $1,200 total. Her profit for the month is still $2,350. The draws do not appear among her expenses, and they do not change the profit line. What they change is how much cash is left in the business account: $2,350 - $1,200 = $1,150 of this month's profit stays in the business, where it covers her tax set-aside and a cushion.
 
+![Tasha's month with profit of $2,350 unchanged by draws, then split into $1,200 of owner's draws and $1,150 that stays in the business.](/lessons/getting-paid-and-staying-paid--u2-05-paying-yourself.svg)
+
 ### You owe taxes on profit, not on what you took
 
 Here is why this matters at tax time. You owe taxes on profit whether you draw it or not. Tasha is taxed on her $2,350 of profit. It does not matter that she only moved $1,200 to her personal account. If she had taken nothing, she would still owe tax on $2,350. If she had taken all of it, the tax would be the same.

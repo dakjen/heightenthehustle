@@ -72,6 +72,8 @@ As you go, QuickBooks learns your patterns and its suggestions get better. Work 
 
 Create one invoice inside QuickBooks. Choose a customer, pick a service from your list, set a due date, and send it. A real invoice to a real customer is best. If you have none ready, send a small test invoice to yourself. When that invoice is paid and the deposit lands in your bank, QuickBooks can match the two. That is the full loop: invoice out, money in, books updated.
 
+![The five setup features in order, with connecting the bank marked as the one that matters most, followed by the full loop of invoice out, money in, books updated.](/lessons/getting-paid-and-staying-paid--u1-04-quickbooks-fast-version.svg)
+
 Matching matters. When a deposit is matched to its invoice, the invoice is marked paid and the income is counted once. Without the match, the same money can show up as an open invoice and as a separate deposit, and the books overstate what you earned.
 
 ### One system from here on

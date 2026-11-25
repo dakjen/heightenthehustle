@@ -59,6 +59,8 @@ An inbox makes a poor to-do list. Messages you cannot act on yet sit on top of t
 
 Use it for anything real that you cannot act on yet. A supplier's invoice due on the 15th can be snoozed to the 13th. A customer who says "call me after the holidays" can be snoozed to the opening week of January. The goal is an inbox that shows only now things: messages you can and should deal with today. Everything else is either done, archived, or snoozed to the right day.
 
+![Four panels, one per tool: a template with bracketed blanks, an email written Sunday night arriving Monday at 8:30, a 30-second undo, and an invoice due on the 15th snoozed to the 13th.](/lessons/your-online-business-presence--u2-01-gmail-beyond-the-basics.svg)
+
 ### Sending from your own business address
 
 If you have a custom-domain address, an email at your own business name, you can run it from the Gmail you already use. In Gmail's settings, the Accounts section has a "Send mail as" area where you can add another address you own. Gmail will ask you to confirm you own it, and you will need the mail settings from whoever hosts that address. Once it is connected, you choose which address a message comes from in the From line, and you keep using templates, scheduling, and snooze. The exact server settings differ by provider, and your domain or email host's help page lists them.

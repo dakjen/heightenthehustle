@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>Dee's March reconcile: the statement adds up to a $3,480 ending balance, and deleting a duplicate $62 entry takes the difference from $62.00 to $0.00</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#171717">
+    <text x="32" y="42" font-size="20" font-weight="bold">Dee's March reconcile</text>
+
+    <rect x="32" y="62" width="356" height="250" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+    <rect x="32" y="62" width="356" height="44" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="52" y="90" font-size="16" font-weight="bold">Bank statement, March</text>
+
+    <text x="52" y="140" font-size="15">Beginning balance</text>
+    <text x="368" y="140" font-size="15" text-anchor="end">$2,150</text>
+    <text x="52" y="180" font-size="15">+ Deposits</text>
+    <text x="368" y="180" font-size="15" text-anchor="end">$5,200</text>
+    <text x="52" y="220" font-size="15">− Payments and charges</text>
+    <text x="368" y="220" font-size="15" text-anchor="end">$3,870</text>
+    <line x1="52" y1="242" x2="368" y2="242" stroke="#171717"/>
+    <text x="52" y="280" font-size="16" font-weight="bold">Ending balance</text>
+    <text x="368" y="280" font-size="16" font-weight="bold" text-anchor="end">$3,480</text>
+
+    <rect x="440" y="62" width="328" height="70" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <text x="460" y="104" font-size="16">Difference</text>
+    <text x="748" y="108" font-size="26" font-weight="bold" fill="#910000" text-anchor="end">$62.00</text>
+
+    <line x1="604" y1="132" x2="604" y2="150" stroke="#910000" stroke-width="2"/>
+    <rect x="440" y="150" width="328" height="74" rx="8" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <text x="460" y="180">Same $62 purchase recorded twice.</text>
+    <text x="460" y="204">Delete the hand-typed copy.</text>
+    <line x1="604" y1="224" x2="604" y2="232" stroke="#910000" stroke-width="2"/>
+    <polygon points="604,242 596,230 612,230" fill="#910000"/>
+
+    <rect x="440" y="242" width="328" height="70" rx="8" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+    <text x="460" y="284" font-size="16">Difference</text>
+    <text x="748" y="288" font-size="26" font-weight="bold" text-anchor="end">$0.00</text>
+
+    <text x="32" y="356" font-size="16" font-weight="bold">Three things must be true</text>
+    <rect x="32" y="372" width="230" height="44" rx="22" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="280" y="372" width="230" height="44" rx="22" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <rect x="528" y="372" width="240" height="44" rx="22" fill="#f6f6f6" stroke="#d4d4d4"/>
+    <g text-anchor="middle">
+      <text x="147" y="399">Same starting balance</text>
+      <text x="395" y="399">Same ending balance</text>
+      <text x="648" y="399">Every transaction accounted for</text>
+    </g>
+  </g>
+</svg>

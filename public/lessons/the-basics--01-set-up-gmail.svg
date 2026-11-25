@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <title>How 2-step verification works: your password plus a code or prompt on your phone signs you in, while a stolen password alone cannot get in</title>
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="46" font-size="20" font-weight="bold" fill="#171717">2-step verification: signing in takes two things</text>
+
+    <!-- row 1 -->
+    <text x="40" y="94" font-size="16" font-weight="bold" fill="#171717">You</text>
+
+    <rect x="40" y="108" width="210" height="92" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <text x="145" y="144" font-size="16" fill="#171717" text-anchor="middle">Your password</text>
+    <g fill="#171717">
+      <circle cx="100" cy="172" r="5"/><circle cx="118" cy="172" r="5"/><circle cx="136" cy="172" r="5"/>
+      <circle cx="154" cy="172" r="5"/><circle cx="172" cy="172" r="5"/><circle cx="190" cy="172" r="5"/>
+    </g>
+
+    <text x="275" y="164" font-size="28" font-weight="bold" fill="#910000" text-anchor="middle">+</text>
+
+    <rect x="300" y="108" width="230" height="92" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <rect x="320" y="124" width="34" height="60" rx="6" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+    <line x1="331" y1="176" x2="343" y2="176" stroke="#171717" stroke-width="2"/>
+    <text x="372" y="150" font-size="16" fill="#171717">Code or prompt</text>
+    <text x="372" y="172" font-size="16" fill="#171717">on your phone</text>
+
+    <line x1="542" y1="154" x2="578" y2="154" stroke="#171717" stroke-width="2"/>
+    <polygon points="590,154 576,147 576,161" fill="#171717"/>
+
+    <rect x="600" y="108" width="160" height="92" rx="8" fill="#ffffff" stroke="#171717" stroke-width="2"/>
+    <path d="M624,154 l8,9 l14,-18" fill="none" stroke="#171717" stroke-width="3"/>
+    <text x="658" y="160" font-size="16" font-weight="bold" fill="#171717">Signed in</text>
+
+    <!-- row 2 -->
+    <text x="40" y="256" font-size="16" font-weight="bold" fill="#910000">Someone who stole your password</text>
+
+    <rect x="40" y="270" width="210" height="92" rx="8" fill="#f6f6f6" stroke="#d4d4d4" stroke-width="2"/>
+    <text x="145" y="306" font-size="16" fill="#171717" text-anchor="middle">Your password</text>
+    <g fill="#171717">
+      <circle cx="100" cy="334" r="5"/><circle cx="118" cy="334" r="5"/><circle cx="136" cy="334" r="5"/>
+      <circle cx="154" cy="334" r="5"/><circle cx="172" cy="334" r="5"/><circle cx="190" cy="334" r="5"/>
+    </g>
+
+    <text x="275" y="326" font-size="28" font-weight="bold" fill="#910000" text-anchor="middle">+</text>
+
+    <rect x="300" y="270" width="230" height="92" rx="8" fill="#ffffff" stroke="#910000" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="415" y="322" font-size="16" fill="#910000" text-anchor="middle">Without your phone</text>
+
+    <line x1="542" y1="316" x2="578" y2="316" stroke="#910000" stroke-width="2"/>
+    <polygon points="590,316 576,309 576,323" fill="#910000"/>
+
+    <rect x="600" y="270" width="160" height="92" rx="8" fill="#f6e9e9" stroke="#910000" stroke-width="2"/>
+    <path d="M616,308 l14,16 M630,308 l-14,16" fill="none" stroke="#910000" stroke-width="3"/>
+    <text x="640" y="322" font-size="15" font-weight="bold" fill="#910000">Cannot get in</text>
+
+    <text x="40" y="412" font-size="15" fill="#4b4b4b">Whoever controls the inbox can reset the rest.</text>
+  </g>
+</svg>

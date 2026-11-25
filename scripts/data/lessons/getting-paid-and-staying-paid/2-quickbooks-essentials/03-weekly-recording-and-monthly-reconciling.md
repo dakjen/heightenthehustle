@@ -74,6 +74,8 @@ Check it: $2,150 + $5,200 - $3,870 = $3,480.
 
 Dee checks off the transactions in QuickBooks against the statement. When she has checked everything in the list, QuickBooks shows a difference of $62.00, not zero. She looks for a $62 item and finds two of them: a restaurant supply purchase, same store, same date, same amount. The statement shows that purchase only once. It was recorded twice in QuickBooks, once from the bank import and once when she typed it in by hand. She deletes the hand-typed copy. The difference drops to $0.00 and she finishes.
 
+![Dee's March bank statement adding up to a $3,480 ending balance, beside the reconcile difference dropping from $62.00 to $0.00 once the duplicate entry is deleted.](/lessons/getting-paid-and-staying-paid--u2-03-weekly-recording-and-monthly-reconciling.svg)
+
 Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now her reports are numbers she can act on.
 
 ### When the difference is not zero

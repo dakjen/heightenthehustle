@@ -35,6 +35,8 @@ Each slide uses a layout, a ready-made arrangement of boxes. The boxes are calle
 
 The opening slide in a new deck uses the **Title Slide** layout, with one box for a title and one for a subtitle. The layout you will use most is **Title and Content**, which has a title at the top and a larger box below for bullets, a picture, or a chart. Other useful layouts are **Title Only**, **Two Content**, and **Blank**.
 
+![Three slide thumbnails: the first uses the Title Slide layout with a title and subtitle, and the next two use the Title and Content layout with a title on top and a content box below.](/lessons/microsoft-essentials--u3-01-getting-started-with-powerpoint.svg)
+
 To change the layout of a slide you already made:
 
 1. Click the slide in the thumbnail pane.

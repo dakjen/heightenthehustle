@@ -62,6 +62,8 @@ Even with good prevention, some invoices will go past due. Most late payers are 
 
 Notice what changes. The tone moves from friendly to direct to firm. It never becomes angry or insulting. Every message states the invoice number, the amount, and how to pay. Polite and relentless gets paid.
 
+![The follow-up ladder as rising steps from the due date: friendly nudge at 3 days past due, direct check-in at 2 weeks, firm final notice at 30 days.](/lessons/getting-paid-and-staying-paid--u1-05-getting-paid-faster.svg)
+
 ### Save them before you need them
 
 Follow-ups get put off when each one has to be written from scratch on a busy day. Write your three messages once, in your own voice, and save them as email templates. Then following up takes one minute. The day an invoice goes overdue, the message is ready and the decision is already made.

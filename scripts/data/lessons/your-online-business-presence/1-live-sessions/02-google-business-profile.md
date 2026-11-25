@@ -60,6 +60,8 @@ It works because it is personal, short, says why it matters, and takes the custo
 
 Reply to every review, good or bad. A reply to a good review can be two sentences: thank them by name and mention the job. Future customers read your replies as closely as the reviews themselves. A calm, kind reply shows them how you treat people. Set aside ten minutes on the same day each week to answer whatever came in, so no review sits unanswered for long.
 
+![A business listing card with its parts numbered: name, primary category, hours and phone, work photos, services, and reviews with a reply.](/lessons/your-online-business-presence--u1-02-google-business-profile.svg)
+
 ## Do this now
 
 1. Search for your business and either claim the listing or start a new profile.

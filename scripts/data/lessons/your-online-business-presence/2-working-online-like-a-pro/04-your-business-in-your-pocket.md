@@ -36,6 +36,8 @@ The Drive app turns your phone's camera into a scanner. Tap the + button and cho
 
 Naming is what makes this useful. Start with the date, then who and what: "2026-03-14 Home Supply furnace filters receipt" or "2026-03-14 Jackson signed estimate." Dates written year first sort themselves in order. Make a Receipts folder with a folder for each month, and scan each receipt before you leave the store's parking lot. At tax time, the shoebox is already filed. The same goes for signed contracts, permits, and inspection forms: scan them on the spot, and the paper can get rained on without costing you anything.
 
+![Two scan file names split into date, who and what, above a Receipts folder that holds a folder for each month with a named scan inside.](/lessons/your-online-business-presence--u2-04-your-business-in-your-pocket.svg)
+
 ### Attach from Drive anywhere
 
 You no longer need to be at your computer to send a file. In the Gmail app, start a new email, tap the paperclip, and choose to insert from Drive. Pick the file and send. You can also open any file in the Drive app and use its share option to send someone a link or give them access by email.

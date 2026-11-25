@@ -48,6 +48,8 @@ Devices get dropped, stolen, soaked and worn out. A second copy of your files, k
 
 Phones can back up automatically. Look in Settings under your account name, or under **Backup**, and switch it on. On a computer, the built-in backup tools are in Settings as well. Whatever method you use, test it once by opening a backed-up file from a different device. A backup you have never tested is only a hope.
 
+![A locked device surrounded by the four settings that protect it, automatic updates, screen lock, find my device and a tested backup.](/lessons/the-basics--u4-04-keeping-devices-secure.svg)
+
 ### Shared devices
 
 On any computer other people also use, such as one at a library, a hotel, or a family computer at home:

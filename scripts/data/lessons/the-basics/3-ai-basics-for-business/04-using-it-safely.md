@@ -35,6 +35,8 @@ Here is the safe version:
 
 The draft is the same quality. Then you fill in the real name and amount yourself, outside the AI tool.
 
+![An unsafe prompt with the customer's name, address, phone number and card marked, above the safe version that uses NAME and AMOUNT placeholders.](/lessons/the-basics--u3-04-using-it-safely.svg)
+
 ### Rule 2: Verify anything that matters against a real source
 
 AI can be confidently wrong. It can state a wrong tax deadline, a license rule from a different state, or a statistic it made up, and it sounds as sure as when it is right. So any answer that affects your money, your legal standing or your customers gets checked against a real source before you act on it.

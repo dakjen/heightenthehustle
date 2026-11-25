@@ -60,6 +60,8 @@ Subtraction uses the minus sign. If total sales are in B6 and total expenses are
 
 Multiplication uses the asterisk, the star above the 8 on most keyboards. Say a customer orders 12 trays at $45 each. Put 12 in cell B9 and 45 in cell B10. The formula `=B9*B10` gives 540. If the customer changes the order to 15 trays, change B9 and the total updates to 675.
 
+![Spreadsheet grid of four weeks of sales and expenses with the SUM, AVERAGE, subtraction and multiplication formulas shown in the cells they belong in, and the answer for each.](/lessons/microsoft-essentials--u2-03-basic-formulas.svg)
+
 ### Four checks before you rely on an answer
 
 A formula is only as good as the cells it points to. Check every one.

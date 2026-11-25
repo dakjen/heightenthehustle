@@ -36,6 +36,8 @@ Here is Dee's month, sorted into categories.
 
 Check it: $1,900 + $600 + $250 + $180 + $140 + $130 = $3,200. Then $5,200 - $3,200 = $2,000. Dee brought in $5,200 and kept $2,000. Because the spending is sorted, she can also see that food is her biggest cost by far. That tells her where a better supplier price or a tighter menu would move profit most. A pile of receipts cannot tell her that.
 
+![Bar chart of Dee's month by category, with $5,200 income, six expense categories led by $1,900 for food and ingredients, $3,200 total expenses and $2,000 profit.](/lessons/getting-paid-and-staying-paid--u2-01-money-in-money-out-and-setup.svg)
+
 ### Categories pay for themselves
 
 A category, such as Supplies or Insurance, does two jobs. It shows you where the money goes, so you can make decisions. And it matters at tax time, because a business expense you have recorded is a tax deduction: it lowers the profit you are taxed on. Categorized expenses are tax deductions. Forgotten ones are donations to the IRS.

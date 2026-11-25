@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>An unsafe prompt with the private details marked, above the safe version that uses placeholders</title>
+<rect width="800" height="450" fill="#ffffff"/>
+<rect x="32" y="28" width="736" height="158" rx="10" fill="#f6e9e9" stroke="#910000"/>
+<g stroke="#910000" stroke-width="3" stroke-linecap="round"><path d="M56 52 l14 14 M70 52 l-14 14"/></g>
+<text x="82" y="66" font-size="20" font-weight="bold" fill="#910000">Unsafe</text>
+<rect x="52" y="82" width="696" height="68" rx="6" fill="#ffffff" stroke="#d4d4d4"/>
+<text x="68" y="110" font-size="16" fill="#171717">Write a late payment reminder to <tspan fill="#910000" font-weight="bold">Denise Carter</tspan> at <tspan fill="#910000" font-weight="bold">4410 Elm Ave</tspan>,</text>
+<text x="68" y="134" font-size="16" fill="#171717"><tspan fill="#910000" font-weight="bold">410-555-0199</tspan>, who owes $380 on <tspan fill="#910000" font-weight="bold">card ending 4421</tspan>.</text>
+<text x="56" y="172" font-size="14" fill="#910000">No customer data. No banking info. No passwords.</text>
+<text x="400" y="216" font-size="16" font-weight="bold" fill="#171717" text-anchor="middle">Swap the private details for placeholders</text>
+<path d="M400 224 v14" stroke="#910000" stroke-width="3"/><path d="M392 236 l8 10 l8 -10 z" fill="#910000"/>
+<rect x="32" y="254" width="736" height="164" rx="10" fill="#f6f6f6" stroke="#d4d4d4"/>
+<path d="M56 286 l6 7 l12 -15" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="84" y="292" font-size="20" font-weight="bold" fill="#171717">Safe</text>
+<rect x="52" y="308" width="696" height="68" rx="6" fill="#ffffff" stroke="#d4d4d4"/>
+<text x="68" y="336" font-size="16" fill="#171717">Write a polite late payment reminder to a client named <tspan fill="#910000" font-weight="bold">[NAME]</tspan></text>
+<text x="68" y="360" font-size="16" fill="#171717">who owes <tspan fill="#910000" font-weight="bold">[AMOUNT]</tspan> for a cleaning service from three weeks ago.</text>
+<text x="56" y="402" font-size="14" fill="#4b4b4b">Fill in the real name and amount yourself, outside the AI tool.</text>
+</svg>

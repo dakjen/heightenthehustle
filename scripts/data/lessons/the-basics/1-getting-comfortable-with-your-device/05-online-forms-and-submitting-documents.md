@@ -40,6 +40,8 @@ You will meet the same handful of field types on every application. Each has one
 - **Date picker.** A small calendar that opens when you click a date field.
 - **Upload button.** A button that says something like **Choose file**, **Browse**, **Attach**, or **Upload**.
 
+![A generic application form with each field type labelled: text box, dropdown menu, radio buttons, checkboxes, date picker, upload button, and the final Submit button](/lessons/the-basics--05-online-forms-and-submitting-documents.svg)
+
 Type answers exactly the way the form asks. If a phone field shows an example with dashes, use dashes. If it asks for your legal business name, type it the way it appears on your registration, not the name on your sign. A mismatch between the form and your registration is a common reason an application gets sent back.
 
 ### Upload a document and confirm it attached

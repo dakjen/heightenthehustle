@@ -34,6 +34,8 @@ Here is the outline for Sharp Lines Barbershop, a fictional business. Notice how
 - **Slide 4, Title and Content layout.** Title: `Fresh Cuts Every Day`. Content: one photo of your work, or the expense chart with a title that states the point.
 - **Slide 5, Title and Content layout.** Title: `Come See Us`. Lines: `410 Maple Street`, `555-0142`, `Tuesday to Sunday, 9 a.m. to 7 p.m.`, `Book your first cut this week`.
 
+![Five slide thumbnails labelled title, overview, product or service, supporting visual, and closing, with every title in the same position.](/lessons/microsoft-essentials--u3-04-five-slide-presentation.svg)
+
 Write your outline on paper or in a blank document before you open PowerPoint. Deciding the words ahead of time keeps you from decorating slides that have nothing to say yet.
 
 ### Build it in order
