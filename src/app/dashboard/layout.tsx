@@ -62,7 +62,7 @@ export default async function DashboardLayout({
       items: [
         ...(isAdminArea ? [{ href: "/dashboard/admin/support", label: "Support Requests" }] : []),
         ...(isAdminArea ? [{ href: "/dashboard/admin/documents", label: "Member Documents" }] : []),
-        ...(isAdminArea ? [{ href: "/dashboard/admin/resources", label: "Resources Hub" }] : []),
+        ...(isAdminArea ? [{ href: "/dashboard/admin/resources", label: "Manage Resources" }] : []),
       ],
     },
     {
