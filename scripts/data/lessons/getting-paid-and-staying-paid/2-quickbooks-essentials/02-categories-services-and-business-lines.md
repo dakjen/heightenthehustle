@@ -1,26 +1,26 @@
-# Categories, Services, and Business Lines
+# See Which Part of Your Business Makes Money
 
-> Build a short chart of accounts, list everything you sell with a price, and keep each line of business separate.
+> Trim QuickBooks to 10 to 15 expense categories you would act on, list everything you sell with a price, and keep each line of business separate.
 
 ## Why this matters
 
-QuickBooks can only tell you what you tell it to track. If every expense lands in one bucket called "Other," your reports say nothing. If you have ninety categories, you will never label things the same way twice. Dee, the caterer, also sells weekly meal-prep boxes. She suspected meal prep was a lot of work for little money, but all her income sat in one line, so she could not check. Twenty minutes of setup gave her the answer every month after that. This lesson is that setup.
+QuickBooks can only report on what you set it up to track. If every expense lands in one bucket called "Other," the reports say nothing. If there are ninety categories, the same purchase gets labeled three different ways over a year. Dee, the caterer, also sells weekly meal-prep boxes. She suspected meal prep was a lot of work for little money, but all her income sat in one line, so there was no way to check. Twenty minutes of setup gave her the answer every month after that. This lesson is that setup.
 
-## What you'll learn
+## What you'll be able to do
 
-- What the chart of accounts is and how long it should be
-- A sample list of 12 expense categories you can adapt
-- The test for whether a category deserves to exist
-- How to list your products and services with prices
-- How to keep separate lines of business separate on Simple Start
+- Cut the chart of accounts down to a list you can label from without hesitating
+- Adapt a sample list of 12 expense categories to your trade
+- Test whether a category deserves to exist
+- Load your products and services with prices so invoices build in a few clicks
+- Keep separate lines of business separate on Simple Start
 
 ## The lesson
 
-### The chart of accounts is just a category list
+### Make the category list yours
 
-"Chart of accounts" sounds technical. It is just the category list your money sorts into. Each category is called an account. Some accounts hold income, some hold expenses, and some hold things like your bank balance. When you label a transaction, you are choosing which account it belongs to.
+Every transaction you label goes into an account on your chart of accounts, which is QuickBooks' name for the full list of categories your money sorts into. Some accounts hold income, some hold expenses, and some hold balances such as your bank account. The expense accounts are the ones you choose from every week, so they are the ones to get right.
 
-QuickBooks gives you a starter list when you sign up. It is usually longer than you need and written in accountant language. Your job is to trim it and rename things so they match how your business actually works.
+QuickBooks gives you a starter list when you sign up. It is built to cover every kind of business, so it is longer than you need and worded for accountants. Trim it and rename things so they match how your business runs.
 
 ### Keep it short: 10 to 15 expense categories
 
@@ -43,9 +43,9 @@ Adapt it. Dee would add "Food and Ingredients" and "Packaging," because those ar
 
 ### The test for every category
 
-Here is the test: do your report lines answer questions you would actually act on? "Food and Ingredients" passes for Dee, because if that number jumps she will reprice her menu or change suppliers. Splitting it into "Produce," "Meat," "Dairy," and "Spices" fails. She would never make a decision from the Spices line, so it only adds work.
+Here is the test: do your report lines answer questions you would act on? "Food and Ingredients" passes for Dee, because if that number jumps she will reprice her menu or change suppliers. Splitting it into "Produce," "Meat," "Dairy," and "Spices" fails. She would never make a decision from the Spices line, so it only adds work.
 
-You do not have to get the list perfect today. You can add or rename categories anytime. Let real transactions tell you what is missing. If you keep reaching for a category that does not exist, add it. If a category sits empty for three months, remove it or fold it into another.
+The list does not have to be final today. You can add or rename categories anytime. Let real transactions tell you what is missing. If you keep reaching for a category that does not exist, add it. If a category sits empty for three months, remove it or fold it into another.
 
 To set up your list:
 
@@ -66,11 +66,11 @@ Next, open Products and Services. Add each thing you sell with a name, a short d
 | Weekly meal-prep box | $90 |
 | Delivery and setup | $40 |
 
-This pays off in two ways. Invoicing gets fast. You pick the service and the price fills in. An invoice for 30 catered lunches, one dessert tray, and delivery is built in a few clicks: 30 x $18 = $540, plus $65, plus $40, for a total of $645. Reports also get smart. QuickBooks can show sales by product or service, so you can see which service actually makes money and which one just keeps you busy.
+This pays off in two ways. Invoicing gets fast. You pick the service and the price fills in. An invoice for 30 catered lunches, one dessert tray, and delivery is built in a few clicks: 30 x $18 = $540, plus $65, plus $40, for a total of $645. Reports also get sharper. QuickBooks can show sales by product or service, so you can see which service makes money and which one only keeps you busy.
 
 ### Running more than one line of business
 
-A **line of business** is a distinct way you earn money. Catering and meal prep are two lines. So are haircuts and product sales, or house cleaning and office cleaning. If you run more than one, keep their income separate.
+Catering and meal prep are two lines of business, two distinct ways Dee earns money. So are haircuts and product sales, or house cleaning and office cleaning. If you run more than one, keep their income separate.
 
 On Simple Start, that means a separate income account per line. Dee creates two income accounts in her Chart of Accounts: "Catering Income" and "Meal Prep Income." Then she points each product or service at the right one. Catered lunches, dessert trays, and delivery go to Catering Income. Meal-prep boxes go to Meal Prep Income.
 
@@ -84,7 +84,7 @@ Here is what Dee saw at the end of the month.
 | Meal Prep Income | $1,800 |
 | **Total income** | **$5,200** |
 
-$3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. Now Dee can ask a sharper question: how many hours does each line take her? That is a decision she could not even start to make when everything sat in one line.
+$3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. Now Dee can ask a sharper question: how many hours does each line take her? That is a decision she could not start to make when everything sat in one line.
 
 ## Do this now
 
@@ -98,20 +98,21 @@ $3,400 + $1,800 = $5,200. Catering brings in nearly twice what meal prep does. N
 
 You finish with a short chart of accounts in your own words, a priced list of what you sell, and income separated by line of business.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Too many categories.** Fix: fold small ones together until you are at 10 to 15.
-- **Dumping things into "Other" or "Miscellaneous."** Fix: if you use it more than a few times, create a real category.
-- **Keeping accountant labels you do not understand.** Fix: rename them in your own words.
-- **One income line for two different businesses.** Fix: one income account per line of business.
-- **Typing prices by hand on every invoice.** Fix: save each service with its price once.
+- **Too many categories.** Every transaction takes longer and the same cost ends up in two places. Fix: fold small ones together until you are at 10 to 15.
+- **"Other" or "Miscellaneous" as a catch-all.** A large unlabeled line hides the costs you most need to see. Fix: if you use it more than a few times, create a real category.
+- **Starter-list labels left as they came.** Wording that does not match your business leads to inconsistent choices. Fix: rename them in your own words.
+- **One income line for two different businesses.** A weak line hides behind a strong one. Fix: one income account per line of business.
+- **Prices typed by hand on every invoice.** It is slow, and it is how old prices and typos reach customers. Fix: save each service with its price once.
 
-## Check yourself
+## Before you move on
 
-- What is the chart of accounts, in plain words?
 - How many expense categories do you have, and does each one pass the test?
-- Is every product or service you sell listed with a price?
+- Is every product or service you sell listed with its current price?
+- Can you build an invoice for your most common job without typing a price?
 - If you have more than one line of business, can you see each one's income separately?
+- Which line would you check first if profit dropped next month?
 
 ## What you walk away with
 

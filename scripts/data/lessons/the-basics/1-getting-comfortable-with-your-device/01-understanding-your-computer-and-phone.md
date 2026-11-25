@@ -1,70 +1,91 @@
-# Understanding Your Computer and Phone
+# Fix Device Problems Fast and Get the Right Help
 
-> Learn the parts of your device, what hardware, software, apps, and websites are, and how to describe a problem when you need help.
+> Clear most laptop and phone problems yourself in a few minutes, and when you do need support, describe the problem so it gets fixed in one call.
 
 ## Why this matters
 
-Your computer and your phone are business tools, the same as a barber's clippers or a caterer's oven. When you know what the parts are called and what they do, you stop feeling stuck and start fixing small problems yourself. Picture a cleaning business owner whose laptop freezes ten minutes before she has to send a quote. If she can say, "My browser stopped responding, so I restarted the computer and it works now," she sends the quote on time. If she can only say, "It's broken," she waits on someone else and may lose the job.
+A frozen laptop or a dead app costs you money only when it costs you time. Picture a cleaning business owner whose laptop freezes ten minutes before a quote is due. She restarts it the right way, the browser comes back, and the quote goes out on time. If the restart had not worked, she could have told support, "My browser stopped responding on my Windows laptop, I restarted, and it still shows 'Page unresponsive.'" That sentence gets a fix in one call. "It's broken" gets a callback tomorrow, and the job may go to whoever quoted first.
 
-## What you'll learn
+## What you'll be able to do
 
-- The difference between hardware and software
-- The names of the common parts of a computer and a phone
-- How an operating system, an app, and a website are different
-- How to open apps, change volume and display settings, and restart safely
-- How to describe a technology problem clearly when you ask for help
+- Tell in under a minute whether a problem needs a repair shop or is something you can clear yourself
+- Run a short fix sequence that settles most app and device problems
+- Restart a computer or phone without losing work
+- Keep a device fact card so support never has to wait while you look things up
+- Report a problem in four facts so the person helping you can act right away
 
 ## The lesson
 
-### Hardware and software
+### Decide who can fix it: you or a repair shop
 
-Every device has two sides. **Hardware** is anything you can touch: the screen, the keyboard, the charger, the phone itself. **Software** is the set of instructions that tells the hardware what to do. You cannot touch software, but you see it every time the screen lights up. A simple way to remember it: if you can drop it on your foot, it is hardware. If it can only show up on a screen, it is software.
+The quickest way to stop losing time is to sort the problem into one of two piles. A hardware problem is physical: a cracked screen, a charging port that no longer holds the cable, a key that stopped working, a battery that drains in an hour. Those go to a repair shop, and nothing you tap on the screen will change them. A software problem is in the programs: an app that keeps closing, a page that will not load, a device that has slowed to a crawl. Those you can usually clear yourself.
 
-This matters because the fix is different for each one. A cracked screen is a hardware problem, and it needs a repair shop. An app that keeps closing is a software problem, and you can often fix it yourself by closing the app, updating it, or restarting the device.
+The sorting question is this: does the problem follow one app, or does it follow the device? If only your invoicing app misbehaves and everything else runs fine, work on that app. If everything is slow, work on the device. If a part is physically damaged or will not power on with a charger you know works, book the repair and stop troubleshooting.
 
-### The parts of your device
+When you do call a shop, name the part. "The charging port on the bottom of my phone is loose" or "the left USB port on my laptop stopped reading drives" lets them quote you and order the part before you arrive.
 
-On a computer, the main parts are the **screen** (also called the monitor or display), the **keyboard**, the **mouse or touchpad** (the flat square below a laptop keyboard that moves the pointer), the **power button**, and the **ports**. Ports are the small openings on the sides where you plug things in, such as a charger, a printer cable, or a USB drive. Most computers also have a **camera** above the screen, a **microphone**, and **speakers**.
+### The fix sequence for software problems
 
-On a phone or tablet, the screen does most of the work because you touch it directly. You will also find a **power button** on the side, **volume buttons**, a **charging port** on the bottom, and **cameras** on the front and back. Take a moment to find each of these on your own device. Knowing where they are saves time later when someone says, "Hold the power button."
+Work through these in order.
 
-### Operating system, app, or website?
+1. Close the app completely and open it again.
+2. Check for an update to the app. An outdated version is a frequent cause of crashes after the device itself has updated.
+3. Restart the device (steps below).
+4. Check for an update to the device's operating system, the main software that runs it (Windows or macOS on a computer, iOS or Android on a phone). Look in **Settings** under **System**, **General**, or **Software update**.
+5. If it is still failing, write your problem report and call support.
 
-These three words get mixed up all the time, so here is the plain version. The **operating system** is the main software that runs the whole device. It starts when you turn the device on, and everything else runs on top of it. Computers usually run Windows or macOS. Phones usually run iOS (on an iPhone) or Android.
+### Restart without losing work
 
-An **app** (short for application, and also called a program) is software that does one kind of job. A calculator, a camera, a word processor, and a web browser are all apps. An app is installed on your device, and you open it by clicking or tapping its icon, which is the small picture that stands for it.
+A restart clears out whatever was stuck and starts everything fresh, which is why support asks about it before anything else. Do it properly and you lose nothing.
 
-A **website** is not installed on your device. It lives on the internet, and you visit it using a browser app such as Chrome, Safari, or Edge. Your bank is a good example. The bank may have an app you install on your phone, and it also has a website you can visit from any browser. Both reach the same account. When you ask for help, saying "the app" or "the website" tells the helper exactly where to look.
+1. Save your work.
+2. Close your open apps.
+3. Choose **Restart** from the power menu. On Windows, the power menu is in the Start menu. On a Mac, it is in the Apple menu at the top left corner. On a phone, hold the power button (on some phones, the power button and a volume button together) until power options appear.
 
-### Restarting safely and describing a problem
+Holding the power button until the device goes dark is a last resort for a device that is fully frozen. It cuts power before anything can close properly, so unsaved work is gone.
 
-Restarting fixes a surprising number of problems because it clears out whatever was stuck and starts fresh. To restart safely, save your work first, close your open apps, and then choose **Restart** from the power menu. On Windows, the power menu is in the Start menu. On a Mac, it is in the Apple menu at the top left corner. On a phone, hold the power button (on some phones, the power button and a volume button together) until power options appear. Holding the power button until the device goes dark is a last resort for a device that is fully frozen.
+### Know whether you are in the app or on the website
 
-When restarting does not fix it, describe the problem with four facts: what device you are using, what you were trying to do, what happened instead, and the exact words of any message on the screen. "I'm on my Android phone, I tried to open my email app, and it says 'No connection'" gets you help in minutes.
+Many services give you two ways in. Your bank has an app installed on your phone, and it also has a website you reach through a browser such as Chrome, Safari, or Edge. Both reach the same account, but they are separate pieces of software with separate support steps. This gives you a workaround and a better report. If the bank's app will not open, sign in on the website and finish the deposit or transfer there. Then tell support, "The app fails, the website works." That one detail tells them exactly where to look.
+
+### Keep a device fact card
+
+Support will ask what you are running. Have the answer written down before you need it. Open **Settings** and look for a section called **About**, **General**, or **System**. Record the device type and model, and the name and version of the operating system.
+While you are in Settings, confirm you can reach the volume and brightness controls quickly.
+### Report a problem in four facts
+
+When the fix sequence does not settle it, give support these four facts:
+
+1. What device you are using
+2. What you were trying to do
+3. What happened instead
+4. The exact words of any message on the screen
+
+"I'm on my Android phone, I tried to open my email app, and it says 'No connection'" gets you help in minutes. Add what you already tried, and the person helping can skip straight to the next step. Photograph the error message before you close it. The exact wording is the best clue anyone has, and it disappears when you tap OK.
 
 ## Try it
 
-1. Point to each part of your device and say its name out loud: screen, keyboard or touch screen, power button, volume controls, charging port, camera.
-2. Find out which operating system you have. Open **Settings** and look for a section called **About**, **General**, or **System**. Write the name down.
-3. Open three apps: a browser, a calculator, and a notes or word processing app. Close each one.
-4. Turn the volume up, then down. Then find the brightness setting and make the screen brighter and dimmer.
+1. Open **Settings**, find **About**, **General**, or **System**, and write down your device model and the name of your operating system.
+2. Name the physical parts you might need to describe to a repair shop: screen, keyboard or touch screen, power button, volume controls, charging port, camera. Note which ports your laptop has and what you plug into each.
+3. Open three apps: a browser, a calculator, and a notes or word processing app. Close each one completely, the way you would in step one of the fix sequence.
+4. Turn the volume up, then down. Then change the screen brightness in both directions. Time yourself. You want this to take seconds.
 5. Save anything open, then restart your device using the power menu, not by holding the button.
-6. On paper, write one practice problem report using the four facts. You now have a device fact card: your device type, your operating system, and a model problem report.
+6. On paper, write one practice problem report using the four facts, plus what you already tried. You now have a device fact card: your device type, your operating system, and a model problem report.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Calling everything "the internet."** Name the actual thing: the device, the app, or the website.
-- **Holding the power button every time something is slow.** Use Restart from the power menu so the device can close everything properly.
-- **Closing an error message without reading it.** Write down or photograph the exact words first. They are the best clue.
-- **Restarting without saving.** Save your work before you restart, every time.
+- **Reporting "the internet is down" when one app is failing.** Support starts in the wrong place and you repeat the call. Name the actual thing: the device, the app, or the website.
+- **Holding the power button whenever something is slow.** It works, but it risks unsaved work and can leave files damaged. Use Restart from the power menu so the device can close everything properly.
+- **Closing an error message before recording it.** Without the wording, support has to recreate the problem. Write down or photograph the exact words.
+- **Restarting with a quote or invoice half written.** Save your work before you restart, every time.
 
-## Check yourself
+## Before you move on
 
-- Is a printer hardware or software? What about the program that sends a document to it?
-- What is the name of the operating system on your device?
-- What is the difference between your bank's app and your bank's website?
-- What four facts make a good problem report?
+- Can you state your device model and operating system without looking them up, or put your hand on the card that lists them?
+- Think of the last tech problem that held up a job. Was it hardware or software, and which step of the fix sequence would have settled it?
+- For the service you depend on most (bank, payments, scheduling), do you have both the app and the website sign-in working, so one can cover for the other?
+- Can you give a four-fact report for a problem you had recently, in under thirty seconds?
 
 ## What you walk away with
 
-You can find your way around your device, name its parts, and tell an operating system from an app from a website. You also have a fact card for your device and a clear way to describe a problem when you need help.
+A way to sort any device problem in under a minute, a fix sequence that settles most software trouble without outside help, a device fact card, and a four-fact problem report that gets you the right fix in one call.

@@ -1,32 +1,32 @@
-# LinkedIn Profile
+# A LinkedIn Profile That Gets You the Callback
 
-> Build a finished LinkedIn profile live: headshot, a headline that says what you do for whom, a three-paragraph About, and your business under Experience.
+> Finish a LinkedIn profile in one session: headshot, a headline that says what you do for whom, a three-paragraph About, your business under Experience, and a way to reach you.
 
 ## Why this matters
 
-Before a bank officer, a property manager, or a corporate buyer calls you back, they look you up. LinkedIn is often the first result for your name, and an empty profile with no photo reads as "not serious" even when your work is excellent. Picture Renee, who runs a commercial cleaning company. A facilities manager hears her name from a tenant and searches for her. If he finds a clear photo, a headline that says exactly what she cleans and for whom, and a short story about her business, he calls. If he finds a gray circle and the word "Owner," he moves on to the next name on his list.
+Before a bank officer, a property manager, or a corporate buyer calls you back, they look you up. LinkedIn is often the top result for your name, and it is the one result where you control every word. Picture Renee, who runs a commercial cleaning company. A facilities manager hears her name from a tenant and searches for her. He finds a clear photo, a headline that says exactly what she cleans and for whom, and a short account of how her company works. He calls. The same search landing on a blank photo circle and the single word "Owner" gives him nothing to act on, and he moves to the next name on his list.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to take a headshot that works, using only a phone
-- How to write a headline that says what you do for whom
-- How to draft a three-paragraph About section
-- How to list your business under Experience and make your contact info visible
-- How to stay visible without ever writing a post
+- Take a headshot that works, using a phone and a window
+- Write a headline that says what you do, for whom, and where
+- Draft a three-paragraph About section in your own voice
+- List your business under Experience and make your contact details visible
+- Stay in front of buyers without writing a single post
 
 ## The lesson
 
-### Your profile is a handshake
+### Ten seconds to a decision
 
-Think of your LinkedIn profile as the handshake that happens before you are in the room. It has one job: let a stranger decide in about ten seconds that you are a real professional who runs a real business. You do not need a long work history or a fancy degree for that. You need five things filled in clearly, and we finish all five in this session.
+A buyer checking you out gives the profile about ten seconds. In that time they want to confirm three things: you are a real person, you run a real business, and it does the thing they need. Five parts of the profile carry that decision, and we finish all five in this session.
 
 ### The headshot
 
-Your photo is the first thing people see, and profiles without one get skipped. You do not need a photographer. You need your face, good light, and a plain background. Stand facing a window so the light falls on your face. Hold the phone at eye level, or have a neighbor in the session hold it. Frame from the shoulders up. Wear what you would wear to meet a customer. Smile like you are greeting someone you like. Skip the sunglasses, the group shot cropped down, and the car selfie. If you do not have a photo you like, we take one in the session.
+Profiles without a photo get skipped, so this comes before anything else. A photographer is optional. The requirements are your face, good light, and a plain background. Stand facing a window so the light falls on your face. Hold the phone at eye level, or have a neighbor in the session hold it. Frame from the shoulders up. Wear what you would wear to meet a customer. Smile like you are greeting someone you like. Leave out sunglasses, a group shot cropped down, and the car selfie. If you do not have a photo you like, we take one in the session.
 
 ### The headline
 
-The headline is the line of text right under your name. LinkedIn fills it with your job title unless you change it. A title alone tells a stranger almost nothing. A strong headline says what you do and who you do it for.
+LinkedIn fills the line under your name with your job title unless you change it. A title alone tells a buyer almost nothing, and it wastes the one line that shows up next to your name in search results, comments, and messages. A strong headline says what you do and who you do it for.
 
 | Weak | Strong |
 | --- | --- |
@@ -34,11 +34,11 @@ The headline is the line of text right under your name. LinkedIn fills it with y
 | CEO | Catering for church events, repasts, and office lunches up to 200 guests |
 | Barber | Barber and shop owner, clean fades and beard work, walk-ins and appointments in Southeast DC |
 
-Use this formula: what you do, for whom, and where. Add your business name if there is room.
+Use this formula: what you do, for whom, and where. Add your business name if there is room. Use the words a buyer would type into a search box, such as "medical cleaning" or "office lunches," because LinkedIn search matches on them.
 
 ### The About section
 
-The About section sits near the top of your profile. Write it in first person, as if you are talking to a customer across the counter. Three short paragraphs are enough.
+Write the About in first person, the way you talk to a customer across the counter. Three short paragraphs are enough.
 
 1. Paragraph one: what you do and who you serve.
 2. Paragraph two: how you work and why people trust you.
@@ -52,17 +52,19 @@ Here is a full example for a fictional business.
 >
 > If you manage a building or run an office and want a quote, message me here or call the number in my contact info. I answer within one business day.
 
-Notice what is missing: no buzzwords, no "passionate, results-driven professional." Plain words win.
+Notice what is missing: no buzzwords, no "passionate, results-driven professional." Plain words win. Notice also what is in it that a buyer screens for: years in business, crew size, licensed, bonded, insured, and a response time.
 
 ### Experience, your custom link, and contact info
 
 Under Experience, add a position. Put your business name as the company and your real role as the title, such as Owner or Founder. Add the month and year you started, and two or three lines about what the business does. This is what makes LinkedIn show you as someone who runs a company, not someone between jobs.
 
-Next, LinkedIn gives every profile a long web address full of random numbers. In your public profile settings you can edit it to something clean, usually your name. A clean profile link looks better on a business card and in your email signature. Last, open the Contact info area on your profile and add your business email and phone number. Check that they are set so visitors can see them. A profile nobody can respond to is a dead end.
+Next, replace the long default web address, which ends in a string of random numbers. In your public profile settings you can edit it to something clean, usually your name. A clean profile link reads well on a business card, in an email signature, and at the bottom of a bid.
+
+Last, open the Contact info area on your profile and add your business email and phone number. Check that they are set so visitors can see them. A buyer who is ready to call and cannot find a number will call the next vendor.
 
 ### Staying visible without posting
 
-You never have to post. Twice a week, leave a thoughtful comment on someone else's post, such as a customer, a supplier, a local business group. Thoughtful means more than "Great post!" Add one useful sentence from your own experience. Every comment puts your name, photo, and headline in front of that person's whole network.
+You never have to post. Twice a week, leave a thoughtful comment on someone else's post: a customer, a supplier, a local business group. Thoughtful means more than "Great post!" Add one useful sentence from your own experience. Every comment puts your name, photo, and headline in front of that person's whole network.
 
 ## Do this now
 
@@ -76,21 +78,22 @@ You never have to post. Twice a week, leave a thoughtful comment on someone else
 
 Finished result: a complete, public LinkedIn profile you would be glad for a customer to find.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **A title-only headline.** Fix: add what you do and who you do it for.
-- **An About written like a résumé in third person.** Fix: write "I" and "we," the way you talk to customers.
-- **No way to contact you.** Fix: put your business phone and email in Contact info and say how to reach you in the About.
-- **Listing yourself as "Self-employed" with no business name.** Fix: add your business as the company under Experience.
-- **Setting it up and disappearing.** Fix: two comments a week, on your calendar.
+- **A title-only headline.** It leaves the most-seen line on the profile empty of any reason to hire you. Fix: add what you do and who you do it for.
+- **An About written like a résumé in third person.** Buyers skim past it. Fix: write "I" and "we," the way you talk to customers.
+- **No way to contact you.** Interest with no phone number goes to a competitor. Fix: put your business phone and email in Contact info and say how to reach you in the About.
+- **"Self-employed" with no business name.** It hides the company you built. Fix: add your business as the company under Experience.
+- **A finished profile that then goes quiet.** Fix: two comments a week, as a repeating block on your calendar.
 
-## Check yourself
+## Before you move on
 
-- Could a stranger read only your headline and know what to hire you for?
-- Does your About say who you serve, why to trust you, and how to reach you?
+- Hand your phone to a neighbor with only your headline showing. Can they say what to hire you for and where you work?
+- Does your About name who you serve, why to trust you, and how to reach you, in that order?
+- Log out, or open a private browser window, and pull up your profile. Are your phone and email visible to a visitor?
 - Is your business listed under Experience with a start date?
-- When will you leave your two comments this week?
+- Which two days this week are your comments on the calendar?
 
 ## What you walk away with
 
-A finished LinkedIn profile with a clear headshot, a headline that sells, a three-paragraph About, your business under Experience, a clean profile link, and a simple habit that keeps you visible.
+A finished LinkedIn profile with a clear headshot, a headline that sells, a three-paragraph About, your business under Experience, a clean profile link, visible contact details, and a twice-a-week habit that keeps you in front of buyers.

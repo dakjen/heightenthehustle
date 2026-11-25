@@ -1,28 +1,24 @@
-# Google Business Profile
+# Show Up on Google Maps and Keep the Reviews Coming
 
-> Get on the map for free: claim your profile, pick the right category, start verification, and send your first two review requests.
+> Claim your free Google Business Profile, pick the category that puts you in the right searches, start verification, and send two review requests before you leave.
 
 ## Why this matters
 
-When someone types "barber near me" or "catering in Hyattsville," Google shows a map with a short list of businesses. Those listings come from Google Business Profiles, and a profile is free. If you do not have one, you are not on that map, no matter how good you are. Think of Marcus, a barber with ten years of loyal customers and no profile. A new family moves into the neighborhood, searches for a barber, and sees three shops with photos, hours, and reviews. Marcus is two blocks away and never appears.
+When someone types "barber near me" or "catering in Hyattsville," Google shows a map with a short list of businesses. Those listings come from Google Business Profiles, and a profile is free. A business without one is not on that map, no matter how good the work is. Think of Marcus, a barber with ten years of loyal customers who has always filled his chairs by word of mouth. A family moves into the neighborhood, searches for a barber, and sees three shops with photos, hours, and reviews. Marcus is two blocks away and never appears. For a local business, this listing often brings in more calls than a website does.
 
-## What you'll learn
+## What you'll be able to do
 
-- What a Google Business Profile is and where customers see it
-- How to set up or claim your profile and choose the right category
-- How to add hours, phone, and service area, and start verification
-- How to add photos and services that win the click
-- How to ask for reviews and reply to them
+- Claim an existing listing or create your profile, with the category that matches how customers search
+- Enter hours, phone, and address or service area, and start verification
+- Add the photos and services that win the click over the listing next to yours
+- Ask for reviews in a way that gets them written
+- Reply to reviews so future customers see how you treat people
 
 ## The lesson
 
-### What the profile is
-
-A Google Business Profile is the box of information that appears in Google Search and Google Maps when someone looks for your business or for a business like yours. It shows your name, category, hours, phone number, photos, and reviews. You manage it with a regular Google account. It costs nothing, and for a local business it often brings in more calls than a website does.
-
 ### Set up or claim
 
-Start by searching Google for your business name and town. Sometimes Google has already made a basic listing from public information, or a customer added it. If a listing exists, look for the option to claim it as the owner. If nothing shows up, you create a new one.
+Start by searching Google for your business name and town. Google may already have made a listing from public information, or a customer may have added one. If a listing exists, look for the option to claim it as the owner. If nothing shows up, you create one. Either way you manage it from a regular Google account, so use the one you use for business.
 
 1. Sign in to the Google account you use for business.
 2. Search for your business name. Claim the listing if it exists, or start a new profile.
@@ -34,21 +30,21 @@ Start by searching Google for your business name and town. Sometimes Google has 
 
 ### The category decides everything
 
-Your primary category tells Google which searches you belong in. It is the most important choice on the profile. Type a few words and pick from Google's list. Choose the most specific one that fits. A catering company that picks "Restaurant" will show up for people who want a table tonight, and miss the people searching for a caterer. "Caterer" is the right pick. A home daycare should look for a child care category, not a general "Education" one. You can add a few secondary categories later, but the primary one carries the most weight.
+Your primary category tells Google which searches you belong in. It is the most important choice on the profile. Type a few words and pick from Google's list. Choose the most specific one that fits. A catering company that picks "Restaurant" will show up for people who want a table tonight, and miss the people searching for a caterer. "Caterer" is the right pick. A home daycare should look for a child care category, not a general "Education" one. You can add a few secondary categories later, but the primary one carries the most weight. A useful check: search for your own service the way a customer would, look at which businesses appear, and note the category shown under their names.
 
 ### Hours, phone, and service area
 
-Enter the hours you truly answer or are open. Wrong hours are the fastest way to earn an angry review. Use one business phone number and use that same number everywhere online.
+Enter the hours you truly answer or are open. Wrong hours are the fastest way to earn an angry review, because the customer drove over or called and got nothing. Use one business phone number and use that same number everywhere online.
 
-If customers come to you, such as a shop or a salon, show your address. If you go to them, such as cleaning, mobile detailing, or home repair, you can hide your home address and list a service area instead. A service area is the list of cities, counties, or ZIP codes you travel to.
+If customers come to you, such as a shop or a salon, show your address. If you go to them, such as cleaning, mobile detailing, or home repair, you can hide your home address and list a service area instead: the cities, counties, or ZIP codes you travel to.
 
 ### Verification
 
-Google will not fully show your profile until it confirms you are the real owner. That step is called verification. The methods Google offers vary by business and can change. You may be offered a phone call or text, an email, a short video of your business, or a postcard with a code mailed to your address. The timing varies too. Some methods finish in minutes and others take days or longer. This is why we start it in the session. Verification that waits for "later" tends not to happen.
+Google will not fully show your profile until it confirms you are the real owner. The verification methods Google offers vary by business and can change. You may be offered a phone call or text, an email, a short video of your business, or a postcard with a code mailed to your address. The timing varies too. Some methods finish in minutes and others take days or longer. This is why we start it in the session. Verification left for "later" tends not to happen, and every week it waits is a week off the map.
 
 ### The winning extras
 
-Once the basics are in, three extras make people choose you over the listing next to yours.
+Once the core details are in, three extras make people choose you over the listing next to yours.
 
 **Real work photos.** Add photos of your actual work, your space, your truck, your team. Phone photos are fine. Skip stock photos, because customers can tell.
 
@@ -58,11 +54,11 @@ Once the basics are in, three extras make people choose you over the listing nex
 
 > Hi Ms. Carter, it's Marcus from Fresh Line Barbershop. Thank you for bringing the boys in on Saturday. If you have one minute, would you leave us a quick Google review? It really helps a small shop like mine get found. Here is the link: [your review link]. Thank you either way!
 
-It works because it is personal, short, says why it matters, and makes the task easy. Never offer discounts or gifts in exchange for reviews, and never write your own.
+It works because it is personal, short, says why it matters, and takes the customer one tap. Save it in your phone's notes or as a text shortcut so sending it takes ten seconds. Never offer discounts or gifts in exchange for reviews, and never write your own.
 
 ### Reply to every review
 
-Reply to every review, good or bad. A reply to a good review can be two sentences: thank them by name and mention the job. Future customers read your replies as closely as the reviews themselves. A calm, kind reply shows them how you treat people.
+Reply to every review, good or bad. A reply to a good review can be two sentences: thank them by name and mention the job. Future customers read your replies as closely as the reviews themselves. A calm, kind reply shows them how you treat people. Set aside ten minutes on the same day each week to answer whatever came in, so no review sits unanswered for long.
 
 ## Do this now
 
@@ -76,20 +72,21 @@ Reply to every review, good or bad. A reply to a good review can be two sentence
 
 Finished result: a profile with verification under way, photos and services in place, and two review requests sent or queued.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Picking a broad category.** Fix: choose the most specific one that matches what people actually search for.
-- **Putting off verification.** Fix: start it today and put the follow-up on your calendar.
-- **Hours that are not true.** Fix: list only the hours you really answer, and update them for holidays.
-- **Asking for reviews in a mass message.** Fix: text one person at a time, by name, right after a good job.
-- **Ignoring reviews.** Fix: reply to each one within a few days.
+- **A broad category.** It puts you in searches from people who want something else and leaves you out of the ones that pay. Fix: choose the most specific category that matches what people actually search for.
+- **Verification left unfinished.** The profile stays hidden while competitors collect the calls. Fix: start it today and put the follow-up on your calendar.
+- **Hours that have drifted from reality.** A wasted trip turns into a one-star review. Fix: list only the hours you really answer, and update them for holidays.
+- **Review requests sent as a mass message.** They read as spam and get ignored. Fix: text one person at a time, by name, right after a good job.
+- **Reviews with no reply.** Readers take silence as indifference. Fix: reply to each one within a few days.
 
-## Check yourself
+## Before you move on
 
-- What primary category did you pick, and why that one?
-- Which verification method were you offered, and what is your next step?
-- Which two customers got your review request?
-- How will you reply to your first review?
+- Which primary category did you pick, and does it match the words your customers type?
+- Which verification method were you offered, and is the follow-up date on your calendar?
+- Which two customers have your review request, or are queued for the day the link works?
+- Is your review-ask message saved where you can send it from your phone in ten seconds?
+- Do the phone number and hours on the profile match your cards and invoices?
 
 ## What you walk away with
 

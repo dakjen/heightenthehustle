@@ -1,42 +1,30 @@
-# Creating Your First Spreadsheet
+# An Expense List That Answers "What Did I Spend?"
 
-> Learn rows, columns, cells, and worksheets, then build and save a simple business expense list.
+> Set up a four-column expense list in Excel or Google Sheets, enter purchases the way an accountant would, and save it where you can reopen it in seconds.
 
 ## Why this matters
 
-Most small-business owners keep their numbers in three places: a shoebox of receipts, a banking app, and their own memory. That works until tax time, a loan application, or the month you cannot tell where the money went. A spreadsheet is one place to write it all down so it can be added up, sorted, and checked. Think of a house-cleaning business that buys supplies a few times a week. Written on scraps of paper, those purchases are a mystery. Typed into a spreadsheet, they become a clear list that answers the question "What did I spend this month?" in seconds.
+Most small-business owners keep their numbers in three places: a shoebox of receipts, a banking app, and their own memory. That works until tax time, a loan application, or the month you cannot tell where the money went. One list, in one file, can be added up, sorted, and checked. Think of a house-cleaning business that buys supplies a few times a week. Written on scraps of paper, those purchases are a mystery. Typed into a spreadsheet, they become a clear list that answers the question "What did I spend this month?" in seconds.
 
-## What you'll learn
+## What you'll be able to do
 
-- What rows, columns, cells, and worksheets are
-- How to read a cell's address, such as B3
-- How to enter, edit, and erase data
-- How to save your spreadsheet and open it again
-- How the same steps look in Google Sheets
+- Lay out an expense list with four headings that hold up at tax time
+- Enter a full row without taking your hands off the keyboard
+- Point to any entry by its cell address, such as B3, which formulas rely on later
+- Correct, replace, or clear an entry and widen a column that cuts off its text
+- Save the workbook under a clear name and reopen it, in Excel or Google Sheets
 
 ## The lesson
 
-### What a spreadsheet is
+### Excel or Google Sheets
 
-A **spreadsheet** is a grid for organizing information, mostly numbers. Excel is Microsoft's spreadsheet program. Google Sheets is Google's version, and it runs in a web browser. They work almost the same way. This unit teaches each skill in Excel first, then shows you the Google Sheets version.
+Excel is Microsoft's spreadsheet program. Google Sheets is Google's version, and it runs in a web browser. They work almost the same way. This unit shows each skill in Excel, then gives the Google Sheets version at the end of the lesson.
 
-Open Excel and choose **Blank workbook**. A **workbook** is the whole file. Inside it are one or more **worksheets**, which are separate pages of the grid. You can see the worksheets as tabs at the bottom of the screen. A new workbook starts with one, named Sheet1.
+Open Excel and choose **Blank workbook**. The workbook is the whole file. Inside it are one or more worksheets, separate pages of the grid, shown as tabs at the bottom of the screen. A new workbook starts with one, named Sheet1.
 
-### Rows, columns, and cells
+### Four headings, one purchase per row
 
-The grid has three parts.
-
-- **Columns** run up and down. Each one has a letter at the top: A, B, C, and so on.
-- **Rows** run side to side. Each one has a number on the left: 1, 2, 3, and so on.
-- A **cell** is one box in the grid, where a column and a row meet.
-
-Every cell has an address made of its column letter and row number. The cell in column B, row 3 is **B3**. Click any cell and look at the small box above column A, called the Name Box. It shows the address of the cell you clicked. Addresses matter because later you will use them to tell the spreadsheet which numbers to add.
-
-### Entering data
-
-Click a cell and type. Press **Enter** to finish and move down one cell. Press **Tab** to finish and move one cell to the right. Tab is handy when you are filling in a row from left to right.
-
-Put labels in the first row so you know what each column holds. These labels are called **headings**. For an expense list, use four headings: Date, Item, Category, and Amount. Then put each purchase on its own row below, like this.
+Put labels in row 1 so every column has one job. For an expense list, use four headings: Date, Item, Category, and Amount. Then put each purchase on its own row below, like this.
 
 | Date | Item | Category | Amount |
 | --- | --- | --- | --- |
@@ -44,24 +32,32 @@ Put labels in the first row so you know what each column holds. These labels are
 | 3/5/2026 | Gas | Travel | 40.00 |
 | 3/9/2026 | Business cards | Marketing | 35.00 |
 
-Two tips make your data easier to work with later. Type dates with slashes, like 3/2/2026, so the spreadsheet knows it is a date. Type amounts as plain numbers, like 64.50, with no dollar sign and no words in the same cell. You will add the dollar sign with formatting in the next lesson.
+Columns run up and down and carry a letter at the top: A, B, C. Rows run side to side and carry a number on the left: 1, 2, 3. Each box where they meet is a cell, and its address is the column letter plus the row number. The cell in column B, row 3 is **B3**. Click any cell and the Name Box, the small box above column A, shows its address. Addresses matter because in the formulas lesson you will use them to tell the spreadsheet which numbers to add.
 
-### Editing and erasing
+### Enter data so it can be added and sorted
 
-Everyone makes typing mistakes. There are three ways to fix them.
+Click a cell and type. Press **Enter** to finish and move down one cell. Press **Tab** to finish and move one cell to the right. Tab is the faster choice when you are filling in a row from left to right.
+
+Two habits make the data work for you later. Type dates with slashes, like 3/2/2026, so the spreadsheet treats the entry as a date and can sort by it. Type amounts as plain numbers, like 64.50, with no dollar sign and no words in the same cell. You will add the dollar sign with formatting in the next lesson.
+
+Also decide on a short list of categories and spell each one the same way every time. "Supplies" and "Supply" look alike to you, but the spreadsheet counts them as two different categories, and your supplies total comes up short.
+
+### Correct an entry
+
+There are three ways to change what is in a cell.
 
 1. **Replace the whole cell.** Click the cell and type the new entry. The old one is gone.
 2. **Fix part of a cell.** Double-click the cell. A cursor appears inside it. Change the letters or numbers you need, then press Enter.
 3. **Erase a cell.** Click it and press **Delete**.
 
-To undo your last action, press **Ctrl + Z** on Windows or **Cmd + Z** on a Mac. If the words in a cell look cut off, the column is too narrow. Move your mouse to the line between two column letters at the top and double-click. The column widens to fit.
+To undo your last action, press **Ctrl + Z** on Windows or **Cmd + Z** on a Mac. If the words in a cell look cut off, the column is too narrow. Move your pointer to the line between two column letters at the top and double-click. The column widens to fit.
 
-### Saving and reopening
+### Save it where you will find it
 
 1. Go to **File > Save As**.
 2. Choose a folder you will remember, such as a folder named for your business.
 3. Name the file clearly, such as `Expenses-2026`.
-4. Click **Save**. Excel adds `.xlsx` to the name, which is the file type for an Excel workbook.
+4. Click **Save**. Excel adds `.xlsx` to the name, the file type for an Excel workbook.
 
 After that, press **Ctrl + S** on Windows or **Cmd + S** on a Mac to save as you work. To reopen the file later, go to **File > Open** and look under Recent, or find it in your folder and double-click it.
 
@@ -92,21 +88,22 @@ Fresh Start Cleaning is a fictional two-person cleaning business. Here are its M
 
 You are done when you have a saved file with four headings and five rows of expenses that you closed and reopened yourself.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Putting two things in one cell, such as "Gas $40."** Fix: one piece of information per cell. Item in one column, amount in another.
-- **Typing dollar signs or words with amounts.** Fix: type only the number. Formatting adds the dollar sign later.
-- **Leaving blank rows between entries.** Fix: keep the list tight, one row right after another, so sorting and adding work.
-- **Skipping the headings.** Fix: always use row 1 for labels.
-- **Closing without saving in Excel.** Fix: save with a clear name right away, then press Ctrl + S or Cmd + S often.
+- **Two things in one cell, such as "Gas $40."** The spreadsheet cannot add an amount that shares a cell with words. Fix: one piece of information per cell. Item in one column, amount in another.
+- **Dollar signs or words typed with amounts.** Fix: type only the number. Formatting adds the dollar sign later.
+- **Blank rows between entries.** Sorting and adding can stop at the gap and leave purchases out. Fix: keep the list tight, one row right after another.
+- **No headings.** Fix: always use row 1 for labels.
+- **Closing Excel without saving.** Fix: save with a clear name right away, then press Ctrl + S or Cmd + S often.
+- **Letting receipts pile up for months.** Faded receipts and forgotten purchases become missed deductions. Fix: enter them once a week, on the same day.
 
-## Check yourself
+## Before you move on
 
-1. What is the address of the cell in column C, row 4?
-2. What is the difference between a workbook and a worksheet?
-3. What does pressing Tab do after you type in a cell?
-4. How is saving different in Google Sheets?
+1. Can you open your expense file in under a minute from a closed laptop?
+2. Does every row hold one purchase, with the amount in its own cell as a plain number?
+3. Have you settled on a short category list for your own business, spelled one way?
+4. Have you picked the day each week when receipts go into the list?
 
 ## What you walk away with
 
-A working, saved expense list, and a clear picture of how a spreadsheet organizes information into rows, columns, and cells.
+A working, saved expense list with one purchase per row.

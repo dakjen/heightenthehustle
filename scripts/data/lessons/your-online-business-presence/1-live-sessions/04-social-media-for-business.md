@@ -1,18 +1,18 @@
-# Social Media for Business
+# One Social Page That Shows Current Work
 
-> Choose the one platform that fits your business, write a bio that works like a storefront sign, and plan your first month of posts.
+> Choose the one platform that fits your business, write a bio that works like a storefront sign, and plan a month of posts in one sitting.
 
 ## Why this matters
 
-Most customers do a quick check before they hire a small business. They pull up your page to see if you are still open and if your work looks good. A page whose last post is from two years ago makes people wonder if you closed. Consider Andre, who paints houses. He does beautiful work, but his page shows three blurry photos and a holiday greeting from long ago. A homeowner comparing two painters picks the one with last week's before-and-after photos. Andre did not lose on skill. He lost on looking current.
+Most customers do a quick check before they hire a small business. They pull up your page to see if you are still open and if your work looks good. A page whose last post is from two years ago makes people wonder if you closed. Consider Andre, who paints houses. He does beautiful work and stays booked, so his page has sat untouched: three photos and a holiday greeting from a while back. A homeowner comparing two painters picks the one with last week's before-and-after photos. Andre did not lose on skill. He lost on looking current, and one post a week would have covered it.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to choose the one platform that fits your business
-- How to write a bio that works like a storefront sign
-- A simple weekly rotation so you always know what to post
-- How to plan a full month of posts in one sitting
-- What "good enough" looks like, so you can stop worrying about it
+- Choose the one platform that fits your business
+- Write a bio that works like a storefront sign
+- Run a weekly rotation so you always know what to post
+- Plan a full month of posts in one sitting
+- Hold the page to a clear standard and stop there
 
 ## The lesson
 
@@ -26,17 +26,17 @@ You do not need to be everywhere. Every platform you add is another place to kee
 | Local services: cleaning, childcare, repair, tax prep | Facebook | Neighbors ask for recommendations there and share local pages |
 | Business-to-business: you sell to companies, not households | LinkedIn | The people who approve contracts are there |
 
-Business-to-business, often written B2B, simply means your customer is another business. If you already have a page with real followers on one of these, stay there. Otherwise pick from the table and commit.
+If you already have a page with real followers on one of these, stay there. Otherwise pick from the table and commit.
 
 ### A bio that is a storefront sign
 
-Your bio is the short text at the top of your page. Treat it like the sign over a shop door. A sign does not tell your life story. It says what this place is, where it is, and how to get in. Your bio needs the same three things: what, where, how to book.
+Treat your bio like the sign over a shop door. A sign does not tell your life story. It says what this place is, where it is, and how to get in. Your bio needs the same three things: what, where, how to book.
 
-A weak bio:
+A bio that says nothing about the work:
 
 > Blessed. Hustler. Dog dad. Living my dream one day at a time.
 
-A strong bio:
+A bio that sells:
 
 > House painting, inside and out. Serving Bowie, Largo, and Upper Marlboro. Free estimates: text Andre at the number below or tap the link.
 
@@ -44,14 +44,14 @@ Then put your home base link in the link spot, and use your logo or a clear phot
 
 ### The weekly rotation
 
-The hardest part of posting is deciding what to post. Take the decision away with a rotation of four kinds of posts, one per week.
+The slow part of posting is deciding what to post. Take the decision away with a rotation of four kinds of posts, one per week.
 
 1. **A finished job.** Show the work. For service businesses, before-and-after photos win every time.
 2. **A tip.** One useful thing you know that your customers do not.
 3. **Something about you.** Your story, your team, your shop, why you started.
 4. **A review.** A customer's kind words, shared with thanks.
 
-One post a week is enough to look alive. Here is a first month for Andre.
+One post a week is enough to show the business is active. Here is a month for Andre.
 
 | Week | Type | The post |
 | --- | --- | --- |
@@ -60,7 +60,11 @@ One post a week is enough to look alive. Here is a first month for Andre.
 | 3 | About you | Photo of Andre and his daughter loading the van. "Twelve years in, and she is my best helper on Saturdays." |
 | 4 | Review | Screenshot of a Google review. "Thank you, Ms. Patterson. Your kitchen was a joy to paint." |
 
-When week five comes, start the rotation over with new content. You never face a blank page again.
+When week five comes, start the rotation over with new content. The question "what do I post?" is answered for the year.
+
+### Plan the month in one sitting
+
+Writing four posts at once takes less time than writing one post four separate times. Pull the photos from your phone, write the four captions, and save them as drafts or in a note. Most platforms let a business account schedule posts ahead, so you can load the month and let it run. To keep the supply coming, make the before photo part of how you start a job and the after photo part of how you close it. Two taps on site saves you from hunting for content later.
 
 ### Writing the post
 
@@ -68,11 +72,11 @@ Keep captions short. Say what the photo shows, add one detail a customer would c
 
 ### Phone photos are fine
 
-You do not need a camera or an editor. Wipe the lens, stand near a window or go outside, hold the phone steady, and take the same angle for before and after. Always ask the customer before you post their home, their face, or their child. For reviews, ask first or post only the first name.
+A camera and an editor are not required. Wipe the lens, stand near a window or go outside, hold the phone steady, and take the same angle for before and after. Always ask the customer before you post their home, their face, or their child. For reviews, ask before you share or post only the customer's given name.
 
 ### The bar
 
-Here is the standard you are aiming for, and nothing more: when a customer checks, you look current and competent. Current means a recent post. Competent means real work shown clearly. You are not trying to go viral or gain thousands of followers. You are passing a ten-second check.
+Here is the standard you are aiming for, and nothing more: when a customer checks, you look current and competent. Current means a recent post. Competent means real work shown clearly. Going viral and collecting thousands of followers are different goals that take far more time, and they are not what brings a local customer to call. The page has to pass a ten-second check.
 
 ## Do this now
 
@@ -84,21 +88,22 @@ Here is the standard you are aiming for, and nothing more: when a customer check
 6. Publish week one now, in the session.
 7. Set a repeating reminder on your phone for the day you will post each week.
 
-Finished result: one live business page with a storefront-sign bio, your first post published, and three more posts written and ready.
+Finished result: one live business page with a storefront-sign bio, one post published, and three more posts written and ready.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Opening accounts on every platform.** Fix: pick one, and leave the others alone until that one runs on habit.
-- **A bio about your personality, not your business.** Fix: what, where, how to book.
-- **Only posting ads and sales.** Fix: follow the rotation so people see work, help, and a human being.
-- **Waiting for perfect photos.** Fix: a clear phone photo today beats a perfect one never.
-- **Posting daily for a week, then vanishing.** Fix: one post a week, every week.
+- **Accounts on every platform.** Each one is another page to keep current, and the stale ones cost you trust. Fix: pick one, and leave the others alone until that one runs on habit.
+- **A bio about personality, not the business.** A customer cannot tell what to hire you for. Fix: what, where, how to book.
+- **A feed of nothing but ads and sales.** People scroll past. Fix: follow the rotation so they see work, help, and a human being.
+- **Holding posts for perfect photos.** The page goes quiet while you wait. Fix: a clear phone photo today beats a perfect one never.
+- **Daily posts for a week, then silence.** A burst followed by a gap looks worse than a steady pace. Fix: one post a week, every week.
 
-## Check yourself
+## Before you move on
 
 - Which platform did you choose, and what about your business made it the right one?
-- Does your bio say what, where, and how to book?
-- What are your four posts for this month?
+- Does your bio say what, where, and how to book, and does the link open your home base?
+- Are your four posts for this month written, with a photo picked for each?
+- Is the weekly posting reminder set on your phone?
 - If a customer checked your page today, would you look current and competent?
 
 ## What you walk away with

@@ -1,32 +1,20 @@
-# Using Basic Formulas
+# Totals, Averages, and Order Math That Update Themselves
 
-> Let the spreadsheet do the math with SUM, AVERAGE, subtraction, and multiplication, and learn how to check every answer.
+> Use SUM, AVERAGE, subtraction, and multiplication so your sales, costs, and order totals recalculate on their own, and verify every answer before you rely on it.
 
 ## Why this matters
 
-Adding a column of numbers on a calculator works until one number changes. Then you add it all again, and hope you did not skip a line. A formula does the math for you and redoes it the moment a number changes. Picture a caterer who tracks sales and costs each week. With four short formulas she can see her total sales, her total costs, what is left over, and what a normal week looks like. If she finds a receipt she forgot, she types it in and every total updates by itself. That is the difference between guessing how the month went and knowing.
+Adding a column of numbers on a calculator works until one number changes. Then you add it all again, and hope you did not skip a line. A formula does the math for you and redoes it the moment a number changes. Picture a caterer who tracks sales and costs each week. With four short formulas she can see her total sales, her total costs, what is left over, and what a normal week looks like. If a receipt turns up late, she types it in and every total updates by itself. That is the difference between guessing how the month went and knowing. The catch is that a formula pointed at the wrong cells gives a confident wrong answer, so this lesson spends as much time on checking formulas as on writing them.
 
-## What you'll learn
+## What you'll be able to do
 
-- Why every formula starts with an equals sign
-- How cell references work and why you use them instead of typing numbers
-- How to use SUM and AVERAGE
-- How to subtract and multiply
-- How to check a formula so you can trust the answer
+- Total a column of sales or expenses with SUM
+- Find what a typical week brings in with AVERAGE
+- Calculate what is left after costs, and price times quantity for an order
+- Build formulas from cell references so answers update when a number changes
+- Run four quick checks that catch a wrong formula before it costs you
 
 ## The lesson
-
-### Formulas start with an equals sign
-
-A **formula** is an instruction that tells the spreadsheet to calculate something. Every formula starts with **=**. The equals sign is how the spreadsheet knows you want an answer and not just text. If you type `5+3` in a cell, you see 5+3. If you type `=5+3` and press Enter, you see 8.
-
-The cell shows the answer. To see the formula behind it, click the cell and look at the **formula bar**, the long box above the column letters.
-
-### Cell references
-
-A **cell reference** is a cell's address used inside a formula. If cell B2 holds 1200 and cell C2 holds 450, the formula `=B2-C2` means "take what is in B2 and subtract what is in C2." The answer is 750.
-
-Use references, not typed numbers. If you type `=1200-450`, the answer is stuck. If you type `=B2-C2` and later change B2 to 1300, the answer updates to 850 right away. You can type a reference, or you can click the cell while you are building the formula and the spreadsheet fills in the address for you.
 
 ### The sample data
 
@@ -41,32 +29,42 @@ The examples below use four weeks of numbers from Tasha's Catering, a fictional 
 
 The headings are in row 1. Sales are in cells B2 through B5. Expenses are in cells C2 through C5.
 
-### SUM adds a group of cells
+### Point at cells, do not retype numbers
 
-`=SUM(B2:B5)` adds every cell from B2 through B5. The colon means "through." A group of cells like B2:B5 is called a **range**. For the sample data, the answer is 4600.
+Every formula starts with **=**. The equals sign tells the spreadsheet you want an answer and not text. Type `5+3` in a cell and you see 5+3. Type `=5+3` and press Enter and you see 8.
 
-1. Click cell B6, just below the sales numbers.
+The cell shows the answer. To see the formula behind it, click the cell and look at the formula bar, the long box above the column letters.
+
+The professional habit is to build formulas from cell references, meaning cell addresses, and not from typed numbers. With 1200 in B2 and 450 in C2, the formula `=B2-C2` means "take what is in B2 and subtract what is in C2." The answer is 750. If you type `=1200-450`, the answer is stuck. With `=B2-C2`, changing B2 to 1300 updates the answer to 850 right away. You can type a reference, or you can click the cell while you are building the formula and the spreadsheet fills in the address for you.
+
+### SUM: total sales, total costs
+
+`=SUM(B2:B5)` adds every cell from B2 through B5. The colon means "through," and a block of cells like B2:B5 is called a range. For the sample data, the answer is 4600.
+
+1. Click cell B6, the cell right below the sales numbers.
 2. Type `=SUM(`
 3. Drag from B2 down to B5. The formula now reads `=SUM(B2:B5`
 4. Type `)` and press Enter.
 
 There is also a shortcut. Click B6, go to the **Home** tab, and click **AutoSum**. Excel guesses the range above. Check that it is right, then press Enter.
 
-### AVERAGE finds the typical amount
+### AVERAGE: what a normal week looks like
 
-`=AVERAGE(B2:B5)` adds the cells in the range and divides by how many there are. For the sample data, that is 4600 divided by 4, which is 1150. So a typical week brings in $1,150. An average helps you plan. If next week comes in at $700, you know it was a slow one.
+`=AVERAGE(B2:B5)` adds the cells in the range and divides by how many there are. For the sample data, that is 4600 divided by 4, which is 1150. So a typical week brings in $1,150. An average gives you a baseline to plan against. If next week comes in at $700, you know it was a slow one.
 
-### Subtraction and multiplication
+### Subtraction: what is left
 
 Subtraction uses the minus sign. If total sales are in B6 and total expenses are in C6, then `=B6-C6` gives what is left. For the sample data, that is 4600 minus 1760, which is 2840.
 
-Multiplication uses the asterisk, which is the star above the 8 on most keyboards. Say a customer orders 12 trays at $45 each. Put 12 in cell B9 and 45 in cell B10. The formula `=B9*B10` gives 540. If the customer changes the order to 15 trays, change B9 and the total updates to 675.
+### Multiplication: pricing an order
 
-### How to check a formula
+Multiplication uses the asterisk, the star above the 8 on most keyboards. Say a customer orders 12 trays at $45 each. Put 12 in cell B9 and 45 in cell B10. The formula `=B9*B10` gives 540. If the customer changes the order to 15 trays, change B9 and the total updates to 675.
+
+### Four checks before you rely on an answer
 
 A formula is only as good as the cells it points to. Check every one.
 
-1. **Look at the range.** Double-click the formula cell. The cells it uses light up with colored borders. Make sure the first and last rows are both included.
+1. **Look at the range.** Double-click the formula cell. The cells it uses light up with colored borders. Make sure the top and bottom rows are both included.
 2. **Estimate in your head.** Four weeks of about $1,000 each should total around $4,000. If the answer is 46,000 or 460, something is wrong.
 3. **Test it.** Change one number and watch the total change. Then change it back.
 4. **Look for text.** If a number sits on the left side of its cell, it may have been typed as text, and SUM will skip it. Retype it as a plain number.
@@ -77,7 +75,7 @@ Formulas are written exactly the same way in Google Sheets. `=SUM(B2:B5)`, `=AVE
 
 ## Try it
 
-1. Open a new blank workbook and save it as `Sales-Practice`.
+1. Open a blank workbook and save it as `Sales-Practice`.
 2. Type the headings Week, Sales, and Expenses in A1, B1, and C1. Type the four weeks of Tasha's Catering data in rows 2 through 5.
 3. In A6, type `Total`.
 4. In B6, type `=SUM(B2:B5)`. You should get 4600.
@@ -91,21 +89,21 @@ Formulas are written exactly the same way in Google Sheets. `=SUM(B2:B5)`, `=AVE
 
 You are done when every answer matches the ones above and the file is saved.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Leaving off the equals sign.** Fix: click the cell and retype it starting with =.
-- **Typing numbers into a formula instead of references.** Fix: replace the numbers with cell addresses so the answer updates.
-- **A range that stops one row short.** Fix: double-click the formula and check the colored border covers every row.
-- **Including the total row in its own range.** Fix: make sure the range ends at the last data row, not the row with the formula.
-- **Typing an x for multiplication.** Fix: use the asterisk, as in =B9*B10.
+- **A formula typed without the equals sign.** Fix: click the cell and retype it starting with =.
+- **Numbers typed into a formula in place of references.** The answer stays frozen when the underlying figure changes, and a stale total gets quoted to a customer. Fix: replace the numbers with cell addresses so the answer updates.
+- **A range that stops one row short.** The last week or the last receipt is silently left out. Fix: double-click the formula and check the colored border covers every row.
+- **The total row included in its own range.** Fix: make sure the range ends at the last data row, not the row with the formula.
+- **An x typed for multiplication.** The spreadsheet reads it as text. Fix: use the asterisk, as in =B9*B10.
 
-## Check yourself
+## Before you move on
 
-1. What does every formula start with?
-2. What does `=SUM(C2:C5)` do?
-3. Why is `=B2-C2` better than `=1200-450`?
-4. Name two ways to check that a formula is right.
+1. Can you state your total sales and total costs for the last four weeks from one sheet, without a calculator?
+2. Do you know what an average week brings in for your business, and would you spot a slow one?
+3. If a customer changed an order quantity while on the phone, could you give the new total by changing one cell?
+4. Which two checks will you run on every total before you put it in a quote or hand it to a preparer?
 
 ## What you walk away with
 
-You can write and check formulas for totals, averages, what is left over, and price times quantity, instead of calculating every number by hand.
+You can write and verify formulas for totals, averages, what is left over, and price times quantity, so your numbers recalculate on their own and you can stand behind them.

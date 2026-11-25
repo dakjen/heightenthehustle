@@ -1,32 +1,32 @@
-# Taxes
+# Set Aside Tax Money Before You Spend It
 
 > Nobody withholds taxes for you now. Tax money was never yours, so set aside 25-30% the moment you get paid.
 
 ## Why this matters
 
-At a regular job, taxes come out of your paycheck before you ever see the money. When you work for yourself, the full amount lands in your account and it all looks like yours. It is not. This is the money mistake that hurts self-employed people most. Marcus, a barber, had a strong first year on his own. He spent what came in, the way he always had with a paycheck. In the spring he learned he owed several thousand dollars he no longer had. He had not been careless with his work. He just had no system for tax money. The fix is a simple habit, and you can start it today.
+When you work for yourself, the full amount of every payment lands in your account, and no one has taken the tax out. All of it looks spendable. Part of it is not. This is the money problem that costs self-employed people most. Marcus, a barber, had a strong first year on his own. He ran his money the way that had always worked on a paycheck: what landed in the account was his to use. In the spring he learned he owed several thousand dollars he no longer had. His work and his spending were both sound. What was missing was a system for tax money, and that system takes one account and one rule.
 
 This lesson is general education, not tax or legal advice. Confirm your own situation with a tax professional.
 
-## What you'll learn
+## What you'll be able to do
 
-- Why self-employed people get surprised by taxes
-- The set-aside habit: 25-30% of every payment, moved on arrival
-- How to set up a separate tax savings account
-- What quarterly estimated taxes are
-- How your profit and loss report and a tax professional work together
+- Move 25-30% of every payment into tax savings on arrival
+- Set up a separate tax savings account that is hard to spend from
+- Record the set-aside correctly in QuickBooks
+- Cover quarterly estimated tax payments from money already set aside
+- Hand a tax professional a clean profit and loss report and get a clear number back
 
 ## The lesson
 
 ### Nobody withholds for you now
 
-**Withholding** is when an employer takes tax out of each paycheck and sends it to the government for you. Employees rarely think about it, because it happens before payday. As a business owner, you have no employer doing that. Customers pay you the full price. The tax on what you earn is still owed. It has simply not been collected yet.
+An employer withholds tax, meaning it takes tax out of each paycheck and sends it to the government before payday. As a business owner, you have no one doing that. Customers pay you the full price. The tax on what you earn is still owed. It has not been collected yet.
 
-That is why a good year can turn into a painful spring. The money to pay the tax did come in. It just got spent, a little at a time, because it was sitting in the same account as everything else.
+That is how a good year turns into a hard spring. The money to pay the tax did come in. It got spent, a little at a time, because it sat in the same account as everything else and nothing marked it as spoken for.
 
 ### The fix is mechanical
 
-You do not need willpower. You need a rule you follow every single time, without thinking. Here it is: every time you get paid, move 25-30% into a separate tax savings account before you touch the rest.
+The answer is a rule you follow every time, with no judgment call involved. Here it is: every time you get paid, move 25-30% into a separate tax savings account before you touch the rest.
 
 "Mechanical" means there is no decision to make. You do not wait to see how the month goes. You do not skip it when things are tight. Payment arrives, the transfer happens, and only then do you look at what is left.
 
@@ -42,9 +42,9 @@ If Marcus is paid $800 for a wedding party and uses 25%, he moves $200 to tax sa
 
 ### Tax money was never yours
 
-The habit is the lesson, and the habit rests on one idea: tax money was never yours. When $800 arrives, you did not earn $800 to spend. You earned the part that is left after the set-aside, and you are holding the rest for a short time.
+The rule rests on one idea: tax money was never yours. When $800 arrives, you did not earn $800 to spend. You earned the part that is left after the set-aside, and you are holding the rest for a short time.
 
-Thinking this way changes how the transfer feels. You are not losing $200. You are putting it where it belongs before it can be mistaken for spending money. Owners who do this stop dreading tax season, because the money is already sitting there.
+Run the business on the after-set-aside number. Price, budget, and pay yourself from the $600, not the $800. The $200 goes where it belongs before it can be counted as spending money. When a tax bill comes due, the money is already sitting there, and the bill is a transfer instead of a scramble.
 
 ### Set up the tax savings account
 
@@ -59,7 +59,7 @@ In QuickBooks, a transfer to tax savings is money moving between your own accoun
 
 ### Quarterly estimated taxes
 
-The IRS also expects self-employed people to pay tax during the year, not as one bill in April. These payments are called **estimated taxes**. They are payments you send during the year toward the tax you expect to owe on that year's profit. They are sent quarterly, which means four times a year.
+The IRS also expects self-employed people to pay tax during the year, not as one bill in April. You do that with estimated taxes: payments sent quarterly, four times a year, toward the tax you expect to owe on that year's profit.
 
 This is where your tax savings account earns its keep. When a quarterly payment comes due, the money is already set aside. You pay it from tax savings and keep going.
 
@@ -67,7 +67,7 @@ How much do you send each quarter? Two things answer that. Your profit and loss 
 
 ### Where QuickBooks fits
 
-Taxes are figured on profit, which is income minus expenses. This is why the earlier lessons matter. Every expense you record correctly lowers the profit you are taxed on. Every expense you forget makes your profit look bigger than it was. Current, reconciled books mean you can hand a tax professional a clean profit and loss report, get a clear answer, and pay only what you actually owe.
+Taxes are figured on profit, which is income minus expenses. This is why the earlier lessons matter. Every expense you record correctly lowers the profit you are taxed on. Every expense that goes unrecorded makes your profit look bigger than it was. Current, reconciled books mean you can hand a tax professional a clean profit and loss report, get a clear answer, and pay only what you owe.
 
 ## Do this now
 
@@ -80,20 +80,21 @@ Taxes are figured on profit, which is income minus expenses. This is why the ear
 
 You finish with a tax savings account that has its first deposit in it, a set-aside rule in writing, and a profit and loss report ready for a tax professional.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Treating every deposit as spending money.** Fix: move 25-30% out before you touch the rest.
-- **Keeping tax money in the main checking account.** Fix: use a separate savings account with no debit card.
-- **Setting money aside "when there's extra."** Fix: make it automatic on every payment, with no exceptions.
-- **Waiting until April to think about taxes.** Fix: ask a tax professional about quarterly estimated taxes now.
-- **Borrowing from tax savings in a slow month.** Fix: treat that account as off limits for anything but taxes.
+- **Every deposit treated as spending money.** The tax share gets spent a little at a time. Fix: move 25-30% out before you touch the rest.
+- **Tax money kept in the main checking account.** Nothing separates it from operating cash. Fix: use a separate savings account with no debit card.
+- **Setting money aside "when there's extra."** Tax is owed on tight months too. Fix: make it automatic on every payment, with no exceptions.
+- **Leaving taxes until April.** A year of tax arrives as one bill. Fix: ask a tax professional about quarterly estimated taxes now.
+- **Borrowing from tax savings in a slow month.** The gap has to be refilled from the next good month, on top of that month's own set-aside. Fix: treat that account as off limits for anything but taxes.
 
-## Check yourself
+## Before you move on
 
-- Why do taxes surprise so many self-employed people?
-- What percentage are you setting aside, and when exactly does the transfer happen?
-- What are estimated taxes, and how often are they sent?
-- Who or what tells you how much to send each quarter?
+- What percentage are you setting aside, and what exactly triggers the transfer?
+- Is there money in your tax savings account today, and does it have no debit card attached?
+- In QuickBooks, does your set-aside show as a transfer and not as an expense?
+- Who is your tax professional, and have they seen this year's profit and loss report?
+- Do you know your next estimated tax date and amount, and is it on your calendar?
 
 ## What you walk away with
 

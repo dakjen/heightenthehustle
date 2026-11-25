@@ -1,24 +1,24 @@
 # Building a Monthly Budget Tracker
 
-> Build a planned-versus-actual tracker with category totals and a remaining balance that you can reuse every month.
+> Build a planned-versus-actual tracker with section totals and a remaining balance, then read it for next month's decisions and reuse it every month.
 
 ## Why this matters
 
 A budget is a plan for your money. A tracker shows whether the plan held up. Without one, most owners find out they overspent when the account runs low. With one, you see it by the middle of the month, while there is still time to adjust. Take a barber who rents a booth. He plans to spend $250 on supplies. By the end of the month he has spent $315. The tracker shows him the $65 gap in one glance, so next month he can buy in bulk, raise the plan, or cut back. One page, updated a few minutes a week, turns "I think we did okay" into a number.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to lay out planned and actual income and expenses
-- How to copy a formula down a column instead of retyping it
-- How to total each section and find the remaining balance
-- How to read the difference between planned and actual
-- How to check your totals before you trust them
+- Lay out planned and actual income and expenses on one page
+- Total each section and calculate the remaining balance
+- Copy a formula across or down a column in one drag
+- Read the difference column and turn it into decisions for next month
+- Prove the totals agree before you act on them
 
 ## The lesson
 
-### Planned versus actual
+### Planned, actual, and the difference
 
-**Planned** is what you expect at the start of the month. **Actual** is what really happened. The **difference** is actual minus planned. Reading that difference is the whole point of the tracker, and it reads two ways.
+Planned is what you expect at the start of the month. Actual is what really happened. The difference is actual minus planned, and reading that column is the whole point of the page. It reads two ways.
 
 - For **income**, a positive difference is good news. You earned more than you planned.
 - For **expenses**, a positive difference means you spent more than you planned.
@@ -52,12 +52,12 @@ Each total uses SUM from the last lesson.
 
 The remaining balance is what is left after the bills are paid. It is the most important number on the page.
 
-### Copying formulas
+### Copy formulas with the fill handle
 
-You need the same three totals in the Actual column. You could retype them, but copying is faster and makes fewer mistakes. When you copy a formula one column to the right, the spreadsheet shifts the references one column to the right too. So `=SUM(B2:B3)` copied from B4 into C4 becomes `=SUM(C2:C3)` automatically.
+You need the same three totals in the Actual column. Retyping them works, but copying is faster and leaves less room for a typing slip. When you copy a formula one column to the right, the spreadsheet shifts the references one column to the right too. So `=SUM(B2:B3)` copied from B4 into C4 becomes `=SUM(C2:C3)` automatically.
 
 1. Click B4.
-2. Find the small square at the bottom-right corner of the cell. This is the **fill handle**.
+2. Find the small square at the bottom-right corner of the cell. This is the fill handle.
 3. Drag the fill handle one cell to the right, into C4, and let go.
 4. Do the same for B11 and B13.
 
@@ -65,7 +65,7 @@ You should now see 3560 in C4, 1340 in C11, and 2220 in C13.
 
 The fill handle also copies down. In D2, type `=C2-B2`, which is actual minus planned. Then drag the fill handle from D2 down to D4. Each row gets its own version: `=C3-B3`, then `=C4-B4`. Do the same for the expense rows. Type `=C6-B6` in D6 and drag down to D11. Finally, type `=C13-B13` in D13.
 
-### Reading the difference
+### Read the difference column for decisions
 
 Look at column D for Sharp Lines Barbershop.
 
@@ -79,9 +79,7 @@ Look at column D for Sharp Lines Barbershop.
 
 Those numbers tell a story. Haircuts carried the month. Product sales were weak, and marketing was underspent, which may be connected. Supplies need a closer look. That is three decisions for next month from one small table.
 
-### Checking totals
-
-Before you trust the tracker, check it.
+### Check the totals before you act on them
 
 1. Click each total and look at the formula bar. Make sure the range covers every row in its section and nothing else.
 2. Check that the differences agree. The income difference minus the expense difference should equal the remaining balance difference. Here, 160 minus 25 is 135. It matches.
@@ -93,7 +91,7 @@ Every formula here works the same way in Google Sheets. The fill handle is the s
 
 ## Try it
 
-1. Open a new blank workbook and save it as `Budget-Tracker`.
+1. Open a blank workbook and save it as `Budget-Tracker`.
 2. In row 1, type the headings: Category, Planned, Actual, Difference.
 3. Type the Sharp Lines Barbershop categories and numbers into the rows shown in the table above. Leave rows 5 and 12 blank.
 4. Enter the three total formulas in B4, B11, and B13.
@@ -103,22 +101,22 @@ Every formula here works the same way in Google Sheets. The fill handle is the s
 8. Bold the headings and the three total rows. Format columns B, C, and D as Currency.
 9. Save the file.
 
-You are done when you have a saved tracker with planned and actual income and expenses, section totals, differences, and a remaining balance that match the numbers above.
+You are done when you have a saved tracker with planned and actual income and expenses, section totals, differences, and a remaining balance that match the numbers above. The next lesson uses this file, so keep the barbershop version.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Typing a total by hand instead of using a formula.** Fix: replace it with SUM so it updates when the numbers change.
-- **Adding a new category below the total row.** Fix: insert the new row inside the section, above the total, then check that the SUM range grew to include it.
-- **Subtracting in the wrong order.** Fix: always use actual minus planned, so the sign means the same thing every time.
-- **Reading a positive expense difference as good news.** Fix: remember that for expenses, positive means over the plan.
-- **Dragging the fill handle too far.** Fix: undo with Ctrl + Z or Cmd + Z and drag again, stopping at the last row.
+- **A total typed by hand in place of a formula.** Fix: replace it with SUM so it updates when the numbers change.
+- **A category added below the total row.** The new cost never reaches the total, so spending looks lower than it is. Fix: insert the row inside the section, above the total, then check that the SUM range grew to include it.
+- **Subtracting in a different order on different rows.** Fix: always use actual minus planned.
+- **Reading a positive expense difference as good news.** Fix: for expenses, positive means over the plan.
+- **The fill handle dragged past the last row.** Fix: undo with Ctrl + Z or Cmd + Z and drag again, stopping at the last row.
 
-## Check yourself
+## Before you move on
 
-1. What is the difference between planned and actual?
-2. What happens to `=SUM(B2:B3)` when you copy it one column to the right?
-3. What does a positive difference mean on an expense row?
-4. Which formula gives the remaining balance?
+1. Can you name your planned and actual remaining balance for a month from one page?
+2. Which expense line in your own business is most likely to run over plan, and would this tracker show it by mid-month?
+3. Do your income difference and expense difference reconcile to the remaining balance difference?
+4. When you add a category, do you know where the row goes so the total picks it up?
 
 ## What you walk away with
 

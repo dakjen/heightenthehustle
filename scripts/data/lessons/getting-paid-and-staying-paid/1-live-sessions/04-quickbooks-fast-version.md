@@ -1,18 +1,18 @@
-# QuickBooks Fast Version
+# Get QuickBooks Live in One Session
 
 > The five QuickBooks features that matter, done together. Leave with a live, connected account, not a plan to make one.
 
 ## Why this matters
 
-Your tracker and your invoice template work. They also depend on you typing every line by hand. As you get busier, that typing is the first thing to slip. QuickBooks Online does most of the typing for you. It pulls transactions straight from your bank, remembers how you label them, and keeps track of who has paid. Many owners sign up, look at the dashboard full of menus, and close the tab. A caterer who "has QuickBooks" but never connected her bank has nothing but a monthly bill. This session skips the tour and does the five things that turn an empty account into a working one.
+Your tracker and your invoice template work. They also depend on you typing every line by hand, and as you get busier, that typing is the first thing to slip. QuickBooks Online does most of the typing for you. It pulls transactions straight from your bank, remembers how you label them, and keeps track of who has paid. The catch is that none of this happens until the account is set up past the sign-up screen. A caterer who pays for QuickBooks but has not connected her bank has a monthly bill and an empty ledger. This session skips the tour and does the five things that turn an empty account into a working one.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to create your QuickBooks Online account
-- How to connect your business bank account so transactions import on their own
-- Which settings to fix on day one
-- How to add your main services with prices
-- How to categorize your first batch of real transactions and send one invoice
+- Open a QuickBooks Online account on the right plan
+- Connect your business bank account so transactions import on their own
+- Set the three day-one settings that show up on every invoice
+- Load your main services with prices so invoices take seconds
+- Categorize a batch of real transactions and send one invoice from inside QuickBooks
 
 ## The lesson
 
@@ -24,7 +24,7 @@ QuickBooks has dozens of features. You need five of them today. The rest can wai
 
 ### Feature 1: Create the account
 
-Sign up for QuickBooks Online Simple Start using your business email. QuickBooks will ask a few questions about your business, such as what you do and how long you have been operating. Answer what you know and skip what you do not. Nothing you choose here is permanent. The goal is to get inside, not to get every answer perfect.
+Sign up for QuickBooks Online Simple Start using your business email. QuickBooks will ask a few questions about your business, such as what you do and how long you have been operating. Answer what you know and skip what you do not. Nothing you choose here is permanent. The goal is to get inside, not to perfect every answer.
 
 ### Feature 2: Connect the bank
 
@@ -38,7 +38,7 @@ Three settings are worth two minutes now.
 
 1. **Business name.** Make sure it is spelled the way you want customers to see it.
 2. **Logo.** Upload it so it appears on your invoices.
-3. **Invoice numbering.** Turn on custom invoice numbers. If you have never sent an invoice, start at 1001. If you have been using the HTH invoice template, continue your sequence. If your last one was 1007, the next is 1008.
+3. **Invoice numbering.** Turn on custom invoice numbers. If you have not sent invoices before, start at 1001. If you have been using the HTH invoice template, continue your sequence. If your last one was 1007, the next is 1008.
 
 ### Feature 4: Add your main services with prices
 
@@ -52,21 +52,27 @@ In Products and Services, add each thing you sell with a name and a price. Start
 
 Once these are saved, building an invoice takes seconds. You pick the service and the price fills in. One deep clean plus one standard clean comes to $280 + $150 = $430, and QuickBooks adds it for you.
 
+There is a second payoff. Because every invoice now uses the same service names, QuickBooks can later show you sales by service. That is how you find out which of your offerings carries the business and which one you could drop.
+
 ### Feature 5: Categorize the first batch
 
-Go back to the banking area. You will see a list of imported transactions waiting for review. For each one, QuickBooks suggests a category, which is the label that says what kind of income or expense it is. Your job is to confirm it or fix it.
+Go back to the banking area. You will see a list of imported transactions waiting for review. For each one, QuickBooks suggests a category, the label that says what kind of income or expense it is. Your job is to confirm it or fix it.
 
 1. Open the first transaction.
-2. Read the name and the amount. Ask yourself what it was for.
+2. Read the name and the amount, and place what it was for.
 3. Choose the category that fits, such as Supplies, Gas, or Sales.
 4. Add or confirm it. It moves out of the review list and into your books.
 5. Repeat for the next one.
 
-A $62 charge at a beauty supply store becomes Supplies. A $340 deposit from your card reader becomes Sales. If you do not know what a charge was, leave it for later and look it up. A wrong label is worse than a blank one. As you go, QuickBooks learns your patterns and its suggestions get better.
+A $62 charge at a beauty supply store becomes Supplies. A $340 deposit from your card reader becomes Sales. If you cannot place a charge, leave it for later and look it up. A wrong label is worse than a blank one, because a blank one stays on the review list where you can see it.
+
+As you go, QuickBooks learns your patterns and its suggestions get better. Work in batches by vendor to speed that up. If the same supplier appears six times, categorize all six in a row.
 
 ### Close the loop: send one invoice
 
 Create one invoice inside QuickBooks. Choose a customer, pick a service from your list, set a due date, and send it. A real invoice to a real customer is best. If you have none ready, send a small test invoice to yourself. When that invoice is paid and the deposit lands in your bank, QuickBooks can match the two. That is the full loop: invoice out, money in, books updated.
+
+Matching matters. When a deposit is matched to its invoice, the invoice is marked paid and the income is counted once. Without the match, the same money can show up as an open invoice and as a separate deposit, and the books overstate what you earned.
 
 ### One system from here on
 
@@ -86,19 +92,20 @@ This is what everyone does together in the session.
 
 You finish with a live QuickBooks account connected to your bank, real transactions categorized, and one invoice sent.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Creating the account and stopping.** Fix: do not leave the session until the bank is connected.
-- **Connecting a personal account.** Fix: connect only the business account.
-- **Accepting every suggested category without reading it.** Fix: glance at each one and fix what is wrong.
-- **Keeping the spreadsheet "just in case."** Fix: retire it today and trust one system.
-- **Restarting invoice numbers at 1.** Fix: start at 1001 or continue the sequence you already have.
+- **An account with no bank connected.** The subscription bills monthly and the books stay empty. Fix: do not leave the session until the bank is connected.
+- **A personal account connected.** Every grocery run and streaming charge lands in the review list. Fix: connect only the business account.
+- **Suggested categories accepted unread.** One wrong suggestion, confirmed, teaches QuickBooks to repeat it. Fix: glance at each one and fix what is wrong.
+- **The spreadsheet kept running as a backup.** Two systems mean double entry and two answers to every question. Fix: retire it today and trust one system.
+- **Invoice numbers restarted at 1.** You end up with duplicates of numbers already sent. Fix: start at 1001 or continue the sequence you already have.
 
-## Check yourself
+## Before you move on
 
 - Is your business bank account connected and importing?
 - What number will your next invoice carry?
-- How many services are in your Products and Services list?
+- Are your three to five best sellers in Products and Services with current prices?
+- Is your review list down by at least ten transactions, with nothing labeled on a guess?
 - What day is your weekly fifteen minutes?
 
 ## What you walk away with

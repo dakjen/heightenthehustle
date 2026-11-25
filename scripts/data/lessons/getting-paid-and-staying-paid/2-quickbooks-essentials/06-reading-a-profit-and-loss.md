@@ -1,30 +1,30 @@
-# Reading a P&L
+# Make One Decision a Month from Your P&L
 
 > Income on top, expenses in the middle, profit at the bottom. Ask three questions every month, then make one decision.
 
 ## Why this matters
 
-Everything you have set up so far leads to one page: the profit and loss report. It is the scorecard for your business. Many owners never open it, or open it and feel lost. So they run the business on feel. A busy month feels good, a quiet one feels bad, and decisions follow the mood. Dee, the caterer, had her busiest month in April and felt great about it. Her report told a different story. She had brought in more money and kept less. She would not have known without looking, and she would have kept doing the thing that was costing her.
+Everything you have set up so far feeds one page: the profit and loss report. It is the scorecard for your business. Without it, the only signal an owner has is how busy the month was, and busy is not the same as profitable. Dee, the caterer, had her busiest month in April, and by every sign she could see from the kitchen it was a strong one. Her report told a different story. She had brought in more money and kept less. The report is the only place that showed up, and without it she would have kept doing the thing that was costing her.
 
-## What you'll learn
+## What you'll be able to do
 
-- What a profit and loss report is and how it is laid out
-- How to run one in QuickBooks, with last month beside it
-- The three questions to ask every month
-- How to turn the answers into one decision
-- What the report does not show
+- Run a profit and loss report in QuickBooks with last month beside it
+- Open any number on it to see the transactions behind it
+- Work through three questions every month in a few minutes
+- Turn the answers into one decision and check it the following month
+- Account for what the report leaves out: draws, tax transfers, and cash in the bank
 
 ## The lesson
 
-### What a P&L is
+### Read it from the bottom line up
 
-A **profit and loss report**, or P&L, shows what your business earned and spent over a period of time, and what was left. Some people call it an income statement. It always has the same shape.
+A profit and loss report, or P&L, covers a period of time and always has the same shape. Some people call it an income statement.
 
 - **Income on top.** Everything customers paid you, by income account.
 - **Expenses in the middle.** Everything the business spent, by category.
 - **Profit at the bottom.** Income minus expenses. QuickBooks usually labels this line Net Income.
 
-You read it top to bottom, like a receipt. If the bottom number is positive, you made money in that period. If it is negative, you spent more than you earned.
+If the bottom number is positive, you made money in that period. If it is negative, you spent more than you earned. Experienced owners go to the bottom line first and then read upward to find out why.
 
 ### How to run it
 
@@ -60,7 +60,7 @@ Go straight to the bottom line. In April, Dee's profit was $1,800. Yes, she made
 
 ### Question 2: Where did it go?
 
-Read down the expense categories and look for surprises. A surprise is any number that makes you say "that much?" Dee's eye stops on two lines. Food and Ingredients is $2,300, her largest cost by far. Marketing is $260, which is more than she remembers spending. She clicks the Marketing number and sees a flyer printing order she had forgotten.
+Read down the expense categories and look for surprises. A surprise is any number that makes you say "that much?" Dee's eye stops on two lines. Food and Ingredients is $2,300, her largest cost by far. Marketing is $260, which is more than she remembers spending. She clicks the Marketing number and sees a flyer printing order from early in the month.
 
 You are not judging every line. You are looking for the one or two that do not match the picture in your head.
 
@@ -69,6 +69,8 @@ You are not judging every line. You are looking for the one or two that do not m
 Now compare the two columns. Dee's income rose from $5,200 to $5,600, which is $400 more. Her profit fell from $2,000 to $1,800, which is $200 less. More sales and less profit means expenses grew faster than income. They rose by $600, from $3,200 to $3,800.
 
 Where did the $600 come from? Food went up $400. Marketing went up $130. Packaging went up $40. Gas went up $30. That is $400 + $130 + $40 + $30 = $600. Food is the big one. In March, food cost her about 37 cents of every dollar she brought in. In April, it cost about 41 cents. She sold more catering, and each dollar of it cost more to make.
+
+That cents-per-dollar figure is worth working out for your own largest cost. Divide the cost by total income for the month. A dollar amount that rises with sales is expected. A share that rises means the cost is growing faster than the business, and that is the early warning.
 
 ### Then make one decision
 
@@ -80,7 +82,9 @@ That is running your business on numbers instead of vibes.
 
 ### What the P&L does not show
 
-A P&L shows profit, not cash in the bank. Two things you have already learned do not appear on it. Owner's draws are not expenses, so they are not listed. Transfers to tax savings are not expenses either. So your bank balance will not grow by the full amount of your profit. That is normal. Also, the report is only as good as your books. Review it after the month is categorized and reconciled.
+A P&L shows profit, not cash in the bank. Two items from earlier lessons do not appear on it. Owner's draws are not expenses, so they are not listed. Transfers to tax savings are not expenses either. So your bank balance will not grow by the full amount of your profit. That is expected.
+
+The report is also only as good as your books. Review it after the month is categorized and reconciled.
 
 ## Do this now
 
@@ -94,21 +98,22 @@ A P&L shows profit, not cash in the bank. Two things you have already learned do
 
 You finish with last month's P&L in front of you, three written answers, and one decision to act on this month.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Only looking at income.** Fix: start at the bottom line, then read the expenses.
-- **Reading one month alone.** Fix: always put the previous month beside it.
-- **Reviewing before the books are current.** Fix: categorize and reconcile first.
-- **Making a long to-do list from the report.** Fix: choose one decision and follow through.
-- **Expecting profit to equal your bank balance.** Fix: remember that draws and tax transfers are not on the P&L.
+- **Reading only the income line.** A record sales month can hide a drop in profit. Fix: start at the bottom line, then read the expenses.
+- **Reading one month alone.** A single column cannot show what is rising. Fix: always put the previous month beside it.
+- **Reviewing before the books are current.** Decisions get made on incomplete numbers. Fix: categorize and reconcile first.
+- **A long to-do list from the report.** Nothing on it gets finished, and next month you cannot tell what worked. Fix: choose one decision and follow through.
+- **Expecting profit to equal the bank balance.** Time goes into hunting for an error that is not there. Fix: account for draws and tax transfers, which are not on the P&L.
 
-## Check yourself
+## Before you move on
 
-- What sits at the top, middle, and bottom of a P&L?
-- What are the three questions you ask every month?
-- If income goes up and profit goes down, what happened?
-- What one decision are you making from last month's report?
+- What was your profit last month, and was it up or down from the month before?
+- Which one or two expense lines surprised you, and what was inside them when you clicked in?
+- What share of every dollar you bring in goes to your largest cost, and did that share rise or fall?
+- What one decision are you making from last month's report, and where is it written down?
+- Is your monthly review reminder set for after the reconcile, not before?
 
 ## What you walk away with
 
-The ability to read your own profit and loss report, a monthly three-question review, and one decision made from real numbers.
+A monthly three-question review of your own profit and loss report, and one decision made from real numbers.

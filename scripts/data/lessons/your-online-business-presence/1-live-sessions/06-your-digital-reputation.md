@@ -1,38 +1,38 @@
-# Your Digital Reputation
+# Control What Customers Find When They Search You
 
-> Search for yourself the way a customer does, then fix what they find: matching info everywhere, a review habit, and an alert on your name.
+> Search for your business the way a customer does, then fix what comes up: matching info everywhere, a standing review habit, and an alert on your name.
 
 ## Why this matters
 
-Your reputation used to live in what neighbors said about you. Now it also lives in what shows up when someone types your name into a search bar. Take Luis, who runs a mobile car detailing business. A search for his business shows an old listing with a disconnected phone number, a page with last year's hours, and one two-star review he never answered. None of it reflects the business he runs today, but a stranger has no way to know that. What they find is what they believe.
+Your reputation used to live in what neighbors said about you. Now it also lives in what shows up when someone types your name into a search bar. Take Luis, who runs a mobile car detailing business that has grown and changed over the years. A search for his business shows an old listing with a phone number he no longer uses, a page with last year's hours, and one two-star review that came in during a busy stretch and never got a reply. None of it reflects the business he runs today, but a stranger has no way to know that. What they find is what they believe, and they decide whether to call based on it.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to search for your business the way a customer does
-- Why matching name, phone, and hours everywhere matters
-- How to build a one-page master-info doc
-- How to make reviews a standing habit and handle a bad one
-- How to set a Google Alert on your business name
+- Search for your business the way a customer does and list what needs fixing
+- Make your name, phone, and hours match everywhere
+- Build a one-page master-info doc you paste from
+- Make reviews a standing habit and handle a bad one without losing customers
+- Set a Google Alert on your business name
 
 ## The lesson
 
 ### We Google everyone, live
 
-We start the session by searching for every business in the room. To see what a stranger sees, use a private or incognito browser window, which hides your own search history from the results. Run three searches.
+We start the session by searching for every business in the room. To see what a stranger sees, use a private or incognito browser window, which keeps your own search history from shaping the results. Run three searches.
 
 1. Your business name plus your town.
 2. Your own name plus your town.
 3. Your service plus "near me" or your town, such as "mobile detailing Lanham."
 
-Look at the first page only, since few people go further. Write down everything you see: listings, social pages, review sites, photos, and anything wrong or out of date. This list is your work for today. Do not be discouraged by it. Nearly everyone finds something stale.
+Look at page one only, since few people go further. Write down everything you see: listings, social pages, review sites, photos, and anything wrong or out of date. This list is your work for today. Nearly every business that has been open more than a year or two turns up something stale.
 
 ### Fix one: consistency
 
-Consistency means your business name, phone number, and hours are exactly the same everywhere they appear. This matters for two reasons. Customers lose trust when two pages disagree, and they may call the wrong number. Search engines also compare your listings, and matching details help them trust that all those pages are the same real business.
+Consistency means your business name, phone number, and hours are exactly the same everywhere they appear. It matters for two reasons. Customers lose trust when two pages disagree, and they may call the wrong number. Search engines also compare your listings, and matching details help them treat all those pages as the same real business.
 
 "Exactly the same" is stricter than it sounds. "Luis Mobile Detail," "Luis's Detailing LLC," and "L&M Auto Spa" look like three businesses. Pick one version and use it everywhere.
 
-The tool that makes this easy is a one-page master-info doc. It is a single document with the official version of every detail, so you copy and paste and never retype from memory. Lay it out like this.
+The tool that keeps this tight is a one-page master-info doc: a single document with the official version of every detail, so you copy and paste and never retype from memory. Lay it out like this.
 
 | Field | Your official version |
 | --- | --- |
@@ -51,11 +51,11 @@ Keep it in Google Drive so it is on your phone. A blank copy is in this lesson's
 
 ### Fix two: reviews as a standing habit
 
-One burst of reviews fades. A steady trickle shows you are busy right now. Make asking part of how you close every job. Luis's habit is simple: when he hands back the keys, he says, "I'm going to text you a link, would you leave a quick review?" and sends it before he drives off. Pick your moment, such as at payment, at delivery, or at pickup, and ask every time.
+One burst of reviews fades. A steady trickle shows you are busy right now. Make asking part of how you close every job. Luis's habit: when he hands back the keys, he says, "I'm going to text you a link, would you leave a quick review?" and sends it before he drives off. Pick your moment, such as at payment, at delivery, or at pickup, and ask every time.
 
 ### The bad-review playbook
 
-Sooner or later you will get a bad review. Some will be fair and some will not. The playbook is the same for both: respond once, professionally, take it offline.
+Any business that serves enough customers will get a bad review. Some will be fair and some will not. The playbook is the same for both: respond once, professionally, take it offline.
 
 1. Wait until you are calm. Never reply the same hour.
 2. Write one short public reply. Thank them, acknowledge the problem, say you want to fix it, and give a phone number or email.
@@ -65,11 +65,11 @@ Sooner or later you will get a bad review. Some will be fair and some will not. 
 
 > Mr. Daniels, thank you for letting us know, and I am sorry the interior was not finished to your standard. That is not the job we want to deliver. Please call me directly at (555) 010-0177 so I can make it right. Luis, owner
 
-Remember who the reply is really for. It is for the next hundred people who read it. They do not expect a business with zero complaints. They are watching how you act when something goes wrong.
+The reply is really for the next hundred people who read it. They do not expect a business with zero complaints. They are watching how you act when something goes wrong.
 
 ### Fix three: a Google Alert
 
-A Google Alert is a free tool from Google that emails you when new pages mentioning a word or phrase appear in search. Set one for your business name so you hear about mentions automatically.
+Set a Google Alert on your business name and Google emails you when a page mentioning it appears in search. It is free and takes two minutes.
 
 1. Sign in to your Google account and open Google Alerts.
 2. Type your business name inside quotation marks, so it matches the exact phrase.
@@ -80,7 +80,7 @@ Alerts do not catch everything, and they do not replace checking your reviews. T
 
 ### Close the loop
 
-End by running the same three searches again. Some fixes show at once, and others take days or weeks to appear in results. Mark each item on your list as fixed, in progress, or still to do.
+End by running the same three searches again. Some fixes show at once, and others take days or weeks to appear in results. Mark each item on your list as fixed, in progress, or still to do. Then put a repeating reminder on your calendar to rerun the three searches every few months and update the "last checked" dates in the doc.
 
 ## Do this now
 
@@ -94,19 +94,20 @@ End by running the same three searches again. Some fixes show at once, and other
 
 Finished result: a master-info doc, corrected listings, an alert running, and a short list of what is left.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Retyping details from memory.** Fix: always paste from the master-info doc.
-- **Asking for reviews only when business is slow.** Fix: ask at the same moment on every job.
-- **Arguing with a reviewer in public.** Fix: respond once, professionally, take it offline.
-- **Ignoring old pages you forgot about.** Fix: claim, correct, or request an update for each one.
+- **Retyping details from memory.** Small differences creep in and listings stop matching. Fix: always paste from the master-info doc.
+- **Asking for reviews only when business is slow.** The reviews bunch up and then go stale. Fix: ask at the same moment on every job.
+- **A public back-and-forth with a reviewer.** Future customers read the whole exchange. Fix: respond once, professionally, take it offline.
+- **Old listings left as they are.** They keep sending callers to a number that no longer rings. Fix: claim, correct, or request an update for each one.
 
-## Check yourself
+## Before you move on
 
 - What did a stranger see on page one this morning, and what do they see now?
-- Do your name, phone, and hours match everywhere?
-- What are the three parts of the bad-review playbook?
-- Where does your master-info doc live?
+- Do your name, phone, and hours match on every listing you can edit today?
+- Can you open your master-info doc on your phone in under a minute?
+- Is your bad-review reply drafted and saved where you can find it?
+- Is the Google Alert running, and is the next search check on your calendar?
 
 ## What you walk away with
 

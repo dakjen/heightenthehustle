@@ -1,18 +1,18 @@
-# Professional Invoice
+# Build an Invoice That Gets Paid
 
-> Build an invoice template with every element that gets you paid, and send a real one before the session ends.
+> Set up an invoice template with the six elements that remove every reason to delay, and send a real one before the session ends.
 
 ## Why this matters
 
-An invoice is a written request for payment. It tells your customer what you did, what they owe, when it is due, and how to pay. When any of those pieces is missing, the customer has to stop and ask, and a customer who has to ask usually pays later. Think of a cleaning business that texts "You owe me $825 for March" to a dental office. The office manager needs a document for their records, does not know who to make the check out to, and sets it aside. A clear invoice removes every excuse. It also tells the customer they are dealing with a real business.
+An invoice has one job: get the money moving without a single follow-up question. It tells your customer what you did, what they owe, when it is due, and how to pay. When any of those is missing, the customer has to stop and ask, and a customer who has to ask usually pays later. Take a cleaning business that texts "You owe me $825 for March" to a dental office. The text is accurate. But the office manager needs a document for the files, does not know who to make the check out to, and sets it aside for later. A complete invoice clears all of that in one page.
 
-## What you'll learn
+## What you'll be able to do
 
-- The six elements every invoice needs
-- How to number invoices, starting at 1001
-- Why a due date is never left blank
-- How to write payment instructions that need no follow-up questions
-- When to retire this template and invoice from QuickBooks instead
+- Put all six payment-driving elements on every invoice
+- Number invoices in sequence, starting at 1001
+- Set a due date every time, never a blank
+- Write payment instructions that need no follow-up questions
+- Track who still owes you, and hand off to QuickBooks without breaking your numbering
 
 ## The lesson
 
@@ -20,9 +20,9 @@ An invoice is a written request for payment. It tells your customer what you did
 
 **1. Both parties' information.** Your business name, your name, phone, and email go at the top. So does the customer's name or business name and their contact information. If their bookkeeper pulls this invoice out of a folder in six months, it should be obvious who billed whom.
 
-**2. An invoice number.** Every invoice gets its own number, and numbers go in order. Start at 1001. Nobody needs to know which invoice was your very first, and a four-digit number is easy to refer to on the phone. The next invoice is 1002, then 1003. Never reuse a number and never skip around.
+**2. An invoice number.** Every invoice gets its own number, and numbers go in order. Start at 1001. Nobody needs to know which invoice was your very first, and a four-digit number is quick to refer to on the phone. The next invoice is 1002, then 1003. Never reuse a number and never skip around.
 
-**3. Itemized work.** List each thing you did on its own line with a quantity, a price, and a line total. "Services: $825" invites questions. Four cleaning visits at $150 each does not.
+**3. Itemized work.** List each thing you did on its own line with a quantity, a price, and a line total. "Services: $825" invites questions. Four cleaning visits at $150 each does not. If you gave a quote, use the same wording on the invoice so the customer can match the two without calling you.
 
 **4. The total.** One clear number, in bold, labeled "Total due."
 
@@ -52,13 +52,17 @@ Here is an invoice from a fictional business, Bright Path Cleaning, to a fiction
 
 Check the math before you send anything. $600 + $180 + $45 = $825. A wrong total is the fastest way to delay a payment, because the customer has to write back and wait for a corrected copy.
 
+Notice who it is addressed to. "Attention Office Manager" sends the invoice to the person who pays the bills, not the person who booked the work. With a business customer, ask once who handles payables and whether they need anything on the invoice, such as a purchase order number.
+
 ### Writing the "how to pay" line
 
-Look at the sample again. The customer knows the Zelle number. They know the exact name to write on a check. They know a card link is coming. They never have to ask "Who do I make this out to?" or "Do you take cards?" Write your own line the same way. List only the methods you really have set up. You will set up or add payment methods in the Getting Paid Faster session.
+Look at the sample again. The customer knows the Zelle number. They know the exact name to write on a check. They know a card link is coming. They never have to ask "Who do I make this out to?" or "Do you take cards?" Write your own line the same way. List only the methods you have set up and working. You will set up or add payment methods in the Getting Paid Faster session.
 
-### Send it the right way
+### Send it so it gets opened and filed
 
-Save the finished invoice as a PDF so it looks the same on every screen and cannot be changed by accident. Name the file with the invoice number and customer, such as "Invoice 1001 Oak Street Dental." Email it with a short message that repeats the total and the due date. Then record it. Keep a simple list of invoice number, customer, amount, date sent, and date paid, so you always know who still owes you.
+Save the finished invoice as a PDF so it looks the same on every screen and cannot be changed by accident. Name the file with the invoice number and customer, such as "Invoice 1001 Oak Street Dental." Email it with a short message that repeats the total and the due date, so the two facts that matter are visible before anyone opens the attachment.
+
+Then record it. Keep a running list of invoice number, customer, amount, date sent, and date paid. That list is how you know, on any given day, who still owes you and how much is outstanding in total.
 
 ### Use the template until QuickBooks takes over
 
@@ -80,20 +84,21 @@ This is what everyone does together in the session.
 
 You finish with a reusable invoice template in your business's name, and most people finish with a real invoice sent.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Leaving the due date blank.** Fix: every invoice gets a specific calendar date.
-- **One lump-sum line.** Fix: itemize each service with quantity, price, and line total.
-- **Vague payment instructions.** Fix: give the exact details for each method so no one has to ask.
-- **Reusing or skipping invoice numbers.** Fix: start at 1001 and go up by one every time.
-- **Sending a file the customer can edit.** Fix: send a PDF and keep the editable copy for yourself.
+- **A blank due date.** Nothing is ever late, so nothing is ever urgent. Fix: every invoice gets a specific calendar date.
+- **One lump-sum line.** It draws questions, and questions hold up payment. Fix: itemize each service with quantity, price, and line total.
+- **Vague payment instructions.** The customer means to ask and then forgets. Fix: give the exact details for each method so no one has to ask.
+- **Reused or skipped invoice numbers.** Payments get applied to the wrong job and records stop matching. Fix: start at 1001 and go up by one every time.
+- **Sending a file the customer can edit.** Totals and dates can change without you knowing. Fix: send a PDF and keep the editable copy for yourself.
 
-## Check yourself
+## Before you move on
 
-- Can you name all six elements without looking?
-- What number will your first invoice carry, and what comes after it?
-- Could a new customer pay your invoice without asking you a single question?
-- What invoice number will you use first when you move to QuickBooks?
+- Could a customer who has never dealt with you pay your invoice without asking a single question?
+- Is your master template saved with your details, your logo, and your "how to pay" line filled in?
+- Which invoice number goes out next, and where is your list of what has been sent and paid?
+- For your largest business customer, do you know who handles payables?
+- What invoice number will you use on the day you move to QuickBooks?
 
 ## What you walk away with
 

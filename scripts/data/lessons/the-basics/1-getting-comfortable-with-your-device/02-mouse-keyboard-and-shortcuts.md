@@ -1,41 +1,39 @@
-# Mouse, Keyboard, and Everyday Shortcuts
+# Cut Paperwork Time with Keyboard Shortcuts
 
-> Click, scroll, drag, select text, and use the handful of shortcuts that make everyday work faster on Windows and Mac.
+> Reuse what you have already written, fix edits in seconds, and move between apps without retyping, on Windows, Mac, and your phone.
 
 ## Why this matters
 
-Most business paperwork is small edits done over and over: fixing a price on a menu, copying an address into an invoice, changing a date on a flyer. If each of those takes you two minutes of hunting through menus, the day disappears. A childcare provider who can copy last month's parent letter, paste it into a new document, and change three lines is done in five minutes. The same letter typed from scratch takes half an hour. These skills are small, and you will use them every single day.
+Most business paperwork is small edits done over and over: fixing a price on a menu, copying an address into an invoice, changing a date on a flyer. If each of those takes two minutes of hunting through menus, the day disappears. A childcare provider who copies last month's parent letter, pastes it into a fresh document, and changes three lines is done in five minutes. The same letter typed from scratch takes half an hour. Retyping also invites errors, and a wrong digit in an address or an invoice total costs more than the time it took to type.
 
-## What you'll learn
+## What you'll be able to do
 
-- The five basic mouse and touchpad moves, and their touch screen versions
-- How to select exactly the text you want
-- The shortcuts for copy, cut, paste, undo, save, and select all on Windows and Mac
-- How to move between open apps without closing anything
+- Select exactly the text you want without dragging and redoing it
+- Copy, cut, paste, undo, save, and select all from the keyboard on Windows and Mac
+- Use right-click and press-and-hold menus to reach the action you need without searching toolbars
+- Move between open apps to carry information from an email into an invoice without closing anything
+- Reuse an existing letter, quote, or invoice as the starting point for the next one
 
 ## The lesson
 
-### The five basic moves
+### Reuse before you retype
 
-The **pointer** is the small arrow that moves on the screen when you move the mouse or slide a finger on the touchpad. Almost everything you do is one of five moves.
+The fastest document is one you already wrote. Open last month's version, select all of it, copy it, paste it into a blank document, and change only what is different. Everything else in this lesson supports that habit.
 
-1. **Click.** Press the left button once. This chooses something or places your typing spot.
-2. **Double-click.** Press the left button twice quickly. This opens a file or a folder.
-3. **Right-click.** Press the right button once. This opens a small menu of things you can do with whatever you clicked. On a touchpad, tapping with two fingers usually does the same thing.
-4. **Scroll.** Roll the wheel on the mouse, or slide two fingers up and down on the touchpad. This moves the page up and down.
-5. **Drag.** Press and hold the left button, move the pointer, then let go. This moves things or selects text.
+### Select exactly what you want
 
-On a phone or tablet, your finger is the mouse. A tap is a click. Pressing and holding is like a right-click. Sliding your finger scrolls, and pressing, holding, then sliding drags an item.
+Every edit starts with selecting the text you mean to change. Dragging across it works, but there are quicker ways.
 
-### Selecting text
+- Double-click a word to select that one word. Type, and the replacement goes in.
+- Click at the start of a passage, hold the **Shift** key, and click at the end. Everything in between is selected. This beats dragging across a long passage or one that runs off the bottom of the page.
+- Use Select all (in the table below) to grab the entire document.
+- On a phone, press and hold a word, then drag the small handles on each side to stretch the selection.
 
-To change, copy, or delete text, you first have to **select** it, which means highlighting it so the device knows what you mean. Click right before the first letter, hold the button down, drag to the end of the text, and let go. The selected text changes color. Two quicker ways: double-click a word to select just that word, or click at the start, hold the **Shift** key, and click at the end to select everything in between. On a phone, press and hold a word, then drag the small handles on each side to stretch the selection.
+One detail saves a lot of rework. Typing goes where the blinking cursor is, not where the pointer is resting. If text appears in the wrong place, click where you want it and continue.
 
-The blinking line that shows where your typing will appear is called the **cursor**. Whatever you type goes where the cursor is, not where the pointer is. If your typing shows up in the wrong place, click where you want it first.
+### The six shortcuts that carry the day
 
-### The shortcuts you will use every day
-
-A **keyboard shortcut** is two keys pressed together that do a job without opening a menu. Hold the first key, tap the second, then let go of both. On Windows, the first key is **Ctrl**. On a Mac, it is **Command**, the key next to the space bar marked with the word or the ⌘ symbol.
+A keyboard shortcut is two keys pressed together that do a job without opening a menu. Hold the first key, tap the second, then let go of both. On Windows, the first key is **Ctrl**. On a Mac, it is **Command**, the key next to the space bar marked with the word or the ⌘ symbol.
 
 | What it does | Windows | Mac |
 | --- | --- | --- |
@@ -46,37 +44,52 @@ A **keyboard shortcut** is two keys pressed together that do a job without openi
 | Save | Ctrl + S | Command + S |
 | Select all | Ctrl + A | Command + A |
 
-**Copy** makes a duplicate of what you selected and holds it in memory. **Cut** removes it and holds it. **Paste** places whatever is being held at your cursor. **Undo** reverses the last thing you did, and you can press it several times to step back further. Undo is the most comforting key on the keyboard, because it means almost no mistake is permanent. **Save** stores your work so it is still there tomorrow. Some apps save for you automatically, but pressing Save never hurts.
+Here is how each one earns its place.
 
-### Moving between open apps
+- **Copy** duplicates what you selected and holds it in memory. Use it for anything that must match exactly: an address, an invoice number, a license number, a price.
+- **Cut** removes the selection and holds it. Use it to move a paragraph or a line item to a different spot.
+- **Paste** places whatever is being held at your cursor. You can paste the same thing several times.
+- **Undo** reverses the last thing you did, and you can press it several times to step back further. Because of Undo, almost no editing slip is permanent, so you can work fast.
+- **Save** stores your work so it is still there tomorrow. Some apps save automatically, but pressing Save costs nothing. Make it a reflex after every meaningful change.
+- **Select all** grabs the whole document, ready to copy into the next one.
 
-You do not have to close one app to use another. Several can be open at once, the way several papers can sit on a desk. On Windows, hold **Alt** and tap **Tab** to flip through open apps. On a Mac, hold **Command** and tap **Tab**. You can also click the app's icon on the taskbar (the strip along the bottom of a Windows screen) or the Dock (the row of icons on a Mac). On a phone, swipe up from the bottom edge and pause, or tap the recent apps button, to see everything that is open. This is how you copy a customer's address from an email and paste it into an invoice without retyping it.
+### Right-click for the short list
+
+Right-clicking an item opens a short menu of the things you can do with it: rename a file, copy a link, paste, print. It is usually quicker than scanning a toolbar. On a touchpad, tapping with two fingers usually does the same thing. On a phone or tablet, pressing and holding an item brings up the same kind of menu, and pressing, holding, then sliding moves the item.
+
+### Move between open apps
+
+You do not have to close one app to use another. Several can stay open at once, the way several papers can sit on a desk. On Windows, hold **Alt** and tap **Tab** to flip through open apps. On a Mac, hold **Command** and tap **Tab**. You can also click the app's icon on the taskbar along the bottom of a Windows screen, or on the Dock on a Mac. On a phone, swipe up from the bottom edge and pause, or tap the recent apps button, to see everything that is open.
+
+This is how a customer's address gets from an email into an invoice with no retyping: select it in the email, copy, switch apps, click in the address field, paste. Four moves, and the address is exact.
 
 ## Try it
 
 1. Open a notes or word processing app and start a blank document.
 2. Type three lines: your business name, a one-sentence description of what you do, and your phone number.
-3. Double-click one word in your description and type a better word over it.
+3. Double-click one word in your description and type a stronger word over it.
 4. Select the whole line with your phone number, copy it, click at the end of the document, and paste it. Then press Undo to remove the extra copy.
 5. Select your business name, cut it, click at the very bottom, and paste it there. Press Undo twice to put everything back.
 6. Open a browser. Switch back and forth between the browser and your document three times using the keyboard.
 7. Save the document with the name **Practice - My Business**. You now have a saved, edited document and you used every shortcut on the list.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Typing without clicking first.** Click where you want the text to go so the cursor is in the right place.
-- **Pressing the two shortcut keys one after the other.** Hold the first key down while you tap the second.
-- **Panicking when text disappears.** If you type while text is selected, it gets replaced. Press Undo and it comes back.
-- **Closing an app to get to another one.** Switch between them. Closing risks losing unsaved work.
+- **Retyping details that already exist somewhere.** Every retyped address or total is a chance for an error on an invoice. Copy and paste it instead.
+- **Typing before placing the cursor.** The text lands wherever the cursor was last. Click where you want it, then type.
+- **Pressing the two shortcut keys one after the other.** Nothing happens, or a stray letter appears. Hold the first key down while you tap the second.
+- **Rebuilding text that vanished.** If you type while text is selected, the selection is replaced. Press Undo and it comes back.
+- **Closing an app to get to another one.** Closing risks losing unsaved work and costs time reopening. Switch between them instead.
 - **Using Ctrl on a Mac.** On a Mac, the everyday shortcut key is Command.
 
-## Check yourself
+## Before you move on
 
-- What is the difference between copy and cut?
-- Which shortcut reverses a mistake on your device?
-- How do you select a single word quickly?
-- How do you move from one open app to another without closing anything?
+- Which document do you rewrite most often (quote, invoice, letter, schedule)? Can you produce the next one from the last one in under five minutes?
+- Can you move a customer's address from an email into an invoice without typing a single character of it?
+- Do you know the Undo shortcut on your own device well enough to hit it without looking?
+- Can you switch between your email and an open document from the keyboard?
+- When did you last press Save on the document you care about most?
 
 ## What you walk away with
 
-You can edit a document, fix mistakes with Undo, and move between open apps with confidence. Keep the shortcut reference sheet in this lesson's downloads next to your device until the keys feel automatic.
+A faster way to produce the paperwork your business repeats every week: reuse the last version, select precisely, copy instead of retype, undo slips instantly, and carry information between apps. Keep the shortcut reference sheet in this lesson's downloads next to your device until the keys are automatic.

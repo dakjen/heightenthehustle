@@ -1,32 +1,29 @@
-# Paying Yourself
+# Pay Yourself on a Schedule with an Owner's Draw
 
-> Pay yourself with an owner's draw, the same amount on the same schedule, like a paycheck.
+> Pay yourself with an owner's draw, the same amount on the same schedule, like a paycheck, and record it so your profit stays accurate.
 
 ## Why this matters
 
-"How do I pay myself?" is the question every new owner asks. Most answer it by accident. They pull money out whenever a personal bill is due, in whatever amount is needed that day. Tasha, who runs a cleaning business, did this for a year. Some weeks she took $900. Some weeks she took nothing and put groceries on a credit card. She never knew what she really earned, and the business account was always a surprise. Paying yourself the right way does two things. It keeps your books accurate, and it gives your household a steady income to plan around.
+How you take money out of the business decides two things: whether your books are right, and whether your household can plan. The common pattern is to pull money when a personal bill comes due, in whatever amount that bill needs. Tasha, who runs a cleaning business, worked that way for a year, and it kept the bills paid. Some weeks she took $900. Some weeks she took nothing and put groceries on a credit card. The cost was that she could not state what she earned, and the business balance swung with her personal calendar instead of with the business. A fixed draw on a fixed schedule solves both. It keeps the books accurate, and it gives the household a steady income to plan around.
 
 This lesson is general education, not tax or legal advice. Confirm your own situation with a tax professional.
 
-## What you'll learn
+## What you'll be able to do
 
-- What an owner's draw is and who uses it
-- Why a draw is not an expense and does not reduce profit
-- How to take a draw and record it in QuickBooks
-- When payroll with a real paycheck comes into the picture
-- How to choose a steady amount and schedule
+- Pay yourself by owner's draw and record it in QuickBooks
+- Keep draws out of your expenses so profit reads true
+- Plan around the fact that tax follows profit, not what you took out
+- Know when payroll with a paycheck enters the picture
+- Set a steady amount and schedule the business can carry in a slow month
 
 ## The lesson
 
 ### The owner's draw
 
-If you are a sole proprietor or the single owner of an LLC, you pay yourself with an **owner's draw**. A draw is a transfer of money from the business bank account to your personal bank account. That is all it is. There is no paycheck, no pay stub, and no payroll software involved.
-
-A **sole proprietor** is someone who runs a business in their own name without forming a separate company. A **single-owner LLC** is a limited liability company with one owner. In both cases, the draw is the normal way to move money from the business to yourself.
-
+If you are a sole proprietor, running the business in your own name without a separate company, or the single owner of an LLC, you pay yourself with an owner's draw. A draw is a transfer from the business bank account to your personal bank account. There is no paycheck, no pay stub, and no payroll software involved.
 ### A draw is not an expense
 
-This is the part that trips people up. An expense is money the business spends to operate, like supplies or insurance. A draw is the owner taking out some of what the business earned. So you record it as a draw, not as an expense. It does not reduce your profit.
+This is where books most often go wrong. An expense is money the business spends to operate, like supplies or insurance. A draw is the owner taking out some of what the business earned. So you record it as a draw, not as an expense. It does not reduce your profit.
 
 Look at Tasha's month.
 
@@ -43,7 +40,7 @@ $3,800 - $1,450 = $2,350. Tasha took two draws of $600, for $1,200 total. Her pr
 
 Here is why this matters at tax time. You owe taxes on profit whether you draw it or not. Tasha is taxed on her $2,350 of profit. It does not matter that she only moved $1,200 to her personal account. If she had taken nothing, she would still owe tax on $2,350. If she had taken all of it, the tax would be the same.
 
-Two lessons follow from this. First, taking a smaller draw does not lower your taxes. Second, if you record draws as expenses by mistake, your profit will look smaller than it really is, and your books will be wrong. This is also why the tax set-aside from the Taxes lesson comes first. Move your tax money to tax savings, then pay yourself from what remains.
+Two things follow. First, taking a smaller draw does not lower your taxes. Second, if draws are recorded as expenses, your profit will look smaller than it is, and every report and tax figure built on it will be wrong. This is also why the tax set-aside from the previous lesson comes first. Move your tax money to tax savings, then pay yourself from what remains.
 
 ### How to take and record a draw
 
@@ -53,19 +50,19 @@ Two lessons follow from this. First, taking a smaller draw does not lower your t
 4. Categorize it to your owner's draw account. QuickBooks usually has an equity account for this, with a name like Owner's Draw. If you do not see one, add it in the Chart of Accounts.
 5. Add the transaction to your books.
 
-**Equity** is the owner's stake in the business. Draws reduce equity, not profit. You do not need to master that idea today. Just make sure draws go to the draw account and never to Contract Labor, Wages, or any other expense.
+Equity is the owner's stake in the business, and draws reduce equity, not profit. The working rule is that draws go to the draw account and never to Contract Labor, Wages, or any other expense.
 
 Once you pay yourself this way, stop paying personal bills straight from the business account. Groceries, your home rent, and your personal phone come out of your personal account, funded by your draw.
 
-### What about a real paycheck?
+### What about a paycheck?
 
-Payroll with a real paycheck comes later, mainly if you elect S-corp status. That is a tax choice some businesses make as they grow. It changes how the owner is paid and adds paperwork and cost. It is a decision to make with a tax professional, not on your own and not from a video you saw online. Until then, the owner's draw is your method.
+Payroll with a paycheck comes later, mainly if you elect S-corp status. That is a tax choice some businesses make as they grow. It changes how the owner is paid and adds paperwork and cost. It is a decision to make with a tax professional who has seen your numbers. Until then, the owner's draw is your method.
 
 ### Same amount, same schedule
 
 Either way, the rule is the same: pay yourself the same amount on the same schedule, like a paycheck, instead of raiding the account when you need money.
 
-Raiding feels flexible, and it causes two problems. Your household never knows what is coming. And the business account gets drained in good weeks, leaving nothing for slow ones.
+Raiding looks flexible, and it causes two problems. Your household never knows what is coming. And the business account gets drained in good weeks, leaving nothing for slow ones.
 
 To choose your number:
 
@@ -75,7 +72,7 @@ To choose your number:
 4. Pick a schedule, such as the 1st and the 15th, or every Friday.
 5. Set a repeating reminder or a scheduled transfer for that amount.
 
-Tasha chose $600 on the 1st and $600 on the 15th. In a strong month, the extra stays in the business as a cushion. After a few steady months, she can raise the amount. Start lower than you think and give yourself a raise later. That is far easier than cutting your own pay.
+Tasha chose $600 on the 1st and $600 on the 15th. In a strong month, the extra stays in the business as a cushion. After a few steady months, she can raise the amount. Start lower than you think and give yourself a raise later. That beats having to cut your own pay.
 
 ## Do this now
 
@@ -88,20 +85,20 @@ Tasha chose $600 on the 1st and $600 on the 15th. In a strong month, the extra s
 
 You finish with past draws recorded correctly, a fixed draw amount, and a pay schedule on your calendar.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Recording draws as an expense or as wages.** Fix: categorize every transfer to yourself as an owner's draw.
-- **Taking money whenever you need it.** Fix: same amount, same schedule.
-- **Paying personal bills from the business account.** Fix: take your draw, then pay personal bills from your personal account.
-- **Thinking a smaller draw means lower taxes.** Fix: remember that tax is based on profit, whether you draw it or not.
-- **Setting your pay from your best month.** Fix: base it on your lowest recent month and raise it later.
+- **Draws recorded as an expense or as wages.** Profit reads low and the books no longer match reality. Fix: categorize every transfer to yourself as an owner's draw.
+- **Taking money as bills come due.** The business balance follows your personal calendar. Fix: same amount, same schedule.
+- **Personal bills paid from the business account.** Each one has to be found and recategorized later. Fix: take your draw, then pay personal bills from your personal account.
+- **Cutting the draw to cut taxes.** It does not work, and the household goes short for nothing. Fix: plan on tax being based on profit, whether you draw it or not.
+- **Pay set from the best month.** The first slow month forces a cut or drains the account. Fix: base it on your lowest recent month and raise it later.
 
-## Check yourself
+## Before you move on
 
-- What is an owner's draw?
-- Does a draw reduce your profit? Why or why not?
-- If you take no draw at all in a month, do you still owe tax on that month's profit?
 - What amount will you pay yourself, and on what days?
+- Could the business have covered that draw in your lowest month of the last three, after the tax set-aside?
+- Is every transfer to yourself last month sitting in the owner's draw account, with none in an expense category?
+- Which personal charges still hit the business account, and when do they move?
 
 ## What you walk away with
 

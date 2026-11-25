@@ -1,24 +1,22 @@
 # Building a Five-Slide Presentation
 
-> Build a short business introduction with a title, an overview, a product or service slide, a visual, and a closing slide.
+> Build a five-slide introduction to your business, with a title, an overview, a product or service slide, a visual, and a closing slide that all look like one set.
 
 ## Why this matters
 
-Five slides is enough to introduce almost any small business. It fits a two-minute spot at a networking breakfast, a table at a vendor fair, or the start of a meeting with a new client. It is also a deck you can keep and grow. Add a pricing slide for one audience or swap the photo for another. A barber invited to speak at a neighborhood business night does not need thirty slides. He needs his name, what he does, what he offers, one strong picture, and how to reach him. This lesson is about building that deck cleanly so the five slides look like they belong together. What to say to investors and how to shape a pitch are different skills. Pitch strategy is covered separately.
+Five slides is enough to introduce almost any small business. It fits a two-minute spot at a networking breakfast, a table at a vendor fair, or the start of a meeting with a prospective client. It is also a deck you can keep and grow. Add a pricing slide for one audience or swap the photo for another. A barber invited to speak at a neighborhood business night does not need thirty slides. He needs his name, what he does, what he offers, one strong picture, and how to reach him. This lesson is about building that deck cleanly so the five slides look like they belong together. What to say to investors and how to shape a pitch are different skills. Pitch strategy is covered separately.
 
-## What you'll learn
+## What you'll be able to do
 
-- A simple five-slide structure that works for any business
-- How to choose the right layout for each slide
-- How to keep fonts, colors, and positions the same across a deck
-- How to check a finished deck for consistency
-- How to save it so you can build on it later
+- Outline a five-slide introduction where each slide has one job
+- Match each slide to the layout that fits it
+- Keep fonts, colors, and positions identical across the deck
+- Audit the finished deck against six consistency questions
+- Save it so you can build on it for each audience
 
 ## The lesson
 
-### The five slides
-
-Each slide has one job.
+### Five slides, five jobs
 
 1. **Title.** Your business name and a short line about what you do.
 2. **Overview.** Who you are, where you work, and who you serve.
@@ -36,9 +34,9 @@ Here is the outline for Sharp Lines Barbershop, a fictional business. Notice how
 - **Slide 4, Title and Content layout.** Title: `Fresh Cuts Every Day`. Content: one photo of your work, or the expense chart with a title that states the point.
 - **Slide 5, Title and Content layout.** Title: `Come See Us`. Lines: `410 Maple Street`, `555-0142`, `Tuesday to Sunday, 9 a.m. to 7 p.m.`, `Book your first cut this week`.
 
-Write your outline on paper or in a blank document before you open PowerPoint. Deciding the words first keeps you from decorating slides that have nothing to say yet.
+Write your outline on paper or in a blank document before you open PowerPoint. Deciding the words ahead of time keeps you from decorating slides that have nothing to say yet.
 
-### Building it in order
+### Build it in order
 
 1. Open PowerPoint, choose **Blank Presentation**, and save it right away with **File > Save As**. Name it with your business, such as `Sharp-Lines-Intro`.
 2. Go to the **Design** tab and choose one plain theme. Do this before you add content so every slide starts with the same fonts and colors.
@@ -49,11 +47,11 @@ Write your outline on paper or in a blank document before you open PowerPoint. D
 7. Add the closing slide and type your contact details.
 8. Save with **Ctrl + S** on Windows or **Cmd + S** on a Mac.
 
-### Keeping the deck consistent
+### Keep the deck consistent
 
-**Visual consistency** means every slide looks like part of the same set. The titles sit in the same place, in the same font, size, and color. The body text matches from slide to slide. The margins are the same. When a deck is consistent, the audience stops noticing the design and pays attention to you.
+Visual consistency means every slide looks like part of the same set. The titles sit in the same place, in the same font, size, and color. The body text matches from slide to slide. The margins are the same. When a deck is consistent, the audience stops noticing the design and pays attention to you.
 
-Three habits make this easy. First, use layouts and placeholders for everything you can, because they hold the positions and fonts for you. Second, if you build a slide you like, reuse it. Right-click its thumbnail, choose **Duplicate Slide**, and change the words. Third, if a slide has drifted out of line because boxes were dragged around, select it, go to the **Home** tab, and click **Reset**. That snaps the placeholders back to the layout's position and formatting.
+Three habits hold it together. One, use layouts and placeholders for everything you can, because they hold the positions and fonts for you. Two, if you build a slide you like, reuse it. Right-click its thumbnail, choose **Duplicate Slide**, and change the words. Three, if a slide has drifted out of line because boxes were dragged around, select it, go to the **Home** tab, and click **Reset**. That snaps the placeholders back to the layout's position and formatting.
 
 ### The consistency check
 
@@ -63,7 +61,7 @@ When all five slides are done, look at them together. Go to the **View** tab and
 2. Do the titles start in the same spot on every slide?
 3. Is the body text the same size on slides 2, 3, and 5?
 4. Did you use only your two or three colors?
-5. Does each slide make just one point?
+5. Does each slide make one point and no more?
 6. Is anything too close to the edge?
 
 Click **Normal** on the **View** tab to go back and fix anything that stands out. Then run the slide show from the beginning and read every word for spelling. Check names, phone numbers, and addresses twice. A wrong digit in a phone number makes the whole deck useless.
@@ -74,9 +72,9 @@ Start a blank presentation and choose a theme from the panel that opens on the r
 
 ## Try it
 
-Build the deck for your own business. If you are not ready, use the Sharp Lines Barbershop outline above.
+Build the deck for your own business. If you would rather work from a finished example, use the Sharp Lines Barbershop outline above.
 
-1. Write your five-slide outline first: title, overview, product or service, visual, and closing.
+1. Write your five-slide outline: title, overview, product or service, visual, and closing.
 2. Open PowerPoint, start a blank presentation, and save it with your business name.
 3. Choose one plain theme on the **Design** tab.
 4. Build slides 1 through 3 using layouts and placeholders. Keep each to five lines or fewer.
@@ -88,21 +86,21 @@ Build the deck for your own business. If you are not ready, use the Sharp Lines 
 
 You are done when you have a saved five-slide deck that passes all six consistency questions.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Opening PowerPoint before deciding what to say.** Fix: write the outline first, then build.
-- **Changing the theme halfway through.** Fix: choose the theme first and stick with it.
-- **Dragging placeholders to new spots on each slide.** Fix: select the slide and click Reset on the Home tab.
-- **Cramming two jobs into one slide.** Fix: keep one job per slide, even if that means a sixth slide.
-- **A typo in the phone number or address.** Fix: read the closing slide out loud, digit by digit.
+- **Opening PowerPoint before deciding what to say.** Fix: write the outline, then build.
+- **Changing the theme halfway through.** Text reflows and every finished slide needs rechecking. Fix: choose the theme at the start and stick with it.
+- **Placeholders dragged to different spots on each slide.** Titles jump around as you click through, which reads as rushed. Fix: select the slide and click Reset on the Home tab.
+- **Two jobs crammed into one slide.** Neither point lands. Fix: keep one job per slide, even if that means a sixth slide.
+- **A typo in the phone number or address.** Interested people cannot reach you, and you never find out. Fix: read the closing slide out loud, digit by digit.
 
-## Check yourself
+## Before you move on
 
-1. What are the five slides in a basic business introduction?
-2. Why should you choose the theme before adding content?
-3. What does Slide Sorter let you check?
-4. What does the Reset button do?
+1. Could you introduce your business in two minutes from these five slides?
+2. Does your closing slide give a way to reach you and one specific next step?
+3. In Slide Sorter, do all five slides look like one set at a glance?
+4. Has someone other than you read the phone number and address back against the real ones?
 
 ## What you walk away with
 
-An editable five-slide introduction to your business, with a consistent look, that you can update and add to whenever you need it.
+An editable five-slide introduction to your business, with a consistent look, that you can update and adapt for each audience.

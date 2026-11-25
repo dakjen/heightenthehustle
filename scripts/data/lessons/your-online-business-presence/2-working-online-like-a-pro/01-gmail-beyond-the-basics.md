@@ -1,24 +1,24 @@
-# Gmail Beyond the Basics
+# Cut Your Email Time with Gmail Templates, Scheduling and Snooze
 
 > Four Gmail tools that save hours: templates, schedule-send, a 30-second undo, and snooze, plus sending from your own business address.
 
 ## Why this matters
 
-Most owners use Gmail like a mailbox: open, read, reply, repeat. Gmail has free tools built in that cut that work down, and most people never turn them on. Picture Keisha, who runs a cleaning company. Every week she types the same "here is your quote" email from scratch, answers messages at 11 at night, and loses important emails under a pile of newsletters. Four settings would give her back hours each month and make her look more organized to every client.
+Email is unpaid time. Gmail has free tools built in that cut that time down, and they are switched off or tucked away by default. Picture Keisha, who runs a cleaning company with a full client list. Every week she types the same "here is your quote" email from scratch, clears her messages at 11 at night because that is when the day's jobs are done, and has to dig past newsletters to find a client's reply. Four settings would give her back hours each month and show every client a tighter operation.
 
-## What you'll learn
+## What you'll be able to do
 
-- How to save a template for any email you write twice a month
-- How to schedule an email so night work arrives in the morning
-- How to set undo-send to 30 seconds
-- How to snooze messages so your inbox shows only what needs you now
-- How to send from a custom business address inside Gmail
+- Save a template for any email you write twice a month
+- Schedule an email so night work arrives in the morning
+- Set undo-send to 30 seconds
+- Snooze messages so your inbox shows only what needs you now
+- Send from a custom business address inside Gmail
 
 ## The lesson
 
 ### Templates
 
-A template is a saved email you can drop into a new message with two clicks. The rule is simple: if you write an email twice a month, it should be a template. Common ones for a small business are the quote, the appointment confirmation, the "here is what to expect" message for new customers, the payment reminder, and the review request.
+A template drops a saved email into a new message in two clicks. The rule: if you write an email twice a month, it should be a template. Common ones for a small business are the quote, the appointment confirmation, the "here is what to expect" message for new customers, the payment reminder, and the review request.
 
 Templates are off until you turn them on. On a computer, open Gmail's settings, choose to see all settings, and look in the Advanced section for Templates. Enable it and save. Then:
 
@@ -37,56 +37,58 @@ Here is one of Keisha's.
 >
 > If anything changes, reply to this email or text me at the number below.
 
-Always read a template before you send it. A message that still says [name] undoes the good impression.
+Read a template before you send it. A message that still says [name] undoes the good impression. Templates also keep your wording consistent. Every customer gets the same terms, the same instructions, and the same payment language, which matters if a job is ever disputed.
 
 ### Schedule-send
 
-Many owners do paperwork at night or on Sunday. That is fine, but an email that lands at 11:40 on a Sunday night says two things you may not mean: that you are behind, and that you are available at all hours. Schedule-send lets you write the email now and have Gmail deliver it later.
+Many owners do paperwork at night or on Sunday, because that is when the phone stops ringing. The work is fine. The timestamp is the problem. An email that lands at 11:40 on a Sunday night tells the customer two things you may not mean: that you are behind, and that you are available at all hours. Schedule-send lets you write the email now and have Gmail deliver it later.
 
 In the compose window, click the small arrow beside the Send button and choose the option to schedule. Pick a suggested time or set your own. Sunday-night work arrives Monday at 8:30, right when your customer sits down, at the top of their inbox. Scheduled messages wait in a Scheduled folder, where you can still edit or cancel them.
 
+It works for follow-ups too. Write the "checking in on the quote I sent" message the same day you send the quote, and schedule it for three business days out. If the customer answers before then, cancel it from the Scheduled folder.
+
 ### Undo-send, set to 30 seconds
 
-Everyone has hit Send and then seen the typo, the wrong attachment, or the wrong "Mike." Gmail holds every message for a short time after you click Send and shows an Undo option. The default hold is only a few seconds. In Gmail's settings, in the General section, find Undo Send and change the cancellation period to 30 seconds. Save at the bottom of the page.
+A typo in the price, the wrong attachment, the wrong "Mike": the moment you see it is usually the second after you click Send. Gmail holds every message for a short time after you click Send and shows an Undo option. The default hold is only a few seconds. In Gmail's settings, in the General section, find Undo Send and change the cancellation period to 30 seconds. Save at the bottom of the page.
 
-Now, after every send, you have half a minute to click Undo. The message returns as a draft and nobody ever sees it. After 30 seconds it is gone for good, so use that time to glance at the name and the attachment.
+Now, after every send, you have half a minute to click Undo. The message returns as a draft and nobody ever sees it. After 30 seconds it is gone for good, so use that time to glance at the name, the amount, and the attachment.
 
 ### Snooze
 
-An inbox is not a to-do list, but most of us use it as one, and important things sink. Snooze removes a message from your inbox and brings it back at the day and time you choose, as if it just arrived. Hover over a message on a computer and click the clock icon, or use the menu on your phone.
+An inbox makes a poor to-do list. Messages you cannot act on yet sit on top of the ones you can, and the important ones sink. Snooze removes a message from your inbox and brings it back at the day and time you choose, as if it had arrived then. Hover over a message on a computer and click the clock icon, or use the menu on your phone.
 
-Use it for anything real that you cannot act on yet. A supplier's invoice due on the 15th can be snoozed to the 13th. A customer who says "call me after the holidays" can be snoozed to the first week of January. The goal is an inbox that shows only now things: messages you can and should deal with today. Everything else is either done, archived, or snoozed to the right day.
+Use it for anything real that you cannot act on yet. A supplier's invoice due on the 15th can be snoozed to the 13th. A customer who says "call me after the holidays" can be snoozed to the opening week of January. The goal is an inbox that shows only now things: messages you can and should deal with today. Everything else is either done, archived, or snoozed to the right day.
 
 ### Sending from your own business address
 
-If you have a custom-domain address, meaning an email at your own business name, you do not have to learn a new mail program to use it. In Gmail's settings, the Accounts section has a "Send mail as" area where you can add another address you own. Gmail will ask you to confirm you own it, and you will need the mail settings from whoever hosts that address. Once it is connected, you choose which address a message comes from in the From line, and you keep using templates, scheduling, and snooze. If you get stuck on the settings, your domain or email host's help page lists them.
+If you have a custom-domain address, an email at your own business name, you can run it from the Gmail you already use. In Gmail's settings, the Accounts section has a "Send mail as" area where you can add another address you own. Gmail will ask you to confirm you own it, and you will need the mail settings from whoever hosts that address. Once it is connected, you choose which address a message comes from in the From line, and you keep using templates, scheduling, and snooze. The exact server settings differ by provider, and your domain or email host's help page lists them.
 
 ## Do this now
 
 1. Turn on Templates in settings.
 2. Write and save two templates you will use this month.
 3. Set Undo Send to 30 seconds and save.
-4. Send a test email to yourself and practice clicking Undo.
+4. Send a test email to yourself and click Undo before the 30 seconds run out.
 5. Write one real email and schedule it for tomorrow at 8:30 in the morning.
 6. Go through today's inbox and snooze at least three messages to the day you can act on them.
 7. If you have a custom-domain address, find the "Send mail as" area and start the connection.
 
 Finished result: two saved templates, a 30-second safety net, one email scheduled, and an inbox that shows only what needs you now.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Retyping the same email every week.** Fix: twice a month means it becomes a template.
-- **Sending a template with the brackets still in it.** Fix: read every line before you send.
-- **Sending late-night emails right away.** Fix: schedule them for the next business morning.
-- **Snoozing everything forever.** Fix: snooze only to a date when you can truly act, and archive what needs no action.
-- **Forgetting to save settings.** Fix: scroll to the bottom of the settings page and save before leaving.
+- **Retyping the same email every week.** That is hours a year, and the wording drifts each time. Fix: twice a month means it becomes a template.
+- **A template sent with the brackets still in it.** The customer sees a form letter. Fix: read every line before you send.
+- **Late-night emails sent on the spot.** Customers learn to expect answers at midnight. Fix: schedule them for the next business morning.
+- **Snoozing with no date in mind.** The same messages keep coming back unhandled. Fix: snooze only to a date when you can truly act, and archive what needs no action.
+- **Settings changed and not saved.** The change is lost when you leave the page. Fix: scroll to the bottom of the settings page and save before leaving.
 
-## Check yourself
+## Before you move on
 
-- Which emails do you write at least twice a month?
-- How long do you now have to undo a sent message?
-- Where do scheduled emails wait before they go out?
-- What does "an inbox of now things" mean for you?
+- Which emails do you write at least twice a month, and are two of them saved as templates now?
+- Send yourself a test message. Does Undo stay on screen for 30 seconds?
+- Is one real email sitting in the Scheduled folder for tomorrow morning?
+- Does your inbox right now show only messages you can act on today?
 
 ## What you walk away with
 

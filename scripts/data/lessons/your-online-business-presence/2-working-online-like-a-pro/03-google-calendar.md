@@ -1,26 +1,26 @@
-# Google Calendar
+# A Calendar That Protects Your Billable Hours
 
-> If it matters, it has a time slot. Put appointments and admin work on one calendar, with locations, reminders, colors, and real invites.
+> If it matters, it has a time slot. Put appointments and admin work on one Google Calendar, with locations, reminders, colors, and real invites.
 
 ## Why this matters
 
-When you run a business, your time is the product. A missed appointment costs you the job and often the customer. Unbilled work costs you money you already earned. Consider Sharon, a mobile notary. She keeps appointments in her head and in text threads. One week she double-books a Tuesday, drives to the wrong address on Wednesday, and realizes on Friday night that she has not sent a single invoice all month. Nothing was wrong with her work. Nothing was written down in one place.
+When you run a business, your time is the product. A missed appointment costs you the job and often the customer. Unbilled work costs you money you already earned. Consider Sharon, a mobile notary whose bookings have grown fast. She has always confirmed signings by text and carried the week in her head, and that worked at a lower volume. In one heavy week, two Tuesday signings overlap, a Wednesday address is buried in a long text thread and she drives to the wrong building, and on Friday night she sees that the month's invoices have not gone out. Her work was right every time. The schedule had outgrown text threads and needed one place to live.
 
-## What you'll learn
+## What you'll be able to do
 
-- Why everything that matters gets a time slot, including admin work
-- How to use the location field so your phone navigates for you
-- How to set default reminders once
-- How to color-code by type and read your week at a glance
-- How and why to send real invites for meetings
+- Give everything that matters a time slot, including admin work
+- Use the location field so your phone navigates for you
+- Set default reminders once
+- Color-code by type and read your week at a glance
+- Send real invites that confirm meetings in writing
 
 ## The lesson
 
 ### If it matters, it has a time slot
 
-A calendar is not only for appointments with other people. It is a plan for your hours. The rule for this lesson is: if it matters, it has a time slot. A task without a time slot is a wish. It will lose to whatever is loudest that day.
+A calendar holds more than appointments with other people. It is a plan for your hours. The rule for this lesson is: if it matters, it has a time slot. A task without a time slot loses to whatever is loudest that day.
 
-This applies most of all to the admin work, the behind-the-scenes tasks that keep the business alive: invoicing, bookkeeping, ordering supplies, returning quotes, posting to your page. Nobody calls to remind you to do these, so they slide. Put them on the calendar as events with yourself. "Friday 9–11: invoices" is a real appointment. If a customer asks for Friday at 10, you say, "I'm booked then, how is 1 o'clock?"
+This applies most of all to admin work, the tasks that keep the business alive behind the scenes: invoicing, bookkeeping, ordering supplies, returning quotes, posting to your page. Nobody calls to remind you to do these, so they slide. Put them on the calendar as events with yourself. "Friday 9–11: invoices" is a real appointment. If a customer asks for Friday at 10, you say, "I'm booked then, how is 1 o'clock?"
 
 Use one calendar for business and personal life. You are one person and cannot be in two places. A school pickup that is not on the calendar will collide with a job that is.
 
@@ -37,13 +37,13 @@ For anything that happens on a schedule, use the repeat option. Set "Admin: invo
 
 ### Addresses in the location field
 
-Always put the address in the location field, not in the title or the notes. When the address is in that field, it becomes something you can tap. On your phone, you open the event, tap the address, and your maps app starts directions. No scrolling through old texts in a parking lot looking for a house number. Type the complete address, including the unit number and the town, and choose the match Calendar suggests when it offers one.
+Put the address in the location field, not in the title or the notes. In that field it becomes something you can tap. On your phone, you open the event, tap the address, and your maps app starts directions. No scrolling through old texts in a parking lot looking for a house number. Type the complete address, including the unit number and the town, and choose the match Calendar suggests when it offers one.
 
 ### Reminders set by default
 
-A reminder, which Calendar calls a notification, is the alert your phone gives you before an event. You can add one to each event by hand, but you will forget. Set it once instead. In Calendar's settings, each of your calendars has its own settings for event notifications. Add a default there, and every new event gets it automatically.
+You can add a reminder, which Calendar calls a notification, to each event by hand, but on a busy day that step gets skipped. Set it once instead. In Calendar's settings, each of your calendars has its own settings for event notifications. Add a default there, and every new event gets it automatically.
 
-Pick defaults that fit your work. If you drive to customers, 60 minutes before gives you time to leave. Many owners add a second one the day before, so nothing on tomorrow's schedule is a surprise. Make sure notifications for the Calendar app are turned on in your phone's settings, or the reminders will be silent.
+Pick defaults that fit your work. If you drive to customers, 60 minutes before gives you time to leave. Many owners add a second one the day before, so nothing on tomorrow's schedule is a surprise. Check that notifications for the Calendar app are turned on in your phone's settings, or the reminders will be silent.
 
 ### Color-code by type
 
@@ -56,7 +56,7 @@ Calendar lets you give each event a color. Decide on a small set and stick to it
 | Yellow | Sales and meetings | Meeting: walk-through with new client |
 | Purple | Personal | Dentist, school pickup |
 
-The exact colors do not matter. What matters is the picture. A week that is all yellow and blue with no green means no money is coming in. A week of solid green with no blue means invoices are not going out.
+The exact colors do not matter. What matters is the picture. A week that is all yellow and blue with no green means no money is coming in. A week of solid green with no blue means invoices are not going out. Looking a week or two ahead, a thin patch of green is your cue to send quotes and follow up on open ones now.
 
 ### Send real invites
 
@@ -64,7 +64,7 @@ When a meeting involves another person, do not leave it at a text. Add them to t
 
 That is the whole point. An accepted invite is a commitment, and a "see you Tuesday" text is a hope. The invite puts the same details in front of both of you, so there is no "I thought you said 3." If the plan changes, you edit the event and everyone is updated at once. You can also see at a glance who has accepted and who has not, which tells you who needs a follow-up call.
 
-Not every customer uses a calendar, and that is fine. Send the invite anyway, since the email itself is a written confirmation, and follow your usual reminder text the day before.
+Some customers do not keep a calendar. Send the invite anyway, since the email itself is a written confirmation, and follow your usual reminder text the day before.
 
 ## Do this now
 
@@ -78,20 +78,20 @@ Not every customer uses a calendar, and that is fine. Send the invite anyway, si
 
 Finished result: two full weeks on your calendar, color-coded, with reminders, admin blocks, and one accepted invite.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Only putting customer appointments on the calendar.** Fix: give admin work its own repeating blocks.
-- **Typing the address in the title.** Fix: use the location field so you can tap to navigate.
-- **Keeping separate work and personal calendars you never compare.** Fix: put everything where you can see it in one view.
-- **Confirming meetings by text only.** Fix: send a real invite and watch for the yes.
-- **Booking back to back with no travel time.** Fix: block the drive as part of the event or as its own event.
+- **Only customer appointments on the calendar.** Invoicing and quotes get whatever time is left, which is often none. Fix: give admin work its own repeating blocks.
+- **The address typed in the title.** It cannot be tapped, so you retype it into maps at every stop. Fix: use the location field.
+- **Separate work and personal calendars that are never compared.** Conflicts show up the morning of. Fix: put everything where you can see it in one view.
+- **Meetings confirmed by text only.** There is no reminder on the other side and no single record of the details. Fix: send a real invite and watch for the yes.
+- **Back-to-back bookings with no travel time.** One late start makes every stop after it late. Fix: block the drive as part of the event or as its own event.
 
-## Check yourself
+## Before you move on
 
-- What admin work now has a time slot on your calendar?
-- What happens when you tap the location on an event from your phone?
-- What reminders will every new event get by default?
-- Why is an accepted invite stronger than a text?
+- Does invoicing have a repeating block on your calendar, and what else from your admin list has one?
+- Open tomorrow's first event on your phone. Does tapping the address start directions?
+- Create a test event. Does it pick up your default reminders without you adding them?
+- Looking at the next two weeks by color, is there enough green, and enough blue to bill for it?
 
 ## What you walk away with
 

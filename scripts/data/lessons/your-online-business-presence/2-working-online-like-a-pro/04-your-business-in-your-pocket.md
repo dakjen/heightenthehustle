@@ -1,24 +1,24 @@
-# Your Business in Your Pocket
+# Run the Business from Your Phone
 
 > Turn your phone into a branch office: scan receipts to Drive, attach files anywhere, navigate from Calendar, work offline, and set a boundary.
 
 ## Why this matters
 
-Most small-business owners do not sit at a desk. You are in the van, at the shop, in a customer's kitchen, or at the supply store. If your business files only live on a computer at home, you cannot answer simple questions until tonight. Picture Vernon, an HVAC technician. A customer asks for a copy of last year's invoice while he is standing in her basement. With the right apps set up, he sends it in one minute and looks like the most organized contractor she has ever hired. Without them, he says "I'll get that to you later," and later turns into next week.
+Most small-business owners do not sit at a desk. You are in the van, at the shop, in a customer's kitchen, or at the supply store. If your business files live only on a computer at home, every request for a document waits until tonight. Picture Vernon, an HVAC technician. A customer asks for a copy of last year's invoice while he is standing in her basement. With his files in Drive and the right apps on his phone, he sends it in one minute and looks like the most organized contractor she has ever hired. Without that setup, the honest answer is "I'll get that to you later," and on a full schedule later turns into next week.
 
-## What you'll learn
+## What you'll be able to do
 
-- Which four apps turn your phone into a branch office
-- How to scan receipts and signed paperwork straight into Drive
-- How to attach a Drive file from your phone
-- How to navigate from Calendar and keep key files available offline
-- How to set a boundary so the phone does not run your life
+- Set up the four apps that turn your phone into a branch office
+- Scan receipts and signed paperwork straight into Drive
+- Attach a Drive file to an email from your phone
+- Navigate from Calendar and keep key files available offline
+- Set a boundary so the phone does not run your life
 
 ## The lesson
 
 ### Four apps, one account
 
-A branch office is a smaller location that can do the same work as the main one. Your phone becomes that with four free apps: Gmail, Google Drive, Google Calendar, and Google Docs. Install all four and sign in to each with the same Google account you use for business on your computer.
+Your phone can do the same work as the office with four free apps: Gmail, Google Drive, Google Calendar, and Google Docs. Install all four and sign in to each with the same Google account you use for business on your computer.
 
 Because they share one account, everything matches. An event you add on your laptop is on your phone. A document you fix on your phone is fixed on your laptop. Nothing has to be sent to yourself or copied over.
 
@@ -26,7 +26,7 @@ Before you go further, protect the phone. It now holds customer names, addresses
 
 ### Scan with Drive
 
-A scanner used to be a machine. Now it is your phone's camera. In the Drive app, tap the + button and choose Scan. Point the camera at the paper. The app finds the edges, straightens the page, and saves it as a PDF, which is the standard file type for documents you want to keep exactly as they are. The button's look and placement can shift with app updates, but the scan option lives under creating something new.
+The Drive app turns your phone's camera into a scanner. Tap the + button and choose Scan. Point the camera at the paper. The app finds the edges, straightens the page, and saves it as a PDF, the format banks, insurers, and tax preparers expect. The button's look and placement can shift with app updates, but the scan option lives under creating something new.
 
 1. Open the Drive app and go to the folder where the scan belongs.
 2. Tap + and choose Scan.
@@ -44,7 +44,7 @@ This is how Vernon answers that basement question. He opens Gmail, attaches last
 
 ### Navigate from Calendar
 
-If you have been putting addresses in the location field, this part is already done. Open today's event in the Calendar app and tap the address. Your maps app opens with directions. The event description holds the gate code and the customer's number, so everything for the stop is on one screen. Check tomorrow's schedule the night before and you will know your first address before you start the truck.
+If you have been putting addresses in the location field, this part is already done. Open today's event in the Calendar app and tap the address. Your maps app opens with directions. The event description holds the gate code and the customer's number, so everything for the stop is on one screen. Check tomorrow's schedule the night before and you will know where the day starts before you turn the key.
 
 ### Mark key files available offline
 
@@ -54,9 +54,9 @@ Do not do this for everything, since it uses storage space. Choose the few files
 
 ### The boundary
 
-Here is the part that keeps this lesson from hurting you. A branch office in your pocket is open whenever the phone is on. Customers will email at 9 at night, and you will see it. Being able to answer at 9pm isn't an obligation to.
+A branch office in your pocket is open whenever the phone is on. Customers will email at 9 at night, and you will see it. Being able to answer at 9pm isn't an obligation to.
 
-Set your hours and let the tools hold them for you. Put your response hours in your email signature and on your home base. If you want to write a reply at night, use schedule-send so it arrives at 8:30 the next morning. Use your phone's Do Not Disturb or focus setting to quiet work notifications in the evening. Customers respect an owner who answers reliably during stated hours far more than one who answers instantly at midnight and then burns out.
+Set your hours and let the tools hold them for you. Put your response hours in your email signature and on your home base. If you want to write a reply at night, use schedule-send so it arrives at 8:30 the next morning. Use your phone's Do Not Disturb or focus setting to quiet work notifications in the evening. Customers respect an owner who answers reliably during stated hours far more than one who answers instantly at midnight for a few months and then cannot keep it up.
 
 ## Do this now
 
@@ -71,20 +71,20 @@ Set your hours and let the tools hold them for you. Put your response hours in y
 
 Finished result: four working apps, one scanned and filed PDF, three offline files, and a stated cutoff time.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Signing in with different accounts on different apps.** Fix: use your one business account on all four.
-- **Taking a regular photo of a receipt.** Fix: use Scan in Drive so it saves as a named PDF in the right folder.
-- **Leaving scans named "Scanned document."** Fix: name each with date, who, and what before saving.
-- **No lock on a phone full of customer information.** Fix: set a passcode or fingerprint today.
-- **Answering every message the moment it arrives.** Fix: set your hours, schedule late replies, and quiet notifications at night.
+- **Different accounts on different apps.** Files and events end up split, and something is always on the other account. Fix: use your one business account on all four.
+- **A regular photo of a receipt.** It is lost in the camera roll by tax time, and the deduction goes with it. Fix: use Scan in Drive so it saves as a named PDF in the right folder.
+- **Scans left as "Scanned document."** Search cannot find them. Fix: name each with date, who, and what before saving.
+- **No lock on a phone full of customer information.** A lost phone becomes a customer-data problem. Fix: set a passcode or fingerprint today.
+- **Answering every message the moment it arrives.** Customers come to expect it, and the evenings disappear. Fix: set your hours, schedule late replies, and quiet notifications at night.
 
-## Check yourself
+## Before you move on
 
-- Which four apps make up your branch office?
-- Where does a scanned receipt go, and what do you name it?
-- Which three files did you make available offline, and why those?
-- What time does your business day end?
+- Standing away from your computer, can you find and email a specific customer's invoice in under a minute?
+- Is the receipt you scanned today sitting in this month's folder with the date, who, and what in its name?
+- Turn on airplane mode. Do your price list, estimate form, and insurance certificate still open?
+- What time does your business day end, and is Do Not Disturb or a focus schedule set to match?
 
 ## What you walk away with
 

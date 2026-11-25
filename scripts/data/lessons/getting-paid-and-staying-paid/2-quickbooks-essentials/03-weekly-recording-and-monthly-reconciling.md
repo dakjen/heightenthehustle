@@ -4,15 +4,15 @@
 
 ## Why this matters
 
-Setting up QuickBooks is a one-time job. Keeping it up is what makes it worth having. Books that are three months behind cannot tell you whether you can afford new equipment, and catching up becomes a miserable weekend. Books that are current but wrong are worse, because you trust them. Dee, the caterer, once made a spending decision from a report that counted a $62 supply run twice. It was a small error, and she only found it because she checked her books against her bank statement. Two short routines, one weekly and one monthly, prevent both problems.
+Setting up QuickBooks is a one-time job. Keeping it current is what makes it worth paying for. Books that are three months behind cannot tell you whether you can afford new equipment, and catching up costs a full weekend. Books that are current but wrong are worse, because you act on them. Dee, the caterer, once made a spending decision from a report that counted a $62 supply run twice. It was a small error, and she caught it because she checks her books against her bank statement every month. Two short routines, one weekly and one monthly, prevent both problems.
 
-## What you'll learn
+## What you'll be able to do
 
-- The weekly fifteen-minute routine for recording transactions
-- Why to send invoices from inside QuickBooks
-- How to capture receipts with the mobile app
-- What reconciling means and how to do it each month
-- How to find and fix a difference when the numbers do not match
+- Clear your transaction review list in a fixed fifteen minutes a week
+- See who owes you at a glance by invoicing from inside QuickBooks
+- Capture receipts with the mobile app at the point of purchase
+- Reconcile each month so your books match the bank to the cent
+- Track down and fix a difference when the numbers do not match
 
 ## The lesson
 
@@ -27,25 +27,25 @@ Pick one day of the week. Put a repeating reminder on your phone. On that day, y
 5. Add the transaction to your books. It leaves the review list.
 6. Keep going until the review list is empty.
 
-The first few weeks are the slowest. QuickBooks learns your patterns as you go. Once you have labeled your gas station as Car and Truck a few times, it starts suggesting that on its own. After a month or two, most of your weekly session is confirming good guesses.
+The opening weeks are the slowest. QuickBooks learns your patterns as you go. Once you have labeled your gas station as Car and Truck a few times, it starts suggesting that on its own. After a month or two, most of your weekly session is confirming good guesses.
 
-If you see a charge you do not recognize, do not guess. Leave it, look it up in your bank app or receipts, and label it once you know.
+If a charge does not ring a bell, do not guess. Leave it, look it up in your bank app or receipts, and label it once you know.
 
 ### Send invoices from inside QuickBooks
 
 When you create and send invoices from QuickBooks, it knows what each customer owes. When the payment lands in your bank, QuickBooks can match the deposit to the invoice and mark it paid. That means you always know who has not paid. One glance at your open invoices shows every customer with a balance and how many days it has been.
 
-If you invoice somewhere else, QuickBooks only sees a deposit. It has no idea which job the deposit was for, or that another customer is 20 days late.
+If you invoice somewhere else, QuickBooks only sees a deposit. It cannot tell which job the deposit was for, or that another customer is 20 days late. Add a look at open invoices to the end of your weekly fifteen minutes, and your follow-ups go out on schedule instead of when you happen to remember.
 
 ### Photograph big receipts
 
-For larger purchases, use the QuickBooks mobile app to take a photo of the receipt and attach it to the transaction. Your bank line might just say the store name and $280. The receipt shows it was a commercial stand mixer for the business. Do it in the parking lot, before the receipt fades or disappears.
+For larger purchases, use the QuickBooks mobile app to take a photo of the receipt and attach it to the transaction. Your bank line might say only the store name and $280. The receipt shows it was a commercial stand mixer for the business. Do it in the parking lot, before the receipt fades or goes missing. If anyone ever asks what a purchase was, the proof is attached to the line itself.
 
-### What reconciling means
+### Monthly: prove the books match the bank
 
 Weekly categorizing keeps the books current. Monthly reconciling proves they are right.
 
-To **reconcile** means to match your QuickBooks records against your actual bank statement, line by line, and confirm they agree. Three things must be true: the same starting balance, the same ending balance, and every transaction accounted for. When all three are true, you know nothing is missing, nothing is counted twice, and the bank made no errors.
+When you reconcile, you match your QuickBooks records against your actual bank statement, line by line, and confirm they agree. Three things must be true: the same starting balance, the same ending balance, and every transaction accounted for. When all three are true, you know nothing is missing, nothing is counted twice, and the bank made no errors.
 
 ### How to reconcile, step by step
 
@@ -74,7 +74,7 @@ Check it: $2,150 + $5,200 - $3,870 = $3,480.
 
 Dee checks off the transactions in QuickBooks against the statement. When she has checked everything in the list, QuickBooks shows a difference of $62.00, not zero. She looks for a $62 item and finds two of them: a restaurant supply purchase, same store, same date, same amount. The statement shows that purchase only once. It was recorded twice in QuickBooks, once from the bank import and once when she typed it in by hand. She deletes the hand-typed copy. The difference drops to $0.00 and she finishes.
 
-Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now she trusts her reports.
+Without that check, her supplies would have been overstated by $62 and her profit understated by $62. Small, but it adds up, and now her reports are numbers she can act on.
 
 ### When the difference is not zero
 
@@ -85,7 +85,7 @@ Work through this list.
 - Compare amounts closely for typos, such as $45 entered as $54.
 - Check that the beginning balance matched before you started.
 
-Never force it to balance by entering an adjustment you cannot explain. Find the cause.
+Never force it to balance by entering an adjustment you cannot explain. Find the cause. An unexplained adjustment hides the error this month and carries it into every month after.
 
 ## Do this now
 
@@ -98,20 +98,21 @@ Never force it to balance by entering an adjustment you cannot explain. Find the
 
 You finish with an empty review list, one reconciled month with a $0.00 difference, and two reminders on your phone.
 
-## Common mistakes
+## Where owners lose time or money
 
-- **Letting weeks pile up.** Fix: fifteen minutes, same day, every week.
-- **Accepting suggested categories without reading them.** Fix: glance at every one before confirming.
-- **Typing in a transaction the bank will also import.** Fix: let the import bring it in, then label it.
-- **Skipping reconciliation because "the bank feed handles it."** Fix: reconcile every month, since the feed can miss or duplicate items.
-- **Forcing the reconciliation to balance.** Fix: hunt down the real cause of the difference.
+- **Weeks piling up.** The backlog grows until clearing it takes a weekend, and the details are forgotten by then. Fix: fifteen minutes, same day, every week.
+- **Suggested categories confirmed unread.** One wrong label repeats itself in every later suggestion. Fix: glance at every one before confirming.
+- **Typing in a transaction the bank will also import.** The expense is counted twice and profit reads low. Fix: let the import bring it in, then label it.
+- **Skipping reconciliation because "the bank feed handles it."** The feed can miss or duplicate items without any warning. Fix: reconcile every month.
+- **Forcing the reconciliation to balance.** The error stays in the books under a different name. Fix: hunt down the real cause of the difference.
 
-## Check yourself
+## Before you move on
 
-- What day is your weekly fifteen minutes?
-- Why should invoices be sent from inside QuickBooks?
-- What three things must match when you reconcile?
-- What is the first thing to look for when the difference is not zero?
+- What day is your weekly fifteen minutes, and is your review list empty right now?
+- Can you name every customer who owes you and how many days each is past due, from one screen?
+- Is your most recent complete month reconciled to a $0.00 difference?
+- Is a receipt photo attached to your last large purchase?
+- When does your statement arrive, and is the monthly reconcile reminder set for a few days after?
 
 ## What you walk away with
 
