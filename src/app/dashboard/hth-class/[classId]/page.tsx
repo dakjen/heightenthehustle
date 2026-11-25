@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser, hasPermission } from "@/lib/auth";
@@ -56,6 +57,16 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
   const homeworkDone = homework.filter((a) => a.submission !== null).length;
   const lessonHomework = homework.filter((a) => a.lessonId !== null);
   const courseHomework = homework.filter((a) => a.lessonId === null);
+  // Outline sections. A course whose lessons carry unit names groups them by unit;
+  // otherwise every lesson is its own unit (the Core Curriculum).
+  const hasUnits = course.lessons.some((l) => l.unit);
+  const sections: { name: string | null; lessons: typeof course.lessons }[] = [];
+  for (const l of course.lessons) {
+    const last = sections[sections.length - 1];
+    if (hasUnits && last && last.name === (l.unit ?? null)) last.lessons.push(l);
+    else sections.push({ name: hasUnits ? l.unit ?? null : null, lessons: [l] });
+  }
+  const sectionOf = (lessonId: number | null) => sections.findIndex((s) => s.lessons.some((l) => l.id === lessonId));
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -102,7 +113,7 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
                 href={`/dashboard/hth-class/${course.id}/${nextLesson.id}`}
                 className="inline-flex items-center justify-center rounded-lg bg-[#910000] px-6 py-3 font-semibold text-white shadow-md transition-all hover:bg-[#7a0000] hover:shadow-lg"
               >
-                {course.completedCount > 0 ? "Continue" : "Start"}: Unit {nextLesson.order}
+                {course.completedCount > 0 ? "Continue" : "Start"}: {hasUnits ? nextLesson.title : `Unit ${nextLesson.order}`}
               </Link>
             )}
             {course.syllabusUrl && (
@@ -151,7 +162,7 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
                 </summary>
                 <ol className="divide-y divide-gray-100 border-t border-gray-100 bg-gray-50">
                   {homework.map((a) => {
-                    const unitIndex = course.lessons.findIndex((l) => l.id === a.lessonId);
+                    const unitIndex = sectionOf(a.lessonId);
                     return (
                       <li key={a.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-5 py-2.5 text-sm">
                         <span className="font-medium text-gray-900">{a.title}</span>
@@ -193,42 +204,53 @@ export default async function CoursePage({ params }: { params: Promise<{ classId
           <p className="px-5 py-6 text-gray-600">Lessons are on the way.</p>
         )}
 
-        {course.lessons.map((l, i) => {
-          const href = `/dashboard/hth-class/${course.id}/${l.id}`;
-          const isNext = nextLesson?.id === l.id;
-          const unitHomework = lessonHomework.filter((a) => a.lessonId === l.id);
+        {sections.map((s, si) => {
+          const done = s.lessons.filter((l) => l.completed).length;
+          const hasNext = s.lessons.some((l) => l.id === nextLesson?.id);
+          const right = hasUnits
+            ? `${done} of ${s.lessons.length} done`
+            : s.lessons[0].completed ? "Completed" : hasNext ? "Up next" : undefined;
           return (
-            <div key={l.id} id={`unit-${i + 1}`} className="scroll-mt-6">
-              <SectionBar title={`Unit ${i + 1}`} right={l.completed ? "Completed" : isNext ? "Up next" : undefined} highlight={isNext} />
+            <div key={si} id={`unit-${si + 1}`} className="scroll-mt-6">
+              <SectionBar title={s.name ? `Unit ${si + 1}: ${s.name}` : `Unit ${si + 1}`} right={right} highlight={hasNext} />
               <ul className="divide-y divide-gray-100">
-                <li>
-                  <Link href={href} className={`flex items-start gap-3 px-5 py-3 hover:bg-gray-50 ${isNext ? "bg-[#910000]/[0.04]" : ""}`}>
-                    <span className="mt-0.5">{l.completed ? <CheckIcon /> : <DocIcon />}</span>
-                    <span className="min-w-0 flex-1">
-                      <span className={`block font-semibold ${l.completed ? "text-gray-500" : "text-gray-900"}`}>{l.title}</span>
-                      {l.summary && <span className="block text-sm text-gray-600">{l.summary}</span>}
-                      <span className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-gray-500">
-                        {l.videoUrl && <span className="inline-flex items-center gap-1"><VideoIcon /> Video</span>}
-                        {l.durationMinutes ? <span>{formatDuration(l.durationMinutes)}</span> : null}
-                      </span>
-                    </span>
-                    <span className="shrink-0 text-sm font-semibold text-[#910000]">{l.completed ? "Review" : isNext ? "Start →" : "Open →"}</span>
-                  </Link>
-                </li>
-                {unitHomework.map((a) => (
-                  <li key={a.id}>
-                    <Link href={`${href}#homework`} className="flex items-center gap-3 px-5 py-2.5 pl-12 hover:bg-gray-50">
-                      <PencilIcon />
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-medium text-gray-900">{a.title}</span>
-                        {(a.dueDate || a.points) && (
-                          <span className="block text-xs text-gray-500">{a.dueDate ? `Due ${formatShortDate(a.dueDate)}` : ""}{a.dueDate && a.points ? " · " : ""}{a.points ? `${a.points} pts` : ""}</span>
-                        )}
-                      </span>
-                      <AssignmentStatusChip assignment={a} />
-                    </Link>
-                  </li>
-                ))}
+                {s.lessons.map((l) => {
+                  const href = `/dashboard/hth-class/${course.id}/${l.id}`;
+                  const isNext = nextLesson?.id === l.id;
+                  const unitHomework = lessonHomework.filter((a) => a.lessonId === l.id);
+                  return (
+                    <Fragment key={l.id}>
+                      <li>
+                        <Link href={href} className={`flex items-start gap-3 px-5 py-3 hover:bg-gray-50 ${isNext ? "bg-[#910000]/[0.04]" : ""}`}>
+                          <span className="mt-0.5">{l.completed ? <CheckIcon /> : <DocIcon />}</span>
+                          <span className="min-w-0 flex-1">
+                            <span className={`block font-semibold ${l.completed ? "text-gray-500" : "text-gray-900"}`}>{l.title}</span>
+                            {l.summary && <span className="block text-sm text-gray-600">{l.summary}</span>}
+                            <span className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                              {l.videoUrl && <span className="inline-flex items-center gap-1"><VideoIcon /> Video</span>}
+                              {l.durationMinutes ? <span>{formatDuration(l.durationMinutes)}</span> : null}
+                            </span>
+                          </span>
+                          <span className="shrink-0 text-sm font-semibold text-[#910000]">{l.completed ? "Review" : isNext ? "Start →" : "Open →"}</span>
+                        </Link>
+                      </li>
+                      {unitHomework.map((a) => (
+                        <li key={a.id}>
+                          <Link href={`${href}#homework`} className="flex items-center gap-3 px-5 py-2.5 pl-12 hover:bg-gray-50">
+                            <PencilIcon />
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-sm font-medium text-gray-900">{a.title}</span>
+                              {(a.dueDate || a.points) && (
+                                <span className="block text-xs text-gray-500">{a.dueDate ? `Due ${formatShortDate(a.dueDate)}` : ""}{a.dueDate && a.points ? " · " : ""}{a.points ? `${a.points} pts` : ""}</span>
+                              )}
+                            </span>
+                            <AssignmentStatusChip assignment={a} />
+                          </Link>
+                        </li>
+                      ))}
+                    </Fragment>
+                  );
+                })}
               </ul>
             </div>
           );

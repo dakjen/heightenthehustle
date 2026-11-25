@@ -38,7 +38,7 @@ export default async function LessonPage({ params }: { params: Promise<{ classId
         <span className="mx-2">/</span>
         <Link href={courseHref} className="font-semibold text-[#910000] hover:underline">{course.title}</Link>
         <span className="mx-2">/</span>
-        <span className="text-gray-700">Unit {lesson.order}</span>
+        <span className="text-gray-700">{lesson.unit ?? `Unit ${lesson.order}`}</span>
       </nav>
 
       {!lesson.isPublished && (

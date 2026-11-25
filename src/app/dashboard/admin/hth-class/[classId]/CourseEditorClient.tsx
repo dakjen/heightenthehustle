@@ -80,7 +80,11 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
       ) : (
         <ol className="hth-card divide-y divide-gray-100 overflow-hidden">
           {course.lessons.map((l, i) => (
-            <li key={l.id} className="flex items-center gap-4 px-5 py-4">
+            <li key={l.id}>
+              {l.unit && l.unit !== course.lessons[i - 1]?.unit && (
+                <p className="border-b border-gray-200 bg-gray-100 px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gray-800">{l.unit}</p>
+              )}
+              <div className="flex items-center gap-4 px-5 py-4">
               <span className="font-display text-3xl leading-none text-[#910000] w-10 shrink-0">{String(i + 1).padStart(2, "0")}</span>
               <div className="min-w-0 flex-1">
                 <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${l.id}`} className="block truncate text-lg font-semibold text-gray-900 hover:text-[#910000]">{l.title}</Link>
@@ -101,6 +105,7 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
                 <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${l.id}`} className="rounded-lg border-2 border-[#910000] px-3 py-1.5 text-sm font-semibold text-[#910000] hover:bg-[#910000] hover:text-white">Open</Link>
                 <button type="button" disabled={pending} onClick={() => remove(l)} className="rounded-lg px-2 py-1.5 text-sm font-semibold text-red-700 hover:bg-red-50">Delete</button>
               </div>
+            </div>
             </li>
           ))}
         </ol>

@@ -4,7 +4,7 @@ import type { MemberAssignment } from "./assignment-actions";
 /** Small presentational pieces shared by the member-facing course pages. */
 
 export function typeLabel(type: Class["type"]): string {
-  return type === "pre-course" ? "Pre-course" : "HTH course";
+  return type === "pre-course" ? "Supplementary" : "Main curriculum";
 }
 
 export function percent(done: number, total: number): number {

@@ -97,9 +97,21 @@ export default function CoursesAdminClient({ courses }: { courses: AdminCourse[]
         </div>
       )}
 
-      <div className="space-y-5">
+      <div className="space-y-10">
         {courses.length === 0 && !showCreate && <p className="text-gray-600">No courses yet. Create one to get started.</p>}
-        {courses.map((c) => <CourseCard key={c.id} course={c} />)}
+        {([["hth-course", "Main curriculum", "The cohort course. Required to pitch."], ["pre-course", "Supplementary courses", "Short, optional skill courses. Each one is split into units."]] as const).map(([type, heading, blurb]) => {
+          const group = courses.filter((c) => c.type === type);
+          if (group.length === 0) return null;
+          return (
+            <section key={type} className="space-y-5">
+              <div className="border-b border-gray-200 pb-2">
+                <h2 className="text-3xl leading-none text-gray-900">{heading}</h2>
+                <p className="mt-1 text-sm text-gray-600">{blurb}</p>
+              </div>
+              {group.map((c) => <CourseCard key={c.id} course={c} />)}
+            </section>
+          );
+        })}
       </div>
     </div>
   );

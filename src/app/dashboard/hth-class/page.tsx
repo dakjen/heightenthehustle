@@ -54,7 +54,7 @@ function CourseCard({ course }: { course: MemberCourse }) {
             href={`/dashboard/hth-class/${course.id}/${nextLesson.id}`}
             className="inline-flex items-center justify-center rounded-lg bg-[#910000] px-5 py-3 font-semibold text-white shadow-md transition-all hover:bg-[#7a0000] hover:shadow-lg"
           >
-            {course.completedCount > 0 ? "Continue" : "Start"}: Unit {nextLesson.order}
+            {course.completedCount > 0 ? "Continue" : "Start"}: {course.lessons.some((l) => l.unit) ? nextLesson.title : `Unit ${nextLesson.order}`}
             <span className="ml-2 hidden max-w-[16rem] truncate font-normal text-white/80 sm:inline">· {nextLesson.title}</span>
           </Link>
         ) : null}
@@ -87,8 +87,17 @@ export default async function HTHClassPage() {
             <p className="mt-2 text-gray-600">Pick up where you left off.</p>
           </header>
           <div className="space-y-6">
-            {courses.map((c) => <CourseCard key={c.id} course={c} />)}
+            {courses.filter((c) => c.type === "hth-course").map((c) => <CourseCard key={c.id} course={c} />)}
           </div>
+          {courses.some((c) => c.type === "pre-course") && (
+            <div className="mt-10">
+              <h2 className="text-3xl leading-none text-gray-900">Supplementary courses</h2>
+              <p className="mt-1 mb-4 text-gray-600">Short, optional skill courses. Take a whole course or just the unit you need.</p>
+              <div className="space-y-6">
+                {courses.filter((c) => c.type === "pre-course").map((c) => <CourseCard key={c.id} course={c} />)}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

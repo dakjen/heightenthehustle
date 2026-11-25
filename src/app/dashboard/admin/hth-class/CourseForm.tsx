@@ -7,8 +7,8 @@ import { FormState } from "@/types/form-state";
 import { Field, FormSection, SubmitButton, FormError, FormSuccess, inputClass, checkboxClass, ghostButtonClass, invalidProps } from "@/app/components/form";
 
 export const COURSE_TYPE_LABEL: Record<AdminCourse["type"], string> = {
-  "pre-course": "Pre-course",
-  "hth-course": "HTH course",
+  "pre-course": "Supplementary course",
+  "hth-course": "Main curriculum",
 };
 
 type CourseFormProps = {

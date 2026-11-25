@@ -157,6 +157,7 @@ export const lessons = pgTable('lessons', {
   id: serial('id').primaryKey(),
   classId: integer('class_id').notNull().references(() => classes.id),
   title: text('title').notNull(),
+  unit: text('unit'), // optional unit name: lessons sharing one are grouped under it in the outline
   summary: text('summary'), // one or two lines shown in the lesson list
   content: text('content'), // Markdown
   videoUrl: text('video_url'), // YouTube/Vimeo/Loom link embedded at the top of the lesson

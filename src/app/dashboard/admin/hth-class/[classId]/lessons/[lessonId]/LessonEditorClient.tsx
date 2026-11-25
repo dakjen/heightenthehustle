@@ -98,6 +98,9 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
         <Field name="title" label="Title" required error={errors.title} className="sm:col-span-2">
           <input id="title" name="title" type="text" required defaultValue={lesson?.title ?? ""} className={inputClass} {...invalidProps("title", errors)} />
         </Field>
+        <Field name="unit" label="Unit" error={errors.unit} className="sm:col-span-2" hint="Optional. Lessons with the same unit name are grouped under it in the course outline.">
+          <input id="unit" name="unit" type="text" defaultValue={lesson?.unit ?? ""} placeholder="e.g. QuickBooks Essentials" className={inputClass} {...invalidProps("unit", errors)} />
+        </Field>
         <Field name="summary" label="Summary" error={errors.summary} className="sm:col-span-2" hint="One or two lines shown in the lesson list.">
           <input id="summary" name="summary" type="text" defaultValue={lesson?.summary ?? ""} className={inputClass} {...invalidProps("summary", errors)} />
         </Field>

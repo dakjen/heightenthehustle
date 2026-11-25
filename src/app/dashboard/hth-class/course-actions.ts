@@ -29,7 +29,7 @@ function revalidateCourses() {
 // Member side
 // ============================================================================
 
-export type LessonListItem = Pick<Lesson, "id" | "title" | "summary" | "order" | "durationMinutes" | "videoUrl"> & { completed: boolean };
+export type LessonListItem = Pick<Lesson, "id" | "title" | "unit" | "summary" | "order" | "durationMinutes" | "videoUrl"> & { completed: boolean };
 export type MemberCourse = Class & { lessons: LessonListItem[]; completedCount: number; enrollment: Enrollment & { cohort: Cohort | null }; attachments: CourseAttachment[] };
 
 /** Courses the signed-in member is enrolled in (published only), with per-lesson progress. */
@@ -53,7 +53,7 @@ export async function getMyCourses(): Promise<MemberCourse[]> {
       : [];
     return published.map((r) => {
       const { class: c, ...enrollment } = r;
-      const ls = c.lessons.map((l) => ({ id: l.id, title: l.title, summary: l.summary, order: l.order, durationMinutes: l.durationMinutes, videoUrl: l.videoUrl, completed: doneSet.has(l.id) }));
+      const ls = c.lessons.map((l) => ({ id: l.id, title: l.title, unit: l.unit, summary: l.summary, order: l.order, durationMinutes: l.durationMinutes, videoUrl: l.videoUrl, completed: doneSet.has(l.id) }));
       const { lessons: _omit, ...classOnly } = c;
       void _omit;
       return { ...classOnly, lessons: ls, completedCount: ls.filter((l) => l.completed).length, enrollment, attachments: courseFiles.filter((f) => f.classId === c.id) };
@@ -139,7 +139,7 @@ export async function getAdminCourses(): Promise<AdminCourse[]> {
   await requirePermission("canManageClasses");
   try {
     const rows = await db.query.classes.findMany({
-      orderBy: [desc(classes.isPublished), asc(classes.type), asc(classes.title)],
+      orderBy: [desc(classes.type), asc(classes.title)],
       with: { lessons: { orderBy: [asc(lessons.order)] }, teacher: { columns: { id: true, name: true } }, enrollments: { columns: { id: true, status: true } } },
     });
     return rows.map(({ enrollments: e, ...c }) => ({ ...c, enrollmentCount: e.filter((x) => x.status === "enrolled" || x.status === "completed").length }));
@@ -255,6 +255,7 @@ export async function saveLesson(prevState: FormState, formData: FormData): Prom
   const classId = Number(text(formData, "classId"));
   const title = text(formData, "title");
   const summary = text(formData, "summary");
+  const unit = text(formData, "unit");
   const content = text(formData, "content").replace(/\r\n?/g, "\n"); // normalize textarea line endings
   const videoUrl = text(formData, "videoUrl");
   const durationRaw = text(formData, "durationMinutes");
@@ -267,7 +268,7 @@ export async function saveLesson(prevState: FormState, formData: FormData): Prom
   if (durationRaw && !/^\d{1,3}$/.test(durationRaw)) fieldErrors.durationMinutes = "Minutes, numbers only.";
   if (Object.keys(fieldErrors).length) return { message: "", error: "Please fix the highlighted fields.", fieldErrors };
 
-  const values = { title, summary: summary || null, content: content || null, videoUrl: videoUrl || null, durationMinutes: durationRaw ? Number(durationRaw) : null, isPublished, updatedAt: new Date() };
+  const values = { title, unit: unit || null, summary: summary || null, content: content || null, videoUrl: videoUrl || null, durationMinutes: durationRaw ? Number(durationRaw) : null, isPublished, updatedAt: new Date() };
   try {
     if (id) {
       await db.update(lessons).set(values).where(and(eq(lessons.id, id), eq(lessons.classId, classId)));
