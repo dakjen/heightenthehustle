@@ -47,6 +47,14 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
   const [msg, setMsg] = useState("");
   const ids = course.lessons.map((l) => l.id);
   const files = (lessonId: number) => course.attachments.filter((a) => a.lessonId === lessonId).length;
+  // Each unit is its own collapsible block. Courses without unit names show one plain list.
+  const hasUnits = course.lessons.some((l) => l.unit);
+  const groups: { name: string | null; items: { l: Lesson; i: number }[] }[] = [];
+  course.lessons.forEach((l, i) => {
+    const last = groups[groups.length - 1];
+    if (last && last.name === (l.unit ?? null)) last.items.push({ l, i });
+    else groups.push({ name: l.unit ?? null, items: [{ l, i }] });
+  });
 
   const move = (index: number, dir: -1 | 1) => {
     const next = [...ids];
@@ -78,14 +86,32 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
       {course.lessons.length === 0 ? (
         <p className="hth-card p-6 text-gray-600">No lessons yet.</p>
       ) : (
-        <ol className="hth-card divide-y divide-gray-100 overflow-hidden">
-          {course.lessons.map((l, i) => (
-            <li key={l.id}>
-              {l.unit && l.unit !== course.lessons[i - 1]?.unit && (
-                <p className="border-b border-gray-200 bg-gray-100 px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gray-800">{l.unit}</p>
+        <div className="space-y-4">
+          {hasUnits && (
+            <nav aria-label="Units" className="flex flex-wrap gap-2">
+              {groups.map((g, gi) => (
+                <a key={gi} href={`#unit-${gi + 1}`} className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-semibold text-gray-800 hover:border-[#910000] hover:text-[#910000]">
+                  {g.name ?? "No unit"} <span className="font-normal text-gray-500">({g.items.length})</span>
+                </a>
+              ))}
+            </nav>
+          )}
+          {groups.map((g, gi) => (
+            <details key={gi} id={`unit-${gi + 1}`} open={!hasUnits || groups.length === 1} className="hth-card group scroll-mt-6 overflow-hidden">
+              {hasUnits && (
+                <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-5 py-4 hover:bg-gray-50">
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#910000]">Unit {gi + 1}</span>
+                  <span className="text-2xl leading-none text-gray-900 font-display">{g.name ?? "No unit"}</span>
+                  <span className="text-sm text-gray-600">{g.items.length} lesson{g.items.length === 1 ? "" : "s"}</span>
+                  <span className="ml-auto text-sm font-semibold text-[#910000] group-open:hidden">Open</span>
+                  <span className="ml-auto hidden text-sm font-semibold text-gray-500 group-open:inline">Close</span>
+                </summary>
               )}
+              <ol className={`divide-y divide-gray-100 ${hasUnits ? "border-t border-gray-200" : ""}`}>
+                {g.items.map(({ l, i }, n) => (
+                  <li key={l.id}>
               <div className="flex items-center gap-4 px-5 py-4">
-              <span className="font-display text-3xl leading-none text-[#910000] w-10 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-display text-3xl leading-none text-[#910000] w-10 shrink-0">{String(n + 1).padStart(2, "0")}</span>
               <div className="min-w-0 flex-1">
                 <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/${l.id}`} className="block truncate text-lg font-semibold text-gray-900 hover:text-[#910000]">{l.title}</Link>
                 <p className="truncate text-sm text-gray-600">
@@ -106,9 +132,17 @@ function LessonsTab({ course }: { course: AdminCourseDetail }) {
                 <button type="button" disabled={pending} onClick={() => remove(l)} className="rounded-lg px-2 py-1.5 text-sm font-semibold text-red-700 hover:bg-red-50">Delete</button>
               </div>
             </div>
-            </li>
+                  </li>
+                ))}
+              </ol>
+              {hasUnits && g.name && (
+                <p className="border-t border-gray-100 px-5 py-3">
+                  <Link href={`/dashboard/admin/hth-class/${course.id}/lessons/new?unit=${encodeURIComponent(g.name)}`} className="text-sm font-semibold text-[#910000] hover:underline">+ Add a lesson to this unit</Link>
+                </p>
+              )}
+            </details>
           ))}
-        </ol>
+        </div>
       )}
     </div>
   );

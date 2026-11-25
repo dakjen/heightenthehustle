@@ -6,7 +6,7 @@ import LessonEditorClient from "./LessonEditorClient";
 export const dynamic = "force-dynamic";
 
 /** /admin/hth-class/[classId]/lessons/new creates; /lessons/[id] edits. Guarded by the admin/hth-class layout. */
-export default async function AdminLessonPage({ params }: { params: Promise<{ classId: string; lessonId: string }> }) {
+export default async function AdminLessonPage({ params, searchParams }: { params: Promise<{ classId: string; lessonId: string }>; searchParams: Promise<{ unit?: string }> }) {
   const { classId: rawClass, lessonId: rawLesson } = await params;
   const classId = Number(rawClass);
   if (!Number.isInteger(classId)) notFound();
@@ -15,7 +15,8 @@ export default async function AdminLessonPage({ params }: { params: Promise<{ cl
   if (!course) notFound();
 
   if (rawLesson === "new") {
-    return <LessonEditorClient classId={classId} courseTitle={course.title} lesson={null} lessonNumber={course.lessons.length + 1} attachments={[]} assignments={[]} />;
+    const { unit } = await searchParams;
+    return <LessonEditorClient defaultUnit={typeof unit === "string" ? unit.slice(0, 120) : undefined} classId={classId} courseTitle={course.title} lesson={null} lessonNumber={course.lessons.length + 1} attachments={[]} assignments={[]} />;
   }
 
   const lessonId = Number(rawLesson);

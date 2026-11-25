@@ -22,7 +22,7 @@ interface Props {
   assignments: AdminAssignment[];
 }
 
-export default function LessonEditorClient({ classId, courseTitle, lesson, lessonNumber, attachments, assignments }: Props) {
+export default function LessonEditorClient({ classId, courseTitle, lesson, lessonNumber, attachments, assignments, defaultUnit }: Props & { defaultUnit?: string }) {
   const router = useRouter();
   const backHref = `/dashboard/admin/hth-class/${classId}`;
   const [state, formAction] = useActionState<FormState, FormData>(saveLesson, { message: "" });
@@ -99,7 +99,7 @@ export default function LessonEditorClient({ classId, courseTitle, lesson, lesso
           <input id="title" name="title" type="text" required defaultValue={lesson?.title ?? ""} className={inputClass} {...invalidProps("title", errors)} />
         </Field>
         <Field name="unit" label="Unit" error={errors.unit} className="sm:col-span-2" hint="Optional. Lessons with the same unit name are grouped under it in the course outline.">
-          <input id="unit" name="unit" type="text" defaultValue={lesson?.unit ?? ""} placeholder="e.g. QuickBooks Essentials" className={inputClass} {...invalidProps("unit", errors)} />
+          <input id="unit" name="unit" type="text" defaultValue={lesson?.unit ?? defaultUnit ?? ""} placeholder="e.g. QuickBooks Essentials" className={inputClass} {...invalidProps("unit", errors)} />
         </Field>
         <Field name="summary" label="Summary" error={errors.summary} className="sm:col-span-2" hint="One or two lines shown in the lesson list.">
           <input id="summary" name="summary" type="text" defaultValue={lesson?.summary ?? ""} className={inputClass} {...invalidProps("summary", errors)} />
