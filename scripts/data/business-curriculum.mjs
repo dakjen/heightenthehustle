@@ -181,7 +181,7 @@ export const courses = [
     ...BRITTNI,
     minutes: 60,
     description:
-      "A mini course inside **Track 1 — Pitch & Sell Your Business**. How to operate presentation software and build clean, readable slides. This course covers the technical side. What goes in a pitch and how to deliver it is taught by Dr. Merritt in *Building & Delivering Your Pitch Deck*.",
+      "A mini course inside **Track 1 — Pitch & Sell Your Business**. How to operate presentation software and build clean, readable slides. This course covers the technical side. Pitch strategy and delivery are covered separately.",
     lessons: [
       {
         title: "Getting Started with PowerPoint",
@@ -207,7 +207,7 @@ export const courses = [
       {
         title: "Building a Five-Slide Presentation",
         summary: "A simple business introduction: title, overview, product or service, visual, and close.",
-        teach: "Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)",
+        teach: "Technical execution and visual consistency across a short deck. Investor messaging and pitch strategy are covered separately.",
         do: "Build a five-slide business introduction: a title, an overview, a product or service description, a supporting visual, and a closing slide.",
         leave: "An editable presentation you can build on.",
       },
@@ -518,7 +518,7 @@ courses.push(
       pick(PAID, "Simple Money Tracker", { title: "Google Sheets: Simple Money Tracker" }),
       pick(SLIDES, "Building a Five-Slide Presentation", {
         title: "Google Slides: Building a Five-Slide Presentation",
-        teach: "The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency. (Pitch strategy is taught by Dr. Merritt.)",
+        teach: "The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency.",
       }),
       pick(PRO, "Sharing & Collaborating"),
       pick(PRO, "Google Calendar"),
@@ -566,61 +566,6 @@ courses.push(
     ],
   },
 );
-
-// Dr. Merritt's sections: outlined, content not yet written (Word export only, not seeded).
-export const pending = [
-  {
-    title: "Pitch & Sell Your Business",
-    group: "Track 1 — Pitch & Sell Your Business",
-    kind: "Live track",
-    instructor: "Dr. Gina Merritt",
-    tagline: "Turn your idea into a story people want to hear, and act on.",
-    lessons: [
-      ["Your Elevator Pitch", "Who you are, what you do, who you help, and what you want, in 30 seconds."],
-      ["Know Your Customer", "Exactly who you're selling to, their problem, and the words they use to describe it."],
-      ["Your Services & Pricing", "What you offer, how to package it, and how to set a price you can say with confidence."],
-      ["Selling Without Feeling Pushy", "Asking for the business, following up, and handling “I'll think about it.”"],
-      ["Your Business Bio & One-Page Overview", "A short professional bio and a one-page leave-behind."],
-    ],
-  },
-  {
-    title: "Building & Delivering Your Pitch Deck",
-    group: "Track 1 — Pitch & Sell Your Business",
-    kind: "Mini course",
-    instructor: "Dr. Gina Merritt",
-    tagline: "What goes in the deck and how to deliver it. (Brittni covers how to use PowerPoint and Google Slides.)",
-    lessons: [
-      ["The 5 Slides Every Pitch Needs", "What goes on each slide, and in what order."],
-      ["Building Your Deck", "Turning your business story into clear, readable slides."],
-      ["Delivering Your Pitch", "Presenting with confidence in 2 to 3 minutes."],
-    ],
-  },
-  {
-    title: "Business Mindset & Planning",
-    group: "Track 4 — Business Mindset & Planning",
-    kind: "Live track",
-    instructor: "Dr. Gina Merritt",
-    tagline: "Think like an owner: set goals, make decisions, and build something that lasts.",
-    lessons: [
-      ["The Difference Between a Job and a Business", "The shift from employee to owner, and working on the business, not just in it."],
-      ["Set a 90-Day Business Goal", "One specific goal, broken into weekly actions, and how to track it."],
-      ["Know Your Numbers (Even If You Hate Math)", "How much you need to earn, how many clients that takes, and what your rate needs to be."],
-      ["Who's in Your Corner? Building a Network", "Social capital, mentors, peers, and referral relationships."],
-      ["Protecting Yourself Legally & Practically", "Sole proprietor vs. LLC, basic contracts, and separating business and personal money."],
-    ],
-  },
-  {
-    title: "Program Videos",
-    group: "Program",
-    kind: "Videos",
-    instructor: "Dr. Gina Merritt",
-    tagline: "",
-    lessons: [
-      ["Welcome to Heighten the Hustle™", "A 3–5 minute welcome for every new participant."],
-      ["You Built Something — Keep Going", "A 3–5 minute closing message for participants finishing the program."],
-    ],
-  },
-];
 
 export function lessonMarkdown(l) {
   const parts = [];

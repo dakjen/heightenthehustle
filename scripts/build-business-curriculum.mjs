@@ -2,7 +2,7 @@
 // Usage: node scripts/build-business-curriculum.mjs            -> writes drizzle/manual/20_seed_business_curriculum.sql
 //        node scripts/build-business-curriculum.mjs --json out  -> also writes the data as JSON (for the Word export)
 import { writeFileSync } from "node:fs";
-import { courses, pending, lessonMarkdown } from "./data/business-curriculum.mjs";
+import { courses, lessonMarkdown } from "./data/business-curriculum.mjs";
 
 const OUT = "drizzle/manual/20_seed_business_curriculum.sql";
 const q = (s) => `'${s.replace(/'/g, "''")}'`;
@@ -43,5 +43,5 @@ console.log(`${OUT}: ${courses.length} courses, ${courses.reduce((n, c) => n + c
 
 const j = process.argv.indexOf("--json");
 if (j > -1) {
-  writeFileSync(process.argv[j + 1], JSON.stringify({ courses: courses.map((c) => ({ ...c, lessons: c.lessons.map((l) => ({ ...l, markdown: lessonMarkdown(l) })) })), pending }, null, 2));
+  writeFileSync(process.argv[j + 1], JSON.stringify({ courses: courses.map((c) => ({ ...c, lessons: c.lessons.map((l) => ({ ...l, markdown: lessonMarkdown(l) })) })) }, null, 2));
 }

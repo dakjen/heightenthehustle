@@ -301,7 +301,7 @@ AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."tit
 ;
 
 INSERT INTO "classes" ("title", "description", "teacher_id", "type", "is_published")
-SELECT 'Presentations: PowerPoint & Google Slides Basics', $md$A mini course inside **Track 1 — Pitch & Sell Your Business**. How to operate presentation software and build clean, readable slides. This course covers the technical side. What goes in a pitch and how to deliver it is taught by Dr. Merritt in *Building & Delivering Your Pitch Deck*.$md$,
+SELECT 'Presentations: PowerPoint & Google Slides Basics', $md$A mini course inside **Track 1 — Pitch & Sell Your Business**. How to operate presentation software and build clean, readable slides. This course covers the technical side. Pitch strategy and delivery are covered separately.$md$,
   COALESCE((SELECT "id" FROM "users" WHERE "name" = 'Brittni Hardie' ORDER BY "id" LIMIT 1), (SELECT "id" FROM "users" WHERE "role" = 'admin' ORDER BY "id" LIMIT 1)),
   'hth-course', false
 WHERE NOT EXISTS (SELECT 1 FROM "classes" WHERE "title" = 'Presentations: PowerPoint & Google Slides Basics')
@@ -361,7 +361,7 @@ AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."tit
 INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
 SELECT c."id", 'Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
 
-Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)
+Technical execution and visual consistency across a short deck. Investor messaging and pitch strategy are covered separately.
 
 ## What you'll do
 
@@ -872,7 +872,7 @@ AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."tit
 INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
 SELECT c."id", 'PowerPoint: Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
 
-Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)
+Technical execution and visual consistency across a short deck. Investor messaging and pitch strategy are covered separately.
 
 ## What you'll do
 
@@ -1004,7 +1004,7 @@ AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."tit
 INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
 SELECT c."id", 'Google Slides: Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
 
-The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency. (Pitch strategy is taught by Dr. Merritt.)
+The slide basics in Google Slides: layouts, text boxes, and adding and rearranging slides, with a focus on technical execution and visual consistency.
 
 ## What you'll do
 
@@ -1249,7 +1249,7 @@ AND NOT EXISTS (SELECT 1 FROM "lessons" l WHERE l."class_id" = c."id" AND l."tit
 INSERT INTO "lessons" ("class_id", "title", "summary", "content", "duration_minutes", "is_published", "order")
 SELECT c."id", 'Building a Five-Slide Presentation', $md$A simple business introduction: title, overview, product or service, visual, and close.$md$, $md$## What we cover
 
-Technical execution and visual consistency across a short deck. (Investor messaging and pitch strategy are taught by Dr. Merritt.)
+Technical execution and visual consistency across a short deck. Investor messaging and pitch strategy are covered separately.
 
 ## What you'll do
 
