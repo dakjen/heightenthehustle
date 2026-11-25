@@ -3,7 +3,7 @@
 import { FormState } from "@/types/form-state";
 import { db } from "@/db";
 import { users, userRole } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql, asc, desc } from "drizzle-orm";
 import { getSession } from "@/app/login/actions";
 import { createSession } from "@/lib/session";
 import { hasPermission, requireAdmin } from "@/lib/auth";
@@ -21,7 +21,11 @@ type UserWithStatus = SafeUser;
 export async function getAllUsers(): Promise<UserWithStatus[]> {
   await requireAdmin();
   try {
-    return await db.query.users.findMany({ columns: safeUserColumns });
+    // Alphabetical by name (case-insensitive), so the list reads the same every time.
+    return await db.query.users.findMany({
+      columns: safeUserColumns,
+      orderBy: [sql`lower(${users.name})`, asc(users.id)],
+    });
   } catch (error) {
     console.error("Error fetching all users:", error);
     return [];
@@ -37,6 +41,7 @@ export async function getAllPendingUserRequests(): Promise<UserWithStatus[]> {
   try {
     return await db.query.users.findMany({
       where: eq(users.status, 'pending'),
+      orderBy: [desc(users.createdAt), desc(users.id)],
       columns: safeUserColumns,
     });
   } catch (error) {
