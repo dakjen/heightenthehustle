@@ -67,6 +67,7 @@ export default async function DashboardLayout({
     },
     {
       label: "Admin Tools",
+      pinBottom: true,
       items: [
         ...(canAccessAdminUsers ? [{ href: "/dashboard/admin/users", label: "Users & Approvals" }] : []),
         ...(canAccessAdminBusinesses ? [{ href: "/dashboard/admin/businesses/manage", label: "Businesses" }] : []),

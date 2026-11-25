@@ -15,6 +15,8 @@ export interface NavItem {
 export interface NavSection {
   label: string;
   items: NavItem[];
+  /** Pin this section to the bottom of the sidebar (used for Admin Tools). */
+  pinBottom?: boolean;
 }
 
 interface SidebarNavProps {
@@ -63,13 +65,13 @@ export default function SidebarNav({ items, sections = [] }: SidebarNavProps) {
   const isActive = (href: string) => href === activeHref;
 
   return (
-    <nav className="space-y-1">
+    <nav className="flex min-h-full flex-col space-y-1">
       {items.map((item) => (
         <NavLink key={item.href} item={item} active={isActive(item.href)} />
       ))}
 
       {sections.map((section) => (
-        <div key={section.label}>
+        <div key={section.label} className={section.pinBottom ? "!mt-auto pt-4" : undefined}>
           <p className="pt-6 pb-2 px-3 text-xs font-semibold tracking-[0.2em] uppercase text-gray-400">
             {section.label}
           </p>
